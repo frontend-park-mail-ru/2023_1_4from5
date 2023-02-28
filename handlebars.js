@@ -1,15 +1,20 @@
 //Retrieve the template data from the HTML .
 var root = document.querySelector("#root");
-var template = Handlebars.templates.example;
-console.log(template)
-
 var context = { "name" : "Ritesh Kumar", "occupation" : "developer" };
 
-//Compile the template data into a function
+var template = Handlebars.templates.test;
 var templateScript = template(context);
+root.innerHTML = templateScript;
+
+// console.log(Handlebars.templates)
+
+
+
+//Compile the template data into a function
+
 
 // var html = templateScript(context);
-console.log(html)
+// console.log(html)
 //html = 'My name is Ritesh Kumar . I am a developer.'
-root.innerHTML = templateScript
+
 // root.append(html);
