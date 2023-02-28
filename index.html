@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-    <h1>asdasd</h1>
+
+    <!-- Include Handlebars from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+
+    <script>
+        // compile the template
+        var template = Handlebars.compile("Handlebars <b>{{doesWhat}}</b>");
+        // execute the compiled template and print the output to the console
+        console.log(template({ doesWhat: "rocks!" }));
+    </script>
+
+    <script src="handlebars.js" id="handlebars-demo" type="text/x-handlebars-template">
+        <div>
+    		My name is {{name}}. I am a {{occupation}}.	
+    	</div>
+    </script>
+
 </body>
+
 </html>
