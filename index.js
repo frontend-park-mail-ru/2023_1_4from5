@@ -63,22 +63,28 @@ function renderAuth(parent) {
     auth.render();
     console.log('authorization rendered');
 
-    // const form = document.getElementById('auth-form');
-    const submitBtn = document.getElementById('auth-btn');
-    console.log(submitBtn);
+    const submitBtn = document.getElementById('authbtn');
     const usernameInput = document.getElementById('auth-username');
     const passwordInput = document.getElementById('auth-password');
+    
+    submitBtn.addEventListener( "click", (e) => {
+        e.preventDefault();
+        const username = usernameInput.value;
+        console.log(username);
+        const password = passwordInput.value;
+        console.log(password);
 
-    submitBtn.onclick = function() { alert(1); }
-    // submitBtn.addEventListener( "click", () => {
-    //     // e.preventDefault();
-    //     console.log("1");
-    //     alert('1');
-    //     const username = usernameInput.value.trim();
-    //     console.log(username);
-    //     const password = passwordInput.value;
-    //     console.log(password);
-
+        fetch ('sub-me.ru/api/auth/signIn', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            data: JSON.stringify({
+                "login": username,
+                "password_hash": password,
+            })
+        })
+        .then(response => console.log(response.ok))
+    });
         // ajax(
         //     'POST',
         //     'sub-me.ru/api/auth/signIn',

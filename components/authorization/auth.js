@@ -6,9 +6,12 @@ export class Auth {
     }
 
     render() {
+        var newDiv = document.createElement('div');
+
         var template = Handlebars.templates.auth;
         var tScript = template();
-
-        this.#parent.innerHTML += tScript;
+        newDiv.innerHTML = tScript;
+        
+        this.#parent.appendChild(newDiv);
     }
 }
