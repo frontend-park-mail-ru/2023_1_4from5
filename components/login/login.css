@@ -1,0 +1,10 @@
+#login {
+    top: 200px;
+    /* Сдвигаем текст вверх */
+    left: 150px;
+    /* Сдвигаем текст вправо */
+    background-color: #7dbe7c;
+    position: relative;
+    width: 300px;
+    z-index: 3;
+}

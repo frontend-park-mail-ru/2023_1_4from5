@@ -3,3 +3,11 @@
     position: relative;
     z-index: 1;
 }
+
+a {
+    color: #222;
+}
+
+.btn {
+    border: 2px solid gray;
+}

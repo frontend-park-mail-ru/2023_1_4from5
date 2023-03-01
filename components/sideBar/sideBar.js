@@ -16,12 +16,12 @@ export class SideBar {
 
     render() {
         var template = Handlebars.templates.sideBar;
-        var tScript = template(this.#config, this.myFunc);
+        var tScript = template(this.#config);
 
         this.#parent.innerHTML += tScript;
-    }
-
-    myFunc() {
-        console.log('ааауууууф');
-    }
+    }  
 }
+
+Handlebars.registerHelper('stringifyFunc', function(renderElement) {
+    return new Handlebars.SafeString("(" + renderElement.toString() + ")()");
+});

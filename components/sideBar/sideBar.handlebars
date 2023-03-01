@@ -13,7 +13,9 @@
     </h4>
 
     {{else}}
-    <button> Регистрация </button>
-    <button onclick="{{{myFunc}}}()"> Войти </button>
+    {{#each entry.pages}}
+        <button onclick="{{stringifyFunc render}}"> {{name}} </button>
+    {{/each}}
+    
     {{/if}}
 </div>

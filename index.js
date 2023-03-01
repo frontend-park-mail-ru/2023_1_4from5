@@ -1,5 +1,6 @@
 import { SideBar } from "./components/sideBar/sideBar.js";
 import { Auth } from "./components/authorization/auth.js";
+import { Login } from "./components/login/login.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -22,21 +23,28 @@ const config = {
                 name: 'Мои подписки',
                 href: '/subs',    
             },
+        ]
+    },
+    entry: {
+        pages: [
             {
                 name: 'Регистрация',
-                href: '/register',
+                href: '/register',   
+                render: renderLogin,
             },
             {
                 name: 'Войти',
-                href: '/login',
+                href: '/login',    
+                render: renderAuth,
             },
-        ]
+        ],
     },
     user: {
         login: 'Cockpit',
         isAuthor: false,
         isAuthorized: false,
-    }
+    },
+
 };
 
 function renderSideBar(parent) {
@@ -52,9 +60,12 @@ function renderAuth(parent) {
     console.log('authorization rendered');
 }
 
-// function goToPage(configSection) {
-//     configSection.
-// }
+function renderLogin(parent) {
+    const login = new Login(parent);
+    login.render();
+    console.log('login rendered');
+}
 
-renderSideBar(sideBarElement)
+renderSideBar(sideBarElement);
 renderAuth(rootElement);
+renderLogin(rootElement);
