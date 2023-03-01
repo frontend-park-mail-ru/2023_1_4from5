@@ -1,0 +1,19 @@
+<div id="sideBar">
+    {{#each general.pages}}
+    <a href={{href}}> {{name}} </a>
+    {{/each}}
+
+    {{#if user.isAuthorized}}
+    {{#unless user.isAuthor}}
+    <button> Стать автором </button>
+    {{/unless}}
+
+    <h4 style="display: inline;">
+        {{user.login}}
+    </h4>
+
+    {{else}}
+    <button> Регистрация </button>
+    <button> Войти </button>
+    {{/if}}
+</div>

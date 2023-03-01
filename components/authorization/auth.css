@@ -1,0 +1,6 @@
+#auth {
+    background-color: #ddd;
+    position: fixed;
+    width: 300px;
+    z-index: 2;
+}

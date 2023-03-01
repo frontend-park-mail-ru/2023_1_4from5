@@ -1,0 +1,5 @@
+#sidebar {
+    background-color: #eee;
+    position: absolute;
+    z-index: 1;
+}
