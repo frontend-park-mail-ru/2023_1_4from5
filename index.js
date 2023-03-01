@@ -1,6 +1,6 @@
 import { SideBar } from "./components/sideBar/sideBar.js";
 import { Auth } from "./components/authorization/auth.js";
-import { Login } from "./components/login/login.js";
+import { Register } from "./components/register/reg.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -63,7 +63,7 @@ function renderAuth(parent) {
     auth.render();
     console.log('authorization rendered');
 
-    const submitBtn = document.getElementById('authbtn');
+    const submitBtn = document.getElementById('auth-btn');
     const usernameInput = document.getElementById('auth-username');
     const passwordInput = document.getElementById('auth-password');
     
@@ -85,30 +85,14 @@ function renderAuth(parent) {
         })
         .then(response => console.log(response.ok))
     });
-        // ajax(
-        //     'POST',
-        //     'sub-me.ru/api/auth/signIn',
-        //     {username, password},
-        //     status => {
-        //         if (status === 200) {
-        //             // goToPage(config.profile);
-        //             console.log("user has been authorized");
-        //             return;
-        //         }
-
-        //         alert('Неверный емейл или пароль');
-        //     }
-        // )
-    // });
 }
 
-function renderLogin(parent) {
-    const login = new Login(parent);
-    login.render();
-    console.log('login rendered');
+function renderRegister(parent) {
+    const reg = new Register(parent);
+    reg.render();
+    console.log('Register rendered');
 }
-
 
 renderSideBar(sideBarElement);
 renderAuth(rootElement);
-renderLogin(rootElement);
+renderRegister(rootElement);

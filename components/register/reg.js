@@ -1,4 +1,4 @@
-export class Login {
+export class Register {
     #parent
 
     constructor(parent) {
@@ -8,7 +8,7 @@ export class Login {
     render() {
         var newDiv = document.createElement('div');
 
-        var template = Handlebars.templates.login;
+        var template = Handlebars.templates.reg;
         var tScript = template();
         newDiv.innerHTML = tScript;
 
