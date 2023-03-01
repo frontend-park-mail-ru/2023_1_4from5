@@ -46,9 +46,9 @@ templates['sideBar'] = template({"1":function(container,depth0,helpers,partials,
     };
 
   return "        <button onclick=\""
-    + alias3((lookupProperty(helpers,"stringifyFunc")||(depth0 && lookupProperty(depth0,"stringifyFunc"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"render") : depth0),{"name":"stringifyFunc","hash":{},"data":data,"loc":{"start":{"line":17,"column":25},"end":{"line":17,"column":49}}}))
+    + alias3((lookupProperty(helpers,"stringifyFunc")||(depth0 && lookupProperty(depth0,"stringifyFunc"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"render") : depth0),5,2,{"name":"stringifyFunc","hash":{},"data":data,"loc":{"start":{"line":17,"column":25},"end":{"line":17,"column":53}}}))
     + "\"> "
-    + alias3(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":17,"column":52},"end":{"line":17,"column":60}}}) : helper)))
+    + alias3(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"name","hash":{},"data":data,"loc":{"start":{"line":17,"column":56},"end":{"line":17,"column":64}}}) : helper)))
     + " </button>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
