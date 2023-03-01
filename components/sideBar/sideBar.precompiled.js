@@ -28,7 +28,16 @@ templates['sideBar'] = template({"1":function(container,depth0,helpers,partials,
 },"4":function(container,depth0,helpers,partials,data) {
     return "    <button> Стать автором </button>\n";
 },"6":function(container,depth0,helpers,partials,data) {
-    return "    <button> Регистрация </button>\n    <button> Войти </button>\n";
+    var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "    <button> Регистрация </button>\n    <button onclick=\""
+    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"myFunc") || (depth0 != null ? lookupProperty(depth0,"myFunc") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"myFunc","hash":{},"data":data,"loc":{"start":{"line":17,"column":21},"end":{"line":17,"column":33}}}) : helper))) != null ? stack1 : "")
+    + "()\"> Войти </button>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {

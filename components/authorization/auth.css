@@ -1,6 +1,10 @@
 #auth {
+    top: 100px;
+    /* Сдвигаем текст вверх */
+    left: 100px;
+    /* Сдвигаем текст вправо */
     background-color: #ddd;
-    position: fixed;
+    position: relative;
     width: 300px;
     z-index: 2;
 }

@@ -22,6 +22,14 @@ const config = {
                 name: 'Мои подписки',
                 href: '/subs',    
             },
+            {
+                name: 'Регистрация',
+                href: '/register',
+            },
+            {
+                name: 'Войти',
+                href: '/login',
+            },
         ]
     },
     user: {
@@ -44,6 +52,9 @@ function renderAuth(parent) {
     console.log('authorization rendered');
 }
 
-renderAuth(rootElement);
-renderSideBar(sideBarElement);
+// function goToPage(configSection) {
+//     configSection.
+// }
 
+renderSideBar(sideBarElement)
+renderAuth(rootElement);

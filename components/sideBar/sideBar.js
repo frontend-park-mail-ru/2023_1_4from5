@@ -16,8 +16,12 @@ export class SideBar {
 
     render() {
         var template = Handlebars.templates.sideBar;
-        var tScript = template(this.#config);
+        var tScript = template(this.#config, this.myFunc);
 
         this.#parent.innerHTML += tScript;
+    }
+
+    myFunc() {
+        console.log('ааауууууф');
     }
 }

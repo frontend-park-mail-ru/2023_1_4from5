@@ -1,5 +1,5 @@
-#sidebar {
+#sideBar {
     background-color: #eee;
-    position: absolute;
+    position: relative;
     z-index: 1;
 }
