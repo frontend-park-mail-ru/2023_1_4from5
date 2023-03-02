@@ -11,7 +11,7 @@ rootElement.appendChild(contentElement);
 
 const usernameIn = 'Cockpit'; //так ли хранить username?
 const isAuthorIn = false;
-const isAuthorizedIn = false;
+const isAuthorizedIn = true;
 const config = {
     general: {
         pages: [
@@ -171,7 +171,6 @@ function goToPage(target) {
         return;
     }
 
-
     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === usernameIn)) {
         target.parent.innerHTML = '';
     }
@@ -187,7 +186,8 @@ sideBarElement.addEventListener('click', (e) => {
         // console.log(e.target.id);
         // console.log(key, config[key], config[key].pages);
         // config.key.pages
-        config.pages.forEach(element => {
+        // console.log(config.general)
+        config.general.pages.forEach(element => {
             // console.log(element.id, targetId, typeof element.id, typeof targetId )
             if (element.id === targetId) {
                 // console.log(element, config[key]);
