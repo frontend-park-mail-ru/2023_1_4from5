@@ -82,7 +82,6 @@ const config = {
                 },
             },
         ],
-        parent: rootElement,
     },
     user: {
         username: usernameIn,
