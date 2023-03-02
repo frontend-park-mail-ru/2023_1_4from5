@@ -197,10 +197,14 @@ function renderRegister(parent) {
 
         fetch ('http://sub-me.ru:8000/api/auth/signUp', { // 400 Bad Request!!!
             method: 'POST',
-            data: JSON.stringify({
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
                 "login": login,
                 "name": username,
-                "password_hash": password,
+                "password_hash": password
             })
         })
         .then(response => console.log(response.ok))
@@ -216,7 +220,6 @@ function goToPage(target) {
         target.parent.innerHTML = '';
     }
     activePage = target.name;
-    // console.log(activePage);
     target.render(target.parent);
 }
 
