@@ -15,15 +15,17 @@ export class SideBar {
     }
 
     render() {
-        let lastSideBar = document.getElementById('sidebarDiv');
+        const lastSideBar = document.getElementById('sidebarDiv');
         if (lastSideBar) {
             lastSideBar.remove();
         }
-        let newDiv = document.createElement('div');
+
+        const newDiv = document.createElement('div');
         newDiv.id = 'sidebarDiv';
-        let template = Handlebars.templates.sideBar;
-        let tScript = template(this.#config);
-        newDiv.innerHTML = tScript;
+
+        const template = Handlebars.templates.sideBar;
+        newDiv.innerHTML = template(this.#config);
+
         this.#parent.appendChild(newDiv);
     }  
 }
