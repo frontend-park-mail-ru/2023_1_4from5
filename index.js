@@ -92,7 +92,7 @@ const config = {
                 name: 'Моя страница',
                 href: '/my_profile',
                 id: 'winSetting-profile',
-                showDisplay: isAuthorIn,
+                showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
                 render: function () {
                     console.log("Моя страница");
@@ -102,7 +102,7 @@ const config = {
                 name: 'Мои доходы',
                 href: '/finance',
                 id: 'winSetting-finance',
-                showDisplay: isAuthorIn,
+                showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
                 render: function () {
                     console.log("Мои доходы");
@@ -135,7 +135,7 @@ const config = {
         isAuthor: false,
         isAuthorized: false,
     },
-    activePage: "",
+    activePage: '',
 };
 
 function constructConfig() {    // можно ли улучшить?
