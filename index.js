@@ -265,31 +265,6 @@ function renderWinSettings(parent) {
     win.render();
     console.log('winSetting rendered');
 }
-// function goToPage(target) {
-//     if (activePage === target.name) {
-//         return;
-//     }
-
-//     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === userIn.usernameIn)) {
-//         target.parent.innerHTML = '';
-//     }
-//     activePage = target.name;
-//     target.render(target.parent);
-// }
-
-// sideBarElement.addEventListener('click', (e) => {
-//     if (e.target instanceof HTMLAnchorElement) {
-//         e.preventDefault();
-//         const targetId = e.target.id;
-//         let target;
-//         config.general.pages.forEach(element => {
-//             if (element.id === targetId) {
-//                 target = element;
-//             }
-//         });
-//         goToPage(target);
-//     }
-// });
 
 renderSideBar(sideBarElement);
 
