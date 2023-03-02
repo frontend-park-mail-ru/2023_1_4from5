@@ -30,3 +30,4 @@ export class WinSettings {
         this.#parent.appendChild(newDiv);
     }
 }
+// можно сделать один handlebars
