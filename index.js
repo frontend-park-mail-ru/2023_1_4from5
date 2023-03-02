@@ -169,7 +169,6 @@ sideBarElement.addEventListener('click', (e) => {
                 type = config.entry;
             }
         });   
-        console.log(target, type);
         goToPage(target, type);
     }
 });
