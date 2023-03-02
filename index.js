@@ -129,7 +129,14 @@ function renderAuth(parent) {
                 "password_hash": password
             }),
         })
-        .then(response => console.log(response.ok))
+        .then(response => {
+            if (response.ok) {
+            fetch ('http://sub-me.ru:8000/api/user/profile', {
+            method: 'GET',
+            credentials: 'include',
+        })
+        .then(response => console.log(response.json()))
+        }})
     });
 }
 
@@ -146,11 +153,6 @@ function renderRegister(parent) {
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
-        fetch ('http://sub-me.ru:8000/api/user/profile', {
-            method: 'GET',
-            credentials: 'include',
-        })
-        .then(response => console.log(response.json()))
     });
     // submitBtn.addEventListener( 'click', (e) => {
     //     e.preventDefault();
