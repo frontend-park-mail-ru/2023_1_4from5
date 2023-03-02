@@ -120,7 +120,7 @@ function renderRegister(parent) {
             method: 'GET',
             credentials: 'include',
         })
-        .then(response => console.log(response))
+        .then(response => console.log(response.json()))
     });
     // submitBtn.addEventListener( 'click', (e) => {
     //     e.preventDefault();
