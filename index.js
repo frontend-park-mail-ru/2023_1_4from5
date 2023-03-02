@@ -48,7 +48,6 @@ const config = {
             },
             {
                 name: 'Войти',
-                href: '/login',    
                 id: 'sidebar-auth',
                 render: renderAuth,
             },
