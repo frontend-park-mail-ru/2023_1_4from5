@@ -11,7 +11,7 @@ rootElement.appendChild(contentElement);
 
 const usernameIn = 'Cockpit'; //так ли хранить username?
 const isAuthorIn = false;
-const isAuthorizedIn = true;
+const isAuthorizedIn = false;
 const config = {
     general: {
         pages: [
