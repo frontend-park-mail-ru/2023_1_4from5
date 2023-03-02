@@ -1,21 +1,7 @@
 <div id="sideBar">
     {{#each general.pages}}
-    <a href={{href}}> {{name}} </a>
+        {{#if showDisplay}}
+            <a id={{id}} href={{href}}> {{name}} </a>
+        {{/if}}
     {{/each}}
-
-    {{#if user.isAuthorized}}
-    {{#unless user.isAuthor}}
-    <button> Стать автором </button>
-    {{/unless}}
-
-    <h4 style="display: inline;">
-        {{user.login}}
-    </h4>
-
-    {{else}}
-    {{#each entry.pages}}
-        <button onclick="{{stringifyFunc render 5 2}}"> {{name}} </button>
-    {{/each}}
-    
-    {{/if}}
 </div>

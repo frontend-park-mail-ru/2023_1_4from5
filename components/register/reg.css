@@ -1,10 +1,9 @@
 #register {
     top: 200px;
-    /* Сдвигаем текст вверх */
     left: 150px;
-    /* Сдвигаем текст вправо */
     background-color: #7dbe7c;
-    position: relative;
+    position: fixed;
     width: 400px;
-    z-index: 3;
+    opacity: 1;
+    z-index: 20;
 }
