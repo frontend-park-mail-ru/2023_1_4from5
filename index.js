@@ -122,6 +122,10 @@ function renderRegister(parent) {
         console.log(username);
         const password = passwordInput.value;
         console.log(password);
+        
+        const passwordCheck = passwordInputCheck.value;
+        console.log(passwordCheck);
+        
         const repeatPassword = passwordRepeatInput.value;
         console.log(repeatPassword);
 
@@ -143,3 +147,21 @@ function renderRegister(parent) {
 renderSideBar(sideBarElement);
 renderAuth(rootElement);
 renderRegister(rootElement);
+
+function isValid(inputStr) {
+    const blackList = ""; //надо ли???
+    let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
+        hasntBlackList = true, hasMinLen = false;
+    if (inputStr.length >= 7) {
+        hasMinLen = true;
+    }
+    for (const char in inputStr) {
+        if (!~blackList.indexOf(char)) {
+            hasntBlackList = false;
+        }
+
+    }
+
+    return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial && hasntBlackList;
+
+}
