@@ -87,22 +87,6 @@ function renderAuth(parent) {
     });
 }
 
-function isValid(inputStr) {
-    // const blackList = ""; //надо ли???
-    let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
-        hasMinLen = false;
-    if (inputStr.length >= 7) {
-        hasMinLen = true;
-    }
-    for (const char in inputStr) {
-        
-
-    }
-
-    return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial;
-
-}
-
 function renderRegister(parent) {
     const reg = new Register(parent);
     reg.render();
@@ -122,10 +106,6 @@ function renderRegister(parent) {
         console.log(username);
         const password = passwordInput.value;
         console.log(password);
-        
-        const passwordCheck = passwordInputCheck.value;
-        console.log(passwordCheck);
-        
         const repeatPassword = passwordRepeatInput.value;
         console.log(repeatPassword);
 
