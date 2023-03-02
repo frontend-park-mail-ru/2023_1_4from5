@@ -8,6 +8,8 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
+
+const usernameIn = 'Cockpit'; //так ли хранить username?
 const config = {
     general: {
         pages: [
@@ -48,25 +50,52 @@ const config = {
             },
             {
                 name: 'Войти',
+                href: '/auth',
                 id: 'sidebar-auth',
                 render: renderAuth,
             },
         ],
         parent: rootElement,
     },
+    beAuthor: {
+        pages: [
+            {
+                name: 'Стать автором',
+                href: '/beAuthor',
+                id: 'sidebar-beAuthor',
+                render: function () {
+                    console.log("Стать автором");
+                },
+            },
+        ],
+        parent: contentElement
+    },
+    nickname: {
+        pages: [
+            {
+                name: usernameIn,
+                href: '/modalWindow',
+                id: 'sidebar-modalWindow',
+                render: function () {
+                    console.log("модальное окно");
+                },
+            },
+        ],
+        parent: contentElement
+    },
     user: {
-        login: 'Cockpit',
+        username: usernameIn,
         isAuthor: false,
         isAuthorized: false,
     },
-
 };
 
-var activePage;
+let activePage;
 
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
     sideBar.config = config;
+
     sideBar.render();
     console.log('sideBar rendered');
 }
@@ -142,7 +171,7 @@ function goToPage(target, type) {
         return;
     }
 
-    if (type === config.general) {
+    if (type === config.general || type === config.nickname) {
         type.parent.innerHTML = '';
     }
     activePage = target;
@@ -153,21 +182,36 @@ sideBarElement.addEventListener('click', (e) => {
     if (e.target instanceof HTMLAnchorElement) {
         e.preventDefault();
         const targetId = e.target.id;
-        var target;
-        var type;
-        config.general.pages.forEach(element => {
-            if (element.id === targetId) {
-                target = element;
-                type = config.general;
+        let target;
+        let type;
+        // console.log(e.target.id);
+        for (let key in config) {
+            // console.log(key, config[key], config[key].pages);
+            if (key!=="user") {
+                // config.key.pages
+                config[key].pages.forEach(element => {
+                    // console.log(element.id, targetId, typeof element.id, typeof targetId )
+                    if (element.id === targetId) {
+                        // console.log(element, config[key]);
+                        target = element;
+                        type = config[key];
+                    }
+                });
             }
-        });        
-
-        config.entry.pages.forEach(element => {
-            if (element.id === targetId) {
-                target = element;
-                type = config.entry;
-            }
-        });   
+        }
+        // config.general.pages.forEach(element => {
+        //     if (element.id === targetId) {
+        //         target = element;
+        //         type = config.general;
+        //     }
+        // });
+        //
+        // config.entry.pages.forEach(element => {
+        //     if (element.id === targetId) {
+        //         target = element;
+        //         type = config.entry;
+        //     }
+        // });
         goToPage(target, type);
     }
 });

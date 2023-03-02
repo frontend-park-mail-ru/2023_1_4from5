@@ -5,12 +5,14 @@
 
     {{#if user.isAuthorized}}
     {{#unless user.isAuthor}}
-    <button> Стать автором </button>
+        {{#each beAuthor.pages}}
+        <a id={{id}} href={{href}}> {{name}} </a>
+        {{/each}}
     {{/unless}}
 
-    <h4 style="display: inline;">
-        {{user.login}}
-    </h4>
+    {{#each nickname.pages}}
+        <a id={{id}} href={{href}}> {{name}} </a>
+    {{/each}}
 
     {{else}}
     {{#each entry.pages}}
