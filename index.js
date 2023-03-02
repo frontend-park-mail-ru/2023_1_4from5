@@ -10,8 +10,8 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-
-let userIn  = {
+// при первом заходе должен отправляться get запрос
+const userIn  = {
     usernameIn: 'Cockpit', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
@@ -182,6 +182,7 @@ function removeAuth() {
     }
 }
 
+// сделать authentification async-ом
 function authentification() {
     const submitBtn = document.getElementById('auth-btn');
     const loginInput = document.getElementById('auth-login');
@@ -192,6 +193,8 @@ function authentification() {
         const login = loginInput.value;
         const password = passwordInput.value;
 
+        // сделать класс для работы с fetch
+        // вынести в переменные method, credentials, url
         fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
             credentials: 'include',
@@ -223,6 +226,7 @@ function authentification() {
     });
 }
 
+// после регистрации окно должно пропадать
 function renderRegister(parent) {
     const reg = new Register(parent);
     reg.render();
@@ -246,7 +250,7 @@ function renderRegister(parent) {
         console.log(repeatPassword);
 
 
-        fetch ('http://sub-me.ru:8000/api/auth/signUp', { // 400 Bad Request!!!
+        fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({

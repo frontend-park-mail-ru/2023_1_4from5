@@ -17,7 +17,7 @@ export function clickHandler (e, configPart, config) {
         goToPage(target, config);
     }
 }
-function goToPage(target, config) {
+function goToPage(target, config) { // можно сделать function expression
     if (config.activePage === target.name) {
         return;
     }
