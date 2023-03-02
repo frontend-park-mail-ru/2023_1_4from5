@@ -8,10 +8,11 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-
-const usernameIn = 'Cockpit'; //так ли хранить username?
-const isAuthorIn = false;
-const isAuthorizedIn = false;
+let userIn  = {
+    usernameIn: 'Cockpit', //так ли хранить username?
+    isAuthorIn: false,
+    isAuthorizedIn: false,
+}
 const config = {
     general: {
         pages: [
@@ -19,7 +20,7 @@ const config = {
                 name: 'Лента',
                 href: '/feed',
                 id: 'sidebar-feed',
-                showDisplay: isAuthorizedIn,
+                showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
                 render: function () {
                     console.log("лента");
@@ -39,7 +40,7 @@ const config = {
                 name: 'Мои подписки',
                 href: '/subs',
                 id: 'sidebar-subs',
-                showDisplay: isAuthorizedIn,
+                showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
                 render: function () {
                     console.log("подписки");
@@ -49,7 +50,7 @@ const config = {
                 name: 'Регистрация',
                 href: '/register',
                 id: 'sidebar-reg',
-                showDisplay: !isAuthorizedIn,
+                showDisplay: !userIn.isAuthorizedIn,
                 parent: rootElement,
                 render: renderRegister,
             },
@@ -57,7 +58,7 @@ const config = {
                 name: 'Войти',
                 href: '/auth',
                 id: 'sidebar-auth',
-                showDisplay: !isAuthorizedIn,
+                showDisplay: !userIn.isAuthorizedIn,
                 parent: rootElement,
                 render: renderAuth,
             },
@@ -65,39 +66,53 @@ const config = {
                 name: 'Стать автором',
                 href: '/beAuthor',
                 id: 'sidebar-beAuthor',
-                showDisplay: isAuthorizedIn * !isAuthorIn,
+                showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                 parent: contentElement,
                 render: function () {
                     console.log("Стать автором");
                 },
             },
             {
-                name: usernameIn,
+                name: userIn.usernameIn,
                 href: '/modalWindow',
                 id: 'sidebar-modalWindow',
-                showDisplay: isAuthorizedIn,
+                showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
                 render: function () {
                     console.log("модальное окно");
                 },
             },
         ],
-        parent: rootElement,
     },
     user: {
-        username: usernameIn,
-        isAuthor: isAuthorIn,
-        isAuthorized: isAuthorizedIn,
+        username: '',
+        isAuthor: false,
+        isAuthorized: false,
     },
 };
 
 let activePage;
 
+function constructConfig() {
+    config.user.username = userIn.usernameIn;
+    config.user.isAuthor = userIn.isAuthorIn;
+    config.user.isAuthorized = userIn.isAuthorizedIn;
+
+    config.general.pages[0].showDisplay = userIn.isAuthorizedIn;
+    config.general.pages[1].showDisplay = true;
+    config.general.pages[2].showDisplay = userIn.isAuthorizedIn;
+    config.general.pages[3].showDisplay = !userIn.isAuthorizedIn;
+    config.general.pages[4].showDisplay = !userIn.isAuthorizedIn;
+    config.general.pages[5].showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
+    config.general.pages[6].showDisplay = userIn.isAuthorizedIn;
+
+    config.general.pages[6].name = userIn.usernameIn;
+}
+
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
-
+    constructConfig();
     sideBar.config = config;
-
     sideBar.render();
     console.log('sideBar rendered');
 }
@@ -106,17 +121,19 @@ function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.render();
     console.log('authorization rendered');
+    
+    authentification();
+}
 
+function authentification() {
     const submitBtn = document.getElementById('auth-btn');
     const loginInput = document.getElementById('auth-login');
     const passwordInput = document.getElementById('auth-password');
-    
+
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
-        console.log(login);
         const password = passwordInput.value;
-        console.log(password);
 
         fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
@@ -135,7 +152,15 @@ function renderAuth(parent) {
             method: 'GET',
             credentials: 'include',
         })
-        .then(response => console.log(response.json()))
+        .then(response => response.json())
+        .then(result => {
+            if (result.login.length > 0) {
+                userIn.usernameIn = result.login;
+                console.log('user has entered as: ', userIn.usernameIn);
+                userIn.isAuthorizedIn = true;
+                renderSideBar(sideBarElement);
+            }
+        })
         }})
     });
 }
@@ -183,11 +208,11 @@ function goToPage(target) {
         return;
     }
 
-    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === usernameIn)) {
+    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === userIn.usernameIn)) {
         target.parent.innerHTML = '';
     }
     activePage = target.name;
-    console.log(activePage);
+    // console.log(activePage);
     target.render(target.parent);
 }
 
@@ -196,14 +221,8 @@ sideBarElement.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = e.target.id;
         let target;
-        // console.log(e.target.id);
-        // console.log(key, config[key], config[key].pages);
-        // config.key.pages
-        // console.log(config.general)
         config.general.pages.forEach(element => {
-            // console.log(element.id, targetId, typeof element.id, typeof targetId )
             if (element.id === targetId) {
-                // console.log(element, config[key]);
                 target = element;
             }
         });
