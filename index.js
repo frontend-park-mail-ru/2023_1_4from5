@@ -13,35 +13,47 @@ const config = {
         pages: [
             {
                 name: 'Лента',
-                href: '/feed',    
+                href: '/feed',
+                id: 'sidebar-feed',    
+                render: function () {
+                    console.log("лента");
+                },
             },
             {
                 name: 'Поиск авторов',
                 href: '/find',    
+                id: 'sidebar-find',
+                render: function () {
+                    console.log("поиск");
+                },
             },
             {
                 name: 'Мои подписки',
                 href: '/subs',    
+                id: 'sidebar-subs',
+                render: function () {
+                    console.log("подписки");
+                },
             },
-        ]
+        ],
+        parent: contentElement,
     },
     entry: {
         pages: [
             {
                 name: 'Регистрация',
                 href: '/register',   
-                render: function(a, b) {
-                    console.log(a, b);
-                },
+                id: 'sidebar-reg',
+                render: renderRegister,
             },
             {
                 name: 'Войти',
                 href: '/login',    
-                render: function(a, b) {
-                    console.log(a - b);
-                },
+                id: 'sidebar-auth',
+                render: renderAuth,
             },
         ],
+        parent: rootElement,
     },
     user: {
         login: 'Cockpit',
@@ -50,6 +62,8 @@ const config = {
     },
 
 };
+
+var activePage;
 
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
@@ -124,24 +138,58 @@ function renderRegister(parent) {
     });
 }
 
-renderSideBar(sideBarElement);
-renderAuth(rootElement);
-renderRegister(rootElement);
-
-function isValid(inputStr) {
-    const blackList = ""; //надо ли???
-    let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
-        hasntBlackList = true, hasMinLen = false;
-    if (inputStr.length >= 7) {
-        hasMinLen = true;
-    }
-    for (const char in inputStr) {
-        if (!~blackList.indexOf(char)) {
-            hasntBlackList = false;
-        }
-
+function goToPage(target, type) {
+    if (activePage === target) {
+        return;
     }
 
-    return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial && hasntBlackList;
-
+    if (type === config.general) {
+        type.parent.innerHTML = '';
+    }
+    activePage = target;
+    target.render(type.parent);
 }
+
+sideBarElement.addEventListener('click', (e) => {
+    if (e.target instanceof HTMLAnchorElement) {
+        e.preventDefault();
+        const targetId = e.target.id;
+        var target;
+        var type;
+        config.general.pages.forEach(element => {
+            if (element.id === targetId) {
+                target = element;
+                type = config.general;
+            }
+        });        
+
+        config.entry.pages.forEach(element => {
+            if (element.id === targetId) {
+                target = element;
+                type = config.entry;
+            }
+        });   
+        console.log(target, type);
+        goToPage(target, type);
+    }
+});
+
+renderSideBar(sideBarElement);
+
+// function isValid(inputStr) {
+//     const blackList = ""; //надо ли???
+//     let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
+//         hasntBlackList = true, hasMinLen = false;
+//     if (inputStr.length >= 7) {
+//         hasMinLen = true;
+//     }
+//     for (const char in inputStr) {
+//         if (!~blackList.indexOf(char)) {
+//             hasntBlackList = false;
+//         }
+
+//     }
+
+//     return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial && hasntBlackList;
+
+// }
