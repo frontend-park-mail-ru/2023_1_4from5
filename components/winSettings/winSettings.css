@@ -1,0 +1,8 @@
+#winSettings {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background: aqua;
+    z-index: 20;
+
+}
