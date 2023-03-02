@@ -9,9 +9,9 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 
-const usernameIn = 'Cockpit'; //так ли хранить username?
-const isAuthorIn = false;
-const isAuthorizedIn = false;
+let usernameIn = 'Cockpit'; //так ли хранить username?
+let isAuthorIn = false;
+let isAuthorizedIn = false;
 const config = {
     general: {
         pages: [
@@ -114,9 +114,7 @@ function renderAuth(parent) {
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
-        console.log(login);
         const password = passwordInput.value;
-        console.log(password);
 
         fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
@@ -135,7 +133,9 @@ function renderAuth(parent) {
             method: 'GET',
             credentials: 'include',
         })
-        .then(response => console.log(response.json()))
+        .then(response => response.json())
+        .then(result => usernameIn = result.login)
+        .then(login => console.log(login))
         }})
     });
 }
