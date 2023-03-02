@@ -6,10 +6,11 @@ export class Register {
     }
 
     render() {
-        var newDiv = document.createElement('div');
-        var template = Handlebars.templates.reg;
-        var tScript = template();
-        newDiv.innerHTML = tScript;
+        const newDiv = document.createElement('div');
+
+        const template = Handlebars.templates.reg;
+        newDiv.innerHTML = template();
+
         this.#parent.appendChild(newDiv);
     }
 }

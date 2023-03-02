@@ -11,7 +11,7 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 
-let userIn  = {
+const userIn  = {
     usernameIn: 'Cockpit', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
@@ -176,7 +176,7 @@ function renderAuth(parent) {
 }
 
 function removeAuth() {
-    let lastAuth = document.getElementById('authDiv');
+    const lastAuth = document.getElementById('authDiv');
     if (lastAuth) {
         lastAuth.remove();
     }
