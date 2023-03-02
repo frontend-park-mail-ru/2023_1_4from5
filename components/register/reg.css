@@ -5,6 +5,6 @@
     /* Сдвигаем текст вправо */
     background-color: #7dbe7c;
     position: relative;
-    width: 300px;
+    width: 400px;
     z-index: 3;
 }
