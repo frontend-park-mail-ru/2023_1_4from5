@@ -167,14 +167,15 @@ function renderRegister(parent) {
 }
 
 function goToPage(target) {
-    if (activePage === target) {
+    if (activePage === target.name) {
         return;
     }
 
     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === usernameIn)) {
         target.parent.innerHTML = '';
     }
-    activePage = target;
+    activePage = target.name;
+    console.log(activePage);
     target.render(target.parent);
 }
 
