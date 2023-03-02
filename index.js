@@ -93,7 +93,7 @@ const config = {
 
 let activePage;
 
-function constructConfig() {
+function constructConfig() {    // можно ли улучшить?
     config.user.username = userIn.usernameIn;
     config.user.isAuthor = userIn.isAuthorIn;
     config.user.isAuthorized = userIn.isAuthorizedIn;
@@ -121,8 +121,14 @@ function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.render();
     console.log('authorization rendered');
-    
     authentification();
+}
+
+function removeAuth() {
+    let lastAuth = document.getElementById('authDiv');
+    if (lastAuth) {
+        lastAuth.remove();
+    }
 }
 
 function authentification() {
@@ -159,6 +165,7 @@ function authentification() {
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
                 renderSideBar(sideBarElement);
+                removeAuth();
             }
         })
         }})
@@ -178,29 +185,26 @@ function renderRegister(parent) {
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
+        const login = loginInput.value;
+        console.log(login);
+        const username = usernameInput.value;
+        console.log(username);
+        const password = passwordInput.value;
+        console.log(password);
+        const repeatPassword = passwordRepeatInput.value;
+        console.log(repeatPassword);
+
+
+        fetch ('http://sub-me.ru:8000/api/auth/signUp', { // 400 Bad Request!!!
+            method: 'POST',
+            data: JSON.stringify({
+                "login": login,
+                "name": username,
+                "password_hash": password,
+            })
+        })
+        .then(response => console.log(response.ok))
     });
-    // submitBtn.addEventListener( 'click', (e) => {
-    //     e.preventDefault();
-    //     const login = loginInput.value;
-    //     console.log(login);
-    //     const username = usernameInput.value;
-    //     console.log(username);
-    //     const password = passwordInput.value;
-    //     console.log(password);
-    //     const repeatPassword = passwordRepeatInput.value;
-    //     console.log(repeatPassword);
-
-
-    //     fetch ('http://sub-me.ru:8000/api/auth/signUp', {
-    //         method: 'POST',
-    //         data: JSON.stringify({
-    //             "login": login,
-    //             "name": username,
-    //             "password_hash": password,
-    //         })
-    //     })
-    //     .then(response => console.log(response.ok))
-    // });
 }
 
 function goToPage(target) {
