@@ -1,6 +1,8 @@
 import { SideBar } from "./components/sideBar/sideBar.js";
 import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
+import { WinSettings } from "./components/winSettings/winSettings.js";
+import { clickHandler } from "./modules/handler.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -10,8 +12,8 @@ rootElement.appendChild(contentElement);
 
 
 const usernameIn = 'Cockpit'; //так ли хранить username?
-const isAuthorIn = false;
-const isAuthorizedIn = false;
+const isAuthorIn = true;
+const isAuthorizedIn = true;
 const config = {
     general: {
         pages: [
@@ -77,21 +79,61 @@ const config = {
                 id: 'sidebar-modalWindow',
                 showDisplay: isAuthorizedIn,
                 parent: contentElement,
+                render: renderWinSettings,
+            },
+        ],
+    },
+    setting: {
+        pages: [
+            {
+                name: 'Моя страница',
+                href: '/my_profile',
+                id: 'winSetting-profile',
+                showDisplay: isAuthorIn,
+                parent: contentElement,
                 render: function () {
-                    console.log("модальное окно");
+                    console.log("Моя страница");
+                },
+            },
+            {
+                name: 'Мои доходы',
+                href: '/finance',
+                id: 'winSetting-finance',
+                showDisplay: isAuthorIn,
+                parent: contentElement,
+                render: function () {
+                    console.log("Мои доходы");
+                },
+            },
+            {
+                name: 'Настройки',
+                href: '/settings',
+                id: 'winSetting-settings',
+                showDisplay: true,
+                parent: contentElement,
+                render: function () {
+                    console.log("Настройки");
+                },
+            },
+            {
+                name: 'Выйти',
+                href: '/startPage',
+                id: 'winSetting-startPage',
+                showDisplay: true,
+                parent: contentElement,
+                render: function () {
+                    console.log("Выйти");
                 },
             },
         ],
-        parent: rootElement,
     },
     user: {
         username: usernameIn,
         isAuthor: isAuthorIn,
         isAuthorized: isAuthorizedIn,
     },
+    activePage: "",
 };
-
-let activePage;
 
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
@@ -101,6 +143,12 @@ function renderSideBar(parent) {
     sideBar.render();
     console.log('sideBar rendered');
 }
+
+sideBarElement.addEventListener('click', (e) => {
+    // console.log("start_add_event-listener");
+    clickHandler(e, config.general, config);
+});
+
 
 function renderAuth(parent) {
     const auth = new Auth(parent);
@@ -178,40 +226,17 @@ function renderRegister(parent) {
     // });
 }
 
-function goToPage(target) {
-    if (activePage === target.name) {
-        return;
-    }
+function renderWinSettings(parent) {
+    const win = new WinSettings(parent);
 
-    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === usernameIn)) {
-        target.parent.innerHTML = '';
-    }
-    activePage = target.name;
-    console.log(activePage);
-    target.render(target.parent);
+    win.config = config;
+
+    win.render();
+    console.log('winSetting rendered');
 }
 
-sideBarElement.addEventListener('click', (e) => {
-    if (e.target instanceof HTMLAnchorElement) {
-        e.preventDefault();
-        const targetId = e.target.id;
-        let target;
-        // console.log(e.target.id);
-        // console.log(key, config[key], config[key].pages);
-        // config.key.pages
-        // console.log(config.general)
-        config.general.pages.forEach(element => {
-            // console.log(element.id, targetId, typeof element.id, typeof targetId )
-            if (element.id === targetId) {
-                // console.log(element, config[key]);
-                target = element;
-            }
-        });
-        goToPage(target);
-    }
-});
-
 renderSideBar(sideBarElement);
+//renderWinSettings(contentElement);
 
 
 // function isValid(inputStr) {

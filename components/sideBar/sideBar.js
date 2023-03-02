@@ -15,10 +15,12 @@ export class SideBar {
     }
 
     render() {
-        var template = Handlebars.templates.sideBar;
-        var tScript = template(this.#config);
+        let newDiv = document.createElement('div');
 
-        this.#parent.innerHTML += tScript;
+        let template = Handlebars.templates.sideBar;
+        newDiv.innerHTML = template(this.#config);
+
+        this.#parent.appendChild(newDiv);
 
         // const authorBtn = document.getElementById('author');
 
@@ -39,6 +41,3 @@ export class SideBar {
     }  
 }
 
-Handlebars.registerHelper('stringifyFunc', function(renderElement) {
-    return new Handlebars.SafeString("(" + renderElement.toString() + ")()");
-});
