@@ -64,27 +64,43 @@ function renderAuth(parent) {
     console.log('authorization rendered');
 
     const submitBtn = document.getElementById('auth-btn');
-    const usernameInput = document.getElementById('auth-username');
+    const loginInput = document.getElementById('auth-login');
     const passwordInput = document.getElementById('auth-password');
     
-    submitBtn.addEventListener( "click", (e) => {
+    submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
-        const username = usernameInput.value;
-        console.log(username);
+        const login = loginInput.value;
+        console.log(login);
         const password = passwordInput.value;
         console.log(password);
 
-        fetch ('sub-me.ru/api/auth/signIn', {
+        fetch ('http://127.0.0.1:8000/api/auth/signIn', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
             data: JSON.stringify({
-                "login": username,
+                "login": login,
                 "password_hash": password,
             })
         })
         .then(response => console.log(response.ok))
     });
+}
+
+function isValid(inputStr) {
+    // const blackList = ""; //надо ли???
+    let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
+        hasMinLen = false;
+    if (inputStr.length >= 7) {
+        hasMinLen = true;
+    }
+    for (const char in inputStr) {
+        
+
+    }
+
+    return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial;
+
 }
 
 function renderRegister(parent) {
@@ -93,33 +109,38 @@ function renderRegister(parent) {
     console.log('Register rendered');
 
     const submitBtn = document.getElementById('reg-btn');
+    const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
-    const passwordInputCheck = document.getElementById('reg-passwordCheck');
-
-    submitBtn.addEventListener( "click", (e) => {
+    const passwordRepeatInput = document.getElementById('reg-repeat-password');
+    
+    submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
+        const login = loginInput.value;
+        console.log(login);
         const username = usernameInput.value;
         console.log(username);
         const password = passwordInput.value;
         console.log(password);
+        
         const passwordCheck = passwordInputCheck.value;
         console.log(passwordCheck);
+        
+        const repeatPassword = passwordRepeatInput.value;
+        console.log(repeatPassword);
 
 
-
-        if (password === passwordCheck) {
-            fetch ('sub-me.ru:8000/api/auth/signUp', {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                data: JSON.stringify({
-                    "login": username,
-                    "password_hash": password,
-                })
+        fetch ('http://127.0.0.1:8000/api/auth/signUp', {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            data: JSON.stringify({
+                "login": login,
+                "name": username,
+                "password_hash": password,
             })
-                .then(response => console.log(response.ok))
-        }
+        })
+        .then(response => console.log(response.ok))
     });
 }
 
