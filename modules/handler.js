@@ -14,18 +14,16 @@ export function clickHandler (e, configPart, config) {
                 target = element;
             }
         });
-        goToPage(target, config);
-    }
-}
-function goToPage(target, config) { // можно сделать function expression
-    if (config.activePage === target.name) {
-        return;
-    }
 
-    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
-        target.parent.innerHTML = '';
+        if (config.activePage === target.name) {
+            return;
+        }
+
+        if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
+            target.parent.innerHTML = '';
+        }
+        config.activePage = target.name;
+        // console.log(config.activePage);
+        target.render(target.parent);
     }
-    config.activePage = target.name;
-    // console.log(config.activePage);
-    target.render(target.parent);
 }

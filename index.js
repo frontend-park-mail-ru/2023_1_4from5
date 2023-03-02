@@ -1,6 +1,8 @@
 import { SideBar } from "./components/sideBar/sideBar.js";
 import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
+import { WinSettings } from "./components/winSettings/winSettings.js";
+import { clickHandler } from "./modules/handler.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -8,7 +10,7 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-let userIn  = {
+const userIn  = {
     usernameIn: 'Cockpit', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
@@ -78,8 +80,50 @@ const config = {
                 id: 'sidebar-modalWindow',
                 showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
+                render: renderWinSettings,
+            },
+        ],
+    },
+    setting: {
+        pages: [
+            {
+                name: 'Моя страница',
+                href: '/my_profile',
+                id: 'winSetting-profile',
+                showDisplay: userIn.isAuthorIn,
+                parent: contentElement,
                 render: function () {
-                    console.log("модальное окно");
+                    console.log("Моя страница");
+                },
+            },
+            {
+                name: 'Мои доходы',
+                href: '/finance',
+                id: 'winSetting-finance',
+                showDisplay: userIn.isAuthorIn,
+                parent: contentElement,
+                render: function () {
+                    console.log("Мои доходы");
+                },
+            },
+            {
+                name: 'Настройки',
+                href: '/settings',
+                id: 'winSetting-settings',
+                showDisplay: true,
+                parent: contentElement,
+                render: function () {
+                    console.log("Настройки");
+                },
+            },
+            {
+                name: 'Выйти',
+                href: '/startPage',
+                id: 'winSetting-startPage',
+                showDisplay: true,
+                parent: contentElement,
+                render: function () {
+                    console.log("Выйти");
                 },
             },
         ],
@@ -89,9 +133,9 @@ const config = {
         isAuthor: false,
         isAuthorized: false,
     },
+    activePage: '',
 };
 
-let activePage;
 
 function constructConfig() {    // можно ли улучшить?
     config.user.username = userIn.usernameIn;
@@ -117,6 +161,10 @@ function renderSideBar(parent) {
     console.log('sideBar rendered');
 }
 
+sideBarElement.addEventListener('click', (e) => {
+    clickHandler(e, config.general, config);
+});
+
 function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.render();
@@ -125,7 +173,7 @@ function renderAuth(parent) {
 }
 
 function removeAuth() {
-    let lastAuth = document.getElementById('authDiv');
+    const lastAuth = document.getElementById('authDiv');
     if (lastAuth) {
         lastAuth.remove();
     }
@@ -211,31 +259,37 @@ function renderRegister(parent) {
     });
 }
 
-function goToPage(target) {
-    if (activePage === target.name) {
-        return;
-    }
-
-    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === userIn.usernameIn)) {
-        target.parent.innerHTML = '';
-    }
-    activePage = target.name;
-    target.render(target.parent);
+function renderWinSettings(parent) {
+    const win = new WinSettings(parent);
+    win.config = config;
+    win.render();
+    console.log('winSetting rendered');
 }
+// function goToPage(target) {
+//     if (activePage === target.name) {
+//         return;
+//     }
 
-sideBarElement.addEventListener('click', (e) => {
-    if (e.target instanceof HTMLAnchorElement) {
-        e.preventDefault();
-        const targetId = e.target.id;
-        let target;
-        config.general.pages.forEach(element => {
-            if (element.id === targetId) {
-                target = element;
-            }
-        });
-        goToPage(target);
-    }
-});
+//     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === userIn.usernameIn)) {
+//         target.parent.innerHTML = '';
+//     }
+//     activePage = target.name;
+//     target.render(target.parent);
+// }
+
+// sideBarElement.addEventListener('click', (e) => {
+//     if (e.target instanceof HTMLAnchorElement) {
+//         e.preventDefault();
+//         const targetId = e.target.id;
+//         let target;
+//         config.general.pages.forEach(element => {
+//             if (element.id === targetId) {
+//                 target = element;
+//             }
+//         });
+//         goToPage(target);
+//     }
+// });
 
 renderSideBar(sideBarElement);
 

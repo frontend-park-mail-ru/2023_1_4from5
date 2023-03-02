@@ -17,9 +17,9 @@ export class WinSettings {
     }
 
     render() {
-        let newDiv = document.createElement('div');
+        const newDiv = document.createElement('div');
 
-        let template = Handlebars.templates.winSettings;
+        const template = Handlebars.templates.winSettings;
         newDiv.innerHTML = template(this.#config);
 
         newDiv.addEventListener('click', (e) => {
