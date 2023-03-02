@@ -1,6 +1,6 @@
 <div id="sideBar">
     {{#each general.pages}}
-    <a href={{href}}> {{name}} </a>
+    <a id={{id}} href={{href}}> {{name}} </a>
     {{/each}}
 
     {{#if user.isAuthorized}}
@@ -14,7 +14,7 @@
 
     {{else}}
     {{#each entry.pages}}
-        <button onclick="{{stringifyFunc render 5 2}}"> {{name}} </button>
+        <a id={{id}} href={{href}}> {{name}} </a>
     {{/each}}
     
     {{/if}}

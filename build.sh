@@ -1,0 +1,5 @@
+#!/bin/bash
+# mkdir public/build
+handlebars ./components/authorization/auth.handlebars -f ./public/build/auth.precompiled.js
+handlebars ./components/register/reg.handlebars -f ./public/build/reg.precompiled.js
+handlebars ./components/sideBar/sideBar.handlebars -f ./public/build/sideBar.precompiled.js
