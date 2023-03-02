@@ -1,8 +1,6 @@
 import { SideBar } from "./components/sideBar/sideBar.js";
 import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
-import { WinSettings } from "./components/winSettings/winSettings.js";
-import { clickHandler } from "./modules/handler.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -10,13 +8,11 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-// при первом заходе должен отправляться get запрос
-const userIn  = {
+let userIn  = {
     usernameIn: 'Cockpit', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
 }
-
 const config = {
     general: {
         pages: [
@@ -82,50 +78,8 @@ const config = {
                 id: 'sidebar-modalWindow',
                 showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
-                render: renderWinSettings,
-            },
-        ],
-    },
-    setting: {
-        pages: [
-            {
-                name: 'Моя страница',
-                href: '/my_profile',
-                id: 'winSetting-profile',
-                showDisplay: userIn.isAuthorIn,
-                parent: contentElement,
                 render: function () {
-                    console.log("Моя страница");
-                },
-            },
-            {
-                name: 'Мои доходы',
-                href: '/finance',
-                id: 'winSetting-finance',
-                showDisplay: userIn.isAuthorIn,
-                parent: contentElement,
-                render: function () {
-                    console.log("Мои доходы");
-                },
-            },
-            {
-                name: 'Настройки',
-                href: '/settings',
-                id: 'winSetting-settings',
-                showDisplay: true,
-                parent: contentElement,
-                render: function () {
-                    console.log("Настройки");
-                },
-            },
-            {
-                name: 'Выйти',
-                href: '/startPage',
-                id: 'winSetting-startPage',
-                showDisplay: true,
-                parent: contentElement,
-                render: function () {
-                    console.log("Выйти");
+                    console.log("модальное окно");
                 },
             },
         ],
@@ -135,8 +89,9 @@ const config = {
         isAuthor: false,
         isAuthorized: false,
     },
-    activePage: '',
 };
+
+let activePage;
 
 function constructConfig() {    // можно ли улучшить?
     config.user.username = userIn.usernameIn;
@@ -162,12 +117,6 @@ function renderSideBar(parent) {
     console.log('sideBar rendered');
 }
 
-sideBarElement.addEventListener('click', (e) => {
-    // console.log("start_add_event-listener");
-    clickHandler(e, config.general, config);
-});
-
-
 function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.render();
@@ -182,7 +131,6 @@ function removeAuth() {
     }
 }
 
-// сделать authentification async-ом
 function authentification() {
     const submitBtn = document.getElementById('auth-btn');
     const loginInput = document.getElementById('auth-login');
@@ -193,8 +141,6 @@ function authentification() {
         const login = loginInput.value;
         const password = passwordInput.value;
 
-        // сделать класс для работы с fetch
-        // вынести в переменные method, credentials, url
         fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
             credentials: 'include',
@@ -226,7 +172,6 @@ function authentification() {
     });
 }
 
-// после регистрации окно должно пропадать
 function renderRegister(parent) {
     const reg = new Register(parent);
     reg.render();
@@ -250,30 +195,46 @@ function renderRegister(parent) {
         console.log(repeatPassword);
 
 
-        fetch ('http://sub-me.ru:8000/api/auth/signUp', {
+        fetch ('http://sub-me.ru:8000/api/auth/signUp', { // 400 Bad Request!!!
             method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify({
+            data: JSON.stringify({
                 "login": login,
                 "name": username,
-                "password_hash": password
+                "password_hash": password,
             })
         })
         .then(response => console.log(response.ok))
     });
 }
 
-function renderWinSettings(parent) {
-    const win = new WinSettings(parent);
+function goToPage(target) {
+    if (activePage === target.name) {
+        return;
+    }
 
-    win.config = config;
-
-    win.render();
-    console.log('winSetting rendered');
+    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === userIn.usernameIn)) {
+        target.parent.innerHTML = '';
+    }
+    activePage = target.name;
+    // console.log(activePage);
+    target.render(target.parent);
 }
 
+sideBarElement.addEventListener('click', (e) => {
+    if (e.target instanceof HTMLAnchorElement) {
+        e.preventDefault();
+        const targetId = e.target.id;
+        let target;
+        config.general.pages.forEach(element => {
+            if (element.id === targetId) {
+                target = element;
+            }
+        });
+        goToPage(target);
+    }
+});
+
 renderSideBar(sideBarElement);
-//renderWinSettings(contentElement);
 
 
 // function isValid(inputStr) {
