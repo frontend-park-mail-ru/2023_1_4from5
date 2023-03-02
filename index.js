@@ -8,65 +8,95 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
+
+const usernameIn = 'Cockpit'; //так ли хранить username?
+const isAuthorIn = false;
+const isAuthorizedIn = true;
 const config = {
     general: {
         pages: [
             {
                 name: 'Лента',
                 href: '/feed',
-                id: 'sidebar-feed',    
+                id: 'sidebar-feed',
+                showDisplay: isAuthorizedIn,
+                parent: contentElement,
                 render: function () {
                     console.log("лента");
                 },
             },
             {
                 name: 'Поиск авторов',
-                href: '/find',    
+                href: '/find',
                 id: 'sidebar-find',
+                showDisplay: true,
+                parent: contentElement,
                 render: function () {
                     console.log("поиск");
                 },
             },
             {
                 name: 'Мои подписки',
-                href: '/subs',    
+                href: '/subs',
                 id: 'sidebar-subs',
+                showDisplay: isAuthorizedIn,
+                parent: contentElement,
                 render: function () {
                     console.log("подписки");
                 },
             },
-        ],
-        parent: contentElement,
-    },
-    entry: {
-        pages: [
             {
                 name: 'Регистрация',
-                href: '/register',   
+                href: '/register',
                 id: 'sidebar-reg',
+                showDisplay: !isAuthorizedIn,
+                parent: rootElement,
                 render: renderRegister,
             },
             {
                 name: 'Войти',
+                href: '/auth',
                 id: 'sidebar-auth',
+                showDisplay: !isAuthorizedIn,
+                parent: rootElement,
                 render: renderAuth,
             },
+            {
+                name: 'Стать автором',
+                href: '/beAuthor',
+                id: 'sidebar-beAuthor',
+                showDisplay: isAuthorizedIn * !isAuthorIn,
+                parent: contentElement,
+                render: function () {
+                    console.log("Стать автором");
+                },
+            },
+            {
+                name: usernameIn,
+                href: '/modalWindow',
+                id: 'sidebar-modalWindow',
+                showDisplay: isAuthorizedIn,
+                parent: contentElement,
+                render: function () {
+                    console.log("модальное окно");
+                },
+            },
         ],
-        parent: rootElement,
     },
     user: {
-        login: 'Cockpit',
-        isAuthor: false,
-        isAuthorized: false,
+        username: usernameIn,
+        isAuthor: isAuthorIn,
+        isAuthorized: isAuthorizedIn,
     },
-
 };
 
-var activePage;
+let activePage;
 
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
-    sideBar.config = config;    
+
+    sideBar.config = config;
+
     sideBar.render();
     console.log('sideBar rendered');
 }
@@ -145,38 +175,36 @@ function renderRegister(parent) {
     // });
 }
 
-function goToPage(target, type) {
-    if (activePage === target) {
+function goToPage(target) {
+    if (activePage === target.name) {
         return;
     }
 
-    if (type === config.general) {
-        type.parent.innerHTML = '';
+    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === usernameIn)) {
+        target.parent.innerHTML = '';
     }
-    activePage = target;
-    target.render(type.parent);
+    activePage = target.name;
+    console.log(activePage);
+    target.render(target.parent);
 }
 
 sideBarElement.addEventListener('click', (e) => {
     if (e.target instanceof HTMLAnchorElement) {
         e.preventDefault();
         const targetId = e.target.id;
-        var target;
-        var type;
+        let target;
+        // console.log(e.target.id);
+        // console.log(key, config[key], config[key].pages);
+        // config.key.pages
+        // console.log(config.general)
         config.general.pages.forEach(element => {
+            // console.log(element.id, targetId, typeof element.id, typeof targetId )
             if (element.id === targetId) {
+                // console.log(element, config[key]);
                 target = element;
-                type = config.general;
             }
-        });        
-
-        config.entry.pages.forEach(element => {
-            if (element.id === targetId) {
-                target = element;
-                type = config.entry;
-            }
-        });   
-        goToPage(target, type);
+        });
+        goToPage(target);
     }
 });
 
