@@ -66,7 +66,7 @@ var activePage;
 
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
-    sideBar.config = config;
+    sideBar.config = config;    
     sideBar.render();
     console.log('sideBar rendered');
 }
@@ -87,14 +87,16 @@ function renderAuth(parent) {
         const password = passwordInput.value;
         console.log(password);
 
-        fetch ('http://127.0.0.1:8000/api/auth/signIn', {
+        fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
-            mode: 'cors',
             credentials: 'include',
-            data: JSON.stringify({
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
                 "login": login,
-                "password_hash": password,
-            })
+                "password_hash": password
+            }),
         })
         .then(response => console.log(response.ok))
     });
@@ -113,28 +115,34 @@ function renderRegister(parent) {
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
-        const login = loginInput.value;
-        console.log(login);
-        const username = usernameInput.value;
-        console.log(username);
-        const password = passwordInput.value;
-        console.log(password);
-        const repeatPassword = passwordRepeatInput.value;
-        console.log(repeatPassword);
-
-
-        fetch ('http://127.0.0.1:8000/api/auth/signUp', {
-            method: 'POST',
-            mode: 'cors',
+        fetch ('http://sub-me.ru:8000/api/user/profile', {
+            method: 'GET',
             credentials: 'include',
-            data: JSON.stringify({
-                "login": login,
-                "name": username,
-                "password_hash": password,
-            })
         })
-        .then(response => console.log(response.ok))
+        .then(response => console.log(response.json()))
     });
+    // submitBtn.addEventListener( 'click', (e) => {
+    //     e.preventDefault();
+    //     const login = loginInput.value;
+    //     console.log(login);
+    //     const username = usernameInput.value;
+    //     console.log(username);
+    //     const password = passwordInput.value;
+    //     console.log(password);
+    //     const repeatPassword = passwordRepeatInput.value;
+    //     console.log(repeatPassword);
+
+
+    //     fetch ('http://sub-me.ru:8000/api/auth/signUp', {
+    //         method: 'POST',
+    //         data: JSON.stringify({
+    //             "login": login,
+    //             "name": username,
+    //             "password_hash": password,
+    //         })
+    //     })
+    //     .then(response => console.log(response.ok))
+    // });
 }
 
 function goToPage(target, type) {
@@ -173,6 +181,7 @@ sideBarElement.addEventListener('click', (e) => {
 });
 
 renderSideBar(sideBarElement);
+
 
 // function isValid(inputStr) {
 //     const blackList = ""; //надо ли???

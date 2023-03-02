@@ -3,19 +3,19 @@
     <a id={{id}} href={{href}}> {{name}} </a>
     {{/each}}
 
-    {{#if user.isAuthorized}}
-    {{#unless user.isAuthor}}
+    {{!-- {{#if user.isAuthorized}} --}}
+    {{!-- {{#unless user.isAuthor}} --}}
     <button> Стать автором </button>
-    {{/unless}}
+    {{!-- {{/unless}} --}}
 
     <h4 style="display: inline;">
         {{user.login}}
     </h4>
 
-    {{else}}
+    {{!-- {{else}} --}}
     {{#each entry.pages}}
         <a id={{id}} href={{href}}> {{name}} </a>
     {{/each}}
     
-    {{/if}}
+    {{!-- {{/if}} --}}
 </div>
