@@ -1,23 +1,7 @@
 <div id="sideBar">
     {{#each general.pages}}
-    <a id={{id}} href={{href}}> {{name}} </a>
+        {{#if showDisplay}}
+            <a id={{id}} href={{href}}> {{name}} </a>
+        {{/if}}
     {{/each}}
-
-    {{#if user.isAuthorized}}
-    {{#unless user.isAuthor}}
-        {{#each beAuthor.pages}}
-        <a id={{id}} href={{href}}> {{name}} </a>
-        {{/each}}
-    {{/unless}}
-
-    {{#each nickname.pages}}
-        <a id={{id}} href={{href}}> {{name}} </a>
-    {{/each}}
-
-    {{else}}
-    {{#each entry.pages}}
-        <a id={{id}} href={{href}}> {{name}} </a>
-    {{/each}}
-    
-    {{/if}}
 </div>
