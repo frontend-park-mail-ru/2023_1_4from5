@@ -11,7 +11,7 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 const userIn  = {
-    usernameIn: 'Cockpit', //так ли хранить username?
+    usernameIn: '', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
 }
@@ -70,9 +70,7 @@ const config = {
                 id: 'sidebar-beAuthor',
                 showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                 parent: contentElement,
-                render: function () {
-                    console.log("Стать автором");
-                },
+                render: becomeAuthor,
             },
             {
                 name: userIn.usernameIn,
@@ -150,10 +148,29 @@ function constructConfig() {    // можно ли улучшить?
     config.general.pages[5].showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
     config.general.pages[6].showDisplay = userIn.isAuthorizedIn;
 
+    config.setting.pages[0].showDisplay = userIn.isAuthorIn;
+    config.setting.pages[1].showDisplay = userIn.isAuthorIn;
+    config.setting.pages[2].showDisplay = true;
+    config.setting.pages[3].showDisplay = true;
+
     config.general.pages[6].name = userIn.usernameIn;
 }
 
-function renderSideBar(parent) {
+async function renderSideBar(parent) {
+    // этот запрос можно отключить, если хотим страничку входа
+    await fetch ('http://sub-me.ru:8000/api/user/profile', {
+            method: 'GET',
+            credentials: 'include',
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.login.length > 0) {
+                userIn.usernameIn = result.login;
+                console.log('user has entered as: ', userIn.usernameIn);
+                userIn.isAuthorizedIn = true;
+            }
+        })
+    ///////////////////////////////////////////////////////////
     const sideBar = new SideBar(parent);
     constructConfig();
     sideBar.config = config;
@@ -256,19 +273,19 @@ function registration() {
         .then(response => {
             if (response.ok) {
                 fetch ('http://sub-me.ru:8000/api/user/profile', {
-                method: 'GET',
-                credentials: 'include',
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.login.length > 0) {
-                    userIn.usernameIn = result.login;
-                    console.log('user has entered as: ', userIn.usernameIn);
-                    userIn.isAuthorizedIn = true;
-                    renderSideBar(sideBarElement);
-                    removeReg();
-                }
-            })
+                    method: 'GET',
+                    credentials: 'include',
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.login.length > 0) {
+                        userIn.usernameIn = result.login;
+                        console.log('user has entered as: ', userIn.usernameIn);
+                        userIn.isAuthorizedIn = true;
+                        renderSideBar(sideBarElement);
+                        removeReg();
+                    }
+                })
             }
         })
     });
@@ -287,6 +304,11 @@ function renderWinSettings(parent) {
     win.config = config;
     win.render();
     console.log('winSetting rendered');
+}
+
+function becomeAuthor(parent) {
+    userIn.isAuthorIn = true;
+    renderSideBar(sideBarElement);
 }
 
 renderSideBar(sideBarElement);
