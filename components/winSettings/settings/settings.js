@@ -1,6 +1,6 @@
 import { clickHandler} from "../../modules/handler.js";
 
-export class WinSettings {
+export class Settings {
     #parent
     #config
 
@@ -17,7 +17,13 @@ export class WinSettings {
     }
 
     render() {
+        const lastSettings = document.getElementById('settingsDiv');
+        if (lastSettings) {
+            lastSettings.remove();
+        }
+
         const newDiv = document.createElement('div');
+        newDiv.id = 'settingsDiv';
         const template = Handlebars.templates.winSettings; // eslint-disable-line
         newDiv.innerHTML = template(this.#config);
 
@@ -26,8 +32,6 @@ export class WinSettings {
 
         });
     
-
         this.#parent.appendChild(newDiv);
     }
 }
-// можно сделать один handlebars

@@ -70,7 +70,9 @@ const config = {
                 id: 'sidebar-beAuthor',
                 showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                 parent: contentElement,
-                render: becomeAuthor,
+                render: function () {
+                    console.log('стать автором');
+                },
             },
             {
                 name: userIn.usernameIn,
@@ -169,6 +171,22 @@ async function renderSideBar(parent) {
                 userIn.usernameIn = result.login;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
+
+                fetch ('http://sub-me.ru:8000/api/user/homePage', {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'include',
+                })
+                .then(response => response.json())
+                .then(userHomePage => {
+                    userIn.isAuthorIn = userHomePage.is_creator;
+                    // код повторяется
+                    const sideBar = new SideBar(parent);
+                    constructConfig();
+                    sideBar.config = config;
+                    sideBar.render();
+                    console.log('sideBar rendered');
+                })
             }
         })
     ///////////////////////////////////////////////////////////
@@ -252,14 +270,14 @@ function registration() {
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
-    const passwordRepeatInput = document.getElementById('reg-repeat-password');
+    // const passwordRepeatInput = document.getElementById('reg-repeat-password');
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
-        const repeatPassword = passwordRepeatInput.value;
+        // const repeatPassword = passwordRepeatInput.value;
 
         fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
@@ -311,10 +329,10 @@ function renderWinSettings(parent) {
     console.log('winSetting rendered');
 }
 
-function becomeAuthor(parent) {
-    userIn.isAuthorIn = true;
-    renderSideBar(sideBarElement);
-}
+// function becomeAuthor(parent) {
+//     userIn.isAuthorIn = true;
+//     renderSideBar(sideBarElement);
+// }
 
 renderSideBar(sideBarElement);
 

@@ -23,7 +23,7 @@ export class SideBar {
         const newDiv = document.createElement('div');
         newDiv.id = 'sidebarDiv';
 
-        const template = Handlebars.templates.sideBar;
+        const template = Handlebars.templates.sideBar; // eslint-disable-line
         newDiv.innerHTML = template(this.#config);
 
         this.#parent.appendChild(newDiv);
