@@ -6,6 +6,8 @@ import { clickHandler } from "./modules/handler.js";
 import { Settings } from "./components/winSettings/settings/settings.js";
 import { MyPage } from "./components/winSettings/myPage/myPage.js";
 
+const USER_DASHA_URL = '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4';
+
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
 const contentElement = document.createElement('main');
@@ -338,10 +340,21 @@ function renderSettings(parent) {
 }
 
 function renderMyPage(parent) {
-    const myPage = new MyPage(parent);
-    myPage.config = config;
-    myPage.render();
-    console.log('myPage rendered');
+    fetch ('http://sub-me.ru:8000/api/creator/page/' + USER_DASHA_URL, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+        const myPage = new MyPage(parent);
+        myPage.config = result;
+        myPage.render();
+        console.log('myPage rendered');
+    })
+
+    
 }
 
 renderSideBar(sideBarElement);
