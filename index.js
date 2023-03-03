@@ -4,6 +4,7 @@ import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
 import { Settings } from "./components/winSettings/settings/settings.js";
+import { MyPage } from "./components/winSettings/myPage/myPage.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -94,9 +95,7 @@ const config = {
                 id: 'winSetting-profile',
                 showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
-                render: function () {
-                    console.log("Моя страница");
-                },
+                render: renderMyPage,
             },
             {
                 name: 'Мои доходы',
@@ -336,6 +335,13 @@ function renderSettings(parent) {
     settings.config = config;
     settings.render();
     console.log('settings rendered');
+}
+
+function renderMyPage(parent) {
+    const myPage = new MyPage(parent);
+    myPage.config = config;
+    myPage.render();
+    console.log('myPage rendered');
 }
 
 renderSideBar(sideBarElement);
