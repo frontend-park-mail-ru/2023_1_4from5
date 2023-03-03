@@ -160,6 +160,7 @@ async function renderSideBar(parent) {
     // этот запрос можно отключить, если хотим страничку входа
     await fetch ('http://sub-me.ru:8000/api/user/profile', {
             method: 'GET',
+            mode: 'cors',
             credentials: 'include',
         })
         .then(response => response.json())
@@ -208,6 +209,7 @@ function authentification() {
 
         fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
+            mode: 'cors',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
@@ -221,6 +223,7 @@ function authentification() {
             if (response.ok) {
             fetch ('http://sub-me.ru:8000/api/user/profile', {
             method: 'GET',
+            mode: 'cors',
             credentials: 'include',
         })
         .then(response => response.json())
@@ -260,6 +263,7 @@ function registration() {
 
         fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
+            mode: 'cors',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
@@ -274,6 +278,7 @@ function registration() {
             if (response.ok) {
                 fetch ('http://sub-me.ru:8000/api/user/profile', {
                     method: 'GET',
+                    mode: 'cors',
                     credentials: 'include',
                 })
                 .then(response => response.json())
