@@ -171,7 +171,7 @@ async function renderSideBar(parent) {
         .then(response => response.json())
         .then(result => {
             if (result.login.length > 0) {
-                userIn.usernameIn = result.login;
+                userIn.usernameIn = result.name;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
 
