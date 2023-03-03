@@ -7,6 +7,7 @@ export class Register {
 
     render() {
         const newDiv = document.createElement('div');
+        newDiv.id = 'regDiv';
 
         const template = Handlebars.templates.reg;
         newDiv.innerHTML = template();
