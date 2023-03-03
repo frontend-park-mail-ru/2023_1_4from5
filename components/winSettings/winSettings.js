@@ -23,7 +23,6 @@ export class WinSettings {
 
         newDiv.addEventListener('click', (e) => {
             clickHandler(e, this.#config.setting, this.#config);
-
         });
     
 

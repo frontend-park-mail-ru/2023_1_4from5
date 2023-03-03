@@ -3,6 +3,7 @@ import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
+import { Settings } from "./components/winSettings/settings/settings.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -11,7 +12,8 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 const userIn  = {
-    usernameIn: '', //так ли хранить username?
+    loginIn: 'Cockpit1',
+    usernameIn: 'Cockpit1!', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
 }
@@ -112,9 +114,7 @@ const config = {
                 id: 'winSetting-settings',
                 showDisplay: true,
                 parent: contentElement,
-                render: function () {
-                    console.log("Настройки");
-                },
+                render: renderSettings,
             },
             {
                 name: 'Выйти',
@@ -129,6 +129,7 @@ const config = {
         ],
     },
     user: {
+        login: '', 
         username: '',
         isAuthor: false,
         isAuthorized: false,
@@ -138,6 +139,7 @@ const config = {
 
 
 function constructConfig() {    // можно ли улучшить?
+    config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.isAuthor = userIn.isAuthorIn;
     config.user.isAuthorized = userIn.isAuthorizedIn;
@@ -247,7 +249,7 @@ function authentification() {
         .then(response => response.json())
         .then(result => {
             if (result.login.length > 0) {
-                userIn.usernameIn = result.login;
+                userIn.usernameIn = result.name;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
                 renderSideBar(sideBarElement);
@@ -301,8 +303,8 @@ function registration() {
                 })
                 .then(response => response.json())
                 .then(result => {
-                    if (result.login.length > 0) {
-                        userIn.usernameIn = result.login;
+                    if (result.name.length > 0) {
+                        userIn.usernameIn = result.name;
                         console.log('user has entered as: ', userIn.usernameIn);
                         userIn.isAuthorizedIn = true;
                         renderSideBar(sideBarElement);
@@ -329,10 +331,12 @@ function renderWinSettings(parent) {
     console.log('winSetting rendered');
 }
 
-// function becomeAuthor(parent) {
-//     userIn.isAuthorIn = true;
-//     renderSideBar(sideBarElement);
-// }
+function renderSettings(parent) {
+    const settings = new Settings(parent);
+    settings.config = config;
+    settings.render();
+    console.log('settings rendered');
+}
 
 renderSideBar(sideBarElement);
 

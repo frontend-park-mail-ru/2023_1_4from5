@@ -15,15 +15,15 @@ export class Settings {
     }
 
     render() {
-        const lastSettings = document.getElementById('settingsDiv');
-        if (lastSettings) {
-            lastSettings.remove();
+        const lastMyPage = document.getElementById('myPageDiv');
+        if (lastMyPage) {
+            lastMyPage.remove();
         }
 
         const newDiv = document.createElement('div');
-        newDiv.id = 'settingsDiv';
-        const template = Handlebars.templates.settings; // eslint-disable-line
-        newDiv.innerHTML = template(this.#config.user);
+        newDiv.id = 'myPageDiv';
+        const template = Handlebars.templates.myPage; // eslint-disable-line
+        newDiv.innerHTML = template(this.#config);
     
         this.#parent.appendChild(newDiv);
     }
