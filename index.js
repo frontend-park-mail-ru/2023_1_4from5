@@ -220,11 +220,14 @@ function authentification() {
     });
 }
 
-function renderRegister(parent) {
-    const reg = new Register(parent);
-    reg.render();
-    console.log('Register rendered');
+function removeReg() {
+    const lastReg = document.getElementById('regDiv');
+    if (lastReg) {
+        lastReg.remove();
+    }
+}
 
+function registration() {
     const submitBtn = document.getElementById('reg-btn');
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
@@ -234,16 +237,11 @@ function renderRegister(parent) {
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
-        console.log(login);
         const username = usernameInput.value;
-        console.log(username);
         const password = passwordInput.value;
-        console.log(password);
         const repeatPassword = passwordRepeatInput.value;
-        console.log(repeatPassword);
 
-
-        fetch ('http://sub-me.ru:8000/api/auth/signUp', { // 400 Bad Request!!!
+        fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -255,8 +253,33 @@ function renderRegister(parent) {
                 "password_hash": password
             })
         })
-        .then(response => console.log(response.ok))
+        .then(response => {
+            if (response.ok) {
+                fetch ('http://sub-me.ru:8000/api/user/profile', {
+                method: 'GET',
+                credentials: 'include',
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.login.length > 0) {
+                    userIn.usernameIn = result.login;
+                    console.log('user has entered as: ', userIn.usernameIn);
+                    userIn.isAuthorizedIn = true;
+                    renderSideBar(sideBarElement);
+                    removeReg();
+                }
+            })
+            }
+        })
     });
+}
+
+function renderRegister(parent) {
+    const reg = new Register(parent);
+    reg.render();
+    console.log('Register rendered');
+
+    registration();
 }
 
 function renderWinSettings(parent) {
