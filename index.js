@@ -3,6 +3,8 @@ import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
+import { Settings } from "./components/winSettings/settings/settings.js";
+import { MyPage } from "./components/winSettings/myPage/myPage.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -11,7 +13,8 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 const userIn  = {
-    usernameIn: '', //так ли хранить username?
+    loginIn: 'Cockpit1',
+    usernameIn: 'Cockpit1!', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
 }
@@ -70,7 +73,9 @@ const config = {
                 id: 'sidebar-beAuthor',
                 showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                 parent: contentElement,
-                render: becomeAuthor,
+                render: function () {
+                    console.log('стать автором');
+                },
             },
             {
                 name: userIn.usernameIn,
@@ -90,9 +95,7 @@ const config = {
                 id: 'winSetting-profile',
                 showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
-                render: function () {
-                    console.log("Моя страница");
-                },
+                render: renderMyPage,
             },
             {
                 name: 'Мои доходы',
@@ -110,9 +113,7 @@ const config = {
                 id: 'winSetting-settings',
                 showDisplay: true,
                 parent: contentElement,
-                render: function () {
-                    console.log("Настройки");
-                },
+                render: renderSettings,
             },
             {
                 name: 'Выйти',
@@ -127,6 +128,7 @@ const config = {
         ],
     },
     user: {
+        login: '', 
         username: '',
         isAuthor: false,
         isAuthorized: false,
@@ -136,6 +138,7 @@ const config = {
 
 
 function constructConfig() {    // можно ли улучшить?
+    config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.isAuthor = userIn.isAuthorIn;
     config.user.isAuthorized = userIn.isAuthorizedIn;
@@ -158,19 +161,35 @@ function constructConfig() {    // можно ли улучшить?
 
 async function renderSideBar(parent) {
     // этот запрос можно отключить, если хотим страничку входа
-    // await fetch ('http://sub-me.ru:8000/api/user/profile', {
-    //         method: 'GET',
-    //         mode: 'cors',
-    //         credentials: 'include',
-    //     })
-    //     .then(response => response.json())
-    //     .then(result => {
-    //         if (result.login.length > 0) {
-    //             userIn.usernameIn = result.login;
-    //             console.log('user has entered as: ', userIn.usernameIn);
-    //             userIn.isAuthorizedIn = true;
-    //         }
-    //     })
+    await fetch ('http://sub-me.ru:8000/api/user/profile', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include',
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.login.length > 0) {
+                userIn.usernameIn = result.login;
+                console.log('user has entered as: ', userIn.usernameIn);
+                userIn.isAuthorizedIn = true;
+
+                fetch ('http://sub-me.ru:8000/api/user/homePage', {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'include',
+                })
+                .then(response => response.json())
+                .then(userHomePage => {
+                    userIn.isAuthorIn = userHomePage.is_creator;
+                    // код повторяется
+                    const sideBar = new SideBar(parent);
+                    constructConfig();
+                    sideBar.config = config;
+                    sideBar.render();
+                    console.log('sideBar rendered');
+                })
+            }
+        })
     ///////////////////////////////////////////////////////////
     const sideBar = new SideBar(parent);
     constructConfig();
@@ -229,7 +248,7 @@ function authentification() {
         .then(response => response.json())
         .then(result => {
             if (result.login.length > 0) {
-                userIn.usernameIn = result.login;
+                userIn.usernameIn = result.name;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
                 renderSideBar(sideBarElement);
@@ -252,14 +271,14 @@ function registration() {
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
-    const passwordRepeatInput = document.getElementById('reg-repeat-password');
+    // const passwordRepeatInput = document.getElementById('reg-repeat-password');
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
-        const repeatPassword = passwordRepeatInput.value; //нигде не используется
+        // const repeatPassword = passwordRepeatInput.value;
 
         fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
@@ -283,8 +302,8 @@ function registration() {
                 })
                 .then(response => response.json())
                 .then(result => {
-                    if (result.login.length > 0) {
-                        userIn.usernameIn = result.login;
+                    if (result.name.length > 0) {
+                        userIn.usernameIn = result.name;
                         console.log('user has entered as: ', userIn.usernameIn);
                         userIn.isAuthorizedIn = true;
                         renderSideBar(sideBarElement);
@@ -311,9 +330,18 @@ function renderWinSettings(parent) {
     console.log('winSetting rendered');
 }
 
-function becomeAuthor(parent) {
-    userIn.isAuthorIn = true;
-    renderSideBar(parent);
+function renderSettings(parent) {
+    const settings = new Settings(parent);
+    settings.config = config;
+    settings.render();
+    console.log('settings rendered');
+}
+
+function renderMyPage(parent) {
+    const myPage = new MyPage(parent);
+    myPage.config = config;
+    myPage.render();
+    console.log('myPage rendered');
 }
 
 renderSideBar(sideBarElement);
