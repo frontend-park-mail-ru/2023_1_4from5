@@ -1,3 +1,9 @@
 <div>
-    <h1>Моя страница</h1>
+    <h1>{{creator_info.name}}</h1>
+    <h3>О моем блоге: {{creator_info.description}}</h3>
+    <p>{{creator_info.followers_count}} подписчиков</p>
+    {{#each posts}}
+        <h5>Пост: {{title}}</h5>
+        <p>{{text}}</p>
+    {{/each}}
 </div>
