@@ -18,7 +18,6 @@ export class WinSettings {
 
     render() {
         const newDiv = document.createElement('div');
-
         const template = Handlebars.templates.winSettings;
         newDiv.innerHTML = template(this.#config);
 
@@ -26,6 +25,7 @@ export class WinSettings {
             clickHandler(e, this.#config.setting, this.#config);
 
         });
+    
 
         this.#parent.appendChild(newDiv);
     }
