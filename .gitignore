@@ -1,4 +1,4 @@
-node_modules/
 .idea/
-package.json
-package-lock.json
+node_modules/
+/package-lock.json
+/package.json

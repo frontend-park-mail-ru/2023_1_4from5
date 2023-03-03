@@ -315,10 +315,10 @@ function registration() {
     });
 }
 
-function renderRegister(parent) {
-    const reg = new Register(parent);
-    reg.render();
-    console.log('Register rendered');
+function     renderRegister      (parent)        {
+    const reg =       new Register(parent);
+    reg.render()    ;
+    console.log(      'Register rendered');
 
     registration();
 }
@@ -346,21 +346,8 @@ function renderMyPage(parent) {
 
 renderSideBar(sideBarElement);
 
+const char = "a";
 
-// function isValid(inputStr) {
-//     const blackList = ""; //надо ли???
-//     let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
-//         hasntBlackList = true, hasMinLen = false;
-//     if (inputStr.length >= 7) {
-//         hasMinLen = true;
-//     }
-//     for (const char in inputStr) {
-//         if (!~blackList.indexOf(char)) {
-//             hasntBlackList = false;
-//         }
+console.log(char.toUpperCase(), char.toLowerCase(), isNaN(char));
 
-//     }
 
-//     return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial && hasntBlackList;
-
-// }
