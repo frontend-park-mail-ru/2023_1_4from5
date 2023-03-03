@@ -3,6 +3,7 @@ import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
+import {isValidLogin, isValidPassword} from "./modules/isValid";
 import { Settings } from "./components/winSettings/settings/settings.js";
 import { MyPage } from "./components/winSettings/myPage/myPage.js";
 
@@ -220,42 +221,51 @@ function authentification() {
     const submitBtn = document.getElementById('auth-btn');
     const loginInput = document.getElementById('auth-login');
     const passwordInput = document.getElementById('auth-password');
+    const errorOutput = document.getElementById('auth-error');
 
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const password = passwordInput.value;
+        const errLogin = isValidLogin(login);
+        const errPassword = isValidPassword(password);
 
-        fetch ('http://sub-me.ru:8000/api/auth/signIn', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "login": login,
-                "password_hash": password
-            }),
-        })
-        .then(response => {
-            if (response.ok) {
-            fetch ('http://sub-me.ru:8000/api/user/profile', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include',
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.login.length > 0) {
-                userIn.usernameIn = result.name;
-                console.log('user has entered as: ', userIn.usernameIn);
-                userIn.isAuthorizedIn = true;
-                renderSideBar(sideBarElement);
-                removeAuth();
-            }
-        })
-        }})
+        if (errLogin === "" && errPassword === "") {
+            fetch ('http://sub-me.ru:8000/api/auth/signIn', {
+                method: 'POST',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "login": login,
+                    "password_hash": password
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    fetch ('http://sub-me.ru:8000/api/user/profile', {
+                        method: 'GET',
+                        mode: 'cors',
+                        credentials: 'include',
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.login.length > 0) {
+                                userIn.usernameIn = result.name;
+                                console.log('user has entered as: ', userIn.usernameIn);
+                                userIn.isAuthorizedIn = true;
+                                renderSideBar(sideBarElement);
+                                removeAuth();
+                            }
+                        })
+                }
+            })
+        }
+        else {}
+
+
     });
 }
 
