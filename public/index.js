@@ -163,36 +163,37 @@ function constructConfig() {    // можно ли улучшить?
 
 async function renderSideBar(parent) {
     // этот запрос можно отключить, если хотим страничку входа
-    await fetch ('http://sub-me.ru:8000/api/user/profile', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include',
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.login.length > 0) {
-                userIn.usernameIn = result.name;
-                console.log('user has entered as: ', userIn.usernameIn);
-                userIn.isAuthorizedIn = true;
+    // await fetch ('http://sub-me.ru:8000/api/user/profile', {
+    //         method: 'GET',
+    //         mode: 'cors',
+    //         credentials: 'include',
+    //     })
+    //     .then(response => response.json())
+    //     .then(result => {
+    //         if (result.login.length > 0) {
+    //             userIn.usernameIn = result.name;
+    //             console.log('user has entered as: ', userIn.usernameIn);
+    //             userIn.isAuthorizedIn = true;
 
-                fetch ('http://sub-me.ru:8000/api/user/homePage', {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'include',
-                })
-                .then(response => response.json())
-                .then(userHomePage => {
-                    userIn.isAuthorIn = userHomePage.is_creator;
-                    // код повторяется
-                    const sideBar = new SideBar(parent);
-                    constructConfig();
-                    sideBar.config = config;
-                    sideBar.render();
-                    console.log('sideBar rendered');
-                })
-            }
-        })
-    ///////////////////////////////////////////////////////////
+    //             fetch ('http://sub-me.ru:8000/api/user/homePage', {
+    //                 method: 'GET',
+    //                 mode: 'cors',
+    //                 credentials: 'include',
+    //             })
+    //             .then(response => response.json())
+    //             .then(userHomePage => {
+    //                 userIn.isAuthorIn = userHomePage.is_creator;
+    //                 // код повторяется
+    //                 const sideBar = new SideBar(parent);
+    //                 constructConfig();
+    //                 sideBar.config = config;
+    //                 sideBar.render();
+    //                 console.log('sideBar rendered');
+    //             })
+    //         }
+    //     })
+    // ///////////////////////////////////////////////////////////
+    console.log('user entered');
     const sideBar = new SideBar(parent);
     constructConfig();
     sideBar.config = config;
@@ -317,11 +318,10 @@ function registration() {
     });
 }
 
-function     renderRegister      (parent)        {
-    const reg =       new Register(parent);
-    reg.render()    ;
-    console.log(      'Register rendered');
-
+function renderRegister (parent) {
+    const reg = new Register(parent);
+    reg.render();
+    console.log('Register rendered');
     registration();
 }
 
