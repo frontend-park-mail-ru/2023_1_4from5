@@ -158,19 +158,19 @@ function constructConfig() {    // можно ли улучшить?
 
 async function renderSideBar(parent) {
     // этот запрос можно отключить, если хотим страничку входа
-    await fetch ('http://sub-me.ru:8000/api/user/profile', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include',
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.login.length > 0) {
-                userIn.usernameIn = result.login;
-                console.log('user has entered as: ', userIn.usernameIn);
-                userIn.isAuthorizedIn = true;
-            }
-        })
+    // await fetch ('http://sub-me.ru:8000/api/user/profile', {
+    //         method: 'GET',
+    //         mode: 'cors',
+    //         credentials: 'include',
+    //     })
+    //     .then(response => response.json())
+    //     .then(result => {
+    //         if (result.login.length > 0) {
+    //             userIn.usernameIn = result.login;
+    //             console.log('user has entered as: ', userIn.usernameIn);
+    //             userIn.isAuthorizedIn = true;
+    //         }
+    //     })
     ///////////////////////////////////////////////////////////
     const sideBar = new SideBar(parent);
     constructConfig();
@@ -259,7 +259,7 @@ function registration() {
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
-        const repeatPassword = passwordRepeatInput.value;
+        const repeatPassword = passwordRepeatInput.value; //нигде не используется
 
         fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
@@ -296,10 +296,10 @@ function registration() {
     });
 }
 
-function renderRegister(parent) {
-    const reg = new Register(parent);
-    reg.render();
-    console.log('Register rendered');
+function     renderRegister      (parent)        {
+    const reg =       new Register(parent);
+    reg.render()    ;
+    console.log(      'Register rendered');
 
     registration();
 }
@@ -313,26 +313,13 @@ function renderWinSettings(parent) {
 
 function becomeAuthor(parent) {
     userIn.isAuthorIn = true;
-    renderSideBar(sideBarElement);
+    renderSideBar(parent);
 }
 
 renderSideBar(sideBarElement);
 
+const char = "a";
 
-// function isValid(inputStr) {
-//     const blackList = ""; //надо ли???
-//     let hasUpper=false, hasLower = false, hasNumber = false, hasSpecial = false,
-//         hasntBlackList = true, hasMinLen = false;
-//     if (inputStr.length >= 7) {
-//         hasMinLen = true;
-//     }
-//     for (const char in inputStr) {
-//         if (!~blackList.indexOf(char)) {
-//             hasntBlackList = false;
-//         }
+console.log(char.toUpperCase(), char.toLowerCase(), isNaN(char));
 
-//     }
 
-//     return hasMinLen && hasNumber && hasUpper && hasLower && hasSpecial && hasntBlackList;
-
-// }
