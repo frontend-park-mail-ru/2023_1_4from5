@@ -5,3 +5,4 @@ handlebars ./components/register/reg.handlebars -f ./public/build/reg.precompile
 handlebars ./components/sideBar/sideBar.handlebars -f ./public/build/sideBar.precompiled.js
 handlebars ./components/winSettings/winSettings.handlebars -f ./public/build/winSettings.precompiled.js
 handlebars ./components/winSettings/settings/settings.handlebars -f ./public/build/settings.precompiled.js
+handlebars ./components/winSettings/myPage/myPage.handlebars -f ./public/build/myPage.precompiled.js
