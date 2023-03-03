@@ -11,7 +11,7 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 const userIn  = {
-    usernameIn: 'Cockpit', //так ли хранить username?
+    usernameIn: '', //так ли хранить username?
     isAuthorIn: false,
     isAuthorizedIn: false,
 }
@@ -70,9 +70,7 @@ const config = {
                 id: 'sidebar-beAuthor',
                 showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                 parent: contentElement,
-                render: function () {
-                    console.log("Стать автором");
-                },
+                render: becomeAuthor,
             },
             {
                 name: userIn.usernameIn,
@@ -150,10 +148,30 @@ function constructConfig() {    // можно ли улучшить?
     config.general.pages[5].showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
     config.general.pages[6].showDisplay = userIn.isAuthorizedIn;
 
+    config.setting.pages[0].showDisplay = userIn.isAuthorIn;
+    config.setting.pages[1].showDisplay = userIn.isAuthorIn;
+    config.setting.pages[2].showDisplay = true;
+    config.setting.pages[3].showDisplay = true;
+
     config.general.pages[6].name = userIn.usernameIn;
 }
 
-function renderSideBar(parent) {
+async function renderSideBar(parent) {
+    // этот запрос можно отключить, если хотим страничку входа
+    await fetch ('http://sub-me.ru:8000/api/user/profile', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include',
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.login.length > 0) {
+                userIn.usernameIn = result.login;
+                console.log('user has entered as: ', userIn.usernameIn);
+                userIn.isAuthorizedIn = true;
+            }
+        })
+    ///////////////////////////////////////////////////////////
     const sideBar = new SideBar(parent);
     constructConfig();
     sideBar.config = config;
@@ -191,6 +209,7 @@ function authentification() {
 
         fetch ('http://sub-me.ru:8000/api/auth/signIn', {
             method: 'POST',
+            mode: 'cors',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
@@ -204,6 +223,7 @@ function authentification() {
             if (response.ok) {
             fetch ('http://sub-me.ru:8000/api/user/profile', {
             method: 'GET',
+            mode: 'cors',
             credentials: 'include',
         })
         .then(response => response.json())
@@ -220,11 +240,14 @@ function authentification() {
     });
 }
 
-function renderRegister(parent) {
-    const reg = new Register(parent);
-    reg.render();
-    console.log('Register rendered');
+function removeReg() {
+    const lastReg = document.getElementById('regDiv');
+    if (lastReg) {
+        lastReg.remove();
+    }
+}
 
+function registration() {
     const submitBtn = document.getElementById('reg-btn');
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
@@ -234,17 +257,13 @@ function renderRegister(parent) {
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
-        console.log(login);
         const username = usernameInput.value;
-        console.log(username);
         const password = passwordInput.value;
-        console.log(password);
         const repeatPassword = passwordRepeatInput.value;
-        console.log(repeatPassword);
 
-
-        fetch ('http://sub-me.ru:8000/api/auth/signUp', { // 400 Bad Request!!!
+        fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
+            mode: 'cors',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
@@ -255,8 +274,34 @@ function renderRegister(parent) {
                 "password_hash": password
             })
         })
-        .then(response => console.log(response.ok))
+        .then(response => {
+            if (response.ok) {
+                fetch ('http://sub-me.ru:8000/api/user/profile', {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'include',
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.login.length > 0) {
+                        userIn.usernameIn = result.login;
+                        console.log('user has entered as: ', userIn.usernameIn);
+                        userIn.isAuthorizedIn = true;
+                        renderSideBar(sideBarElement);
+                        removeReg();
+                    }
+                })
+            }
+        })
     });
+}
+
+function renderRegister(parent) {
+    const reg = new Register(parent);
+    reg.render();
+    console.log('Register rendered');
+
+    registration();
 }
 
 function renderWinSettings(parent) {
@@ -265,31 +310,11 @@ function renderWinSettings(parent) {
     win.render();
     console.log('winSetting rendered');
 }
-// function goToPage(target) {
-//     if (activePage === target.name) {
-//         return;
-//     }
 
-//     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === userIn.usernameIn)) {
-//         target.parent.innerHTML = '';
-//     }
-//     activePage = target.name;
-//     target.render(target.parent);
-// }
-
-// sideBarElement.addEventListener('click', (e) => {
-//     if (e.target instanceof HTMLAnchorElement) {
-//         e.preventDefault();
-//         const targetId = e.target.id;
-//         let target;
-//         config.general.pages.forEach(element => {
-//             if (element.id === targetId) {
-//                 target = element;
-//             }
-//         });
-//         goToPage(target);
-//     }
-// });
+function becomeAuthor(parent) {
+    userIn.isAuthorIn = true;
+    renderSideBar(sideBarElement);
+}
 
 renderSideBar(sideBarElement);
 
