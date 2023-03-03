@@ -1,4 +1,4 @@
-export class SideBar {
+export class Settings {
     #parent
     #config
 
@@ -15,17 +15,16 @@ export class SideBar {
     }
 
     render() {
-        const lastSideBar = document.getElementById('sidebarDiv');
-        if (lastSideBar) {
-            lastSideBar.remove();
+        const lastMyPage = document.getElementById('myPageDiv');
+        if (lastMyPage) {
+            lastMyPage.remove();
         }
 
         const newDiv = document.createElement('div');
-        newDiv.id = 'sidebarDiv';
-
-        const template = Handlebars.templates.sideBar; // eslint-disable-line
+        newDiv.id = 'myPageDiv';
+        const template = Handlebars.templates.myPage; // eslint-disable-line
         newDiv.innerHTML = template(this.#config);
-
+    
         this.#parent.appendChild(newDiv);
-    }  
+    }
 }
