@@ -2,7 +2,7 @@ a {
     text-decoration: none;
 }
 
-/* .background {
+.background {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,4 +11,4 @@ a {
     background: #000;
     opacity: 0.4;
     z-index: 10;
-} */
+}

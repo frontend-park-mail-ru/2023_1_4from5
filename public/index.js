@@ -17,8 +17,8 @@ rootElement.appendChild(contentElement);
 const userIn  = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!', //так ли хранить username?
-    isAuthorIn: true,
-    isAuthorizedIn: true,
+    isAuthorIn: false,
+    isAuthorizedIn: false,
 }
 const config = {
     general: {
@@ -97,7 +97,7 @@ const config = {
                 id: 'winSetting-profile',
                 showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
-                render: renderMyPage,
+                render: clickMyPage,
             },
             {
                 name: 'Мои доходы',
@@ -171,7 +171,6 @@ function enterRequest() {
         console.log('get response');
         response.json()})
     .then(result => {
-        console.log('get user');
         if (result.login.length > 0) {
             userIn.usernameIn = result.name;
             console.log('user has entered as: ', userIn.usernameIn);
@@ -184,9 +183,15 @@ function enterRequest() {
             })
             .then(response => response.json())
             .then(userHomePage => {
+                console.log('get home page');
                 userIn.isAuthorIn = userHomePage.is_creator;
+                renderSideBar(sideBarElement);  
             })
         }
+    })
+    .catch(err => {
+        renderSideBar(sideBarElement);  
+        console.log(err);
     })
 }
 
@@ -343,6 +348,13 @@ function renderSettings(parent) {
 }
 
 function renderMyPage(parent) {
+    const myPage = new MyPage(parent);
+    myPage.config = result;
+    myPage.render();
+    console.log('myPage rendered');
+}
+
+function clickMyPage(parent) {
     fetch ('http://sub-me.ru:8000/api/creator/page/' + USER_DASHA_URL, {
         method: 'GET',
         mode: 'cors',
@@ -351,13 +363,12 @@ function renderMyPage(parent) {
     .then(response => response.json())
     .then(result => {
         console.log(result);
-        const myPage = new MyPage(parent);
-        myPage.config = result;
-        myPage.render();
-        console.log('myPage rendered');
+        renderMyPage(parent);
     })
-
-    
+    .catch(err => {
+        console.log(err);
+        renderMyPage(parent);
+    })
 }
 
 enter();
