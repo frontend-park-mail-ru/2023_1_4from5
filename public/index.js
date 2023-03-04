@@ -4,8 +4,8 @@ import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
 import { isValidLogin, isValidPassword } from "./modules/isValid.js";
-import { Settings } from "./components/winSettings/settings/settings.js";
-import { MyPage } from "./components/winSettings/myPage/myPage.js";
+import { Settings } from "./components/settings/settings.js";
+import { MyPage } from "./components/myPage/myPage.js";
 
 const USER_DASHA_URL = '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4';
 
@@ -19,7 +19,7 @@ const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
     isAuthorIn: false,
-    isAuthorizedIn: true,
+    isAuthorizedIn: false,
 };
 const config = {
     general: {
@@ -168,8 +168,12 @@ function enterRequest() {
         credentials: 'include',
     })
         .then((response) => {
+            // console.log(response, response.json());
+            if (!response.ok) {
+                throw 'Error: response is empty';
+            }
             console.log('get response');
-            response.json();
+            return response.json();
         })
         .then((result) => {
             if (result.login.length > 0) {
@@ -190,17 +194,13 @@ function enterRequest() {
                     });
             }
         })
-        .catch((err) => {
-            renderSideBar(sideBarElement);
-            console.log(err);
-        });
+        // .catch((err) => {
+        //     renderSideBar(sideBarElement);
+        //     console.log(err);
+        // });
 }
 
-async function enter() {
-    // этот запрос можно отключить, если хотим страничку входа
-    await enterRequest();
-    renderSideBar(sideBarElement);
-}
+
 
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
@@ -257,8 +257,8 @@ function authentification() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    login,
-                    password_hash: password,
+                    login: login,
+                    password_hash: password
                 }),
             })
                 .then((response) => {
@@ -349,6 +349,8 @@ function registration() {
                             mode: 'cors',
                             credentials: 'include',
                         })
+                        //  let a = await GET(){}
+                        //  a.then
                             // eslint-disable-next-line no-shadow
                             .then((response) => response.json())
                             .then((result) => {
@@ -428,6 +430,12 @@ function clickMyPage(parent) {
             console.log(err);
             renderMyPage(parent);
         });
+}
+
+async function enter() {
+    // этот запрос можно отключить, если хотим страничку входа
+    await enterRequest();
+    renderSideBar(sideBarElement);
 }
 
 enter();
