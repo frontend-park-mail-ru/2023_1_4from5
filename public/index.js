@@ -1,4 +1,4 @@
-import { SideBar } from "./components/sideBar/sideBar.js";
+import { SideBar } from './components/sideBar/sideBar.js';
 import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
@@ -19,7 +19,7 @@ const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
     isAuthorIn: false,
-    isAuthorizedIn: false,
+    isAuthorizedIn: true,
 };
 const config = {
     general: {
@@ -303,27 +303,27 @@ function registration() {
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
-    
-    submitBtn.addEventListener( 'click', (e) => {
+
+    submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
 
-        fetch ('http://sub-me.ru:8000/api/auth/signUp', {
+        fetch('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "login": login,
-                "name": username,
-                "password_hash": password
-            })
+                'login': login,
+                'name': username,
+                'password_hash': password
+            }),
         })
-        .then(response => {
+            .then((response) => {
             if (response.ok) {
                 fetch ('http://sub-me.ru:8000/api/user/profile', {
                     method: 'GET',
