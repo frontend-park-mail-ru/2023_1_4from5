@@ -3,9 +3,11 @@ import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
-import { isValidLogin, isValidPassword } from "./modules/isValid";
+import { isValidLogin, isValidPassword } from "./modules/isValid.js";
 import { Settings } from "./components/winSettings/settings/settings.js";
 import { MyPage } from "./components/winSettings/myPage/myPage.js";
+
+const USER_DASHA_URL = '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4';
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -96,7 +98,7 @@ const config = {
                 id: 'winSetting-profile',
                 showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
-                render: renderMyPage,
+                render: clickMyPage,
             },
             {
                 name: 'Мои доходы',
@@ -160,38 +162,47 @@ function constructConfig() {
     config.general.pages[6].name = userIn.usernameIn;
 }
 
-async function renderSideBar(parent) {
-    // этот запрос можно отключить, если хотим страничку входа
-    await fetch('http://sub-me.ru:8000/api/user/profile', {
+function enterRequest() {
+    fetch ('http://sub-me.ru:8000/api/user/profile', {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     })
-        .then((response) => response.json())
-        .then((result) => {
+        .then(response => {
+            console.log('get response');
+            response.json()})
+        .then(result => {
             if (result.login.length > 0) {
-                userIn.usernameIn = result.login;
+                userIn.usernameIn = result.name;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
 
-                fetch('http://sub-me.ru:8000/api/user/homePage', {
+                fetch ('http://sub-me.ru:8000/api/user/homePage', {
                     method: 'GET',
                     mode: 'cors',
                     credentials: 'include',
                 })
-                .then(response => response.json())
-                .then(userHomePage => {
-                    userIn.isAuthorIn = userHomePage.is_creator;
-                    // код повторяется
-                    const sideBar = new SideBar(parent);
-                    constructConfig();
-                    sideBar.config = config;
-                    sideBar.render();
-                    console.log('sideBar rendered');
-                })
+                    .then(response => response.json())
+                    .then(userHomePage => {
+                        console.log('get home page');
+                        userIn.isAuthorIn = userHomePage.is_creator;
+                        renderSideBar(sideBarElement);
+                    })
             }
         })
-    ///////////////////////////////////////////////////////////
+        .catch(err => {
+            renderSideBar(sideBarElement);
+            console.log(err);
+        })
+}
+
+async function enter() {
+    // этот запрос можно отключить, если хотим страничку входа
+    await enterRequest();
+    renderSideBar(sideBarElement);
+}
+
+function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
     constructConfig();
     sideBar.config = config;
@@ -271,8 +282,6 @@ function authentification() {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Неверный логин или пароль';
         }
-
-
     });
 }
 
@@ -332,11 +341,10 @@ function registration() {
     });
 }
 
-function     renderRegister      (parent)        {
-    const reg =       new Register(parent);
-    reg.render()    ;
-    console.log(      'Register rendered');
-
+function renderRegister (parent) {
+    const reg = new Register(parent);
+    reg.render();
+    console.log('Register rendered');
     registration();
 }
 
@@ -356,15 +364,26 @@ function renderSettings(parent) {
 
 function renderMyPage(parent) {
     const myPage = new MyPage(parent);
-    myPage.config = config;
+    myPage.config = result;
     myPage.render();
     console.log('myPage rendered');
 }
 
-renderSideBar(sideBarElement);
+function clickMyPage(parent) {
+    fetch ('http://sub-me.ru:8000/api/creator/page/' + USER_DASHA_URL, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+        renderMyPage(parent);
+    })
+    .catch(err => {
+        console.log(err);
+        renderMyPage(parent);
+    })
+}
 
-const char = "a";
-
-console.log(char.toUpperCase(), char.toLowerCase(), isNaN(char));
-
-
+enter();
