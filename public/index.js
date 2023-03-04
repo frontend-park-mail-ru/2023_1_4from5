@@ -1,11 +1,11 @@
 import { SideBar } from './components/sideBar/sideBar.js';
-import { Auth } from './components/authorization/auth.js';
-import { Register } from './components/register/reg.js';
-import { WinSettings } from './components/winSettings/winSettings.js';
-import { clickHandler } from './modules/handler.js';
-import { isValidLogin, isValidPassword } from './modules/isValid.js';
-import { Settings } from './components/winSettings/settings/settings.js';
-import { MyPage } from './components/winSettings/myPage/myPage.js';
+import { Auth } from "./components/authorization/auth.js";
+import { Register } from "./components/register/reg.js";
+import { WinSettings } from "./components/winSettings/winSettings.js";
+import { clickHandler } from "./modules/handler.js";
+import { isValidLogin, isValidPassword } from "./modules/isValid.js";
+import { Settings } from "./components/winSettings/settings/settings.js";
+import { MyPage } from "./components/winSettings/myPage/myPage.js";
 
 const USER_DASHA_URL = '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4';
 
@@ -18,7 +18,7 @@ rootElement.appendChild(contentElement);
 const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
-    isAuthorIn: true,
+    isAuthorIn: false,
     isAuthorizedIn: true,
 };
 const config = {
@@ -306,6 +306,7 @@ function registration() {
     const passwordInput = document.getElementById('reg-password');
     const passwordRepeatInput = document.getElementById('reg-repeat-password');
     const errorOutput = document.getElementById('reg-error');
+
 
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
