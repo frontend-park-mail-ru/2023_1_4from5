@@ -2,6 +2,10 @@ a {
     text-decoration: none;
 }
 
+h3 {
+    margin: 0;
+}
+
 .background {
     position: fixed;
     top: 0;
@@ -9,6 +13,10 @@ a {
     width: 100%;
     height: 100%;
     background: #000;
-    opacity: 0.4;
+    opacity: 0.7;
     z-index: 10;
+}
+
+.close:hover {
+    cursor: pointer;
 }
