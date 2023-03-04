@@ -261,9 +261,16 @@ function authentification() {
                             }
                         })
                 }
+                else {
+                    errorOutput.innerHTML = '';
+                    errorOutput.innerHTML = 'Неверный логин или пароль';
+                }
             })
         }
-        else {}
+        else {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = 'Неверный логин или пароль';
+        }
 
 
     });
