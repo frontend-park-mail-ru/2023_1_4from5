@@ -30,7 +30,7 @@ const config = {
                 id: 'sidebar-feed',
                 showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
-                render: function () {
+                render() {
                     console.log('лента');
                 },
             },
@@ -40,7 +40,7 @@ const config = {
                 id: 'sidebar-find',
                 showDisplay: true,
                 parent: contentElement,
-                render: function () {
+                render() {
                     console.log('поиск');
                 },
             },
@@ -50,8 +50,8 @@ const config = {
                 id: 'sidebar-subs',
                 showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
-                render: function () {
-                    console.log("подписки");
+                render() {
+                    console.log('подписки');
                 },
             },
             {
@@ -76,7 +76,7 @@ const config = {
                 id: 'sidebar-beAuthor',
                 showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                 parent: contentElement,
-                render: function () {
+                render() {
                     console.log('стать автором');
                 },
             },
@@ -106,7 +106,7 @@ const config = {
                 id: 'winSetting-finance',
                 showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
-                render: function () {
+                render() {
                     console.log('Мои доходы');
                 },
             },
@@ -124,7 +124,7 @@ const config = {
                 id: 'winSetting-startPage',
                 showDisplay: true,
                 parent: contentElement,
-                render: function () {
+                render() {
                     console.log('Выйти');
                 },
             },
@@ -139,12 +139,11 @@ const config = {
     activePage: '',
 };
 
-
 function constructConfig() {
     config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.isAuthor = userIn.isAuthorIn;
-    config.user.isAuthorized =  userIn.isAuthorizedIn;
+    config.user.isAuthorized = userIn.isAuthorizedIn;
 
     config.general.pages[0].showDisplay = userIn.isAuthorizedIn;
     config.general.pages[1].showDisplay = true;
@@ -163,37 +162,38 @@ function constructConfig() {
 }
 
 function enterRequest() {
-    fetch ('http://sub-me.ru:8000/api/user/profile', {
+    fetch('http://sub-me.ru:8000/api/user/profile', {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     })
-        .then(response => {
+        .then((response) => {
             console.log('get response');
-            response.json()})
-        .then(result => {
+            response.json();
+        })
+        .then((result) => {
             if (result.login.length > 0) {
                 userIn.usernameIn = result.name;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
 
-                fetch ('http://sub-me.ru:8000/api/user/homePage', {
+                fetch('http://sub-me.ru:8000/api/user/homePage', {
                     method: 'GET',
                     mode: 'cors',
                     credentials: 'include',
                 })
-                    .then(response => response.json())
-                    .then(userHomePage => {
+                    .then((response) => response.json())
+                    .then((userHomePage) => {
                         console.log('get home page');
                         userIn.isAuthorIn = userHomePage.is_creator;
                         renderSideBar(sideBarElement);
-                    })
+                    });
             }
         })
-        .catch(err => {
+        .catch((err) => {
             renderSideBar(sideBarElement);
             console.log(err);
-        })
+        });
 }
 
 async function enter() {
@@ -220,8 +220,10 @@ function renderAuth(parent) {
     const closeBtn = document.getElementById('closeAuth');
     closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        // eslint-disable-next-line no-use-before-define
         removeAuth();
-    })
+    });
+    // eslint-disable-next-line no-use-before-define
     authentification();
 }
 
@@ -239,51 +241,50 @@ function authentification() {
     const passwordInput = document.getElementById('auth-password');
     const errorOutput = document.getElementById('auth-error');
 
-    submitBtn.addEventListener( 'click', (e) => {
+    submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const password = passwordInput.value;
         const errLogin = isValidLogin(login);
         const errPassword = isValidPassword(password);
 
-        if (errLogin === '' && errPassword === "") {
+        if (errLogin === '' && errPassword === '') {
             fetch('https://sub-me.ru:8000/api/auth/signIn', {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "login": login,
-                    "password_hash": password
+                    login,
+                    password_hash: password,
                 }),
             })
-            .then(response => {
-                if (response.ok) {
-                    fetch ('http://sub-me.ru:8000/api/user/profile', {
-                        method: 'GET',
-                        mode: 'cors',
-                        credentials: 'include',
-                    })
-                        .then(response => response.json())
-                        .then(result => {
-                            if (result.login.length > 0) {
-                                userIn.usernameIn = result.name;
-                                console.log('user has entered as: ', userIn.usernameIn);
-                                userIn.isAuthorizedIn = true;
-                                renderSideBar(sideBarElement);
-                                removeAuth();
-                            }
+                .then((response) => {
+                    if (response.ok) {
+                        fetch('http://sub-me.ru:8000/api/user/profile', {
+                            method: 'GET',
+                            mode: 'cors',
+                            credentials: 'include',
                         })
-                }
-                else {
-                    errorOutput.innerHTML = '';
-                    errorOutput.innerHTML = 'Неверный логин или пароль';
-                }
-            })
-        }
-        else {
+                            // eslint-disable-next-line no-shadow
+                            .then((response) => response.json())
+                            .then((result) => {
+                                if (result.login.length > 0) {
+                                    userIn.usernameIn = result.name;
+                                    console.log('user has entered as: ', userIn.usernameIn);
+                                    userIn.isAuthorizedIn = true;
+                                    renderSideBar(sideBarElement);
+                                    removeAuth();
+                                }
+                            });
+                    } else {
+                        errorOutput.innerHTML = '';
+                        errorOutput.innerHTML = 'Неверный логин или пароль';
+                    }
+                });
+        } else {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Неверный логин или пароль';
         }
@@ -303,49 +304,72 @@ function registration() {
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
+    const passwordRepeatInput = document.getElementById('reg-repeat-password');
+    const errorOutput = document.getElementById('reg-error');
+
 
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
-
-        fetch('http://sub-me.ru:8000/api/auth/signUp', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                'login': login,
-                'name': username,
-                'password_hash': password
-            }),
-        })
-            .then((response) => {
-            if (response.ok) {
-                fetch ('http://sub-me.ru:8000/api/user/profile', {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'include',
-                })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.name.length > 0) {
-                        userIn.usernameIn = result.name;
-                        console.log('user has entered as: ', userIn.usernameIn);
-                        userIn.isAuthorizedIn = true;
-                        renderSideBar(sideBarElement);
-                        removeReg();
+        const repeatPassword = passwordRepeatInput.value;
+        const errLogin = isValidLogin(login);
+        const errPassword = isValidPassword(password);
+        if (username.length === 0) {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = 'Введите ваше имя';
+        } else if (errLogin !== '') {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = errLogin;
+        } else if (errPassword !== '') {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = errPassword;
+        } else if (password !== repeatPassword) {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = 'Пароли не совпадают';
+        } else {
+            fetch('http://sub-me.ru:8000/api/auth/signUp', {
+                method: 'POST',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    login,
+                    name: username,
+                    password_hash: password,
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        fetch('http://sub-me.ru:8000/api/user/profile', {
+                            method: 'GET',
+                            mode: 'cors',
+                            credentials: 'include',
+                        })
+                            // eslint-disable-next-line no-shadow
+                            .then((response) => response.json())
+                            .then((result) => {
+                                if (result.name.length > 0) {
+                                    userIn.usernameIn = result.name;
+                                    console.log('user has entered as: ', userIn.usernameIn);
+                                    userIn.isAuthorizedIn = true;
+                                    renderSideBar(sideBarElement);
+                                    removeReg();
+                                }
+                            });
+                    } else {
+                        errorOutput.innerHTML = '';
+                        errorOutput.innerHTML = 'Такой логин уже существует';
                     }
-                })
-            }
-        })
+                });
+        }
     });
 }
 
-function renderRegister (parent) {
+function renderRegister(parent) {
     const reg = new Register(parent);
     reg.render();
 
@@ -353,7 +377,7 @@ function renderRegister (parent) {
     closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         removeReg();
-    })
+    });
     registration();
 }
 
@@ -376,20 +400,20 @@ function renderMyPage(parent) {
 }
 
 function clickMyPage(parent) {
-    fetch ('http://sub-me.ru:8000/api/creator/page/' + USER_DASHA_URL, {
+    fetch(`http://sub-me.ru:8000/api/creator/page/${USER_DASHA_URL}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     })
-    .then(response => response.json())
-    .then(result => {
-        console.log(result);
-        renderMyPage(parent);
-    })
-    .catch(err => {
-        console.log(err);
-        renderMyPage(parent);
-    })
+        .then((response) => response.json())
+        .then((result) => {
+            console.log(result);
+            renderMyPage(parent);
+        })
+        .catch((err) => {
+            console.log(err);
+            renderMyPage(parent);
+        });
 }
 
 enter();
