@@ -143,7 +143,7 @@ function constructConfig() {    // можно ли улучшить?
     config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.isAuthor = userIn.isAuthorIn;
-    config.user.isAuthorized = userIn.isAuthorizedIn;
+    config.user.isAuthorized =  userIn.isAuthorizedIn;
 
     config.general.pages[0].showDisplay = userIn.isAuthorizedIn;
     config.general.pages[1].showDisplay = true;
@@ -206,7 +206,6 @@ function renderSideBar(parent) {
     constructConfig();
     sideBar.config = config;
     sideBar.render();
-    console.log('sideBar rendered');
 }
 
 sideBarElement.addEventListener('click', (e) => {
@@ -216,7 +215,12 @@ sideBarElement.addEventListener('click', (e) => {
 function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.render();
-    console.log('authorization rendered');
+
+    const closeBtn = document.getElementById('closeAuth');
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        removeAuth();
+    })
     authentification();
 }
 
@@ -225,6 +229,7 @@ function removeAuth() {
     if (lastAuth) {
         lastAuth.remove();
     }
+    config.activePage = '';
 }
 
 function authentification() {
@@ -275,6 +280,7 @@ function removeReg() {
     if (lastReg) {
         lastReg.remove();
     }
+    config.activePage = '';
 }
 
 function registration() {
@@ -282,14 +288,12 @@ function registration() {
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
-    // const passwordRepeatInput = document.getElementById('reg-repeat-password');
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
-        // const repeatPassword = passwordRepeatInput.value;
 
         fetch ('http://sub-me.ru:8000/api/auth/signUp', {
             method: 'POST',
@@ -329,7 +333,12 @@ function registration() {
 function renderRegister (parent) {
     const reg = new Register(parent);
     reg.render();
-    console.log('Register rendered');
+
+    const closeBtn = document.getElementById('closeReg');
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        removeReg();
+    })
     registration();
 }
 
@@ -337,21 +346,18 @@ function renderWinSettings(parent) {
     const win = new WinSettings(parent);
     win.config = config;
     win.render();
-    console.log('winSetting rendered');
 }
 
 function renderSettings(parent) {
     const settings = new Settings(parent);
     settings.config = config;
     settings.render();
-    console.log('settings rendered');
 }
 
 function renderMyPage(parent) {
     const myPage = new MyPage(parent);
     myPage.config = result;
     myPage.render();
-    console.log('myPage rendered');
 }
 
 function clickMyPage(parent) {
