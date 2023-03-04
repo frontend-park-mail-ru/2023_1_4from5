@@ -3,7 +3,7 @@ import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
 import { clickHandler } from "./modules/handler.js";
-import {isValidLogin, isValidPassword} from "./modules/isValid";
+import { isValidLogin, isValidPassword } from "./modules/isValid";
 import { Settings } from "./components/winSettings/settings/settings.js";
 import { MyPage } from "./components/winSettings/myPage/myPage.js";
 
@@ -13,12 +13,12 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-const userIn  = {
+const userIn = {
     loginIn: 'Cockpit1',
-    usernameIn: 'Cockpit1!', //так ли хранить username?
+    usernameIn: 'Cockpit1!',
     isAuthorIn: false,
     isAuthorizedIn: false,
-}
+};
 const config = {
     general: {
         pages: [
@@ -29,7 +29,7 @@ const config = {
                 showDisplay: userIn.isAuthorizedIn,
                 parent: contentElement,
                 render: function () {
-                    console.log("лента");
+                    console.log('лента');
                 },
             },
             {
@@ -39,7 +39,7 @@ const config = {
                 showDisplay: true,
                 parent: contentElement,
                 render: function () {
-                    console.log("поиск");
+                    console.log('поиск');
                 },
             },
             {
@@ -105,7 +105,7 @@ const config = {
                 showDisplay: userIn.isAuthorIn,
                 parent: contentElement,
                 render: function () {
-                    console.log("Мои доходы");
+                    console.log('Мои доходы');
                 },
             },
             {
@@ -123,13 +123,13 @@ const config = {
                 showDisplay: true,
                 parent: contentElement,
                 render: function () {
-                    console.log("Выйти");
+                    console.log('Выйти');
                 },
             },
         ],
     },
     user: {
-        login: '', 
+        login: '',
         username: '',
         isAuthor: false,
         isAuthorized: false,
@@ -138,7 +138,7 @@ const config = {
 };
 
 
-function constructConfig() {    // можно ли улучшить?
+function constructConfig() {
     config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.isAuthor = userIn.isAuthorIn;
@@ -162,19 +162,19 @@ function constructConfig() {    // можно ли улучшить?
 
 async function renderSideBar(parent) {
     // этот запрос можно отключить, если хотим страничку входа
-    await fetch ('http://sub-me.ru:8000/api/user/profile', {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include',
-        })
-        .then(response => response.json())
-        .then(result => {
+    await fetch('http://sub-me.ru:8000/api/user/profile', {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+    })
+        .then((response) => response.json())
+        .then((result) => {
             if (result.login.length > 0) {
                 userIn.usernameIn = result.login;
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
 
-                fetch ('http://sub-me.ru:8000/api/user/homePage', {
+                fetch('http://sub-me.ru:8000/api/user/homePage', {
                     method: 'GET',
                     mode: 'cors',
                     credentials: 'include',
@@ -230,8 +230,8 @@ function authentification() {
         const errLogin = isValidLogin(login);
         const errPassword = isValidPassword(password);
 
-        if (errLogin === "" && errPassword === "") {
-            fetch ('http://sub-me.ru:8000/api/auth/signIn', {
+        if (errLogin === '' && errPassword === "") {
+            fetch('https://sub-me.ru:8000/api/auth/signIn', {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',
