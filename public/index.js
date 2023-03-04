@@ -18,8 +18,8 @@ rootElement.appendChild(contentElement);
 const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
-    isAuthorIn: false,
-    isAuthorizedIn: false,
+    isAuthorIn: true,
+    isAuthorizedIn: true,
 };
 const config = {
     general: {
@@ -384,6 +384,20 @@ function renderWinSettings(parent) {
     const win = new WinSettings(parent);
     win.config = config;
     win.render();
+
+    const closeBtn = document.getElementById('closeWinSettings');
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        removeWinSettings();
+    });
+}
+
+function removeWinSettings() {
+    const lastWinSettings = document.getElementById('winSettingsDiv');
+    if (lastWinSettings) {
+        lastWinSettings.remove();
+    }
+    config.activePage = '';
 }
 
 function renderSettings(parent) {
@@ -394,7 +408,7 @@ function renderSettings(parent) {
 
 function renderMyPage(parent) {
     const myPage = new MyPage(parent);
-    myPage.config = result;
+    myPage.config = config;
     myPage.render();
 }
 

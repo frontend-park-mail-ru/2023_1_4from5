@@ -1,6 +1,7 @@
 export class MyPage {
-    #parent
-    #config
+    #parent;
+
+    #config;
 
     constructor(parent) {
         this.#parent = parent;
@@ -24,7 +25,6 @@ export class MyPage {
         newDiv.id = 'myPageDiv';
         const template = Handlebars.templates.myPage; // eslint-disable-line
         newDiv.innerHTML = template(this.#config);
-    
         this.#parent.appendChild(newDiv);
     }
 }

@@ -18,15 +18,13 @@ export class WinSettings {
 
     render() {
         const newDiv = document.createElement('div');
+        newDiv.id = 'winSettingsDiv';
         const template = Handlebars.templates.winSettings; // eslint-disable-line
         newDiv.innerHTML = template(this.#config);
 
         newDiv.addEventListener('click', (e) => {
             clickHandler(e, this.#config.setting, this.#config);
         });
-    
-
         this.#parent.appendChild(newDiv);
     }
 }
-// можно сделать один handlebars
