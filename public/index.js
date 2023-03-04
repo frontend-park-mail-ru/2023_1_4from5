@@ -303,45 +303,73 @@ function registration() {
     const loginInput = document.getElementById('reg-login');
     const usernameInput = document.getElementById('reg-username');
     const passwordInput = document.getElementById('reg-password');
+    const passwordRepeatInput = document.getElementById('reg-repeat-password');
+    const errorOutput = document.getElementById('reg-error');
     
     submitBtn.addEventListener( 'click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
         const username = usernameInput.value;
         const password = passwordInput.value;
+        const repeatPassword = passwordRepeatInput.value;
+        const errLogin = isValidLogin(login);
+        const errPassword = isValidPassword(password);
 
-        fetch ('http://sub-me.ru:8000/api/auth/signUp', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "login": login,
-                "name": username,
-                "password_hash": password
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                fetch ('http://sub-me.ru:8000/api/user/profile', {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'include',
+        if (usernameInput.length === 0) {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = 'Введите ваше имя';
+        }
+        else if (errLogin !== "") {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = errLogin;
+        }
+        else if (errPassword !== "") {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = errPassword;
+        }
+        else if (password !== repeatPassword) {
+            errorOutput.innerHTML = '';
+            errorOutput.innerHTML = 'Пароли не совпадают';
+        }
+        else {
+            fetch ('http://sub-me.ru:8000/api/auth/signUp', {
+                method: 'POST',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "login": login,
+                    "name": username,
+                    "password_hash": password
                 })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.name.length > 0) {
-                        userIn.usernameIn = result.name;
-                        console.log('user has entered as: ', userIn.usernameIn);
-                        userIn.isAuthorizedIn = true;
-                        renderSideBar(sideBarElement);
-                        removeReg();
+            })
+                .then(response => {
+                    if (response.ok) {
+                        fetch ('http://sub-me.ru:8000/api/user/profile', {
+                            method: 'GET',
+                            mode: 'cors',
+                            credentials: 'include',
+                        })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.name.length > 0) {
+                                    userIn.usernameIn = result.name;
+                                    console.log('user has entered as: ', userIn.usernameIn);
+                                    userIn.isAuthorizedIn = true;
+                                    renderSideBar(sideBarElement);
+                                    removeReg();
+                                }
+                            })
+                    }
+                    else {
+                        errorOutput.innerHTML = '';
+                        errorOutput.innerHTML = 'Такой логин уже существует';
                     }
                 })
-            }
-        })
+        }
+
     });
 }
 
