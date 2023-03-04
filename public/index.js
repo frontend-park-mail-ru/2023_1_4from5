@@ -203,10 +203,12 @@ function enterRequest() {
 
 
 function renderSideBar(parent) {
+    console.log(2);
     const sideBar = new SideBar(parent);
     constructConfig();
     sideBar.config = config;
     sideBar.render();
+    console.log(3);
 }
 
 sideBarElement.addEventListener('click', (e) => {
@@ -249,7 +251,7 @@ function authentification() {
         const errPassword = isValidPassword(password);
 
         if (errLogin === '' && errPassword === '') {
-            fetch('https://sub-me.ru:8000/api/auth/signIn', {
+            fetch('http://sub-me.ru:8000/api/auth/signIn', {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',
@@ -433,8 +435,9 @@ function clickMyPage(parent) {
 }
 
 async function enter() {
+    console.log(1);
     // этот запрос можно отключить, если хотим страничку входа
-    await enterRequest();
+    // await enterRequest();
     renderSideBar(sideBarElement);
 }
 
