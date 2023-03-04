@@ -194,10 +194,10 @@ function enterRequest() {
                     });
             }
         })
-        // .catch((err) => {
-        //     renderSideBar(sideBarElement);
-        //     console.log(err);
-        // });
+        .catch((err) => {
+            renderSideBar(sideBarElement);
+            console.log(err);
+        });
 }
 
 
