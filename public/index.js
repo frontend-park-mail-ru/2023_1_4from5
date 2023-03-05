@@ -7,6 +7,7 @@ import { isValidLogin, isValidPassword } from "./modules/isValid.js";
 import { Settings } from "./components/settings/settings.js";
 import { MyPage } from "./components/myPage/myPage.js";
 
+const WEB_URL = 'http://sub-me.ru:8000';
 const USER_DASHA_URL = '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4';
 
 const rootElement = document.getElementById('root');
@@ -162,7 +163,7 @@ function constructConfig() {
 }
 
 function enterRequest() {
-    fetch('http://sub-me.ru:8000/api/user/profile', {
+    fetch(`${WEB_URL}/api/user/profile`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -181,7 +182,7 @@ function enterRequest() {
                 console.log('user has entered as: ', userIn.usernameIn);
                 userIn.isAuthorizedIn = true;
 
-                fetch('http://sub-me.ru:8000/api/user/homePage', {
+                fetch(`${WEB_URL}/api/user/homePage`, {
                     method: 'GET',
                     mode: 'cors',
                     credentials: 'include',
@@ -203,10 +204,12 @@ function enterRequest() {
 
 
 function renderSideBar(parent) {
+    console.log(2);
     const sideBar = new SideBar(parent);
     constructConfig();
     sideBar.config = config;
     sideBar.render();
+    console.log(3);
 }
 
 sideBarElement.addEventListener('click', (e) => {
@@ -249,7 +252,7 @@ function authentification() {
         const errPassword = isValidPassword(password);
 
         if (errLogin === '' && errPassword === '') {
-            fetch('https://sub-me.ru:8000/api/auth/signIn', {
+            fetch(`${WEB_URL}/api/auth/signIn`, {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',
@@ -263,7 +266,7 @@ function authentification() {
             })
                 .then((response) => {
                     if (response.ok) {
-                        fetch('http://sub-me.ru:8000/api/user/profile', {
+                        fetch(`${WEB_URL}/api/user/profile`, {
                             method: 'GET',
                             mode: 'cors',
                             credentials: 'include',
@@ -329,7 +332,7 @@ function registration() {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Пароли не совпадают';
         } else {
-            fetch('http://sub-me.ru:8000/api/auth/signUp', {
+            fetch(`${WEB_URL}/api/auth/signUp`, {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',
@@ -344,13 +347,11 @@ function registration() {
             })
                 .then((response) => {
                     if (response.ok) {
-                        fetch('http://sub-me.ru:8000/api/user/profile', {
+                        fetch(WEB_URL + '/api/user/profile', {
                             method: 'GET',
                             mode: 'cors',
                             credentials: 'include',
                         })
-                        //  let a = await GET(){}
-                        //  a.then
                             // eslint-disable-next-line no-shadow
                             .then((response) => response.json())
                             .then((result) => {
@@ -409,30 +410,31 @@ function renderSettings(parent) {
     settings.render();
 }
 
-function renderMyPage(parent) {
+function renderMyPage(parent, config) {
     const myPage = new MyPage(parent);
     myPage.config = config;
     myPage.render();
 }
 
 function clickMyPage(parent) {
-    fetch(`http://sub-me.ru:8000/api/creator/page/${USER_DASHA_URL}`, {
+    fetch(`${WEB_URL}/api/creator/page/${USER_DASHA_URL}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     })
         .then((response) => response.json())
-        .then((result) => {
-            console.log(result);
-            renderMyPage(parent);
+        .then((config) => {
+            // console.log(result);
+            renderMyPage(parent, config);
         })
         .catch((err) => {
             console.log(err);
-            renderMyPage(parent);
+            renderMyPage(parent, config);
         });
 }
 
 async function enter() {
+    console.log(1);
     // этот запрос можно отключить, если хотим страничку входа
     await enterRequest();
     renderSideBar(sideBarElement);
