@@ -1,10 +1,10 @@
-<div>
+<div id="myPage">
     <h1>{{creator_info.name}}</h1>
-    <img id="user-photo" width="50" src="../../../public/user_photo.png" alt="user_photo">
+    <img id="user-photo" width="50" src="../../../public/images/user_photo.png" alt="user_photo">
     <h3>О моем блоге: {{creator_info.description}}</h3>
     <p>{{creator_info.followers_count}} подписчиков</p>
     {{#each posts}}
-        <h5>Пост: {{title}}</h5>
+        <h4>Пост: {{title}}</h4>
         <p>{{text}}</p>
     {{/each}}
 </div>
