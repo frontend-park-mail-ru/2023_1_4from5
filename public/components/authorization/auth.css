@@ -1,7 +1,7 @@
 #auth {
-    text-align: left;
-    top: 300px;
-    left: 700px;
+    text-align: end;
+    top: 20em;
+    margin-left: 40%;
     background-color: #ddd;
     position: fixed;
     width: 400px;
@@ -9,6 +9,16 @@
     z-index: 20;
 }
 
-label {
-    width: 50px;
+input {
+    width: 22em;
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+}
+
+button {
+    margin-right: 13em;
+}
+
+#auth-error {
+    margin-right: 5em;
 }

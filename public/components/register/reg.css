@@ -1,10 +1,25 @@
 #register {
-    text-align: center;
-    top: 300px;
-    left: 700px;
+    text-align: end;
+    top: 20em;
+    margin-left: 40%;
     background-color: #7dbe7c;
     position: fixed;
-    width: 400px;
+    width: 500px;
     opacity: 1;
     z-index: 20;
+}
+
+input {
+    width: 22em;
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+}
+
+button {
+    margin-right: 13em;
+    margin-bottom: 0.5em;
+}
+
+#reg-error {
+    text-align: center;
 }

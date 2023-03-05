@@ -1,5 +1,4 @@
 export function constructConfig(config, userIn) {
-    console.log('author 6: ', userIn.isAuthorIn);
     config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.authorURL = userIn.authorURL;
