@@ -1,14 +1,15 @@
 import { SideBar } from './components/sideBar/sideBar.js';
-import { Auth } from "./components/authorization/auth.js";
-import { Register } from "./components/register/reg.js";
-import { WinSettings } from "./components/winSettings/winSettings.js";
-import { isValidLogin, isValidPassword } from "./modules/isValid.js";
-import { constructConfig } from "./modules/constructConfig.js";
-import { Settings } from "./components/settings/settings.js";
-import { MyPage } from "./components/myPage/myPage.js";
+import { Auth } from './components/authorization/auth.js';
+import { Register } from './components/register/reg.js';
+import { WinSettings } from './components/winSettings/winSettings.js';
+import { isValidLogin, isValidPassword } from './modules/isValid.js';
+import { constructConfig } from './modules/constructConfig.js';
+import { Settings } from './components/settings/settings.js';
+import { MyPage } from './components/myPage/myPage.js';
 
+// ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
+// http://sub-me.ru:8080
 const WEB_URL = 'http://sub-me.ru:8000';
-const USER_DASHA_URL = '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4';
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -19,6 +20,7 @@ rootElement.appendChild(contentElement);
 const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
+    authorURL: '',
     isAuthorIn: false,
     isAuthorizedIn: false,
 };
@@ -132,6 +134,7 @@ const config = {
     user: {
         login: '',
         username: '',
+        authorURL: '',
         isAuthor: false,
         isAuthorized: false,
     },
@@ -144,37 +147,35 @@ function enterRequest() {
         mode: 'cors',
         credentials: 'include',
     })
-        .then((response) => {
-            // console.log(response, response.json());
-            if (!response.ok) {
-                throw 'Error: response is empty';
-            }
-            console.log('get response');
-            return response.json();
-        })
-        .then((result) => {
-            if (result.login.length > 0) {
-                userIn.usernameIn = result.name;
-                console.log('user has entered as: ', userIn.usernameIn);
-                userIn.isAuthorizedIn = true;
-
-                fetch(`${WEB_URL}/api/user/homePage`, {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'include',
-                })
-                    .then((response) => response.json())
-                    .then((userHomePage) => {
-                        console.log('get home page');
-                        userIn.isAuthorIn = userHomePage.is_creator;
-                        renderSideBar(sideBarElement);
-                    });
-            }
-        })
-        .catch((err) => {
-            renderSideBar(sideBarElement);
-            console.log(err);
-        });
+    .then((response) => {
+        if (!response.ok) {
+            throw 'Error: response is empty';
+        }
+        return response.json();
+    })
+    .then((result) => {
+        if (result.login.length > 0) {
+            userIn.usernameIn = result.name;
+            console.log('user has entered as: ', userIn.usernameIn);
+            userIn.isAuthorizedIn = true;
+            fetch(`${WEB_URL}/api/user/homePage`, {
+                method: 'GET',
+                mode: 'cors',
+                credentials: 'include',
+            })
+            .then((response) => response.json())
+            .then((userHomePage) => {
+                // console.log(userHomePage);
+                userIn.authorURL = userHomePage.creator_id;
+                userIn.isAuthorIn = userHomePage.is_creator;
+                renderSideBar(sideBarElement);
+            });
+        }
+    })
+    .catch((err) => {
+        renderSideBar(sideBarElement);
+        console.log(err);
+    });
 }
 
 function renderAuth(parent) {
@@ -318,29 +319,29 @@ function registration() {
                     password_hash: password,
                 }),
             })
-                .then((response) => {
-                    if (response.ok) {
-                        fetch(WEB_URL + '/api/user/profile', {
-                            method: 'GET',
-                            mode: 'cors',
-                            credentials: 'include',
-                        })
-                            // eslint-disable-next-line no-shadow
-                            .then((response) => response.json())
-                            .then((result) => {
-                                if (result.name.length > 0) {
-                                    userIn.usernameIn = result.name;
-                                    console.log('user has entered as: ', userIn.usernameIn);
-                                    userIn.isAuthorizedIn = true;
-                                    renderSideBar(sideBarElement);
-                                    removeReg();
-                                }
-                            });
-                    } else {
-                        errorOutput.innerHTML = '';
-                        errorOutput.innerHTML = 'Такой логин уже существует';
-                    }
-                });
+            .then((response) => {
+                if (response.ok) {
+                    fetch(WEB_URL + '/api/user/profile', {
+                        method: 'GET',
+                        mode: 'cors',
+                        credentials: 'include',
+                    })
+                    // eslint-disable-next-line no-shadow
+                    .then((response) => response.json())
+                    .then((result) => {
+                        if (result.name.length > 0) {
+                            userIn.usernameIn = result.name;
+                            console.log('user has entered as: ', userIn.usernameIn);
+                            userIn.isAuthorizedIn = true;
+                            renderSideBar(sideBarElement);
+                            removeReg();
+                        }
+                    });
+                } else {
+                    errorOutput.innerHTML = '';
+                    errorOutput.innerHTML = 'Такой логин уже существует';
+                }
+            });
         }
     });
 }
@@ -385,14 +386,14 @@ function renderMyPage(parent, config) {
 }
 
 function clickMyPage(parent) {
-    fetch(`${WEB_URL}/api/creator/page/${USER_DASHA_URL}`, {
+    fetch(`${WEB_URL}/api/creator/page/${config.user.authorURL}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
     })
         .then((response) => response.json())
         .then((config) => {
-            // console.log(result);
+            console.log(config);
             renderMyPage(parent, config);
         })
         .catch((err) => {

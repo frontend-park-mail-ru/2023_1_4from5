@@ -1,6 +1,7 @@
 export function constructConfig(config, userIn) {
     config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
+    config.user.authorURL = userIn.authorURL;
     config.user.isAuthor = userIn.isAuthorIn;
     config.user.isAuthorized = userIn.isAuthorizedIn;
 
