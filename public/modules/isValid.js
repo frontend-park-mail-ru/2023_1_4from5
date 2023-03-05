@@ -46,7 +46,6 @@ export function isValidPassword(inputStr) {
             return flags[flagsKey].error;
         }
     }
-    return '';
 }
 
 export function isValidLogin(inputStr) {
@@ -66,5 +65,4 @@ export function isValidLogin(inputStr) {
     if (inputStr.length > 20) {
         return flags.hasMaxLen.error;
     }
-    return '';
 }
