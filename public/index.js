@@ -1,11 +1,14 @@
-import SideBar from './components/sideBar/sideBar.js';
 import Auth from './components/authorization/auth.js';
-import Register from './components/register/reg.js';
-import WinSettings from './components/winSettings/winSettings.js';
-import { isValidLogin, isValidPassword } from './modules/isValid.js';
-import { constructConfig } from './modules/constructConfig.js';
-import Settings from './components/settings/settings.js';
 import MyPage from './components/myPage/myPage.js';
+import Register from './components/register/reg.js';
+import Settings from './components/settings/settings.js';
+import SideBar from './components/sideBar/sideBar.js';
+import WinSettings from './components/winSettings/winSettings.js';
+
+import { constructConfig } from './modules/constructConfig.js';
+import { isValidLogin, isValidPassword } from './modules/isValid.js';
+
+import { setConfig } from "./consts/constants.js";
 
 // ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
 // http://sub-me.ru:8080
@@ -24,123 +27,10 @@ const userIn = {
     isAuthorIn: true,
     isAuthorizedIn: true,
 };
-const config = {
-    general: {
-        pages: [
-            {
-                name: 'Лента',
-                href: '/feed',
-                id: 'sidebar-feed',
-                showDisplay: userIn.isAuthorizedIn,
-                parent: contentElement,
-                render() {
-                    console.log('лента');
-                },
-            },
-            {
-                name: 'Поиск авторов',
-                href: '/find',
-                id: 'sidebar-find',
-                showDisplay: true,
-                parent: contentElement,
-                render() {
-                    console.log('поиск');
-                },
-            },
-            {
-                name: 'Мои подписки',
-                href: '/subs',
-                id: 'sidebar-subs',
-                showDisplay: userIn.isAuthorizedIn,
-                parent: contentElement,
-                render() {
-                    console.log('подписки');
-                },
-            },
-            {
-                name: 'Регистрация',
-                href: '/register',
-                id: 'sidebar-reg',
-                showDisplay: !userIn.isAuthorizedIn,
-                parent: rootElement,
-                render: renderRegister,
-            },
-            {
-                name: 'Войти',
-                href: '/auth',
-                id: 'sidebar-auth',
-                showDisplay: !userIn.isAuthorizedIn,
-                parent: rootElement,
-                render: renderAuth,
-            },
-            {
-                name: 'Стать автором',
-                href: '/beAuthor',
-                id: 'sidebar-beAuthor',
-                showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
-                parent: contentElement,
-                render() {
-                    console.log('стать автором');
-                },
-            },
-            {
-                name: userIn.usernameIn,
-                href: '/modalWindow',
-                id: 'sidebar-modalWindow',
-                showDisplay: userIn.isAuthorizedIn,
-                parent: contentElement,
-                render: renderWinSettings,
-            },
-        ],
-    },
-    setting: {
-        pages: [
-            {
-                name: 'Моя страница',
-                href: '/my_profile',
-                id: 'winSetting-profile',
-                showDisplay: userIn.isAuthorIn,
-                parent: contentElement,
-                render: clickMyPage,
-            },
-            {
-                name: 'Мои доходы',
-                href: '/finance',
-                id: 'winSetting-finance',
-                showDisplay: userIn.isAuthorIn,
-                parent: contentElement,
-                render() {
-                    console.log('Мои доходы');
-                },
-            },
-            {
-                name: 'Настройки',
-                href: '/settings',
-                id: 'winSetting-settings',
-                showDisplay: true,
-                parent: contentElement,
-                render: renderSettings,
-            },
-            {
-                name: 'Выйти',
-                href: '/startPage',
-                id: 'winSetting-startPage',
-                showDisplay: true,
-                parent: contentElement,
-                render: logout,
-            },
-        ],
-    },
-    user: {
-        login: '',
-        username: '',
-        authorURL: '',
-        isAuthor: false,
-        isAuthorized: false,
-    },
-    activePage: '',
-};
-
+const config = setConfig({
+    userIn, contentElement, rootElement, renderRegister, renderAuth,
+    renderWinSettings, clickMyPage, renderSettings, logout
+});
 async function enterRequest() {
     fetch(`${WEB_URL}/api/user/profile`, {
         method: 'GET',
@@ -214,7 +104,7 @@ function authentification() {
         const errLogin = isValidLogin(login);
         const errPassword = isValidPassword(password);
 
-        if (errLogin === '' && errPassword === '') {
+        if (!errLogin && !errPassword) {
             fetch(`${WEB_URL}/api/auth/signIn`, {
                 method: 'POST',
                 mode: 'cors',
@@ -296,10 +186,10 @@ function registration() {
         if (username.length === 0) {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Введите ваше имя';
-        } else if (errLogin !== '') {
+        } else if (errLogin) {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = errLogin;
-        } else if (errPassword !== '') {
+        } else if (errPassword) {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = errPassword;
         } else if (password !== repeatPassword) {
