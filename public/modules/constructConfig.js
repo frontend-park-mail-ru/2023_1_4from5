@@ -1,9 +1,12 @@
 export function constructConfig(config, userIn) {
+    console.log('author 6: ', userIn.isAuthorIn);
     config.user.login = userIn.loginIn;
     config.user.username = userIn.usernameIn;
     config.user.authorURL = userIn.authorURL;
     config.user.isAuthor = userIn.isAuthorIn;
     config.user.isAuthorized = userIn.isAuthorizedIn;
+    
+    
 
     config.general.pages[0].showDisplay = userIn.isAuthorizedIn;
     config.general.pages[1].showDisplay = true;
