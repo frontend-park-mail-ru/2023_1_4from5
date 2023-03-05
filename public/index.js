@@ -24,7 +24,7 @@ rootElement.appendChild(contentElement);
 
 const userIn = {
     loginIn: '',
-    usernameIn: 'Ashan',
+    usernameIn: '',
     authorURL: '',
     isAuthorIn: false,
     isAuthorizedIn: false,
