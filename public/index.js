@@ -2,8 +2,8 @@ import { SideBar } from './components/sideBar/sideBar.js';
 import { Auth } from "./components/authorization/auth.js";
 import { Register } from "./components/register/reg.js";
 import { WinSettings } from "./components/winSettings/winSettings.js";
-import { clickHandler } from "./modules/handler.js";
 import { isValidLogin, isValidPassword } from "./modules/isValid.js";
+import { constructConfig } from "./modules/constructConfig.js";
 import { Settings } from "./components/settings/settings.js";
 import { MyPage } from "./components/myPage/myPage.js";
 
@@ -19,8 +19,8 @@ rootElement.appendChild(contentElement);
 const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
-    isAuthorIn: false,
-    isAuthorizedIn: false,
+    isAuthorIn: true,
+    isAuthorizedIn: true,
 };
 const config = {
     general: {
@@ -140,28 +140,6 @@ const config = {
     activePage: '',
 };
 
-function constructConfig() {
-    config.user.login = userIn.loginIn;
-    config.user.username = userIn.usernameIn;
-    config.user.isAuthor = userIn.isAuthorIn;
-    config.user.isAuthorized = userIn.isAuthorizedIn;
-
-    config.general.pages[0].showDisplay = userIn.isAuthorizedIn;
-    config.general.pages[1].showDisplay = true;
-    config.general.pages[2].showDisplay = userIn.isAuthorizedIn;
-    config.general.pages[3].showDisplay = !userIn.isAuthorizedIn;
-    config.general.pages[4].showDisplay = !userIn.isAuthorizedIn;
-    config.general.pages[5].showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
-    config.general.pages[6].showDisplay = userIn.isAuthorizedIn;
-
-    config.setting.pages[0].showDisplay = userIn.isAuthorIn;
-    config.setting.pages[1].showDisplay = userIn.isAuthorIn;
-    config.setting.pages[2].showDisplay = true;
-    config.setting.pages[3].showDisplay = true;
-
-    config.general.pages[6].name = userIn.usernameIn;
-}
-
 function enterRequest() {
     fetch(`${WEB_URL}/api/user/profile`, {
         method: 'GET',
@@ -200,21 +178,6 @@ function enterRequest() {
             console.log(err);
         });
 }
-
-
-
-function renderSideBar(parent) {
-    console.log(2);
-    const sideBar = new SideBar(parent);
-    constructConfig();
-    sideBar.config = config;
-    sideBar.render();
-    console.log(3);
-}
-
-sideBarElement.addEventListener('click', (e) => {
-    clickHandler(e, config.general, config);
-});
 
 function renderAuth(parent) {
     const auth = new Auth(parent);
@@ -294,6 +257,17 @@ function authentification() {
     });
 }
 
+function renderRegister(parent) {
+    const reg = new Register(parent);
+    reg.render();
+
+    const closeBtn = document.getElementById('closeReg');
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        removeReg();
+    });
+    registration();
+}
 function removeReg() {
     const lastReg = document.getElementById('regDiv');
     if (lastReg) {
@@ -319,6 +293,7 @@ function registration() {
         const repeatPassword = passwordRepeatInput.value;
         const errLogin = isValidLogin(login);
         const errPassword = isValidPassword(password);
+
         if (username.length === 0) {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Введите ваше имя';
@@ -372,36 +347,16 @@ function registration() {
     });
 }
 
-function renderRegister(parent) {
-    const reg = new Register(parent);
-    reg.render();
-
-    const closeBtn = document.getElementById('closeReg');
-    closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        removeReg();
-    });
-    registration();
+function renderSideBar(parent) {
+    const sideBar = new SideBar(parent);
+    constructConfig(config, userIn);
+    sideBar.config = config;
+    sideBar.render();
 }
-
 function renderWinSettings(parent) {
     const win = new WinSettings(parent);
     win.config = config;
     win.render();
-
-    const closeBtn = document.getElementById('closeWinSettings');
-    closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        removeWinSettings();
-    });
-}
-
-function removeWinSettings() {
-    const lastWinSettings = document.getElementById('winSettingsDiv');
-    if (lastWinSettings) {
-        lastWinSettings.remove();
-    }
-    config.activePage = '';
 }
 
 function renderSettings(parent) {
@@ -432,6 +387,7 @@ function clickMyPage(parent) {
             renderMyPage(parent, config);
         });
 }
+
 
 async function enter() {
     console.log(1);
