@@ -19,8 +19,8 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 const userIn = {
-    loginIn: 'Cockpit1',
-    usernameIn: 'Cockpit1!',
+    loginIn: '',
+    usernameIn: '',
     authorURL: '',
     isAuthorIn: false,
     isAuthorizedIn: false,
@@ -206,22 +206,19 @@ function authentification() {
             req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
             .then((response) => {
                 if (response.ok) {
-                    fetch(`${WEB_URL}/api/user/profile`, {
-                        method: 'GET',
-                        mode: 'cors',
-                        credentials: 'include',
-                    })
+                    req.get(`${WEB_URL}/api/user/profile`)
                         // eslint-disable-next-line no-shadow
                     .then((response) => response.json())
                     .then((result) => {
                         if (result.login.length > 0) {
-                            const req = new Request();
                             req.get(`${WEB_URL}/api/user/homePage`)
                             .then((response) => response.json())
                             .then((result) => {
                                 userIn.usernameIn = result.name;
                                 userIn.isAuthorIn = result.is_creator;
                                 userIn.isAuthorizedIn = true;
+                                userIn.authorURL = result.creator_id; 
+
                                 renderSideBar(sideBarElement);
                                 removeAuth();
                             })
@@ -289,35 +286,30 @@ function registration() {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Пароли не совпадают';
         } else {
-            fetch(`${WEB_URL}/api/auth/signUp`, {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    login,
-                    name: username,
-                    password_hash: password,
-                }),
-            })
+            const req = new Request();
+            req.post(`${WEB_URL}/api/auth/signUp`, {
+                login,
+                name: username,
+                password_hash: password,
+            }) 
             .then((response) => {
                 if (response.ok) {
-                    fetch(WEB_URL + '/api/user/profile', {
-                        method: 'GET',
-                        mode: 'cors',
-                        credentials: 'include',
-                    })
+                    req.get(`${WEB_URL}/api/user/profile`)
                     // eslint-disable-next-line no-shadow
                     .then((response) => response.json())
                     .then((result) => {
-                        if (result.name.length > 0) {
-                            userIn.usernameIn = result.name;
-                            userIn.isAuthorIn = result.is_creator;
-                            userIn.isAuthorizedIn = true;
-                            renderSideBar(sideBarElement);
-                            removeReg();
+                        if (result.login.length > 0) {
+                            req.get(`${WEB_URL}/api/user/homePage`)
+                            .then((response) => response.json())
+                            .then((result) => {
+                                userIn.usernameIn = result.name;
+                                userIn.isAuthorIn = result.is_creator;
+                                userIn.isAuthorizedIn = true;
+                                userIn.authorURL = result.creator_id; 
+
+                                renderSideBar(sideBarElement);
+                                removeReg();
+                            })
                         }
                     });
                 } else {
@@ -330,14 +322,11 @@ function registration() {
 }
 
 function logout() {
-    fetch(WEB_URL + '/api/auth/logout', {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    const req = new Request();
+    req.get(`${WEB_URL}/api/auth/logout`)
     .then((response) => {
-        userIn.loginIn = 'Cockpit1';
-        userIn.usernameIn = 'Cockpit1!';
+        userIn.loginIn = '';
+        userIn.usernameIn = '';
         userIn.isAuthorIn = false;
         userIn.isAuthorizedIn = false;
         renderSideBar(sideBarElement);
@@ -369,11 +358,8 @@ function renderMyPage(parent, config) {
 }
 
 function clickMyPage(parent) {
-    fetch(`${WEB_URL}/api/creator/page/${config.user.authorURL}`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    const req = new Request();
+    req.get(`${WEB_URL}/api/creator/page/${config.user.authorURL}`)
         .then((response) => response.json())
         .then((config) => {
             renderMyPage(parent, config);
