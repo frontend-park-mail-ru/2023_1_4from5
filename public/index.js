@@ -21,52 +21,39 @@ rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
 const userIn = {
-    loginIn: 'Cockpit1',
-    usernameIn: 'Cockpit1!',
+    loginIn: '',
+    usernameIn: '',
     authorURL: '',
     isAuthorIn: true,
     isAuthorizedIn: true,
 };
+
 const config = setConfig({
     userIn, contentElement, rootElement, renderRegister, renderAuth,
     renderWinSettings, clickMyPage, renderSettings, logout
 });
+
 async function enterRequest() {
-    fetch(`${WEB_URL}/api/user/profile`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Error: response is empty');
-        }
-        return response.json();
-    })
-    .then((result) => {
-        
-        if (result.login.length > 0) {
+    const req = new Request();
+
+    try {
+    const response = await req.get(`${WEB_URL}/api/user/profile`);
+    const result = await response.json();
+        if (result.login) {
             userIn.usernameIn = result.name;
-            console.log('user has entered as: ', userIn.usernameIn);
             userIn.isAuthorizedIn = true;
-            fetch(`${WEB_URL}/api/user/homePage`, {
-                method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-            })
-            .then((response) => response.json())
-            .then((userHomePage) => {
-                console.log(userHomePage);
+
+            const getPage = await req.get(`${WEB_URL}/api/user/homePage`);
+            const userHomePage = await getPage.json();
                 userIn.authorURL = userHomePage.creator_id;
                 userIn.isAuthorIn = userHomePage.is_creator;
                 renderSideBar(sideBarElement);
-            });
         }
-    })
-    .catch((err) => {
+    }
+    catch (err) {
         renderSideBar(sideBarElement);
         console.log(err);
-    });
+    }
 }
 
 function renderAuth(parent) {
@@ -105,41 +92,29 @@ function authentification() {
         const errPassword = isValidPassword(password);
 
         if (!errLogin && !errPassword) {
-            fetch(`${WEB_URL}/api/auth/signIn`, {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    login: login,
-                    password_hash: password
-                }),
-            })
-                .then((response) => {
-                    // console.log('signin: ', response);
-                    if (response.ok) {
-                        fetch(`${WEB_URL}/api/user/profile`, {
-                            method: 'GET',
-                            mode: 'cors',
-                            credentials: 'include',
-                        })
-                            // eslint-disable-next-line no-shadow
+            const req = new Request();
+            req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
+            .then((response) => {
+                if (response.ok) {
+                    req.get(`${WEB_URL}/api/user/profile`)
+                        // eslint-disable-next-line no-shadow
                             .then((response) => response.json())
                             .then((result) => {
-                                if (result.login.length > 0) {
-                                    userIn.usernameIn = result.name;
-                                    userIn.isAuthorizedIn = true;
-                                    renderSideBar(sideBarElement);
-                                    removeAuth();
-                                }
-                            });
-                    } else {
-                        errorOutput.innerHTML = '';
-                        errorOutput.innerHTML = 'Неверный логин или пароль';
-                    }
-                });
+                                userIn.usernameIn = result.name;
+                                userIn.isAuthorIn = result.is_creator;
+                                userIn.isAuthorizedIn = true;
+                                userIn.authorURL = result.creator_id; 
+
+                                renderSideBar(sideBarElement);
+                                removeAuth();
+                            })
+                        }
+                   });
+                } else {
+                    errorOutput.innerHTML = '';
+                    errorOutput.innerHTML = 'Неверный логин или пароль';
+                }
+            });
         } else {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Неверный логин или пароль';
@@ -196,35 +171,32 @@ function registration() {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Пароли не совпадают';
         } else {
-            fetch(`${WEB_URL}/api/auth/signUp`, {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    login,
-                    name: username,
-                    password_hash: password,
-                }),
-            })
+            const req = new Request();
+            req.post(`${WEB_URL}/api/auth/signUp`, {
+                login,
+                name: username,
+                password_hash: password,
+            }) 
             .then((response) => {
                 if (response.ok) {
-                    fetch(`${WEB_URL}/api/user/profile`, {
-                        method: 'GET',
-                        mode: 'cors',
-                        credentials: 'include',
-                    })
+
+                    req.get(`${WEB_URL}/api/user/profile`)
+
                     // eslint-disable-next-line no-shadow
                     .then((response) => response.json())
                     .then((result) => {
-                        if (result.name.length > 0) {
-                            userIn.usernameIn = result.name;
-                            console.log('user has entered as: ', userIn.usernameIn);
-                            userIn.isAuthorizedIn = true;
-                            renderSideBar(sideBarElement);
-                            removeReg();
+                        if (result.login.length > 0) {
+                            req.get(`${WEB_URL}/api/user/homePage`)
+                            .then((response) => response.json())
+                            .then((result) => {
+                                userIn.usernameIn = result.name;
+                                userIn.isAuthorIn = result.is_creator;
+                                userIn.isAuthorizedIn = true;
+                                userIn.authorURL = result.creator_id; 
+
+                                renderSideBar(sideBarElement);
+                                removeReg();
+                            })
                         }
                     });
                 } else {
@@ -237,15 +209,12 @@ function registration() {
 }
 
 function logout() {
-    fetch(`${WEB_URL}/api/auth/logout`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    const req = new Request();
+    req.get(`${WEB_URL}/api/auth/logout`)
+
     .then((response) => {
-        console.log('', response);
-        userIn.loginIn = 'Cockpit1';
-        userIn.usernameIn = 'Cockpit1!';
+        userIn.loginIn = '';
+        userIn.usernameIn = '';
         userIn.isAuthorIn = false;
         userIn.isAuthorizedIn = false;
         renderSideBar(sideBarElement);
@@ -277,14 +246,10 @@ function renderMyPage(parent, config) {
 }
 
 function clickMyPage(parent) {
-    fetch(`${WEB_URL}/api/creator/page/${config.user.authorURL}`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    const req = new Request();
+    req.get(`${WEB_URL}/api/creator/page/${config.user.authorURL}`)
         .then((response) => response.json())
         .then((config) => {
-            console.log(config);
             renderMyPage(parent, config);
         })
         .catch((err) => {
@@ -293,13 +258,8 @@ function clickMyPage(parent) {
         });
 }
 
-
-
 async function enter() {
-    console.log(1);
-    // этот запрос можно отключить, если хотим страничку входа
     await enterRequest();
-    renderSideBar(sideBarElement);
 }
 
 enter();
