@@ -1,0 +1,17 @@
+#startPage {
+    margin-left: 10em;
+    margin-right: 10em;
+    padding-top: 2em;
+}
+
+#startPage h1 {
+    text-align: center;
+}
+
+#startPage h3 {
+    font-weight: normal;
+}
+
+#startPage hr {
+    opacity: 0;
+}
