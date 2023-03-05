@@ -10,7 +10,6 @@ import { constructConfig } from './modules/constructConfig.js';
 import { isValidLogin, isValidPassword } from './modules/isValid.js';
 
 import { setConfig } from "./consts/constants.js";
-import Request from './modules/request.js';
 
 // ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
 // http://sub-me.ru:8080
