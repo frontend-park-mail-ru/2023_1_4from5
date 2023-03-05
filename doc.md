@@ -34,8 +34,8 @@ body: {
     password_hash: string
 }
 response_status: {
+    400: Bad request,
     401: Unauthorized,
-    403: Forbidden,
     200: Ok
 }
 

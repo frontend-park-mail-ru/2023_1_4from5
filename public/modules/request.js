@@ -5,33 +5,24 @@ export class Request {
         POST: 'POST',
     }
 
-    get(path) {
-        console.log('get request');
-        let res;
-        fetch (path, {
+    async get(path) {
+        const res = await fetch (path, {
             method: this.#REQUEST_REQUEST_METHODS.GET,
             mode: 'cors',
             credentials: 'include',
         })
-        .then((response) => {
-            res = response;
-        })
         return res;
     }
 
-    post(path, body) {
-        let res
-        fetch (path, {
+    async post(path, body) {
+        const res = await fetch (path, {
             method: this.#REQUEST_REQUEST_METHODS.POST,
             mode: 'cors',
-            credentials: 'incude',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({body}),
-        })
-        .then((response) => {
-            res = response;
+            body: JSON.stringify(body),
         })
         return res;
     }

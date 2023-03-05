@@ -25,7 +25,7 @@ const userIn = {
     isAuthorIn: false,
     isAuthorizedIn: false,
 };
-const config = {
+let config = {
     general: {
         pages: [
             {
@@ -143,41 +143,27 @@ const config = {
 };
 
 async function enterRequest() {
-    fetch(`${WEB_URL}/api/user/profile`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw 'Error: response is empty';
-        }
-        return response.json();
-    })
-    .then((result) => {
-        
-        if (result.login.length > 0) {
+    const req = new Request();
+
+    try {
+    const response = await req.get(`${WEB_URL}/api/user/profile`);
+    const result = await response.json();
+        if (result.login) {
             userIn.usernameIn = result.name;
-            console.log('user has entered as: ', userIn.usernameIn);
             userIn.isAuthorizedIn = true;
-            fetch(`${WEB_URL}/api/user/homePage`, {
-                method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-            })
-            .then((response) => response.json())
-            .then((userHomePage) => {
-                console.log(userHomePage);
+
+            const getPage = await req.get(`${WEB_URL}/api/user/homePage`);
+            const userHomePage = await getPage.json();
                 userIn.authorURL = userHomePage.creator_id;
                 userIn.isAuthorIn = userHomePage.is_creator;
                 renderSideBar(sideBarElement);
-            });
         }
-    })
-    .catch((err) => {
+    }
+    // })
+    catch (err) {
         renderSideBar(sideBarElement);
         console.log(err);
-    });
+    }
 }
 
 function renderAuth(parent) {
@@ -216,41 +202,36 @@ function authentification() {
         const errPassword = isValidPassword(password);
 
         if (errLogin === '' && errPassword === '') {
-            fetch(`${WEB_URL}/api/auth/signIn`, {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    login: login,
-                    password_hash: password
-                }),
-            })
-                .then((response) => {
-                    // console.log('signin: ', response);
-                    if (response.ok) {
-                        fetch(`${WEB_URL}/api/user/profile`, {
-                            method: 'GET',
-                            mode: 'cors',
-                            credentials: 'include',
-                        })
-                            // eslint-disable-next-line no-shadow
+            const req = new Request();
+            req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
+            .then((response) => {
+                if (response.ok) {
+                    fetch(`${WEB_URL}/api/user/profile`, {
+                        method: 'GET',
+                        mode: 'cors',
+                        credentials: 'include',
+                    })
+                        // eslint-disable-next-line no-shadow
+                    .then((response) => response.json())
+                    .then((result) => {
+                        if (result.login.length > 0) {
+                            const req = new Request();
+                            req.get(`${WEB_URL}/api/user/homePage`)
                             .then((response) => response.json())
                             .then((result) => {
-                                if (result.login.length > 0) {
-                                    userIn.usernameIn = result.name;
-                                    userIn.isAuthorizedIn = true;
-                                    renderSideBar(sideBarElement);
-                                    removeAuth();
-                                }
-                            });
-                    } else {
-                        errorOutput.innerHTML = '';
-                        errorOutput.innerHTML = 'Неверный логин или пароль';
-                    }
-                });
+                                userIn.usernameIn = result.name;
+                                userIn.isAuthorIn = result.is_creator;
+                                userIn.isAuthorizedIn = true;
+                                renderSideBar(sideBarElement);
+                                removeAuth();
+                            })
+                        }
+                   });
+                } else {
+                    errorOutput.innerHTML = '';
+                    errorOutput.innerHTML = 'Неверный логин или пароль';
+                }
+            });
         } else {
             errorOutput.innerHTML = '';
             errorOutput.innerHTML = 'Неверный логин или пароль';
@@ -333,7 +314,7 @@ function registration() {
                     .then((result) => {
                         if (result.name.length > 0) {
                             userIn.usernameIn = result.name;
-                            console.log('user has entered as: ', userIn.usernameIn);
+                            userIn.isAuthorIn = result.is_creator;
                             userIn.isAuthorizedIn = true;
                             renderSideBar(sideBarElement);
                             removeReg();
@@ -355,7 +336,6 @@ function logout() {
         credentials: 'include',
     })
     .then((response) => {
-        console.log('logout', response);
         userIn.loginIn = 'Cockpit1';
         userIn.usernameIn = 'Cockpit1!';
         userIn.isAuthorIn = false;
@@ -396,7 +376,6 @@ function clickMyPage(parent) {
     })
         .then((response) => response.json())
         .then((config) => {
-            console.log('my page', config);
             renderMyPage(parent, config);
         })
         .catch((err) => {
@@ -408,10 +387,8 @@ function clickMyPage(parent) {
 
 
 async function enter() {
-    console.log(1);
     // этот запрос можно отключить, если хотим страничку входа
     await enterRequest();
-    renderSideBar(sideBarElement);
 }
 
 enter();
