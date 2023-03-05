@@ -27,7 +27,7 @@ const userIn = {
     usernameIn: 'Ashan',
     authorURL: '',
     isAuthorIn: false,
-    isAuthorizedIn: false,
+    isAuthorizedIn: true,
 };
 
 const config =
