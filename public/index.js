@@ -13,7 +13,7 @@ import { setConfig } from "./consts/constants.js";
 
 // ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
 // http://sub-me.ru:8080
-const WEB_URL = 'http://sub-me.ru:8000';
+
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -39,14 +39,14 @@ async function enterRequest() {
 
     try {
         console.log(1);
-    const response = await req.get(`${WEB_URL}/api/user/profile`);
+    const response = await req.get(`/api/user/profile`);
     console.log(2);
     const result = await response.json();
         if (result.login) {
             userIn.usernameIn = result.name;
             userIn.isAuthorizedIn = true;
 
-            const getPage = await req.get(`${WEB_URL}/api/user/homePage`);
+            const getPage = await req.get(`/api/user/homePage`);
             const userHomePage = await getPage.json();
                 userIn.authorURL = userHomePage.creator_id;
                 userIn.isAuthorIn = userHomePage.is_creator;
@@ -98,15 +98,15 @@ function authentification() {
         if (!errLogin && !errPassword) {
             console.log(!errLogin && !errPassword);
             const req = new Request();
-            req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
+            req.post(`/api/auth/signIn`, {login: login, password_hash: password})
             .then((response) => {
                 if (response.ok) {
-                    req.get(`${WEB_URL}/api/user/profile`)
+                    req.get(`/api/user/profile`)
                         // eslint-disable-next-line no-shadow
                             .then((response) => response.json())
                             .then((result) => {
                                 if (result.login.length > 0) {
-                                    req.get(`${WEB_URL}/api/user/homePage`)
+                                    req.get(`/api/user/homePage`)
                                     .then((response) => response.json())
                                     .then((result) => {
                                         userIn.usernameIn = result.name;
@@ -178,7 +178,7 @@ function registration() {
             errorOutput.innerHTML = 'Пароли не совпадают';
         } else {
             const req = new Request();
-            req.post(`${WEB_URL}/api/auth/signUp`, {
+            req.post(`/api/auth/signUp`, {
                 login,
                 name: username,
                 password_hash: password,
@@ -186,13 +186,13 @@ function registration() {
             .then((response) => {
                 if (response.ok) {
 
-                    req.get(`${WEB_URL}/api/user/profile`)
+                    req.get(`/api/user/profile`)
 
                     // eslint-disable-next-line no-shadow
                     .then((response) => response.json())
                     .then((result) => {
                         if (result.login.length > 0) {
-                            req.get(`${WEB_URL}/api/user/homePage`)
+                            req.get(`/api/user/homePage`)
                             .then((response) => response.json())
                             .then((result) => {
                                 userIn.usernameIn = result.name;
@@ -216,7 +216,7 @@ function registration() {
 
 function logout() {
     const req = new Request();
-    req.get(`${WEB_URL}/api/auth/logout`)
+    req.get(`/api/auth/logout`)
     .then(() => {
         userIn.loginIn = '';
         userIn.usernameIn = '';
@@ -252,7 +252,7 @@ function renderMyPage(parent, config) {
 
 function clickMyPage(parent) {
     const req = new Request();
-    req.get(`${WEB_URL}/api/creator/page/${config.user.authorURL}`)
+    req.get(`/api/creator/page/${config.user.authorURL}`)
         .then((response) => response.json())
         .then((config) => {
             renderMyPage(parent, config);

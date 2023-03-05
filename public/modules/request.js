@@ -1,4 +1,6 @@
 // это все не сделано
+const WEB_URL = 'http://sub-me.ru:8000';
+
 export default class Request {
     #REQUEST_REQUEST_METHODS = {
         GET: 'GET',
@@ -6,7 +8,7 @@ export default class Request {
     };
 
     async get(path) {
-        const res = await fetch (path, {
+        const res = await fetch (WEB_URL + path, {
             method: this.#REQUEST_REQUEST_METHODS.GET,
             mode: 'cors',
             credentials: 'include',
@@ -15,7 +17,7 @@ export default class Request {
     }
 
     async post(path, body) {
-        const res = await fetch (path, {
+        const res = await fetch (WEB_URL + path, {
             method: this.#REQUEST_REQUEST_METHODS.POST,
             mode: 'cors',
             credentials: 'include',
