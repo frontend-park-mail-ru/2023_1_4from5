@@ -32,13 +32,17 @@ const config =
     renderWinSettings, clickMyPage, renderSettings, logout, renderStartPage
 });
 
+/**
+ * First request for entering with cookies
+ * @param {}
+ *
+ * @returns {}
+ */
 async function enterRequest() {
     const req = new Request();
 
     try {
-        console.log(1);
     const response = await req.get(`/api/user/profile`);
-    console.log(2);
     const result = await response.json();
         if (result.login) {
             userIn.usernameIn = result.name;
@@ -60,6 +64,12 @@ async function enterRequest() {
     }
 }
 
+/**
+ * rendering authorization
+ * @param {HTMLElement} parent - parent of authorization window
+ *
+ * @returns {}
+ */
 function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.render();
@@ -74,6 +84,12 @@ function renderAuth(parent) {
     authentification();
 }
 
+/**
+ * removing authorization window
+ * @param {}
+ *
+ * @returns {}
+ */
 function removeAuth() {
     const lastAuth = document.getElementById('authDiv');
     if (lastAuth) {
@@ -82,6 +98,12 @@ function removeAuth() {
     config.activePage = '';
 }
 
+/**
+ * request for authorization
+ * @param {}
+ *
+ * @returns {}
+ */
 function authentification() {
     const submitBtn = document.getElementById('auth-btn');
     const loginInput = document.getElementById('auth-login');
@@ -130,6 +152,12 @@ function authentification() {
     });
 }
 
+/**
+ * rendering registration
+ * @param {HTMLElement} parent - parent of registration window
+ *
+ * @returns {}
+ */
 function renderRegister(parent) {
     const reg = new Register(parent);
     reg.render();
@@ -141,6 +169,13 @@ function renderRegister(parent) {
     });
     registration();
 }
+
+/**
+ * removing registration window
+ * @param {}
+ *
+ * @returns {}
+ */
 function removeReg() {
     const lastReg = document.getElementById('regDiv');
     if (lastReg) {
@@ -149,6 +184,12 @@ function removeReg() {
     config.activePage = '';
 }
 
+/**
+ * rendering registration
+ * @param {HTMLElement} - parent of authorization window
+ *
+ * @returns {}
+ */
 function registration() {
     const submitBtn = document.getElementById('reg-btn');
     const loginInput = document.getElementById('reg-login');
@@ -204,7 +245,6 @@ function registration() {
 
                                 renderSideBar(sideBarElement);
                                 removeReg();
-                                renderStartPage(contentElement);
                             })
                         }
                     });
@@ -217,6 +257,12 @@ function registration() {
     });
 }
 
+/**
+ * log out
+ * @param {}
+ *
+ * @returns {}
+ */
 function logout() {
     const req = new Request();
     req.get(`/api/auth/logout`)
@@ -230,34 +276,73 @@ function logout() {
     })
 }
 
+/**
+ * rendering SideBar
+ * @param {HTMLElement} parent - parent of SideBar window
+ *
+ * @returns {}
+ */
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
     constructConfig(config, userIn);
     sideBar.config = config;
     sideBar.render();
 }
+
+/**
+ * rendering StartPage
+ * @param {HTMLElement} parent - parent of StartPage window
+ *
+ * @returns {}
+ */
 function renderStartPage(parent) {
     const startPage = new StartPage(parent);
     startPage.render();
 }
+
+/**
+ * rendering modal window with settings
+ * @param {HTMLElement} parent - parent of WinSettings window
+ *
+ * @returns {}
+ */
 function renderWinSettings(parent) {
     const win = new WinSettings(parent);
     win.config = config;
     win.render();
 }
 
+/**
+ * rendering Settings
+ * @param {HTMLElement} parent - parent of Settings window
+ *
+ * @returns {}
+ */
 function renderSettings(parent) {
     const settings = new Settings(parent);
     settings.config = config;
     settings.render();
 }
 
+/**
+ * rendering authors page
+ * @param {HTMLElement} parent - parent of MyPage window
+ * @param {Object} config - information about author
+ *
+ * @returns {}
+ */
 function renderMyPage(parent, config) {
     const myPage = new MyPage(parent);
     myPage.config = config;
     myPage.render();
 }
 
+/**
+ * request before rendering authors page
+ * @param {HTMLElement} parent - parent of MyPage window
+ *
+ * @returns {}
+ */
 function clickMyPage(parent) {
     const req = new Request();
     req.get(`/api/creator/page/${config.user.authorURL}`)
@@ -271,6 +356,12 @@ function clickMyPage(parent) {
         });
 }
 
+/**
+ * start function
+ * @param {}
+ *
+ * @returns {}
+ */
 async function enter() {
     await enterRequest();
 }

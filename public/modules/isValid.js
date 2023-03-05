@@ -1,3 +1,9 @@
+/**
+ * validation of password input
+ * @param {String} inputStr - injected password
+ *
+ * @returns {String} - validation error
+ */
 export function isValidPassword(inputStr) {
     const flags = {
         hasMinLen: {
@@ -51,6 +57,12 @@ export function isValidPassword(inputStr) {
     }
 }
 
+/**
+ * validation of login input
+ * @param {String} inputStr - injected login
+ *
+ * @returns {String} - validation error
+ */
 export function isValidLogin(inputStr) {
     const flags = {
         hasMinLen: {

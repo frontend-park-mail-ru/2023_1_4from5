@@ -7,6 +7,12 @@ export default class Request {
         POST: 'POST',
     };
 
+    /**
+     * get request
+     * @param {string} path - end-point
+     *
+     * @returns {Promise} - response
+     */
     async get(path) {
         const res = await fetch (WEB_URL + path, {
             method: this.#REQUEST_REQUEST_METHODS.GET,
@@ -16,6 +22,13 @@ export default class Request {
         return res;
     }
 
+    /**
+     * post request
+     * @param {string} path - end-point
+     * @param {Object} body - request body
+     *
+     * @returns {Promise} - response
+     */
     async post(path, body) {
         const res = await fetch (WEB_URL + path, {
             method: this.#REQUEST_REQUEST_METHODS.POST,
