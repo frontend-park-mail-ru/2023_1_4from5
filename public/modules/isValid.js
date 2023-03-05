@@ -29,7 +29,7 @@ export function isValidPassword(inputStr) {
     // eslint-disable-next-line no-restricted-syntax
     for (const char of inputStr) {
         const code = char.charCodeAt(0);
-        if (!Number.isNaN(char)) {
+        if (!isNaN(char)) {
             flags.hasNumber.flag = true;
         } else if (code > 64 && code < 91) {
             flags.hasUpper.flag = true;
