@@ -24,9 +24,6 @@ export default class Request {
             },
             body: JSON.stringify(body),
         })
-            .then((response) => {
-                res = response;
-            });
         return res;
     }
 }
