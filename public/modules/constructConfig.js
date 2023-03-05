@@ -22,5 +22,4 @@ export function constructConfig(config, userIn) {
     config.setting.pages[3].showDisplay = true;
 
     config.general.pages[6].name = userIn.usernameIn;
-    
 }

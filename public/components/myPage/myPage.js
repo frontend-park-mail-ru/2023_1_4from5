@@ -1,4 +1,4 @@
-export class MyPage {
+export default class MyPage {
     #parent;
 
     #config;

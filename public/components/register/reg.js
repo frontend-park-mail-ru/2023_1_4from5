@@ -1,5 +1,5 @@
-export class Register {
-    #parent
+export default class Register {
+    #parent;
 
     constructor(parent) {
         this.#parent = parent;

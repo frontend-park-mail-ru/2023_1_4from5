@@ -1,9 +1,9 @@
 // это все не сделано
-export class Request {
+export default class Request {
     #REQUEST_REQUEST_METHODS = {
         GET: 'GET',
         POST: 'POST',
-    }
+    };
 
     async get(path) {
         const res = await fetch (path, {
@@ -24,6 +24,9 @@ export class Request {
             },
             body: JSON.stringify(body),
         })
+            .then((response) => {
+                res = response;
+            });
         return res;
     }
 }

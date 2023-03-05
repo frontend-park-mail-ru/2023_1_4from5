@@ -1,6 +1,7 @@
-export class Settings {
-    #parent
-    #config
+export default class Settings {
+    #parent;
+
+    #config;
 
     constructor(parent) {
         this.#parent = parent;
@@ -25,7 +26,6 @@ export class Settings {
         newDiv.id = 'settingsDiv';
         const template = Handlebars.templates.settings; // eslint-disable-line
         newDiv.innerHTML = template(this.#config.user);
-    
         this.#parent.appendChild(newDiv);
     }
 }
