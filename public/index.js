@@ -72,83 +72,28 @@ async function enterRequest() {
  */
 function renderAuth(parent) {
     const auth = new Auth(parent);
+    auth.config = config;
     auth.render();
 
     const closeBtn = document.getElementById('closeAuth');
     closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         // eslint-disable-next-line no-use-before-define
-        removeAuth();
+        auth.removeAuth();
     });
     // eslint-disable-next-line no-use-before-define
-    authentification();
-}
-
-/**
- * removing authorization window
- * @param {}
- *
- * @returns {}
- */
-function removeAuth() {
-    const lastAuth = document.getElementById('authDiv');
-    if (lastAuth) {
-        lastAuth.remove();
-    }
-    config.activePage = '';
-}
-
-/**
- * request for authorization
- * @param {}
- *
- * @returns {}
- */
-function authentification() {
-    const submitBtn = document.getElementById('auth-btn');
-    const loginInput = document.getElementById('auth-login');
-    const passwordInput = document.getElementById('auth-password');
-    const errorOutput = document.getElementById('auth-error');
-
-    submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const login = loginInput.value;
-        const password = passwordInput.value;
-        const errLogin = isValidLogin(login);
-        const errPassword = isValidPassword(password);
-
-        if (!errLogin && !errPassword) {
-            const req = new Request();
-            req.post(`/api/auth/signIn`, {login: login, password_hash: password})
-            .then((response) => {
-                if (response.ok) {
-                    req.get(`/api/user/profile`)
-                        // eslint-disable-next-line no-shadow
-                            .then((response) => response.json())
-                            .then((result) => {
-                                if (result.login.length > 0) {
-                                    req.get(`/api/user/homePage`)
-                                    .then((response) => response.json())
-                                    .then((result) => {
-                                        userIn.usernameIn = result.name;
-                                        userIn.isAuthorIn = result.is_creator;
-                                        userIn.isAuthorizedIn = true;
-                                        userIn.authorURL = result.creator_id; 
-                                        renderSideBar(sideBarElement);
-                                        removeAuth();
-                                    })
-                                }
-                            });
-                    } else {
-                        errorOutput.innerHTML = '';
-                        errorOutput.innerHTML = 'Неверный логин или пароль';
-                    }
-                });
-
-        } else {
-        errorOutput.innerHTML = '';
-        errorOutput.innerHTML = 'Неверный логин или пароль';
-        }
+    auth.authentification((result, req) => {
+        if (result.login.length > 0) {
+            req.get(`/api/user/homePage`)
+                .then((response) => response.json())
+                .then((result) => {
+                    userIn.usernameIn = result.name;
+                    userIn.isAuthorIn = result.is_creator;
+                    userIn.isAuthorizedIn = true;
+                    userIn.authorURL = result.creator_id;
+                    renderSideBar(sideBarElement);
+                    auth.removeAuth();
+                })}
     });
 }
 
@@ -160,99 +105,27 @@ function authentification() {
  */
 function renderRegister(parent) {
     const reg = new Register(parent);
+    reg.config = config;
     reg.render();
 
     const closeBtn = document.getElementById('closeReg');
     closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        removeReg();
+        reg.removeReg();
     });
-    registration();
-}
+    reg.registration((result, req) => {
+        if (result.login.length > 0) {
+            req.get(`/api/user/homePage`)
+                .then((response) => response.json())
+                .then((result) => {
+                    userIn.usernameIn = result.name;
+                    userIn.isAuthorIn = result.is_creator;
+                    userIn.isAuthorizedIn = true;
+                    userIn.authorURL = result.creator_id;
 
-/**
- * removing registration window
- * @param {}
- *
- * @returns {}
- */
-function removeReg() {
-    const lastReg = document.getElementById('regDiv');
-    if (lastReg) {
-        lastReg.remove();
-    }
-    config.activePage = '';
-}
-
-/**
- * rendering registration
- * @param {HTMLElement} - parent of authorization window
- *
- * @returns {}
- */
-function registration() {
-    const submitBtn = document.getElementById('reg-btn');
-    const loginInput = document.getElementById('reg-login');
-    const usernameInput = document.getElementById('reg-username');
-    const passwordInput = document.getElementById('reg-password');
-    const passwordRepeatInput = document.getElementById('reg-repeat-password');
-    const errorOutput = document.getElementById('reg-error');
-
-    submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const login = loginInput.value;
-        const username = usernameInput.value;
-        const password = passwordInput.value;
-        const repeatPassword = passwordRepeatInput.value;
-        const errLogin = isValidLogin(login);
-        const errPassword = isValidPassword(password);
-
-        if (username.length === 0) {
-            errorOutput.innerHTML = '';
-            errorOutput.innerHTML = 'Введите ваше имя';
-        } else if (errLogin) {
-            errorOutput.innerHTML = '';
-            errorOutput.innerHTML = errLogin;
-        } else if (errPassword) {
-            errorOutput.innerHTML = '';
-            errorOutput.innerHTML = errPassword;
-        } else if (password !== repeatPassword) {
-            errorOutput.innerHTML = '';
-            errorOutput.innerHTML = 'Пароли не совпадают';
-        } else {
-            const req = new Request();
-            req.post(`/api/auth/signUp`, {
-                login,
-                name: username,
-                password_hash: password,
-            }) 
-            .then((response) => {
-                if (response.ok) {
-
-                    req.get(`/api/user/profile`)
-
-                    // eslint-disable-next-line no-shadow
-                    .then((response) => response.json())
-                    .then((result) => {
-                        if (result.login.length > 0) {
-                            req.get(`/api/user/homePage`)
-                            .then((response) => response.json())
-                            .then((result) => {
-                                userIn.usernameIn = result.name;
-                                userIn.isAuthorIn = result.is_creator;
-                                userIn.isAuthorizedIn = true;
-                                userIn.authorURL = result.creator_id; 
-
-                                renderSideBar(sideBarElement);
-                                removeReg();
-                            })
-                        }
-                    });
-                } else {
-                    errorOutput.innerHTML = '';
-                    errorOutput.innerHTML = 'Такой логин уже существует';
-                }
-            });
+                    renderSideBar(sideBarElement);
+                    reg.removeReg();
+                })
         }
     });
 }
