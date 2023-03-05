@@ -4,6 +4,7 @@ import Register from './components/register/reg.js';
 import Settings from './components/settings/settings.js';
 import SideBar from './components/sideBar/sideBar.js';
 import WinSettings from './components/winSettings/winSettings.js';
+import Request from "./modules/request.js";
 
 import { constructConfig } from './modules/constructConfig.js';
 import { isValidLogin, isValidPassword } from './modules/isValid.js';
@@ -24,8 +25,8 @@ const userIn = {
     loginIn: '',
     usernameIn: '',
     authorURL: '',
-    isAuthorIn: true,
-    isAuthorizedIn: true,
+    isAuthorIn: false,
+    isAuthorizedIn: false,
 };
 
 const config = setConfig({
@@ -92,6 +93,7 @@ function authentification() {
         const errPassword = isValidPassword(password);
 
         if (!errLogin && !errPassword) {
+            console.log(!errLogin && !errPassword);
             const req = new Request();
             req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
             .then((response) => {
@@ -108,8 +110,7 @@ function authentification() {
                                 renderSideBar(sideBarElement);
                                 removeAuth();
                             })
-                        }
-                   });
+
                 } else {
                     errorOutput.innerHTML = '';
                     errorOutput.innerHTML = 'Неверный логин или пароль';
