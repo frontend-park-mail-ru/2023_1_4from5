@@ -12,10 +12,6 @@ import { isValidLogin, isValidPassword } from './modules/isValid.js';
 
 import { setConfig } from "./consts/constants.js";
 
-// ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
-// http://sub-me.ru:8080
-
-
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
 const contentElement = document.createElement('main');
