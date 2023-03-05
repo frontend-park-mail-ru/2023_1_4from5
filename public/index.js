@@ -93,7 +93,6 @@ function authentification() {
         const errPassword = isValidPassword(password);
 
         if (!errLogin && !errPassword) {
-            console.log(!errLogin && !errPassword);
             const req = new Request();
             req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
             .then((response) => {
@@ -105,8 +104,7 @@ function authentification() {
                                 userIn.usernameIn = result.name;
                                 userIn.isAuthorIn = result.is_creator;
                                 userIn.isAuthorizedIn = true;
-                                userIn.authorURL = result.creator_id; 
-
+                                userIn.authorURL = result.creator_id;
                                 renderSideBar(sideBarElement);
                                 removeAuth();
                             })
