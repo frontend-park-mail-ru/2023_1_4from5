@@ -1,10 +1,14 @@
 #winSettings {
-    top: 10px;
-    left: 10px;
+    /*top: 10px;*/
+    /*left: 10px;*/
+    /*position: center;*/
+    right: 0;
+    top: 40px;
+    width: 8em;
     position: fixed;
     display: flex;
     flex-direction: column;
-    background: aqua;
+    background: gainsboro;
     z-index: 20;
 
 }
