@@ -5,11 +5,10 @@ export class Request {
         POST: 'POST',
     }
 
-    url = 'http://sub-me.ru:8000/'
-
     get(path) {
+        console.log('get request');
         let res;
-        fetch (url + path, {
+        fetch (path, {
             method: this.#REQUEST_REQUEST_METHODS.GET,
             mode: 'cors',
             credentials: 'include',
@@ -22,7 +21,7 @@ export class Request {
 
     post(path, body) {
         let res
-        fetch (url + path, {
+        fetch (path, {
             method: this.#REQUEST_REQUEST_METHODS.POST,
             mode: 'cors',
             credentials: 'incude',
