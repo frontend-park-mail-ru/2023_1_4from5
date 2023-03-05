@@ -5,7 +5,7 @@ export function isValidPassword(inputStr) {
             error: 'Пароль должен содержать не менее 7 символов',
         },
         hasUpper: {
-            flag: false,
+            flag: true, //для упрощения на первое время
             error: 'Пароль должен содержать хотя бы 1 заглавную букву',
         },
         hasLower: {
@@ -17,7 +17,7 @@ export function isValidPassword(inputStr) {
             error: 'Пароль должен содержать хотя бы 1 цифру',
         },
         hasSpecial: {
-            flag: false,
+            flag: true, //для упрощения на первое время
             error: 'Пароль должен содержать хотя бы 1 спец. символ',
         },
     };
