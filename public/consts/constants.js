@@ -1,3 +1,9 @@
+/**
+ * sets configuration for source-object
+ * @param {Object} - object of settings
+ *
+ * @returns {Object} - configuration object
+ */
 export function setConfig ({userIn, contentElement, rootElement, renderRegister, renderAuth,
                                renderWinSettings, clickMyPage, renderSettings, logout, renderStartPage}) {
     return {
