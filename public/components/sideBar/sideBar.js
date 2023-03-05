@@ -1,8 +1,9 @@
-import {clickHandler} from "../../modules/handler.js";
+import clickHandler from "../../modules/handler.js";
 
-export class SideBar {
-    #parent
-    #config
+export default class SideBar {
+    #parent;
+
+    #config;
 
     constructor(parent) {
         this.#parent = parent;
@@ -33,5 +34,5 @@ export class SideBar {
         });
 
         this.#parent.appendChild(newDiv);
-    }  
+    }
 }
