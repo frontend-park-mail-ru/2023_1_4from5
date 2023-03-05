@@ -355,7 +355,7 @@ function logout() {
         credentials: 'include',
     })
     .then((response) => {
-        console.log('', response);
+        console.log('logout', response);
         userIn.loginIn = 'Cockpit1';
         userIn.usernameIn = 'Cockpit1!';
         userIn.isAuthorIn = false;
@@ -396,7 +396,7 @@ function clickMyPage(parent) {
     })
         .then((response) => response.json())
         .then((config) => {
-            console.log(config);
+            console.log('my page', config);
             renderMyPage(parent, config);
         })
         .catch((err) => {
