@@ -19,8 +19,8 @@ rootElement.appendChild(contentElement);
 const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
-    isAuthorIn: true,
-    isAuthorizedIn: true,
+    isAuthorIn: false,
+    isAuthorizedIn: false,
 };
 const config = {
     general: {
@@ -125,9 +125,7 @@ const config = {
                 id: 'winSetting-startPage',
                 showDisplay: true,
                 parent: contentElement,
-                render() {
-                    console.log('Выйти');
-                },
+                render: logout,
             },
         ],
     },
@@ -347,6 +345,21 @@ function registration() {
     });
 }
 
+function logout() {
+    fetch(WEB_URL + '/api/auth/logout', {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+    })
+    .then(() => {
+        userIn.loginIn = 'Cockpit1';
+        userIn.usernameIn = 'Cockpit1!';
+        userIn.isAuthorIn = false;
+        userIn.isAuthorizedIn = false;
+        renderSideBar(sideBarElement);
+    })
+}
+
 function renderSideBar(parent) {
     const sideBar = new SideBar(parent);
     constructConfig(config, userIn);
@@ -387,6 +400,7 @@ function clickMyPage(parent) {
             renderMyPage(parent, config);
         });
 }
+
 
 
 async function enter() {
