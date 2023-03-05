@@ -38,7 +38,9 @@ async function enterRequest() {
     const req = new Request();
 
     try {
+        console.log(1);
     const response = await req.get(`${WEB_URL}/api/user/profile`);
+    console.log(2);
     const result = await response.json();
         if (result.login) {
             userIn.usernameIn = result.name;
@@ -52,6 +54,7 @@ async function enterRequest() {
         }
     }
     catch (err) {
+        console.log(3);
         renderSideBar(sideBarElement);
         console.log(err);
     }
@@ -101,22 +104,24 @@ function authentification() {
                         // eslint-disable-next-line no-shadow
                             .then((response) => response.json())
                             .then((result) => {
-                                userIn.usernameIn = result.name;
-                                userIn.isAuthorIn = result.is_creator;
-                                userIn.isAuthorizedIn = true;
-                                userIn.authorURL = result.creator_id;
-                                renderSideBar(sideBarElement);
-                                removeAuth();
-                            })
-
+                                if (result.login.length > 0) {
+                                    req.get(`${WEB_URL}/api/user/homePage`)
+                                    .then((response) => response.json())
+                                    .then((result) => {
+                                        userIn.usernameIn = result.name;
+                                        userIn.isAuthorIn = result.is_creator;
+                                        userIn.isAuthorizedIn = true;
+                                        userIn.authorURL = result.creator_id; 
+                                        renderSideBar(sideBarElement);
+                                        removeAuth();
+                                    })
+                                }
+                            });
                 } else {
                     errorOutput.innerHTML = '';
                     errorOutput.innerHTML = 'Неверный логин или пароль';
                 }
             });
-        } else {
-            errorOutput.innerHTML = '';
-            errorOutput.innerHTML = 'Неверный логин или пароль';
         }
     });
 }
@@ -210,8 +215,7 @@ function registration() {
 function logout() {
     const req = new Request();
     req.get(`${WEB_URL}/api/auth/logout`)
-
-    .then((response) => {
+    .then(() => {
         userIn.loginIn = '';
         userIn.usernameIn = '';
         userIn.isAuthorIn = false;
