@@ -1,5 +1,5 @@
-export class Auth {
-    #parent
+export default class Auth {
+    #parent;
 
     constructor(parent) {
         this.#parent = parent;

@@ -1,8 +1,9 @@
-import { clickHandler} from "../../modules/handler.js";
+import clickHandler from "../../modules/handler.js";
 
-export class WinSettings {
-    #parent
-    #config
+export default class WinSettings {
+    #parent;
+
+    #config;
 
     constructor(parent) {
         this.#parent = parent;
