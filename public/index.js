@@ -410,7 +410,7 @@ function renderSettings(parent) {
     settings.render();
 }
 
-function renderMyPage(parent) {
+function renderMyPage(parent, config) {
     const myPage = new MyPage(parent);
     myPage.config = config;
     myPage.render();
@@ -423,13 +423,13 @@ function clickMyPage(parent) {
         credentials: 'include',
     })
         .then((response) => response.json())
-        .then((result) => {
-            console.log(result);
-            renderMyPage(parent);
+        .then((config) => {
+            // console.log(result);
+            renderMyPage(parent, config);
         })
         .catch((err) => {
             console.log(err);
-            renderMyPage(parent);
+            renderMyPage(parent, config);
         });
 }
 
