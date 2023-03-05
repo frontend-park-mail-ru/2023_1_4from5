@@ -6,6 +6,7 @@ import { isValidLogin, isValidPassword } from './modules/isValid.js';
 import { constructConfig } from './modules/constructConfig.js';
 import { Settings } from './components/settings/settings.js';
 import { MyPage } from './components/myPage/myPage.js';
+import { Request } from './modules/request.js';
 
 // ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
 // http://sub-me.ru:8080
@@ -141,7 +142,7 @@ const config = {
     activePage: '',
 };
 
-function enterRequest() {
+async function enterRequest() {
     fetch(`${WEB_URL}/api/user/profile`, {
         method: 'GET',
         mode: 'cors',
@@ -154,6 +155,7 @@ function enterRequest() {
         return response.json();
     })
     .then((result) => {
+        
         if (result.login.length > 0) {
             userIn.usernameIn = result.name;
             console.log('user has entered as: ', userIn.usernameIn);
@@ -165,7 +167,7 @@ function enterRequest() {
             })
             .then((response) => response.json())
             .then((userHomePage) => {
-                // console.log(userHomePage);
+                console.log(userHomePage);
                 userIn.authorURL = userHomePage.creator_id;
                 userIn.isAuthorIn = userHomePage.is_creator;
                 renderSideBar(sideBarElement);
@@ -227,6 +229,7 @@ function authentification() {
                 }),
             })
                 .then((response) => {
+                    // console.log('signin: ', response);
                     if (response.ok) {
                         fetch(`${WEB_URL}/api/user/profile`, {
                             method: 'GET',
@@ -238,7 +241,6 @@ function authentification() {
                             .then((result) => {
                                 if (result.login.length > 0) {
                                     userIn.usernameIn = result.name;
-                                    console.log('user has entered as: ', userIn.usernameIn);
                                     userIn.isAuthorizedIn = true;
                                     renderSideBar(sideBarElement);
                                     removeAuth();
@@ -352,7 +354,8 @@ function logout() {
         mode: 'cors',
         credentials: 'include',
     })
-    .then(() => {
+    .then((response) => {
+        console.log('', response);
         userIn.loginIn = 'Cockpit1';
         userIn.usernameIn = 'Cockpit1!';
         userIn.isAuthorIn = false;
