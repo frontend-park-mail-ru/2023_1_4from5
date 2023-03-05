@@ -1,22 +1,36 @@
 #sideBar {
+    display: flex;
     background-color: #eee;
     position: relative;
     z-index: 1;
     text-align: end;
-    height: 40px;
+    height: 4em;
+}
+
+#sideBar-SubMe {
+    margin-left: 1em;
+}
+
+#sideBar-menu {
+    width: 100%;
 }
 
 #sideBar a {
-    vertical-align: middle;
-    font-size: large;
-    margin-left: 6%;
-    margin-right: 8%;
-    /*margin-top: 1em;*/
-    /*padding-top: 20px;*/
-    /*padding-bottom: 10px;*/
+    display: inline-block;
+    font-size: 1.3em;
+    margin-left: 3em;
+    margin-top: 0.8em;
 }
 
-a {
+#sidebar-modalWindow {
+    margin-right: 1em;
+}
+
+#sidebar-auth {
+    margin-right: 1em;
+}
+
+a { 
     color: #222;
 }
 
