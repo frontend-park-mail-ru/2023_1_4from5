@@ -1,12 +1,11 @@
-import { SideBar } from './components/sideBar/sideBar.js';
-import { Auth } from './components/authorization/auth.js';
-import { Register } from './components/register/reg.js';
-import { WinSettings } from './components/winSettings/winSettings.js';
+import SideBar from './components/sideBar/sideBar.js';
+import Auth from './components/authorization/auth.js';
+import Register from './components/register/reg.js';
+import WinSettings from './components/winSettings/winSettings.js';
 import { isValidLogin, isValidPassword } from './modules/isValid.js';
 import { constructConfig } from './modules/constructConfig.js';
-import { Settings } from './components/settings/settings.js';
-import { MyPage } from './components/myPage/myPage.js';
-import { Request } from './modules/request.js';
+import Settings from './components/settings/settings.js';
+import MyPage from './components/myPage/myPage.js';
 
 // ssh -i 2023-1-4from5-AtRLyZTf.pem ubuntu@95.163.212.32
 // http://sub-me.ru:8080
@@ -22,8 +21,8 @@ const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
     authorURL: '',
-    isAuthorIn: false,
-    isAuthorizedIn: false,
+    isAuthorIn: true,
+    isAuthorizedIn: true,
 };
 const config = {
     general: {
@@ -148,9 +147,9 @@ async function enterRequest() {
         mode: 'cors',
         credentials: 'include',
     })
-    .then((response) => {
-        if (!response.ok) {
-            throw 'Error: response is empty';
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Error: response is empty');
         }
         return response.json();
     })
@@ -285,7 +284,6 @@ function registration() {
     const passwordRepeatInput = document.getElementById('reg-repeat-password');
     const errorOutput = document.getElementById('reg-error');
 
-
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const login = loginInput.value;
@@ -323,7 +321,7 @@ function registration() {
             })
             .then((response) => {
                 if (response.ok) {
-                    fetch(WEB_URL + '/api/user/profile', {
+                    fetch(`${WEB_URL}/api/user/profile`, {
                         method: 'GET',
                         mode: 'cors',
                         credentials: 'include',
@@ -349,7 +347,7 @@ function registration() {
 }
 
 function logout() {
-    fetch(WEB_URL + '/api/auth/logout', {
+    fetch(`${WEB_URL}/api/auth/logout`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
