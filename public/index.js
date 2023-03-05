@@ -370,10 +370,7 @@ function clickMyPage(parent) {
         });
 }
 
-
-
 async function enter() {
-    // этот запрос можно отключить, если хотим страничку входа
     await enterRequest();
 }
 
