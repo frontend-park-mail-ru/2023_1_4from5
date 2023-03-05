@@ -19,8 +19,8 @@ rootElement.appendChild(contentElement);
 const userIn = {
     loginIn: 'Cockpit1',
     usernameIn: 'Cockpit1!',
-    isAuthorIn: true,
-    isAuthorizedIn: true,
+    isAuthorIn: false,
+    isAuthorizedIn: false,
 };
 const config = {
     general: {
