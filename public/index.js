@@ -8,7 +8,6 @@ import WinSettings from './components/winSettings/winSettings.js';
 import Request from "./modules/request.js";
 
 import { constructConfig } from './modules/constructConfig.js';
-import { isValidLogin, isValidPassword } from './modules/isValid.js';
 
 import { setConfig } from "./consts/constants.js";
 
