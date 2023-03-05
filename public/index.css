@@ -33,3 +33,7 @@ h3 {
 .close:hover {
     cursor: pointer;
 }
+
+body {
+    margin: auto;
+}
