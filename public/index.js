@@ -24,10 +24,10 @@ rootElement.appendChild(contentElement);
 
 const userIn = {
     loginIn: '',
-    usernameIn: '',
+    usernameIn: 'Ashan',
     authorURL: '',
-    isAuthorIn: false,
-    isAuthorizedIn: false,
+    isAuthorIn: true,
+    isAuthorizedIn: true,
 };
 
 const config =
