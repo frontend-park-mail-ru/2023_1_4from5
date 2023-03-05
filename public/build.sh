@@ -7,3 +7,4 @@ handlebars ./public/components/sideBar/sideBar.handlebars -f ./public/build/side
 handlebars ./public/components/winSettings/winSettings.handlebars -f ./public/build/winSettings.precompiled.js
 handlebars ./public/components/settings/settings.handlebars -f ./public/build/settings.precompiled.js
 handlebars ./public/components/myPage/myPage.handlebars -f ./public/build/myPage.precompiled.js
+handlebars ./public/components/startPage/startPage.handlebars -f ./public/build/startPage.precompiled.js

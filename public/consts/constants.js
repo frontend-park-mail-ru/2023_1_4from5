@@ -1,5 +1,5 @@
 export function setConfig ({userIn, contentElement, rootElement, renderRegister, renderAuth,
-                               renderWinSettings, clickMyPage, renderSettings, logout}) {
+                               renderWinSettings, clickMyPage, renderSettings, logout, renderStartPage}) {
     return {
         general: {
             pages: [
@@ -9,9 +9,7 @@ export function setConfig ({userIn, contentElement, rootElement, renderRegister,
                     id: 'sidebar-feed',
                     showDisplay: userIn.isAuthorizedIn,
                     parent: contentElement,
-                    render() {
-                        console.log('лента');
-                    },
+                    render: renderStartPage,
                 },
                 {
                     name: 'Поиск авторов',
@@ -19,9 +17,7 @@ export function setConfig ({userIn, contentElement, rootElement, renderRegister,
                     id: 'sidebar-find',
                     showDisplay: true,
                     parent: contentElement,
-                    render() {
-                        console.log('поиск');
-                    },
+                    render: renderStartPage,
                 },
                 {
                     name: 'Мои подписки',
@@ -30,7 +26,7 @@ export function setConfig ({userIn, contentElement, rootElement, renderRegister,
                     showDisplay: userIn.isAuthorizedIn,
                     parent: contentElement,
                     render() {
-                        console.log('подписки');
+                        console.log('Мои подписки');
                     },
                 },
                 {
@@ -55,9 +51,7 @@ export function setConfig ({userIn, contentElement, rootElement, renderRegister,
                     id: 'sidebar-beAuthor',
                     showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
                     parent: contentElement,
-                    render() {
-                        console.log('стать автором');
-                    },
+                    render: renderStartPage,
                 },
                 {
                     name: userIn.usernameIn,

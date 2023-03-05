@@ -3,6 +3,7 @@ import MyPage from './components/myPage/myPage.js';
 import Register from './components/register/reg.js';
 import Settings from './components/settings/settings.js';
 import SideBar from './components/sideBar/sideBar.js';
+import StartPage from "./components/startPage/startPage.js";
 import WinSettings from './components/winSettings/winSettings.js';
 import Request from "./modules/request.js";
 
@@ -23,15 +24,16 @@ rootElement.appendChild(contentElement);
 
 const userIn = {
     loginIn: '',
-    usernameIn: '',
+    usernameIn: 'Ashan',
     authorURL: '',
     isAuthorIn: false,
     isAuthorizedIn: false,
 };
 
-const config = setConfig({
+const config =
+    setConfig({
     userIn, contentElement, rootElement, renderRegister, renderAuth,
-    renderWinSettings, clickMyPage, renderSettings, logout
+    renderWinSettings, clickMyPage, renderSettings, logout, renderStartPage
 });
 
 async function enterRequest() {
@@ -51,11 +53,13 @@ async function enterRequest() {
                 userIn.authorURL = userHomePage.creator_id;
                 userIn.isAuthorIn = userHomePage.is_creator;
                 renderSideBar(sideBarElement);
+                renderStartPage(contentElement);
         }
     }
     catch (err) {
         console.log(3);
         renderSideBar(sideBarElement);
+        renderStartPage(contentElement);
         console.log(err);
     }
 }
@@ -98,30 +102,35 @@ function authentification() {
         if (!errLogin && !errPassword) {
             const req = new Request();
             req.post(`${WEB_URL}/api/auth/signIn`, {login: login, password_hash: password})
-            .then((response) => {
-                if (response.ok) {
-                    req.get(`${WEB_URL}/api/user/profile`)
-                        // eslint-disable-next-line no-shadow
+                .then((response) => {
+                    if (response.ok) {
+                        req.get(`${WEB_URL}/api/user/profile`)
+                            // eslint-disable-next-line no-shadow
                             .then((response) => response.json())
                             .then((result) => {
                                 if (result.login.length > 0) {
                                     req.get(`${WEB_URL}/api/user/homePage`)
-                                    .then((response) => response.json())
-                                    .then((result) => {
-                                        userIn.usernameIn = result.name;
-                                        userIn.isAuthorIn = result.is_creator;
-                                        userIn.isAuthorizedIn = true;
-                                        userIn.authorURL = result.creator_id; 
-                                        renderSideBar(sideBarElement);
-                                        removeAuth();
-                                    })
+                                        .then((response) => response.json())
+                                        .then((result) => {
+                                            userIn.usernameIn = result.name;
+                                            userIn.isAuthorIn = result.is_creator;
+                                            userIn.isAuthorizedIn = true;
+                                            userIn.authorURL = result.creator_id;
+                                            renderSideBar(sideBarElement);
+                                            removeAuth();
+                                            renderStartPage(contentElement);
+                                        })
                                 }
                             });
-                } else {
-                    errorOutput.innerHTML = '';
-                    errorOutput.innerHTML = 'Неверный логин или пароль';
-                }
-            });
+                    } else {
+                        errorOutput.innerHTML = '';
+                        errorOutput.innerHTML = 'Неверный логин или пароль';
+                    }
+                });
+
+        } else {
+        errorOutput.innerHTML = '';
+        errorOutput.innerHTML = 'Неверный логин или пароль';
         }
     });
 }
@@ -200,6 +209,7 @@ function registration() {
 
                                 renderSideBar(sideBarElement);
                                 removeReg();
+                                renderStartPage(contentElement);
                             })
                         }
                     });
@@ -221,6 +231,7 @@ function logout() {
         userIn.isAuthorIn = false;
         userIn.isAuthorizedIn = false;
         renderSideBar(sideBarElement);
+        renderStartPage(contentElement);
     })
 }
 
@@ -229,6 +240,10 @@ function renderSideBar(parent) {
     constructConfig(config, userIn);
     sideBar.config = config;
     sideBar.render();
+}
+function renderStartPage(parent) {
+    const startPage = new StartPage(parent);
+    startPage.render();
 }
 function renderWinSettings(parent) {
     const win = new WinSettings(parent);
