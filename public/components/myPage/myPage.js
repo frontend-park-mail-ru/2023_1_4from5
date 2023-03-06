@@ -16,10 +16,10 @@ export default class MyPage {
     }
 
     render() {
-        const lastMyPage = document.getElementById('myPageDiv');
-        if (lastMyPage) {
-            lastMyPage.remove();
-        }
+        // const lastMyPage = document.getElementById('myPageDiv');
+        // if (lastMyPage) {
+        //     lastMyPage.remove();
+        // }
 
         const newDiv = document.createElement('div');
         newDiv.id = 'myPageDiv';
