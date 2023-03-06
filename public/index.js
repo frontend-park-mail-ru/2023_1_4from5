@@ -41,22 +41,21 @@ async function enterRequest() {
     const req = new Request();
 
     try {
-    const response = await req.get(`/api/user/profile`);
-    const result = await response.json();
+        const response = await req.get(`/api/user/profile`);
+        const result = await response.json();
         if (result.login) {
             userIn.usernameIn = result.name;
             userIn.isAuthorizedIn = true;
 
             const getPage = await req.get(`/api/user/homePage`);
             const userHomePage = await getPage.json();
-                userIn.authorURL = userHomePage.creator_id;
-                userIn.isAuthorIn = userHomePage.is_creator;
-                renderSideBar(sideBarElement);
-                renderStartPage(contentElement);
+            userIn.authorURL = userHomePage.creator_id;
+            userIn.isAuthorIn = userHomePage.is_creator;
+            renderSideBar(sideBarElement);
+            renderStartPage(contentElement);
         }
     }
     catch (err) {
-        console.log(3);
         renderSideBar(sideBarElement);
         renderStartPage(contentElement);
         console.log(err);
@@ -218,14 +217,14 @@ function renderMyPage(parent, config) {
 function clickMyPage(parent) {
     const req = new Request();
     req.get(`/api/creator/page/${config.user.authorURL}`)
-        .then((response) => response.json())
-        .then((config) => {
-            renderMyPage(parent, config);
-        })
-        .catch((err) => {
-            console.log(err);
-            renderMyPage(parent, config);
-        });
+    .then((response) => response.json())
+    .then((config) => {
+        renderMyPage(parent, config);
+    })
+    .catch((err) => {
+        console.log(err);
+        renderMyPage(parent, config);
+    });
 }
 
 /**
@@ -234,8 +233,8 @@ function clickMyPage(parent) {
  *
  * @returns {}
  */
-async function enter() {
-    await enterRequest();
+function enter() {
+    enterRequest();
 }
 
 enter();
