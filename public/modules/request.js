@@ -1,7 +1,7 @@
 // это все не сделано
 const WEB_URL = 'http://sub-me.ru:8000';
 
-export default class Request {
+export class Request {
     #REQUEST_REQUEST_METHODS = {
         GET: 'GET',
         POST: 'POST',

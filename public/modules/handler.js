@@ -6,7 +6,7 @@
  *
  * @returns {}
  */
-export default function clickHandler(event, configPart, config) {
+export function clickHandler(event, configPart, config) {
     if (event.target instanceof HTMLAnchorElement) {
         event.preventDefault();
         const targetId = event.target.id;

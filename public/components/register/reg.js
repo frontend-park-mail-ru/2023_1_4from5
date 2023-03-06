@@ -1,7 +1,9 @@
 import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
-import Request from "../../modules/request.js";
+import { Request } from "../../modules/request.js";
 
-export default class Register {
+const request = new Request();
+
+export class Register {
     #parent;
     #config;
     constructor(parent) {
@@ -75,19 +77,18 @@ export default class Register {
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Пароли не совпадают';
             } else {
-                const req = new Request();
-                req.post(`/api/auth/signUp`, {
+                request.post(`/api/auth/signUp`, {
                     login,
                     name: username,
                     password_hash: password,
                 })
                     .then((response) => {
                         if (response.ok) {
-                            req.get(`/api/user/profile`)
+                            request.get(`/api/user/profile`)
                                 // eslint-disable-next-line no-shadow
                                 .then((response) => response.json())
                                 .then((result) => {
-                                    callback(result, req);
+                                    callback(result, request);
                                     // if (result.login.length > 0) {
                                     //     req.get(`/api/user/homePage`)
                                     //         .then((response) => response.json())
