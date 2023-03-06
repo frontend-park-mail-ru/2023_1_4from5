@@ -22,3 +22,7 @@ button {
 #auth-error {
     margin-right: 5em;
 }
+
+#closeAuth {
+    width: 2em;
+}
