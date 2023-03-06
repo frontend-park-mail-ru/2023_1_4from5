@@ -1,0 +1,10 @@
+<div id="winSettings">
+    <div id="closeWinSettings" class="close">
+        <img id="close-win-settings" width="25" src="./images/close.png" alt="user_photo">
+    </div>
+    {{#each setting.pages}}
+        {{#if showDisplay}}
+            <a id={{id}} href={{href}}> {{name}} </a>
+        {{/if}}
+    {{/each}}
+</div>

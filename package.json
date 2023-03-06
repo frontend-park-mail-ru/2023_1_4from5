@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0"
+  },
+  "scripts": {
+    "build": "bash ./public/build.sh",
+    "dev": "http-server"
+  }
+}

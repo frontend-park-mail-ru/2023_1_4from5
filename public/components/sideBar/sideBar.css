@@ -1,0 +1,44 @@
+#sideBar {
+    display: flex;
+    background-color: #eee;
+    position: relative;
+    z-index: 1;
+    text-align: end;
+    height: 4em;
+    width: 100%;
+}
+
+#logo {
+    margin-left: 1em;
+}
+
+#sideBar-SubMe {
+    margin-left: 1em;
+}
+
+#sideBar-menu {
+    width: 100%;
+}
+
+#sideBar a {
+    display: inline-block;
+    font-size: 1.3em;
+    margin-left: 3em;
+    margin-top: 0.8em;
+}
+
+#sidebar-modalWindow {
+    margin-right: 1em;
+}
+
+#sidebar-auth {
+    margin-right: 1em;
+}
+
+a { 
+    color: #222;
+}
+
+.btn {
+    border: 2px solid gray;
+}

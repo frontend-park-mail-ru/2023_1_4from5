@@ -1,0 +1,12 @@
+<div id="myPage">
+    <h1>{{creator_info.name}}</h1>
+    <img id="user-photo" width="50" src="./images/user_photo.png" alt="user_photo">
+    <h3>О моем блоге: {{creator_info.description}}</h3>
+    <p>{{creator_info.followers_count}} подписчиков</p>
+    {{#each posts}}
+        <h4 class="post-title">{{title}}</h4>
+        {{#each textWithBreaks}}
+        <p class="post-text">{{text}}</p>
+        {{/each}}
+    {{/each}}
+</div>
