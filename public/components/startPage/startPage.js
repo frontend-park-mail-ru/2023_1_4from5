@@ -1,4 +1,4 @@
-export default class StartPage {
+export class StartPage {
     #parent;
 
     constructor(parent) {

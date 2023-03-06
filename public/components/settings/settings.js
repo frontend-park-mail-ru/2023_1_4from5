@@ -1,4 +1,4 @@
-export default class Settings {
+export class Settings {
     #parent;
 
     #config;

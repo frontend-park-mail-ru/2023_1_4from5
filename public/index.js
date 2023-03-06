@@ -1,15 +1,15 @@
-import Auth from './components/authorization/auth.js';
-import MyPage from './components/myPage/myPage.js';
-import Register from './components/register/reg.js';
-import Settings from './components/settings/settings.js';
-import SideBar from './components/sideBar/sideBar.js';
-import StartPage from "./components/startPage/startPage.js";
-import WinSettings from './components/winSettings/winSettings.js';
-import Request from "./modules/request.js";
-
+import { Auth } from './components/authorization/auth.js';
+import { MyPage } from './components/myPage/myPage.js';
+import { Register } from './components/register/reg.js';
+import { Settings } from './components/settings/settings.js';
+import { SideBar } from './components/sideBar/sideBar.js';
+import { StartPage } from "./components/startPage/startPage.js";
+import { WinSettings } from './components/winSettings/winSettings.js';
+import { Request } from "./modules/request.js";
 import { constructConfig } from './modules/constructConfig.js';
-
 import { setConfig } from "./consts/constants.js";
+
+const request = new Request();
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -38,16 +38,14 @@ const config =
  * @returns {}
  */
 async function enter() {
-    const req = new Request();
-
     try {
-        const response = await req.get(`/api/user/profile`);
+        const response = await request.get(`/api/user/profile`);
         const result = await response.json();
         if (result.login) {
             userIn.usernameIn = result.name;
             userIn.isAuthorizedIn = true;
 
-            const getPage = await req.get(`/api/user/homePage`);
+            const getPage = await request.get(`/api/user/homePage`);
             const userHomePage = await getPage.json();
             userIn.authorURL = userHomePage.creator_id;
             userIn.isAuthorIn = userHomePage.is_creator;
@@ -80,9 +78,9 @@ function renderAuth(parent) {
         auth.removeAuth();
     });
     // eslint-disable-next-line no-use-before-define
-    auth.authentification((result, req) => {
+    auth.authentification((result, request) => {
         if (result.login.length > 0) {
-            req.get(`/api/user/homePage`)
+            request.get(`/api/user/homePage`)
                 .then((response) => response.json())
                 .then((result) => {
                     userIn.usernameIn = result.name;
@@ -111,9 +109,9 @@ function renderRegister(parent) {
         e.preventDefault();
         reg.removeReg();
     });
-    reg.registration((result, req) => {
+    reg.registration((result, request) => {
         if (result.login.length > 0) {
-            req.get(`/api/user/homePage`)
+            request.get(`/api/user/homePage`)
                 .then((response) => response.json())
                 .then((result) => {
                     userIn.usernameIn = result.name;
@@ -135,8 +133,7 @@ function renderRegister(parent) {
  * @returns {}
  */
 function logout() {
-    const req = new Request();
-    req.get(`/api/auth/logout`)
+    request.get(`/api/auth/logout`)
     .then(() => {
         userIn.loginIn = '';
         userIn.usernameIn = '';
@@ -215,8 +212,7 @@ function renderMyPage(parent, config) {
  * @returns {}
  */
 function clickMyPage(parent) {
-    const req = new Request();
-    req.get(`/api/creator/page/${config.user.authorURL}`)
+    request.get(`/api/creator/page/${config.user.authorURL}`)
     .then((response) => response.json())
     .then((config) => {
         config.posts.forEach(post => {
