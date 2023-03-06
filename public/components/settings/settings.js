@@ -16,10 +16,10 @@ export default class Settings {
     }
 
     render() {
-        const lastSettings = document.getElementById('settingsDiv');
-        if (lastSettings) {
-            lastSettings.remove();
-        }
+        // const lastSettings = document.getElementById('settingsDiv');
+        // if (lastSettings) {
+        //     lastSettings.remove();
+        // }
         // лишнее, так как это проверяет handler при нажатии на winSettings, sidebar
 
         const newDiv = document.createElement('div');
