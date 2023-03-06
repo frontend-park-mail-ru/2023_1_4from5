@@ -5,6 +5,11 @@
     z-index: 1;
     text-align: end;
     height: 4em;
+    width: 100%;
+}
+
+#logo {
+    margin-left: 1em;
 }
 
 #sideBar-SubMe {
