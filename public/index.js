@@ -219,6 +219,15 @@ function clickMyPage(parent) {
     req.get(`/api/creator/page/${config.user.authorURL}`)
     .then((response) => response.json())
     .then((config) => {
+        config.posts.forEach(post => {
+            const textArr = post.text.split('\\n');
+            post.textWithBreaks = new Array();
+            textArr.forEach(text => {
+                post.textWithBreaks.push({text: text});
+            })
+        })
+        console.log(config);
+
         renderMyPage(parent, config);
     })
     .catch((err) => {
