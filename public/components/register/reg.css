@@ -23,3 +23,7 @@ button {
 #reg-error {
     text-align: center;
 }
+
+#closeReg {
+    width: 2em;
+}
