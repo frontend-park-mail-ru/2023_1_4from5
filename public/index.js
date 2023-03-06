@@ -32,12 +32,12 @@ const config =
 });
 
 /**
- * First request for entering with cookies
+ * start function
  * @param {}
  *
  * @returns {}
  */
-async function enterRequest() {
+async function enter() {
     const req = new Request();
 
     try {
@@ -233,16 +233,6 @@ function clickMyPage(parent) {
         console.log(err);
         renderMyPage(parent, config);
     });
-}
-
-/**
- * start function
- * @param {}
- *
- * @returns {}
- */
-function enter() {
-    enterRequest();
 }
 
 enter();
