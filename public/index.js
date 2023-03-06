@@ -226,7 +226,6 @@ function clickMyPage(parent) {
                 post.textWithBreaks.push({text: text});
             })
         })
-        console.log(config);
 
         renderMyPage(parent, config);
     })
