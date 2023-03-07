@@ -2,7 +2,6 @@ import { clickHandler } from "../../modules/handler.js";
 
 export class WinSettings {
     #parent;
-
     #config;
 
     constructor(parent) {
@@ -27,7 +26,6 @@ export class WinSettings {
         newDiv.addEventListener('click', (e) => {
             clickHandler(e, this.#config.setting, this.#config);
         });
-
         this.#parent.appendChild(newDiv);
 
         const closeBtn = document.getElementById('closeWinSettings');

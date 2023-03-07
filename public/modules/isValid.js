@@ -16,7 +16,6 @@ export function isValidPassword(inputStr) {
         },
         hasLower: {
             flag: false,
-            // error: 'Пароль должен содержать хотя бы 1 строчную букву',
             error: 'Пароль должен содержать хотя бы 1 букву',
         },
         hasNumber: {
@@ -38,10 +37,6 @@ export function isValidPassword(inputStr) {
         const code = char.charCodeAt(0);
         if (!isNaN(char)) {
             flags.hasNumber.flag = true;
-        // } else if (code > 64 && code < 91) {
-        //     flags.hasUpper.flag = true;
-        // } else if (code > 96 && code < 123) {
-        //     flags.hasLower.flag = true;
         } else if (code > 96 && code < 123 || code > 64 && code < 91) {
                 flags.hasLower.flag = true;
         } else if (((code > 32 && code < 48) || (code > 57 && code < 65))

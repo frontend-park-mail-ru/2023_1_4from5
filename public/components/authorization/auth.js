@@ -65,32 +65,19 @@ export class Auth {
 
             if (!errLogin && !errPassword) {
                 request.post(`/api/auth/signIn`, {login: login, password_hash: password})
-                    .then((response) => {
-                        if (response.ok) {
-                            request.get(`/api/user/profile`)
-                                // eslint-disable-next-line no-shadow
-                                .then((response) => response.json())
-                                .then((result) => {
-                                    callback(result, request);
-                                    // if (result.login.length > 0) {
-                                    //     req.get(`/api/user/homePage`)
-                                    //         .then((response) => response.json())
-                                    //         .then((result) => {
-                                    //             userIn.usernameIn = result.name;
-                                    //             userIn.isAuthorIn = result.is_creator;
-                                    //             userIn.isAuthorizedIn = true;
-                                    //             userIn.authorURL = result.creator_id;
-                                    //             renderSideBar(sideBarElement);
-                                    //             removeAuth();
-                                    //         })
-                                    // }
-                                });
-                        } else {
-                            errorOutput.innerHTML = '';
-                            errorOutput.innerHTML = 'Неверный логин или пароль';
-                        }
-                    });
-
+                .then((response) => {
+                    if (response.ok) {
+                        request.get(`/api/user/profile`)
+                            // eslint-disable-next-line no-shadow
+                        .then((response) => response.json())
+                        .then((result) => {
+                            callback(result, request);
+                        });
+                    } else {
+                        errorOutput.innerHTML = '';
+                        errorOutput.innerHTML = 'Неверный логин или пароль';
+                    }
+                });
             } else {
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Неверный логин или пароль';

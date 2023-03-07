@@ -22,17 +22,14 @@ export class SideBar {
         if (lastSideBar) {
             lastSideBar.remove();
         }
-
         const newDiv = document.createElement('div');
         newDiv.id = 'sidebarDiv';
-
         const template = Handlebars.templates.sideBar; // eslint-disable-line
         newDiv.innerHTML = template(this.#config);
 
         this.#parent.addEventListener('click', (event) => {
             clickHandler(event, this.#config.general, this.#config);
         });
-
         this.#parent.appendChild(newDiv);
     }
 }

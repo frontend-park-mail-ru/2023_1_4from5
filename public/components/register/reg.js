@@ -82,32 +82,19 @@ export class Register {
                     name: username,
                     password_hash: password,
                 })
-                    .then((response) => {
-                        if (response.ok) {
-                            request.get(`/api/user/profile`)
-                                // eslint-disable-next-line no-shadow
-                                .then((response) => response.json())
-                                .then((result) => {
-                                    callback(result, request);
-                                    // if (result.login.length > 0) {
-                                    //     req.get(`/api/user/homePage`)
-                                    //         .then((response) => response.json())
-                                    //         .then((result) => {
-                                    //             userIn.usernameIn = result.name;
-                                    //             userIn.isAuthorIn = result.is_creator;
-                                    //             userIn.isAuthorizedIn = true;
-                                    //             userIn.authorURL = result.creator_id;
-                                    //
-                                    //             renderSideBar(sideBarElement);
-                                    //             removeReg();
-                                    //         })
-                                    // }
-                                });
-                        } else {
-                            errorOutput.innerHTML = '';
-                            errorOutput.innerHTML = 'Такой логин уже существует';
-                        }
-                    });
+                .then((response) => {
+                    if (response.ok) {
+                        request.get(`/api/user/profile`)
+                            // eslint-disable-next-line no-shadow
+                        .then((response) => response.json())
+                        .then((result) => {
+                            callback(result, request);
+                        });
+                    } else {
+                        errorOutput.innerHTML = '';
+                        errorOutput.innerHTML = 'Такой логин уже существует';
+                    }
+                });
             }
         });
     }

@@ -16,12 +16,6 @@ export class Settings {
     }
 
     render() {
-        // const lastSettings = document.getElementById('settingsDiv');
-        // if (lastSettings) {
-        //     lastSettings.remove();
-        // }
-        // лишнее, так как это проверяет handler при нажатии на winSettings, sidebar
-
         const newDiv = document.createElement('div');
         newDiv.id = 'settingsDiv';
         const template = Handlebars.templates.settings; // eslint-disable-line
