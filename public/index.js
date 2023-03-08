@@ -66,7 +66,7 @@ async function enter() {
  *
  * @returns {}
  */
-function renderAuth(parent) {
+ function renderAuth(parent) {
     const auth = new Auth(parent);
     auth.config = config;
     auth.render();
@@ -78,18 +78,17 @@ function renderAuth(parent) {
         auth.removeAuth();
     });
     // eslint-disable-next-line no-use-before-define
-    auth.authentification((result, request) => {
+    auth.authentification(async (result, request) => {
         if (result.login.length > 0) {
-            request.get(`/api/user/homePage`)
-                .then((response) => response.json())
-                .then((result) => {
-                    userIn.usernameIn = result.name;
-                    userIn.isAuthorIn = result.is_creator;
-                    userIn.isAuthorizedIn = true;
-                    userIn.authorURL = result.creator_id;
-                    renderSideBar(sideBarElement);
-                    auth.removeAuth();
-                })}
+            const getPage = await request.get(`/api/user/homePage`);
+            const result = await getPage.json();
+            userIn.usernameIn = result.name;
+            userIn.isAuthorIn = result.is_creator;
+            userIn.isAuthorizedIn = true;
+            userIn.authorURL = result.creator_id;
+            renderSideBar(sideBarElement);
+            auth.removeAuth();
+        }
     });
 }
 
@@ -109,19 +108,16 @@ function renderRegister(parent) {
         e.preventDefault();
         reg.removeReg();
     });
-    reg.registration((result, request) => {
+    reg.registration(async (result, request) => {
         if (result.login.length > 0) {
-            request.get(`/api/user/homePage`)
-                .then((response) => response.json())
-                .then((result) => {
-                    userIn.usernameIn = result.name;
-                    userIn.isAuthorIn = result.is_creator;
-                    userIn.isAuthorizedIn = true;
-                    userIn.authorURL = result.creator_id;
-
-                    renderSideBar(sideBarElement);
-                    reg.removeReg();
-                })
+            const getPage = await request.get(`/api/user/homePage`);
+            const result = await getPage.json();
+            userIn.usernameIn = result.name;
+            userIn.isAuthorIn = result.is_creator;
+            userIn.isAuthorizedIn = true;
+            userIn.authorURL = result.creator_id;
+            renderSideBar(sideBarElement);
+            reg.removeReg();
         }
     });
 }
@@ -132,16 +128,14 @@ function renderRegister(parent) {
  *
  * @returns {}
  */
-function logout() {
-    request.get(`/api/auth/logout`)
-    .then(() => {
-        userIn.loginIn = '';
-        userIn.usernameIn = '';
-        userIn.isAuthorIn = false;
-        userIn.isAuthorizedIn = false;
-        renderSideBar(sideBarElement);
-        renderStartPage(contentElement);
-    })
+async function logout() {
+    await request.get(`/api/auth/logout`);
+    userIn.loginIn = '';
+    userIn.usernameIn = '';
+    userIn.isAuthorIn = false;
+    userIn.isAuthorizedIn = false;
+    renderSideBar(sideBarElement);
+    renderStartPage(contentElement);
 }
 
 /**
@@ -211,24 +205,17 @@ function renderMyPage(parent, config) {
  *
  * @returns {}
  */
-function clickMyPage(parent) {
-    request.get(`/api/creator/page/${config.user.authorURL}`)
-    .then((response) => response.json())
-    .then((config) => {
-        config.posts.forEach(post => {
-            const textArr = post.text.split('\\n');
-            post.textWithBreaks = new Array();
-            textArr.forEach(text => {
-                post.textWithBreaks.push({text: text});
-            })
+async function clickMyPage(parent) {
+    const creatorPage = await request.get(`/api/creator/page/${config.user.authorURL}`)
+    const result = await creatorPage.json();
+    result.posts.forEach(post => {
+        const textArr = post.text.split('\\n');
+        post.textWithBreaks = new Array();
+        textArr.forEach(text => {
+            post.textWithBreaks.push({text: text});
         })
-
-        renderMyPage(parent, config);
     })
-    .catch((err) => {
-        console.log(err);
-        renderMyPage(parent, config);
-    });
+    renderMyPage(parent, result);
 }
 
 enter();

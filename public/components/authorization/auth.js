@@ -56,7 +56,7 @@ export class Auth {
         const passwordInput = document.getElementById('auth-password');
         const errorOutput = document.getElementById('auth-error');
 
-        submitBtn.addEventListener('click', (e) => {
+        submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             const login = loginInput.value;
             const password = passwordInput.value;
@@ -64,20 +64,16 @@ export class Auth {
             const errPassword = isValidPassword(password);
 
             if (!errLogin && !errPassword) {
-                request.post(`/api/auth/signIn`, {login: login, password_hash: password})
-                .then((response) => {
-                    if (response.ok) {
-                        request.get(`/api/user/profile`)
-                            // eslint-disable-next-line no-shadow
-                        .then((response) => response.json())
-                        .then((result) => {
-                            callback(result, request);
-                        });
-                    } else {
-                        errorOutput.innerHTML = '';
-                        errorOutput.innerHTML = 'Неверный логин или пароль';
-                    }
-                });
+                const signIn = await request.post(`/api/auth/signIn`, {login: login, password_hash: password});
+                if (signIn.ok) {
+                    const profile = await request.get(`/api/user/profile`)
+                        // eslint-disable-next-line no-shadow
+                        const result = await profile.json();
+                        callback(result, request);
+                } else {
+                    errorOutput.innerHTML = '';
+                    errorOutput.innerHTML = 'Неверный логин или пароль';
+                }
             } else {
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Неверный логин или пароль';

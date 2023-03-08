@@ -55,7 +55,7 @@ export class Register {
         const passwordRepeatInput = document.getElementById('reg-repeat-password');
         const errorOutput = document.getElementById('reg-error');
 
-        submitBtn.addEventListener('click', (e) => {
+        submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             const login = loginInput.value;
             const username = usernameInput.value;
@@ -77,24 +77,20 @@ export class Register {
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Пароли не совпадают';
             } else {
-                request.post(`/api/auth/signUp`, {
+                const signUp = await request.post(`/api/auth/signUp`, {
                     login,
                     name: username,
                     password_hash: password,
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        request.get(`/api/user/profile`)
-                            // eslint-disable-next-line no-shadow
-                        .then((response) => response.json())
-                        .then((result) => {
-                            callback(result, request);
-                        });
-                    } else {
-                        errorOutput.innerHTML = '';
-                        errorOutput.innerHTML = 'Такой логин уже существует';
-                    }
-                });
+                if (signUp.ok) {
+                    const profile = await request.get(`/api/user/profile`)
+                        // eslint-disable-next-line no-shadow
+                    const result = await profile.json();
+                    callback(result, request);
+                } else {
+                    errorOutput.innerHTML = '';
+                    errorOutput.innerHTML = 'Такой логин уже существует';
+                }
             }
         });
     }
