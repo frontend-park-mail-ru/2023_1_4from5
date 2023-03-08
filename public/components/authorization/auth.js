@@ -1,7 +1,5 @@
 import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
-import { Request }  from "../../modules/request.js";
-
-const request = new Request();
+import { request }  from "../../modules/request.js";
 
 export class Auth {
     #parent;

@@ -42,3 +42,5 @@ export class Request {
         return res;
     }
 }
+
+export const request = new Request();

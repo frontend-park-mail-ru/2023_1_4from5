@@ -5,11 +5,9 @@ import { Settings } from './components/settings/settings.js';
 import { SideBar } from './components/sideBar/sideBar.js';
 import { StartPage } from "./components/startPage/startPage.js";
 import { WinSettings } from './components/winSettings/winSettings.js';
-import { Request } from "./modules/request.js";
 import { constructConfig } from './modules/constructConfig.js';
 import { setConfig } from "./consts/constants.js";
-
-const request = new Request();
+import { request } from "./modules/request.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
