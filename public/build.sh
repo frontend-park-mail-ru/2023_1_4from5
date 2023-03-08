@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir public/build
+# mkdir public/build
 handlebars ./public/components/authorization/auth.handlebars -f ./public/build/auth.precompiled.js
 handlebars ./public/components/register/reg.handlebars -f ./public/build/reg.precompiled.js
 handlebars ./public/components/sideBar/sideBar.handlebars -f ./public/build/sideBar.precompiled.js
