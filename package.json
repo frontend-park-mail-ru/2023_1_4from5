@@ -6,6 +6,7 @@
     "eslint": "^8.35.0"
   },
   "scripts": {
+    "build": "bash ./public/build.sh",
     "dev": "http-server"
   }
 }

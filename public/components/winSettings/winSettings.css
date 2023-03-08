@@ -1,10 +1,27 @@
 #winSettings {
-    top: 30px;
-    left: 10px;
+    right: 0;
+    top: 4em;
+    width: 12em;
     position: fixed;
     display: flex;
     flex-direction: column;
-    background: aqua;
+    background: gainsboro;
     z-index: 20;
 
+}
+
+#winSettings a {
+    margin: 4px;
+    margin-left: 1em;
+    font-size: 1.1em;
+}
+
+#closeWinSettings {
+    width: 3em;
+    text-align: start;
+}
+
+#closeWinSettings img {
+    margin-top: 0.2em;
+    margin-left: 1em;
 }

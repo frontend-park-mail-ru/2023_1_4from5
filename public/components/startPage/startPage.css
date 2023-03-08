@@ -1,0 +1,35 @@
+#startPage {
+    margin-left: 10em;
+    margin-right: 10em;
+    padding-top: 2em;
+}
+
+#startPage h1 {
+    margin-top: 2em;
+    text-align: center;
+    font-size: xxx-large;
+}
+
+#startPage h2 {
+    font-weight: bold;
+    font-size: larger;
+}
+
+#startPage h3 {
+    font-weight: normal;
+}
+
+#startPage hr {
+    opacity: 0;
+}
+
+#start_photo {
+    width: 35em;
+    float: right;
+    margin-left: 3em;
+}
+
+#footer {
+    margin-left: 0;
+    margin-right: 0;
+}

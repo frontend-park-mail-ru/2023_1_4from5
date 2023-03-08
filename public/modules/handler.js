@@ -1,20 +1,16 @@
-export function clickHandler(e, configPart, config) {
-    if (e.target instanceof HTMLAnchorElement) {
-        e.preventDefault();
-        const targetId = e.target.id;
-        let target;
-        // console.log(e.target.id);
-        // console.log(key, config[key], config[key].pages);
-        // config.key.pages
-        // console.log(config.general)
-        configPart.pages.forEach((element) => {
-            // console.log(element.id, targetId, typeof element.id, typeof targetId )
-            if (element.id === targetId) {
-                // console.log(element, config[key]);
-                target = element;
-            }
-        });
-
+/**
+ * function of click handler
+ * @param {MouseEvent} event - event
+ * @param {Object} configPart - some part of configuration object
+ * @param {Object} config - configuration object
+ *
+ * @returns {}
+ */
+export function clickHandler(event, configPart, config) {
+    if (event.target instanceof HTMLAnchorElement) {
+        event.preventDefault();
+        const targetId = event.target.id;
+        let target = configPart.pages.find((element) => element.id === targetId);
         if (config.activePage === target.name) {
             return;
         }
@@ -22,8 +18,8 @@ export function clickHandler(e, configPart, config) {
         if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
             target.parent.innerHTML = '';
         }
+        // eslint-disable-next-line no-param-reassign
         config.activePage = target.name;
-        // console.log(config.activePage);
         target.render(target.parent);
     }
 }

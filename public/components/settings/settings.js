@@ -1,6 +1,7 @@
 export class Settings {
-    #parent
-    #config
+    #parent;
+
+    #config;
 
     constructor(parent) {
         this.#parent = parent;
@@ -15,16 +16,10 @@ export class Settings {
     }
 
     render() {
-        const lastSettings = document.getElementById('settingsDiv');
-        if (lastSettings) {
-            lastSettings.remove();
-        }
-
         const newDiv = document.createElement('div');
         newDiv.id = 'settingsDiv';
         const template = Handlebars.templates.settings; // eslint-disable-line
         newDiv.innerHTML = template(this.#config.user);
-    
         this.#parent.appendChild(newDiv);
     }
 }
