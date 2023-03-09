@@ -1,5 +1,6 @@
 import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
 import { request }  from "../../modules/request.js";
+import { color } from "../../consts/styles.js";
 
 export class Auth {
     #parent;
@@ -54,8 +55,13 @@ export class Auth {
         const passwordInput = document.getElementById('auth-password');
         const errorOutput = document.getElementById('auth-error');
 
+        loginInput.style.backgroundColor = '#f0eba3';
+        passwordInput.style.backgroundColor = '#f0eba3';
+
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            loginInput.style.backgroundColor = '#f0eba3';
+            passwordInput.style.backgroundColor = '#f0eba3';
             const login = loginInput.value;
             const password = passwordInput.value;
             const errLogin = isValidLogin(login);
@@ -66,13 +72,19 @@ export class Auth {
                 if (signIn.ok) {
                     const profile = await request.get(`/api/user/profile`)
                         // eslint-disable-next-line no-shadow
-                        const result = await profile.json();
-                        callback(result, request);
+                    const result = await profile.json();
+                    callback(result, request);
                 } else {
                     errorOutput.innerHTML = '';
                     errorOutput.innerHTML = 'Неверный логин или пароль';
                 }
             } else {
+                if (errLogin) {
+                    loginInput.style.backgroundColor = color.error;
+                }
+                if (errPassword) {
+                    passwordInput.style.backgroundColor = color.error;
+                }
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Неверный логин или пароль';
             }
