@@ -8,7 +8,7 @@ export class StartPage {
     render() {
         const newDiv = document.createElement('div');
         newDiv.id = 'startPageDiv';
-        const template = Handlebars.templates.startPage; // eslint-disable-line
+        const template = Handlebars.templates.startPage;
         newDiv.innerHTML = template();
         this.#parent.appendChild(newDiv);
     }

@@ -19,7 +19,7 @@ export class WinSettings {
     render() {
         const newDiv = document.createElement('div');
         newDiv.id = 'winSettingsDiv';
-        const template = Handlebars.templates.winSettings; // eslint-disable-line
+        const template = Handlebars.templates.winSettings;
         newDiv.innerHTML = template(this.#config);
         console.log(this.#config.activePage);
 

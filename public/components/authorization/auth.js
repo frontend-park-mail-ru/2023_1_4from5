@@ -24,7 +24,7 @@ export class Auth {
         const newDiv = document.createElement('div');
         newDiv.id = 'authDiv';
 
-        const template = Handlebars.templates.auth; // eslint-disable-line
+        const template = Handlebars.templates.auth;
         newDiv.innerHTML = template();
 
         this.#parent.appendChild(newDiv);
@@ -71,7 +71,6 @@ export class Auth {
                 const signIn = await request.post(`/api/auth/signIn`, {login: login, password_hash: password});
                 if (signIn.ok) {
                     const profile = await request.get(`/api/user/profile`)
-                        // eslint-disable-next-line no-shadow
                     const result = await profile.json();
                     callback(result, request);
                 } else {

@@ -74,7 +74,6 @@ export function isValidPassword(inputStr) {
     } else {
         return flags.hasMinLen.error;
     }
-    // eslint-disable-next-line no-restricted-syntax
     for (const char of inputStr) {
         const code = char.charCodeAt(0);
         if (!isNaN(char)) {
@@ -85,7 +84,6 @@ export function isValidPassword(inputStr) {
             flags.hasSpecial.flag = true;
         }
     }
-    // eslint-disable-next-line no-restricted-syntax
     for (const flagsKey in flags) {
         if (!flags[flagsKey].flag) {
             return flags[flagsKey].error;

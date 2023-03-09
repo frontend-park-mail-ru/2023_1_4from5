@@ -18,7 +18,6 @@ export function clickHandler(event, configPart, config) {
         if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
             target.parent.innerHTML = '';
         }
-        // eslint-disable-next-line no-param-reassign
         config.activePage = target.name;
         target.render(target.parent);
     }

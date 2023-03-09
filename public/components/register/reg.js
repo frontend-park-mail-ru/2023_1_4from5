@@ -21,7 +21,7 @@ export class Register {
         const newDiv = document.createElement('div');
         newDiv.id = 'regDiv';
 
-        const template = Handlebars.templates.reg; // eslint-disable-line
+        const template = Handlebars.templates.reg;
         newDiv.innerHTML = template();
 
         this.#parent.appendChild(newDiv);
@@ -98,7 +98,6 @@ export class Register {
                 })
                 if (signUp.ok) {
                     const profile = await request.get(`/api/user/profile`)
-                        // eslint-disable-next-line no-shadow
                     const result = await profile.json();
                     callback(result, request);
                 } else {

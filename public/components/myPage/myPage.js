@@ -18,7 +18,7 @@ export class MyPage {
     render() {
         const newDiv = document.createElement('div');
         newDiv.id = 'myPageDiv';
-        const template = Handlebars.templates.myPage; // eslint-disable-line
+        const template = Handlebars.templates.myPage;
         newDiv.innerHTML = template(this.#config);
         this.#parent.appendChild(newDiv);
     }
