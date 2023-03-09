@@ -1,4 +1,4 @@
-import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
+import { isValidLogin, isValidPassword } from "../../modules/isValid.js";
 import { request }  from "../../modules/request.js";
 import { color } from "../../consts/styles.js";
 

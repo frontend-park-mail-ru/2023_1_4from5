@@ -1,9 +1,9 @@
-const REQUIREMENTS = {
-    LENGTH : {
+const LENGTH = {
         MIN : 7,
         MAX : 20,
-    },
-    ASCII : {
+    }
+
+const ASCII = {
         UPPER_A : 65,
         UPPER_Z : 90,
         LOWER_A : 97,
@@ -17,7 +17,6 @@ const REQUIREMENTS = {
         FIGURED_BRACKET : 123,
         TILDE : 126,   
     }
-}
 
 /**
  * check for letter
@@ -26,7 +25,7 @@ const REQUIREMENTS = {
  * @returns {bool} - response is sign is letter
  */
 function isLetter(code) {
-    return (code >= REQUIREMENTS.ASCII.LOWER_A && code <= REQUIREMENTS.ASCII.LOWER_Z || code >= REQUIREMENTS.ASCII.UPPER_A && code <= REQUIREMENTS.ASCII.UPPER_Z);
+    return (code >= ASCII.LOWER_A && code <= ASCII.LOWER_Z || code >= ASCII.UPPER_A && code <= ASCII.UPPER_Z);
 }
 
 /**
@@ -36,8 +35,9 @@ function isLetter(code) {
  * @returns {bool} - response is sign is special sign
  */
 function isSpecialSign(code) {
-    return (((code >= 32 && code <= 48) || (code >= 57 && code <= 65))
-            || ((code >= 90 && code <= 97) || (code >= 122 && code <= 127)));
+    return (((code >= ASCII.EXCLAMATION && code <= ASCII.SLASH) 
+            || (code >= ASCII.COLON && code <= ASCII.AT))
+            || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE) || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
 }
 
 /**
@@ -69,7 +69,7 @@ export function isValidPassword(inputStr) {
             error: 'Пароль должен содержать хотя бы 1 спец. символ',
         },
     };
-    if (inputStr.length >= REQUIREMENTS.LENGTH.MIN) {
+    if (inputStr.length >= LENGTH.MIN) {
         flags.hasMinLen.flag = true;
     } else {
         return flags.hasMinLen.error;
@@ -108,10 +108,10 @@ export function isValidLogin(inputStr) {
             error: 'Логин не должен содержать более 20 символов',
         },
     };
-    if (inputStr.length < REQUIREMENTS.LENGTH.MIN) {
+    if (inputStr.length < LENGTH.MIN) {
         return flags.hasMinLen.error;
     }
-    if (inputStr.length > REQUIREMENTS.LENGTH.MAX) {
+    if (inputStr.length > LENGTH.MAX) {
         return flags.hasMaxLen.error;
     }
 }
