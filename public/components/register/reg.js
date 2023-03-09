@@ -1,5 +1,6 @@
 import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
 import { request } from "../../modules/request.js";
+import { color } from "../../consts/styles.js";
 
 export class Register {
     #parent;
@@ -53,8 +54,18 @@ export class Register {
         const passwordRepeatInput = document.getElementById('reg-repeat-password');
         const errorOutput = document.getElementById('reg-error');
 
+        loginInput.style.backgroundColor = color.field;
+        usernameInput.style.backgroundColor = color.field;
+        passwordInput.style.backgroundColor = color.field;
+        passwordRepeatInput.style.backgroundColor = color.field;
+
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            loginInput.style.backgroundColor = color.field;
+            usernameInput.style.backgroundColor = color.field;
+            passwordInput.style.backgroundColor = color.field;
+            passwordRepeatInput.style.backgroundColor = color.field;
+
             const login = loginInput.value;
             const username = usernameInput.value;
             const password = passwordInput.value;
@@ -63,15 +74,20 @@ export class Register {
             const errPassword = isValidPassword(password);
 
             if (username.length === 0) {
+                usernameInput.style.backgroundColor = color.error;
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Введите ваше имя';
             } else if (errLogin) {
+                loginInput.style.backgroundColor = color.error;
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = errLogin;
             } else if (errPassword) {
+                passwordInput.style.backgroundColor = color.error;
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = errPassword;
             } else if (password !== repeatPassword) {
+                passwordInput.style.backgroundColor = color.error;
+                passwordRepeatInput.style.backgroundColor = color.error;
                 errorOutput.innerHTML = '';
                 errorOutput.innerHTML = 'Пароли не совпадают';
             } else {
