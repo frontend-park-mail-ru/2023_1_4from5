@@ -1,12 +1,17 @@
 {
   "dependencies": {
-    "handlebars": "^4.7.7"
+    "eslint-config-airbnb": "^19.0.4",
+    "handlebars": "^4.7.7",
+    "http-server": "^14.1.1"
   },
   "devDependencies": {
-    "eslint": "^8.35.0"
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
   },
   "scripts": {
     "build": "bash ./public/build.sh",
-    "dev": "http-server"
+    "dev": "http-server",
+    "lint": "eslint public"
   }
 }
