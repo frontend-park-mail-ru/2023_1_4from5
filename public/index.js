@@ -75,8 +75,8 @@ function renderAuth(parent) {
   auth.config = config;
   auth.render();
 
-  const closeBtn = document.getElementById('closeAuth');
-  closeBtn.addEventListener('click', (e) => {
+  const background = document.getElementById('backAuth');
+  background.addEventListener('click', (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-use-before-define
     auth.removeAuth();
@@ -107,8 +107,8 @@ function renderRegister(parent) {
   reg.config = config;
   reg.render();
 
-  const closeBtn = document.getElementById('closeReg');
-  closeBtn.addEventListener('click', (e) => {
+  const background = document.getElementById('backReg');
+  background.addEventListener('click', (e) => {
     e.preventDefault();
     reg.removeReg();
   });

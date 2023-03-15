@@ -55,13 +55,13 @@ export class Auth {
     const passwordInput = document.getElementById('auth-password');
     const errorOutput = document.getElementById('auth-error');
 
-    loginInput.style.backgroundColor = '#f0eba3';
-    passwordInput.style.backgroundColor = '#f0eba3';
+    loginInput.style.backgroundColor = color.field;
+    passwordInput.style.backgroundColor = color.field;
 
     submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      loginInput.style.backgroundColor = '#f0eba3';
-      passwordInput.style.backgroundColor = '#f0eba3';
+      loginInput.style.backgroundColor = color.field;
+      passwordInput.style.backgroundColor = color.field;
       const login = loginInput.value;
       const password = passwordInput.value;
       const errLogin = isValidLogin(login);
