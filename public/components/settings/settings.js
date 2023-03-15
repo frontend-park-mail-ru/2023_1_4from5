@@ -1,25 +1,25 @@
 export class Settings {
-    #parent;
+  #parent;
 
-    #config;
+  #config;
 
-    constructor(parent) {
-        this.#parent = parent;
-    }
+  constructor(parent) {
+    this.#parent = parent;
+  }
 
-    get config() {
-        return this.#config;
-    }
+  get config() {
+    return this.#config;
+  }
 
-    set config(config) {
-        this.#config = config;
-    }
+  set config(config) {
+    this.#config = config;
+  }
 
-    render() {
-        const newDiv = document.createElement('div');
-        newDiv.id = 'settingsDiv';
-        const template = Handlebars.templates.settings; // eslint-disable-line
-        newDiv.innerHTML = template(this.#config.user);
-        this.#parent.appendChild(newDiv);
-    }
+  render() {
+    const newDiv = document.createElement('div');
+    newDiv.id = 'settingsDiv';
+    const template = Handlebars.templates.settings;
+    newDiv.innerHTML = template(this.#config.user);
+    this.#parent.appendChild(newDiv);
+  }
 }
