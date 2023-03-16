@@ -1,4 +1,4 @@
 export const color = {
-  field: '#f0eba3',
+  field: '#eee',
   error: '#f0c2a3',
 };
