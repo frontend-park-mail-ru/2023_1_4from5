@@ -1,4 +1,4 @@
-const WEB_URL = 'http://sub-me.ru:8000';
+const WEB_URL = 'http://sub-me.ru';
 
 export class Request {
   #REQUEST_REQUEST_METHODS = {
