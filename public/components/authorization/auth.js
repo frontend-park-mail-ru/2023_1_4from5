@@ -1,6 +1,11 @@
-import { isValidLogin, isValidPassword } from '../../modules/isValid.js';
-import { request } from '../../modules/request.js';
 import { color } from '../../consts/styles.js';
+import { Actions } from '../../actions/auth.js';
+import { request } from '../../modules/request.js';
+import { renderSideBar } from '../../index.js';
+import { userStore } from '../../store/userStore.js';
+
+const rootElement = document.getElementById('root');
+const sideBarElement = document.getElementById('sideBar');
 
 export class Auth {
   #parent;
@@ -27,6 +32,11 @@ export class Auth {
     newDiv.innerHTML = template();
 
     this.#parent.appendChild(newDiv);
+    const background = document.getElementById('backAuth');
+    background.addEventListener('click', (e) => {
+      e.preventDefault();
+      Actions.removeAuth();
+    });
   }
 
   /**
@@ -49,7 +59,7 @@ export class Auth {
    *
    * @returns {}
    */
-  authentification(callback) {
+  authentification() {
     const submitBtn = document.getElementById('auth-btn');
     const loginInput = document.getElementById('auth-login');
     const passwordInput = document.getElementById('auth-password');
@@ -60,36 +70,43 @@ export class Auth {
 
     submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      loginInput.style.backgroundColor = color.field;
-      passwordInput.style.backgroundColor = color.field;
-      const login = loginInput.value;
-      const password = passwordInput.value;
-      const errLogin = isValidLogin(login);
-      const errPassword = isValidPassword(password);
-
-      if (!errLogin && !errPassword) {
-        const signIn = await request.post('/api/auth/signIn', {
-          login,
-          password_hash: password,
-        });
-        if (signIn.ok) {
-          const profile = await request.get('/api/user/profile');
-          const result = await profile.json();
-          callback(result, request);
-        } else {
-          errorOutput.innerHTML = '';
-          errorOutput.innerHTML = 'Неверный логин или пароль';
-        }
-      } else {
-        if (errLogin) {
-          loginInput.style.backgroundColor = color.error;
-        }
-        if (errPassword) {
-          passwordInput.style.backgroundColor = color.error;
-        }
-        errorOutput.innerHTML = '';
-        errorOutput.innerHTML = 'Неверный логин или пароль';
-      }
+      Actions.authorization({
+        loginInput,
+        passwordInput,
+        errorOutput,
+      });
     });
   }
+
+  async authorization(input) {
+    input.loginInput.style.backgroundColor = color.field;
+    input.passwordInput.style.backgroundColor = color.field;
+
+    if (!input.errLogin && !input.errPassword) {
+      const signIn = await request.post('/api/auth/signIn', {
+        login: input.login,
+        password_hash: input.password,
+      });
+      if (signIn.ok) {
+        // TODO убрал запрос на профиль перед запросом homePage
+        Actions.getUser();
+        renderSideBar(sideBarElement);
+        Actions.removeAuth();
+      } else {
+        input.errorOutput.innerHTML = '';
+        input.errorOutput.innerHTML = 'Неверный логин или пароль';
+      }
+    } else {
+      if (input.errLogin) {
+        input.loginInput.style.backgroundColor = color.error;
+      }
+      if (input.errPassword) {
+        input.passwordInput.style.backgroundColor = color.error;
+      }
+      input.errorOutput.innerHTML = '';
+      input.errorOutput.innerHTML = 'Неверный логин или пароль';
+    }
+  }
 }
+
+export const auth = new Auth(rootElement);

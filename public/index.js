@@ -1,4 +1,4 @@
-import { Auth } from './components/authorization/auth.js';
+import { auth } from './components/authorization/auth.js';
 import { MyPage } from './components/myPage/myPage.js';
 import { Register } from './components/register/reg.js';
 import { Settings } from './components/settings/settings.js';
@@ -8,6 +8,9 @@ import { WinSettings } from './components/winSettings/winSettings.js';
 import { constructConfig } from './modules/constructConfig.js';
 import { setConfig } from './consts/constants.js';
 import { request } from './modules/request.js';
+import { Actions } from './actions/auth.js';
+import { authStore } from './store/authStore.js';
+import { userStore } from './store/userStore.js';
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
@@ -15,13 +18,7 @@ const contentElement = document.createElement('main');
 rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-const userIn = {
-  loginIn: '',
-  usernameIn: '',
-  authorURL: '',
-  isAuthorIn: false,
-  isAuthorizedIn: false,
-};
+const userIn = userStore.getState();
 
 const config = setConfig({
   userIn,
@@ -44,7 +41,7 @@ const config = setConfig({
  */
 async function enter() {
   try {
-    const response = await request.get('/api/user/profile');
+    // const response = await request.get('/api/user/profile');
     const result = await response.json();
     if (result.login) {
       userIn.usernameIn = result.name;
@@ -70,28 +67,10 @@ async function enter() {
  *
  * @returns {}
  */
-function renderAuth(parent) {
-  const auth = new Auth(parent);
+export function renderAuth() {
   auth.config = config;
   auth.render();
-
-  const background = document.getElementById('backAuth');
-  background.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth.removeAuth();
-  });
-  auth.authentification(async (result, request) => {
-    if (result.login.length > 0) {
-      const getPage = await request.get('/api/user/homePage');
-      const result = await getPage.json();
-      userIn.usernameIn = result.name;
-      userIn.isAuthorIn = result.is_creator;
-      userIn.isAuthorizedIn = true;
-      userIn.authorURL = result.creator_id;
-      renderSideBar(sideBarElement);
-      auth.removeAuth();
-    }
-  });
+  auth.authentification();
 }
 
 /**
@@ -146,8 +125,10 @@ async function logout() {
  *
  * @returns {}
  */
-function renderSideBar(parent) {
-  const sideBar = new SideBar(parent);
+export function renderSideBar() {
+  const sideBar = new SideBar(sideBarElement);
+  const a = userStore.getState();
+  console.log(a);
   constructConfig(config, userIn);
   sideBar.config = config;
   sideBar.render();

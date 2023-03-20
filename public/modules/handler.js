@@ -1,3 +1,4 @@
+import { Actions } from '../actions/auth.js';
 /**
  * function of click handler
  * @param {MouseEvent} event - event
@@ -18,6 +19,9 @@ export function clickHandler(event, configPart, config) {
       target.parent.innerHTML = '';
     }
     config.activePage = target.name;
-    target.render(target.parent);
+    // target.render(target.parent);
+    if (target.name === 'Войти') {
+      Actions.renderAuth();
+    }
   }
 }
