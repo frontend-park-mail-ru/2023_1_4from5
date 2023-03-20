@@ -14,7 +14,6 @@ export function clickHandler(event, configPart, config) {
     if (config.activePage === target.name) {
       return;
     }
-
     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
       target.parent.innerHTML = '';
     }

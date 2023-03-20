@@ -78,10 +78,8 @@ function renderAuth(parent) {
   const background = document.getElementById('backAuth');
   background.addEventListener('click', (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-use-before-define
     auth.removeAuth();
   });
-  // eslint-disable-next-line no-use-before-define
   auth.authentification(async (result, request) => {
     if (result.login.length > 0) {
       const getPage = await request.get('/api/user/homePage');
