@@ -1,5 +1,9 @@
 import { clickHandler } from '../../modules/handler.js';
 
+const rootElement = document.getElementById('root');
+const sideBarElement = document.createElement('sideBar');
+rootElement.appendChild(sideBarElement);
+
 export class SideBar {
   #parent;
 
@@ -33,3 +37,5 @@ export class SideBar {
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const sideBar = new SideBar(sideBarElement);

@@ -1,31 +1,27 @@
-import { auth } from './components/authorization/auth.js';
 import { MyPage } from './components/myPage/myPage.js';
 import { Register } from './components/register/reg.js';
 import { Settings } from './components/settings/settings.js';
-import { SideBar } from './components/sideBar/sideBar.js';
+import { sideBar } from './components/sideBar/sideBar.js';
 import { StartPage } from './components/startPage/startPage.js';
 import { WinSettings } from './components/winSettings/winSettings.js';
 import { constructConfig } from './modules/constructConfig.js';
 import { setConfig } from './consts/constants.js';
 import { request } from './modules/request.js';
-import { Actions } from './actions/auth.js';
-import { authStore } from './store/authStore.js';
+import { authStore } from './store/authStore.js'; // не удалять!!! он создает authStore!!! (потом починим)
 import { userStore } from './store/userStore.js';
 
 const rootElement = document.getElementById('root');
-const sideBarElement = document.createElement('sideBar');
+const sideBarElement = document.getElementById('sideBar');
 const contentElement = document.createElement('main');
-rootElement.appendChild(sideBarElement);
 rootElement.appendChild(contentElement);
 
-const userIn = userStore.getState();
+const userIn = userStore.getUserState();
 
 const config = setConfig({
   userIn,
   contentElement,
   rootElement,
   renderRegister,
-  renderAuth,
   renderWinSettings,
   clickMyPage,
   renderSettings,
@@ -41,16 +37,17 @@ const config = setConfig({
  */
 async function enter() {
   try {
+    // TODO убрал запрос на профиль перед запросом homePage
     // const response = await request.get('/api/user/profile');
     const result = await response.json();
     if (result.login) {
       userIn.usernameIn = result.name;
       userIn.isAuthorizedIn = true;
-
       const getPage = await request.get('/api/user/homePage');
       const userHomePage = await getPage.json();
       userIn.authorURL = userHomePage.creator_id;
       userIn.isAuthorIn = userHomePage.is_creator;
+
       renderSideBar(sideBarElement);
       renderStartPage(contentElement);
     }
@@ -59,18 +56,6 @@ async function enter() {
     renderStartPage(contentElement);
     console.log(err);
   }
-}
-
-/**
- * rendering authorization
- * @param {HTMLElement} parent - parent of authorization window
- *
- * @returns {}
- */
-export function renderAuth() {
-  auth.config = config;
-  auth.render();
-  auth.authentification();
 }
 
 /**
@@ -126,9 +111,6 @@ async function logout() {
  * @returns {}
  */
 export function renderSideBar() {
-  const sideBar = new SideBar(sideBarElement);
-  const a = userStore.getState();
-  console.log(a);
   constructConfig(config, userIn);
   sideBar.config = config;
   sideBar.render();

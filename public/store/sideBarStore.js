@@ -1,22 +1,13 @@
-/**
- * sets configuration for source-object
- * @param {Object} - object of settings
- *
- * @returns {Object} - configuration object
- */
-export function setConfig({
-  userIn,
-  contentElement,
-  rootElement,
-  renderRegister,
-  renderWinSettings,
-  clickMyPage,
-  renderSettings,
-  logout,
-  renderStartPage,
-}) {
-  return {
-    general: {
+import { dispatcher } from '../dispatcher/dispatcher';
+import { ActionTypes } from '../actionTypes/auth';
+import { request } from '../modules/request';
+import { renderSideBar } from '../index';
+
+export class SideBarStore {
+  #config;
+
+  constructor() {
+    this.#config = {
       pages: [
         {
           name: 'Лента',
@@ -79,52 +70,35 @@ export function setConfig({
           render: renderWinSettings,
         },
       ],
-    },
-    setting: {
-      pages: [
-        {
-          name: 'Моя страница',
-          href: '/my_profile',
-          id: 'winSetting-profile',
-          showDisplay: userIn.isAuthorIn,
-          parent: contentElement,
-          render: clickMyPage,
-        },
-        {
-          name: 'Мои доходы',
-          href: '/finance',
-          id: 'winSetting-finance',
-          showDisplay: userIn.isAuthorIn,
-          parent: contentElement,
-          render() {
-            console.log('Мои доходы');
-          },
-        },
-        {
-          name: 'Настройки',
-          href: '/settings',
-          id: 'winSetting-settings',
-          showDisplay: true,
-          parent: contentElement,
-          render: renderSettings,
-        },
-        {
-          name: 'Выйти',
-          href: '/startPage',
-          id: 'winSetting-startPage',
-          showDisplay: true,
-          parent: contentElement,
-          render: logout,
-        },
-      ],
-    },
-    user: {
-      login: '',
-      username: '',
-      authorURL: '',
-      isAuthor: false,
-      isAuthorized: false,
-    },
-    activePage: '',
-  };
+    };
+    dispatcher.register(this.reduce.bind(this));
+    console.log('register userStore');
+  }
+
+  getUserState() {
+    return this.#user;
+  }
+
+  setState(result) {
+    this.#user.usernameIn = result.name;
+    this.#user.isAuthorIn = result.is_creator;
+    this.#user.isAuthorizedIn = true;
+    this.#user.authorURL = result.creator_id;
+  }
+
+  async reduce(action) {
+    switch (action.type) {
+      case ActionTypes.GET_USER:
+        const getPage = await request.get('/api/user/homePage');
+        const result = await getPage.json();
+        this.setState(result);
+        renderSideBar(sideBarElement);
+        console.log('GET_USER');
+        break;
+      default:
+        break;
+    }
+  }
 }
+
+export const sideBarStore = new SideBarStore();

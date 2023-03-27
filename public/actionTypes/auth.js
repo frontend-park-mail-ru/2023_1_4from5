@@ -5,4 +5,6 @@ export const ActionTypes = {
   REMOVE_AUTH: 'REMOVE_AUTH',
   // user
   GET_USER: 'GET_USER',
+  // sideBar
+  RENDER_SIDEBAR: 'RENDER_SIDEBAR',
 };

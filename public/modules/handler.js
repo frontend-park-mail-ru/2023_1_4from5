@@ -1,4 +1,5 @@
 import { Actions } from '../actions/auth.js';
+
 /**
  * function of click handler
  * @param {MouseEvent} event - event

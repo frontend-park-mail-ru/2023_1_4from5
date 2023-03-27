@@ -23,6 +23,8 @@
     "class-methods-use-this": 0,
     "guard-for-in": 0,
     "no-continue": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "no-case-declarations": 0,
+    "no-trailing-spaces": 0
   }
 }

@@ -1,11 +1,8 @@
 import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/auth.js';
 import { request } from '../../modules/request.js';
-import { renderSideBar } from '../../index.js';
-import { userStore } from '../../store/userStore.js';
 
 const rootElement = document.getElementById('root');
-const sideBarElement = document.getElementById('sideBar');
 
 export class Auth {
   #parent;
@@ -50,7 +47,6 @@ export class Auth {
     if (lastAuth) {
       lastAuth.remove();
     }
-    this.#config.activePage = '';
   }
 
   /**
@@ -83,14 +79,13 @@ export class Auth {
     input.passwordInput.style.backgroundColor = color.field;
 
     if (!input.errLogin && !input.errPassword) {
+      // TODO запрос в store
       const signIn = await request.post('/api/auth/signIn', {
         login: input.login,
         password_hash: input.password,
       });
       if (signIn.ok) {
-        // TODO убрал запрос на профиль перед запросом homePage
         Actions.getUser();
-        renderSideBar(sideBarElement);
         Actions.removeAuth();
       } else {
         input.errorOutput.innerHTML = '';

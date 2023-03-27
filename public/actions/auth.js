@@ -27,4 +27,10 @@ export const Actions = {
       type: ActionTypes.GET_USER,
     });
   },
+  // sideBar
+  renderSideBar() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_SIDEBAR,
+    });
+  },
 };

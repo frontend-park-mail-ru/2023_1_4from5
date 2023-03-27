@@ -1,27 +1,42 @@
 import { ActionTypes } from '../actionTypes/auth.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { renderAuth } from '../index.js';
 import { auth } from '../components/authorization/auth.js';
 import { isValidLogin, isValidPassword } from '../modules/isValid.js';
 
 export class AuthStore {
+  #config;
+
   constructor() {
+    this.#config = {
+      activePage: false,
+    };
+    dispatcher.register(this.reduce.bind(this));
     console.log('register auth');
-    dispatcher.register(this.reduce);
+  }
+
+  setState(config) {
+    this.#config = config;
   }
 
   getInitialState() {
-    return {};
+    return this.#config;
+  }
+
+  renderAuth() {
+    this.#config.activePage = true;
+    auth.config = this.#config;
+    auth.render();
+    auth.authentification();
   }
 
   reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_AUTH:
+        this.renderAuth();
         console.log('RENDER_AUTH');
-        renderAuth();
         break;
+
       case ActionTypes.AUTHORIZATION:
-        console.log('AUTHORIZATION STORE');
         const login = action.input.loginInput.value;
         const password = action.input.passwordInput.value;
         const errLogin = isValidLogin(login);
@@ -34,11 +49,15 @@ export class AuthStore {
           errLogin,
           errPassword,
         });
+        console.log('AUTHORIZATION');
         break;
+
       case ActionTypes.REMOVE_AUTH:
-        console.log('REMOVE_AUTH STORE');
+        this.#config.activePage = false;
         auth.removeAuth();
+        console.log('REMOVE_AUTH');
         break;
+
       default:
         break;
     }

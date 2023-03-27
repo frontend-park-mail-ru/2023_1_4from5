@@ -1,6 +1,9 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/auth.js';
 import { request } from '../modules/request.js';
+import { renderSideBar } from '../index.js';
+
+const sideBarElement = document.getElementById('sideBar');
 
 export class UserStore {
   #user;
@@ -12,11 +15,11 @@ export class UserStore {
       isAuthorizedIn: false,
       authorURL: '',
     };
+    dispatcher.register(this.reduce.bind(this));
     console.log('register userStore');
-    dispatcher.register(this.reduce);
   }
 
-  getState() {
+  getUserState() {
     return this.#user;
   }
 
@@ -27,19 +30,19 @@ export class UserStore {
     this.#user.authorURL = result.creator_id;
   }
 
-  reduce(action) {
+  async reduce(action) {
     switch (action.type) {
       case ActionTypes.GET_USER:
-        getUser();
+        const getPage = await request.get('/api/user/homePage');
+        const result = await getPage.json();
+        this.setState(result);
+        renderSideBar(sideBarElement);
+        console.log('GET_USER');
         break;
-      default: break;
+      default:
+        break;
     }
   }
-}
-async function getUser() {
-  const getPage = await request.get('/api/user/homePage');
-  const result = await getPage.json();
-  userStore.setState(result);
 }
 
 export const userStore = new UserStore();
