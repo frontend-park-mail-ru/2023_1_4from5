@@ -1,21 +1,27 @@
 import { MyPage } from './components/myPage/myPage.js';
 import { Register } from './components/register/reg.js';
 import { Settings } from './components/settings/settings.js';
-import { sideBar } from './components/sideBar/sideBar.js';
 import { StartPage } from './components/startPage/startPage.js';
 import { WinSettings } from './components/winSettings/winSettings.js';
+import { sideBar } from './components/sideBar/sideBar.js';
 import { constructConfig } from './modules/constructConfig.js';
 import { setConfig } from './consts/constants.js';
 import { request } from './modules/request.js';
 import { authStore } from './store/authStore.js'; // не удалять!!! он создает authStore!!! (потом починим)
 import { userStore } from './store/userStore.js';
+import { Actions } from './actions/auth.js';
+import { sideBarStore } from "./store/sideBarStore.js";
 
 const rootElement = document.getElementById('root');
-const sideBarElement = document.getElementById('sideBar');
+const sideBarElement = document.querySelector('sideBar');
+// const sideBarElement = document.getElementById('sideBar');
+// console.log(sideBarElement, 'index.js sideBar tag');
 const contentElement = document.createElement('main');
 rootElement.appendChild(contentElement);
 
 const userIn = userStore.getUserState();
+window.activePage = '';
+// console.log('window', window, 'asd', window.activePage);
 
 const config = setConfig({
   userIn,
@@ -36,6 +42,7 @@ const config = setConfig({
  * @returns {}
  */
 async function enter() {
+  // console.log('1');
   try {
     // TODO убрал запрос на профиль перед запросом homePage
     // const response = await request.get('/api/user/profile');
@@ -48,11 +55,15 @@ async function enter() {
       userIn.authorURL = userHomePage.creator_id;
       userIn.isAuthorIn = userHomePage.is_creator;
 
-      renderSideBar(sideBarElement);
+      // renderSideBar(sideBarElement);
+      Actions.renderSideBar(sideBarElement);
+      // console.log('actions.renderSideBar', sideBarElement);
       renderStartPage(contentElement);
     }
   } catch (err) {
-    renderSideBar(sideBarElement);
+    // renderSideBar(sideBarElement);
+    // console.log('actions.renderSideBar', sideBarElement);
+    Actions.renderSideBar(sideBarElement);
     renderStartPage(contentElement);
     console.log(err);
   }
@@ -82,7 +93,8 @@ function renderRegister(parent) {
       userIn.isAuthorIn = result.is_creator;
       userIn.isAuthorizedIn = true;
       userIn.authorURL = result.creator_id;
-      renderSideBar(sideBarElement);
+      Actions.renderSideBar(sideBarElement);
+      // renderSideBar(sideBarElement);
       reg.removeReg();
     }
   });
@@ -100,7 +112,8 @@ async function logout() {
   userIn.usernameIn = '';
   userIn.isAuthorIn = false;
   userIn.isAuthorizedIn = false;
-  renderSideBar(sideBarElement);
+  Actions.renderSideBar(sideBarElement);
+  // renderSideBar(sideBarElement);
   renderStartPage(contentElement);
 }
 
@@ -110,7 +123,9 @@ async function logout() {
  *
  * @returns {}
  */
+// TODO проблема: используем эту функцию в нескольких сторах
 export function renderSideBar() {
+  // console.log('in index.js, renderSideBar');
   constructConfig(config, userIn);
   sideBar.config = config;
   sideBar.render();

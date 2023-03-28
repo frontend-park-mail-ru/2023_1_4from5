@@ -3,6 +3,7 @@ import { clickHandler } from '../../modules/handler.js';
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
 rootElement.appendChild(sideBarElement);
+// console.log('create sideBar tag');
 
 export class SideBar {
   #parent;
@@ -22,6 +23,7 @@ export class SideBar {
   }
 
   render() {
+    // console.log('inside view, renderSideBar');
     const lastSideBar = document.getElementById('sidebarDiv');
     if (lastSideBar) {
       lastSideBar.remove();

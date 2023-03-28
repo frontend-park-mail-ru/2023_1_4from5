@@ -13,13 +13,14 @@ export function clickHandler(event, configPart, config) {
     event.preventDefault();
     const targetId = event.target.id;
     let target = configPart.pages.find((element) => element.id === targetId);
-    if (config.activePage === target.name) {
+    console.log(window.activePage, target);
+    if (window.activePage === target.name) {
       return;
     }
     if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
       target.parent.innerHTML = '';
     }
-    config.activePage = target.name;
+    window.activePage = target.name;
     // target.render(target.parent);
     if (target.name === 'Войти') {
       Actions.renderAuth();

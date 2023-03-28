@@ -1,99 +1,103 @@
-import { dispatcher } from '../dispatcher/dispatcher';
-import { ActionTypes } from '../actionTypes/auth';
-import { request } from '../modules/request';
-import { renderSideBar } from '../index';
+import { dispatcher } from '../dispatcher/dispatcher.js';
+import { ActionTypes } from '../actionTypes/auth.js';
+import { renderSideBar } from '../index.js';
+import { userStore } from './userStore.js';
+import { Actions } from '../actions/auth.js';
+
+const rootElement = document.getElementById('root');
+const sideBarElement = document.getElementById('sideBar');
+const contentElement = document.getElementById('main');
 
 export class SideBarStore {
   #config;
 
   constructor() {
+    // TODO вместо названий функций в рендере будут лежать действия
     this.#config = {
-      pages: [
-        {
-          name: 'Лента',
-          href: '/feed',
-          id: 'sidebar-feed',
-          showDisplay: userIn.isAuthorizedIn,
-          parent: contentElement,
-          render: renderStartPage,
+      feed: {
+        name: 'Лента',
+        href: '/feed',
+        id: 'sidebar-feed',
+        showDisplay: userStore.getUserState().isAuthorizedIn,
+        parent: contentElement,
+        // render: renderStartPage,
+      },
+      find: {
+        name: 'Поиск авторов',
+        href: '/find',
+        id: 'sidebar-find',
+        showDisplay: true,
+        parent: contentElement,
+        // render: renderStartPage,
+      },
+      subs: {
+        name: 'Мои подписки',
+        href: '/subs',
+        id: 'sidebar-subs',
+        showDisplay: userStore.getUserState().isAuthorizedIn,
+        parent: contentElement,
+        render() {
+          console.log('Мои подписки');
         },
-        {
-          name: 'Поиск авторов',
-          href: '/find',
-          id: 'sidebar-find',
-          showDisplay: true,
-          parent: contentElement,
-          render: renderStartPage,
-        },
-        {
-          name: 'Мои подписки',
-          href: '/subs',
-          id: 'sidebar-subs',
-          showDisplay: userIn.isAuthorizedIn,
-          parent: contentElement,
-          render() {
-            console.log('Мои подписки');
-          },
-        },
-        {
-          name: 'Регистрация',
-          href: '/register',
-          id: 'sidebar-reg',
-          showDisplay: !userIn.isAuthorizedIn,
-          parent: rootElement,
-          render: renderRegister,
-        },
-        {
-          name: 'Войти',
-          href: '/auth',
-          id: 'sidebar-auth',
-          showDisplay: !userIn.isAuthorizedIn,
-          parent: rootElement,
-          render() {
-            console.log('Войти');
-          },
-        },
-        {
-          name: 'Стать автором',
-          href: '/beAuthor',
-          id: 'sidebar-beAuthor',
-          showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
-          parent: contentElement,
-          render: renderStartPage,
-        },
-        {
-          name: userIn.usernameIn,
-          href: '/modalWindow',
-          id: 'sidebar-modalWindow',
-          showDisplay: userIn.isAuthorizedIn,
-          parent: contentElement,
-          render: renderWinSettings,
-        },
-      ],
+      },
+      register: {
+        name: 'Регистрация',
+        href: '/register',
+        id: 'sidebar-reg',
+        showDisplay: !userStore.getUserState().isAuthorizedIn,
+        parent: rootElement,
+        // render: renderRegister,
+      },
+      auth: {
+        name: 'Войти',
+        href: '/auth',
+        id: 'sidebar-auth',
+        showDisplay: !userStore.getUserState().isAuthorizedIn,
+        parent: rootElement,
+        render: Actions.renderAuth,
+        // render() {
+        //   console.log('Войти');
+        // },
+      },
+      beAuthor: {
+        name: 'Стать автором',
+        href: '/beAuthor',
+        id: 'sidebar-beAuthor',
+        showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
+        parent: contentElement,
+        // render: renderStartPage,
+      },
+      modalWindow: {
+        name: userStore.getUserState().usernameIn,
+        href: '/modalWindow',
+        id: 'sidebar-modalWindow',
+        showDisplay: userStore.getUserState().isAuthorizedIn,
+        parent: contentElement,
+        // render: renderWinSettings,
+      },
     };
     dispatcher.register(this.reduce.bind(this));
-    console.log('register userStore');
+    console.log('register sideBarStore');
   }
 
-  getUserState() {
-    return this.#user;
+  getSideBarState() {
+    return this.#config;
   }
 
-  setState(result) {
-    this.#user.usernameIn = result.name;
-    this.#user.isAuthorIn = result.is_creator;
-    this.#user.isAuthorizedIn = true;
-    this.#user.authorURL = result.creator_id;
+  // TODO перенести из constructConfig функцию сюда (не всю)
+  setState(/* result */) {
+    // this.#user.usernameIn = result.name;
+    // this.#user.isAuthorIn = result.is_creator;
+    // this.#user.isAuthorizedIn = true;
+    // this.#user.authorURL = result.creator_id;
   }
 
-  async reduce(action) {
+  reduce(action) {
     switch (action.type) {
-      case ActionTypes.GET_USER:
-        const getPage = await request.get('/api/user/homePage');
-        const result = await getPage.json();
-        this.setState(result);
-        renderSideBar(sideBarElement);
-        console.log('GET_USER');
+      case ActionTypes.RENDER_SIDEBAR:
+        // console.log('inside sctore, renderSideBar', action.parent);
+        renderSideBar(action.parent);
+        console.log('RENDER_SIDEBAR');
         break;
       default:
         break;
