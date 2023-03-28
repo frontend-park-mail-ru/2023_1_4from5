@@ -34,6 +34,7 @@ export class UserStore {
     switch (action.type) {
       case ActionTypes.GET_USER:
         const getPage = await request.get('/api/user/homePage');
+        console.log('answer on get request', getPage);
         const result = await getPage.json();
         this.setState(result);
         renderSideBar(sideBarElement);
