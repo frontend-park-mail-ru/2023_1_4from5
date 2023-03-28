@@ -47,3 +47,5 @@ export class UserStore {
 }
 
 export const userStore = new UserStore();
+
+// TODO при изменении инфы о юзере вызывать вторым действием стор сайт бара  и там обновлять данные

@@ -41,11 +41,12 @@ export const Actions = {
     });
   },
   // sideBar
-  renderSideBar(parent) {
+  renderSideBar(parent, user) {
     // console.log('inside action, renderSideBar', parent);
     dispatcher.dispatch({
       type: ActionTypes.RENDER_SIDEBAR,
       parent,
+      user,
     });
   },
 };

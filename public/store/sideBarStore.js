@@ -1,11 +1,13 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/auth.js';
-import { renderSideBar } from '../index.js';
+// import { renderSideBar } from '../index.js';
 import { userStore } from './userStore.js';
 import { Actions } from '../actions/auth.js';
+// import {constructConfig} from "../modules/constructConfig";
+import { sideBar } from '../components/sideBar/sideBar.js';
 
 const rootElement = document.getElementById('root');
-const sideBarElement = document.getElementById('sideBar');
+// const sideBarElement = document.getElementById('sideBar');
 const contentElement = document.getElementById('main');
 
 export class SideBarStore {
@@ -22,7 +24,7 @@ export class SideBarStore {
         parent: contentElement,
         // render: renderStartPage,
       },
-      find: {
+      findAuth: {
         name: 'Поиск авторов',
         href: '/find',
         id: 'sidebar-find',
@@ -40,7 +42,7 @@ export class SideBarStore {
           console.log('Мои подписки');
         },
       },
-      register: {
+      reg: {
         name: 'Регистрация',
         href: '/register',
         id: 'sidebar-reg',
@@ -77,7 +79,7 @@ export class SideBarStore {
       },
     };
     dispatcher.register(this.reduce.bind(this));
-    console.log('register sideBarStore');
+    console.log(this.#config);
   }
 
   getSideBarState() {
@@ -85,18 +87,30 @@ export class SideBarStore {
   }
 
   // TODO перенести из constructConfig функцию сюда (не всю)
-  setState(/* result */) {
-    // this.#user.usernameIn = result.name;
-    // this.#user.isAuthorIn = result.is_creator;
-    // this.#user.isAuthorizedIn = true;
-    // this.#user.authorURL = result.creator_id;
+  setState(userIn) {
+    this.#config.feed.showDisplay = userIn.isAuthorizedIn;
+    this.#config.findAuth.showDisplay = true;
+    this.#config.subs.showDisplay = userIn.isAuthorizedIn;
+    this.#config.reg.showDisplay = !userIn.isAuthorizedIn;
+    this.#config.auth.showDisplay = !userIn.isAuthorizedIn;
+    this.#config.beAuthor.showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
+    this.#config.modalWindow.showDisplay = userIn.isAuthorizedIn;
+    this.#config.modalWindow.name = userIn.usernameIn;
+  }
+
+  renderSideBar(parent, user) {
+    this.setState(user);
+    sideBar.parent = parent;
+    sideBar.config = this.#config;
+    console.log(this.#config);
+    sideBar.render();
   }
 
   reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_SIDEBAR:
         // console.log('inside sctore, renderSideBar', action.parent);
-        renderSideBar(action.parent);
+        this.renderSideBar(action.parent, action.user);
         console.log('RENDER_SIDEBAR');
         break;
       default:

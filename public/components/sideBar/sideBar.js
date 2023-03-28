@@ -10,16 +10,20 @@ export class SideBar {
 
   #config;
 
-  constructor(parent) {
-    this.#parent = parent;
-  }
-
   get config() {
     return this.#config;
   }
 
   set config(config) {
     this.#config = config;
+  }
+
+  get parent() {
+    return this.#config;
+  }
+
+  set parent(parent) {
+    this.#parent = parent;
   }
 
   render() {
@@ -40,4 +44,4 @@ export class SideBar {
   }
 }
 
-export const sideBar = new SideBar(sideBarElement);
+export const sideBar = new SideBar();

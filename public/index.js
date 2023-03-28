@@ -56,14 +56,14 @@ async function enter() {
       userIn.isAuthorIn = userHomePage.is_creator;
 
       // renderSideBar(sideBarElement);
-      Actions.renderSideBar(sideBarElement);
+      Actions.renderSideBar(sideBarElement, userIn);
       // console.log('actions.renderSideBar', sideBarElement);
       renderStartPage(contentElement);
     }
   } catch (err) {
     // renderSideBar(sideBarElement);
     // console.log('actions.renderSideBar', sideBarElement);
-    Actions.renderSideBar(sideBarElement);
+    Actions.renderSideBar(sideBarElement, userIn);
     renderStartPage(contentElement);
     console.log(err);
   }
@@ -93,7 +93,7 @@ function renderRegister(parent) {
       userIn.isAuthorIn = result.is_creator;
       userIn.isAuthorizedIn = true;
       userIn.authorURL = result.creator_id;
-      Actions.renderSideBar(sideBarElement);
+      Actions.renderSideBar(sideBarElement, userIn);
       // renderSideBar(sideBarElement);
       reg.removeReg();
     }
@@ -112,7 +112,7 @@ async function logout() {
   userIn.usernameIn = '';
   userIn.isAuthorIn = false;
   userIn.isAuthorizedIn = false;
-  Actions.renderSideBar(sideBarElement);
+  Actions.renderSideBar(sideBarElement, userIn);
   // renderSideBar(sideBarElement);
   renderStartPage(contentElement);
 }
