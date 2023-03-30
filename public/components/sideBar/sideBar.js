@@ -25,19 +25,9 @@ export class SideBar {
     this.#config = config;
   }
 
-  get parent() {
-    return this.#config;
-  }
-
-  set parent(parent) {
-    this.#parent = parent;
-  }
-
   render() {
     const lastSideBar = document.getElementById('sidebarDiv');
-
     if (lastSideBar) {
-      console.log('removed');
       lastSideBar.remove();
     }
     const newDiv = document.createElement('div');

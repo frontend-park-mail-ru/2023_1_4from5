@@ -98,7 +98,6 @@ export class SideBarStore {
 
   renderSideBar(parent, user) {
     this.setState(user);
-    sideBar.parent = parent;
     sideBar.config = this.#config;
     sideBar.render();
   }
