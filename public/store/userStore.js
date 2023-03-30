@@ -1,9 +1,7 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/auth.js';
 import { request } from '../modules/request.js';
-import { renderSideBar } from '../index.js';
-
-const sideBarElement = document.getElementById('sideBar');
+import { Actions } from '../actions/auth.js';
 
 export class UserStore {
   #user;
@@ -16,7 +14,6 @@ export class UserStore {
       authorURL: '',
     };
     dispatcher.register(this.reduce.bind(this));
-    console.log('register userStore');
   }
 
   getUserState() {
@@ -36,7 +33,8 @@ export class UserStore {
         const getPage = await request.get('/api/user/homePage');
         const result = await getPage.json();
         this.setState(result);
-        renderSideBar(sideBarElement);
+        const sideBarElement = document.querySelector('sideBar');
+        Actions.renderSideBar(sideBarElement, this.#user);
         console.log('GET_USER');
         break;
       default:
@@ -46,3 +44,5 @@ export class UserStore {
 }
 
 export const userStore = new UserStore();
+
+// TODO при изменении инфы о юзере вызывать вторым действием стор сайт бара  и там обновлять данные

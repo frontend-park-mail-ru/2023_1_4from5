@@ -8,18 +8,24 @@ import { Actions } from '../actions/auth.js';
  *
  * @returns {}
  */
-export function clickHandler(event, configPart, config) {
+export function clickHandler(event, config) {
   if (event.target instanceof HTMLAnchorElement) {
     event.preventDefault();
     const targetId = event.target.id;
-    let target = configPart.pages.find((element) => element.id === targetId);
-    if (config.activePage === target.name) {
+    let target;
+    for (let element in config) {
+      if (config[element].id === targetId) {
+        target = config[element];
+      }
+    }
+
+    if (window.activePage === target.name) {
       return;
     }
-    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
+    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.modalWindow.name)) {
       target.parent.innerHTML = '';
     }
-    config.activePage = target.name;
+    window.activePage = target.name;
     // target.render(target.parent);
     if (target.name === 'Войти') {
       Actions.renderAuth();

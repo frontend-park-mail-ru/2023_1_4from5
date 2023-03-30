@@ -7,9 +7,9 @@ export class AuthStore {
   #config;
 
   constructor() {
-    this.#config = {
-      activePage: false,
-    };
+    // this.#config = {
+    //   activePage: false,
+    // };
     dispatcher.register(this.reduce.bind(this));
     console.log('register auth');
   }
@@ -23,8 +23,9 @@ export class AuthStore {
   }
 
   renderAuth() {
-    this.#config.activePage = true;
-    auth.config = this.#config;
+    // this.#config.activePage = true;
+    // window.activePage = 'Войти';
+    // auth.config = this.#config;
     auth.render();
     auth.authentification();
   }
@@ -33,7 +34,6 @@ export class AuthStore {
     switch (action.type) {
       case ActionTypes.RENDER_AUTH:
         this.renderAuth();
-        console.log('RENDER_AUTH');
         break;
 
       case ActionTypes.AUTHORIZATION:
@@ -53,7 +53,8 @@ export class AuthStore {
         break;
 
       case ActionTypes.REMOVE_AUTH:
-        this.#config.activePage = false;
+        // this.#config.activePage = false;
+        window.activePage = '';
         auth.removeAuth();
         console.log('REMOVE_AUTH');
         break;

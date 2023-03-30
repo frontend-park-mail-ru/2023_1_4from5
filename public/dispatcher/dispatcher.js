@@ -49,6 +49,7 @@ class Dispatcher {
   //   delete this.#callbacks[id];
   // }
 
+  // TODO попробовать воспользоваться им в async start (actions)
   /**
    * Waits for the callbacks specified to be invoked before continuing execution
    * of the current callback. This method should only be used by a callback in

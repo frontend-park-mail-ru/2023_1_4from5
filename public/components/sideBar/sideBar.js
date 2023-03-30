@@ -11,6 +11,10 @@ export class SideBar {
 
   constructor(parent) {
     this.#parent = parent;
+    const handler = (event) => {
+      clickHandler(event, this.#config);
+    };
+    this.#parent.addEventListener('click', handler);
   }
 
   get config() {
@@ -21,9 +25,19 @@ export class SideBar {
     this.#config = config;
   }
 
+  get parent() {
+    return this.#config;
+  }
+
+  set parent(parent) {
+    this.#parent = parent;
+  }
+
   render() {
     const lastSideBar = document.getElementById('sidebarDiv');
+
     if (lastSideBar) {
+      console.log('removed');
       lastSideBar.remove();
     }
     const newDiv = document.createElement('div');
@@ -31,9 +45,6 @@ export class SideBar {
     const template = Handlebars.templates.sideBar;
     newDiv.innerHTML = template(this.#config);
 
-    this.#parent.addEventListener('click', (event) => {
-      clickHandler(event, this.#config.general, this.#config);
-    });
     this.#parent.appendChild(newDiv);
   }
 }
