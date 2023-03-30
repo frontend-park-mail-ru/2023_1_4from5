@@ -7,7 +7,6 @@ import { Actions } from '../actions/auth.js';
 import { sideBar } from '../components/sideBar/sideBar.js';
 
 const rootElement = document.getElementById('root');
-// const sideBarElement = document.getElementById('sideBar');
 const contentElement = document.getElementById('main');
 
 export class SideBarStore {
@@ -79,7 +78,6 @@ export class SideBarStore {
       },
     };
     dispatcher.register(this.reduce.bind(this));
-    console.log(this.#config);
   }
 
   getSideBarState() {
@@ -102,14 +100,12 @@ export class SideBarStore {
     this.setState(user);
     sideBar.parent = parent;
     sideBar.config = this.#config;
-    console.log(this.#config);
     sideBar.render();
   }
 
   reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_SIDEBAR:
-        // console.log('inside sctore, renderSideBar', action.parent);
         this.renderSideBar(action.parent, action.user);
         console.log('RENDER_SIDEBAR');
         break;

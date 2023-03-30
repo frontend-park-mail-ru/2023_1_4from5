@@ -3,12 +3,19 @@ import { clickHandler } from '../../modules/handler.js';
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
 rootElement.appendChild(sideBarElement);
-// console.log('create sideBar tag');
 
 export class SideBar {
   #parent;
 
   #config;
+
+  constructor(parent) {
+    this.#parent = parent;
+    const handler = (event) => {
+      clickHandler(event, this.#config);
+    };
+    this.#parent.addEventListener('click', handler);
+  }
 
   get config() {
     return this.#config;
@@ -27,9 +34,10 @@ export class SideBar {
   }
 
   render() {
-    // console.log('inside view, renderSideBar');
     const lastSideBar = document.getElementById('sidebarDiv');
+
     if (lastSideBar) {
+      console.log('removed');
       lastSideBar.remove();
     }
     const newDiv = document.createElement('div');
@@ -37,11 +45,8 @@ export class SideBar {
     const template = Handlebars.templates.sideBar;
     newDiv.innerHTML = template(this.#config);
 
-    this.#parent.addEventListener('click', (event) => {
-      clickHandler(event, this.#config.general, this.#config);
-    });
     this.#parent.appendChild(newDiv);
   }
 }
 
-export const sideBar = new SideBar();
+export const sideBar = new SideBar(sideBarElement);

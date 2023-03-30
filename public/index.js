@@ -8,20 +8,17 @@ import { constructConfig } from './modules/constructConfig.js';
 import { setConfig } from './consts/constants.js';
 import { request } from './modules/request.js';
 import { authStore } from './store/authStore.js'; // не удалять!!! он создает authStore!!! (потом починим)
+import { sideBarStore } from "./store/sideBarStore.js"; // не удалять!!! он создает sidebarStore!!! (потом починим)
 import { userStore } from './store/userStore.js';
 import { Actions } from './actions/auth.js';
-import { sideBarStore } from "./store/sideBarStore.js";
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.querySelector('sideBar');
-// const sideBarElement = document.getElementById('sideBar');
-// console.log(sideBarElement, 'index.js sideBar tag');
 const contentElement = document.createElement('main');
 rootElement.appendChild(contentElement);
 
 const userIn = userStore.getUserState();
 window.activePage = '';
-// console.log('window', window, 'asd', window.activePage);
 
 const config = setConfig({
   userIn,
@@ -42,7 +39,6 @@ const config = setConfig({
  * @returns {}
  */
 async function enter() {
-  // console.log('1');
   try {
     // TODO убрал запрос на профиль перед запросом homePage
     // const response = await request.get('/api/user/profile');
@@ -55,14 +51,10 @@ async function enter() {
       userIn.authorURL = userHomePage.creator_id;
       userIn.isAuthorIn = userHomePage.is_creator;
 
-      // renderSideBar(sideBarElement);
       Actions.renderSideBar(sideBarElement, userIn);
-      // console.log('actions.renderSideBar', sideBarElement);
       renderStartPage(contentElement);
     }
   } catch (err) {
-    // renderSideBar(sideBarElement);
-    // console.log('actions.renderSideBar', sideBarElement);
     Actions.renderSideBar(sideBarElement, userIn);
     renderStartPage(contentElement);
     console.log(err);
@@ -94,7 +86,6 @@ function renderRegister(parent) {
       userIn.isAuthorizedIn = true;
       userIn.authorURL = result.creator_id;
       Actions.renderSideBar(sideBarElement, userIn);
-      // renderSideBar(sideBarElement);
       reg.removeReg();
     }
   });
@@ -113,7 +104,6 @@ async function logout() {
   userIn.isAuthorIn = false;
   userIn.isAuthorizedIn = false;
   Actions.renderSideBar(sideBarElement, userIn);
-  // renderSideBar(sideBarElement);
   renderStartPage(contentElement);
 }
 
@@ -124,12 +114,12 @@ async function logout() {
  * @returns {}
  */
 // TODO проблема: используем эту функцию в нескольких сторах
-export function renderSideBar() {
-  // console.log('in index.js, renderSideBar');
-  constructConfig(config, userIn);
-  sideBar.config = config;
-  sideBar.render();
-}
+// export function renderSideBar() {
+//   console.log(userIn);
+//   constructConfig(config, userIn);
+//   sideBar.config = config;
+//   sideBar.render();
+// }
 
 /**
  * rendering StartPage
