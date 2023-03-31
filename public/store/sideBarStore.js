@@ -19,7 +19,9 @@ export class SideBarStore {
         id: 'sidebar-feed',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        // render: renderStartPage,
+        render() {
+          console.log('Лента');
+        },
       },
       findAuth: {
         name: 'Поиск авторов',
@@ -27,7 +29,9 @@ export class SideBarStore {
         id: 'sidebar-find',
         showDisplay: true,
         parent: contentElement,
-        // render: renderStartPage,
+        render() {
+          console.log('Поиск авторов');
+        },
       },
       subs: {
         name: 'Мои подписки',
@@ -45,7 +49,7 @@ export class SideBarStore {
         id: 'sidebar-reg',
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
-        // render: renderRegister,
+        render: Actions.renderReg,
       },
       auth: {
         name: 'Войти',
@@ -54,9 +58,6 @@ export class SideBarStore {
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
         render: Actions.renderAuth,
-        // render() {
-        //   console.log('Войти');
-        // },
       },
       beAuthor: {
         name: 'Стать автором',
@@ -64,7 +65,9 @@ export class SideBarStore {
         id: 'sidebar-beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
-        // render: renderStartPage,
+        render() {
+          console.log('Стать автором');
+        },
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,

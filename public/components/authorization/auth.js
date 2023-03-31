@@ -7,18 +7,8 @@ const rootElement = document.getElementById('root');
 export class Auth {
   #parent;
 
-  #config;
-
   constructor(parent) {
     this.#parent = parent;
-  }
-
-  get config() {
-    return this.#config;
-  }
-
-  set config(config) {
-    this.#config = config;
   }
 
   render() {
@@ -47,6 +37,7 @@ export class Auth {
     if (lastAuth) {
       lastAuth.remove();
     }
+    window.activePage = '';
   }
 
   /**

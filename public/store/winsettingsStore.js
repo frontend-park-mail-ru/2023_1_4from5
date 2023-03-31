@@ -18,7 +18,10 @@ export class WinSettingsStore {
         id: 'winSetting-profile',
         showDisplay: userStore.getUserState().isAuthorIn, // TODO убрать getuserState
         parent: contentElement,
-        render: clickMyPage,
+        render() {
+          console.log('Моя страница');
+        },
+        // render: clickMyPage,
       },
       finance: {
         name: 'Мои доходы',
@@ -36,6 +39,9 @@ export class WinSettingsStore {
         id: 'winSetting-settings',
         showDisplay: true,
         parent: contentElement,
+        render() {
+          console.log('Настройки');
+        },
         // render: renderSettings,
       },
       logout: {
@@ -58,11 +64,9 @@ export class WinSettingsStore {
   reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_WINSETTINGS:
-        this.setState(action.user);
+        this.setState(userStore.getUserState());
         winSettings.config = this.#config;
         winSettings.render();
-        console.log(1);
-
         break;
 
       default:

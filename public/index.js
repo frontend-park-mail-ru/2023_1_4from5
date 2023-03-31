@@ -12,6 +12,7 @@ import { Actions } from './actions/auth.js';
 import { startStore } from './store/startStore.js';
 import { winSettingsStore } from './store/winsettingsStore.js';
 import { winSettings } from './components/winSettings/winSettings.js';
+import { regStore } from './store/regStore.js';
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.querySelector('sideBar');
@@ -24,7 +25,6 @@ const config = setConfig({
   userIn,
   contentElement,
   rootElement,
-  renderRegister,
   renderWinSettings,
   clickMyPage,
   renderSettings,
@@ -37,29 +37,6 @@ const config = setConfig({
  *
  * @returns {}
  */
-function renderRegister(parent) {
-  const reg = new Register(parent);
-  reg.config = config;
-  reg.render();
-
-  const background = document.getElementById('backReg');
-  background.addEventListener('click', (e) => {
-    e.preventDefault();
-    reg.removeReg();
-  });
-  reg.registration(async (result, request) => {
-    if (result.login.length > 0) {
-      const getPage = await request.get('/api/user/homePage');
-      const result = await getPage.json();
-      userIn.usernameIn = result.name;
-      userIn.isAuthorIn = result.is_creator;
-      userIn.isAuthorizedIn = true;
-      userIn.authorURL = result.creator_id;
-      Actions.renderSideBar(sideBarElement, userIn);
-      reg.removeReg();
-    }
-  });
-}
 
 /**
  * rendering SideBar

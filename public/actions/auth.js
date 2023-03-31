@@ -35,6 +35,27 @@ export const Actions = {
       type: ActionTypes.REMOVE_AUTH,
     });
   },
+
+  // registration
+  renderReg() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_REG,
+    });
+  },
+
+  registration(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.REGISTRATION,
+      input,
+    });
+  },
+
+  removeReg() {
+    dispatcher.dispatch({
+      type: ActionTypes.REMOVE_REG,
+    });
+  },
+
   // user
   getUser() {
     dispatcher.dispatch({
@@ -58,10 +79,9 @@ export const Actions = {
   },
 
   // winsettings
-  renderWinSettings(user) {
+  renderWinSettings() {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_WINSETTINGS,
-      user,
     });
   },
 };

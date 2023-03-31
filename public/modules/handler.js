@@ -27,18 +27,25 @@ export function clickHandler(event, config) {
       target.parent.innerHTML = '';
     }
     window.activePage = target.name;
-    switch (target.id) {
-      case 'sidebar-auth':
-        Actions.renderAuth();
-        break;
-      case 'sidebar-modalWindow':
-        Actions.renderWinSettings(userStore.getUserState()); // TODO исправить на action
-        break;
-      case 'winSetting-startPage':
-        Actions.logout();
-        break;
-      default:
-        break;
-    }
+
+    // TODO что лучше?
+    target.render();
+
+    // switch (target.id) {
+    //   case 'sidebar-auth':
+    //     Actions.renderAuth();
+    //     break;
+    //   case 'sidebar-reg':
+    //     Actions.renderReg();
+    //     break;
+    //   case 'sidebar-modalWindow':
+    //     Actions.renderWinSettings(userStore.getUserState()); // TODO исправить на action
+    //     break;
+    //   case 'winSetting-startPage':
+    //     Actions.logout();
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
 }

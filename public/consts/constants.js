@@ -10,7 +10,6 @@ export function setConfig({
   userIn,
   contentElement,
   rootElement,
-  renderRegister,
   renderWinSettings,
   clickMyPage,
   renderSettings,
@@ -51,7 +50,7 @@ export function setConfig({
           id: 'sidebar-reg',
           showDisplay: !userIn.isAuthorizedIn,
           parent: rootElement,
-          render: renderRegister,
+          // render: renderRegister,
         },
         {
           name: 'Войти',
