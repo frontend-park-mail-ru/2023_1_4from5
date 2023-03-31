@@ -1,17 +1,13 @@
 import { ActionTypes } from '../actionTypes/auth.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { auth } from '../components/authorization/auth.js';
 import { isValidLogin, isValidPassword } from '../modules/isValid.js';
+import { register } from '../components/register/reg.js';
 
-class AuthStore {
+class RegStore {
   #config;
 
   constructor() {
-    // this.#config = {
-    //   activePage: false,
-    // };
     dispatcher.register(this.reduce.bind(this));
-    console.log('register auth');
   }
 
   setState(config) {
@@ -22,37 +18,43 @@ class AuthStore {
     return this.#config;
   }
 
-  renderAuth() {
-    auth.render();
-    auth.authentification();
+  renderReg() {
+    register.render();
+    register.registration();
   }
 
   reduce(action) {
     switch (action.type) {
-      case ActionTypes.RENDER_AUTH:
-        this.renderAuth();
+      case ActionTypes.RENDER_REG:
+        this.renderReg();
         break;
 
-      case ActionTypes.AUTHORIZATION:
+      case ActionTypes.REGISTRATION:
         const login = action.input.loginInput.value;
+        const username = action.input.usernameInput.value;
         const password = action.input.passwordInput.value;
+        const repeatPassword = action.input.passwordRepeatInput.value;
         const errLogin = isValidLogin(login);
         const errPassword = isValidPassword(password);
-        auth.authorization({
+        register.validation({
           loginInput: action.input.loginInput,
+          usernameInput: action.input.usernameInput,
           passwordInput: action.input.passwordInput,
+          passwordRepeatInput: action.input.passwordRepeatInput,
           errorOutput: action.input.errorOutput,
           login,
+          username,
           password,
+          repeatPassword,
           errLogin,
           errPassword,
         });
-        console.log('AUTHORIZATION');
+        console.log('REGISTRATION');
         break;
 
-      case ActionTypes.REMOVE_AUTH:
-        auth.removeAuth();
-        console.log('REMOVE_AUTH');
+      case ActionTypes.REMOVE_REG:
+        register.removeReg();
+        console.log('REMOVE_REg');
         break;
 
       default:
@@ -61,4 +63,4 @@ class AuthStore {
   }
 }
 
-export const authStore = new AuthStore();
+export const regStore = new RegStore();

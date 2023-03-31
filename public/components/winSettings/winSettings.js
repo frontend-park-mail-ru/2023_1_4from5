@@ -1,5 +1,7 @@
 import { clickHandler } from '../../modules/handler.js';
 
+const contentElement = document.querySelector('main');
+
 export class WinSettings {
   #parent;
 
@@ -24,7 +26,7 @@ export class WinSettings {
     newDiv.innerHTML = template(this.#config);
 
     newDiv.addEventListener('click', (e) => {
-      clickHandler(e, this.#config.setting, this.#config);
+      clickHandler(e, this.#config);
     });
     this.#parent.appendChild(newDiv);
 
@@ -40,6 +42,8 @@ export class WinSettings {
     if (lastWinSettings) {
       lastWinSettings.remove();
     }
-    this.#config.activePage = '';
+    window.activePage = '';
   }
 }
+
+export const winSettings = new WinSettings(contentElement);

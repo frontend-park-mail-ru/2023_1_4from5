@@ -3,18 +3,19 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 
 export const Actions = {
   // start
-  // TODO на будущее (закинуть начало в действия
-  // async start() {
-  //   await dispatcher.dispatch({
-  //     type: ActionTypes.START,
-  //   });
-  //   dispatcher.dispatch({
-  //     type: ActionTypes.RENDER_SIDEBAR,
-  //   });
-  //   dispatcher.dispatch({
-  //     type: ActionTypes.RENDER_STARTPAGE,
-  //   });
-  // },
+  start() {
+    dispatcher.dispatch({
+      type: ActionTypes.START,
+    });
+  },
+
+  renderStartPage() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_STARTPAGE,
+      parent,
+    });
+  },
+
   // authorization
   renderAuth() {
     dispatcher.dispatch({
@@ -34,19 +35,67 @@ export const Actions = {
       type: ActionTypes.REMOVE_AUTH,
     });
   },
+
+  // registration
+  renderReg() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_REG,
+    });
+  },
+
+  registration(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.REGISTRATION,
+      input,
+    });
+  },
+
+  removeReg() {
+    dispatcher.dispatch({
+      type: ActionTypes.REMOVE_REG,
+    });
+  },
+
   // user
   getUser() {
     dispatcher.dispatch({
       type: ActionTypes.GET_USER,
     });
   },
+
+  logout() {
+    dispatcher.dispatch({
+      type: ActionTypes.LOGOUT,
+    });
+  },
+
   // sideBar
   renderSideBar(parent, user) {
-    // console.log('inside action, renderSideBar', parent);
     dispatcher.dispatch({
       type: ActionTypes.RENDER_SIDEBAR,
       parent,
       user,
+    });
+  },
+
+  // winsettings
+  renderWinSettings() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_WINSETTINGS,
+    });
+  },
+
+  // settings
+  renderSettings() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_SETTINGS,
+    });
+  },
+
+  // myPage
+  renderMyPage() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_MYPAGE,
     });
   },
 };

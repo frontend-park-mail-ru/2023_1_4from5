@@ -3,7 +3,9 @@ import { ActionTypes } from '../actionTypes/auth.js';
 import { request } from '../modules/request.js';
 import { Actions } from '../actions/auth.js';
 
-export class UserStore {
+const sideBarElement = document.querySelector('sideBar');
+
+class UserStore {
   #user;
 
   constructor() {
@@ -33,9 +35,18 @@ export class UserStore {
         const getPage = await request.get('/api/user/homePage');
         const result = await getPage.json();
         this.setState(result);
-        const sideBarElement = document.querySelector('sideBar');
         Actions.renderSideBar(sideBarElement, this.#user);
         console.log('GET_USER');
+        break;
+
+      case ActionTypes.LOGOUT:
+        await request.get('/api/auth/logout');
+        this.#user.loginIn = '';
+        this.#user.usernameIn = '';
+        this.#user.isAuthorIn = false;
+        this.#user.isAuthorizedIn = false;
+        Actions.renderSideBar(sideBarElement, this.#user);
+        Actions.renderStartPage();
         break;
       default:
         break;

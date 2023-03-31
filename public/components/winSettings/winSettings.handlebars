@@ -2,9 +2,16 @@
     <div id="closeWinSettings" class="close">
         <img id="close-win-settings" width="25" src="./images/close.png" alt="user_photo">
     </div>
-    {{#each setting.pages}}
-        {{#if showDisplay}}
-            <a id={{id}} href={{href}}> {{name}} </a>
-        {{/if}}
-    {{/each}}
+    {{#if profile.showDisplay}}
+        <a id={{profile.id}} href={{profile.href}}> {{profile.name}} </a>
+    {{/if}}
+    {{#if finance.showDisplay}}
+        <a id={{finance.id}} href={{finance.href}}> {{finance.name}} </a>
+    {{/if}}
+    {{#if settings.showDisplay}}
+        <a id={{settings.id}} href={{settings.href}}> {{settings.name}} </a>
+    {{/if}}
+    {{#if logout.showDisplay}}
+        <a id={{logout.id}} href={{logout.href}}> {{logout.name}} </a>
+    {{/if}}
 </div>

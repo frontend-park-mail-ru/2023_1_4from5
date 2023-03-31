@@ -1,15 +1,25 @@
 export const ActionTypes = {
   // start
-  // TODO старт (на будущее)
-  // START: 'START',
+  START: 'START',
   // authorization
   RENDER_AUTH: 'RENDER_AUTH',
   AUTHORIZATION: 'AUTHORIZATION',
   REMOVE_AUTH: 'REMOVE_AUTH',
+  // registration
+  RENDER_REG: 'RENDER_REG',
+  REGISTRATION: 'REGISTRATION',
+  REMOVE_REG: 'REMOVE_REG',
   // user
   GET_USER: 'GET_USER',
+  LOGOUT: 'LOGOUT',
   // sideBar
   RENDER_SIDEBAR: 'RENDER_SIDEBAR',
   // startPage
   RENDER_STARTPAGE: 'RENDER_STARTPAGE',
+  // winSettings
+  RENDER_WINSETTINGS: 'RENDER_WINSETTINGS',
+  // settings
+  RENDER_SETTINGS: 'RENDER_SETTINGS',
+  // myPage
+  RENDER_MYPAGE: 'RENDER_MYPAGE',
 };

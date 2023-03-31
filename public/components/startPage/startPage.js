@@ -1,3 +1,7 @@
+const rootElement = document.getElementById('root');
+const contentElement = document.createElement('main');
+rootElement.appendChild(contentElement);
+
 export class StartPage {
   #parent;
 
@@ -13,3 +17,5 @@ export class StartPage {
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const startPage = new StartPage(contentElement);

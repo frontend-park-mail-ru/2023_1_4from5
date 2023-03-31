@@ -1,3 +1,5 @@
+import { Actions } from '../actions/auth.js';
+
 /**
  * sets configuration for source-object
  * @param {Object} - object of settings
@@ -8,12 +10,8 @@ export function setConfig({
   userIn,
   contentElement,
   rootElement,
-  renderRegister,
-  renderWinSettings,
   clickMyPage,
   renderSettings,
-  logout,
-  renderStartPage,
 }) {
   return {
     general: {
@@ -24,7 +22,7 @@ export function setConfig({
           id: 'sidebar-feed',
           showDisplay: userIn.isAuthorizedIn,
           parent: contentElement,
-          render: renderStartPage,
+          // render: renderStartPage,
         },
         {
           name: 'Поиск авторов',
@@ -32,7 +30,7 @@ export function setConfig({
           id: 'sidebar-find',
           showDisplay: true,
           parent: contentElement,
-          render: renderStartPage,
+          // render: renderStartPage,
         },
         {
           name: 'Мои подписки',
@@ -50,7 +48,7 @@ export function setConfig({
           id: 'sidebar-reg',
           showDisplay: !userIn.isAuthorizedIn,
           parent: rootElement,
-          render: renderRegister,
+          // render: renderRegister,
         },
         {
           name: 'Войти',
@@ -68,7 +66,7 @@ export function setConfig({
           id: 'sidebar-beAuthor',
           showDisplay: userIn.isAuthorizedIn * !userIn.isAuthorIn,
           parent: contentElement,
-          render: renderStartPage,
+          // render: renderStartPage,
         },
         {
           name: userIn.usernameIn,
@@ -76,7 +74,7 @@ export function setConfig({
           id: 'sidebar-modalWindow',
           showDisplay: userIn.isAuthorizedIn,
           parent: contentElement,
-          render: renderWinSettings,
+          // render: renderWinSettings,
         },
       ],
     },
@@ -114,7 +112,7 @@ export function setConfig({
           id: 'winSetting-startPage',
           showDisplay: true,
           parent: contentElement,
-          render: logout,
+          render: Actions.logout,
         },
       ],
     },

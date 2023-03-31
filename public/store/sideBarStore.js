@@ -1,15 +1,13 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/auth.js';
-// import { renderSideBar } from '../index.js';
 import { userStore } from './userStore.js';
 import { Actions } from '../actions/auth.js';
-// import {constructConfig} from "../modules/constructConfig";
 import { sideBar } from '../components/sideBar/sideBar.js';
 
 const rootElement = document.getElementById('root');
-const contentElement = document.getElementById('main');
+const contentElement = document.querySelector('main');
 
-export class SideBarStore {
+class SideBarStore {
   #config;
 
   constructor() {
@@ -21,7 +19,9 @@ export class SideBarStore {
         id: 'sidebar-feed',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        // render: renderStartPage,
+        render() {
+          console.log('Лента');
+        },
       },
       findAuth: {
         name: 'Поиск авторов',
@@ -29,7 +29,9 @@ export class SideBarStore {
         id: 'sidebar-find',
         showDisplay: true,
         parent: contentElement,
-        // render: renderStartPage,
+        render() {
+          console.log('Поиск авторов');
+        },
       },
       subs: {
         name: 'Мои подписки',
@@ -47,7 +49,7 @@ export class SideBarStore {
         id: 'sidebar-reg',
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
-        // render: renderRegister,
+        render: Actions.renderReg,
       },
       auth: {
         name: 'Войти',
@@ -56,9 +58,6 @@ export class SideBarStore {
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
         render: Actions.renderAuth,
-        // render() {
-        //   console.log('Войти');
-        // },
       },
       beAuthor: {
         name: 'Стать автором',
@@ -66,7 +65,9 @@ export class SideBarStore {
         id: 'sidebar-beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
-        // render: renderStartPage,
+        render() {
+          console.log('Стать автором');
+        },
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
@@ -74,7 +75,7 @@ export class SideBarStore {
         id: 'sidebar-modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        // render: renderWinSettings,
+        render: Actions.renderWinSettings,
       },
     };
     dispatcher.register(this.reduce.bind(this));
@@ -86,6 +87,8 @@ export class SideBarStore {
 
   // TODO перенести из constructConfig функцию сюда (не всю)
   setState(userIn) {
+    console.log('user', userIn);
+
     this.#config.feed.showDisplay = userIn.isAuthorizedIn;
     this.#config.findAuth.showDisplay = true;
     this.#config.subs.showDisplay = userIn.isAuthorizedIn;
@@ -98,7 +101,6 @@ export class SideBarStore {
 
   renderSideBar(parent, user) {
     this.setState(user);
-    sideBar.parent = parent;
     sideBar.config = this.#config;
     sideBar.render();
   }
