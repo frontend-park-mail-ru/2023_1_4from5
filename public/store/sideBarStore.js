@@ -1,13 +1,11 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/auth.js';
-// import { renderSideBar } from '../index.js';
 import { userStore } from './userStore.js';
 import { Actions } from '../actions/auth.js';
-// import {constructConfig} from "../modules/constructConfig";
 import { sideBar } from '../components/sideBar/sideBar.js';
 
 const rootElement = document.getElementById('root');
-const contentElement = document.getElementById('main');
+const contentElement = document.querySelector('main');
 
 export class SideBarStore {
   #config;
@@ -74,7 +72,7 @@ export class SideBarStore {
         id: 'sidebar-modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        // render: renderWinSettings,
+        render: Actions.renderWinSettings,
       },
     };
     dispatcher.register(this.reduce.bind(this));
@@ -86,6 +84,8 @@ export class SideBarStore {
 
   // TODO перенести из constructConfig функцию сюда (не всю)
   setState(userIn) {
+    console.log('user', userIn);
+
     this.#config.feed.showDisplay = userIn.isAuthorizedIn;
     this.#config.findAuth.showDisplay = true;
     this.#config.subs.showDisplay = userIn.isAuthorizedIn;

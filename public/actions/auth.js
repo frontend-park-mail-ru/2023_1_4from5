@@ -3,18 +3,19 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 
 export const Actions = {
   // start
-  // TODO на будущее (закинуть начало в действия
-  // async start() {
-  //   await dispatcher.dispatch({
-  //     type: ActionTypes.START,
-  //   });
-  //   dispatcher.dispatch({
-  //     type: ActionTypes.RENDER_SIDEBAR,
-  //   });
-  //   dispatcher.dispatch({
-  //     type: ActionTypes.RENDER_STARTPAGE,
-  //   });
-  // },
+  start() {
+    dispatcher.dispatch({
+      type: ActionTypes.START,
+    });
+  },
+
+  renderStartPage() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_STARTPAGE,
+      parent,
+    });
+  },
+
   // authorization
   renderAuth() {
     dispatcher.dispatch({
@@ -40,12 +41,26 @@ export const Actions = {
       type: ActionTypes.GET_USER,
     });
   },
+
+  logout() {
+    dispatcher.dispatch({
+      type: ActionTypes.LOGOUT,
+    });
+  },
+
   // sideBar
   renderSideBar(parent, user) {
-    // console.log('inside action, renderSideBar', parent);
     dispatcher.dispatch({
       type: ActionTypes.RENDER_SIDEBAR,
       parent,
+      user,
+    });
+  },
+
+  // winsettings
+  renderWinSettings(user) {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_WINSETTINGS,
       user,
     });
   },

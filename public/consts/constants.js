@@ -1,3 +1,5 @@
+import { Actions } from '../actions/auth.js';
+
 /**
  * sets configuration for source-object
  * @param {Object} - object of settings
@@ -12,7 +14,6 @@ export function setConfig({
   renderWinSettings,
   clickMyPage,
   renderSettings,
-  logout,
   renderStartPage,
 }) {
   return {
@@ -114,7 +115,7 @@ export function setConfig({
           id: 'winSetting-startPage',
           showDisplay: true,
           parent: contentElement,
-          render: logout,
+          render: Actions.logout,
         },
       ],
     },

@@ -1,4 +1,5 @@
 import { Actions } from '../actions/auth.js';
+import { userStore } from '../store/userStore.js';
 
 /**
  * function of click handler
@@ -22,13 +23,22 @@ export function clickHandler(event, config) {
     if (window.activePage === target.name) {
       return;
     }
-    if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.modalWindow.name)) {
+    if (!(target.id === 'sidebar-reg' || target.id === 'sidebar-auth' || target.id === 'sidebar-modalWindow')) {
       target.parent.innerHTML = '';
     }
     window.activePage = target.name;
-    // target.render(target.parent);
-    if (target.name === 'Войти') {
-      Actions.renderAuth();
+    switch (target.id) {
+      case 'sidebar-auth':
+        Actions.renderAuth();
+        break;
+      case 'sidebar-modalWindow':
+        Actions.renderWinSettings(userStore.getUserState()); // TODO исправить на action
+        break;
+      case 'winSetting-startPage':
+        Actions.logout();
+        break;
+      default:
+        break;
     }
   }
 }

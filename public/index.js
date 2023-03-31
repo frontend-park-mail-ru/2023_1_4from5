@@ -1,8 +1,6 @@
 import { MyPage } from './components/myPage/myPage.js';
 import { Register } from './components/register/reg.js';
 import { Settings } from './components/settings/settings.js';
-import { StartPage } from './components/startPage/startPage.js';
-import { WinSettings } from './components/winSettings/winSettings.js';
 import { sideBar } from './components/sideBar/sideBar.js';
 import { constructConfig } from './modules/constructConfig.js';
 import { setConfig } from './consts/constants.js';
@@ -11,11 +9,13 @@ import { authStore } from './store/authStore.js'; // не удалять!!! он
 import { sideBarStore } from "./store/sideBarStore.js"; // не удалять!!! он создает sidebarStore!!! (потом починим)
 import { userStore } from './store/userStore.js';
 import { Actions } from './actions/auth.js';
+import { startStore } from './store/startStore.js';
+import { winSettingsStore } from './store/winsettingsStore.js';
+import { winSettings } from './components/winSettings/winSettings.js';
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.querySelector('sideBar');
-const contentElement = document.createElement('main');
-rootElement.appendChild(contentElement);
+const contentElement = document.querySelector('main');
 
 const userIn = userStore.getUserState();
 window.activePage = '';
@@ -28,38 +28,8 @@ const config = setConfig({
   renderWinSettings,
   clickMyPage,
   renderSettings,
-  logout,
   renderStartPage,
 });
-
-/**
- * start function
- * @param {}
- *
- * @returns {}
- */
-async function enter() {
-  try {
-    // TODO убрал запрос на профиль перед запросом homePage
-    // const response = await request.get('/api/user/profile');
-    const result = await response.json();
-    if (result.login) {
-      userIn.usernameIn = result.name;
-      userIn.isAuthorizedIn = true;
-      const getPage = await request.get('/api/user/homePage');
-      const userHomePage = await getPage.json();
-      userIn.authorURL = userHomePage.creator_id;
-      userIn.isAuthorIn = userHomePage.is_creator;
-
-      Actions.renderSideBar(sideBarElement, userIn);
-      renderStartPage(contentElement);
-    }
-  } catch (err) {
-    Actions.renderSideBar(sideBarElement, userIn);
-    renderStartPage(contentElement);
-    console.log(err);
-  }
-}
 
 /**
  * rendering registration
@@ -89,22 +59,6 @@ function renderRegister(parent) {
       reg.removeReg();
     }
   });
-}
-
-/**
- * log out
- * @param {}
- *
- * @returns {}
- */
-async function logout() {
-  await request.get('/api/auth/logout');
-  userIn.loginIn = '';
-  userIn.usernameIn = '';
-  userIn.isAuthorIn = false;
-  userIn.isAuthorizedIn = false;
-  Actions.renderSideBar(sideBarElement, userIn);
-  renderStartPage(contentElement);
 }
 
 /**
@@ -175,7 +129,7 @@ function renderMyPage(parent, config) {
  *
  * @returns {}
  */
-async function clickMyPage(parent) {
+export async function clickMyPage(parent) {
   const creatorPage = await request.get(`/api/creator/page/${config.user.authorURL}`);
   const result = await creatorPage.json();
   result.posts.forEach((post) => {
@@ -188,4 +142,4 @@ async function clickMyPage(parent) {
   renderMyPage(parent, result);
 }
 
-enter();
+Actions.start();
