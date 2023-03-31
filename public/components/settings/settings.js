@@ -1,25 +1,29 @@
-export class Settings {
+const contentElement = document.querySelector('main');
+
+class Settings {
   #parent;
 
-  #config;
+  #user;
 
   constructor(parent) {
     this.#parent = parent;
   }
 
   get config() {
-    return this.#config;
+    return this.#user;
   }
 
-  set config(config) {
-    this.#config = config;
+  set config(user) {
+    this.#user = user;
   }
 
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
     const template = Handlebars.templates.settings;
-    newDiv.innerHTML = template(this.#config.user);
+    newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const settings = new Settings(contentElement);

@@ -7,7 +7,7 @@ import { startPage } from '../components/startPage/startPage.js';
 
 const sideBarElement = document.querySelector('sideBar');
 
-export class StartStore {
+class StartStore {
   constructor() {
     dispatcher.register(this.reduce.bind(this));
     console.log('register startStore');

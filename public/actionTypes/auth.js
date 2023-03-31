@@ -18,4 +18,8 @@ export const ActionTypes = {
   RENDER_STARTPAGE: 'RENDER_STARTPAGE',
   // winSettings
   RENDER_WINSETTINGS: 'RENDER_WINSETTINGS',
+  // settings
+  RENDER_SETTINGS: 'RENDER_SETTINGS',
+  // myPage
+  RENDER_MYPAGE: 'RENDER_MYPAGE',
 };

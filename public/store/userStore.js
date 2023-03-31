@@ -5,7 +5,7 @@ import { Actions } from '../actions/auth.js';
 
 const sideBarElement = document.querySelector('sideBar');
 
-export class UserStore {
+class UserStore {
   #user;
 
   constructor() {

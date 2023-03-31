@@ -3,7 +3,7 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { auth } from '../components/authorization/auth.js';
 import { isValidLogin, isValidPassword } from '../modules/isValid.js';
 
-export class AuthStore {
+class AuthStore {
   #config;
 
   constructor() {

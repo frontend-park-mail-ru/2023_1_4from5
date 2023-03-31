@@ -7,7 +7,7 @@ import { winSettings } from '../components/winSettings/winSettings.js';
 
 const contentElement = document.querySelector('main');
 
-export class WinSettingsStore {
+class WinSettingsStore {
   #config;
 
   constructor() {
@@ -18,10 +18,7 @@ export class WinSettingsStore {
         id: 'winSetting-profile',
         showDisplay: userStore.getUserState().isAuthorIn, // TODO убрать getuserState
         parent: contentElement,
-        render() {
-          console.log('Моя страница');
-        },
-        // render: clickMyPage,
+        render: Actions.renderMyPage,
       },
       finance: {
         name: 'Мои доходы',
@@ -39,10 +36,7 @@ export class WinSettingsStore {
         id: 'winSetting-settings',
         showDisplay: true,
         parent: contentElement,
-        render() {
-          console.log('Настройки');
-        },
-        // render: renderSettings,
+        render: Actions.renderSettings,
       },
       logout: {
         name: 'Выйти',

@@ -3,7 +3,7 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { isValidLogin, isValidPassword } from '../modules/isValid.js';
 import { register } from '../components/register/reg.js';
 
-export class RegStore {
+class RegStore {
   #config;
 
   constructor() {

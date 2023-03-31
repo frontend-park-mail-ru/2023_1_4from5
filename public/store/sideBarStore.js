@@ -7,7 +7,7 @@ import { sideBar } from '../components/sideBar/sideBar.js';
 const rootElement = document.getElementById('root');
 const contentElement = document.querySelector('main');
 
-export class SideBarStore {
+class SideBarStore {
   #config;
 
   constructor() {

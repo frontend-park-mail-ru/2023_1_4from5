@@ -1,4 +1,6 @@
-export class MyPage {
+const contentElement = document.querySelector('main');
+
+class MyPage {
   #parent;
 
   #config;
@@ -23,3 +25,5 @@ export class MyPage {
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const myPage = new MyPage(contentElement);

@@ -84,4 +84,18 @@ export const Actions = {
       type: ActionTypes.RENDER_WINSETTINGS,
     });
   },
+
+  // settings
+  renderSettings() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_SETTINGS,
+    });
+  },
+
+  // myPage
+  renderMyPage() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_MYPAGE,
+    });
+  },
 };
