@@ -7,9 +7,6 @@ class AuthStore {
   #config;
 
   constructor() {
-    // this.#config = {
-    //   activePage: false,
-    // };
     dispatcher.register(this.reduce.bind(this));
     console.log('register auth');
   }
