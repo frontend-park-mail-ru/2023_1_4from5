@@ -87,8 +87,6 @@ class SideBarStore {
 
   // TODO перенести из constructConfig функцию сюда (не всю)
   setState(userIn) {
-    console.log('user', userIn);
-
     this.#config.feed.showDisplay = userIn.isAuthorizedIn;
     this.#config.findAuth.showDisplay = true;
     this.#config.subs.showDisplay = userIn.isAuthorizedIn;
@@ -109,7 +107,6 @@ class SideBarStore {
     switch (action.type) {
       case ActionTypes.RENDER_SIDEBAR:
         this.renderSideBar(action.parent, action.user);
-        console.log('RENDER_SIDEBAR');
         break;
       default:
         break;
