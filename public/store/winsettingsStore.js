@@ -1,6 +1,5 @@
 import { Actions } from '../actions/auth.js';
 import { userStore } from './userStore.js';
-import { clickMyPage } from '../index.js';
 import { ActionTypes } from '../actionTypes/auth.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { winSettings } from '../components/winSettings/winSettings.js';

@@ -15,3 +15,9 @@ import { myPageStore } from './store/myPageStore.js';
 
 window.activePage = '';
 Actions.start();
+
+// TODO роутер (MDN)
+// TODO вебпак
+// TODO основные экраны
+
+// TODO тех. требования
