@@ -6,7 +6,7 @@ import { authStore } from './store/authStore.js'; // не удалять!!! он
 import { userStore } from './store/userStore.js';
 import { Actions } from './actions/auth.js';
 import { startStore } from './store/startStore.js';
-import { sideBarStore } from "./store/sideBarStore.js"; // не удалять!!! он создает sidebarStore!!! (потом починим)
+import { sideBarStore } from './store/sideBarStore.js'; // не удалять!!! он создает sidebarStore!!! (потом починим)
 import { winSettingsStore } from './store/winsettingsStore.js';
 import { winSettings } from './components/winSettings/winSettings.js';
 import { regStore } from './store/regStore.js';
