@@ -25,6 +25,8 @@ export class Register {
       e.preventDefault();
       Actions.removeReg();
     });
+
+    history.pushState({}, '', 'reg');
   }
 
   /**
@@ -39,6 +41,8 @@ export class Register {
       lastReg.remove();
     }
     window.activePage = '';
+
+    history.back();
   }
 
   /**
