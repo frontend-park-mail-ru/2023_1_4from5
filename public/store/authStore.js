@@ -8,7 +8,6 @@ class AuthStore {
 
   constructor() {
     dispatcher.register(this.reduce.bind(this));
-    console.log('register auth');
   }
 
   setState(config) {
@@ -44,12 +43,10 @@ class AuthStore {
           errLogin,
           errPassword,
         });
-        console.log('AUTHORIZATION');
         break;
 
       case ActionTypes.REMOVE_AUTH:
         auth.removeAuth();
-        console.log('REMOVE_AUTH');
         break;
 
       default:

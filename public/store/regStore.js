@@ -49,12 +49,10 @@ class RegStore {
           errLogin,
           errPassword,
         });
-        console.log('REGISTRATION');
         break;
 
       case ActionTypes.REMOVE_REG:
         register.removeReg();
-        console.log('REMOVE_REg');
         break;
 
       default:

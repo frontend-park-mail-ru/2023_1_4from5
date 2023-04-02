@@ -32,6 +32,9 @@ export class Register {
       e.preventDefault();
       Actions.removeReg();
     });
+
+    history.pushState({}, '', 'reg');
+    window.dispatchEvent(new Event('popstate'));
   }
 
   /**

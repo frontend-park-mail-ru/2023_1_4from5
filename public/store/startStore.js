@@ -10,7 +10,6 @@ const sideBarElement = document.querySelector('sideBar');
 class StartStore {
   constructor() {
     dispatcher.register(this.reduce.bind(this));
-    console.log('register startStore');
   }
 
   async reduce(action) {
@@ -37,7 +36,6 @@ class StartStore {
           Actions.renderStartPage();
           console.log(err);
         }
-        console.log('START');
         break;
 
       case ActionTypes.RENDER_STARTPAGE:

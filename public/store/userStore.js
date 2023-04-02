@@ -36,7 +36,6 @@ class UserStore {
         const result = await getPage.json();
         this.setState(result);
         Actions.renderSideBar(sideBarElement, this.#user);
-        console.log('GET_USER');
         break;
 
       case ActionTypes.LOGOUT:
