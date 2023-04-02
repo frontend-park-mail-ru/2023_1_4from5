@@ -1,23 +1,21 @@
-export const enum pathsURLfrontend {
-  root = '/',
-  login = '/login',
-  register = '/signup',
-  myProfile = '/myProfile',
-  settings = '/settings'
-
-  country = '/country',
-  sight = '/sight',
-  trip = '/trip',
-  album = '/album',
-  sights = '/sights',
-  tag = '/tag',
-  users = '/user',
-  search = '/search',
-}
+export const URLS = {
+  root: '/',
+  auth: '/auth',
+  register: '/reg',
+};
 export function notifier(path) {
   switch (path.pathname) {
-    case pathsURLfrontend.
+    case URLS.root:
+      console.log('root');
+      break;
+    case URLS.auth:
+      console.log('auth');
+      break;
+    case URLS.register:
+      console.log('reg');
+      break;
     default:
+      console.log('undefined url');
       break;
   }
 }

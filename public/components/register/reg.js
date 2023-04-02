@@ -27,6 +27,7 @@ export class Register {
     });
 
     history.pushState({}, '', 'reg');
+    window.dispatchEvent(new Event('popstate'));
   }
 
   /**

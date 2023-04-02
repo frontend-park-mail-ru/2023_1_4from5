@@ -12,13 +12,11 @@ import { winSettings } from './components/winSettings/winSettings.js';
 import { regStore } from './store/regStore.js';
 import { settingsStore } from './store/settingsStore.js';
 import { myPageStore } from './store/myPageStore.js';
-console.log('START');
-window.activePage = '';
-Actions.start();
+import { router } from './modules/Router.js';
 
-window.addEventListener('load', () => {
-  console.log('path:', window.location.pathname);
-});
+window.activePage = '';
+router.start();
+Actions.start();
 
 // TODO роутер (MDN)
 // TODO вебпак
@@ -29,7 +27,7 @@ window.addEventListener('load', () => {
 // TODO вопросы к Саше
 /** -----------------------------------------------------------------------------------------------|
  * как решить проблему с урлами авторизации и регистрации (скорее всего 1 варик)
- * 1) не делать урлы для регистрации и авторизации
+ * >> 1) не делать урлы для регистрации и авторизации
  *        (как будто модальные окна) <-- бля отвечаю так делают ВК образование и бусти
  * 2) сделать ЁБНУТЫЙ чек предыдущего улра, чтобы отрисовать стартовую страничку либо поиска авторов
  * 3) рисовать стартовую страничку по дефолту
