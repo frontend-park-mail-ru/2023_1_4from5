@@ -12,6 +12,13 @@ export class Auth {
   }
 
   render() {
+    history.pushState({ activePage: 'auth' }, '', '/auth');
+    const eventInitDict = {
+      state: {
+        activePage: 'authDispatch',
+      },
+    };
+    window.dispatchEvent(new PopStateEvent('popstate', eventInitDict));
     const newDiv = document.createElement('div');
     newDiv.id = 'authDiv';
 
@@ -41,7 +48,6 @@ export class Auth {
       lastAuth.remove();
     }
     window.activePage = '';
-
     history.back();
   }
 

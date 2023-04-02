@@ -17,6 +17,13 @@ import { router } from './modules/Router.js';
 window.activePage = '';
 router.start();
 Actions.start();
+// window.addEventListener('popstate', (event) => {
+//   console.log('popstate', event);
+// });
+window.addEventListener('popstate', (event) => {
+  event.preventDefault();
+  console.log('popstate', event);
+});
 
 // TODO роутер (MDN)
 // TODO вебпак
