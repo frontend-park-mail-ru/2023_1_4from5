@@ -15,6 +15,13 @@ import { myPageStore } from './store/myPageStore.js';
 
 window.activePage = '';
 Actions.start();
+// window.addEventListener('popstate', (event) => {
+//   console.log('popstate', event);
+// });
+window.addEventListener('popstate', (event) => {
+  event.preventDefault();
+  console.log('popstate', event);
+});
 
 // TODO роутер (MDN)
 // TODO вебпак
