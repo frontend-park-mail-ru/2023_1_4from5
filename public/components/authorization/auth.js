@@ -31,9 +31,6 @@ export class Auth {
       e.preventDefault();
       Actions.removeAuth();
     });
-
-    history.pushState({}, '', 'auth');
-    window.dispatchEvent(new Event('popstate'));
   }
 
   /**
@@ -47,8 +44,6 @@ export class Auth {
     if (lastAuth) {
       lastAuth.remove();
     }
-    window.activePage = '';
-    history.back();
   }
 
   /**

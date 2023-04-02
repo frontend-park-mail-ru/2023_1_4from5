@@ -2,11 +2,11 @@ import { sideBar } from './components/sideBar/sideBar.js';
 import { startPage } from './components/startPage/startPage.js';
 import { Register } from './components/register/reg.js';
 import { request } from './modules/request.js';
-import { authStore } from './store/authStore.js'; // не удалять!!! он создает authStore!!! (потом починим)
+import { authStore } from './store/authStore.js';
 import { userStore } from './store/userStore.js';
 import { Actions } from './actions/auth.js';
 import { startStore } from './store/startStore.js';
-import { sideBarStore } from './store/sideBarStore.js'; // не удалять!!! он создает sidebarStore!!! (потом починим)
+import { sideBarStore } from './store/sideBarStore.js';
 import { winSettingsStore } from './store/winsettingsStore.js';
 import { winSettings } from './components/winSettings/winSettings.js';
 import { regStore } from './store/regStore.js';
@@ -14,16 +14,7 @@ import { settingsStore } from './store/settingsStore.js';
 import { myPageStore } from './store/myPageStore.js';
 import { router } from './modules/Router.js';
 
-window.activePage = '';
 router.start();
-Actions.start();
-// window.addEventListener('popstate', (event) => {
-//   console.log('popstate', event);
-// });
-window.addEventListener('popstate', (event) => {
-  event.preventDefault();
-  console.log('popstate', event);
-});
 
 // TODO роутер (MDN)
 // TODO вебпак
