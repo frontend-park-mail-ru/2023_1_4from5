@@ -1,4 +1,5 @@
 import { clickHandler } from '../../modules/handler.js';
+import { Actions } from '../../actions/auth.js';
 
 const contentElement = document.querySelector('main');
 
@@ -30,10 +31,10 @@ export class WinSettings {
     });
     this.#parent.appendChild(newDiv);
 
-    const closeBtn = document.getElementById('closeWinSettings');
-    closeBtn.addEventListener('click', (e) => {
+    const background = document.getElementById('background');
+    background.addEventListener('click', (e) => {
       e.preventDefault();
-      this.removeWinSettings();
+      Actions.removeWinSettings();
     });
   }
 
@@ -42,7 +43,6 @@ export class WinSettings {
     if (lastWinSettings) {
       lastWinSettings.remove();
     }
-    window.activePage = '';
   }
 }
 

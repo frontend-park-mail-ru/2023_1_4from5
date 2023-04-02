@@ -85,6 +85,12 @@ export const Actions = {
     });
   },
 
+  removeWinSettings() {
+    dispatcher.dispatch({
+      type: ActionTypes.REMOVE_WINSETTINGS,
+    });
+  },
+
   // settings
   renderSettings() {
     dispatcher.dispatch({

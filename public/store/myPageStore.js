@@ -11,23 +11,24 @@ class MyPageStore {
 
   async reduce(action) {
     switch (action.type) {
-      case ActionTypes.RENDER_MYPAGE:
-        const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
-        const result = await creatorPage.json();
-        result.posts.forEach((post) => {
-          const textArr = post.text.split('\\n');
-          post.textWithBreaks = [];
-          textArr.forEach((text) => {
-            post.textWithBreaks.push({ text });
-          });
-        });
-
-        myPage.config = result;
-        myPage.render();
-        break;
       default:
         break;
     }
+  }
+
+  async renderMyPage() {
+    const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+    const result = await creatorPage.json();
+    result.posts.forEach((post) => {
+      const textArr = post.text.split('\\n');
+      post.textWithBreaks = [];
+      textArr.forEach((text) => {
+        post.textWithBreaks.push({ text });
+      });
+    });
+
+    myPage.config = result;
+    myPage.render();
   }
 }
 

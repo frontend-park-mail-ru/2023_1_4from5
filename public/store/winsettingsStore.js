@@ -3,6 +3,8 @@ import { userStore } from './userStore.js';
 import { ActionTypes } from '../actionTypes/auth.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { winSettings } from '../components/winSettings/winSettings.js';
+import { router } from '../modules/Router.js';
+import { URLS } from '../modules/Notifier.js';
 
 const contentElement = document.querySelector('main');
 
@@ -13,11 +15,11 @@ class WinSettingsStore {
     this.#config = {
       profile: {
         name: 'Моя страница',
-        href: '/my_profile',
+        href: URLS.myPage,
         id: 'winSetting-profile',
         showDisplay: userStore.getUserState().isAuthorIn, // TODO убрать getuserState
         parent: contentElement,
-        render: Actions.renderMyPage,
+        render: router.go,
       },
       finance: {
         name: 'Мои доходы',
@@ -31,11 +33,11 @@ class WinSettingsStore {
       },
       settings: {
         name: 'Настройки',
-        href: '/settings',
+        href: URLS.settings,
         id: 'winSetting-settings',
         showDisplay: true,
         parent: contentElement,
-        render: Actions.renderSettings,
+        render: router.go,
       },
       logout: {
         name: 'Выйти',
@@ -60,6 +62,10 @@ class WinSettingsStore {
         this.setState(userStore.getUserState());
         winSettings.config = this.#config;
         winSettings.render();
+        break;
+
+      case ActionTypes.REMOVE_WINSETTINGS:
+        winSettings.removeWinSettings();
         break;
 
       default:

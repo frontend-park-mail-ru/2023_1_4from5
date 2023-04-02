@@ -10,13 +10,14 @@ class SettingsStore {
 
   reduce(action) {
     switch (action.type) {
-      case ActionTypes.RENDER_SETTINGS:
-        settings.config = userStore.getUserState();
-        settings.render();
-        break;
       default:
         break;
     }
+  }
+
+  renderSettings() {
+    settings.config = userStore.getUserState();
+    settings.render();
   }
 }
 

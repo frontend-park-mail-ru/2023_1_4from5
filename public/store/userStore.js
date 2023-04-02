@@ -44,6 +44,7 @@ class UserStore {
         this.#user.usernameIn = '';
         this.#user.isAuthorIn = false;
         this.#user.isAuthorizedIn = false;
+        Actions.removeWinSettings();
         Actions.renderSideBar(sideBarElement, this.#user);
         Actions.renderStartPage();
         break;
@@ -54,5 +55,3 @@ class UserStore {
 }
 
 export const userStore = new UserStore();
-
-// TODO при изменении инфы о юзере вызывать вторым действием стор сайт бара  и там обновлять данные

@@ -20,32 +20,6 @@ export function clickHandler(event, config) {
       }
     }
 
-    if (window.activePage === target.name) {
-      return;
-    }
-    if (!(target.id === 'sidebar-reg' || target.id === 'sidebar-auth' || target.id === 'sidebar-modalWindow')) {
-      target.parent.innerHTML = '';
-    }
-    window.activePage = target.name;
-
-    // TODO что лучше?
-    target.render();
-
-    // switch (target.id) {
-    //   case 'sidebar-auth':
-    //     Actions.renderAuth();
-    //     break;
-    //   case 'sidebar-reg':
-    //     Actions.renderReg();
-    //     break;
-    //   case 'sidebar-modalWindow':
-    //     Actions.renderWinSettings(userStore.getUserState()); // TODO исправить на action
-    //     break;
-    //   case 'winSetting-startPage':
-    //     Actions.logout();
-    //     break;
-    //   default:
-    //     break;
-    // }
+    target.render(target.href, '', target.parent);
   }
 }
