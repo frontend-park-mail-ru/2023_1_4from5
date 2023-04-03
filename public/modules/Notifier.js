@@ -18,7 +18,6 @@ export function notifier(path) {
       startStore.start();
       console.log('root');
       break;
-
     case URLS.myPage:
       myPageStore.renderMyPage(); // TODO асинхронная функция без await + есть связь router-store
       console.log('myPage');

@@ -1,3 +1,5 @@
+const template = require('./settings.handlebars');
+
 const contentElement = document.querySelector('main');
 
 class Settings {
@@ -20,7 +22,6 @@ class Settings {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
-    const template = Handlebars.templates.settings;
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
   }

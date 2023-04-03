@@ -1,7 +1,8 @@
-import { isValidLogin, isValidPassword } from '../../modules/isValid.js';
 import { request } from '../../modules/request.js';
 import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/auth.js';
+
+const template = require('./reg.handlebars');
 
 const rootElement = document.getElementById('root');
 
@@ -23,7 +24,6 @@ export class Register {
     const newDiv = document.createElement('div');
     newDiv.id = 'regDiv';
 
-    const template = Handlebars.templates.reg;
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
 
