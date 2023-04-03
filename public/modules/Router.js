@@ -1,4 +1,4 @@
-import { notifier } from './Notifier.js';
+import { notifier, URLS } from './Notifier.js';
 
 class Router {
   // стартовая функция
@@ -14,12 +14,13 @@ class Router {
   // переход на страницу
   go(path, data, parent) {
     const url = new URL(path, window.location.href);
-    if (window.location.pathname === path && url.searchParams.toString() === '') return;
+    if (window.location.pathname === path && data !== 'logout' && url.searchParams.toString() === '') return;
     if (parent) {
       parent.innerHTML = '';
     }
     if (data) {
       url.searchParams.append('id', data);
+      console.log(url);
     }
     notifier(url);
     window.history.pushState(data, path, path);

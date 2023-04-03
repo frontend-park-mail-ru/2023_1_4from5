@@ -37,20 +37,13 @@ class StartStore {
           const userHomePage = await getPage.json();
           userIn.authorURL = userHomePage.creator_id;
           userIn.isAuthorIn = userHomePage.is_creator;
-
-          Actions.renderSideBar(sideBarElement, userIn);
-          Actions.renderStartPage();
         }
-      } else {
-        Actions.renderSideBar(sideBarElement, userIn);
-        Actions.renderStartPage();
       }
     } catch (err) {
-      Actions.renderSideBar(sideBarElement, userIn);
-      Actions.renderStartPage();
-      console.log('render start');
       console.log(err);
     }
+    Actions.renderSideBar(sideBarElement, userIn);
+    Actions.renderStartPage();
   }
 }
 
