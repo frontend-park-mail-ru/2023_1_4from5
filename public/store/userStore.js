@@ -63,8 +63,7 @@ class UserStore {
     this.#user.isAuthorizedIn = false;
     Actions.removeWinSettings();
     Actions.renderSideBar(sideBarElement, this.#user);
-    parent.innerHTML = '';
-    router.go('/');
+    router.go('/', 'logout', parent);
   }
 }
 

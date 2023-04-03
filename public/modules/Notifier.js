@@ -15,6 +15,7 @@ export const URLS = { // TODO урлы в отдельный файл
 export function notifier(path) {
   switch (path.pathname) {
     case URLS.root:
+      console.log('notifier');
       startStore.start();
       console.log('root');
       break;
