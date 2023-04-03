@@ -34,3 +34,5 @@ router.start();
  */
 
 // TODO question: add to .gitignore .babelrc?
+
+// TODO не работает авторизация на Хроме (возможно только на локальном сервере)

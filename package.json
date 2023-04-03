@@ -24,7 +24,7 @@
     "lint": "eslint public",
     "webpack": "webpack --mode development",
     "webpackProd": "webpack --mode production",
-    "serve": "webpack serve --open --mode development",
+    "serve": "webpack serve --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
