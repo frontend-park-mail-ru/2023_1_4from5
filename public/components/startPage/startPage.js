@@ -14,13 +14,6 @@ export class StartPage {
   }
 
   render() {
-    history.pushState({ activePage: 'startPage' }, '', '/');
-    const eventInitDict = {
-      state: {
-        activePage: 'startPageDispatch',
-      },
-    };
-    window.dispatchEvent(new PopStateEvent('popstate', eventInitDict));
     const newDiv = document.createElement('div');
     newDiv.id = 'startPageDiv';
     newDiv.innerHTML = template();

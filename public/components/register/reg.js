@@ -14,13 +14,6 @@ export class Register {
   }
 
   render() {
-    history.pushState({ activePage: 'reg' }, '', '/reg');
-    const eventInitDict = {
-      state: {
-        activePage: 'regDispatch',
-      },
-    };
-    window.dispatchEvent(new PopStateEvent('popstate', eventInitDict));
     const newDiv = document.createElement('div');
     newDiv.id = 'regDiv';
 

@@ -14,7 +14,6 @@ import { settingsStore } from './store/settingsStore.js';
 import { myPageStore } from './store/myPageStore.js';
 import { router } from './modules/Router.js';
 
-
 router.start();
 
 // TODO роутер (MDN)
