@@ -2,6 +2,7 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/auth.js';
 import { request } from '../modules/request.js';
 import { Actions } from '../actions/auth.js';
+import { router } from '../modules/Router.js';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -22,6 +23,13 @@ class UserStore {
     return this.#user;
   }
 
+  setUserState(user) {
+    this.#user.usernameIn = user.usernameIn;
+    this.#user.isAuthorIn = user.isAuthorIn;
+    this.#user.isAuthorizedIn = user.isAuthorizedIn;
+    this.#user.authorURL = user.authorURL;
+  }
+
   setState(result) {
     this.#user.usernameIn = result.name;
     this.#user.isAuthorIn = result.is_creator;
@@ -39,18 +47,24 @@ class UserStore {
         break;
 
       case ActionTypes.LOGOUT:
-        await request.get('/api/auth/logout');
-        this.#user.loginIn = '';
-        this.#user.usernameIn = '';
-        this.#user.isAuthorIn = false;
-        this.#user.isAuthorizedIn = false;
-        Actions.removeWinSettings();
-        Actions.renderSideBar(sideBarElement, this.#user);
-        Actions.renderStartPage();
+        this.logout(action.parent);
         break;
+
       default:
         break;
     }
+  }
+
+  async logout(parent) {
+    await request.get('/api/auth/logout');
+    this.#user.loginIn = '';
+    this.#user.usernameIn = '';
+    this.#user.isAuthorIn = false;
+    this.#user.isAuthorizedIn = false;
+    Actions.removeWinSettings();
+    Actions.renderSideBar(sideBarElement, this.#user);
+    parent.innerHTML = '';
+    router.go('/');
   }
 }
 

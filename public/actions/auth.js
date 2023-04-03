@@ -63,9 +63,10 @@ export const Actions = {
     });
   },
 
-  logout() {
+  logout(href, data, parent) {
     dispatcher.dispatch({
       type: ActionTypes.LOGOUT,
+      parent,
     });
   },
 

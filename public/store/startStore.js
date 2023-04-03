@@ -48,6 +48,7 @@ class StartStore {
     } catch (err) {
       Actions.renderSideBar(sideBarElement, userIn);
       Actions.renderStartPage();
+      console.log('render start');
       console.log(err);
     }
   }

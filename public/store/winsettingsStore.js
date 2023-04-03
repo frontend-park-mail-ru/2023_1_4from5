@@ -41,7 +41,7 @@ class WinSettingsStore {
       },
       logout: {
         name: 'Выйти',
-        href: '/startPage',
+        href: URLS.root,
         id: 'winSetting-startPage',
         showDisplay: true,
         parent: contentElement,

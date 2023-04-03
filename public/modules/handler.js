@@ -1,6 +1,3 @@
-import { Actions } from '../actions/auth.js';
-import { userStore } from '../store/userStore.js';
-
 /**
  * function of click handler
  * @param {MouseEvent} event - event
@@ -19,7 +16,6 @@ export function clickHandler(event, config) {
         target = config[element];
       }
     }
-
     target.render(target.href, '', target.parent);
   }
 }
