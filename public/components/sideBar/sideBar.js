@@ -1,5 +1,7 @@
 import { clickHandler } from '../../modules/handler.js';
 
+const template = require('./sideBar.handlebars');
+
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
 rootElement.appendChild(sideBarElement);
@@ -32,7 +34,7 @@ export class SideBar {
     }
     const newDiv = document.createElement('div');
     newDiv.id = 'sidebarDiv';
-    const template = Handlebars.templates.sideBar;
+    // const template = templates.sideBar;
     newDiv.innerHTML = template(this.#config);
 
     this.#parent.appendChild(newDiv);

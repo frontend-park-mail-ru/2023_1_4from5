@@ -1,3 +1,5 @@
+const template = require('./startPage.handlebars');
+
 const rootElement = document.getElementById('root');
 const contentElement = document.createElement('main');
 rootElement.appendChild(contentElement);
@@ -19,7 +21,6 @@ export class StartPage {
     window.dispatchEvent(new PopStateEvent('popstate', eventInitDict));
     const newDiv = document.createElement('div');
     newDiv.id = 'startPageDiv';
-    const template = Handlebars.templates.startPage;
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
   }

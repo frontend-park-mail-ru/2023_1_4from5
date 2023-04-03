@@ -5,13 +5,26 @@
     "http-server": "^14.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "babel-loader": "^9.1.2",
     "eslint": "^8.36.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.5"
+    "eslint-plugin-import": "^2.27.5",
+    "filemanager-webpack-plugin": "^8.0.0",
+    "handlebars-loader": "^1.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.2"
   },
   "scripts": {
-    "build": "bash ./public/build.sh",
-    "dev": "http-server",
-    "lint": "eslint public"
+    "build (не нужен)": "bash ./public/build.sh",
+    "dev (не нужен)": "http-server",
+    "lint": "eslint public",
+    "webpack": "webpack --mode development",
+    "webpackProd": "webpack --mode production",
+    "serve": "webpack serve --open --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

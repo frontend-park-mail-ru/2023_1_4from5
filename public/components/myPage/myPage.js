@@ -1,3 +1,5 @@
+const template = require('./myPage.handlebars');
+
 const contentElement = document.querySelector('main');
 
 class MyPage {
@@ -20,7 +22,6 @@ class MyPage {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
-    const template = Handlebars.templates.myPage;
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
   }

@@ -2,6 +2,8 @@ import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/auth.js';
 import { request } from '../../modules/request.js';
 
+const template = require('./auth.handlebars');
+
 const rootElement = document.getElementById('root');
 
 export class Auth {
@@ -22,7 +24,6 @@ export class Auth {
     const newDiv = document.createElement('div');
     newDiv.id = 'authDiv';
 
-    const template = Handlebars.templates.auth;
     newDiv.innerHTML = template();
 
     this.#parent.appendChild(newDiv);

@@ -15,7 +15,7 @@ import { myPageStore } from './store/myPageStore.js';
 import { router } from './modules/Router.js';
 
 window.activePage = '';
-router.start();
+// router.start();
 Actions.start();
 // window.addEventListener('popstate', (event) => {
 //   console.log('popstate', event);
@@ -41,3 +41,5 @@ window.addEventListener('popstate', (event) => {
  * ------------------------------------------------------------------------------------------------|
  * что делать с ошибкой 404 при изменении урла?
  */
+
+// TODO question: add to .gitignore .babelrc?
