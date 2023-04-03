@@ -1,6 +1,8 @@
 import { clickHandler } from '../../modules/handler.js';
 import { Actions } from '../../actions/auth.js';
 
+const template = require('./winSettings.handlebars');
+
 const contentElement = document.querySelector('main');
 
 export class WinSettings {
@@ -23,7 +25,6 @@ export class WinSettings {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'winSettingsDiv';
-    const template = Handlebars.templates.winSettings;
     newDiv.innerHTML = template(this.#config);
 
     newDiv.addEventListener('click', (e) => {
