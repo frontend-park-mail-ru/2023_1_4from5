@@ -1,5 +1,5 @@
-import { sideBar } from './components/sideBar/sideBar.js';
 import { startPage } from './components/startPage/startPage.js';
+import { sideBar } from './components/sideBar/sideBar.js';
 import { Register } from './components/register/reg.js';
 import { request } from './modules/request.js';
 import { authStore } from './store/authStore.js';
