@@ -1,34 +1,33 @@
-import { startPage } from '../components/startPage/startPage.js';
+import { Actions } from '../actions/auth.js';
+import { request } from './request.js';
+import { userStore } from '../store/userStore.js';
 import { myPage } from '../components/myPage/myPage.js';
-import { settings } from '../components/settings/settings.js';
+import { settingsStore } from '../store/settingsStore.js';
+import { myPageStore } from '../store/myPageStore.js';
+import { startStore } from '../store/startStore.js';
 
-export const URLS = {
+export const URLS = { // TODO урлы в отдельный файл
   root: '/',
-  myPage: '/myPage',
+  myPage: '/my_profile',
   settings: '/settings',
-  auth: '/auth',
-  register: '/reg',
 };
+
 export function notifier(path) {
   switch (path.pathname) {
     case URLS.root:
-      startPage.render();
+      startStore.start();
       console.log('root');
       break;
     case URLS.myPage:
-      myPage.render();
+      myPageStore.renderMyPage(); // TODO асинхронная функция без await + есть связь router-store
       console.log('myPage');
       break;
+
     case URLS.settings:
-      settings.render();
+      settingsStore.renderSettings();
       console.log('settings');
       break;
-    case URLS.auth:
-      console.log('auth');
-      break;
-    case URLS.register:
-      console.log('reg');
-      break;
+
     default:
       console.log('undefined url');
       break;

@@ -1,6 +1,8 @@
 const template = require('./startPage.handlebars');
 
 const rootElement = document.getElementById('root');
+const sideBarElement = document.createElement('sideBar');
+rootElement.appendChild(sideBarElement);
 const contentElement = document.createElement('main');
 rootElement.appendChild(contentElement);
 

@@ -3,6 +3,8 @@ import { ActionTypes } from '../actionTypes/auth.js';
 import { userStore } from './userStore.js';
 import { Actions } from '../actions/auth.js';
 import { sideBar } from '../components/sideBar/sideBar.js';
+import { URLS } from '../modules/Notifier.js';
+import { router } from '../modules/Router.js';
 
 const rootElement = document.getElementById('root');
 const contentElement = document.querySelector('main');
@@ -25,13 +27,11 @@ class SideBarStore {
       },
       findAuth: {
         name: 'Поиск авторов',
-        href: '/find',
+        href: URLS.root,
         id: 'sidebar-find',
         showDisplay: true,
         parent: contentElement,
-        render() {
-          console.log('Поиск авторов');
-        },
+        render: router.go,
       },
       subs: {
         name: 'Мои подписки',

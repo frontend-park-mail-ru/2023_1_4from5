@@ -14,36 +14,42 @@ class StartStore {
 
   async reduce(action) {
     switch (action.type) {
-      case ActionTypes.START:
-        const userIn = userStore.getUserState();
-        try {
-          // TODO убрал запрос на профиль перед запросом homePage
-          const response = await request.get('/api/user/profile');
-          const result = await response.json();
-          if (result.login) {
-            userIn.usernameIn = result.name;
-            userIn.isAuthorizedIn = true;
-            const getPage = await request.get('/api/user/homePage');
-            const userHomePage = await getPage.json();
-            userIn.authorURL = userHomePage.creator_id;
-            userIn.isAuthorIn = userHomePage.is_creator;
-
-            Actions.renderSideBar(sideBarElement, userIn);
-            Actions.renderStartPage();
-          }
-        } catch (err) {
-          Actions.renderSideBar(sideBarElement, userIn);
-          Actions.renderStartPage();
-          console.log(err);
-        }
-        break;
-
       case ActionTypes.RENDER_STARTPAGE:
         startPage.render();
         break;
 
       default:
         break;
+    }
+  }
+
+  async start() {
+    const userIn = userStore.getUserState();
+    try {
+      // TODO убрал запрос на профиль перед запросом homePage
+      if (!userIn.isAuthorizedIn) {
+        const response = await request.get('/api/user/profile');
+        const result = await response.json();
+        if (result.login) {
+          userIn.usernameIn = result.name;
+          userIn.isAuthorizedIn = true;
+          const getPage = await request.get('/api/user/homePage');
+          const userHomePage = await getPage.json();
+          userIn.authorURL = userHomePage.creator_id;
+          userIn.isAuthorIn = userHomePage.is_creator;
+
+          Actions.renderSideBar(sideBarElement, userIn);
+          Actions.renderStartPage();
+        }
+      } else {
+        Actions.renderSideBar(sideBarElement, userIn);
+        Actions.renderStartPage();
+      }
+    } catch (err) {
+      Actions.renderSideBar(sideBarElement, userIn);
+      Actions.renderStartPage();
+      console.log('render start');
+      console.log(err);
     }
   }
 }

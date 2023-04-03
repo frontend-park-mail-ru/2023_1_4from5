@@ -63,9 +63,10 @@ export const Actions = {
     });
   },
 
-  logout() {
+  logout(href, data, parent) {
     dispatcher.dispatch({
       type: ActionTypes.LOGOUT,
+      parent,
     });
   },
 
@@ -82,6 +83,12 @@ export const Actions = {
   renderWinSettings() {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_WINSETTINGS,
+    });
+  },
+
+  removeWinSettings() {
+    dispatcher.dispatch({
+      type: ActionTypes.REMOVE_WINSETTINGS,
     });
   },
 
