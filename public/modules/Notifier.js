@@ -1,7 +1,4 @@
 import { Actions } from '../actions/auth.js';
-import { request } from './request.js';
-import { userStore } from '../store/userStore.js';
-import { myPage } from '../components/myPage/myPage.js';
 import { settingsStore } from '../store/settingsStore.js';
 import { myPageStore } from '../store/myPageStore.js';
 import { startStore } from '../store/startStore.js';
@@ -12,11 +9,15 @@ export const URLS = { // TODO урлы в отдельный файл
   settings: '/settings',
 };
 
-export function notifier(path) {
+export function notifier(path, flagStart) {
   switch (path.pathname) {
     case URLS.root:
       console.log('notifier');
-      startStore.start();
+      if (flagStart) {
+        startStore.start();
+      }
+      // TODO BAD action in router
+      Actions.renderStartPage();
       console.log('root');
       break;
     case URLS.myPage:

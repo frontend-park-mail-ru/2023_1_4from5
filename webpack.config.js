@@ -73,9 +73,15 @@ module.exports = {
   devServer: {
     watchFiles: path.join(__dirname, 'public'),
     // contentBase: path.join(__dirname, 'public'), // указываем папку с вашим index.html
-    historyApiFallback: {
-      index: '/', // указываем, что при запросе к любому пути, кроме API, нужно отправлять index.html
-    },
+    historyApiFallback: true,
+    // historyApiFallback: {
+    //   index: '/', // указываем, что при запросе к любому пути, кроме API, нужно отправлять index.html
+    // },
     port: 8080,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+    },
   },
 };
