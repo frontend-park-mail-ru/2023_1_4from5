@@ -4,6 +4,7 @@ class Router {
   // стартовая функция
   start() {
     const url = new URL(window.location.href); // это встроенный класс
+    console.log(url);
     notifier(url);
 
     window.onpopstate = () => {
