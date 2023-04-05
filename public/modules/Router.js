@@ -1,4 +1,5 @@
 import { notifier, URLS } from './Notifier.js';
+import { startStore } from '../store/startStore.js';
 
 // TODO при ходьбе вперёд/назад (кнопочки) не чистятся прошлые страницы и всё рендерится внизу
 // TODO если ты авторизован и вводишь урл settings, сбивается юзер
@@ -6,13 +7,14 @@ import { notifier, URLS } from './Notifier.js';
 
 class Router {
   // стартовая функция
-  start() {
+  async start() {
     const url = new URL(window.location.href); // это встроенный класс
     console.log(url);
-    notifier(url);
+    await startStore.start();
+    notifier(url, false);
 
     window.onpopstate = () => {
-      notifier(new URL(window.location.href));
+      notifier(new URL(window.location.href), true);
     };
   }
 
