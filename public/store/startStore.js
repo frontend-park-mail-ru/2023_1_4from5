@@ -24,6 +24,7 @@ class StartStore {
   }
 
   async start() {
+    console.log('startStore::start');
     const userIn = userStore.getUserState();
     try {
       // TODO убрал запрос на профиль перед запросом homePage
@@ -43,7 +44,7 @@ class StartStore {
       console.log(err);
     }
     Actions.renderSideBar(sideBarElement, userIn);
-    Actions.renderStartPage();
+    // Actions.renderStartPage();
   }
 }
 
