@@ -4,7 +4,6 @@ class Router {
   // стартовая функция
   start() {
     const url = new URL(window.location.href); // это встроенный класс
-    console.log(url);
     notifier(url);
 
     window.onpopstate = () => {
@@ -23,7 +22,7 @@ class Router {
       url.searchParams.append('id', data);
       console.log(url);
     }
-    notifier(url);
+    notifier(url, data, parent);
     window.history.pushState(data, path, path);
     //   тут наверное еще можно вызывать window.dispatchEvent(new Event('popstate'));
   }

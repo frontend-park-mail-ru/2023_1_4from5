@@ -1,3 +1,12 @@
+@import './components/sideBar/sideBar.css';
+@import './components/authorization/auth.css';
+@import './components/register/reg.css';
+@import './components/winSettings/winSettings.css';
+@import './components/settings/settings.css';
+@import './components/myPage/myPage.css';
+@import './components/startPage/startPage.css';
+@import './components/404/page404.css';
+
 #root {
     min-height: 100vh;
     font-family: 'Lato', sans-serif;

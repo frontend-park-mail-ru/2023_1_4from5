@@ -1,3 +1,5 @@
+import './index.css';
+
 import { startPage } from './components/startPage/startPage.js';
 import { sideBar } from './components/sideBar/sideBar.js';
 import { Register } from './components/register/reg.js';
@@ -14,7 +16,12 @@ import { settingsStore } from './store/settingsStore.js';
 import { myPageStore } from './store/myPageStore.js';
 import { router } from './modules/Router.js';
 
-router.start();
+begin();
+
+async function begin() {
+  await startStore.start();
+  router.start();
+}
 // TODO роутер (MDN)
 // TODO вебпак
 // TODO основные экраны
@@ -22,14 +29,9 @@ router.start();
 // TODO тех. требования
 
 // TODO вопросы к Саше
-/** -----------------------------------------------------------------------------------------------|
- * как решить проблему с урлами авторизации и регистрации (скорее всего 1 варик)
- * >> 1) не делать урлы для регистрации и авторизации
- *        (как будто модальные окна) <-- бля отвечаю так делают ВК образование и бусти
- * 2) сделать ЁБНУТЫЙ чек предыдущего улра, чтобы отрисовать стартовую страничку либо поиска авторов
- * 3) рисовать стартовую страничку по дефолту
- * ------------------------------------------------------------------------------------------------|
- * что делать с ошибкой 404 при изменении урла?
- */
 
 // TODO question: add to .gitignore .babelrc?
+
+// TODO не работает авторизация на Хроме (возможно только на локальном сервере)
+
+// TODO для поключения scss and acss в webpack в конфиге читать https://habr.com/ru/articles/701724/#загрузка-стилей-в-webpack
