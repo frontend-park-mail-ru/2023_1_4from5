@@ -17,7 +17,6 @@ import { myPageStore } from './store/myPageStore.js';
 import { router } from './modules/Router.js';
 
 router.start();
-
 // TODO роутер (MDN)
 // TODO вебпак
 // TODO основные экраны

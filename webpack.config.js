@@ -76,6 +76,6 @@ module.exports = {
     historyApiFallback: {
       index: '/', // указываем, что при запросе к любому пути, кроме API, нужно отправлять index.html
     },
-    port: 9000,
+    port: 8080,
   },
 };
