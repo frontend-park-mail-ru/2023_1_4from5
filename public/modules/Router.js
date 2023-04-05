@@ -1,20 +1,18 @@
 import { notifier, URLS } from './Notifier.js';
-import { startStore } from '../store/startStore.js';
 
-// TODO при ходьбе вперёд/назад (кнопочки) не чистятся прошлые страницы и всё рендерится внизу
-// TODO если ты авторизован и вводишь урл settings, сбивается юзер
-// TODO не работают запрос my_profile (cors)
+//  при ходьбе вперёд/назад (кнопочки) не чистятся прошлые страницы и всё рендерится внизу
+//  если ты авторизован и вводишь урл settings, сбивается юзер
+//  не работают запрос my_profile (cors)
+//  кажется, всё починил
 
 class Router {
   // стартовая функция
-  async start() {
+  start() {
     const url = new URL(window.location.href); // это встроенный класс
-    console.log(url);
-    await startStore.start();
-    notifier(url, false);
+    notifier(url);
 
     window.onpopstate = () => {
-      notifier(new URL(window.location.href), true);
+      notifier(new URL(window.location.href));
     };
   }
 
