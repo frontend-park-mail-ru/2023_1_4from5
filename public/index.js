@@ -1,3 +1,5 @@
+import './index.css';
+
 import { startPage } from './components/startPage/startPage.js';
 import { sideBar } from './components/sideBar/sideBar.js';
 import { Register } from './components/register/reg.js';
@@ -36,3 +38,5 @@ router.start();
 // TODO question: add to .gitignore .babelrc?
 
 // TODO не работает авторизация на Хроме (возможно только на локальном сервере)
+
+// TODO для поключения scss and acss в webpack в конфиге читать https://habr.com/ru/articles/701724/#загрузка-стилей-в-webpack
