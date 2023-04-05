@@ -40,6 +40,6 @@ module.exports = {
   ],
   devServer: {
     watchFiles: path.join(__dirname, 'public'),
-    port: 9000,
+    port: 8080,
   },
 };
