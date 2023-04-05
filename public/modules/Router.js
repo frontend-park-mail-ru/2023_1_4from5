@@ -1,10 +1,5 @@
 import { notifier, URLS } from './Notifier.js';
 
-//  при ходьбе вперёд/назад (кнопочки) не чистятся прошлые страницы и всё рендерится внизу
-//  если ты авторизован и вводишь урл settings, сбивается юзер
-//  не работают запрос my_profile (cors)
-//  кажется, всё починил
-
 class Router {
   // стартовая функция
   start() {
@@ -27,7 +22,7 @@ class Router {
       url.searchParams.append('id', data);
       console.log(url);
     }
-    notifier(url);
+    notifier(url, data, parent);
     window.history.pushState(data, path, path);
     //   тут наверное еще можно вызывать window.dispatchEvent(new Event('popstate'));
   }

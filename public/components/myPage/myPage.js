@@ -19,7 +19,12 @@ class MyPage {
     this.#config = config;
   }
 
+  getParent() {
+    return this.#parent;
+  }
+
   render() {
+    this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
     newDiv.innerHTML = template(this.#config);

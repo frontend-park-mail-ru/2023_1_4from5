@@ -14,6 +14,7 @@ export class StartPage {
   }
 
   render() {
+    this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'startPageDiv';
     newDiv.innerHTML = template();
