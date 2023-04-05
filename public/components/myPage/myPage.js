@@ -1,4 +1,8 @@
-export class MyPage {
+const template = require('./myPage.handlebars');
+
+const contentElement = document.querySelector('main');
+
+class MyPage {
   #parent;
 
   #config;
@@ -18,8 +22,9 @@ export class MyPage {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
-    const template = Handlebars.templates.myPage;
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const myPage = new MyPage(contentElement);

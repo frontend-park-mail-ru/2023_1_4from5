@@ -1,5 +1,10 @@
 import { clickHandler } from '../../modules/handler.js';
 
+const template = require('./sideBar.handlebars');
+
+const sideBarElement = document.querySelector('sideBar');
+
+
 export class SideBar {
   #parent;
 
@@ -7,6 +12,10 @@ export class SideBar {
 
   constructor(parent) {
     this.#parent = parent;
+    const handler = (event) => {
+      clickHandler(event, this.#config);
+    };
+    this.#parent.addEventListener('click', handler);
   }
 
   get config() {
@@ -24,12 +33,11 @@ export class SideBar {
     }
     const newDiv = document.createElement('div');
     newDiv.id = 'sidebarDiv';
-    const template = Handlebars.templates.sideBar;
+    // const template = templates.sideBar;
     newDiv.innerHTML = template(this.#config);
 
-    this.#parent.addEventListener('click', (event) => {
-      clickHandler(event, this.#config.general, this.#config);
-    });
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const sideBar = new SideBar(sideBarElement);

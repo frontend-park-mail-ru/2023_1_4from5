@@ -1,3 +1,11 @@
+const template = require('./startPage.handlebars');
+
+const rootElement = document.getElementById('root');
+const sideBarElement = document.createElement('sideBar');
+rootElement.appendChild(sideBarElement);
+const contentElement = document.createElement('main');
+rootElement.appendChild(contentElement);
+
 export class StartPage {
   #parent;
 
@@ -8,8 +16,9 @@ export class StartPage {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'startPageDiv';
-    const template = Handlebars.templates.startPage;
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
   }
 }
+
+export const startPage = new StartPage(contentElement);
