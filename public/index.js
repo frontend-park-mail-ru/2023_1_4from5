@@ -22,13 +22,10 @@ async function begin() {
   await startStore.start();
   router.start();
 }
-// TODO роутер (MDN)
-// TODO вебпак
+/
 // TODO основные экраны
 
 // TODO тех. требования
-
-// TODO вопросы к Саше
 
 // TODO question: add to .gitignore .babelrc?
 
