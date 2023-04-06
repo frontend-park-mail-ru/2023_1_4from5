@@ -3,9 +3,27 @@
 <div id="myPage">
     <div class="container">
         <div class="box-1">
-            <p>{{creator_info.followers_count}} подписчиков</p>
-            <div class="subs-btn-container">
-                <button id="subs-btn" class="subs-btn">Создать пост</button>
+            <div class="box1-btn-container">
+                {{#if is_my_page}}
+                    <button id="createPost-btn" class="subs-btn">Создать пост</button>
+                {{else}}
+                    <button id="subs-btn" class="subs-btn">Подписаться</button>
+                {{/if}}
+            </div>
+            <div class="box1-info">
+                <p class="box1-info-text">
+                    <img id="circle-icon" width="10" src="./images/circle_icon.png" alt="#">
+                    {{creator_info.followers_count}} подписчиков
+                </p>
+                <p class="box1-info-text">
+                    <img id="circle-icon" width="10" src="./images/circle_icon.png" alt="#">
+                    10000 Руб/месяц
+                </p>
+            </div>
+            <div class="box1-info">
+                <p>Цели</p>
+                <p>120 из 500 рублей</p>
+                <button id="subs-btn" class="subs-btn">Отправить донат</button>
             </div>
         </div>
         <div class="box-2">
