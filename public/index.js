@@ -16,9 +16,13 @@ import { settingsStore } from './store/settingsStore.js';
 import { myPageStore } from './store/myPageStore.js';
 import { router } from './modules/Router.js';
 
-startStore.start();
-router.start();
+begin();
 
+async function begin() {
+  await startStore.start();
+  router.start();
+}
+/
 // TODO основные экраны
 
 // TODO тех. требования
