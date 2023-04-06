@@ -20,6 +20,7 @@ class Settings {
   }
 
   render() {
+    this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
     newDiv.innerHTML = template(this.#user);
