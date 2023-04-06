@@ -27,7 +27,6 @@ class StartStore {
     console.log('startStore::start');
     const userIn = userStore.getUserState();
     try {
-      // TODO убрал запрос на профиль перед запросом homePage
       if (!userIn.isAuthorizedIn) {
         const response = await request.get('/api/user/profile');
         const result = await response.json();

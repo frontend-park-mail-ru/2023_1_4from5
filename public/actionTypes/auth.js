@@ -23,4 +23,6 @@ export const ActionTypes = {
   RENDER_SETTINGS: 'RENDER_SETTINGS',
   // myPage
   RENDER_MYPAGE: 'RENDER_MYPAGE',
+  // CRUD post
+  CREATE_POST: 'CREATE_POST',
 };

@@ -105,4 +105,12 @@ export const Actions = {
       type: ActionTypes.RENDER_MYPAGE,
     });
   },
+
+  // CRUD post
+  createPost() {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATE_POST,
+      input,
+    });
+  },
 };
