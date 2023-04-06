@@ -2,3 +2,25 @@
     margin-left: 10em;
     margin-right: 10em;
 }
+.container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 20% 60% 20%;
+}
+.myPage-header {
+    margin: 5em 10em 2em 5em;
+}
+
+.subs-btn-container {
+    text-align: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.3em;
+}
+
+.subs-btn {
+    margin: auto;
+    height: 2em;
+    width: 80%;
+    border-radius: 0.7em;
+    font-size: 1.3em;
+}
