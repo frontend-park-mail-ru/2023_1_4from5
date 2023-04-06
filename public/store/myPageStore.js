@@ -9,7 +9,7 @@ class MyPageStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  async reduce(action) {
+  reduce(action) {
     switch (action.type) {
       default:
         break;

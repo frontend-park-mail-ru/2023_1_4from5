@@ -1,4 +1,5 @@
-import { Actions } from '../../actions/auth';
+import { Actions } from '../../actions/auth.js';
+import { request } from '../../modules/request';
 
 const template = require('./newPost.handlebars');
 
