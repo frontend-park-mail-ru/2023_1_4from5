@@ -107,7 +107,7 @@ export const Actions = {
   },
 
   // CRUD post
-  createPost() {
+  createPost(input) {
     dispatcher.dispatch({
       type: ActionTypes.CREATE_POST,
       input,

@@ -3,12 +3,13 @@ import { settingsStore } from '../store/settingsStore.js';
 import { myPageStore } from '../store/myPageStore.js';
 import { userStore } from '../store/userStore';
 import { router } from './Router';
+import { newPostStore } from '../store/newPostStore';
 
 export const URLS = { // TODO урлы в отдельный файл
   root: '/',
   myPage: '/myPage',
   settings: '/settings',
-  newPost: 'newPost',
+  newPost: '/newPost',
 };
 
 export function notifier(path, data, parent) {
@@ -36,6 +37,7 @@ export function notifier(path, data, parent) {
       break;
 
     case URLS.newPost:
+      newPostStore.renderNewPost();
       console.log('new post');
       break;
 

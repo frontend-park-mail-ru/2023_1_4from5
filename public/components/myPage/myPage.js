@@ -1,3 +1,6 @@
+import { router } from '../../modules/Router.js';
+import { URLS } from '../../modules/Notifier.js';
+
 const template = require('./myPage.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -29,6 +32,12 @@ class MyPage {
     newDiv.id = 'myPageDiv';
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
+
+    const createPostBtn = document.getElementById('subs-btn');
+    createPostBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.go(URLS.newPost, '', this.getParent());
+    });
   }
 }
 
