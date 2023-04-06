@@ -6,17 +6,16 @@ import { router } from './Router';
 
 export const URLS = { // TODO урлы в отдельный файл
   root: '/',
-  myPage: '/my_profile',
+  myPage: '/myPage',
   settings: '/settings',
+  newPost: 'newPost',
 };
 
 export function notifier(path, data, parent) {
   switch (path.pathname) {
     case URLS.root:
-      console.log('notifier');
       // TODO BAD action in notifier
       Actions.renderStartPage();
-      console.log('root');
       break;
 
     case URLS.myPage:
@@ -25,7 +24,6 @@ export function notifier(path, data, parent) {
       } else {
         router.go('/', data, parent);
       }
-      console.log('myPage');
       break;
 
     case URLS.settings:
@@ -35,7 +33,10 @@ export function notifier(path, data, parent) {
       } else {
         router.go('/', data, parent);
       }
-      console.log('settings');
+      break;
+
+    case URLS.newPost:
+      console.log('new post');
       break;
 
     default:

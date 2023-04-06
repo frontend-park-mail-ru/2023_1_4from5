@@ -17,7 +17,7 @@ class WinSettingsStore {
         name: 'Моя страница',
         href: URLS.myPage,
         id: 'winSetting-profile',
-        showDisplay: userStore.getUserState().isAuthorIn, // TODO убрать getuserState
+        showDisplay: userStore.getUserState().isAuthorIn, // TODO ? убрать getuserState
         parent: contentElement,
         render: router.go,
       },
