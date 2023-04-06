@@ -50,6 +50,12 @@
     padding-bottom: 1.3em;
 }
 
+.box1-info-container {
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
 .box1-info {
     border: 1px solid #7f7e7e;
 }
