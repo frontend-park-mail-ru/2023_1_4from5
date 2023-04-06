@@ -2,14 +2,22 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { myPage } from '../components/myPage/myPage.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
+import { ActionTypes } from '../actionTypes/auth';
 
 class MyPageStore {
   constructor() {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  reduce(action) {
+  async reduce(action) {
     switch (action.type) {
+      case ActionTypes.DELETE_POST:
+        await request.get(`/api/post/delete/${action.postId}`);
+        await request.delete(`/api/post/delete/${action.postId}`);
+        await this.renderMyPage();
+        console.log('deleted');
+        break;
+
       default:
         break;
     }

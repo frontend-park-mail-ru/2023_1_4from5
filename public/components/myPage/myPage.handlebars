@@ -35,11 +35,11 @@
                 <h3>О моем блоге: {{creator_info.description}}</h3>
             </div>
             {{#each posts}}
-                <div class="postContainer">
+                <div class="postContainer" id="{{id}}">
                     <div class="postContainer-header">
                         <h4 class="post-title">{{title}}</h4>
                         <img id="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">
-                        <img id="delete-icon" width="25" src="./images/delete_ic_icon.png" alt="delete-icon">
+                        <img id="delete-icon" class="delete-icon" width="25" src="./images/delete_ic_icon.png" alt="delete-icon">
                     </div>
                     {{#each textWithBreaks}}
                         <p class="post-text">{{text}}</p>

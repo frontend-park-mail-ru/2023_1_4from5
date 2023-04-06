@@ -25,4 +25,5 @@ export const ActionTypes = {
   RENDER_MYPAGE: 'RENDER_MYPAGE',
   // CRUD post
   CREATE_POST: 'CREATE_POST',
+  DELETE_POST: 'DELETE_POST',
 };
