@@ -13,26 +13,36 @@
             <div class="box1-info">
                 <p class="box1-info-text">
                     <img id="circle-icon" width="10" src="./images/circle_icon.png" alt="#">
-                    {{creator_info.followers_count}} подписчиков
+                    Подписчиков:  {{creator_info.followers_count}}
                 </p>
                 <p class="box1-info-text">
                     <img id="circle-icon" width="10" src="./images/circle_icon.png" alt="#">
-                    10000 Руб/месяц
+                    Доход в месяц: 10000 Руб
                 </p>
             </div>
             <div class="box1-info">
                 <p>Цели</p>
                 <p>120 из 500 рублей</p>
-                <button id="subs-btn" class="subs-btn">Отправить донат</button>
+                {{#unless is_my_page}}
+                    <button id="subs-btn" class="subs-btn">Отправить донат</button>
+                {{/unless}}
             </div>
         </div>
         <div class="box-2">
-            <h3>О моем блоге: {{creator_info.description}}</h3>
+            <div class="aboutAuthorContainer">
+                <h3>О моем блоге: {{creator_info.description}}</h3>
+            </div>
             {{#each posts}}
-                <h4 class="post-title">{{title}}</h4>
-                {{#each textWithBreaks}}
-                    <p class="post-text">{{text}}</p>
-                {{/each}}
+                <div class="postContainer">
+                    <div class="postContainer-header">
+                        <h4 class="post-title">{{title}}</h4>
+                        <img id="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">
+                        <img id="delete-icon" width="25" src="./images/delete_ic_icon.png" alt="delete-icon">
+                    </div>
+                    {{#each textWithBreaks}}
+                        <p class="post-text">{{text}}</p>
+                    {{/each}}
+                </div>
             {{/each}}
         </div>
         <div class="box-3"><h3>Уровни подписки</h3></div>
