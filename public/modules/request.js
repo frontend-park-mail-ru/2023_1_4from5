@@ -31,7 +31,17 @@ export class Request {
   async post(path, content, contentType = 'application/json') {
     let body;
     if (contentType === 'multipart/form-data') {
-      body = content;
+      const boundary = String(Math.random()).slice(2);
+      const boundaryMiddle = `--${boundary}\r\n`;
+      const boundaryLast = `--${boundary}--\r\n`;
+      body = ['\r\n'];
+      for (let key in content) {
+        body.push(`Content-Disposition: form-data; name="${key}"\r\n\r\n${content[key]}\r\n`);
+      }
+      body = body.join(boundaryMiddle) + boundaryLast;
+
+      contentType = `multipart/form-data; boundary=${boundary}`;
+      // body = content;
     } else {
       body = JSON.stringify(content);
     }

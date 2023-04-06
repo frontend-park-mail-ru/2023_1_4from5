@@ -1,5 +1,4 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/auth.js';
 import { myPage } from '../components/myPage/myPage.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';

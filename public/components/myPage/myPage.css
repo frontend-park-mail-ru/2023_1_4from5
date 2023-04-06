@@ -8,13 +8,21 @@
     grid-template-columns: 20% 60% 20%;
 }
 .myPage-header {
-    margin: 5em 10em 2em 5em;
+    margin: 5em 10em 2em 6em;
 }
 
-.subs-btn-container {
+.box1-btn-container {
     text-align: center;
     padding-top: 1.5em;
     padding-bottom: 1.3em;
+}
+
+.box1-info {
+    border: 1px solid #7f7e7e;
+}
+
+.box1-info-text {
+    font-size: large;
 }
 
 .subs-btn {
@@ -23,4 +31,8 @@
     width: 80%;
     border-radius: 0.7em;
     font-size: 1.3em;
+}
+
+#circle-icon {
+    margin-left: 0.5em;
 }

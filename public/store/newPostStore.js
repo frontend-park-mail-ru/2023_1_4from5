@@ -16,11 +16,16 @@ class NewPostStore {
         const title = action.input.titleInput.value;
         const text = action.input.textInput.value;
 
-        const body = new FormData();
-        body.append('title', title);
-        body.append('text', text);
-        body.append('creator', userStore.getUserState().authorURL);
+        // const body = new FormData();
+        // body.append('title', title);
+        // body.append('text', text);
+        // body.append('creator', userStore.getUserState().authorURL);
 
+        const body = {
+          title,
+          text,
+          creator: userStore.getUserState().authorURL,
+        };
         console.log(body);
 
         await request.get('/api/post/create');
