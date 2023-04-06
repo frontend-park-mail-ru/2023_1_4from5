@@ -1,16 +1,25 @@
-<div class="newpost-form">
+<div class="newpost-form-container">
     <div class="newpost-header-container">
         <h1>Новый пост</h1>
     </div>
 
-    <form id="create-post">
+    <form id="create-post" class="newpost-form">
         <div class="newpost-title-container">
-            <label class="newpost-title-label">Название поста</label>
-            <input id="newpost-title-input" class="newpost-title-input" type="text">
+            <div class="newpost-title-label-container">
+                <label class="newpost-title-label">Название поста</label>
+            </div>
+            <div class="newpost-title-input-container">
+                <textarea id="newpost-title-input" class="newpost-title-input" type="text"></textarea>
+            </div>
         </div>
+
         <div class="newpost-text-container">
-            <label class="newpost-text-label">Текст</label>
-            <input id="newpost-text-input" class="newpost-text-input" type="text">
+            <div class="newpost-text-label-container">
+                <label class="newpost-text-label">Текст</label>
+            </div>
+            <div class="newpost-text-input-container">
+                <textarea id="newpost-text-input" class="newpost-text-input" type="text"></textarea>
+            </div>
         </div>
 
         <div class="newpost-btn-container">
