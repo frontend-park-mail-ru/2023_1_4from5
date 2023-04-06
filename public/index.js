@@ -22,7 +22,7 @@ async function begin() {
   await startStore.start();
   router.start();
 }
-/
+
 // TODO основные экраны
 
 // TODO тех. требования
