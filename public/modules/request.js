@@ -13,6 +13,7 @@ export class Request {
    * @returns {Promise} - response
    */
   async get(path) {
+    console.log('GET_REQUEST');
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.GET,
       mode: 'cors',
