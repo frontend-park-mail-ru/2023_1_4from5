@@ -85,7 +85,6 @@ class SideBarStore {
     return this.#config;
   }
 
-  // TODO перенести из constructConfig функцию сюда (не всю)
   setState(userIn) {
     this.#config.feed.showDisplay = userIn.isAuthorizedIn;
     this.#config.findAuth.showDisplay = true;
