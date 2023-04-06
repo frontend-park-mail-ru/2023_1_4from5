@@ -6,6 +6,7 @@
 @import './components/myPage/myPage.css';
 @import './components/startPage/startPage.css';
 @import './components/404/page404.css';
+@import './components/newPost/newPost.css';
 
 #root {
     min-height: 100vh;

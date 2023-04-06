@@ -42,7 +42,6 @@ export class Request {
       body = body.join(boundaryMiddle) + boundaryLast;
 
       contentType = `multipart/form-data; boundary=${boundary}`;
-      // body = content;
     } else {
       body = JSON.stringify(content);
     }
