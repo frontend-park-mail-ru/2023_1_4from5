@@ -1,5 +1,6 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
+import { Actions } from '../../actions/auth';
 
 // TODO закинуть посты в контейнер
 // TODO лайки
@@ -46,6 +47,17 @@ class MyPage {
       e.preventDefault();
       router.go(URLS.newPost, '', this.getParent());
     });
+
+    let deletePostBtns = document.querySelectorAll('.delete-icon');
+    for (let index = 0; index < deletePostBtns.length; index++) {
+      const button = deletePostBtns[index];
+      button.addEventListener('click', this.deleteHandler);
+    }
+  }
+
+  deleteHandler(e) {
+    e.preventDefault();
+    Actions.deletePost(e.currentTarget.parentElement.parentElement.id);
   }
 }
 

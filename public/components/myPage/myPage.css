@@ -56,8 +56,10 @@
 
 #pencil-icon {
     margin-top: 1em;
+    cursor: pointer;
 }
 
 #delete-icon {
     margin-top: 0.85em;
+    cursor: pointer;
 }

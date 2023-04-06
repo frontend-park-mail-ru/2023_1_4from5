@@ -113,4 +113,11 @@ export const Actions = {
       input,
     });
   },
+
+  deletePost(postId) {
+    dispatcher.dispatch({
+      type: ActionTypes.DELETE_POST,
+      postId,
+    });
+  },
 };
