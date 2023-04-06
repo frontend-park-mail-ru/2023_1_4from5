@@ -1,6 +1,15 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 
+// TODO закинуть посты в контейнер
+//
+// TODO лайки
+// TODO если пользователь подписан, то кнопка Вы подписаны
+// TODO кнопка Отправить донат только, если ты юзер
+// TODO добавить возможность редактирования цели, постов
+// TODO добавить иконку редактирования в целях, уровнях подписки, об авторе
+// TODO при нажатии на подписку предлагает на выбор подписку либо без неё
+
 const template = require('./myPage.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -33,7 +42,7 @@ class MyPage {
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
-    const createPostBtn = document.getElementById('subs-btn');
+    const createPostBtn = document.getElementById('createPost-btn');
     createPostBtn.addEventListener('click', (e) => {
       e.preventDefault();
       router.go(URLS.newPost, '', this.getParent());
