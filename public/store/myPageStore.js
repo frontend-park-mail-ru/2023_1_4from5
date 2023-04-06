@@ -16,6 +16,7 @@ class MyPageStore {
   }
 
   async renderMyPage() {
+    console.log(userStore.getUserState().authorURL);
     const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     const result = await creatorPage.json();
     result.posts.forEach((post) => {
@@ -25,6 +26,8 @@ class MyPageStore {
         post.textWithBreaks.push({ text });
       });
     });
+
+    console.log(result);
 
     myPage.config = result;
     myPage.render();

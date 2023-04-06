@@ -7,6 +7,23 @@
     gap: 20px;
     grid-template-columns: 20% 60% 20%;
 }
+
+.postContainer {
+    border: 1px solid #7f7e7e;
+    margin-top: 1.5em;
+}
+
+.aboutAuthorContainer {
+    border: 1px solid #7f7e7e;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.postContainer-header {
+    display: grid;
+    grid-template-columns: 90% 5% 5%;
+}
+
 .myPage-header {
     margin: 5em 10em 2em 6em;
 }
@@ -35,4 +52,12 @@
 
 #circle-icon {
     margin-left: 0.5em;
+}
+
+#pencil-icon {
+    margin-top: 1em;
+}
+
+#delete-icon {
+    margin-top: 0.85em;
 }

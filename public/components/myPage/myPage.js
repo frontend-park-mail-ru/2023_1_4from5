@@ -2,7 +2,6 @@ import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 
 // TODO закинуть посты в контейнер
-//
 // TODO лайки
 // TODO если пользователь подписан, то кнопка Вы подписаны
 // TODO кнопка Отправить донат только, если ты юзер
