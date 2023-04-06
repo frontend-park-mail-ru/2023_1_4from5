@@ -4,6 +4,7 @@ export class Request {
   #REQUEST_METHODS = {
     GET: 'GET',
     POST: 'POST',
+    DELETE: 'DELETE',
   };
 
   /**
@@ -13,7 +14,6 @@ export class Request {
    * @returns {Promise} - response
    */
   async get(path) {
-    console.log('GET_REQUEST');
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.GET,
       mode: 'cors',
@@ -55,6 +55,15 @@ export class Request {
         'Content-Type': contentType,
       },
       body,
+    });
+    return res;
+  }
+
+  async delete(path) {
+    const res = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.DELETE,
+      mode: 'cors',
+      credentials: 'include',
     });
     return res;
   }
