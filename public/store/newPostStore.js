@@ -13,17 +13,29 @@ class NewPostStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
-        const title = action.input.titleInput.value;
-        const text = action.input.textInput.value;
+        const createTitle = action.input.titleInput.value;
+        const createText = action.input.textInput.value;
 
         const body = {
-          title,
-          text,
+          title: createTitle,
+          text: createText,
           creator: userStore.getUserState().authorURL,
         };
 
         await request.get('/api/post/create');
         await request.post('/api/post/create', body, 'multipart/form-data');
+        break;
+
+      case ActionTypes.UPDATE_POST:
+        const postId = action.postId;
+        const editTitle = action.input.titleInput.value;
+        const editText = action.input.textInput.value;
+
+        await request.get(`/api/post/edit/${postId}`);
+        await request.put(`/api/post/edit/${postId}`, {
+          title: editTitle,
+          text: editText,
+        });
         break;
 
       default:
@@ -34,6 +46,11 @@ class NewPostStore {
   renderNewPost() {
     newPost.render();
     newPost.publish();
+  }
+
+  renderUpdatingPost(postId, title, text) {
+    newPost.render();
+    newPost.update(postId, title, text);
   }
 }
 

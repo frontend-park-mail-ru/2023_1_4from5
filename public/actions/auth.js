@@ -120,4 +120,12 @@ export const Actions = {
       postId,
     });
   },
+
+  updatePost(postId, input) {
+    dispatcher.dispatch({
+      type: ActionTypes.UPDATE_POST,
+      postId,
+      input,
+    });
+  },
 };

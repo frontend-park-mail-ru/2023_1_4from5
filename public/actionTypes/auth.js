@@ -26,4 +26,5 @@ export const ActionTypes = {
   // CRUD post
   CREATE_POST: 'CREATE_POST',
   DELETE_POST: 'DELETE_POST',
+  UPDATE_POST: 'UPDATE_POST',
 };
