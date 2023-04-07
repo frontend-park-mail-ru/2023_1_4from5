@@ -5,6 +5,7 @@ export class Request {
     GET: 'GET',
     POST: 'POST',
     DELETE: 'DELETE',
+    PUT: 'PUT',
   };
 
   /**
@@ -64,6 +65,19 @@ export class Request {
       method: this.#REQUEST_METHODS.DELETE,
       mode: 'cors',
       credentials: 'include',
+    });
+    return res;
+  }
+
+  async put(path, body) {
+    const res = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.PUT,
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     });
     return res;
   }

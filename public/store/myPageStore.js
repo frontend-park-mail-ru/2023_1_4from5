@@ -12,6 +12,7 @@ class MyPageStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.DELETE_POST:
+        console.log(action.postId);
         await request.get(`/api/post/delete/${action.postId}`);
         await request.delete(`/api/post/delete/${action.postId}`);
         await this.renderMyPage();
