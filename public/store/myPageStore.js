@@ -5,6 +5,8 @@ import { userStore } from './userStore.js';
 import { ActionTypes } from '../actionTypes/auth';
 
 class MyPageStore {
+  #config;
+
   constructor() {
     dispatcher.register(this.reduce.bind(this));
   }
@@ -17,7 +19,36 @@ class MyPageStore {
         await this.renderMyPage();
         console.log('deleted');
         break;
-
+      case ActionTypes.CLICK_LIKE:
+        if (action.typeLike === 'addLike') {
+          const result = await request.put('/api/post/addLike', { post_id: action.postId });
+          if (result.ok) {
+            console.log('ADD_LIKE OK', result);
+            // TODO научиться нормально считывать инфу с данного результата
+            console.log();
+            const currentPost = this.#config.posts.find((post) => post.id === action.postId);
+            // TODO бэкендеры не обновляют is_liked у себя в бд
+            currentPost.is_liked = true;
+            currentPost.likes_count += 1;
+            myPage.config = this.#config;
+            myPage.render();
+          } else {
+            console.log('ADD_LIKE ERROR');
+          }
+        } else {
+          const result = await request.put('/api/post/removeLike', { post_id: action.postId });
+          if (result.ok) {
+            console.log('REMOVE_LIKE OK');
+            const currentPost = this.#config.posts.find((post) => post.id === action.postId);
+            currentPost.is_liked = false;
+            currentPost.likes_count -= 1;
+            myPage.config = this.#config;
+            myPage.render();
+          } else {
+            console.log('REMOVE_LIKE ERROR');
+          }
+        }
+        break;
       default:
         break;
     }
@@ -33,8 +64,8 @@ class MyPageStore {
         post.textWithBreaks.push({ text });
       });
     });
-
-    myPage.config = result;
+    this.#config = result;
+    myPage.config = this.#config;
     myPage.render();
   }
 }

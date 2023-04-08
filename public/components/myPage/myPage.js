@@ -1,11 +1,11 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/auth';
-import { newPost } from '../newPost/newPost';
 
-// TODO лайки (запросы, counter)
 // TODO добавить возможность редактирования цели (от автора)
 // TODO добавить возможность редактирования цели (от подписчика)
+// TODO загрузка аватарки пользователя и автора
+// TODO кнопки подписаться нет, когда ты не авторизован
 
 // TODO FUTURE при нажатии на подписку предлагает на выбор подписку либо без неё
 // TODO FUTURE если пользователь подписан, то кнопка Вы подписаны
@@ -39,6 +39,7 @@ class MyPage {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
+    console.log(this.#config);
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
@@ -48,16 +49,26 @@ class MyPage {
       router.go(URLS.newPost, '', this.getParent());
     });
 
-    let deletePostBtns = document.querySelectorAll('#delete-icon');
+    const deletePostBtns = document.querySelectorAll('#delete-icon');
     for (let index = 0; index < deletePostBtns.length; index++) {
       const button = deletePostBtns[index];
       button.addEventListener('click', this.deleteHandler);
     }
 
-    let updatePostBtns = document.querySelectorAll('#pencil-icon');
+    const updatePostBtns = document.querySelectorAll('#pencil-icon');
     for (let index = 0; index < updatePostBtns.length; index++) {
       const button = updatePostBtns[index];
       button.addEventListener('click', this.updateHandler.bind(this));
+    }
+
+    const likeIcons = document.querySelectorAll('.like-icon');
+    for (let index = 0; index < likeIcons.length; index++) {
+      const likeIcon = likeIcons[index];
+      likeIcon.addEventListener('click', (event) => {
+        const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
+        console.log(event, eventLike, event.target.parentElement.parentElement.parentElement.id);
+        Actions.clickLike(eventLike, event.target.parentElement.parentElement.parentElement.id);
+      });
     }
   }
 
