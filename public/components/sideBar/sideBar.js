@@ -33,7 +33,6 @@ export class SideBar {
     }
     const newDiv = document.createElement('div');
     newDiv.id = 'sidebarDiv';
-    // const template = templates.sideBar;
     newDiv.innerHTML = template(this.#config);
 
     this.#parent.appendChild(newDiv);
