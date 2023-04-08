@@ -100,7 +100,7 @@
     width: 100%;
 }
 
-#settings-icon {
+.settings-icon {
     position: absolute;
     right: 1.3%;
     top: 5em;
