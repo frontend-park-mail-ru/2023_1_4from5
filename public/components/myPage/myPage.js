@@ -5,12 +5,12 @@ import { newPost } from '../newPost/newPost';
 
 // закинуть посты в контейнер (вроде сделал)
 // TODO лайки
-// TODO если пользователь подписан, то кнопка Вы подписаны
 // кнопка Отправить донат только, если ты юзер (сделал)
 // TODO добавить возможность редактирования цели, постов
 // TODO добавить иконку редактирования в целях, уровнях подписки, об авторе
 
 // TODO FUTURE при нажатии на подписку предлагает на выбор подписку либо без неё
+// TODO FUTURE если пользователь подписан, то кнопка Вы подписаны
 
 const template = require('./myPage.handlebars');
 
@@ -42,6 +42,7 @@ class MyPage {
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
     newDiv.innerHTML = template(this.#config);
+    console.log(this.#config);
     this.#parent.appendChild(newDiv);
 
     const createPostBtn = document.getElementById('createPost-btn');

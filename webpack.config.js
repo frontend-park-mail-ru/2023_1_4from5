@@ -75,6 +75,7 @@ module.exports = {
     // contentBase: path.join(__dirname, 'public'), // указываем папку с вашим index.html
     historyApiFallback: true,
     // historyApiFallback: {
+    // eslint-disable-next-line max-len
     //   index: '/', // указываем, что при запросе к любому пути, кроме API, нужно отправлять index.html
     // },
     port: 8080,
