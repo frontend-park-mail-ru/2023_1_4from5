@@ -41,16 +41,18 @@
     padding-right: 1em;
     margin-bottom: 1em;
     font-size: 1.5em;
+    resize: vertical;
 }
 
 .newpost-text-input {
     width: 95%;
-    height: 10em;
+    height: 20em;
     border-radius: 1.5em;
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
     font-size: 1.3em;
+    resize: vertical;
 }
 
 .newpost-btn-container {

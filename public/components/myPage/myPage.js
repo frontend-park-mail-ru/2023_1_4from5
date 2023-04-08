@@ -42,7 +42,6 @@ class MyPage {
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
     newDiv.innerHTML = template(this.#config);
-    console.log(this.#config);
     this.#parent.appendChild(newDiv);
 
     const createPostBtn = document.getElementById('createPost-btn');
@@ -51,13 +50,13 @@ class MyPage {
       router.go(URLS.newPost, '', this.getParent());
     });
 
-    let deletePostBtns = document.querySelectorAll('.delete-icon');
+    let deletePostBtns = document.querySelectorAll('#delete-icon');
     for (let index = 0; index < deletePostBtns.length; index++) {
       const button = deletePostBtns[index];
       button.addEventListener('click', this.deleteHandler);
     }
 
-    let updatePostBtns = document.querySelectorAll('.pencil-icon');
+    let updatePostBtns = document.querySelectorAll('#pencil-icon');
     for (let index = 0; index < updatePostBtns.length; index++) {
       const button = updatePostBtns[index];
       button.addEventListener('click', this.updateHandler.bind(this));
@@ -66,13 +65,11 @@ class MyPage {
 
   deleteHandler(e) {
     e.preventDefault();
-
     Actions.deletePost(e.currentTarget.parentElement.parentElement.id);
   }
 
   updateHandler(e) {
     e.preventDefault();
-
     const postId = e.currentTarget.parentElement.parentElement.id;
     const title = e.currentTarget.parentElement.parentElement.title;
     const text = e.currentTarget.parentElement.parentElement.slot;
