@@ -13,7 +13,7 @@ export const URLS = { // TODO урлы в отдельный файл
   editPost: '/editPost',
 };
 
-export function notifier(path, data, parent) {
+export function notifier(path, data, parent, additionalUrl) {
   switch (path.pathname) {
     case URLS.root:
       // TODO BAD action in notifier
@@ -41,13 +41,13 @@ export function notifier(path, data, parent) {
       newPostStore.renderNewPost();
       break;
 
-    case URLS.editPost:
+    case `${URLS.editPost}/${additionalUrl}`:
       newPostStore.renderUpdatingPost(data.postId, data.title, data.text);
-      console.log(data.text);
       console.log('editPost');
       break;
 
     default:
+      console.log(path.pathname);
       console.log('undefined url'); // TODO page 404
       break;
   }
