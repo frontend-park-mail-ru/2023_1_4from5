@@ -24,7 +24,6 @@ class StartStore {
   }
 
   async start() {
-    console.log('startStore::start');
     const userIn = userStore.getUserState();
     try {
       if (!userIn.isAuthorizedIn) {
