@@ -2,13 +2,13 @@
     margin-left: 10em;
     margin-right: 10em;
 }
-.container {
+.myPage-container {
     display: grid;
     gap: 20px;
     grid-template-columns: 20% 60% 20%;
 }
 
-.myPageHeaderContainer {
+.myPage-header-container {
     background-image: url("../../images/myPage_phone.jpg");
     background-repeat: no-repeat;
     background-position: center center;
@@ -19,23 +19,23 @@
     background-size: cover;
 }
 
-.postContainer {
+.post-container {
     border: 1px solid #7f7e7e;
     margin-top: 1.5em;
 }
 
-.aboutAuthorContainer {
+.aboutAuthor-container {
     border: 1px solid #7f7e7e;
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-.aboutAuthorContainer-header {
+.aboutAuthor-container-header {
     display: grid;
     grid-template-columns: 95% 5%;
 }
 
-.postContainer-header {
+.post-container-header {
     display: grid;
     grid-template-columns: 90% 5% 5%;
 }
@@ -106,7 +106,12 @@
     top: 5em;
 }
 
+.like-container {
+    cursor: pointer;
+}
+
 .like-icon, #comment-icon {
     margin-left: 1em;
+    cursor: pointer;
 }
 
