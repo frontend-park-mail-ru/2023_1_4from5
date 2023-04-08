@@ -30,6 +30,11 @@
     margin-bottom: 1em;
 }
 
+.aboutAuthorContainer-header {
+    display: grid;
+    grid-template-columns: 95% 5%;
+}
+
 .postContainer-header {
     display: grid;
     grid-template-columns: 90% 5% 5%;
@@ -64,6 +69,11 @@
     font-size: large;
 }
 
+.box3-header-container {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
 .subs-btn {
     margin: auto;
     height: 2em;
@@ -94,5 +104,9 @@
     position: absolute;
     right: 1.3%;
     top: 5em;
+}
+
+.like-icon, #comment-icon {
+    margin-left: 1em;
 }
 
