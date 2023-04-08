@@ -11,6 +11,7 @@ export const URLS = { // TODO урлы в отдельный файл
   settings: '/settings',
   newPost: '/newPost',
   editPost: '/editPost',
+  search: '/search',
 };
 
 export function notifier(path, data, parent, additionalUrl) {
@@ -29,7 +30,6 @@ export function notifier(path, data, parent, additionalUrl) {
       break;
 
     case URLS.settings:
-      console.log(userStore.getUserState().isAuthorizedIn);
       if (userStore.getUserState().isAuthorizedIn) {
         settingsStore.renderSettings();
       } else {
@@ -43,12 +43,14 @@ export function notifier(path, data, parent, additionalUrl) {
 
     case `${URLS.editPost}/${additionalUrl}`:
       newPostStore.renderUpdatingPost(data.postId, data.title, data.text);
-      console.log('editPost');
+      break;
+
+    case URLS.search:
+      console.log('search');
       break;
 
     default:
-      console.log(path.pathname);
-      console.log('undefined url'); // TODO page 404
+      console.log('undefined url: ', path.pathname); // TODO page 404
       break;
   }
 }
