@@ -11,6 +11,10 @@ class MyPageStore {
 
   async reduce(action) {
     switch (action.type) {
+      case ActionTypes.RENDER_MYPAGE:
+        this.renderMyPage();
+        break;
+
       case ActionTypes.DELETE_POST:
         await request.get(`/api/post/delete/${action.postId}`);
         await request.delete(`/api/post/delete/${action.postId}`);
@@ -23,8 +27,13 @@ class MyPageStore {
     }
   }
 
-  async renderMyPage() {
-    const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+  async renderMyPage(authorUrl = '') {
+    let creatorPage;
+    if (authorUrl) {
+      creatorPage = await request.get(`/api/creator/page/${authorUrl}`);
+    } else {
+      creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+    }
     const result = await creatorPage.json();
     result.posts.forEach((post) => {
       const textArr = post.text.split('\\n');

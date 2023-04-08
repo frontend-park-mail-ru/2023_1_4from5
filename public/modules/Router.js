@@ -1,4 +1,5 @@
 import { notifier, URLS } from './Notifier.js';
+import { myPageStore } from '../store/myPageStore';
 
 class Router {
   // стартовая функция

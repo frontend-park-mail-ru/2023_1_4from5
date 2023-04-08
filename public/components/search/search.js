@@ -1,3 +1,8 @@
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
+import { myPage } from '../myPage/myPage';
+import { myPageStore } from '../../store/myPageStore';
+
 const template = require('./search.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -19,12 +24,27 @@ class Search {
     return this.#authors;
   }
 
+  getParent() {
+    return this.#parent;
+  }
+
   render() {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'searchDiv';
     newDiv.innerHTML = template(this.#authors);
     this.#parent.appendChild(newDiv);
+
+    let cards = document.querySelectorAll('.author-card');
+    for (let index = 0; index < cards.length; index++) {
+      const card = cards[index];
+      card.addEventListener('click', this.selectAuthor.bind(this));
+    }
+  }
+
+  selectAuthor(e) {
+    e.preventDefault();
+    router.go(URLS.myPage, {}, this.getParent(), e.currentTarget.id);
   }
 }
 

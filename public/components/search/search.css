@@ -1,0 +1,12 @@
+.author-card {
+    border: solid black 2px;
+    border-radius: 2em;
+    width: 80%;
+    margin: auto auto 2em;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.author-card-info {
+    width: 50%;
+}
