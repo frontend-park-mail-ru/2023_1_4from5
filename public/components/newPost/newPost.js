@@ -52,7 +52,7 @@ class NewPost {
     const titleInput = document.getElementById('newpost-title-input');
     const textInput = document.getElementById('newpost-text-input');
     const postBtn = document.getElementById('newpost-btn');
-
+    console.log(textInput);
     titleInput.textContent = title;
     textInput.textContent = text;
     postBtn.textContent = 'готово';
