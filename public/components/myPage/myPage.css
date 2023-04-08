@@ -30,6 +30,11 @@
     margin-bottom: 1em;
 }
 
+.aboutAuthorContainer-header {
+    display: grid;
+    grid-template-columns: 95% 5%;
+}
+
 .postContainer-header {
     display: grid;
     grid-template-columns: 90% 5% 5%;
@@ -50,12 +55,23 @@
     padding-bottom: 1.3em;
 }
 
+.box1-info-container {
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
 .box1-info {
     border: 1px solid #7f7e7e;
 }
 
 .box1-info-text {
     font-size: large;
+}
+
+.box3-header-container {
+    display: grid;
+    grid-template-columns: 90% 10%;
 }
 
 .subs-btn {
@@ -88,5 +104,9 @@
     position: absolute;
     right: 1.3%;
     top: 5em;
+}
+
+.like-icon, #comment-icon {
+    margin-left: 1em;
 }
 
