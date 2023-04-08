@@ -44,10 +44,12 @@ class MyPage {
     this.#parent.appendChild(newDiv);
 
     const createPostBtn = document.getElementById('createPost-btn');
-    createPostBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.go(URLS.newPost, '', this.getParent());
-    });
+    if (createPostBtn) {
+      createPostBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        router.go(URLS.newPost, '', this.getParent());
+      });
+    }
 
     const deletePostBtns = document.querySelectorAll('#delete-icon');
     for (let index = 0; index < deletePostBtns.length; index++) {

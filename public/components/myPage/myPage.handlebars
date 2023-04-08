@@ -1,6 +1,6 @@
 <div class="myPage-header-container">
     {{#if is_my_page}}
-        <img id="settings-icon" class="settings-icon" width="40" src="./images/settings_icon.svg" alt="settings-icon">
+        <img id="settings-icon" class="settings-icon" width="40" src="../../images/settings_icon.svg" alt="settings-icon">
     {{/if}}
     <h1 class="myPage-header"> <img id="user-photo" width="50" src="../../images/user_photo.png" alt="user-photo">{{creator_info.name}}</h1>
 </div>
@@ -16,11 +16,11 @@
             </div>
             <div class="box1-info">
                 <p class="box1-info-text">
-                    <img id="circle-icon" width="10" src="./images/circle_icon.png" alt="#">
+                    <img id="circle-icon" width="10" src="../../images/circle_icon.png" alt="#">
                     Подписчиков:  {{creator_info.followers_count}}
                 </p>
                 <p class="box1-info-text">
-                    <img id="circle-icon" width="10" src="./images/circle_icon.png" alt="#">
+                    <img id="circle-icon" width="10" src="../../images/circle_icon.png" alt="#">
                     Доход в месяц: 10000 Руб
                 </p>
             </div>
@@ -28,7 +28,7 @@
                 <div class="box1-info-container">
                     <p>Цели</p>
                     {{#if is_my_page}}
-                        <img id="pencil-icon-aim"  class="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">
+                        <img id="pencil-icon-aim"  class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
                     {{/if}}
                 </div>
                 <p>120 из
@@ -51,7 +51,7 @@
                 <div class="aboutAuthor-container-header">
                     <h3>О моем блоге:</h3>
                     {{#if is_my_page}}
-                        <img id="pencil-icon-about" class="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">
+                        <img id="pencil-icon-about" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
                     {{/if}}
                 </div>
                 <h3>{{creator_info.description}}</h3>
@@ -61,8 +61,8 @@
                     <div class="post-container-header">
                         <h4 class="post-title">{{title}}</h4>
                         {{#if ../is_my_page}}
-                            <img id="pencil-icon" class="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">
-                            <img id="delete-icon" class="delete-icon" width="25" src="./images/delete_ic_icon.png" alt="delete-icon">
+                            <img id="pencil-icon" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                            <img id="delete-icon" class="delete-icon" width="25" src="../../images/delete_ic_icon.png" alt="delete-icon">
                         {{/if}}
                     </div>
                     {{#each textWithBreaks}}
@@ -86,7 +86,7 @@
             <div class="box3-header-container">
                 <h3>Уровни подписки</h3>
                 {{#if is_my_page}}
-                    <img id="pencil-icon-level" class="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">
+                    <img id="pencil-icon-level" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
                 {{/if}}
             </div>
         </div>
