@@ -20,7 +20,6 @@ class Router {
     }
     if (data) {
       url.searchParams.append('id', data);
-      console.log(url);
     }
     notifier(url, data, parent);
     window.history.pushState(data, path, path);

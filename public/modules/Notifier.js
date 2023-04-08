@@ -10,6 +10,7 @@ export const URLS = { // TODO урлы в отдельный файл
   myPage: '/myPage',
   settings: '/settings',
   newPost: '/newPost',
+  editPost: '/editPost',
 };
 
 export function notifier(path, data, parent) {
@@ -38,7 +39,12 @@ export function notifier(path, data, parent) {
 
     case URLS.newPost:
       newPostStore.renderNewPost();
-      console.log('new post');
+      break;
+
+    case URLS.editPost:
+      newPostStore.renderUpdatingPost(data.postId, data.title, data.text);
+      console.log(data.text);
+      console.log('editPost');
       break;
 
     default:

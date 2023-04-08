@@ -47,6 +47,24 @@ class NewPost {
       });
     });
   }
+
+  update(postId, title, text) {
+    const titleInput = document.getElementById('newpost-title-input');
+    const textInput = document.getElementById('newpost-text-input');
+    const postBtn = document.getElementById('newpost-btn');
+    console.log(textInput);
+    titleInput.textContent = title;
+    textInput.textContent = text;
+    postBtn.textContent = 'готово';
+
+    postBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      Actions.updatePost(postId, {
+        titleInput,
+        textInput,
+      });
+    });
+  }
 }
 
 export const newPost = new NewPost(contentElement);
