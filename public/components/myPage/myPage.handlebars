@@ -38,7 +38,7 @@
                 <h3>О моем блоге: {{creator_info.description}}</h3>
             </div>
             {{#each posts}}
-                <div class="postContainer" id="{{id}}" title="{{title}}">
+                <div class="postContainer" id="{{id}}" title="{{title}}" slot="{{text}}">
                     <div class="postContainer-header">
                         <h4 class="post-title">{{title}}</h4>
                         <img id="pencil-icon" class="pencil-icon" width="20" src="./images/edit_pencil_write_icon.png" alt="pencil-icon">

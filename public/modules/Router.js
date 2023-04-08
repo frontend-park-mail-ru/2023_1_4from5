@@ -6,14 +6,24 @@ class Router {
     const url = new URL(window.location.href); // это встроенный класс
     notifier(url);
 
-    window.onpopstate = () => {
-      notifier(new URL(window.location.href));
+    window.onpopstate = (e) => {
+      if (e.state) {
+        notifier(new URL(window.location.href), e.state.data, {}, e.state.additionalUrl);
+      } else {
+        notifier(new URL(window.location.href));
+      }
     };
   }
 
   // переход на страницу
-  go(path, data, parent) {
-    const url = new URL(path, window.location.href);
+  go(path, data, parent, additionalUrl) {
+    let url;
+    if (additionalUrl) {
+      url = new URL(`${path}/${additionalUrl}`, window.location.href);
+    } else {
+      url = new URL(path, window.location.href);
+    }
+
     if (window.location.pathname === path && data !== 'logout' && url.searchParams.toString() === '') return;
     if (parent) {
       parent.innerHTML = '';
@@ -21,9 +31,14 @@ class Router {
     if (data) {
       url.searchParams.append('id', data);
     }
-    notifier(url, data, parent);
-    window.history.pushState(data, path, path);
-    //   тут наверное еще можно вызывать window.dispatchEvent(new Event('popstate'));
+
+    if (additionalUrl) {
+      notifier(url, data, parent, additionalUrl);
+      window.history.pushState({ data, additionalUrl }, path, `${path}/${additionalUrl}`);
+    } else {
+      notifier(url, data, parent);
+      window.history.pushState(data, path, path);
+    }
   }
 
   // нужен если на странице делать кнопку назад
