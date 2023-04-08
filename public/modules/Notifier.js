@@ -4,6 +4,7 @@ import { myPageStore } from '../store/myPageStore.js';
 import { userStore } from '../store/userStore';
 import { router } from './Router';
 import { newPostStore } from '../store/newPostStore';
+import { searchStore } from '../store/searchStore';
 
 export const URLS = { // TODO урлы в отдельный файл
   root: '/',
@@ -29,6 +30,11 @@ export function notifier(path, data, parent, additionalUrl) {
       }
       break;
 
+    case `${URLS.myPage}/${additionalUrl}`:
+      myPageStore.renderMyPage(additionalUrl);
+      console.log('mypage');
+      break;
+
     case URLS.settings:
       if (userStore.getUserState().isAuthorizedIn) {
         settingsStore.renderSettings();
@@ -46,7 +52,7 @@ export function notifier(path, data, parent, additionalUrl) {
       break;
 
     case URLS.search:
-      console.log('search');
+      searchStore.renderSearch();
       break;
 
     default:
