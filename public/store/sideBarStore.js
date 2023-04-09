@@ -107,6 +107,7 @@ class SideBarStore {
       case ActionTypes.RENDER_SIDEBAR:
         this.renderSideBar(action.parent, action.user);
         break;
+
       default:
         break;
     }

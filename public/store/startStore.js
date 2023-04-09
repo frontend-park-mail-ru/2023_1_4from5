@@ -32,6 +32,8 @@ class StartStore {
         if (result.login) {
           userIn.usernameIn = result.name;
           userIn.isAuthorizedIn = true;
+          userIn.login = result.login;
+          userIn.profilePhoto = result.profile_photo;
           const getPage = await request.get('/api/user/homePage');
           const userHomePage = await getPage.json();
           userIn.authorURL = userHomePage.creator_id;
@@ -42,7 +44,6 @@ class StartStore {
       console.log(err);
     }
     Actions.renderSideBar(sideBarElement, userIn);
-    // Actions.renderStartPage();
   }
 }
 

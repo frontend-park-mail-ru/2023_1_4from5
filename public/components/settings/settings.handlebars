@@ -1,19 +1,39 @@
 <div class="settings">
-    <h1> Настройки
-        <img id="pencil-icon" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
-    </h1>
+    <h1>Настройки</h1>
 
-    <img id="user-photo" width="50" src="../../images/user_photo.png" alt="user_photo">
-    <h3>{{usernameIn}}</h3>
-    {{#if isAuthorIn}}
-    <h3>Автор</h3>
-    {{else}}
-    <h3>Пользователь</h3>
-    {{/if}}
+    <img id="user-photo" width="200" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
+    <input type="file" class="upload" id="photo-upload"/>
 
-    <br>
+    <hr>
+    <div>
+        <h3>Имя</h3>
+        <input class="change-name" id="change-username-input" type="text" value="{{usernameIn}}">
+        <br>
+        <button class="change-btn" id="change-username-btn">Сменить имя</button>
+    </div>
 
-    <div id="change-password">
+    <div>
+        <h3>Логин</h3>
+        <input class="change-name" id="change-login-input" type="text" value="{{login}}">
+        <br>
+        <button class="change-btn" id="change-login-btn">Сменть логин</button>
+    </div>
 
+    <hr>
+    <div class="change-password">
+        <h4>Изменить пароль</h4>
+        <div>
+            <label class="change-password-label" for="password">Старый пароль</label>
+            <input class="change-password-input" id="old-password-input" type="text">
+        </div>
+
+        <div>
+            <label class="change-password-label" for="password">Новый пароль</label>
+            <input class="change-password-input" id="new-password-input" type="text">
+        </div>
+
+        <div id="change-password-error"></div>
+
+        <button class="change-btn" id="change-password-btn">Сменить пароль</button>
     </div>
 </div>
