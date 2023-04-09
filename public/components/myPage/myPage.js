@@ -70,6 +70,12 @@ class MyPage {
         Actions.clickLike(eventLike, event.target.parentElement.parentElement.parentElement.id);
       });
     }
+    const editAimIcon = document.getElementById('pencil-icon-aim');
+
+    editAimIcon.addEventListener('click', async (e) => {
+      e.preventDefault();
+      console.log('click on editAimIcon');
+    });
   }
 
   deleteHandler(e) {

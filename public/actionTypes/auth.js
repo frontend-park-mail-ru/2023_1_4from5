@@ -24,6 +24,7 @@ export const ActionTypes = {
   // myPage
   RENDER_MYPAGE: 'RENDER_MYPAGE',
   CLICK_LIKE: 'CLICK_LIKE',
+
   // CRUD post
   CREATE_POST: 'CREATE_POST',
   DELETE_POST: 'DELETE_POST',
