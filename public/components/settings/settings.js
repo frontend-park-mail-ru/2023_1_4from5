@@ -29,6 +29,8 @@ class Settings {
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
 
+    console.log(2);
+
     const changePwdBtn = document.getElementById('change-password-btn');
     changePwdBtn.addEventListener('click', this.changePwd);
 

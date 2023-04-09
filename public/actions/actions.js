@@ -133,11 +133,15 @@ export const Actions = {
       type: ActionTypes.RENDER_MYPAGE,
     });
   },
+
   clickLike(typeLike, postId) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
       typeLike,
       postId,
+    });
+  },
+
   // myPage-Aim
   editAim() {
     dispatcher.dispatch({
