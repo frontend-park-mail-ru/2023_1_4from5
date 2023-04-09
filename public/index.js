@@ -14,6 +14,7 @@ import { winSettings } from './components/winSettings/winSettings.js';
 import { regStore } from './store/regStore.js';
 import { settingsStore } from './store/settingsStore.js';
 import { myPageStore } from './store/myPageStore.js';
+import { donateWinStore } from './store/donateWinStore.js';
 import { router } from './modules/Router.js';
 
 begin();

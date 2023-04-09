@@ -70,12 +70,45 @@ class MyPage {
         Actions.clickLike(eventLike, event.target.parentElement.parentElement.parentElement.id);
       });
     }
-    const editAimIcon = document.getElementById('pencil-icon-aim');
 
-    editAimIcon.addEventListener('click', async (e) => {
-      e.preventDefault();
-      console.log('click on editAimIcon');
-    });
+    const editAimIcon = document.getElementById('pencil-icon-aim');
+    if (editAimIcon) {
+      editAimIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        Actions.editAim();
+      });
+    }
+
+    const closeEditAimIcon = document.getElementById('close-icon-aim');
+    if (closeEditAimIcon) {
+      closeEditAimIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        Actions.closeEditAim();
+      });
+    }
+
+    const saveBtnAim = document.getElementById('save-btn-aim');
+    if (saveBtnAim) {
+      const descriptionInput = document.getElementById('description-edit-aim');
+      const moneyNeededInput = document.getElementById('money-needed-edit-aim');
+      const errorOutput = document.getElementById('edit-aim-err');
+      saveBtnAim.addEventListener('click', (e) => {
+        e.preventDefault();
+        Actions.saveEditAim({
+          descriptionInput,
+          moneyNeededInput,
+          errorOutput,
+        });
+      });
+    }
+
+    const donateBtnAim = document.getElementById('donate-btn-aim');
+    if (donateBtnAim) {
+      donateBtnAim.addEventListener('click', (e) => {
+        e.preventDefault();
+        Actions.renderDonateWin();
+      });
+    }
   }
 
   deleteHandler(e) {

@@ -1,14 +1,26 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { myPage } from '../components/myPage/myPage.js';
+import { donateWin } from '../components/donateWin/donateWin.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
-import { ActionTypes } from '../actionTypes/actionTypes';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
+import { isValidDescription, isValidMoneyString } from '../modules/isValid.js';
+import { color } from '../consts/styles.js';
+import {auth} from "../components/authorization/auth";
 
 class MyPageStore {
   #config;
 
   constructor() {
     dispatcher.register(this.reduce.bind(this));
+  }
+
+  setState(config) {
+    this.#config = config;
+  }
+
+  getState() {
+    return this.#config;
   }
 
   async reduce(action) {
@@ -24,35 +36,20 @@ class MyPageStore {
         console.log('deleted');
         break;
       case ActionTypes.CLICK_LIKE:
-        if (action.typeLike === 'addLike') {
-          console.log(action.postId);
-          const result = await request.put('/api/post/addLike', { post_id: action.postId });
-          if (result.ok) {
-            console.log('ADD_LIKE OK', result);
-            // TODO научиться нормально считывать инфу с данного результата
-            const currentPost = this.#config.posts.find((post) => post.id === action.postId);
-            // TODO бэкендеры не обновляют is_liked у себя в бд
-            currentPost.is_liked = true;
-            currentPost.likes_count += 1;
-            myPage.config = this.#config;
-            myPage.render();
-          } else {
-            console.log('ADD_LIKE ERROR');
-          }
-        } else {
-          console.log(action.postId);
-          const result = await request.put('/api/post/removeLike', { post_id: action.postId });
-          if (result.ok) {
-            console.log('REMOVE_LIKE OK');
-            const currentPost = this.#config.posts.find((post) => post.id === action.postId);
-            currentPost.is_liked = false;
-            currentPost.likes_count -= 1;
-            myPage.config = this.#config;
-            myPage.render();
-          } else {
-            console.log('REMOVE_LIKE ERROR');
-          }
-        }
+        this.changeLikeState(action);
+        break;
+      case ActionTypes.OPEN_EDIT_AIM:
+        this.#config.edit_aim = false;
+        myPage.config = this.#config;
+        myPage.render();
+        break;
+      case ActionTypes.CLOSE_EDIT_AIM:
+        this.#config.edit_aim = true;
+        myPage.config = this.#config;
+        myPage.render();
+        break;
+      case ActionTypes.SAVE_EDIT_AIM:
+        this.saveEditAim(action.input);
         break;
       default:
         break;
@@ -74,16 +71,88 @@ class MyPageStore {
         post.textWithBreaks.push({ text });
       });
     });
+    console.log(userStore.getUserState().isAuthorizedIn);
     this.#config = result;
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
-      edit_aboutAuthor: this.#config.is_my_page,
-      edit_level: this.#config.is_my_page,
+      isAuthorized: userStore.getUserState().isAuthorizedIn,
     };
     this.#config = Object.assign(this.#config, renderIcon);
     console.log('testObject', this.#config);
     myPage.config = this.#config;
     myPage.render();
+  }
+
+  async changeLikeState(action) {
+    if (action.typeLike === 'addLike') {
+      console.log(action.postId);
+      const result = await request.put('/api/post/addLike', { post_id: action.postId });
+      if (result.ok) {
+        const res = await result.json();
+        const currentPost = this.#config.posts.find((post) => post.id === action.postId);
+        currentPost.is_liked = true;
+        currentPost.likes_count = res.likes_count;
+        myPage.config = this.#config;
+        myPage.render();
+      }
+    } else {
+      const result = await request.put('/api/post/removeLike', { post_id: action.postId });
+      if (result.ok) {
+        const res = await result.json();
+        const currentPost = this.#config.posts.find((post) => post.id === action.postId);
+        currentPost.is_liked = false;
+        currentPost.likes_count = res.likes_count;
+        myPage.config = this.#config;
+        myPage.render();
+      }
+    }
+  }
+
+  async saveEditAim(input) {
+    console.log('myPageStore');
+
+    let description = input.descriptionInput.value;
+    let moneyNeeded = input.moneyNeededInput.value;
+    const errDescription = isValidDescription(description);
+    const errMoneyNeeded = isValidMoneyString(moneyNeeded);
+    if (moneyNeeded.isEmpty) {
+      moneyNeeded = '0';
+    }
+    input.descriptionInput.style.backgroundColor = color.field;
+    input.moneyNeededInput.style.backgroundColor = color.field;
+
+    if (!errDescription && !errMoneyNeeded) {
+      console.log(this.#config.creator_info.creator_id, this.#config.aim.money_got);
+      const aimEdit = await request.post('/api/creator/aim/create', {
+        creator_id: this.#config.creator_info.creator_id,
+        description: description,
+        money_needed: Number(moneyNeeded),
+        money_got: Number(this.#config.aim.money_got)
+      });
+      if (aimEdit.ok) {
+        this.#config.aim.description = description;
+        this.#config.aim.money_needed = Number(moneyNeeded);
+
+        this.#config.edit_aim = true;
+        myPage.config = this.#config;
+        myPage.render();
+      } else {
+        input.errorOutput.innerHTML = '';
+        input.errorOutput.innerHTML = 'Неверные описание или цель';
+        input.descriptionInput.style.backgroundColor = color.error;
+        input.moneyNeededInput.style.backgroundColor = color.error;
+      }
+    } else {
+      input.errorOutput.innerHTML = '';
+      if (errDescription) {
+        input.errorOutput.innerHTML = errDescription;
+        input.descriptionInput.style.backgroundColor = color.error;
+      }
+      if (errMoneyNeeded) {
+        input.errorOutput.innerHTML = errMoneyNeeded;
+        input.moneyNeededInput.style.backgroundColor = color.error;
+      }
+    }
   }
 }
 

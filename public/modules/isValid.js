@@ -1,6 +1,8 @@
 const LENGTH = {
   MIN: 7,
   MAX: 20,
+  MAX_MONEY: 30,
+  MAX_DESCRIPTION: 100,
 };
 
 const ASCII = {
@@ -116,6 +118,59 @@ export function isValidLogin(inputStr) {
     return flags.hasMinLen.error;
   }
   if (inputStr.length > LENGTH.MAX) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+export function isValidMoneyString(inputStr) {
+  const flags = {
+    onlyNumber: {
+      flag: true,
+      error: 'В поле цель можно вводить только цифры',
+    },
+    hasMaxLen: {
+      flag: true,
+      error: 'В поле цель не должно содержаться более 30 символов',
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_MONEY) {
+    return flags.hasMaxLen.error;
+  }
+  for (const char of inputStr) {
+    if (isNaN(char)) {
+      return flags.onlyNumber.error;
+    }
+  }
+  return '';
+}
+
+export function isValidDonate(inputStr) {
+  const flags = {
+    onlyNumber: {
+      flag: true,
+      error: 'В поле сумма доната можно вводить только цифры',
+    },
+  };
+  for (const char of inputStr) {
+    if (isNaN(char)) {
+      return flags.onlyNumber.error;
+    }
+  }
+  if (Number(inputStr) <= 0) {
+    return 'Сумма доната должна быть больше 0';
+  }
+  return '';
+}
+
+export function isValidDescription(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: 'В поле описание не должно содержаться более 100 символов',
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_DESCRIPTION) {
     return flags.hasMaxLen.error;
   }
   return '';
