@@ -1,7 +1,7 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { userStore } from './userStore.js';
-import { Actions } from '../actions/auth.js';
+import { Actions } from '../actions/actions.js';
 import { sideBar } from '../components/sideBar/sideBar.js';
 import { URLS } from '../modules/Notifier.js';
 import { router } from '../modules/Router.js';

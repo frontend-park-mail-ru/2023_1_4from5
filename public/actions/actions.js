@@ -1,4 +1,4 @@
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
 
 export const Actions = {
@@ -110,6 +110,44 @@ export const Actions = {
       type: ActionTypes.CLICK_LIKE,
       typeLike,
       postId,
+    });
+  },
+  // myPage-Aim
+  editAim() {
+    dispatcher.dispatch({
+      type: ActionTypes.OPEN_EDIT_AIM,
+    });
+  },
+
+  saveEditAim(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.SAVE_EDIT_AIM,
+      input,
+    });
+  },
+
+  closeEditAim() {
+    dispatcher.dispatch({
+      type: ActionTypes.CLOSE_EDIT_AIM,
+    });
+  },
+  // donateWin
+  renderDonateWin() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_DONATE_WIN,
+    });
+  },
+
+  removeDonateWin() {
+    dispatcher.dispatch({
+      type: ActionTypes.REMOVE_DONATE_WIN,
+    });
+  },
+
+  donate(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.DONATE,
+      input,
     });
   },
 

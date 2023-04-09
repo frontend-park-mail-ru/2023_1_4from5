@@ -25,25 +25,41 @@
                 </p>
             </div>
             <div class="box1-info">
-                <div class="box1-info-container">
-                    <p>Цели</p>
-                    {{#if edit_aim }}
-                        <img id="pencil-icon-aim"  class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                {{#if is_my_page}}
+                    {{#if edit_aim}}
+                        <div class="box1-info-container">
+                            <h4>Цели</h4>
+                            <img id="pencil-icon-aim"  class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                        </div>
+                            <div>{{ aim.description }}</div>
+                            <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
+                    {{else}}
+                        <div class="box1-info-container">
+                            <h4>Цели</h4>
+                            <img id="close-icon-aim"  class="pencil-icon" width="20" src="../../images/close.png" alt="close-icon">
+                        </div>
+                        <div>
+                            <div> Описание:</div>
+                            <textarea id="description-edit-aim">
+                                {{ aim.description }}
+                            </textarea>
+
+                            <div> Цель:</div>
+                            <input id="money-needed-edit-aim" type="text" value="{{ aim.money_needed }}">
+                        </div>
+                        <button id="save-btn-aim" class="subs-btn">Сохранить</button>
+                        <div id="edit-aim-err"></div>
                     {{/if}}
-                </div>
-                <p>120 из
-                {{#if false}}
-                    500
                 {{else}}
-                        <input type="text">
+                    <div class="box1-info-container">
+                        <h4>Цели</h4>
+                    </div>
+                    <div>{{ aim.description }}</div>
+                    <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
+                    {{#if isAuthorized }}
+                        <button id="donate-btn-aim" class="subs-btn">Отправить донат</button>
+                    {{/if}}
                 {{/if}}
-                    рублей</p>
-                {{#if true}}
-                    <input type="button">
-                {{/if}}
-                {{#unless is_my_page}}
-                    <button id="subs-btn-aim" class="subs-btn">Отправить донат</button>
-                {{/unless}}
             </div>
         </div>
         <div class="box-2">

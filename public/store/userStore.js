@@ -1,7 +1,7 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { request } from '../modules/request.js';
-import { Actions } from '../actions/auth.js';
+import { Actions } from '../actions/actions.js';
 import { router } from '../modules/Router.js';
 
 const sideBarElement = document.querySelector('sideBar');

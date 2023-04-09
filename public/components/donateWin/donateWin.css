@@ -1,0 +1,25 @@
+#donateWin {
+    top: 15em;
+    margin-left: 30%;
+    background-color: #ddd;
+    position: fixed;
+    width: 40em;
+    height: 20em;
+    border-radius: 3em;
+    opacity: 1;
+    z-index: 30;
+}
+
+.input-donateWin-container {
+    margin-right: 2em;
+}
+
+.donateWin-container {
+    text-align: end;
+    margin: auto;
+    width: 30em;
+}
+
+#donateWin-error {
+    margin-right: 5em;
+}

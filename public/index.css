@@ -7,6 +7,7 @@
 @import './components/startPage/startPage.css';
 @import './components/newPost/newPost.css';
 @import './components/search/search.css';
+@import './components/donateWin/donateWin.css';
 
 #root {
     min-height: 100vh;
@@ -29,7 +30,7 @@ h3 {
     height: 100%;
     background: #000;
     opacity: 0.7;
-    z-index: 10;
+    z-index: 2;
 }
 
 .background-settings {
