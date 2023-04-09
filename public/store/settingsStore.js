@@ -51,12 +51,14 @@ class SettingsStore {
     formData.append('path', userStore.getUserState().profilePhoto);
 
     await request.get('/api/user/updateProfilePhoto');
-    await request.postMultipart('/api/user/updateProfilePhoto', formData);
+    const update = await request.postMultipart('/api/user/updateProfilePhoto', formData);
+    const newPhoto = await update.json();
+    console.log('body', newPhoto);
 
-    Actions.getUser();
-    setTimeout(this.renderSettings, 1000);
+    await Actions.getUser();
+    // setTimeout(this.renderSettings, 1000);
     console.log('after changing', userStore.getUserState().profilePhoto);
-    // this.renderSettings();
+    this.renderSettings();
   }
 
   async changePassword(input) {
