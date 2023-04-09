@@ -9,7 +9,6 @@ import { router } from '../modules/Router';
 import { URLS } from '../modules/Notifier';
 
 const sideBarElement = document.querySelector('sideBar');
-const contentElement = document.querySelector('main');
 
 class SettingsStore {
   constructor() {

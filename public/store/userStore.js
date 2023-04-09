@@ -51,7 +51,6 @@ class UserStore {
 
         const getUser = await request.get('/api/user/profile');
         const profile = await getUser.json();
-        con
 
         this.setState(homePage, profile);
 
