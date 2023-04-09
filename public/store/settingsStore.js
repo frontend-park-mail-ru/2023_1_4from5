@@ -54,8 +54,9 @@ class SettingsStore {
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
 
     Actions.getUser();
+    setTimeout(this.renderSettings, 1000);
     console.log('after changing', userStore.getUserState().profilePhoto);
-    this.renderSettings();
+    // this.renderSettings();
   }
 
   async changePassword(input) {
