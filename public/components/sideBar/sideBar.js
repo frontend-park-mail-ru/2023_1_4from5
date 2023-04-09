@@ -4,7 +4,6 @@ const template = require('./sideBar.handlebars');
 
 const sideBarElement = document.querySelector('sideBar');
 
-
 export class SideBar {
   #parent;
 

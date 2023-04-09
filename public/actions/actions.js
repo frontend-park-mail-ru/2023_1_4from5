@@ -99,6 +99,34 @@ export const Actions = {
     });
   },
 
+  changePassword(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_PASSWORD,
+      input,
+    });
+  },
+
+  changeUsername(username) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_USERNAME,
+      username,
+    });
+  },
+
+  changeLogin(login) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_LOGIN,
+      login,
+    });
+  },
+
+  changePhoto(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_PHOTO,
+      file,
+    });
+  },
+
   // myPage
   renderMyPage() {
     dispatcher.dispatch({
@@ -110,8 +138,6 @@ export const Actions = {
       type: ActionTypes.CLICK_LIKE,
       typeLike,
       postId,
-    });
-  },
   // myPage-Aim
   editAim() {
     dispatcher.dispatch({

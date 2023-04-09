@@ -12,9 +12,11 @@ class UserStore {
   constructor() {
     this.#user = {
       usernameIn: '',
+      login: '',
       isAuthorIn: false,
       isAuthorizedIn: false,
       authorURL: '',
+      profilePhoto: '',
     };
     dispatcher.register(this.reduce.bind(this));
   }
@@ -28,21 +30,30 @@ class UserStore {
     this.#user.isAuthorIn = user.isAuthorIn;
     this.#user.isAuthorizedIn = user.isAuthorizedIn;
     this.#user.authorURL = user.authorURL;
+    this.#user.login = user.login;
+    this.#user.profilePhoto = user.profilePhoto;
   }
 
-  setState(result) {
-    this.#user.usernameIn = result.name;
-    this.#user.isAuthorIn = result.is_creator;
+  setState(homePage, profile) {
+    this.#user.usernameIn = homePage.name;
+    this.#user.isAuthorIn = homePage.is_creator;
     this.#user.isAuthorizedIn = true;
-    this.#user.authorURL = result.creator_id;
+    this.#user.authorURL = homePage.creator_id;
+    this.#user.login = profile.login;
+    this.#user.profilePhoto = profile.profile_photo;
   }
 
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.GET_USER:
         const getPage = await request.get('/api/user/homePage');
-        const result = await getPage.json();
-        this.setState(result);
+        const homePage = await getPage.json();
+
+        const getUser = await request.get('/api/user/profile');
+        const profile = await getUser.json();
+
+        this.setState(homePage, profile);
+
         Actions.renderSideBar(sideBarElement, this.#user);
         break;
 
@@ -61,6 +72,7 @@ class UserStore {
     this.#user.usernameIn = '';
     this.#user.isAuthorIn = false;
     this.#user.isAuthorizedIn = false;
+    this.#user.profilePhoto = '';
     Actions.removeWinSettings();
     Actions.renderSideBar(sideBarElement, this.#user);
     router.go('/', 'logout', parent);
