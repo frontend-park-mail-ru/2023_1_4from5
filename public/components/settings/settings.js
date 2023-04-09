@@ -23,13 +23,12 @@ class Settings {
   }
 
   render() {
+    console.log(this.#user.profilePhoto);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
-
-    console.log(2);
 
     const changePwdBtn = document.getElementById('change-password-btn');
     changePwdBtn.addEventListener('click', this.changePwd);
