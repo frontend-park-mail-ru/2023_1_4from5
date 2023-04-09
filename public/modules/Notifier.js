@@ -48,7 +48,7 @@ export function notifier(path, data, parent, additionalUrl) {
       break;
 
     case `${URLS.editPost}/${additionalUrl}`:
-      newPostStore.renderUpdatingPost(data.postId, data.title, data.text);
+      newPostStore.renderUpdatingPost(additionalUrl);
       break;
 
     case URLS.search:

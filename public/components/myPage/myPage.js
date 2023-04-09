@@ -39,7 +39,6 @@ class MyPage {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
-    console.log(this.#config);
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
@@ -68,7 +67,6 @@ class MyPage {
       const likeIcon = likeIcons[index];
       likeIcon.addEventListener('click', (event) => {
         const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
-        console.log(event, eventLike, event.target.parentElement.parentElement.parentElement.id);
         Actions.clickLike(eventLike, event.target.parentElement.parentElement.parentElement.id);
       });
     }
@@ -82,12 +80,10 @@ class MyPage {
   updateHandler(e) {
     e.preventDefault();
     const postId = e.currentTarget.parentElement.parentElement.id;
-    const title = e.currentTarget.parentElement.parentElement.title;
-    const text = e.currentTarget.parentElement.parentElement.slot;
+    // const title = e.currentTarget.parentElement.parentElement.title;
+    // const text = e.currentTarget.parentElement.parentElement.slot;
     router.go(URLS.editPost, {
       postId,
-      title,
-      text,
     }, this.getParent(), postId);
   }
 }
