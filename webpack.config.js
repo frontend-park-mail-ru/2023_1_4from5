@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public', 'dist'),
     filename: 'index.[contenthash].js',
-    // assetModuleFilename: path.join('images', '[name].[contenthash][ext]'),
+    assetModuleFilename: path.join('images', '[name].[contenthash][ext]'),
     publicPath: '/', // указываем, что все ресурсы будут расположены в корне сайта
   },
   module: {
@@ -41,17 +41,17 @@ module.exports = {
           'postcss-loader',
         ],
       },
-      // {
-      //   test: /\.(png|jpg|jpeg|gif)$/i,
-      //   type: 'asset/resource',
-      // },
-      // {
-      //   test: /\.svg$/,
-      //   type: 'asset/resource',
-      //   generator: {
-      //     filename: path.join('icons', '[name].[contenthash][ext]'),
-      //   },
-      // },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+          filename: path.join('icons', '[name].[contenthash][ext]'),
+        },
+      },
     ],
   },
   plugins: [

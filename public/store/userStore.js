@@ -16,6 +16,7 @@ class UserStore {
       isAuthorIn: false,
       isAuthorizedIn: false,
       authorURL: '',
+      profilePhoto: '',
     };
     dispatcher.register(this.reduce.bind(this));
   }
@@ -30,6 +31,7 @@ class UserStore {
     this.#user.isAuthorizedIn = user.isAuthorizedIn;
     this.#user.authorURL = user.authorURL;
     this.#user.login = user.login;
+    this.#user.profilePhoto = user.profilePhoto
   }
 
   setState(homePage, profile) {
@@ -38,6 +40,7 @@ class UserStore {
     this.#user.isAuthorizedIn = true;
     this.#user.authorURL = homePage.creator_id;
     this.#user.login = profile.login;
+    this.#user.profilePhoto = profile.profile_photo;
   }
 
   async reduce(action) {
@@ -68,6 +71,7 @@ class UserStore {
     this.#user.usernameIn = '';
     this.#user.isAuthorIn = false;
     this.#user.isAuthorizedIn = false;
+    this.#user.profilePhoto = '';
     Actions.removeWinSettings();
     Actions.renderSideBar(sideBarElement, this.#user);
     router.go('/', 'logout', parent);

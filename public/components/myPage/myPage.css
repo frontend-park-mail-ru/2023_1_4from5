@@ -9,7 +9,7 @@
 }
 
 .myPage-header-container {
-    background-image: url("../../images/myPage_phone.jpg");
+    background-image: url("./images/myPage_phone.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
