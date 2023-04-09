@@ -5,8 +5,11 @@ import { userStore } from './userStore.js';
 import { isValidPassword } from '../modules/isValid';
 import { request } from '../modules/request';
 import { Actions } from '../actions/actions';
+import { router } from '../modules/Router';
+import { URLS } from '../modules/Notifier';
 
 const sideBarElement = document.querySelector('sideBar');
+const contentElement = document.querySelector('main');
 
 class SettingsStore {
   constructor() {
@@ -50,7 +53,7 @@ class SettingsStore {
     await request.get('/api/user/updateProfilePhoto');
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
 
-    Actions.getUser();
+    router.go(URLS.settings, {}, contentElement);
   }
 
   async changePassword(input) {
