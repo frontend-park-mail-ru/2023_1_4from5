@@ -13,7 +13,7 @@ class SettingsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  reduce(action) {
+  async reduce(action) {
     switch (action.type) {
       case ActionTypes.CHANGE_PASSWORD:
         this.changePassword(action.input);
@@ -28,7 +28,8 @@ class SettingsStore {
         break;
 
       case ActionTypes.CHANGE_PHOTO:
-        this.changePhoto(action.file);
+        await this.changePhoto(action.file);
+        this.renderSettings();
         break;
 
       default:
@@ -39,7 +40,6 @@ class SettingsStore {
   renderSettings() {
     settings.config = userStore.getUserState();
     settings.render();
-    console.log(1);
   }
 
   async changePhoto(file) {
@@ -50,10 +50,7 @@ class SettingsStore {
     await request.get('/api/user/updateProfilePhoto');
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
 
-    const user = userStore.getUserState();
-    user.usernameIn = name;
-    userStore.setUserState(user);
-    this.renderSettings();
+    Actions.getUser();
   }
 
   async changePassword(input) {

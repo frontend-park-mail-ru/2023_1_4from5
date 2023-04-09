@@ -53,8 +53,7 @@ class UserStore {
         const profile = await getUser.json();
 
         this.setState(homePage, profile);
-        console.log('store', userStore.getUserState().profilePhoto);
-        
+
         Actions.renderSideBar(sideBarElement, this.#user);
         break;
 
