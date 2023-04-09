@@ -48,6 +48,10 @@ class SettingsStore {
 
     await request.get('/api/user/updateProfilePhoto');
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
+
+    const user = userStore.getUserState();
+    user.usernameIn = name;
+    userStore.setUserState(user);
   }
 
   async changePassword(input) {
