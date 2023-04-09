@@ -44,6 +44,7 @@ class SettingsStore {
   }
 
   async changePhoto(file) {
+    console.log(1);
     const formData = new FormData();
     formData.append('upload', file);
     formData.append('path', userStore.getUserState().profilePhoto);
@@ -52,7 +53,6 @@ class SettingsStore {
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
 
     Actions.getUser();
-    console.log(1);
   }
 
   async changePassword(input) {
