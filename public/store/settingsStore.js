@@ -53,10 +53,8 @@ class SettingsStore {
     const update = await request.postMultipart('/api/user/updateProfilePhoto', formData);
     const newPhoto = await update.json();
     console.log('body', newPhoto);
-
-    await Actions.getUser();
-    // setTimeout(this.renderSettings, 1000);
-    console.log('after changing', userStore.getUserState().profilePhoto);
+    const user = userStore.getUserState();
+    user.profilePhoto = newPhoto;
     this.renderSettings();
   }
 
