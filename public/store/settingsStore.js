@@ -38,6 +38,7 @@ class SettingsStore {
   }
 
   renderSettings() {
+    console.log(2);
     settings.config = userStore.getUserState();
     settings.render();
   }
@@ -51,6 +52,7 @@ class SettingsStore {
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
 
     Actions.getUser();
+    console.log(1);
   }
 
   async changePassword(input) {

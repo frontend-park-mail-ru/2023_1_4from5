@@ -43,9 +43,6 @@ class Settings {
       event.preventDefault();
       const files = event.target.files;
       Actions.changePhoto(files[0]);
-
-      // console.log(files[0]);
-      // uploadFile(files[0]);
     });
   }
 
