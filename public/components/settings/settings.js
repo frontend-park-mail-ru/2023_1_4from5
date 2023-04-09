@@ -41,7 +41,7 @@ class Settings {
     //
 
     const img = document.getElementById('user-photo');
-    img.src = '../images/0c50fcda-9e43-4139-9c80-f7a536282c2e.jpeg';
+    img.src = '../images/b30646fe-f8e2-49f8-a3bc-a4e148b4286c.jpeg';
   }
 
   changePwd(e) {
