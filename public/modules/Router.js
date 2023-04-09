@@ -5,7 +5,7 @@ class Router {
   // стартовая функция
   start() {
     const url = new URL(window.location.href); // это встроенный класс
-    notifier(url);
+    notifier(url, {}, {}, this.parseUrl(url.pathname).additionalUrl);
 
     window.onpopstate = (e) => {
       if (e.state) {
@@ -35,7 +35,10 @@ class Router {
 
     if (additionalUrl) {
       notifier(url, data, parent, additionalUrl);
-      window.history.pushState({ data, additionalUrl }, path, `${path}/${additionalUrl}`);
+      window.history.pushState({
+        data,
+        additionalUrl,
+      }, path, `${path}/${additionalUrl}`);
     } else {
       notifier(url, data, parent);
       window.history.pushState(data, path, path);
@@ -56,6 +59,28 @@ class Router {
 
   #pushHistoryState(_path, _data) {
     window.history.pushState(_data, _path, _path);
+  }
+
+  parseUrl(url) {
+    let countSlash = 0;
+    let method = '/';
+    let additionalUrl = '';
+    for (let i in url) {
+      if (url[i] === '/') {
+        countSlash++;
+      } else {
+        if (countSlash === 1) {
+          method += url[i];
+        }
+        if (countSlash === 2) {
+          additionalUrl += url[i];
+        }
+      }
+    }
+    return {
+      method,
+      additionalUrl,
+    };
   }
 }
 

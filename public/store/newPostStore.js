@@ -48,9 +48,11 @@ class NewPostStore {
     newPost.publish();
   }
 
-  renderUpdatingPost(postId, title, text) {
+  async renderUpdatingPost(postId) {
+    const postRequest = await request.get(`/api/post/get/${postId}`);
+    const post = await postRequest.json();
     newPost.render();
-    newPost.update(postId, title, text);
+    newPost.update(postId, post.title, post.text);
   }
 }
 
