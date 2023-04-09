@@ -1,4 +1,4 @@
-import { Actions } from '../actions/auth.js';
+import { Actions } from '../actions/actions.js';
 import { settingsStore } from '../store/settingsStore.js';
 import { myPageStore } from '../store/myPageStore.js';
 import { userStore } from '../store/userStore';

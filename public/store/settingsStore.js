@@ -1,5 +1,5 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { settings } from '../components/settings/settings.js';
 import { userStore } from './userStore.js';
 

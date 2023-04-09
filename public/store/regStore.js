@@ -1,4 +1,4 @@
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { isValidLogin, isValidPassword } from '../modules/isValid.js';
 import { register } from '../components/register/reg.js';

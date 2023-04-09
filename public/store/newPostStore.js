@@ -1,7 +1,7 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { newPost } from '../components/newPost/newPost';
-import { Actions } from '../actions/auth';
-import { ActionTypes } from '../actionTypes/auth';
+import { Actions } from '../actions/actions';
+import { ActionTypes } from '../actionTypes/actionTypes';
 import { userStore } from './userStore';
 import { request } from '../modules/request';
 
