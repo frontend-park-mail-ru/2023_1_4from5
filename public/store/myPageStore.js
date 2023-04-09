@@ -2,7 +2,7 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { myPage } from '../components/myPage/myPage.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
-import { ActionTypes } from '../actionTypes/auth';
+import { ActionTypes } from '../actionTypes/actionTypes';
 
 class MyPageStore {
   #config;

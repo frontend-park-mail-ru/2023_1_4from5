@@ -1,3 +1,6 @@
+import { Actions } from '../../actions/actions';
+import { userStore } from '../../store/userStore';
+
 const template = require('./settings.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -26,16 +29,46 @@ class Settings {
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
 
-    const editBtn = document.getElementById('pencil-icon');
-    editBtn.addEventListener('click', this.editSettings);
+    const changePwdBtn = document.getElementById('change-password-btn');
+    changePwdBtn.addEventListener('click', this.changePwd);
+
+    const changeNameBtn = document.getElementById('change-username-btn');
+    changeNameBtn.addEventListener('click', this.changeName);
+
+    const changeLoginBtn = document.getElementById('change-login-btn');
+    changeLoginBtn.addEventListener('click', this.changeLogin);
+
+    //
+
+    const img = document.getElementById('user-photo');
+    img.src = '/images/0c50fcda-9e43-4139-9c80-f7a536282c2e.jpeg';
   }
 
-  editSettings(e) {
+  changePwd(e) {
     e.preventDefault();
-    const space = document.getElementById('change-password');
-    const oldPwd = document.createElement('textarea');
-    oldPwd.id = 'oldPwd';
-    const newPwd = document.createElement('textarea');
+    const oldPwdInput = document.getElementById('old-password-input');
+    const newPwdInput = document.getElementById('new-password-input');
+    Actions.changePassword({
+      oldPwdInput,
+      newPwdInput,
+    });
+  }
+
+  changeName(e) {
+    e.preventDefault();
+    const usernameInput = document.getElementById('change-username-input');
+    Actions.changeUsername(usernameInput);
+  }
+
+  changeLogin(e) {
+    e.preventDefault();
+    const loginInput = document.getElementById('change-login-input');
+    Actions.changeLogin(loginInput);
+  }
+
+  invalidPassword(err) {
+    const errorDiv = document.getElementById('change-password-error');
+    errorDiv.textContent = err;
   }
 }
 

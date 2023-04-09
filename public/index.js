@@ -6,7 +6,7 @@ import { Register } from './components/register/reg.js';
 import { request } from './modules/request.js';
 import { authStore } from './store/authStore.js';
 import { userStore } from './store/userStore.js';
-import { Actions } from './actions/auth.js';
+import { Actions } from './actions/actions.js';
 import { startStore } from './store/startStore.js';
 import { sideBarStore } from './store/sideBarStore.js';
 import { winSettingsStore } from './store/winsettingsStore.js';

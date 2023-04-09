@@ -1,4 +1,4 @@
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
 
 export const Actions = {
@@ -96,6 +96,27 @@ export const Actions = {
   renderSettings() {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_SETTINGS,
+    });
+  },
+
+  changePassword(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_PASSWORD,
+      input,
+    });
+  },
+
+  changeUsername(username) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_USERNAME,
+      username,
+    });
+  },
+
+  changeLogin(login) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_LOGIN,
+      login,
     });
   },
 

@@ -1,6 +1,6 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
-import { Actions } from '../../actions/auth';
+import { Actions } from '../../actions/actions';
 
 // TODO добавить возможность редактирования цели (от автора)
 // TODO добавить возможность редактирования цели (от подписчика)

@@ -1,8 +1,8 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/auth.js';
+import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
-import { Actions } from '../actions/auth.js';
+import { Actions } from '../actions/actions.js';
 import { startPage } from '../components/startPage/startPage.js';
 
 const sideBarElement = document.querySelector('sideBar');
@@ -32,6 +32,7 @@ class StartStore {
         if (result.login) {
           userIn.usernameIn = result.name;
           userIn.isAuthorizedIn = true;
+          userIn.login = result.login;
           const getPage = await request.get('/api/user/homePage');
           const userHomePage = await getPage.json();
           userIn.authorURL = userHomePage.creator_id;
@@ -42,7 +43,6 @@ class StartStore {
       console.log(err);
     }
     Actions.renderSideBar(sideBarElement, userIn);
-    // Actions.renderStartPage();
   }
 }
 

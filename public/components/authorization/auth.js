@@ -1,5 +1,5 @@
 import { color } from '../../consts/styles.js';
-import { Actions } from '../../actions/auth.js';
+import { Actions } from '../../actions/actions.js';
 import { request } from '../../modules/request.js';
 
 const template = require('./auth.handlebars');

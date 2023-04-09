@@ -1,5 +1,5 @@
 import { clickHandler } from '../../modules/handler.js';
-import { Actions } from '../../actions/auth.js';
+import { Actions } from '../../actions/actions.js';
 
 const template = require('./winSettings.handlebars');
 
