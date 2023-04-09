@@ -39,6 +39,7 @@ class SettingsStore {
   renderSettings() {
     settings.config = userStore.getUserState();
     settings.render();
+    console.log(1);
   }
 
   async changePhoto(file) {
