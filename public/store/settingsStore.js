@@ -32,7 +32,6 @@ class SettingsStore {
 
       case ActionTypes.CHANGE_PHOTO:
         await this.changePhoto(action.file);
-        this.renderSettings();
         break;
 
       default:
@@ -53,7 +52,9 @@ class SettingsStore {
     await request.get('/api/user/updateProfilePhoto');
     await request.postMultipart('/api/user/updateProfilePhoto', formData);
 
-    router.go(URLS.settings, {}, contentElement);
+    Actions.getUser();
+    console.log('user: ', userStore.getUserState());
+    this.renderSettings();
   }
 
   async changePassword(input) {
