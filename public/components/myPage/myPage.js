@@ -86,8 +86,6 @@ class MyPage {
   updateHandler(e) {
     e.preventDefault();
     const postId = e.currentTarget.parentElement.parentElement.id;
-    // const title = e.currentTarget.parentElement.parentElement.title;
-    // const text = e.currentTarget.parentElement.parentElement.slot;
     router.go(URLS.editPost, {
       postId,
     }, this.getParent(), postId);

@@ -120,6 +120,13 @@ export const Actions = {
     });
   },
 
+  changePhoto(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.CHANGE_PHOTO,
+      file,
+    });
+  },
+
   // myPage
   renderMyPage() {
     dispatcher.dispatch({

@@ -61,6 +61,16 @@ export class Request {
     return res;
   }
 
+  async postMultipart(path, body) {
+    const response = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.PUT,
+      mode: 'cors',
+      credentials: 'include',
+      body,
+    });
+    return response;
+  }
+
   async delete(path) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.DELETE,

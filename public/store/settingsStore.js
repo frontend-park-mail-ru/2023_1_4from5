@@ -27,6 +27,10 @@ class SettingsStore {
         this.changeLogin(action.login);
         break;
 
+      case ActionTypes.CHANGE_PHOTO:
+        this.changePhoto(action.file);
+        break;
+
       default:
         break;
     }
@@ -35,6 +39,15 @@ class SettingsStore {
   renderSettings() {
     settings.config = userStore.getUserState();
     settings.render();
+  }
+
+  async changePhoto(file) {
+    const formData = new FormData();
+    formData.append('upload', file);
+    formData.append('path', userStore.getUserState().profilePhoto);
+
+    await request.get('/api/user/updateProfilePhoto');
+    await request.postMultipart('/api/user/updateProfilePhoto', formData);
   }
 
   async changePassword(input) {

@@ -38,7 +38,18 @@ class Settings {
     const changeLoginBtn = document.getElementById('change-login-btn');
     changeLoginBtn.addEventListener('click', this.changeLogin);
 
+    const fileInput = document.querySelector('#photo-upload');
+    fileInput.addEventListener('change', (event) => {
+      event.preventDefault();
+      const files = event.target.files;
+      Actions.changePhoto(files[0]);
+
+      // console.log(files[0]);
+      // uploadFile(files[0]);
+    });
   }
+
+
 
   changePwd(e) {
     e.preventDefault();

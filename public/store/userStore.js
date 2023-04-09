@@ -31,7 +31,7 @@ class UserStore {
     this.#user.isAuthorizedIn = user.isAuthorizedIn;
     this.#user.authorURL = user.authorURL;
     this.#user.login = user.login;
-    this.#user.profilePhoto = user.profilePhoto
+    this.#user.profilePhoto = user.profilePhoto;
   }
 
   setState(homePage, profile) {
@@ -53,6 +53,8 @@ class UserStore {
         const profile = await getUser.json();
 
         this.setState(homePage, profile);
+        console.log('store', userStore.getUserState().profilePhoto);
+        
         Actions.renderSideBar(sideBarElement, this.#user);
         break;
 
