@@ -25,11 +25,11 @@ class MyPageStore {
         break;
       case ActionTypes.CLICK_LIKE:
         if (action.typeLike === 'addLike') {
+          console.log(action.postId);
           const result = await request.put('/api/post/addLike', { post_id: action.postId });
           if (result.ok) {
             console.log('ADD_LIKE OK', result);
             // TODO научиться нормально считывать инфу с данного результата
-            console.log();
             const currentPost = this.#config.posts.find((post) => post.id === action.postId);
             // TODO бэкендеры не обновляют is_liked у себя в бд
             currentPost.is_liked = true;
@@ -40,6 +40,7 @@ class MyPageStore {
             console.log('ADD_LIKE ERROR');
           }
         } else {
+          console.log(action.postId);
           const result = await request.put('/api/post/removeLike', { post_id: action.postId });
           if (result.ok) {
             console.log('REMOVE_LIKE OK');
@@ -74,6 +75,13 @@ class MyPageStore {
       });
     });
     this.#config = result;
+    const renderIcon = {
+      edit_aim: this.#config.is_my_page,
+      edit_aboutAuthor: this.#config.is_my_page,
+      edit_level: this.#config.is_my_page,
+    };
+    this.#config = Object.assign(this.#config, renderIcon);
+    console.log('testObject', this.#config);
     myPage.config = this.#config;
     myPage.render();
   }
