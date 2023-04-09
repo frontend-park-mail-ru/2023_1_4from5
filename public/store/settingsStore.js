@@ -52,7 +52,7 @@ class SettingsStore {
     const user = userStore.getUserState();
     user.usernameIn = name;
     userStore.setUserState(user);
-    settingsStore.renderSettings();
+    this.renderSettings();
   }
 
   async changePassword(input) {
