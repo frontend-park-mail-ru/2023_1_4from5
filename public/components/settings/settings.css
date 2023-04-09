@@ -1,4 +1,8 @@
-#settings {
+.settings {
     margin-left: 10em;
     margin-right: 10em;
+    border: solid black 2px;
+    border-radius: 2em;
+    padding-left: 2em;
+    padding-bottom: 2em;
 }

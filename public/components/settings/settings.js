@@ -25,6 +25,17 @@ class Settings {
     newDiv.id = 'settingsDiv';
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
+
+    const editBtn = document.getElementById('pencil-icon');
+    editBtn.addEventListener('click', this.editSettings);
+  }
+
+  editSettings(e) {
+    e.preventDefault();
+    const space = document.getElementById('change-password');
+    const oldPwd = document.createElement('textarea');
+    oldPwd.id = 'oldPwd';
+    const newPwd = document.createElement('textarea');
   }
 }
 
