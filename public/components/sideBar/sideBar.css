@@ -10,6 +10,7 @@
 
 #logo {
     margin-left: 1em;
+    cursor: pointer;
 }
 
 #sideBar-SubMe {
@@ -35,7 +36,7 @@
     margin-right: 1em;
 }
 
-a { 
+a {
     color: #222;
 }
 
