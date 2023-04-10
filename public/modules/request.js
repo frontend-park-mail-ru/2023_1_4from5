@@ -27,7 +27,8 @@ export class Request {
   /**
    * post request
    * @param {string} path - end-point
-   * @param {Object} body - request body
+   * @param content
+   * @param contentType
    *
    * @returns {Promise} - response
    */
@@ -47,7 +48,6 @@ export class Request {
     } else {
       body = JSON.stringify(content);
     }
-    console.log(body);
 
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.POST,

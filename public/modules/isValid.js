@@ -51,7 +51,6 @@ function isSpecialSign(code) {
  * @returns {String} - validation error
  */
 export function isValidPassword(inputStr) {
-  // TODO сделать обработку русских букв
   const flags = {
     hasMinLen: {
       flag: false,

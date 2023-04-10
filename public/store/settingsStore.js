@@ -38,13 +38,11 @@ class SettingsStore {
   }
 
   renderSettings() {
-    console.log(2);
     settings.config = userStore.getUserState();
     settings.render();
   }
 
   async changePhoto(file) {
-    console.log(1);
     const formData = new FormData();
     formData.append('upload', file);
     formData.append('path', userStore.getUserState().profilePhoto);

@@ -1,10 +1,8 @@
-import { notifier, URLS } from './Notifier.js';
-import { myPageStore } from '../store/myPageStore';
+import { notifier } from './Notifier.js';
 
 class Router {
-  // стартовая функция
   start() {
-    const url = new URL(window.location.href); // это встроенный класс
+    const url = new URL(window.location.href);
     notifier(url, {}, {}, this.parseUrl(url.pathname).additionalUrl);
 
     window.onpopstate = (e) => {
@@ -16,7 +14,6 @@ class Router {
     };
   }
 
-  // переход на страницу
   go(path, data, parent, additionalUrl) {
     let url;
     if (additionalUrl) {
@@ -45,14 +42,12 @@ class Router {
     }
   }
 
-  // нужен если на странице делать кнопку назад
   popstate() {
     window.history.back();
     const url = new URL(window.location.href);
     notifier(url);
   }
 
-  // ЕБАТЬ ГЕНИАЛЬНАЯ ФУНКЦИЯ!?!?!?!?!?
   pushHistoryState(_path, _data) {
     this.#pushHistoryState(_path, { _data });
   }

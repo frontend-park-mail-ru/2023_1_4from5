@@ -8,7 +8,6 @@ export const Actions = {
       type: ActionTypes.START,
     });
   },
-
   renderStartPage() {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_STARTPAGE,
@@ -22,14 +21,12 @@ export const Actions = {
       type: ActionTypes.RENDER_AUTH,
     });
   },
-
   authorization(input) {
     dispatcher.dispatch({
       type: ActionTypes.AUTHORIZATION,
       input,
     });
   },
-
   removeAuth() {
     dispatcher.dispatch({
       type: ActionTypes.REMOVE_AUTH,
@@ -42,14 +39,12 @@ export const Actions = {
       type: ActionTypes.RENDER_REG,
     });
   },
-
   registration(input) {
     dispatcher.dispatch({
       type: ActionTypes.REGISTRATION,
       input,
     });
   },
-
   removeReg() {
     dispatcher.dispatch({
       type: ActionTypes.REMOVE_REG,
@@ -62,7 +57,6 @@ export const Actions = {
       type: ActionTypes.GET_USER,
     });
   },
-
   logout(href, data, parent) {
     dispatcher.dispatch({
       type: ActionTypes.LOGOUT,
@@ -85,7 +79,6 @@ export const Actions = {
       type: ActionTypes.RENDER_WINSETTINGS,
     });
   },
-
   removeWinSettings() {
     dispatcher.dispatch({
       type: ActionTypes.REMOVE_WINSETTINGS,
@@ -98,28 +91,24 @@ export const Actions = {
       type: ActionTypes.RENDER_SETTINGS,
     });
   },
-
   changePassword(input) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_PASSWORD,
       input,
     });
   },
-
   changeUsername(username) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_USERNAME,
       username,
     });
   },
-
   changeLogin(login) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_LOGIN,
       login,
     });
   },
-
   changePhoto(file) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_PHOTO,
@@ -137,39 +126,39 @@ export const Actions = {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
       typeLike,
-      postId,
+      postId
+    });
+  },
+
   // myPage-Aim
   editAim() {
     dispatcher.dispatch({
       type: ActionTypes.OPEN_EDIT_AIM,
     });
   },
-
   saveEditAim(input) {
     dispatcher.dispatch({
       type: ActionTypes.SAVE_EDIT_AIM,
       input,
     });
   },
-
   closeEditAim() {
     dispatcher.dispatch({
       type: ActionTypes.CLOSE_EDIT_AIM,
     });
   },
+
   // donateWin
   renderDonateWin() {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_DONATE_WIN,
     });
   },
-
   removeDonateWin() {
     dispatcher.dispatch({
       type: ActionTypes.REMOVE_DONATE_WIN,
     });
   },
-
   donate(input) {
     dispatcher.dispatch({
       type: ActionTypes.DONATE,
@@ -184,14 +173,12 @@ export const Actions = {
       input,
     });
   },
-
   deletePost(postId) {
     dispatcher.dispatch({
       type: ActionTypes.DELETE_POST,
       postId,
     });
   },
-
   updatePost(postId, input) {
     dispatcher.dispatch({
       type: ActionTypes.UPDATE_POST,

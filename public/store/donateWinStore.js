@@ -34,8 +34,6 @@ class DonateWinStore {
   }
 
   async donate(input) {
-    console.log('myPageStore');
-
     let moneyCount = input.moneyInput.value;
     const errMoneyGot = isValidDonate(moneyCount);
     if (moneyCount.isEmpty) {
@@ -44,7 +42,6 @@ class DonateWinStore {
     input.moneyInput.style.backgroundColor = color.field;
 
     if (!errMoneyGot) {
-      console.log(myPageStore.getState().creator_info.creator_id, moneyCount);
       await request.get('/api/user/donate');
       const donateAim = await request.post('/api/user/donate', {
         creator_id: myPageStore.getState().creator_info.creator_id,

@@ -1,5 +1,4 @@
 import { Actions } from '../../actions/actions';
-import { userStore } from '../../store/userStore';
 
 const template = require('./settings.handlebars');
 
@@ -45,8 +44,6 @@ class Settings {
       Actions.changePhoto(files[0]);
     });
   }
-
-
 
   changePwd(e) {
     e.preventDefault();
