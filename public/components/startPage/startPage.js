@@ -1,4 +1,4 @@
-const template = require('./startPage.handlebars');
+import template from './startPage.handlebars';
 
 const rootElement = document.getElementById('root');
 const sideBarElement = document.createElement('sideBar');
