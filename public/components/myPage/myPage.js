@@ -30,6 +30,7 @@ class MyPage {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
+    console.log(this.#config);
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
