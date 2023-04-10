@@ -12,12 +12,18 @@
 
 .input-donateWin-container {
     margin-right: 2em;
+    text-align: center;
 }
 
 .donateWin-container {
     text-align: end;
     margin: auto;
     width: 30em;
+}
+
+.donateWin-label {
+    font-size: 1.2em;
+    margin-bottom: 1em;
 }
 
 #donateWin-error {
