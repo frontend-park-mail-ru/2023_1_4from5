@@ -1,12 +1,14 @@
 .newpost-form-container {
     margin: auto;
+    margin-top: 2em;
     width: 50em;
     border: 2px solid gray;
     border-radius: 2em;
 }
 
 .newpost-header-container {
-    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
 .newpost-form {
@@ -67,4 +69,14 @@
     height: 2em;
     border-radius: 1.5em;
     font-size: 1.3em;
+}
+
+#newpost-btn-back {
+    font-size: 1.3em;
+    margin-left: 2em;
+}
+
+.newpost-title {
+    font-size: 2em;
+    margin-left: 10%;
 }

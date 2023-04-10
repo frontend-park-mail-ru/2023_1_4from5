@@ -1,4 +1,6 @@
 import { Actions } from '../../actions/actions.js';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 import template from './newPost.handlebars';
 
 const contentElement = document.querySelector('main');
@@ -30,6 +32,12 @@ class NewPost {
     newDiv.id = 'newPostDiv';
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
+
+    const backBtn = document.getElementById('newpost-btn-back');
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.go(URLS.myPage, {}, contentElement);
+    });
   }
 
   publish() {
