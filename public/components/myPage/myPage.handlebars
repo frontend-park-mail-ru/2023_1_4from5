@@ -11,7 +11,9 @@
                 {{#if is_my_page}}
                     <button id="createPost-btn" class="subs-btn">Создать пост</button>
                 {{else}}
-                    <button id="subs-btn" class="subs-btn">Подписаться</button>
+                    {{#if isAuthorized }}
+                        <button id="subs-btn" class="subs-btn">Подписаться</button>
+                    {{/if}}
                 {{/if}}
             </div>
             <div class="box1-info">
@@ -86,10 +88,14 @@
                     {{/each}}
                     <div class="post-footer-container">
                         <span class="like-container">
-                            {{#if is_liked}}
-                                <img id="love-like-icon" class="like-icon" width="27" src="../../images/love_like_icon.png" alt="love_like-icon">
+                            {{#if ../is_my_page}}
+                                <img id="disable-like-icon" class="like-icon--disable" width="27" src="../../images/disable_like_icon.png" alt="disable_like-icon">
                             {{else}}
-                                <img id="like-icon" class="like-icon" width="25" src="../../images/like_icon.png" alt="like-icon">
+                                {{#if is_liked}}
+                                    <img id="love-like-icon" class="like-icon" width="27" src="../../images/love_like_icon.png" alt="love_like-icon">
+                                {{else}}
+                                    <img id="like-icon" class="like-icon" width="25" src="../../images/like_icon.png" alt="like-icon">
+                                {{/if}}
                             {{/if}}
                             <span>{{likes_count}}</span>
                         </span>
