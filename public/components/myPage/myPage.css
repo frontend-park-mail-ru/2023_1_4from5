@@ -78,6 +78,21 @@
     font-size: large;
 }
 
+.box-3__container {
+    border: 1px solid #7f7e7e;
+    margin-bottom: 2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.box-3__divider {
+    color: #7f7e7e;
+}
+
+.box-3__money {
+    padding-bottom: 1em;
+}
+
 #description-edit-aim {
     resize: vertical;
     width: 80%;

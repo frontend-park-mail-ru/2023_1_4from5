@@ -1,6 +1,5 @@
 import { Actions } from '../../actions/actions';
-
-const template = require('./settings.handlebars');
+import template from './settings.handlebars';
 
 const contentElement = document.querySelector('main');
 

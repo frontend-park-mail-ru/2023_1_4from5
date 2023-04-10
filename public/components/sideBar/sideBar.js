@@ -1,9 +1,7 @@
 import { clickHandler } from '../../modules/handler.js';
-import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
-
-const template = require('./sideBar.handlebars');
+import template from './sideBar.handlebars';
 
 const sideBarElement = document.querySelector('sideBar');
 

@@ -1,7 +1,6 @@
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
-
-const template = require('./search.handlebars');
+import template from './search.handlebars';
 
 const contentElement = document.querySelector('main');
 
