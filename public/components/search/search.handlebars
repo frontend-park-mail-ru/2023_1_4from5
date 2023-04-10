@@ -1,0 +1,11 @@
+<div class="search-container">
+    {{#each creatorList}}
+        <div class="author-card" id="{{creator_id}}">
+            <div class="author-card-info">
+                <h1>{{name}}</h1>
+                <p>{{description}}</p>
+                <p>Подписчиков: {{followers_count}}</p>
+            </div>
+        </div>
+    {{/each}}
+</div>

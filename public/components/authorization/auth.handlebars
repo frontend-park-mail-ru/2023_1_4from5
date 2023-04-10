@@ -1,19 +1,23 @@
 <div id="backAuth" class="background">
 </div>
 <div id="auth">
-    <div id="closeAuth" class="close">
-        <img id="close-auth" width="25" src="./images/close.png" alt="user_photo">
-    </div>
-    <div class="form">
-        <label class="label" for="username">Логин</label>
-        <input id="auth-login" type="text">
-    </div>
-    <div>
-        <label class="label" for="password">Пароль</label>
-        <input id="auth-password" type="password">
-    </div>
-    <div id="auth-error"></div>
-    <div>
-        <button id="auth-btn"> Войти </button>
+    <div class="auth-container">
+        <div class="title">
+            Войти на SubMe
+        </div>
+        <div class="input-auth-container">
+            <div>
+                <label class="auth-label" for="username">Логин</label>
+                <input id="auth-login" class="auth-input" type="text">
+            </div>
+            <div>
+                <label class="auth-label" for="password">Пароль</label>
+                <input id="auth-password" class="auth-input" type="password">
+            </div>
+            <div id="auth-error"></div>
+            <div class="auth-btn-container">
+                <button id="auth-btn" class="auth-btn"> Войти</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,22 +1,27 @@
 #auth {
-    text-align: end;
-    top: 20em;
-    margin-left: 35%;
+    top: 15em;
+    margin-left: 30%;
     background-color: #ddd;
     position: fixed;
-    width: 400px;
+    width: 40em;
+    height: 20em;
+    border-radius: 3em;
     opacity: 1;
     z-index: 20;
 }
 
-input {
-    width: 22em;
-    margin-right: 1em;
-    margin-bottom: 0.5em;
+.input-auth-container {
+    margin-right: 2em;
 }
 
-button {
-    margin-right: 13em;
+.auth-container {
+    text-align: end;
+    margin: auto;
+    width: 30em;
+}
+
+.toReg {
+    text-align: center;
 }
 
 #auth-error {

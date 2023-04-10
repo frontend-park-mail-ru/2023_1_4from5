@@ -1,38 +1,48 @@
-import { clickHandler } from "../../modules/handler.js";
+import { clickHandler } from '../../modules/handler.js';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
+import template from './sideBar.handlebars';
+
+const sideBarElement = document.querySelector('sideBar');
 
 export class SideBar {
-    #parent;
+  #parent;
 
-    #config;
+  #config;
 
-    constructor(parent) {
-        this.#parent = parent;
+  constructor(parent) {
+    this.#parent = parent;
+    const handler = (event) => {
+      clickHandler(event, this.#config);
+    };
+    this.#parent.addEventListener('click', handler);
+  }
+
+  get config() {
+    return this.#config;
+  }
+
+  set config(config) {
+    this.#config = config;
+  }
+
+  render() {
+    const lastSideBar = document.getElementById('sidebarDiv');
+    if (lastSideBar) {
+      lastSideBar.remove();
     }
+    const newDiv = document.createElement('div');
+    newDiv.id = 'sidebarDiv';
+    newDiv.innerHTML = template(this.#config);
 
-    get config() {
-        return this.#config;
-    }
+    this.#parent.appendChild(newDiv);
 
-    set config(config) {
-        this.#config = config;
-    }
-
-    render() {
-        const lastSideBar = document.getElementById('sidebarDiv');
-        if (lastSideBar) {
-            lastSideBar.remove();
-        }
-
-        const newDiv = document.createElement('div');
-        newDiv.id = 'sidebarDiv';
-
-        const template = Handlebars.templates.sideBar; // eslint-disable-line
-        newDiv.innerHTML = template(this.#config);
-
-        this.#parent.addEventListener('click', (event) => {
-            clickHandler(event, this.#config.general, this.#config);
-        });
-
-        this.#parent.appendChild(newDiv);
-    }
+    const logoBtn = document.getElementById('logo');
+    logoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.go(URLS.root);
+    });
+  }
 }
+
+export const sideBar = new SideBar(sideBarElement);

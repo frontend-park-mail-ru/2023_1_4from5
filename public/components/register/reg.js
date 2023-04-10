@@ -1,114 +1,114 @@
-import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
-import { Request } from "../../modules/request.js";
+import { request } from '../../modules/request.js';
+import { color } from '../../consts/styles.js';
+import { Actions } from '../../actions/actions.js';
+import template from './reg.handlebars';
 
-const request = new Request();
+const rootElement = document.getElementById('root');
 
 export class Register {
-    #parent;
-    #config;
-    constructor(parent) {
-        this.#parent = parent;
+  #parent;
+
+  constructor(parent) {
+    this.#parent = parent;
+  }
+
+  render() {
+    const newDiv = document.createElement('div');
+    newDiv.id = 'regDiv';
+
+    newDiv.innerHTML = template();
+    this.#parent.appendChild(newDiv);
+
+    const background = document.getElementById('backReg');
+    background.addEventListener('click', (e) => {
+      e.preventDefault();
+      Actions.removeReg();
+    });
+  }
+
+  /**
+   * removing registration window
+   * @param {}
+   *
+   * @returns {}
+   */
+  removeReg() {
+    const lastReg = document.getElementById('regDiv');
+    if (lastReg) {
+      lastReg.remove();
     }
+  }
 
-    get config() {
-        return this.#config;
+  /**
+   * rendering registration
+   * @param {function} callback
+   *
+   * @returns {}
+   */
+  registration() {
+    const submitBtn = document.getElementById('reg-btn');
+    const loginInput = document.getElementById('reg-login');
+    const usernameInput = document.getElementById('reg-username');
+    const passwordInput = document.getElementById('reg-password');
+    const passwordRepeatInput = document.getElementById('reg-repeat-password');
+    const errorOutput = document.getElementById('reg-error');
+
+    loginInput.style.backgroundColor = color.field;
+    usernameInput.style.backgroundColor = color.field;
+    passwordInput.style.backgroundColor = color.field;
+    passwordRepeatInput.style.backgroundColor = color.field;
+
+    submitBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      Actions.registration({
+        loginInput,
+        usernameInput,
+        passwordInput,
+        passwordRepeatInput,
+        errorOutput,
+      });
+    });
+  }
+
+  async validation(input) {
+    input.loginInput.style.backgroundColor = color.field;
+    input.usernameInput.style.backgroundColor = color.field;
+    input.passwordInput.style.backgroundColor = color.field;
+    input.passwordRepeatInput.style.backgroundColor = color.field;
+
+    if (input.username.length === 0) {
+      input.usernameInput.style.backgroundColor = color.error;
+      input.errorOutput.innerHTML = '';
+      input.errorOutput.innerHTML = 'Введите ваше имя';
+    } else if (input.errLogin) {
+      input.loginInput.style.backgroundColor = color.error;
+      input.errorOutput.innerHTML = '';
+      input.errorOutput.innerHTML = input.errLogin;
+    } else if (input.errPassword) {
+      input.passwordInput.style.backgroundColor = color.error;
+      input.errorOutput.innerHTML = '';
+      input.errorOutput.innerHTML = input.errPassword;
+    } else if (input.password !== input.repeatPassword) {
+      input.passwordInput.style.backgroundColor = color.error;
+      input.passwordRepeatInput.style.backgroundColor = color.error;
+      input.errorOutput.innerHTML = '';
+      input.errorOutput.innerHTML = 'Пароли не совпадают';
+    } else {
+      const signUp = await request.post('/api/auth/signUp', {
+        login: input.login,
+        name: input.username,
+        password_hash: input.password,
+      });
+      if (signUp.ok) {
+        Actions.getUser();
+        Actions.removeReg();
+        Actions.renderStartPage();
+      } else {
+        input.errorOutput.innerHTML = '';
+        input.errorOutput.innerHTML = 'Такой логин уже существует';
+      }
     }
-
-    set config(config) {
-        this.#config = config;
-    }
-
-    render() {
-        const newDiv = document.createElement('div');
-        newDiv.id = 'regDiv';
-
-        const template = Handlebars.templates.reg; // eslint-disable-line
-        newDiv.innerHTML = template();
-
-        this.#parent.appendChild(newDiv);
-    }
-    /**
-     * removing registration window
-     * @param {}
-     *
-     * @returns {}
-     */
-    removeReg() {
-        const lastReg = document.getElementById('regDiv');
-        if (lastReg) {
-            lastReg.remove();
-        }
-        this.#config.activePage = '';
-    }
-
-    /**
-     * rendering registration
-     * @param {function} callback
-     *
-     * @returns {}
-     */
-    registration(callback) {
-        const submitBtn = document.getElementById('reg-btn');
-        const loginInput = document.getElementById('reg-login');
-        const usernameInput = document.getElementById('reg-username');
-        const passwordInput = document.getElementById('reg-password');
-        const passwordRepeatInput = document.getElementById('reg-repeat-password');
-        const errorOutput = document.getElementById('reg-error');
-
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const login = loginInput.value;
-            const username = usernameInput.value;
-            const password = passwordInput.value;
-            const repeatPassword = passwordRepeatInput.value;
-            const errLogin = isValidLogin(login);
-            const errPassword = isValidPassword(password);
-
-            if (username.length === 0) {
-                errorOutput.innerHTML = '';
-                errorOutput.innerHTML = 'Введите ваше имя';
-            } else if (errLogin) {
-                errorOutput.innerHTML = '';
-                errorOutput.innerHTML = errLogin;
-            } else if (errPassword) {
-                errorOutput.innerHTML = '';
-                errorOutput.innerHTML = errPassword;
-            } else if (password !== repeatPassword) {
-                errorOutput.innerHTML = '';
-                errorOutput.innerHTML = 'Пароли не совпадают';
-            } else {
-                request.post(`/api/auth/signUp`, {
-                    login,
-                    name: username,
-                    password_hash: password,
-                })
-                    .then((response) => {
-                        if (response.ok) {
-                            request.get(`/api/user/profile`)
-                                // eslint-disable-next-line no-shadow
-                                .then((response) => response.json())
-                                .then((result) => {
-                                    callback(result, request);
-                                    // if (result.login.length > 0) {
-                                    //     req.get(`/api/user/homePage`)
-                                    //         .then((response) => response.json())
-                                    //         .then((result) => {
-                                    //             userIn.usernameIn = result.name;
-                                    //             userIn.isAuthorIn = result.is_creator;
-                                    //             userIn.isAuthorizedIn = true;
-                                    //             userIn.authorURL = result.creator_id;
-                                    //
-                                    //             renderSideBar(sideBarElement);
-                                    //             removeReg();
-                                    //         })
-                                    // }
-                                });
-                        } else {
-                            errorOutput.innerHTML = '';
-                            errorOutput.innerHTML = 'Такой логин уже существует';
-                        }
-                    });
-            }
-        });
-    }
+  }
 }
+
+export const register = new Register(rootElement);

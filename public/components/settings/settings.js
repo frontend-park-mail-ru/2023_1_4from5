@@ -1,31 +1,80 @@
-export class Settings {
-    #parent;
+import { Actions } from '../../actions/actions';
+import template from './settings.handlebars';
 
-    #config;
+const contentElement = document.querySelector('main');
 
-    constructor(parent) {
-        this.#parent = parent;
-    }
+class Settings {
+  #parent;
 
-    get config() {
-        return this.#config;
-    }
+  #user;
 
-    set config(config) {
-        this.#config = config;
-    }
+  constructor(parent) {
+    this.#parent = parent;
+  }
 
-    render() {
-        // const lastSettings = document.getElementById('settingsDiv');
-        // if (lastSettings) {
-        //     lastSettings.remove();
-        // }
-        // лишнее, так как это проверяет handler при нажатии на winSettings, sidebar
+  get config() {
+    return this.#user;
+  }
 
-        const newDiv = document.createElement('div');
-        newDiv.id = 'settingsDiv';
-        const template = Handlebars.templates.settings; // eslint-disable-line
-        newDiv.innerHTML = template(this.#config.user);
-        this.#parent.appendChild(newDiv);
-    }
+  set config(user) {
+    this.#user = user;
+  }
+
+  render() {
+    this.#parent.innerHTML = '';
+    const newDiv = document.createElement('div');
+    newDiv.id = 'settingsDiv';
+    newDiv.innerHTML = template(this.#user);
+    this.#parent.appendChild(newDiv);
+
+    const changePwdBtn = document.getElementById('change-password-btn');
+    changePwdBtn.addEventListener('click', this.changePwd);
+
+    const changeNameBtn = document.getElementById('change-username-btn');
+    changeNameBtn.addEventListener('click', this.changeName);
+
+    const changeLoginBtn = document.getElementById('change-login-btn');
+    changeLoginBtn.addEventListener('click', this.changeLogin);
+
+    const fileInput = document.querySelector('#photo-upload');
+    fileInput.addEventListener('change', (event) => {
+      event.preventDefault();
+      const files = event.target.files;
+      Actions.changePhoto(files[0]);
+    });
+  }
+
+  changePwd(e) {
+    e.preventDefault();
+    const oldPwdInput = document.getElementById('old-password-input');
+    const newPwdInput = document.getElementById('new-password-input');
+    Actions.changePassword({
+      oldPwdInput,
+      newPwdInput,
+    });
+  }
+
+  changeName(e) {
+    e.preventDefault();
+    const usernameInput = document.getElementById('change-username-input');
+    Actions.changeUsername(usernameInput);
+  }
+
+  changeLogin(e) {
+    e.preventDefault();
+    const loginInput = document.getElementById('change-login-input');
+    Actions.changeLogin(loginInput);
+  }
+
+  invalidPassword(err) {
+    const errorDiv = document.getElementById('change-password-error');
+    errorDiv.textContent = err;
+  }
+
+  invalidLogin(err) {
+    const errorDiv = document.getElementById('change-login-error');
+    errorDiv.textContent = err;
+  }
 }
+
+export const settings = new Settings(contentElement);

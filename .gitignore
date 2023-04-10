@@ -2,5 +2,7 @@
 node_modules/
 /package-lock.json
 *.pem
-public/build/
+public/build
 service.txt
+dist/
+.vscode

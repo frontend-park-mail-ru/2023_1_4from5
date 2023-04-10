@@ -1,101 +1,97 @@
-import {isValidLogin, isValidPassword} from "../../modules/isValid.js";
-import { Request }  from "../../modules/request.js";
+import { color } from '../../consts/styles.js';
+import { Actions } from '../../actions/actions.js';
+import { request } from '../../modules/request.js';
+import template from './auth.handlebars';
 
-const request = new Request();
+const rootElement = document.getElementById('root');
 
 export class Auth {
-    #parent;
+  #parent;
 
-    #config;
+  constructor(parent) {
+    this.#parent = parent;
+  }
 
+  render() {
+    const newDiv = document.createElement('div');
+    newDiv.id = 'authDiv';
 
-    constructor(parent) {
-        this.#parent = parent;
+    newDiv.innerHTML = template();
+
+    this.#parent.appendChild(newDiv);
+    const background = document.getElementById('backAuth');
+    background.addEventListener('click', (e) => {
+      e.preventDefault();
+      Actions.removeAuth();
+    });
+  }
+
+  /**
+   * removing authorization window
+   * @param {}
+   *
+   * @returns {}
+   */
+  removeAuth() {
+    const lastAuth = document.getElementById('authDiv');
+    if (lastAuth) {
+      lastAuth.remove();
     }
+  }
 
-    get config() {
-        return this.#config;
+  /**
+   * request for authorization
+   * @param {function} callback
+   *
+   * @returns {}
+   */
+  authentification() {
+    const submitBtn = document.getElementById('auth-btn');
+    const loginInput = document.getElementById('auth-login');
+    const passwordInput = document.getElementById('auth-password');
+    const errorOutput = document.getElementById('auth-error');
+
+    loginInput.style.backgroundColor = color.field;
+    passwordInput.style.backgroundColor = color.field;
+
+    submitBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      Actions.authorization({
+        loginInput,
+        passwordInput,
+        errorOutput,
+      });
+    });
+  }
+
+  async authorization(input) {
+    input.loginInput.style.backgroundColor = color.field;
+    input.passwordInput.style.backgroundColor = color.field;
+
+    if (!input.errLogin && !input.errPassword) {
+      const signIn = await request.post('/api/auth/signIn', {
+        login: input.login,
+        password_hash: input.password,
+      });
+      if (signIn.ok) {
+        Actions.getUser();
+        Actions.removeAuth();
+        Actions.renderStartPage();
+      } else {
+        input.errorOutput.innerHTML = '';
+        input.errorOutput.innerHTML = 'Неверный логин или пароль';
+      }
+    } else {
+      if (input.errLogin) {
+        input.loginInput.style.backgroundColor = color.error;
+      }
+      if (input.errPassword) {
+        input.passwordInput.style.backgroundColor = color.error;
+      }
+      input.errorOutput.innerHTML = '';
+      input.errorOutput.innerHTML = 'Неверный логин или пароль';
     }
-
-    set config(config) {
-        this.#config = config;
-    }
-
-    render() {
-        const newDiv = document.createElement('div');
-        newDiv.id = 'authDiv';
-
-        const template = Handlebars.templates.auth; // eslint-disable-line
-        newDiv.innerHTML = template();
-
-        this.#parent.appendChild(newDiv);
-    }
-    /**
-     * removing authorization window
-     * @param {}
-     *
-     * @returns {}
-     */
-     removeAuth() {
-        const lastAuth = document.getElementById('authDiv');
-        if (lastAuth) {
-            lastAuth.remove();
-        }
-        this.#config.activePage = '';
-    }
-
-    /**
-     * request for authorization
-     * @param {function} callback
-     *
-     * @returns {}
-     */
-     authentification(callback) {
-        const submitBtn = document.getElementById('auth-btn');
-        const loginInput = document.getElementById('auth-login');
-        const passwordInput = document.getElementById('auth-password');
-        const errorOutput = document.getElementById('auth-error');
-
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const login = loginInput.value;
-            const password = passwordInput.value;
-            const errLogin = isValidLogin(login);
-            const errPassword = isValidPassword(password);
-
-            if (!errLogin && !errPassword) {
-                request.post(`/api/auth/signIn`, {login: login, password_hash: password})
-                    .then((response) => {
-                        if (response.ok) {
-                            request.get(`/api/user/profile`)
-                                // eslint-disable-next-line no-shadow
-                                .then((response) => response.json())
-                                .then((result) => {
-                                    callback(result, request);
-                                    // if (result.login.length > 0) {
-                                    //     req.get(`/api/user/homePage`)
-                                    //         .then((response) => response.json())
-                                    //         .then((result) => {
-                                    //             userIn.usernameIn = result.name;
-                                    //             userIn.isAuthorIn = result.is_creator;
-                                    //             userIn.isAuthorizedIn = true;
-                                    //             userIn.authorURL = result.creator_id;
-                                    //             renderSideBar(sideBarElement);
-                                    //             removeAuth();
-                                    //         })
-                                    // }
-                                });
-                        } else {
-                            errorOutput.innerHTML = '';
-                            errorOutput.innerHTML = 'Неверный логин или пароль';
-                        }
-                    });
-
-            } else {
-                errorOutput.innerHTML = '';
-                errorOutput.innerHTML = 'Неверный логин или пароль';
-            }
-        });
-    }
+  }
 }
 
+export const auth = new Auth(rootElement);

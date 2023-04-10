@@ -1,27 +1,31 @@
-<div class="background">
+<div id="backReg" class="background">
 </div>
 <div id="register">
-    <div id="closeReg" class="close">
-        <img id="close-reg" width="25" src="./images/close.png" alt="user_photo">
-    </div>
-    <div>
-        <label class="label" for="username"> Логин </label>
-        <input id="reg-login" type="text">
-    </div>
-    <div>
-        <label class="label" for="username"> Ваше имя </label>
-        <input id="reg-username" type="text">
-    </div>
-    <div>
-        <label class="label" for="password"> Пароль </label>
-        <input id="reg-password" type="password">
-    </div>
-    <div>
-        <label class="label" for="password"> Повторите пароль </label>
-        <input id="reg-repeat-password" type="password">
-    </div>
-    <div id="reg-error"></div>
-    <div>
-        <button id="reg-btn"> Зарегистрироваться </button>
+    <div class="reg-container">
+        <div class="title">
+            Регистрация на SubMe
+        </div>
+        <div class="input">
+            <div>
+                <label class="auth-label" for="username"> Логин </label>
+                <input id="reg-login" class="auth-input" type="text">
+            </div>
+            <div>
+                <label class="auth-label" for="username"> Ваше имя </label>
+                <input id="reg-username" class="auth-input" type="text">
+            </div>
+            <div>
+                <label class="auth-label" for="password"> Пароль </label>
+                <input id="reg-password" class="auth-input" type="password">
+            </div>
+            <div>
+                <label class="auth-label" for="password"> Повторите пароль </label>
+                <input id="reg-repeat-password" class="auth-input" type="password">
+            </div>
+            <div id="reg-error"></div>
+            <div class="auth-btn-container">
+                <button id="reg-btn" class="reg-btn"> Зарегистрироваться</button>
+            </div>
+        </div>
     </div>
 </div>

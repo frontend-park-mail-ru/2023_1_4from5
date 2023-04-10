@@ -6,20 +6,16 @@
  *
  * @returns {}
  */
-export function clickHandler(event, configPart, config) {
-    if (event.target instanceof HTMLAnchorElement) {
-        event.preventDefault();
-        const targetId = event.target.id;
-        let target = configPart.pages.find((element) => element.id === targetId);
-        if (config.activePage === target.name) {
-            return;
-        }
-
-        if (!(target.name === 'Регистрация' || target.name === 'Войти' || target.name === config.user.username)) {
-            target.parent.innerHTML = '';
-        }
-        // eslint-disable-next-line no-param-reassign
-        config.activePage = target.name;
-        target.render(target.parent);
+export function clickHandler(event, config) {
+  if (event.target instanceof HTMLAnchorElement) {
+    event.preventDefault();
+    const targetId = event.target.id;
+    let target;
+    for (let element in config) {
+      if (config[element].id === targetId) {
+        target = config[element];
+      }
     }
+    target.render(target.href, '', target.parent);
+  }
 }
