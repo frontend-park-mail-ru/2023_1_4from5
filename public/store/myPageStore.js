@@ -1,12 +1,10 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { myPage } from '../components/myPage/myPage.js';
-import { donateWin } from '../components/donateWin/donateWin.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
 import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { isValidDescription, isValidMoneyString } from '../modules/isValid.js';
 import { color } from '../consts/styles.js';
-import {auth} from "../components/authorization/auth";
 
 class MyPageStore {
   #config;

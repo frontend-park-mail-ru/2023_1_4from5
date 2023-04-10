@@ -24,8 +24,6 @@
     "webpack-dev-server": "^4.13.2"
   },
   "scripts": {
-    "build (не нужен)": "bash ./public/build.sh",
-    "dev (не нужен)": "http-server",
     "lint": "eslint public",
     "webpack": "webpack --mode development",
     "webpackProd": "webpack --mode production",
