@@ -2,9 +2,11 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { settings } from '../components/settings/settings.js';
 import { userStore } from './userStore.js';
-import { isValidPassword } from '../modules/isValid';
+import { isValidLogin, isValidPassword } from '../modules/isValid';
 import { request } from '../modules/request';
 import { Actions } from '../actions/actions';
+import { router } from '../modules/Router';
+import { URLS } from '../modules/Notifier';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -29,7 +31,6 @@ class SettingsStore {
 
       case ActionTypes.CHANGE_PHOTO:
         await this.changePhoto(action.file);
-        this.renderSettings();
         break;
 
       default:
@@ -48,9 +49,11 @@ class SettingsStore {
     formData.append('path', userStore.getUserState().profilePhoto);
 
     await request.get('/api/user/updateProfilePhoto');
-    await request.postMultipart('/api/user/updateProfilePhoto', formData);
-
-    Actions.getUser();
+    const update = await request.postMultipart('/api/user/updateProfilePhoto', formData);
+    const newPhoto = await update.json();
+    const user = userStore.getUserState();
+    user.profilePhoto = newPhoto;
+    this.renderSettings();
   }
 
   async changePassword(input) {
@@ -86,14 +89,19 @@ class SettingsStore {
   async changeLogin(loginInput) {
     const login = loginInput.value;
     const name = userStore.getUserState().usernameIn;
-    await request.get('/api/user/updateData');
-    await request.put('/api/user/updateData', {
-      login,
-      name,
-    });
-    const user = userStore.getUserState();
-    user.login = login;
-    userStore.setUserState(user);
+    const errLogin = isValidLogin(login);
+    settings.invalidLogin(errLogin);
+
+    if (!errLogin) {
+      await request.get('/api/user/updateData');
+      await request.put('/api/user/updateData', {
+        login,
+        name,
+      });
+      const user = userStore.getUserState();
+      user.login = login;
+      userStore.setUserState(user);
+    }
   }
 }
 

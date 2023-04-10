@@ -20,7 +20,6 @@ class DonateWinStore {
     switch (action.type) {
       case ActionTypes.RENDER_DONATE_WIN:
         donateWin.render();
-        console.log(action);
         break;
       case ActionTypes.REMOVE_DONATE_WIN:
         donateWin.removeDonateWin();

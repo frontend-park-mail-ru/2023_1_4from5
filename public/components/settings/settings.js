@@ -71,6 +71,11 @@ class Settings {
     const errorDiv = document.getElementById('change-password-error');
     errorDiv.textContent = err;
   }
+
+  invalidLogin(err) {
+    const errorDiv = document.getElementById('change-login-error');
+    errorDiv.textContent = err;
+  }
 }
 
 export const settings = new Settings(contentElement);

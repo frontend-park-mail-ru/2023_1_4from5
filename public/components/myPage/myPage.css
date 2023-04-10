@@ -3,6 +3,7 @@
     margin-right: 10em;
 }
 .myPage-container {
+    margin-top: 1em;
     display: grid;
     gap: 20px;
     grid-template-columns: 20% 60% 20%;
@@ -21,12 +22,17 @@
 
 .post-container {
     border: 1px solid #7f7e7e;
+    border-radius: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-bottom: 0.2em;
     margin-top: 1.5em;
 }
 
 .aboutAuthor-container {
     border: 1px solid #7f7e7e;
-    margin-top: 1em;
+    border-radius: 0.5em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
     margin-bottom: 1em;
 }
 
@@ -63,10 +69,23 @@
 
 .box1-info {
     border: 1px solid #7f7e7e;
+    margin-bottom: 2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 .box1-info-text {
     font-size: large;
+}
+
+#description-edit-aim {
+    resize: vertical;
+    width: 80%;
+}
+
+#money-needed-edit-aim {
+    width: 80%;
+    margin-bottom: 1em;
 }
 
 .box3-header-container {
@@ -80,6 +99,13 @@
     width: 80%;
     border-radius: 0.7em;
     font-size: 1.3em;
+}
+
+#donate-btn-aim {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #circle-icon {
@@ -115,3 +141,6 @@
     cursor: pointer;
 }
 
+#pencil-icon-about {
+    margin-top: 0;
+}

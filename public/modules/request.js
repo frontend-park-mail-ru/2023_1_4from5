@@ -6,7 +6,6 @@ export class Request {
     POST: 'POST',
     DELETE: 'DELETE',
     PUT: 'PUT',
-    PATCH: 'PATCH',
   };
 
   /**
@@ -83,19 +82,6 @@ export class Request {
   async put(path, body) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-    return res;
-  }
-
-  async patch(path, body) {
-    const res = await fetch(WEB_URL + path, {
-      method: this.#REQUEST_METHODS.PATCH,
       mode: 'cors',
       credentials: 'include',
       headers: {

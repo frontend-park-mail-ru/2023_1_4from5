@@ -3,6 +3,11 @@ import { newPost } from '../components/newPost/newPost';
 import { ActionTypes } from '../actionTypes/actionTypes';
 import { userStore } from './userStore';
 import { request } from '../modules/request';
+import { router } from '../modules/Router';
+import { URLS } from '../modules/Notifier';
+import { myPageStore } from './myPageStore';
+
+const contentElement = document.querySelector('main');
 
 class NewPostStore {
   constructor() {
@@ -23,6 +28,7 @@ class NewPostStore {
 
         await request.get('/api/post/create');
         await request.post('/api/post/create', body, 'multipart/form-data');
+        router.go(URLS.myPage, {}, contentElement);
         break;
 
       case ActionTypes.UPDATE_POST:
@@ -35,6 +41,7 @@ class NewPostStore {
           title: editTitle,
           text: editText,
         });
+        router.go(URLS.myPage, {}, contentElement);
         break;
 
       default:
