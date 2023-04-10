@@ -46,8 +46,6 @@ class Settings {
     });
   }
 
-
-
   changePwd(e) {
     e.preventDefault();
     const oldPwdInput = document.getElementById('old-password-input');
@@ -72,6 +70,11 @@ class Settings {
 
   invalidPassword(err) {
     const errorDiv = document.getElementById('change-password-error');
+    errorDiv.textContent = err;
+  }
+
+  invalidLogin(err) {
+    const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = err;
   }
 }

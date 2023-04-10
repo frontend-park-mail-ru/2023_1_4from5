@@ -32,7 +32,6 @@ export function notifier(path, data, parent, additionalUrl) {
 
     case `${URLS.myPage}/${additionalUrl}`:
       myPageStore.renderMyPage(additionalUrl);
-      console.log('mypage');
       break;
 
     case URLS.settings:

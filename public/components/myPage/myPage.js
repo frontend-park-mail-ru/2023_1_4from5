@@ -76,6 +76,8 @@ class MyPage {
       editAimIcon.addEventListener('click', (e) => {
         e.preventDefault();
         Actions.editAim();
+        const aimInput = document.getElementById('description-edit-aim');
+        aimInput.textContent = this.#config.aim.description;
       });
     }
 

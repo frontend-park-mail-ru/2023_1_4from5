@@ -1,8 +1,10 @@
 <div class="myPage-header-container">
     {{#if is_my_page}}
-        <img id="settings-icon" class="settings-icon" width="40" src="../../images/settings_icon.svg" alt="settings-icon">
+        <img id="settings-icon" class="settings-icon" width="40" src="../../images/settings_icon.svg"
+             alt="settings-icon">
     {{/if}}
-    <h1 class="myPage-header"> <img id="user-photo" width="50" src="../../images/user_photo.png" alt="user-photo">{{creator_info.name}}</h1>
+    <h1 class="myPage-header"><img id="user-photo" width="50" src="../../images/user_photo.png"
+                                   alt="user-photo">{{creator_info.name}}</h1>
 </div>
 <div id="myPage">
     <div class="myPage-container">
@@ -29,19 +31,20 @@
                     {{#if edit_aim}}
                         <div class="box1-info-container">
                             <h4>Цели</h4>
-                            <img id="pencil-icon-aim"  class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                            <img id="pencil-icon-aim" class="pencil-icon" width="20"
+                                 src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
                         </div>
-                            <div>{{ aim.description }}</div>
-                            <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
+                        <div>{{ aim.description }}</div>
+                        <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
                     {{else}}
                         <div class="box1-info-container">
                             <h4>Цели</h4>
-                            <img id="close-icon-aim"  class="pencil-icon" width="20" src="../../images/close.png" alt="close-icon">
+                            <img id="close-icon-aim" class="pencil-icon" width="20" src="../../images/close.png"
+                                 alt="close-icon">
                         </div>
                         <div>
                             <div> Описание:</div>
-                            <textarea id="description-edit-aim">
-                                {{ aim.description }}
+                            <textarea id="description-edit-aim" type="text">
                             </textarea>
 
                             <div> Цель:</div>
@@ -57,17 +60,21 @@
                     <div>{{ aim.description }}</div>
                     <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
                     {{#if isAuthorized }}
-                        <button id="donate-btn-aim" class="subs-btn">Отправить донат</button>
+                        <div class="donate-btn-container">
+                            <button id="donate-btn-aim" class="subs-btn">Отправить донат</button>
+                        </div>
                     {{/if}}
                 {{/if}}
             </div>
         </div>
+
         <div class="box-2">
             <div class="aboutAuthor-container">
                 <div class="aboutAuthor-container-header">
                     <h3>О моем блоге:</h3>
                     {{#if is_my_page}}
-                        <img id="pencil-icon-about" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                        <img id="pencil-icon-about" class="pencil-icon" width="20"
+                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
                     {{/if}}
                 </div>
                 <h3>{{creator_info.description}}</h3>
@@ -77,8 +84,10 @@
                     <div class="post-container-header">
                         <h4 class="post-title">{{title}}</h4>
                         {{#if ../is_my_page}}
-                            <img id="pencil-icon" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
-                            <img id="delete-icon" class="delete-icon" width="25" src="../../images/delete_ic_icon.png" alt="delete-icon">
+                            <img id="pencil-icon" class="pencil-icon" width="20"
+                                 src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                            <img id="delete-icon" class="delete-icon" width="25" src="../../images/delete_ic_icon.png"
+                                 alt="delete-icon">
                         {{/if}}
                     </div>
                     {{#each textWithBreaks}}
@@ -87,13 +96,16 @@
                     <div class="post-footer-container">
                         <span class="like-container">
                             {{#if is_liked}}
-                                <img id="love-like-icon" class="like-icon" width="27" src="../../images/love_like_icon.png" alt="love_like-icon">
+                                <img id="love-like-icon" class="like-icon" width="27"
+                                     src="../../images/love_like_icon.png" alt="love_like-icon">
                             {{else}}
-                                <img id="like-icon" class="like-icon" width="25" src="../../images/like_icon.png" alt="like-icon">
+                                <img id="like-icon" class="like-icon" width="25" src="../../images/like_icon.png"
+                                     alt="like-icon">
                             {{/if}}
                             <span>{{likes_count}}</span>
                         </span>
-                        <img id="comment-icon" class="comment-icon" width="25" src="../../images/comment_icon.png" alt="comment-icon">
+                        <img id="comment-icon" class="comment-icon" width="25" src="../../images/comment_icon.png"
+                             alt="comment-icon">
                     </div>
                 </div>
             {{/each}}
@@ -102,14 +114,16 @@
             <div class="box3-header-container">
                 <h3>Уровни подписки</h3>
                 {{#if is_my_page}}
-                    <img id="pencil-icon-level" class="pencil-icon" width="20" src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                    <img id="pencil-icon-level" class="pencil-icon" width="20"
+                         src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
                 {{/if}}
             </div>
         </div>
     </div>
     <div id="footer">
         <hr style="opacity: 75%;">
-        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a href="https://t.me/averageqqq">TG</a></h6>
+        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a
+                href="https://t.me/averageqqq">TG</a></h6>
     </div>
 
 </div>
