@@ -97,15 +97,19 @@
                     {{/each}}
                     <div class="post-footer-container">
                         <span class="like-container">
-                            {{#if ../is_my_page}}
+                            {{#unless ../isAuthorized }}
                                 <img id="disable-like-icon" class="like-icon--disable" width="27" src="../../images/disable_like_icon.png" alt="disable_like-icon">
                             {{else}}
-                                {{#if is_liked}}
-                                    <img id="love-like-icon" class="like-icon" width="27" src="../../images/love_like_icon.png" alt="love_like-icon">
+                                {{#if ../is_my_page}}
+                                    <img id="disable-like-icon" class="like-icon--disable" width="27" src="../../images/disable_like_icon.png" alt="disable_like-icon">
                                 {{else}}
-                                    <img id="like-icon" class="like-icon" width="25" src="../../images/like_icon.png" alt="like-icon">
+                                    {{#if is_liked}}
+                                        <img id="love-like-icon" class="like-icon" width="27" src="../../images/love_like_icon.png" alt="love_like-icon">
+                                    {{else}}
+                                        <img id="like-icon" class="like-icon" width="25" src="../../images/like_icon.png" alt="like-icon">
+                                    {{/if}}
                                 {{/if}}
-                            {{/if}}
+                            {{/unless}}
                             <span>{{likes_count}}</span>
                         </span>
                         <img id="comment-icon" class="comment-icon" width="25" src="../../images/comment_icon.png"
@@ -115,12 +119,21 @@
             {{/each}}
         </div>
         <div class="box-3">
-            <div class="box3-header-container">
-                <h3>Уровни подписки</h3>
-                {{#if is_my_page}}
-                    <img id="pencil-icon-level" class="pencil-icon" width="20"
-                         src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
-                {{/if}}
+            <div class="box-3__container">
+                <div class="box3-header-container">
+                    <h3>Уровни подписки</h3>
+                    {{#if is_my_page }}
+                        <img id="pencil-icon-level" class="pencil-icon" width="20"
+                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                    {{/if}}
+                </div>
+                <hr class="box-3__divider">
+                {{#each subscriptions}}
+                    <h4>{{ title }}</h4>
+                    <div class="box-3__money">{{month_const}} рублей</div>
+                    <div>{{description}}</div>
+                    <hr class="box-3__divider">
+                {{/each}}
             </div>
         </div>
     </div>
