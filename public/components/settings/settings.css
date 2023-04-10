@@ -26,6 +26,7 @@
 }
 
 .change-btn {
+    margin-top: 0.5em;
     margin-bottom: 1.5em;
     height: 2em;
     border-radius: 0.7em;
@@ -39,4 +40,12 @@
     border-radius: 1em;
     padding-left: 1em;
     font-size: 1.2em;
+}
+
+.change-success {
+    color: green;
+}
+
+#change-password-error {
+    color: red;
 }

@@ -92,9 +92,15 @@
                                  alt="delete-icon">
                         {{/if}}
                     </div>
-                    {{#each textWithBreaks}}
-                        <p class="post-text">{{text}}</p>
-                    {{/each}}
+
+                    {{#if is_available}}
+                        {{#each textWithBreaks}}
+                            <p class="post-text">{{text}}</p>
+                        {{/each}}
+                    {{else}}
+                        <p>--- Пост недоступен ---</p>
+                    {{/if}}
+
                     <div class="post-footer-container">
                         <span class="like-container">
                             {{#unless ../isAuthorized }}
