@@ -1,6 +1,5 @@
 import { Actions } from '../../actions/actions.js';
-
-const template = require('./newPost.handlebars');
+import template from './newPost.handlebars';
 
 const contentElement = document.querySelector('main');
 
