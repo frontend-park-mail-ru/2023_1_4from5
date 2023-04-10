@@ -78,6 +78,7 @@ export class Auth {
       if (signIn.ok) {
         Actions.getUser();
         Actions.removeAuth();
+        Actions.renderStartPage();
       } else {
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Неверный логин или пароль';
