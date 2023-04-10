@@ -1,5 +1,4 @@
 import { Actions } from '../../actions/actions';
-import { userStore } from '../../store/userStore';
 
 const template = require('./settings.handlebars');
 

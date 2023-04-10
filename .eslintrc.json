@@ -27,6 +27,9 @@
     "no-case-declarations": 0,
     "no-trailing-spaces": 0,
     "import/no-extraneous-dependencies": 0,
+    "object-shorthand": 0,
+    "comma-dangle": 0,
+    "import/no-cycle": 0,
     "prefer-destructuring": 0
   }
 }

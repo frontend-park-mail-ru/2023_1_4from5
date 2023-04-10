@@ -6,7 +6,7 @@ import { router } from './Router';
 import { newPostStore } from '../store/newPostStore';
 import { searchStore } from '../store/searchStore';
 
-export const URLS = { // TODO урлы в отдельный файл
+export const URLS = {
   root: '/',
   myPage: '/myPage',
   settings: '/settings',
@@ -18,13 +18,12 @@ export const URLS = { // TODO урлы в отдельный файл
 export function notifier(path, data, parent, additionalUrl) {
   switch (path.pathname) {
     case URLS.root:
-      // TODO BAD action in notifier
       Actions.renderStartPage();
       break;
 
     case URLS.myPage:
       if (userStore.getUserState().isAuthorizedIn) {
-        myPageStore.renderMyPage(); // TODO асинхронная функция без await + есть связь router-store
+        myPageStore.renderMyPage();
       } else {
         router.go('/', data, parent);
       }
@@ -55,7 +54,7 @@ export function notifier(path, data, parent, additionalUrl) {
       break;
 
     default:
-      console.log('undefined url: ', path.pathname); // TODO page 404
+      console.log('undefined url: ', path.pathname);
       break;
   }
 }

@@ -1,7 +1,5 @@
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
-import { myPage } from '../myPage/myPage';
-import { myPageStore } from '../../store/myPageStore';
 
 const template = require('./search.handlebars');
 
