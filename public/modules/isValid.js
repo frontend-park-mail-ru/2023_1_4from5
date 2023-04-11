@@ -1,7 +1,11 @@
 const LENGTH = {
-  MIN: 7,
-  MAX: 20,
-  MAX_MONEY: 30,
+  MIN_LOGIN: 7,
+  MAX_LOGIN: 40,
+  MIN_PASSWORD: 7,
+  MAX_PASSWORD: 40,
+  MIN_USERNAME: 1,
+  MAX_USERNAME: 40,
+  MAX_MONEY: 50,
   MAX_DESCRIPTION: 100,
 };
 
@@ -10,6 +14,7 @@ const ASCII = {
   UPPER_Z: 90,
   LOWER_A: 97,
   LOWER_Z: 122,
+  SPACE: 32,
   EXCLAMATION: 33,
   SLASH: 47,
   COLON: 58,
@@ -43,7 +48,9 @@ function isSpecialSign(code) {
       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
 }
-
+function isWhiteSign(code) {
+  return (code >= ASCII.SPACE && code <= ASCII.TILDE);
+}
 /**
  * validation of password input
  * @param {String} inputStr - injected password
@@ -54,10 +61,14 @@ export function isValidPassword(inputStr) {
   const flags = {
     hasMinLen: {
       flag: false,
-      error: 'Пароль должен содержать не менее 7 символов',
+      error: `Пароль должен содержать не менее ${LENGTH.MIN_PASSWORD} символов`,
+    },
+    hasMaxLen: {
+      flag: false,
+      error: `Пароль не должен содержать более ${LENGTH.MAX_PASSWORD} символов`,
     },
     hasUpper: {
-      flag: true,
+      flag: false,
       error: 'Пароль должен содержать хотя бы 1 заглавную букву',
     },
     hasLower: {
@@ -73,10 +84,15 @@ export function isValidPassword(inputStr) {
       error: 'Пароль должен содержать хотя бы 1 спец. символ',
     },
   };
-  if (inputStr.length >= LENGTH.MIN) {
+  if (inputStr.length >= LENGTH.MIN_PASSWORD) {
     flags.hasMinLen.flag = true;
   } else {
     return flags.hasMinLen.error;
+  }
+  if (inputStr.length <= LENGTH.MAX_PASSWORD) {
+    flags.hasMaxLen.flag = true;
+  } else {
+    return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
@@ -104,19 +120,49 @@ export function isValidPassword(inputStr) {
  */
 export function isValidLogin(inputStr) {
   const flags = {
+    hasBlackSign: {
+      flag: false,
+      error: 'Логин содержит запретный символ',
+    },
     hasMinLen: {
       flag: false,
-      error: 'Логин должен содержать не менее 7 символов',
+      error: `Логин должен содержать не менее ${LENGTH.MIN_LOGIN} символов`,
     },
     hasMaxLen: {
       flag: true,
-      error: 'Логин не должен содержать более 20 символов',
+      error: `Логин не может содержать более ${LENGTH.MAX_LOGIN} символов`,
     },
   };
-  if (inputStr.length < LENGTH.MIN) {
+  if (inputStr.length < LENGTH.MIN_LOGIN) {
     return flags.hasMinLen.error;
   }
-  if (inputStr.length > LENGTH.MAX) {
+  if (inputStr.length > LENGTH.MAX_LOGIN) {
+    return flags.hasMaxLen.error;
+  }
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isWhiteSign(code)) {
+      return flags.hasBlackSign.error;
+    }
+  }
+  return '';
+}
+
+export function isValidUsername(inputStr) {
+  const flags = {
+    hasMinLen: {
+      flag: false,
+      error: 'Введите ваше имя',
+    },
+    hasMaxLen: {
+      flag: false,
+      error: `Имя не может содержать более ${LENGTH.MAX_USERNAME} символов`,
+    },
+  };
+  if (inputStr.length < LENGTH.MIN_USERNAME) {
+    return flags.hasMinLen.error;
+  }
+  if (inputStr.length > LENGTH.MAX_USERNAME) {
     return flags.hasMaxLen.error;
   }
   return '';
@@ -162,7 +208,7 @@ export function isValidDonate(inputStr) {
   return '';
 }
 
-export function isValidDescription(inputStr) {
+export function isValidDescriptionAim(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,

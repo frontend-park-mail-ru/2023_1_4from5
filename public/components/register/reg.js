@@ -77,7 +77,7 @@ export class Register {
     input.passwordInput.style.backgroundColor = color.field;
     input.passwordRepeatInput.style.backgroundColor = color.field;
 
-    if (input.username.length === 0) {
+    if (input.errUsername) {
       input.usernameInput.style.backgroundColor = color.error;
       input.errorOutput.innerHTML = '';
       input.errorOutput.innerHTML = 'Введите ваше имя';

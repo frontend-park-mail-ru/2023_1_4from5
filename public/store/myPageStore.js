@@ -3,7 +3,7 @@ import { myPage } from '../components/myPage/myPage.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
 import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { isValidDescription, isValidMoneyString } from '../modules/isValid.js';
+import { isValidDescriptionAim, isValidMoneyString } from '../modules/isValid.js';
 import { color } from '../consts/styles.js';
 
 class MyPageStore {
@@ -105,7 +105,7 @@ class MyPageStore {
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
     let moneyNeeded = input.moneyNeededInput.value;
-    const errDescription = isValidDescription(description);
+    const errDescription = isValidDescriptionAim(description);
     const errMoneyNeeded = isValidMoneyString(moneyNeeded);
     if (moneyNeeded.isEmpty) {
       moneyNeeded = '0';
