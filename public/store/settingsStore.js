@@ -64,11 +64,11 @@ class SettingsStore {
     settings.invalidPassword(errPwd);
 
     if (!errPwd) {
-      await request.get('/api/user/updatePassword');
+      const token = await request.getHeader('/api/user/updatePassword');
       const response = await request.put('/api/user/updatePassword', {
         old_password: oldPwd,
         new_password: newPwd,
-      });
+      }, token);
       if (!response.ok) {
         settings.invalidPassword('неверный пароль');
       } else {
@@ -80,11 +80,11 @@ class SettingsStore {
   async changeUsername(usernameInput) {
     const name = usernameInput.value;
     const login = userStore.getUserState().login;
-    await request.get('/api/user/updateData');
+    const token = await request.getHeader('/api/user/updateData');
     const response = await request.put('/api/user/updateData', {
       login,
       name,
-    });
+    }, token);
 
     if (response.ok) {
       const user = userStore.getUserState();
@@ -102,11 +102,11 @@ class SettingsStore {
     settings.invalidLogin(errLogin);
 
     if (!errLogin) {
-      await request.get('/api/user/updateData');
+      const token = await request.getHeader('/api/user/updateData');
       const response = await request.put('/api/user/updateData', {
         login,
         name,
-      });
+      }, token);
 
       if (response.ok) {
         const user = userStore.getUserState();
