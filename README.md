@@ -9,6 +9,6 @@
 - IvanStukalov - Frontend 
 
 Полезные ссылки
-Деплой: sub-me.ru:8080/
+Деплой: http://sub-me.ru/
 Фигма: https://www.figma.com/file/h62Iz9YQP6VVv9VNivF3Z0/SubMe?node-id=0%3A1&t=eOVdHpfPXxOj4o5g-0
 Репозиторий бэкенда: https://github.com/go-park-mail-ru/2023_1_4from5.git
