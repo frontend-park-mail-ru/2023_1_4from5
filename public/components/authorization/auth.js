@@ -70,7 +70,6 @@ export class Auth {
     input.passwordInput.style.backgroundColor = color.field;
 
     if (!input.errLogin && !input.errPassword) {
-      // TODO запрос в store
       const signIn = await request.post('/api/auth/signIn', {
         login: input.login,
         password_hash: input.password,
@@ -78,6 +77,7 @@ export class Auth {
       if (signIn.ok) {
         Actions.getUser();
         Actions.removeAuth();
+        Actions.renderStartPage();
       } else {
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Неверный логин или пароль';

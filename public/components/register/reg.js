@@ -103,6 +103,7 @@ export class Register {
       if (signUp.ok) {
         Actions.getUser();
         Actions.removeReg();
+        Actions.renderStartPage();
       } else {
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Такой логин уже существует';

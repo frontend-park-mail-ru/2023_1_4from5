@@ -14,10 +14,6 @@ class AuthStore {
     this.#config = config;
   }
 
-  getInitialState() {
-    return this.#config;
-  }
-
   renderAuth() {
     auth.render();
     auth.authentification();

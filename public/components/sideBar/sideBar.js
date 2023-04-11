@@ -1,4 +1,7 @@
 import { clickHandler } from '../../modules/handler.js';
+import { Actions } from '../../actions/actions';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const template = require('./sideBar.handlebars');
 
@@ -35,6 +38,12 @@ export class SideBar {
     newDiv.innerHTML = template(this.#config);
 
     this.#parent.appendChild(newDiv);
+
+    const logoBtn = document.getElementById('logo');
+    logoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.go(URLS.root);
+    });
   }
 }
 

@@ -92,6 +92,14 @@ body {
     font-size: 1.3em;
 }
 
+.reg-btn {
+    margin: auto;
+    height: 2em;
+    width: 12em;
+    border-radius: 0.7em;
+    font-size: 1.3em;
+}
+
 .auth-btn-container {
     text-align: center;
     padding-top: 1.5em;
@@ -103,4 +111,8 @@ body {
     margin-bottom: 1em;
     text-align: center;
     font-size: 1.7em;
+}
+
+button {
+    cursor: pointer;
 }

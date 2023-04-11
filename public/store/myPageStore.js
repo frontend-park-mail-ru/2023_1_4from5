@@ -1,12 +1,10 @@
 import { dispatcher } from '../dispatcher/dispatcher.js';
 import { myPage } from '../components/myPage/myPage.js';
-import { donateWin } from '../components/donateWin/donateWin.js';
 import { request } from '../modules/request.js';
 import { userStore } from './userStore.js';
 import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { isValidDescription, isValidMoneyString } from '../modules/isValid.js';
 import { color } from '../consts/styles.js';
-import {auth} from "../components/authorization/auth";
 
 class MyPageStore {
   #config;
@@ -33,7 +31,6 @@ class MyPageStore {
         await request.get(`/api/post/delete/${action.postId}`);
         await request.delete(`/api/post/delete/${action.postId}`);
         await this.renderMyPage();
-        console.log('deleted');
         break;
       case ActionTypes.CLICK_LIKE:
         this.changeLikeState(action);
@@ -71,21 +68,18 @@ class MyPageStore {
         post.textWithBreaks.push({ text });
       });
     });
-    console.log(userStore.getUserState().isAuthorizedIn);
     this.#config = result;
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
       isAuthorized: userStore.getUserState().isAuthorizedIn,
     };
     this.#config = Object.assign(this.#config, renderIcon);
-    console.log('testObject', this.#config);
     myPage.config = this.#config;
     myPage.render();
   }
 
   async changeLikeState(action) {
     if (action.typeLike === 'addLike') {
-      console.log(action.postId);
       const result = await request.put('/api/post/addLike', { post_id: action.postId });
       if (result.ok) {
         const res = await result.json();
@@ -109,8 +103,6 @@ class MyPageStore {
   }
 
   async saveEditAim(input) {
-    console.log('myPageStore');
-
     let description = input.descriptionInput.value;
     let moneyNeeded = input.moneyNeededInput.value;
     const errDescription = isValidDescription(description);
@@ -122,7 +114,6 @@ class MyPageStore {
     input.moneyNeededInput.style.backgroundColor = color.field;
 
     if (!errDescription && !errMoneyNeeded) {
-      console.log(this.#config.creator_info.creator_id, this.#config.aim.money_got);
       const aimEdit = await request.post('/api/creator/aim/create', {
         creator_id: this.#config.creator_info.creator_id,
         description: description,

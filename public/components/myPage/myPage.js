@@ -2,14 +2,6 @@ import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
 
-// TODO добавить возможность редактирования цели (от автора)
-// TODO добавить возможность редактирования цели (от подписчика)
-// TODO загрузка аватарки пользователя и автора
-// TODO кнопки подписаться нет, когда ты не авторизован
-
-// TODO FUTURE при нажатии на подписку предлагает на выбор подписку либо без неё
-// TODO FUTURE если пользователь подписан, то кнопка Вы подписаны
-
 const template = require('./myPage.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -76,6 +68,8 @@ class MyPage {
       editAimIcon.addEventListener('click', (e) => {
         e.preventDefault();
         Actions.editAim();
+        const aimInput = document.getElementById('description-edit-aim');
+        aimInput.textContent = this.#config.aim.description;
       });
     }
 

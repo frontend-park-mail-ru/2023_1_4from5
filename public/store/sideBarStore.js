@@ -13,7 +13,6 @@ class SideBarStore {
   #config;
 
   constructor() {
-    // TODO вместо названий функций в рендере будут лежать действия
     this.#config = {
       feed: {
         name: 'Лента',
@@ -79,10 +78,6 @@ class SideBarStore {
       },
     };
     dispatcher.register(this.reduce.bind(this));
-  }
-
-  getSideBarState() {
-    return this.#config;
   }
 
   setState(userIn) {
