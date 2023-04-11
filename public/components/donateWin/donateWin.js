@@ -1,7 +1,6 @@
 import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/actions.js';
-
-const template = require('./donateWin.handlebars');
+import template from './donateWin.handlebars';
 
 const rootElement = document.getElementById('root');
 

@@ -1,6 +1,5 @@
 import { Actions } from '../../actions/actions';
-
-const template = require('./settings.handlebars');
+import template from './settings.handlebars';
 
 const contentElement = document.querySelector('main');
 
@@ -70,11 +69,32 @@ class Settings {
   invalidPassword(err) {
     const errorDiv = document.getElementById('change-password-error');
     errorDiv.textContent = err;
+
+    const successTitle = document.getElementById('change-success-password');
+    successTitle.textContent = '';
   }
 
   invalidLogin(err) {
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = err;
+  }
+
+  successNameChanged() {
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = 'Имя успешно изменено';
+  }
+
+  successLoginChanged() {
+    const successTitle = document.getElementById('change-success-login');
+    successTitle.textContent = 'Логин успешно изменен';
+  }
+
+  successPasswordChanged() {
+    const successTitle = document.getElementById('change-success-password');
+    successTitle.textContent = 'Пароль успешно изменен';
+
+    const errTitle = document.getElementById('change-password-error');
+    errTitle.textContent = '';
   }
 }
 

@@ -65,10 +65,15 @@ class SettingsStore {
 
     if (!errPwd) {
       await request.get('/api/user/updatePassword');
-      await request.put('/api/user/updatePassword', {
+      const response = await request.put('/api/user/updatePassword', {
         old_password: oldPwd,
         new_password: newPwd,
       });
+      if (!response.ok) {
+        settings.invalidPassword('неверный пароль');
+      } else {
+        settings.successPasswordChanged();
+      }
     }
   }
 
@@ -76,14 +81,18 @@ class SettingsStore {
     const name = usernameInput.value;
     const login = userStore.getUserState().login;
     await request.get('/api/user/updateData');
-    await request.put('/api/user/updateData', {
+    const response = await request.put('/api/user/updateData', {
       login,
       name,
     });
-    const user = userStore.getUserState();
-    user.usernameIn = name;
-    userStore.setUserState(user);
-    Actions.renderSideBar(sideBarElement, user);
+
+    if (response.ok) {
+      const user = userStore.getUserState();
+      user.usernameIn = name;
+      userStore.setUserState(user);
+      Actions.renderSideBar(sideBarElement, user);
+      settings.successNameChanged();
+    }
   }
 
   async changeLogin(loginInput) {
@@ -94,13 +103,17 @@ class SettingsStore {
 
     if (!errLogin) {
       await request.get('/api/user/updateData');
-      await request.put('/api/user/updateData', {
+      const response = await request.put('/api/user/updateData', {
         login,
         name,
       });
-      const user = userStore.getUserState();
-      user.login = login;
-      userStore.setUserState(user);
+
+      if (response.ok) {
+        const user = userStore.getUserState();
+        user.login = login;
+        userStore.setUserState(user);
+        settings.successLoginChanged();
+      }
     }
   }
 }

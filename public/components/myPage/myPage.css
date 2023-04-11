@@ -10,7 +10,7 @@
 }
 
 .myPage-header-container {
-    background-image: url("../../images/myPage_phone.jpg");
+    background-image: url("/public/images/myPage_phone.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -76,6 +76,21 @@
 
 .box1-info-text {
     font-size: large;
+}
+
+.box-3__container {
+    border: 1px solid #7f7e7e;
+    margin-bottom: 2em;
+    border-radius: 1em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.box-3__divider {
+    color: #7f7e7e;
+}
+
+.box-3__money {
+    padding-bottom: 1em;
 }
 
 #description-edit-aim {

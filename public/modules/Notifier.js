@@ -8,7 +8,7 @@ import { searchStore } from '../store/searchStore';
 
 export const URLS = {
   root: '/',
-  myPage: '/myPage',
+  myPage: '/creatorPage',
   settings: '/settings',
   newPost: '/newPost',
   editPost: '/editPost',

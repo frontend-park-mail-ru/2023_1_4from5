@@ -1,8 +1,7 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
-
-const template = require('./myPage.handlebars');
+import template from './myPage.handlebars';
 
 const contentElement = document.querySelector('main');
 
@@ -31,6 +30,7 @@ class MyPage {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
+    console.log(this.#config);
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
