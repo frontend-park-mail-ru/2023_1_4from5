@@ -70,7 +70,7 @@ class SettingsStore {
         new_password: newPwd,
       }, token);
       if (!response.ok) {
-        settings.invalidPassword('неверный пароль');
+        settings.invalidPassword('неверный старый пароль');
       } else {
         settings.successPasswordChanged();
       }

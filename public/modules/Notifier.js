@@ -13,6 +13,7 @@ export const URLS = {
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
+  becameAuthor: '/becameAuthor',
 };
 
 export function notifier(path, data, parent, additionalUrl) {
@@ -51,6 +52,10 @@ export function notifier(path, data, parent, additionalUrl) {
 
     case URLS.search:
       searchStore.renderSearch();
+      break;
+
+    case URLS.becameAuthor:
+
       break;
 
     default:
