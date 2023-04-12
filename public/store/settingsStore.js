@@ -48,8 +48,8 @@ class SettingsStore {
     formData.append('upload', file);
     formData.append('path', userStore.getUserState().profilePhoto);
 
-    await request.get('/api/user/updateProfilePhoto');
-    const update = await request.postMultipart('/api/user/updateProfilePhoto', formData);
+    const token = await request.getHeader('/api/user/updateProfilePhoto');
+    const update = await request.postMultipart('/api/user/updateProfilePhoto', formData, token);
     const newPhoto = await update.json();
     const user = userStore.getUserState();
     user.profilePhoto = newPhoto;

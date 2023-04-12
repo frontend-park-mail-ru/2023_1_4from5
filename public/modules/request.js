@@ -78,11 +78,14 @@ export class Request {
     return res;
   }
 
-  async postMultipart(path, body) {
+  async postMultipart(path, body, token) {
     const response = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',
       credentials: 'include',
+      headers: {
+        'x-csrf-token': token,
+      },
       body,
     });
     return response;
