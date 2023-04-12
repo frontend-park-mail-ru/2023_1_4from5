@@ -5,7 +5,6 @@ import { userStore } from './userStore';
 import { request } from '../modules/request';
 import { router } from '../modules/Router';
 import { URLS } from '../modules/Notifier';
-import { myPageStore } from './myPageStore';
 
 const contentElement = document.querySelector('main');
 

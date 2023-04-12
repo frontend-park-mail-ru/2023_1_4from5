@@ -79,8 +79,10 @@ export class Auth {
         Actions.removeAuth();
         Actions.renderStartPage();
       } else {
+        input.loginInput.style.backgroundColor = color.error;
+        input.passwordInput.style.backgroundColor = color.error;
         input.errorOutput.innerHTML = '';
-        input.errorOutput.innerHTML = 'Неверный логин или пароль';
+        input.errorOutput.innerHTML = 'Неверный логин или пароль123';
       }
     } else {
       // TODO чтобы не подсказывать юзеру, где именно ошибка, подсвечивать лучше оба поля
