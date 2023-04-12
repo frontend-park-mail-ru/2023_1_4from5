@@ -25,8 +25,8 @@ class NewPostStore {
           creator: userStore.getUserState().authorURL,
         };
 
-        await request.get('/api/post/create');
-        await request.post('/api/post/create', body, 'multipart/form-data');
+        const tokenCreate = await request.getHeader('/api/post/create');
+        await request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
         router.go(URLS.myPage, {}, contentElement);
         break;
 
@@ -35,11 +35,11 @@ class NewPostStore {
         const editTitle = action.input.titleInput.value;
         const editText = action.input.textInput.value;
 
-        await request.get(`/api/post/edit/${postId}`);
+        const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
         await request.put(`/api/post/edit/${postId}`, {
           title: editTitle,
           text: editText,
-        });
+        }, tokenEdit);
         router.go(URLS.myPage, {}, contentElement);
         break;
 
