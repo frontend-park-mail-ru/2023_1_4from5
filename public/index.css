@@ -9,6 +9,7 @@
 @import './components/search/search.css';
 @import './components/donateWin/donateWin.css';
 @import './components/becomeAuthor/becomeAuthor.css';
+@import './components/page404/page404.css';
 
 #root {
     min-height: 100vh;

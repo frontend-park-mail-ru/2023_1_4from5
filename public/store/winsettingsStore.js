@@ -22,14 +22,14 @@ class WinSettingsStore {
         render: router.go,
       },
       finance: {
-        name: 'Мои доходы',
-        href: '/finance',
-        id: 'winSetting-finance',
-        showDisplay: userStore.getUserState().isAuthorIn,
-        parent: contentElement,
-        render() {
-          console.log('Мои доходы');
-        },
+        // name: 'Мои доходы',
+        // href: '/finance',
+        // id: 'winSetting-finance',
+        // showDisplay: userStore.getUserState().isAuthorIn,
+        // parent: contentElement,
+        // render() {
+        //   console.log('Мои доходы');
+        // },
       },
       settings: {
         name: 'Настройки',
