@@ -8,6 +8,7 @@
 @import './components/newPost/newPost.css';
 @import './components/search/search.css';
 @import './components/donateWin/donateWin.css';
+@import './components/becomeAuthor/becomeAuthor.css';
 
 #root {
     min-height: 100vh;

@@ -60,7 +60,7 @@ class SideBarStore {
       },
       beAuthor: {
         name: 'Стать автором',
-        href: URLS.becameAuthor,
+        href: URLS.becomeAuthor,
         id: 'sidebar-beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,

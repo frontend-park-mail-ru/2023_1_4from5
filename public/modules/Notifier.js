@@ -5,6 +5,7 @@ import { userStore } from '../store/userStore';
 import { router } from './Router';
 import { newPostStore } from '../store/newPostStore';
 import { searchStore } from '../store/searchStore';
+import { becameAuthorStore } from '../store/becomeAuthorStore';
 
 export const URLS = {
   root: '/',
@@ -13,7 +14,7 @@ export const URLS = {
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
-  becameAuthor: '/becameAuthor',
+  becomeAuthor: '/becomeAuthor',
 };
 
 export function notifier(path, data, parent, additionalUrl) {
@@ -54,8 +55,8 @@ export function notifier(path, data, parent, additionalUrl) {
       searchStore.renderSearch();
       break;
 
-    case URLS.becameAuthor:
-
+    case URLS.becomeAuthor:
+      becameAuthorStore.renderBecomeAuthor();
       break;
 
     default:
