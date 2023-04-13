@@ -1,5 +1,6 @@
 import template from './becomeAuthor.handlebars';
 import { Actions } from '../../actions/actions';
+import { router } from '../../modules/Router';
 
 const contentElement = document.querySelector('main');
 
@@ -27,6 +28,12 @@ class BecomeAuthor {
         nameInput,
         descriptionInput,
       });
+    });
+
+    const backBtn = document.getElementById('becameAuthor__backBtn');
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.popstate();
     });
   }
 }

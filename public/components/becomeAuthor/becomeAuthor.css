@@ -6,6 +6,13 @@
     margin: 2em auto auto;
 }
 
+.becameAuthor__backBtn {
+    border-radius: 1em;
+    padding: 0.2em 0.7em 0.3em 0.7em;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
 .becameAuthor__name--header {
     margin-bottom: 1em;
 }

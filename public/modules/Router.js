@@ -45,7 +45,7 @@ class Router {
   popstate() {
     window.history.back();
     const url = new URL(window.location.href);
-    notifier(url);
+    notifier(url, {}, {}, this.parseUrl(url.pathname).additionalUrl);
   }
 
   pushHistoryState(_path, _data) {
