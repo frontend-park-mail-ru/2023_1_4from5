@@ -33,6 +33,9 @@ class MyPage {
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
+    const backGnd = document.getElementById('myPage-header-container');
+    backGnd.style.backgroundImage = 'url(../../images/myPage_phone.jpg)';
+
     const createPostBtn = document.getElementById('createPost-btn');
     if (createPostBtn) {
       createPostBtn.addEventListener('click', (e) => {
