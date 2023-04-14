@@ -24,7 +24,7 @@ class SideBarStore {
         },
       },
       findAuth: {
-        name: 'Поиск авторов',
+        name: 'Авторы',
         href: URLS.search,
         id: 'sidebar-find',
         showDisplay: true,
