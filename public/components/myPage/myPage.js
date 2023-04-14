@@ -37,10 +37,12 @@ class MyPage {
     backGnd.style.backgroundImage = 'url(../../images/myPage_phone.jpg)';
 
     const settingsIcon = document.getElementById('settings-icon');
-    settingsIcon.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.go(URLS.authorSettings);
-    });
+    if (settingsIcon !== null) {
+      settingsIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        router.go(URLS.authorSettings);
+      });
+    }
 
     const createPostBtn = document.getElementById('createPost-btn');
     if (createPostBtn) {
