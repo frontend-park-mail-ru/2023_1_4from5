@@ -100,7 +100,12 @@
 
 #money-needed-edit-aim {
     width: 80%;
-    margin-bottom: 1em;
+    /*margin-bottom: 1em;*/
+}
+
+/*в будущем можно для label создать общий класс*/
+.above-input-label-money-needed {
+    margin-top: 1em;
 }
 
 .box3-header-container {
@@ -109,7 +114,8 @@
 }
 
 .subs-btn {
-    margin: auto;
+    margin-top: 1em;
+    /*margin: auto;*/
     min-height: 2em;
     height: min-content;
     width: 80%;
@@ -164,4 +170,9 @@
 
 #user-photo {
     margin-right: 0.7em;
+}
+
+.under-input-error {
+    color: rgba(255, 36, 36, 0.63);
+    font-size: smaller;
 }

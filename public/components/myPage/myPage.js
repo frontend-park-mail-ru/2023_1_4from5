@@ -95,13 +95,15 @@ class MyPage {
     if (saveBtnAim) {
       const descriptionInput = document.getElementById('description-edit-aim');
       const moneyNeededInput = document.getElementById('money-needed-edit-aim');
-      const errorOutput = document.getElementById('edit-aim-err');
+      const errorDescriptionOutput = document.getElementById('edit-aim-description-error');
+      const errorMoneyNeededOutput = document.getElementById('edit-aim-money-needed-error');
       saveBtnAim.addEventListener('click', (e) => {
         e.preventDefault();
         Actions.saveEditAim({
           descriptionInput,
           moneyNeededInput,
-          errorOutput,
+          errorDescriptionOutput,
+          errorMoneyNeededOutput,
         });
       });
     }
