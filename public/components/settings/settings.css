@@ -3,18 +3,27 @@
 }
 
 .settings__container {
-    margin-top: 6em;
-    margin-left: 10em;
-    margin-right: 10em;
+    margin: 6em auto auto;
+    width: 50%;
     border: solid black 2px;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-bottom: 2em;
+    padding: 0.5em 3em 0 3em;
     background-color: #f8f8f8;
+}
+
+.settings__nameLogin {
+    margin-top: 1.5em;
+}
+
+.settings__block {
+    width: fit-content;
 }
 
 .upload {
     cursor: pointer;
+}
+
+.change-password {
+    margin-top: 1.5em;
 }
 
 .change-password-label {
@@ -22,10 +31,23 @@
     margin-bottom: 0.5em;
 }
 
+.change__input {
+    width: 17em;
+    font-size: 1.2em;
+}
+
+.change__password--header {
+    margin-bottom: 1em;
+}
+
 .change-password-input {
     margin-bottom: 1em;
-    height: 2em;
+    height: 1.5em;
     padding-left: 1em;
+}
+
+.change-btn__container {
+    /*text-align: end;*/
 }
 
 .change-btn {

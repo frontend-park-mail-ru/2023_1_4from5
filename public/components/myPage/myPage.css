@@ -8,6 +8,7 @@
     display: grid;
     gap: 20px;
     grid-template-columns: 20% 60% 20%;
+    min-height: 41em;
 }
 
 .myPage-header-container {
@@ -71,10 +72,6 @@
     border: 1px solid #7f7e7e;
     margin-bottom: 2em;
     padding: 0.5em 0.5em 0.5em 0.5em;
-}
-
-.box1-info-text {
-    font-size: large;
 }
 
 .box-3__container {

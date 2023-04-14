@@ -39,7 +39,7 @@ class BecomeAuthorStore {
     const token = await request.getHeader('/api/user/becameCreator');
     await request.post('/api/user/becameCreator', body, token);
     Actions.getUser();
-    router.go(URLS.root, {}, contentElement);
+    router.popstate();
   }
 }
 
