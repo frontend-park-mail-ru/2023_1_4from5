@@ -45,12 +45,16 @@ class NewPost {
     const titleInput = document.getElementById('newpost-title-input');
     const textInput = document.getElementById('newpost-text-input');
     const postBtn = document.getElementById('newpost-btn');
+    const errorTitleOutput = document.getElementById('newpost-title-error');
+    const errorTextOutput = document.getElementById('newpost-text-error');
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
       Actions.createPost({
         titleInput,
         textInput,
+        errorTitleOutput,
+        errorTextOutput,
       });
     });
   }
@@ -59,6 +63,9 @@ class NewPost {
     const titleInput = document.getElementById('newpost-title-input');
     const textInput = document.getElementById('newpost-text-input');
     const postBtn = document.getElementById('newpost-btn');
+    const errorTitleOutput = document.getElementById('newpost-title-error');
+    const errorTextOutput = document.getElementById('newpost-text-error');
+
     titleInput.textContent = title;
     textInput.textContent = text;
     postBtn.textContent = 'готово';
@@ -68,6 +75,8 @@ class NewPost {
       Actions.updatePost(postId, {
         titleInput,
         textInput,
+        errorTitleOutput,
+        errorTextOutput,
       });
     });
   }

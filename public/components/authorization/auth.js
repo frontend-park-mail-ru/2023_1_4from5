@@ -80,16 +80,21 @@ export class Auth {
         Actions.removeAuth();
         router.go(URLS.root);
       } else {
+        input.loginInput.style.backgroundColor = color.error;
+        input.passwordInput.style.backgroundColor = color.error;
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Неверный логин или пароль';
       }
     } else {
-      if (input.errLogin) {
-        input.loginInput.style.backgroundColor = color.error;
-      }
-      if (input.errPassword) {
-        input.passwordInput.style.backgroundColor = color.error;
-      }
+      // TODO чтобы не подсказывать юзеру, где именно ошибка, подсвечивать лучше оба поля
+      input.loginInput.style.backgroundColor = color.error;
+      input.passwordInput.style.backgroundColor = color.error;
+      // if (input.errLogin) {
+      //   input.loginInput.style.backgroundColor = color.error;
+      // }
+      // if (input.errPassword) {
+      //   input.passwordInput.style.backgroundColor = color.error;
+      // }
       input.errorOutput.innerHTML = '';
       input.errorOutput.innerHTML = 'Неверный логин или пароль';
     }
