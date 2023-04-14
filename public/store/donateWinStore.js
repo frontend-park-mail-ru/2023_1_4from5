@@ -58,10 +58,8 @@ class DonateWinStore {
       }
     } else {
       input.errorOutput.innerHTML = '';
-      if (errMoneyGot) {
-        input.errorOutput.innerHTML = errMoneyGot;
-        input.moneyInput.style.backgroundColor = color.error;
-      }
+      input.errorOutput.innerHTML = errMoneyGot;
+      input.moneyInput.style.backgroundColor = color.error;
     }
   }
 }

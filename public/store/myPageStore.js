@@ -104,7 +104,7 @@ class MyPageStore {
 
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value;
+    let moneyNeeded = input.moneyNeededInput.value.split(' ').join('');
     const errDescription = isValidDescriptionAim(description);
     const errMoneyNeeded = isValidMoneyString(moneyNeeded);
     if (moneyNeeded.isEmpty) {

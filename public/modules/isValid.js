@@ -8,8 +8,10 @@ const LENGTH = {
   MIN_USERNAME: 1,
   MAX_USERNAME: 40,
 
-  MAX_MONEY: 50,
-  MAX_DESCRIPTION: 100,
+  MAX_MONEY: 9,
+  MAX_DESCRIPTION_AIM: 100,
+  MAX_TITLE_POST: 40,
+  MAX_TEXT_POST: 4000,
 };
 
 const ASCII = {
@@ -219,20 +221,17 @@ export function isValidMoneyString(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: 'В поле цель не должно содержаться более 30 символов',
+      error: 'Слишком большая сумма цели',
     },
   };
-  if (inputStr.length > LENGTH.MAX_MONEY) {
-    console.log('Error: money_aim is long');
+  if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
     return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
     if (isNaN(char)) {
-      console.log('Error: money_aim', flags.onlyNumber.error);
       return flags.onlyNumber.error;
     }
   }
-  console.log('OK: money_aim');
   return '';
 }
 
@@ -240,16 +239,27 @@ export function isValidDonate(inputStr) {
   const flags = {
     onlyNumber: {
       flag: true,
-      error: 'В поле сумма доната можно вводить только цифры',
+      error: 'В поле сумма доната можно вводить только число',
     },
+    hasMaxLen: {
+      flag: true,
+      error: 'Слишком большая сумма доната',
+    },
+    hasPositive: {
+      flag: true,
+      error: 'Сумма доната должна быть больше 0',
+    }
   };
+  if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
+    return flags.hasMaxLen.error;
+  }
+  if (Number(inputStr) <= 0) {
+    return flags.hasPositive.error;
+  }
   for (const char of inputStr) {
     if (isNaN(char)) {
       return flags.onlyNumber.error;
     }
-  }
-  if (Number(inputStr) <= 0) {
-    return 'Сумма доната должна быть больше 0';
   }
   return '';
 }
@@ -261,7 +271,33 @@ export function isValidDescriptionAim(inputStr) {
       error: 'В поле описание не должно содержаться более 100 символов',
     },
   };
-  if (inputStr.length > LENGTH.MAX_DESCRIPTION) {
+  if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+export function isValidTitlePost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Название поста не может содержать более ${LENGTH.MAX_TITLE_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TITLE_POST) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+export function isValidTextPost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Текст поста не может содержать более ${LENGTH.MAX_TEXT_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TEXT_POST) {
     return flags.hasMaxLen.error;
   }
   return '';
