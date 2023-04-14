@@ -79,6 +79,11 @@ class Settings {
     errorDiv.textContent = err;
   }
 
+  invalidUsername(err) {
+    const errorDiv = document.getElementById('change-username-error');
+    errorDiv.textContent = err;
+  }
+
   successNameChanged() {
     const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = 'Имя успешно изменено';
