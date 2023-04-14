@@ -41,11 +41,11 @@ class DonateWinStore {
     input.moneyInput.style.backgroundColor = color.field;
 
     if (!errMoneyGot) {
-      await request.get('/api/user/donate');
+      const token = await request.getHeader('/api/user/donate');
       const donateAim = await request.post('/api/user/donate', {
         creator_id: myPageStore.getState().creator_info.creator_id,
         money_count: Number(moneyCount),
-      });
+      }, token);
       if (donateAim.ok) {
         myPageStore.getState().aim.money_got += Number(moneyCount);
         myPage.config = myPageStore.getState();
