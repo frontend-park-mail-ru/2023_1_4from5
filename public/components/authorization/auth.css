@@ -1,21 +1,15 @@
 #auth {
-    top: 15em;
+    top: 10em;
     margin-left: 30%;
-    background-color: #ddd;
+    background-color: #eee;
     position: fixed;
     width: 40em;
-    height: 20em;
-    border-radius: 3em;
+    height: 30em;
     opacity: 1;
     z-index: 20;
 }
 
-.input-auth-container {
-    margin-right: 2em;
-}
-
 .auth-container {
-    text-align: end;
     margin: auto;
     width: 30em;
 }
@@ -25,5 +19,6 @@
 }
 
 #auth-error {
-    margin-right: 5em;
+    margin-left: 5em;
+    height: 1em;
 }

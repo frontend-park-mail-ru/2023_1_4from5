@@ -1,12 +1,16 @@
 .settings {
-    margin-top: 2em;
+    background-color: white;
+}
+
+.settings__container {
+    margin-top: 6em;
     margin-left: 10em;
     margin-right: 10em;
     border: solid black 2px;
-    border-radius: 2em;
     padding-left: 2em;
     padding-right: 2em;
     padding-bottom: 2em;
+    background-color: #f8f8f8;
 }
 
 .upload {
@@ -21,7 +25,6 @@
 .change-password-input {
     margin-bottom: 1em;
     height: 2em;
-    border-radius: 1em;
     padding-left: 1em;
 }
 
@@ -29,7 +32,6 @@
     margin-top: 0.5em;
     margin-bottom: 1.5em;
     height: 2em;
-    border-radius: 0.7em;
     font-size: 1em;
 }
 
@@ -37,7 +39,6 @@
     margin-bottom: 0.7em;
     margin-top: 1em;
     height: 1.5em;
-    border-radius: 1em;
     padding-left: 1em;
     font-size: 1.2em;
 }
