@@ -33,7 +33,7 @@ class DonateWinStore {
   }
 
   async donate(input) {
-    let moneyCount = input.moneyInput.value;
+    let moneyCount = input.moneyInput.value.split(' ').join('');
     const errMoneyGot = isValidDonate(moneyCount);
     if (moneyCount.isEmpty) {
       moneyCount = '0';
@@ -53,7 +53,7 @@ class DonateWinStore {
         myPage.render();
       } else {
         input.errorOutput.innerHTML = '';
-        input.errorOutput.innerHTML = 'Неверная сумма доната';
+        input.errorOutput.innerHTML = 'Некорректная сумма доната';
         input.moneyInput.style.backgroundColor = color.error;
       }
     } else {

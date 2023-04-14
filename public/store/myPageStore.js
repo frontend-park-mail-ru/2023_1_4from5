@@ -105,6 +105,8 @@ class MyPageStore {
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
     let moneyNeeded = input.moneyNeededInput.value.split(' ').join('');
+    const errDescriptionOutput = input.errorDescriptionOutput;
+    const errMoneyNeededOutput = input.errorMoneyNeededOutput;
     const errDescription = isValidDescriptionAim(description);
     const errMoneyNeeded = isValidMoneyString(moneyNeeded);
     if (moneyNeeded.isEmpty) {
@@ -112,8 +114,18 @@ class MyPageStore {
     }
     input.descriptionInput.style.backgroundColor = color.field;
     input.moneyNeededInput.style.backgroundColor = color.field;
+    errDescriptionOutput.innerHTML = '';
+    errMoneyNeededOutput.innerHTML = '';
 
-    if (!errDescription && !errMoneyNeeded) {
+    if (errDescription) {
+      errDescriptionOutput.innerHTML = '';
+      errDescriptionOutput.innerHTML = errDescription;
+      input.descriptionInput.style.backgroundColor = color.error;
+    } else if (errMoneyNeeded) {
+      errMoneyNeededOutput.innerHTML = '';
+      errMoneyNeededOutput.innerHTML = errMoneyNeeded;
+      input.moneyNeededInput.style.backgroundColor = color.error;
+    } else {
       const aimEdit = await request.post('/api/creator/aim/create', {
         creator_id: this.#config.creator_info.creator_id,
         description: description,
@@ -128,19 +140,9 @@ class MyPageStore {
         myPage.config = this.#config;
         myPage.render();
       } else {
-        input.errorOutput.innerHTML = '';
-        input.errorOutput.innerHTML = 'Неверные описание или цель';
+        errMoneyNeededOutput.innerHTML = '';
+        errMoneyNeededOutput.innerHTML = 'Введённые данные некорректны';
         input.descriptionInput.style.backgroundColor = color.error;
-        input.moneyNeededInput.style.backgroundColor = color.error;
-      }
-    } else {
-      input.errorOutput.innerHTML = '';
-      if (errDescription) {
-        input.errorOutput.innerHTML = errDescription;
-        input.descriptionInput.style.backgroundColor = color.error;
-      }
-      if (errMoneyNeeded) {
-        input.errorOutput.innerHTML = errMoneyNeeded;
         input.moneyNeededInput.style.backgroundColor = color.error;
       }
     }

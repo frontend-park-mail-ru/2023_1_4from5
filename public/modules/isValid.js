@@ -104,20 +104,17 @@ export function isValidPassword(inputStr) {
   if (inputStr.length >= LENGTH.MIN_PASSWORD) {
     flags.hasMinLen.flag = true;
   } else {
-    console.log('Error: password is small');
     return flags.hasMinLen.error;
   }
 
   if (inputStr.length <= LENGTH.MAX_PASSWORD) {
     flags.hasMaxLen.flag = true;
   } else {
-    console.log('Error: password is long');
     return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
     if (!isWhiteSign(code)) {
-      console.log('Error: password ', flags[flagsKey].error);
       return flags.hasBlackSign.error;
     }
     if (!isNaN(char)) {
@@ -130,11 +127,9 @@ export function isValidPassword(inputStr) {
   }
   for (const flagsKey in flags) {
     if (!flags[flagsKey].flag) {
-      console.log('Error: password ', flags[flagsKey].error);
       return flags[flagsKey].error;
     }
   }
-  console.log('OK: password');
   return '';
 }
 
@@ -160,22 +155,18 @@ export function isValidLogin(inputStr) {
     },
   };
   if (inputStr.length < LENGTH.MIN_LOGIN) {
-    console.log('Error: login is small');
     return flags.hasMinLen.error;
   }
   if (inputStr.length > LENGTH.MAX_LOGIN) {
-    console.log('Error: login is long');
     return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
     if (!(isLetter(code) || code === ASCII.POINT || code === ASCII.DASH
         || code === ASCII.UNDERLINING || !isNaN(char))) {
-      console.log('Error: login', flags.hasBlackSign.error);
       return flags.hasBlackSign.error;
     }
   }
-  console.log('OK: login');
   return '';
 }
 
@@ -195,21 +186,17 @@ export function isValidUsername(inputStr) {
     },
   };
   if (inputStr.length < LENGTH.MIN_USERNAME) {
-    console.log('Error: username is small');
     return flags.hasMinLen.error;
   }
   if (inputStr.length > LENGTH.MAX_USERNAME) {
-    console.log('Error: username is long');
     return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
     if (!isWhiteSign(code)) {
-      console.log('Error: username ', flags.hasBlackSign.error);
       return flags.hasBlackSign.error;
     }
   }
-  console.log('OK: username');
   return '';
 }
 
@@ -221,7 +208,7 @@ export function isValidMoneyString(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: 'Слишком большая сумма цели',
+      error: 'Слишком большая сумма',
     },
   };
   if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
@@ -268,7 +255,7 @@ export function isValidDescriptionAim(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'В поле описание не должно содержаться более 100 символов',
+      error: `В поле описание не должно содержаться более ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
