@@ -13,7 +13,7 @@
 
 #root {
     min-height: 100vh;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto Light', sans-serif;
 }
 
 a {
@@ -117,4 +117,9 @@ body {
 
 button {
     cursor: pointer;
+}
+
+.inactive {
+    color: #777;
+    cursor: default;
 }
