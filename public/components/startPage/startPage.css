@@ -1,6 +1,6 @@
 #startPage {
-    margin-left: 10em;
-    margin-right: 10em;
+    margin-left: 15em;
+    margin-right: 15em;
     padding-top: 2em;
 }
 
@@ -10,26 +10,52 @@
     font-size: xxx-large;
 }
 
-#startPage h2 {
-    font-weight: bold;
-    font-size: larger;
-}
-
 #startPage h3 {
-    font-weight: normal;
-}
-
-#startPage hr {
-    opacity: 0;
+    font-weight: bolder;
 }
 
 #start_photo {
-    width: 35em;
+    width: 30em;
     float: right;
     margin-left: 3em;
+    margin-top: 5em;
 }
 
 #footer {
+    font-size: 0.7em;
     margin-left: 0;
     margin-right: 0;
+}
+
+.startPage__text--header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+.startPage__text {
+    font-size: 1.3em;
+}
+
+.startPage__intro {
+    margin-bottom: 7em;
+}
+
+.startPage__usage {
+    margin-bottom: 7em;
+}
+
+#usagePhoto {
+    float: left;
+    width: 27em;
+}
+
+.startPage__forWhom {
+    width: 80%;
+    margin-bottom: 7em;
+}
+
+#forWhomPhoto {
+    float: right;
+    width: 25em;
 }
