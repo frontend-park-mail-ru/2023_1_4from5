@@ -17,20 +17,18 @@ class NewPostStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
-        this.createPost(action.input);
+        this.sendPost(action, async (body) => {
+          const tokenCreate = await request.getHeader('/api/post/create');
+          return request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
+        });
         break;
 
       case ActionTypes.UPDATE_POST:
-        const postId = action.postId;
-        const editTitle = action.input.titleInput.value;
-        const editText = action.input.textInput.value;
-
-        const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
-        await request.put(`/api/post/edit/${postId}`, {
-          title: editTitle,
-          text: editText,
-        }, tokenEdit);
-        router.popstate();
+        this.sendPost(action, async (body, action) => {
+          const postId = action.postId;
+          const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
+          return request.put(`/api/post/edit/${postId}`, body, tokenEdit);
+        });
         break;
 
       default:
@@ -50,27 +48,27 @@ class NewPostStore {
     newPost.update(postId, post.title, post.text);
   }
 
-  async createPost(input) {
-    const createTitle = input.titleInput.value;
-    const createText = input.textInput.value;
+  async sendPost(action, callback) {
+    const createTitle = action.input.titleInput.value;
+    const createText = action.input.textInput.value;
     const errTitle = isValidTitlePost(createTitle);
     const errText = isValidTextPost(createText);
-    const errorTitleOutput = input.errorTitleOutput;
-    const errorTextOutput = input.errorTextOutput;
+    const errorTitleOutput = action.input.errorTitleOutput;
+    const errorTextOutput = action.input.errorTextOutput;
 
-    input.titleInput.style.backgroundColor = color.field;
-    input.textInput.style.backgroundColor = color.field;
+    action.input.titleInput.style.backgroundColor = color.field;
+    action.input.textInput.style.backgroundColor = color.field;
     errorTitleOutput.innerHTML = '';
     errorTextOutput.innerHTML = '';
 
     if (errTitle) {
       errorTitleOutput.innerHTML = '';
       errorTitleOutput.innerHTML = errTitle;
-      input.titleInput.style.backgroundColor = color.error;
+      action.input.titleInput.style.backgroundColor = color.error;
     } else if (errText) {
       errorTextOutput.innerHTML = '';
       errorTextOutput.innerHTML = errText;
-      input.textInput.style.backgroundColor = color.error;
+      action.input.textInput.style.backgroundColor = color.error;
     } else {
       const body = {
         title: createTitle,
@@ -78,15 +76,14 @@ class NewPostStore {
         creator: userStore.getUserState().authorURL,
       };
 
-      const tokenCreate = await request.getHeader('/api/post/create');
-      const createPost = await request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
-      if (createPost.ok) {
-        router.go(URLS.myPage);
+      const result = await callback(body, action);
+      if (result.ok) {
+        router.popstate();
       } else {
         errorTextOutput.innerHTML = '';
         errorTextOutput.innerHTML = 'Введённые данные некорректны';
-        input.titleInput.style.backgroundColor = color.error;
-        input.textInput.style.backgroundColor = color.error;
+        action.input.titleInput.style.backgroundColor = color.error;
+        action.input.textInput.style.backgroundColor = color.error;
       }
     }
   }
