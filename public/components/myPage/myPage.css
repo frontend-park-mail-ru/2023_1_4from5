@@ -1,8 +1,9 @@
 #myPage {
-    margin-left: 10em;
-    margin-right: 10em;
+
 }
 .myPage-container {
+    margin-left: 7em;
+    margin-right: 10em;
     margin-top: 1em;
     display: grid;
     gap: 20px;
@@ -10,7 +11,6 @@
 }
 
 .myPage-header-container {
-    /*background-image: url("../../images/myPage_phone.jpg");*/
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -22,7 +22,7 @@
 
 .post-container {
     border: 1px solid #7f7e7e;
-    border-radius: 1em;
+    border-radius: 0.5em;
     padding-right: 1em;
     padding-left: 1em;
     padding-bottom: 0.2em;
@@ -50,7 +50,7 @@
     margin: 0;
     top: 0;
     left: 0;
-    padding-left: 30%;
+    padding-left: 25%;
     padding-top: 4em;
     padding-bottom: 1em;
 }
@@ -70,7 +70,6 @@
 .box1-info {
     border: 1px solid #7f7e7e;
     margin-bottom: 2em;
-    border-radius: 1em;
     padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
@@ -81,7 +80,6 @@
 .box-3__container {
     border: 1px solid #7f7e7e;
     margin-bottom: 2em;
-    border-radius: 1em;
     padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
@@ -119,8 +117,25 @@
     min-height: 2em;
     height: min-content;
     width: 80%;
-    border-radius: 0.7em;
+    background-color: #333;
+    color: white;
     font-size: 1.3em;
+}
+
+.subs-btn:hover {
+    background-color: #000;
+}
+
+.subme__btn {
+    background-color: #eee;
+}
+
+.subme__btn:hover {
+    background-color: #eee;
+}
+
+.createPost__btn {
+    width: 100%;
 }
 
 #donate-btn-aim {
@@ -175,4 +190,8 @@
 .under-input-error {
     color: rgba(255, 36, 36, 0.63);
     font-size: smaller;
+}
+
+.cretor__description {
+    font-size: 1.2em;
 }
