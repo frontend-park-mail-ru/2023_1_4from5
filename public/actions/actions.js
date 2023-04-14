@@ -187,4 +187,12 @@ export const Actions = {
       input,
     });
   },
+
+  // become author
+  becomeAuthor(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.BECOME_AUTHOR,
+      input,
+    });
+  },
 };

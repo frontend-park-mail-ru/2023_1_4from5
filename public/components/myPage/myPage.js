@@ -33,11 +33,20 @@ class MyPage {
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
+    const backGnd = document.getElementById('myPage-header-container');
+    backGnd.style.backgroundImage = 'url(../../images/myPage_phone.jpg)';
+
+    const settingsIcon = document.getElementById('settings-icon');
+    settingsIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.go(URLS.authorSettings);
+    });
+
     const createPostBtn = document.getElementById('createPost-btn');
     if (createPostBtn) {
       createPostBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        router.go(URLS.newPost, '', this.getParent());
+        router.go(URLS.newPost);
       });
     }
 
@@ -114,7 +123,7 @@ class MyPage {
     const postId = e.currentTarget.parentElement.parentElement.id;
     router.go(URLS.editPost, {
       postId,
-    }, this.getParent(), postId);
+    }, postId);
   }
 }
 

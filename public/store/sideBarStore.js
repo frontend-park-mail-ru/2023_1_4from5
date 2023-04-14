@@ -15,14 +15,14 @@ class SideBarStore {
   constructor() {
     this.#config = {
       feed: {
-        name: 'Лента',
-        href: '/feed',
-        id: 'sidebar-feed',
-        showDisplay: userStore.getUserState().isAuthorizedIn,
-        parent: contentElement,
-        render() {
-          console.log('Лента');
-        },
+        // name: 'Лента',
+        // href: '/feed',
+        // id: 'sidebar-feed',
+        // showDisplay: userStore.getUserState().isAuthorizedIn,
+        // parent: contentElement,
+        // render() {
+        //   console.log('Лента');
+        // },
       },
       findAuth: {
         name: 'Поиск авторов',
@@ -33,14 +33,14 @@ class SideBarStore {
         render: router.go,
       },
       subs: {
-        name: 'Мои подписки',
-        href: '/subs',
-        id: 'sidebar-subs',
-        showDisplay: userStore.getUserState().isAuthorizedIn,
-        parent: contentElement,
-        render() {
-          console.log('Мои подписки');
-        },
+        // name: 'Мои подписки',
+        // href: '/subs',
+        // id: 'sidebar-subs',
+        // showDisplay: userStore.getUserState().isAuthorizedIn,
+        // parent: contentElement,
+        // render() {
+        //   console.log('Мои подписки');
+        // },
       },
       reg: {
         name: 'Регистрация',
@@ -60,13 +60,11 @@ class SideBarStore {
       },
       beAuthor: {
         name: 'Стать автором',
-        href: '/beAuthor',
+        href: URLS.becomeAuthor,
         id: 'sidebar-beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
-        render() {
-          console.log('Стать автором');
-        },
+        render: router.go,
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
