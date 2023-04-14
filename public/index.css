@@ -16,6 +16,10 @@
     font-family: 'Roboto Light', sans-serif;
 }
 
+main {
+    margin-top: 4em;
+}
+
 a {
     text-decoration: none;
 }
@@ -122,4 +126,8 @@ button {
 .inactive {
     color: #777;
     cursor: default;
+}
+
+.hover--underline:hover {
+    border-bottom: green solid 2px;
 }

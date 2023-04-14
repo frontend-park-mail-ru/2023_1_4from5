@@ -13,10 +13,10 @@
         <div class="box-1">
             <div class="box1-btn-container">
                 {{#if is_my_page}}
-                    <button id="createPost-btn" class="subs-btn">Создать пост</button>
+                    <button id="createPost-btn" class="subs-btn createPost__btn">Создать пост</button>
                 {{else}}
                     {{#if isAuthorized }}
-                        <button id="subs-btn" class="subs-btn inactive">Подписаться</button>
+                        <button id="subs-btn" class="subs-btn subme__btn inactive">Подписаться</button>
                     {{/if}}
                 {{/if}}
             </div>
@@ -81,7 +81,7 @@
 <!--                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">-->
                     {{/if}}
                 </div>
-                <h3>{{creator_info.description}}</h3>
+                <p class="cretor__description">{{creator_info.description}}</p>
             </div>
             {{#each posts}}
                 <div class="post-container" id="{{id}}">

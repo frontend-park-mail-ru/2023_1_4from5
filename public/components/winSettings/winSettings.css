@@ -5,8 +5,9 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    background: gainsboro;
+    background: #f6f6f6;
     z-index: 20;
+    border: gray solid 1px;
 
 }
 
@@ -24,4 +25,9 @@
 #closeWinSettings img {
     margin-top: 0.2em;
     margin-left: 1em;
+}
+
+.winsettings--href {
+    margin-top: 0.5em;
+    height: 1.7em;
 }
