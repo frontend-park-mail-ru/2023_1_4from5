@@ -5,17 +5,21 @@ import { userStore } from '../store/userStore';
 import { router } from './Router';
 import { newPostStore } from '../store/newPostStore';
 import { searchStore } from '../store/searchStore';
+import { becameAuthorStore } from '../store/becomeAuthorStore';
+import { page404 } from '../components/page404/page404';
 
 export const URLS = {
   root: '/',
   myPage: '/creatorPage',
   settings: '/settings',
+  authorSettings: '/authorSettings',
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
+  becomeAuthor: '/becomeAuthor',
 };
 
-export function notifier(path, data, parent, additionalUrl) {
+export function notifier(path, data, additionalUrl) {
   switch (path.pathname) {
     case URLS.root:
       Actions.renderStartPage();
@@ -53,8 +57,16 @@ export function notifier(path, data, parent, additionalUrl) {
       searchStore.renderSearch();
       break;
 
+    case URLS.becomeAuthor:
+      becameAuthorStore.renderBecomeAuthor();
+      break;
+
+    case URLS.authorSettings:
+      console.log('authorSettings');
+      break;
+
     default:
-      console.log('undefined url: ', path.pathname);
+      page404.render();
       break;
   }
 }

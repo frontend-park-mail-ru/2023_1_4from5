@@ -16,6 +16,6 @@ export function clickHandler(event, config) {
         target = config[element];
       }
     }
-    target.render(target.href, '', target.parent);
+    target.render(target.href);
   }
 }
