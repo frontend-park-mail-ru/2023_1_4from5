@@ -281,7 +281,7 @@ export function isValidTextPost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: `Текст поста не может содержать более ${LENGTH.MAX_TEXT_POST} символов`,
+      error: 'Слишком длинный текст поста',
     },
   };
   if (inputStr.length > LENGTH.MAX_TEXT_POST) {

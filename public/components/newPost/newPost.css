@@ -31,6 +31,7 @@
 }
 
 .newpost-text-label-container {
+    margin-top: 1em;
     margin-bottom: 1em;
 }
 
@@ -41,7 +42,7 @@
     padding-top: 0.5em;
     padding-left: 1em;
     padding-right: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 0.2em;
     font-size: 1.5em;
     resize: vertical;
 }
@@ -53,6 +54,7 @@
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
+    margin-bottom: 0.2em;
     font-size: 1.3em;
     resize: vertical;
 }
@@ -79,4 +81,9 @@
 .newpost-title {
     font-size: 2em;
     margin-left: 10%;
+}
+
+.under-input-error-post {
+    color: rgba(255, 36, 36, 0.63);
+    font-size: medium;
 }
