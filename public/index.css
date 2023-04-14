@@ -118,3 +118,8 @@ body {
 button {
     cursor: pointer;
 }
+
+.inactive {
+    color: #777;
+    cursor: default;
+}
