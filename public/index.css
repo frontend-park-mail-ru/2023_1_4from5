@@ -123,3 +123,7 @@ button {
     color: #777;
     cursor: default;
 }
+
+.hover--underline:hover {
+    border-bottom: green solid 2px;
+}

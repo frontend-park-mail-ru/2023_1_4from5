@@ -2,15 +2,23 @@
 </div>
 <div id="winSettings">
     {{#if profile.showDisplay}}
-        <a id={{profile.id}} href={{profile.href}}> {{profile.name}} </a>
+        <div class="winsettings--href">
+            <a id={{profile.id}} class="hover--underline" href={{profile.href}}> {{profile.name}} </a>
+        </div>
     {{/if}}
     {{#if finance.showDisplay}}
-        <a id={{finance.id}} class="inactive" href={{finance.href}}> {{finance.name}} </a>
+        <div class="winsettings--href">
+            <a id={{finance.id}} class="inactive" href={{finance.href}}> {{finance.name}} </a>
+        </div>
     {{/if}}
     {{#if settings.showDisplay}}
-        <a id={{settings.id}} href={{settings.href}}> {{settings.name}} </a>
+        <div class="winsettings--href">
+            <a id={{settings.id}} class="hover--underline" href={{settings.href}}> {{settings.name}} </a>
+        </div>
     {{/if}}
     {{#if logout.showDisplay}}
-        <a id={{logout.id}} href={{logout.href}}> {{logout.name}} </a>
+        <div class="winsettings--href">
+            <a id={{logout.id}} class="hover--underline" href={{logout.href}}> {{logout.name}} </a>
+        </div>
     {{/if}}
 </div>
