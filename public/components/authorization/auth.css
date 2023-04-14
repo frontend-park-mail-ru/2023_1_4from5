@@ -4,7 +4,7 @@
     background-color: #ddd;
     position: fixed;
     width: 40em;
-    height: 30em;
+    height: 35em;
     opacity: 1;
     z-index: 20;
 }
@@ -21,4 +21,17 @@
 #auth-error {
     margin-left: 5em;
     height: 1em;
+}
+
+.authHref__container {
+    display: flex;
+}
+
+#toReg {
+    margin: auto;
+    cursor: pointer;
+}
+
+#toReg:hover {
+    border-bottom: green solid 2px;
 }
