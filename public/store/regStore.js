@@ -1,6 +1,6 @@
 import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { dispatcher } from '../dispatcher/dispatcher.js';
-import { isValidLogin, isValidPassword } from '../modules/isValid.js';
+import {isValidLogin, isValidPassword, isValidUsername} from '../modules/isValid.js';
 import { register } from '../components/register/reg.js';
 
 class RegStore {
@@ -35,6 +35,7 @@ class RegStore {
         const password = action.input.passwordInput.value;
         const repeatPassword = action.input.passwordRepeatInput.value;
         const errLogin = isValidLogin(login);
+        const errUsername = isValidUsername(username);
         const errPassword = isValidPassword(password);
         register.validation({
           loginInput: action.input.loginInput,
@@ -47,6 +48,7 @@ class RegStore {
           password,
           repeatPassword,
           errLogin,
+          errUsername,
           errPassword,
         });
         break;

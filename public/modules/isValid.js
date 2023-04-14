@@ -1,8 +1,17 @@
 const LENGTH = {
-  MIN: 7,
-  MAX: 20,
-  MAX_MONEY: 30,
-  MAX_DESCRIPTION: 100,
+  MIN_LOGIN: 7,
+  MAX_LOGIN: 40,
+
+  MIN_PASSWORD: 7,
+  MAX_PASSWORD: 40,
+
+  MIN_USERNAME: 1,
+  MAX_USERNAME: 40,
+
+  MAX_MONEY: 9,
+  MAX_DESCRIPTION_AIM: 100,
+  MAX_TITLE_POST: 40,
+  MAX_TEXT_POST: 4000,
 };
 
 const ASCII = {
@@ -10,11 +19,15 @@ const ASCII = {
   UPPER_Z: 90,
   LOWER_A: 97,
   LOWER_Z: 122,
+  SPACE: 32,
   EXCLAMATION: 33,
+  DASH: 45,
+  POINT: 46,
   SLASH: 47,
   COLON: 58,
   AT: 64,
   RECTANGLE_BRACKET: 91,
+  UNDERLINING: 95,
   BACK_QUOTE: 96,
   FIGURED_BRACKET: 123,
   TILDE: 126,
@@ -37,13 +50,15 @@ function isLetter(code) {
  *
  * @returns {boolean} - response is sign is special sign
  */
-function isSpecialSign(code) {
-  return (((code >= ASCII.EXCLAMATION && code <= ASCII.SLASH)
-      || (code >= ASCII.COLON && code <= ASCII.AT))
-      || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
-      || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
+// function isSpecialSign(code) {
+//   return (((code >= ASCII.EXCLAMATION && code <= ASCII.SLASH)
+//       || (code >= ASCII.COLON && code <= ASCII.AT))
+//       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
+//       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
+// }
+function isWhiteSign(code) {
+  return (code >= ASCII.SPACE && code <= ASCII.TILDE);
 }
-
 /**
  * validation of password input
  * @param {String} inputStr - injected password
@@ -52,15 +67,28 @@ function isSpecialSign(code) {
  */
 export function isValidPassword(inputStr) {
   const flags = {
+    hasBlackSign: {
+      flag: true,
+      error: 'Пароль содержит некорректный символ',
+    },
     hasMinLen: {
       flag: false,
-      error: 'Пароль должен содержать не менее 7 символов',
+      error: `Пароль должен содержать не менее ${LENGTH.MIN_PASSWORD} символов`,
     },
-    hasUpper: {
-      flag: true,
-      error: 'Пароль должен содержать хотя бы 1 заглавную букву',
+    hasMaxLen: {
+      flag: false,
+      error: `Пароль должен содержать не более ${LENGTH.MAX_PASSWORD} символов`,
     },
-    hasLower: {
+    // убрал, потому что кажется Саша так говорил и бэк его послушал
+    // hasUpper: {
+    //   flag: false,
+    //   error: 'Пароль должен содержать хотя бы 1 заглавную букву',
+    // },
+    // hasLower: {
+    //   flag: false,
+    //   error: 'Пароль должен содержать хотя бы 1 букву',
+    // },
+    hasLetter: {
       flag: false,
       error: 'Пароль должен содержать хотя бы 1 букву',
     },
@@ -68,31 +96,45 @@ export function isValidPassword(inputStr) {
       flag: false,
       error: 'Пароль должен содержать хотя бы 1 цифру',
     },
-    hasSpecial: {
-      flag: true,
-      error: 'Пароль должен содержать хотя бы 1 спец. символ',
-    },
+    // hasSpecial: {
+    //   flag: true,
+    //   error: 'Пароль должен содержать хотя бы 1 спец. символ',
+    // },
   };
-  if (inputStr.length >= LENGTH.MIN) {
+  if (inputStr.length >= LENGTH.MIN_PASSWORD) {
     flags.hasMinLen.flag = true;
   } else {
+    console.log('Error: password is small');
     return flags.hasMinLen.error;
+  }
+
+  if (inputStr.length <= LENGTH.MAX_PASSWORD) {
+    flags.hasMaxLen.flag = true;
+  } else {
+    console.log('Error: password is long');
+    return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
+    if (!isWhiteSign(code)) {
+      console.log('Error: password ', flags[flagsKey].error);
+      return flags.hasBlackSign.error;
+    }
     if (!isNaN(char)) {
       flags.hasNumber.flag = true;
     } else if (isLetter(code)) {
-      flags.hasLower.flag = true;
-    } else if (isSpecialSign(code)) {
-      flags.hasSpecial.flag = true;
+      flags.hasLetter.flag = true;
+    } else if (!isWhiteSign(code)) {
+      flags.hasBlackSign = true;
     }
   }
   for (const flagsKey in flags) {
     if (!flags[flagsKey].flag) {
+      console.log('Error: password ', flags[flagsKey].error);
       return flags[flagsKey].error;
     }
   }
+  console.log('OK: password');
   return '';
 }
 
@@ -104,21 +146,70 @@ export function isValidPassword(inputStr) {
  */
 export function isValidLogin(inputStr) {
   const flags = {
-    hasMinLen: {
+    hasBlackSign: {
       flag: false,
-      error: 'Логин должен содержать не менее 7 символов',
+      error: 'Логин может содержать только латинские символы, цифры, точку и подчеркивание',
+    },
+    hasMinLen: {
+      flag: true,
+      error: `Логин должен содержать не менее ${LENGTH.MIN_LOGIN} символов`,
     },
     hasMaxLen: {
       flag: true,
-      error: 'Логин не должен содержать более 20 символов',
+      error: `Логин не может содержать более ${LENGTH.MAX_LOGIN} символов`,
     },
   };
-  if (inputStr.length < LENGTH.MIN) {
+  if (inputStr.length < LENGTH.MIN_LOGIN) {
+    console.log('Error: login is small');
     return flags.hasMinLen.error;
   }
-  if (inputStr.length > LENGTH.MAX) {
+  if (inputStr.length > LENGTH.MAX_LOGIN) {
+    console.log('Error: login is long');
     return flags.hasMaxLen.error;
   }
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!(isLetter(code) || code === ASCII.POINT || code === ASCII.DASH
+        || code === ASCII.UNDERLINING || !isNaN(char))) {
+      console.log('Error: login', flags.hasBlackSign.error);
+      return flags.hasBlackSign.error;
+    }
+  }
+  console.log('OK: login');
+  return '';
+}
+
+export function isValidUsername(inputStr) {
+  const flags = {
+    hasBlackSign: {
+      flag: false,
+      error: 'Имя содержит некорректные символы',
+    },
+    hasMinLen: {
+      flag: false,
+      error: 'Введите ваше имя',
+    },
+    hasMaxLen: {
+      flag: false,
+      error: `Имя не может содержать более ${LENGTH.MAX_USERNAME} символов`,
+    },
+  };
+  if (inputStr.length < LENGTH.MIN_USERNAME) {
+    console.log('Error: username is small');
+    return flags.hasMinLen.error;
+  }
+  if (inputStr.length > LENGTH.MAX_USERNAME) {
+    console.log('Error: username is long');
+    return flags.hasMaxLen.error;
+  }
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isWhiteSign(code)) {
+      console.log('Error: username ', flags.hasBlackSign.error);
+      return flags.hasBlackSign.error;
+    }
+  }
+  console.log('OK: username');
   return '';
 }
 
@@ -126,14 +217,14 @@ export function isValidMoneyString(inputStr) {
   const flags = {
     onlyNumber: {
       flag: true,
-      error: 'В поле цель можно вводить только цифры',
+      error: 'В поле цель можно вводить только число',
     },
     hasMaxLen: {
       flag: true,
-      error: 'В поле цель не должно содержаться более 30 символов',
+      error: 'Слишком большая сумма цели',
     },
   };
-  if (inputStr.length > LENGTH.MAX_MONEY) {
+  if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
     return flags.hasMaxLen.error;
   }
   for (const char of inputStr) {
@@ -148,28 +239,65 @@ export function isValidDonate(inputStr) {
   const flags = {
     onlyNumber: {
       flag: true,
-      error: 'В поле сумма доната можно вводить только цифры',
+      error: 'В поле сумма доната можно вводить только число',
     },
+    hasMaxLen: {
+      flag: true,
+      error: 'Слишком большая сумма доната',
+    },
+    hasPositive: {
+      flag: true,
+      error: 'Сумма доната должна быть больше 0',
+    }
   };
+  if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
+    return flags.hasMaxLen.error;
+  }
+  if (Number(inputStr) <= 0) {
+    return flags.hasPositive.error;
+  }
   for (const char of inputStr) {
     if (isNaN(char)) {
       return flags.onlyNumber.error;
     }
   }
-  if (Number(inputStr) <= 0) {
-    return 'Сумма доната должна быть больше 0';
-  }
   return '';
 }
 
-export function isValidDescription(inputStr) {
+export function isValidDescriptionAim(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
       error: 'В поле описание не должно содержаться более 100 символов',
     },
   };
-  if (inputStr.length > LENGTH.MAX_DESCRIPTION) {
+  if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+export function isValidTitlePost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Название поста не может содержать более ${LENGTH.MAX_TITLE_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TITLE_POST) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+export function isValidTextPost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Текст поста не может содержать более ${LENGTH.MAX_TEXT_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TEXT_POST) {
     return flags.hasMaxLen.error;
   }
   return '';

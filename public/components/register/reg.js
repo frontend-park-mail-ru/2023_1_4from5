@@ -76,10 +76,10 @@ export class Register {
     input.passwordInput.style.backgroundColor = color.field;
     input.passwordRepeatInput.style.backgroundColor = color.field;
 
-    if (input.username.length === 0) {
+    if (input.errUsername) {
       input.usernameInput.style.backgroundColor = color.error;
       input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = 'Введите ваше имя';
+      input.errorOutput.innerHTML = input.errUsername;
     } else if (input.errLogin) {
       input.loginInput.style.backgroundColor = color.error;
       input.errorOutput.innerHTML = '';
@@ -105,7 +105,7 @@ export class Register {
         Actions.renderStartPage();
       } else {
         input.errorOutput.innerHTML = '';
-        input.errorOutput.innerHTML = 'Такой логин уже существует';
+        input.errorOutput.innerHTML = 'Введённые данные некорректны';
       }
     }
   }
