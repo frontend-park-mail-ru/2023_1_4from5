@@ -12,7 +12,6 @@
 @import './components/page404/page404.css';
 
 #root {
-    min-height: 100vh;
     font-family: 'Roboto Light', sans-serif;
 }
 
