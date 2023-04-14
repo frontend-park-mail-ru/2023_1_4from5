@@ -26,3 +26,12 @@
 #closeReg {
     width: 2em;
 }
+
+#toAuth {
+    margin: auto;
+    cursor: pointer;
+}
+
+#toAuth:hover {
+    border-bottom: green solid 2px;
+}

@@ -26,6 +26,13 @@ export class Auth {
       e.preventDefault();
       Actions.removeAuth();
     });
+
+    const toReg = document.getElementById('toReg');
+    toReg.addEventListener('click', (e) => {
+      e.preventDefault();
+      Actions.removeAuth();
+      Actions.renderReg();
+    });
   }
 
   /**
