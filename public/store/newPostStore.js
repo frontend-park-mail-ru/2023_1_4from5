@@ -65,11 +65,9 @@ class NewPostStore {
 
     if (errTitle) {
       errorTitleOutput.innerHTML = '';
-      // errorTextOutput.innerHTML = '';
       errorTitleOutput.innerHTML = errTitle;
       input.titleInput.style.backgroundColor = color.error;
     } else if (errText) {
-      // errorTitleOutput.innerHTML = '';
       errorTextOutput.innerHTML = '';
       errorTextOutput.innerHTML = errText;
       input.textInput.style.backgroundColor = color.error;
