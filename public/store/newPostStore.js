@@ -5,8 +5,8 @@ import { userStore } from './userStore';
 import { request } from '../modules/request';
 import { router } from '../modules/Router';
 import { URLS } from '../modules/Notifier';
-import {isValidTextPost, isValidTitlePost} from "../modules/isValid";
-import {color} from "../consts/styles";
+import { isValidTextPost, isValidTitlePost } from '../modules/isValid';
+import { color } from '../consts/styles';
 
 document.querySelector('main');
 class NewPostStore {
@@ -60,12 +60,16 @@ class NewPostStore {
 
     input.titleInput.style.backgroundColor = color.field;
     input.textInput.style.backgroundColor = color.field;
+    errorTitleOutput.innerHTML = '';
+    errorTextOutput.innerHTML = '';
 
     if (errTitle) {
       errorTitleOutput.innerHTML = '';
+      // errorTextOutput.innerHTML = '';
       errorTitleOutput.innerHTML = errTitle;
       input.titleInput.style.backgroundColor = color.error;
     } else if (errText) {
+      // errorTitleOutput.innerHTML = '';
       errorTextOutput.innerHTML = '';
       errorTextOutput.innerHTML = errText;
       input.textInput.style.backgroundColor = color.error;
@@ -77,7 +81,7 @@ class NewPostStore {
       };
 
       const tokenCreate = await request.getHeader('/api/post/create');
-      await request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
+      const createPost = await request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
       if (createPost.ok) {
         router.go(URLS.myPage);
       } else {
