@@ -25,9 +25,9 @@ class StartStore {
 
   async start() {
     const userIn = userStore.getUserState();
-    try {
-      if (!userIn.isAuthorizedIn) {
-        const response = await request.get('/api/user/profile');
+    if (!userIn.isAuthorizedIn) {
+      const response = await request.get('/api/user/profile');
+      if (response.ok) {
         const result = await response.json();
         if (result.login) {
           userIn.usernameIn = result.name;
@@ -40,8 +40,6 @@ class StartStore {
           userIn.isAuthorIn = userHomePage.is_creator;
         }
       }
-    } catch (err) {
-      console.log(err);
     }
     Actions.renderSideBar(sideBarElement, userIn);
   }
