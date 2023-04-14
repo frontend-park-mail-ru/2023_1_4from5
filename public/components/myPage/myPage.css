@@ -8,6 +8,7 @@
     display: grid;
     gap: 20px;
     grid-template-columns: 20% 60% 20%;
+    height: 41em;
 }
 
 .myPage-header-container {
