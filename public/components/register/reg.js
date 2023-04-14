@@ -1,8 +1,7 @@
 import { request } from '../../modules/request.js';
 import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/actions.js';
-
-const template = require('./reg.handlebars');
+import template from './reg.handlebars';
 
 const rootElement = document.getElementById('root');
 

@@ -1,8 +1,7 @@
 import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/actions.js';
 import { request } from '../../modules/request.js';
-
-const template = require('./auth.handlebars');
+import template from './auth.handlebars';
 
 const rootElement = document.getElementById('root');
 

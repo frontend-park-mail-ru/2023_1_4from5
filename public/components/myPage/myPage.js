@@ -1,8 +1,7 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
-
-const template = require('./myPage.handlebars');
+import template from './myPage.handlebars';
 
 const contentElement = document.querySelector('main');
 

@@ -28,8 +28,8 @@ class MyPageStore {
         break;
 
       case ActionTypes.DELETE_POST:
-        await request.get(`/api/post/delete/${action.postId}`);
-        await request.delete(`/api/post/delete/${action.postId}`);
+        const token = await request.getHeader(`/api/post/delete/${action.postId}`);
+        await request.delete(`/api/post/delete/${action.postId}`, token);
         await this.renderMyPage();
         break;
       case ActionTypes.CLICK_LIKE:

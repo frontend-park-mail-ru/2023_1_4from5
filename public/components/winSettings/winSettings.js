@@ -1,7 +1,6 @@
 import { clickHandler } from '../../modules/handler.js';
 import { Actions } from '../../actions/actions.js';
-
-const template = require('./winSettings.handlebars');
+import template from './winSettings.handlebars';
 
 const contentElement = document.querySelector('main');
 
