@@ -59,6 +59,10 @@ export class Register {
     const passwordInput = document.getElementById('reg-password');
     const passwordRepeatInput = document.getElementById('reg-repeat-password');
     const errorOutput = document.getElementById('reg-error');
+    const errorLoginOutput = document.getElementById('reg-login-error');
+    const errorUsernameOutput = document.getElementById('reg-username-error');
+    const errorPasswordOutput = document.getElementById('reg-password-error');
+    const errorRepeatPasswordOutput = document.getElementById('reg-repeat-password-error');
 
     loginInput.style.backgroundColor = color.field;
     usernameInput.style.backgroundColor = color.field;
@@ -73,6 +77,10 @@ export class Register {
         passwordInput,
         passwordRepeatInput,
         errorOutput,
+        errorLoginOutput,
+        errorUsernameOutput,
+        errorPasswordOutput,
+        errorRepeatPasswordOutput,
       });
     });
   }
@@ -83,23 +91,29 @@ export class Register {
     input.passwordInput.style.backgroundColor = color.field;
     input.passwordRepeatInput.style.backgroundColor = color.field;
 
-    if (input.errUsername) {
-      input.usernameInput.style.backgroundColor = color.error;
-      input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = input.errUsername;
-    } else if (input.errLogin) {
+    input.errorLoginOutput.innerHTML = '';
+    input.errorUsernameOutput.innerHTML = '';
+    input.errorPasswordOutput.innerHTML = '';
+    input.errorRepeatPasswordOutput.innerHTML = '';
+    input.errorOutput.innerHTML = '';
+
+    if (input.errLogin) {
       input.loginInput.style.backgroundColor = color.error;
-      input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = input.errLogin;
+      input.errorLoginOutput.innerHTML = '';
+      input.errorLoginOutput.innerHTML = input.errLogin;
+    } else if (input.errUsername) {
+      input.usernameInput.style.backgroundColor = color.error;
+      input.errorUsernameOutput.innerHTML = '';
+      input.errorUsernameOutput.innerHTML = input.errUsername;
     } else if (input.errPassword) {
       input.passwordInput.style.backgroundColor = color.error;
-      input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = input.errPassword;
+      input.errorPasswordOutput.innerHTML = '';
+      input.errorPasswordOutput.innerHTML = input.errPassword;
     } else if (input.password !== input.repeatPassword) {
       input.passwordInput.style.backgroundColor = color.error;
       input.passwordRepeatInput.style.backgroundColor = color.error;
-      input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = 'Пароли не совпадают';
+      input.errorRepeatPasswordOutput.innerHTML = '';
+      input.errorRepeatPasswordOutput.innerHTML = 'Пароли не совпадают';
     } else {
       const signUp = await request.post('/api/auth/signUp', {
         login: input.login,

@@ -79,7 +79,7 @@
     margin-left: 10%;
 }
 
-.under-input-error-post {
-    color: rgba(255, 36, 36, 0.63);
+.under-input-error-modal {
+    color: red;
     font-size: medium;
 }

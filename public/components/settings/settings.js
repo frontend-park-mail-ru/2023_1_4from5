@@ -75,16 +75,29 @@ class Settings {
   }
 
   invalidLogin(err) {
+    const successTitle = document.getElementById('change-success-login');
+    successTitle.textContent = '';
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = err;
   }
 
+  invalidUsername(err) {
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = '';
+    const errorDiv = document.getElementById('change-username-error');
+    errorDiv.textContent = err;
+  }
+
   successNameChanged() {
+    const errorDiv = document.getElementById('change-username-error');
+    errorDiv.textContent = '';
     const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = 'Имя успешно изменено';
   }
 
   successLoginChanged() {
+    const errorDiv = document.getElementById('change-login-error');
+    errorDiv.textContent = '';
     const successTitle = document.getElementById('change-success-login');
     successTitle.textContent = 'Логин успешно изменен';
   }

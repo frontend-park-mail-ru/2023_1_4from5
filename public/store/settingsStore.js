@@ -2,7 +2,7 @@ import { dispatcher } from '../dispatcher/dispatcher.js';
 import { ActionTypes } from '../actionTypes/actionTypes.js';
 import { settings } from '../components/settings/settings.js';
 import { userStore } from './userStore.js';
-import { isValidLogin, isValidPassword } from '../modules/isValid';
+import {isValidLogin, isValidPassword, isValidUsername} from '../modules/isValid';
 import { request } from '../modules/request';
 import { Actions } from '../actions/actions';
 import { router } from '../modules/Router';
@@ -80,24 +80,29 @@ class SettingsStore {
   async changeUsername(usernameInput) {
     const name = usernameInput.value;
     const login = userStore.getUserState().login;
-    const token = await request.getHeader('/api/user/updateData');
-    const response = await request.put('/api/user/updateData', {
-      login,
-      name,
-    }, token);
+    const errUsername = isValidUsername(name);
+    settings.invalidUsername(errUsername);
+    if (!errUsername) {
+      const token = await request.getHeader('/api/user/updateData');
+      const response = await request.put('/api/user/updateData', {
+        login,
+        name,
+      }, token);
 
-    if (response.ok) {
-      const user = userStore.getUserState();
-      user.usernameIn = name;
-      userStore.setUserState(user);
-      Actions.renderSideBar(sideBarElement, user);
-      settings.successNameChanged();
+      if (response.ok) {
+        const user = userStore.getUserState();
+        user.usernameIn = name;
+        userStore.setUserState(user);
+        Actions.renderSideBar(sideBarElement, user);
+        settings.successNameChanged();
+      }
     }
   }
 
   async changeLogin(loginInput) {
     const login = loginInput.value;
     const name = userStore.getUserState().usernameIn;
+
     const errLogin = isValidLogin(login);
     settings.invalidLogin(errLogin);
 

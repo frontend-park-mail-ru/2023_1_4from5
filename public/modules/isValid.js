@@ -15,22 +15,31 @@ const LENGTH = {
 };
 
 const ASCII = {
-  UPPER_A: 65,
-  UPPER_Z: 90,
-  LOWER_A: 97,
-  LOWER_Z: 122,
   SPACE: 32,
   EXCLAMATION: 33,
   DASH: 45,
   POINT: 46,
   SLASH: 47,
+  ZERO: 48,
+  NINE: 57,
   COLON: 58,
   AT: 64,
+  ENG_UPPER_A: 65,
+  ENG_UPPER_Z: 90,
   RECTANGLE_BRACKET: 91,
   UNDERLINING: 95,
   BACK_QUOTE: 96,
+  ENG_LOWER_A: 97,
+  ENG_LOWER_Z: 122,
   FIGURED_BRACKET: 123,
   TILDE: 126,
+};
+
+const UNICODE = {
+  RUS_UPPER_E: 1025,
+  RUS_UPPER_A: 1040,
+  RUS_LOWER_YA: 1103,
+  RUS_LOWER_E: 1105,
 };
 
 /**
@@ -40,8 +49,8 @@ const ASCII = {
  * @returns {boolean} - response is sign is letter
  */
 function isLetter(code) {
-  return ((code >= ASCII.LOWER_A && code <= ASCII.LOWER_Z)
-      || (code >= ASCII.UPPER_A && code <= ASCII.UPPER_Z));
+  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z));
 }
 
 /**
@@ -56,7 +65,26 @@ function isLetter(code) {
 //       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
 //       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
 // }
+function isWhiteSignWithRus(code) {
+  // space, dash, point, zero-nine, ENG_UPPER_A-ENG_UPPER_Z,
+  // underlining, ENG_LOWER_A - ENG_LOWER_Z,
+  // RUS_UPPER_A - RUS_LOWER_P, RUS_LOWER_R - RUS_LOWER_E
+  return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
+      || (code >= ASCII.ZERO && code <= ASCII.NINE)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
+      || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+      || code === ASCII.UNDERLINING || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
+}
 function isWhiteSign(code) {
+  return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
+      || (code >= ASCII.ZERO && code <= ASCII.NINE)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
+      || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+      || code === ASCII.UNDERLINING);
+}
+
+function isWhiteSignPassword(code) {
   return (code >= ASCII.SPACE && code <= ASCII.TILDE);
 }
 /**
@@ -69,7 +97,7 @@ export function isValidPassword(inputStr) {
   const flags = {
     hasBlackSign: {
       flag: true,
-      error: 'Пароль содержит некорректный символ',
+      error: 'Допустимы только латинские символы, цифры и символы-разделители',
     },
     hasMinLen: {
       flag: false,
@@ -77,7 +105,7 @@ export function isValidPassword(inputStr) {
     },
     hasMaxLen: {
       flag: false,
-      error: `Пароль должен содержать не более ${LENGTH.MAX_PASSWORD} символов`,
+      error: 'Превышена максимальная длина пароля',
     },
     // убрал, потому что кажется Саша так говорил и бэк его послушал
     // hasUpper: {
@@ -114,14 +142,14 @@ export function isValidPassword(inputStr) {
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
-    if (!isWhiteSign(code)) {
+    if (!isWhiteSignPassword(code)) {
       return flags.hasBlackSign.error;
     }
     if (!isNaN(char)) {
       flags.hasNumber.flag = true;
     } else if (isLetter(code)) {
       flags.hasLetter.flag = true;
-    } else if (!isWhiteSign(code)) {
+    } else if (!isWhiteSignPassword(code)) {
       flags.hasBlackSign = true;
     }
   }
@@ -143,7 +171,7 @@ export function isValidLogin(inputStr) {
   const flags = {
     hasBlackSign: {
       flag: false,
-      error: 'Логин может содержать только латинские символы, цифры, точку и подчеркивание',
+      error: 'Допустимы только латинские символы, цифры и символы-разделители',
     },
     hasMinLen: {
       flag: true,
@@ -151,7 +179,7 @@ export function isValidLogin(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: `Логин не может содержать более ${LENGTH.MAX_LOGIN} символов`,
+      error: 'Превышена максимальная длина логина',
     },
   };
   if (inputStr.length < LENGTH.MIN_LOGIN) {
@@ -162,8 +190,7 @@ export function isValidLogin(inputStr) {
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
-    if (!(isLetter(code) || code === ASCII.POINT || code === ASCII.DASH
-        || code === ASCII.UNDERLINING || !isNaN(char))) {
+    if (!(isWhiteSign(code))) {
       return flags.hasBlackSign.error;
     }
   }
@@ -174,7 +201,7 @@ export function isValidUsername(inputStr) {
   const flags = {
     hasBlackSign: {
       flag: false,
-      error: 'Имя содержит некорректные символы',
+      error: 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители',
     },
     hasMinLen: {
       flag: false,
@@ -182,7 +209,7 @@ export function isValidUsername(inputStr) {
     },
     hasMaxLen: {
       flag: false,
-      error: `Имя не может содержать более ${LENGTH.MAX_USERNAME} символов`,
+      error: 'Превышена максимальная длина имени',
     },
   };
   if (inputStr.length < LENGTH.MIN_USERNAME) {
@@ -193,7 +220,7 @@ export function isValidUsername(inputStr) {
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
-    if (!isWhiteSign(code)) {
+    if (!isWhiteSignWithRus(code)) {
       return flags.hasBlackSign.error;
     }
   }
@@ -208,7 +235,7 @@ export function isValidMoneyString(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: 'Слишком большая сумма',
+      error: 'Превышено максимальное значение цели',
     },
   };
   if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
@@ -230,7 +257,7 @@ export function isValidDonate(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: 'Слишком большая сумма доната',
+      error: 'Превышено максимальное значение суммы доната',
     },
     hasPositive: {
       flag: true,
@@ -255,7 +282,7 @@ export function isValidDescriptionAim(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: `В поле описание не должно содержаться более ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
+      error: 'Превышена максимальная длина описания',
     },
   };
   if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
@@ -268,7 +295,7 @@ export function isValidTitlePost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: `Название поста не может содержать более ${LENGTH.MAX_TITLE_POST} символов`,
+      error: 'Превышена максимальная длина названия поста',
     },
   };
   if (inputStr.length > LENGTH.MAX_TITLE_POST) {
@@ -281,7 +308,7 @@ export function isValidTextPost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Слишком длинный текст поста',
+      error: 'Превышена максимальная длина текста поста',
     },
   };
   if (inputStr.length > LENGTH.MAX_TEXT_POST) {

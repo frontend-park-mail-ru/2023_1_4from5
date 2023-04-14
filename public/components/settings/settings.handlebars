@@ -5,12 +5,12 @@
         <img id="user-photo" width="200" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
         <input type="file" class="upload" id="photo-upload"/>
         <hr>
-
         <div class="settings__nameLogin">
             <div class="settings__block">
                 <h3>Имя</h3>
                 <input class="change-name change__input" id="change-username-input" type="text" value="{{usernameIn}}">
                 <br>
+                <div id="change-username-error" class="under-input-error-modal"></div>
                 <div class="change-success" id="change-success-name"></div>
 
                 <div class="change-btn__container">
@@ -18,11 +18,12 @@
                 </div>
             </div>
 
+
             <div class="settings__block">
                 <h3>Логин</h3>
                 <input class="change-name change__input" id="change-login-input" type="text" value="{{login}}">
                 <br>
-                <div id="change-login-error"></div>
+                <div id="change-login-error" class="under-input-error-modal"></div>
                 <br>
                 <div class="change-success" id="change-success-login"></div>
 
