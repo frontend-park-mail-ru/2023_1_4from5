@@ -7,10 +7,8 @@ import { router } from '../modules/Router';
 import { URLS } from '../modules/Notifier';
 import {isValidTextPost, isValidTitlePost} from "../modules/isValid";
 import {color} from "../consts/styles";
-import {myPage} from "../components/myPage/myPage";
 
-const contentElement = document.querySelector('main');
-
+document.querySelector('main');
 class NewPostStore {
   constructor() {
     dispatcher.register(this.reduce.bind(this));
@@ -32,7 +30,7 @@ class NewPostStore {
           title: editTitle,
           text: editText,
         }, tokenEdit);
-        router.go(URLS.myPage, {}, contentElement);
+        router.popstate();
         break;
 
       default:
@@ -81,7 +79,7 @@ class NewPostStore {
       const tokenCreate = await request.getHeader('/api/post/create');
       await request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
       if (createPost.ok) {
-        router.go(URLS.myPage, {}, contentElement);
+        router.go(URLS.myPage);
       } else {
         errorTextOutput.innerHTML = '';
         errorTextOutput.innerHTML = 'Введённые данные некорректны';

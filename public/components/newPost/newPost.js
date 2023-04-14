@@ -37,7 +37,7 @@ class NewPost {
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      router.go(URLS.myPage, {}, contentElement);
+      router.popstate();
     });
   }
 

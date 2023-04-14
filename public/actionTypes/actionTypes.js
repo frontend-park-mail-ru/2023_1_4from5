@@ -51,4 +51,7 @@ export const ActionTypes = {
   CREATE_POST: 'CREATE_POST',
   DELETE_POST: 'DELETE_POST',
   UPDATE_POST: 'UPDATE_POST',
+
+  // become author
+  BECOME_AUTHOR: 'BECOME_AUTHOR',
 };

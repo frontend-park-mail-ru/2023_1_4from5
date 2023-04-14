@@ -41,7 +41,7 @@ class Search {
 
   selectAuthor(e) {
     e.preventDefault();
-    router.go(URLS.myPage, {}, this.getParent(), e.currentTarget.id);
+    router.go(URLS.myPage, {}, e.currentTarget.id);
   }
 }
 

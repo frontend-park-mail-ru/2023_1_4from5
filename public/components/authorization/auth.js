@@ -2,6 +2,8 @@ import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/actions.js';
 import { request } from '../../modules/request.js';
 import template from './auth.handlebars';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const rootElement = document.getElementById('root');
 
@@ -76,7 +78,7 @@ export class Auth {
       if (signIn.ok) {
         Actions.getUser();
         Actions.removeAuth();
-        Actions.renderStartPage();
+        router.go(URLS.root);
       } else {
         input.loginInput.style.backgroundColor = color.error;
         input.passwordInput.style.backgroundColor = color.error;

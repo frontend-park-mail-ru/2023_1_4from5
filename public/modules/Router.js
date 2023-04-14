@@ -1,20 +1,22 @@
 import { notifier } from './Notifier.js';
 
+const contentElement = document.querySelector('main');
+
 class Router {
   start() {
     const url = new URL(window.location.href);
-    notifier(url, {}, {}, this.parseUrl(url.pathname).additionalUrl);
+    notifier(url, {}, this.parseUrl(url.pathname).additionalUrl);
 
     window.onpopstate = (e) => {
       if (e.state) {
-        notifier(new URL(window.location.href), e.state.data, {}, e.state.additionalUrl);
+        notifier(new URL(window.location.href), e.state.data, e.state.additionalUrl);
       } else {
         notifier(new URL(window.location.href));
       }
     };
   }
 
-  go(path, data, parent, additionalUrl) {
+  go(path, data, additionalUrl) {
     let url;
     if (additionalUrl) {
       url = new URL(`${path}/${additionalUrl}`, window.location.href);
@@ -24,21 +26,20 @@ class Router {
 
     // TODO разобраться, что такое url.searchParams.toString() === ''
     if (window.location.pathname === path && data !== 'logout' && url.searchParams.toString() === '') return;
-    if (parent) {
-      parent.innerHTML = '';
-    }
+    contentElement.innerHTML = '';
+
     if (data) {
       url.searchParams.append('id', data);
     }
 
     if (additionalUrl) {
-      notifier(url, data, parent, additionalUrl);
+      notifier(url, data, additionalUrl);
       window.history.pushState({
         data,
         additionalUrl,
       }, path, `${path}/${additionalUrl}`);
     } else {
-      notifier(url, data, parent);
+      notifier(url, data);
       window.history.pushState(data, path, path);
     }
   }
@@ -46,7 +47,7 @@ class Router {
   popstate() {
     window.history.back();
     const url = new URL(window.location.href);
-    notifier(url);
+    notifier(url, {}, this.parseUrl(url.pathname).additionalUrl);
   }
 
   pushHistoryState(_path, _data) {
