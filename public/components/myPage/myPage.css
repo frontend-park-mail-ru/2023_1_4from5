@@ -1,8 +1,9 @@
 #myPage {
-    margin-left: 7em;
-    margin-right: 10em;
+
 }
 .myPage-container {
+    margin-left: 7em;
+    margin-right: 10em;
     margin-top: 1em;
     display: grid;
     gap: 20px;
@@ -21,7 +22,7 @@
 
 .post-container {
     border: 1px solid #7f7e7e;
-    border-radius: 1em;
+    border-radius: 0.5em;
     padding-right: 1em;
     padding-left: 1em;
     padding-bottom: 0.2em;
@@ -69,7 +70,6 @@
 .box1-info {
     border: 1px solid #7f7e7e;
     margin-bottom: 2em;
-    border-radius: 1em;
     padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
@@ -80,7 +80,6 @@
 .box-3__container {
     border: 1px solid #7f7e7e;
     margin-bottom: 2em;
-    border-radius: 1em;
     padding: 0.5em 0.5em 0.5em 0.5em;
 }
 

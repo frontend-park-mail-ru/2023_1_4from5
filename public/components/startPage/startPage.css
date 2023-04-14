@@ -22,9 +22,9 @@
 }
 
 #footer {
+    margin-left: 7em;
+    margin-right: 10em;
     font-size: 0.7em;
-    margin-left: 0;
-    margin-right: 0;
 }
 
 .startPage__text--header {
