@@ -4,11 +4,8 @@ import { ActionTypes } from '../actionTypes/actionTypes';
 import { userStore } from './userStore';
 import { request } from '../modules/request';
 import { router } from '../modules/Router';
-import { URLS } from '../modules/Notifier';
-import { myPageStore } from './myPageStore';
 
-const contentElement = document.querySelector('main');
-
+document.querySelector('main');
 class NewPostStore {
   constructor() {
     dispatcher.register(this.reduce.bind(this));
@@ -28,7 +25,7 @@ class NewPostStore {
 
         const tokenCreate = await request.getHeader('/api/post/create');
         await request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
-        router.go(URLS.myPage, {}, contentElement);
+        router.popstate();
         break;
 
       case ActionTypes.UPDATE_POST:
@@ -41,7 +38,7 @@ class NewPostStore {
           title: editTitle,
           text: editText,
         }, tokenEdit);
-        router.go(URLS.myPage, {}, contentElement);
+        router.popstate();
         break;
 
       default:
