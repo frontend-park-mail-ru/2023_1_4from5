@@ -102,6 +102,7 @@ class SettingsStore {
   async changeLogin(loginInput) {
     const login = loginInput.value;
     const name = userStore.getUserState().usernameIn;
+
     const errLogin = isValidLogin(login);
     settings.invalidLogin(errLogin);
 
