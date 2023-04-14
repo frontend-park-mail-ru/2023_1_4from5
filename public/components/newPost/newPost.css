@@ -1,9 +1,8 @@
 .newpost-form-container {
-    margin: auto;
-    margin-top: 2em;
+    margin: 6em auto auto;
     width: 50em;
-    border: 2px solid gray;
-    border-radius: 2em;
+    border: black solid 2px;
+    background-color: #f8f8f8;
 }
 
 .newpost-header-container {
@@ -38,7 +37,6 @@
 .newpost-title-input {
     width: 95%;
     height: 1.7em;
-    border-radius: 1.5em;
     padding-top: 0.5em;
     padding-left: 1em;
     padding-right: 1em;
@@ -50,7 +48,6 @@
 .newpost-text-input {
     width: 95%;
     height: 20em;
-    border-radius: 1.5em;
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
@@ -69,7 +66,6 @@
 .newpost-btn {
     width: 10em;
     height: 2em;
-    border-radius: 1.5em;
     font-size: 1.3em;
 }
 
