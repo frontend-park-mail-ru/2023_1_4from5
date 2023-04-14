@@ -1,10 +1,14 @@
 .author-card {
     border: solid black 2px;
-    border-radius: 2em;
+    background-color: #f8f8f8;
     width: 80%;
     margin: auto auto 2em;
     padding: 1em;
     cursor: pointer;
+}
+
+.author-card:hover {
+    background-color: #ccc;
 }
 
 .author-card-info {
@@ -12,5 +16,5 @@
 }
 
 .search-container {
-    margin-top: 2em;
+    margin-top: 6em;
 }

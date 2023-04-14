@@ -1,44 +1,46 @@
 <div class="settings">
-    <h1>Настройки</h1>
+    <div class="settings__container">
+        <h1>Настройки</h1>
 
-    <img id="user-photo" width="200" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
-    <input type="file" class="upload" id="photo-upload"/>
+        <img id="user-photo" width="200" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
+        <input type="file" class="upload" id="photo-upload"/>
 
-    <hr>
-    <div>
-        <h3>Имя</h3>
-        <input class="change-name" id="change-username-input" type="text" value="{{usernameIn}}">
-        <br>
-        <div class="change-success" id="change-success-name"></div>
-        <button class="change-btn" id="change-username-btn">Сменить имя</button>
-    </div>
-
-    <div>
-        <h3>Логин</h3>
-        <input class="change-name" id="change-login-input" type="text" value="{{login}}">
-        <br>
-        <div id="change-login-error"></div>
-        <br>
-        <div class="change-success" id="change-success-login"></div>
-        <button class="change-btn" id="change-login-btn">Сменть логин</button>
-    </div>
-
-    <hr>
-    <div class="change-password">
-        <h4>Изменить пароль</h4>
+        <hr>
         <div>
-            <label class="change-password-label" for="password">Старый пароль</label>
-            <input class="change-password-input" id="old-password-input" type="password">
+            <h3>Имя</h3>
+            <input class="change-name" id="change-username-input" type="text" value="{{usernameIn}}">
+            <br>
+            <div class="change-success" id="change-success-name"></div>
+            <button class="change-btn" id="change-username-btn">Сменить имя</button>
         </div>
 
         <div>
-            <label class="change-password-label" for="password">Новый пароль</label>
-            <input class="change-password-input" id="new-password-input" type="password">
+            <h3>Логин</h3>
+            <input class="change-name" id="change-login-input" type="text" value="{{login}}">
+            <br>
+            <div id="change-login-error"></div>
+            <br>
+            <div class="change-success" id="change-success-login"></div>
+            <button class="change-btn" id="change-login-btn">Сменть логин</button>
         </div>
 
-        <div class="change-success" id="change-success-password"></div>
-        <div id="change-password-error"></div>
+        <hr>
+        <div class="change-password">
+            <h4>Изменить пароль</h4>
+            <div>
+                <label class="change-password-label" for="password">Старый пароль</label>
+                <input class="change-password-input" id="old-password-input" type="password">
+            </div>
 
-        <button class="change-btn" id="change-password-btn">Сменить пароль</button>
+            <div>
+                <label class="change-password-label" for="password">Новый пароль</label>
+                <input class="change-password-input" id="new-password-input" type="password">
+            </div>
+
+            <div class="change-success" id="change-success-password"></div>
+            <div id="change-password-error"></div>
+
+            <button class="change-btn" id="change-password-btn">Сменить пароль</button>
+        </div>
     </div>
 </div>

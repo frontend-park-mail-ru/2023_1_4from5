@@ -82,19 +82,17 @@ body {
 .auth-input {
     font-size: 1.3em;
     height: 2em;
-    width: 14em;
+    width: 18em;
     margin-right: 1em;
     margin-bottom: 0.5em;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    border-radius: 0.8em;
 }
 
 .auth-btn {
-    margin: auto;
+    margin: 2em auto auto;
     height: 2em;
     width: 8em;
-    border-radius: 0.7em;
     font-size: 1.3em;
 }
 
@@ -102,7 +100,6 @@ body {
     margin: auto;
     height: 2em;
     width: 12em;
-    border-radius: 0.7em;
     font-size: 1.3em;
 }
 
@@ -120,7 +117,13 @@ body {
 }
 
 button {
+    background-color: #333;
+    color: white;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #000;
 }
 
 .inactive {
@@ -130,4 +133,12 @@ button {
 
 .hover--underline:hover {
     border-bottom: green solid 2px;
+}
+
+.input__container {
+    text-align: start;
+}
+
+.input-auth-container {
+    padding-left: 10%;
 }

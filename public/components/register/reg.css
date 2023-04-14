@@ -1,23 +1,26 @@
 #register {
-    top: 15em;
-    margin-left: 30%;
-    background-color: #94b989;
+    top: 7em;
+    margin-left: 27%;
+    background-color: #eee;
     position: fixed;
     width: 45em;
-    height: 30em;
-    border-radius: 3em;
+    height: 45em;
     opacity: 1;
     z-index: 20;
 }
 
 .reg-container {
-    text-align: end;
     margin: auto;
-    width: 44em;
+    width: 40em;
+}
+
+.reg__input {
+    margin-left: 20%;
 }
 
 #reg-error {
-    text-align: center;
+    margin-left: 7em;
+    height: 1em;
 }
 
 #closeReg {
