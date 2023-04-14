@@ -43,6 +43,7 @@ export class Request {
    * post request
    * @param {string} path - end-point
    * @param content
+   * @param token
    * @param contentType
    *
    * @returns {Promise} - response
