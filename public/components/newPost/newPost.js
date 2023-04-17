@@ -1,6 +1,5 @@
-import { Actions } from '../../actions/actions.js';
+import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
-import { URLS } from '../../modules/Notifier';
 
 const template = require('./newPost.handlebars');
 

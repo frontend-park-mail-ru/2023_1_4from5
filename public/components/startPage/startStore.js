@@ -1,9 +1,9 @@
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { request } from '../modules/request.js';
-import { userStore } from './userStore.js';
-import { Actions } from '../actions/actions.js';
-import { startPage } from '../components/startPage/startPage.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { request } from '../../modules/request.js';
+import { userStore } from '../user/userStore.js';
+import { Actions } from '../../actions/actions.js';
+import { startPage } from './startPage.js';
 
 const sideBarElement = document.querySelector('sideBar');
 

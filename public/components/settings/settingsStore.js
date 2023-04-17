@@ -1,12 +1,12 @@
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { settings } from '../components/settings/settings.js';
-import { userStore } from './userStore.js';
-import {isValidLogin, isValidPassword, isValidUsername} from '../modules/isValid';
-import { request } from '../modules/request';
-import { Actions } from '../actions/actions';
-import { router } from '../modules/Router';
-import { URLS } from '../modules/Notifier';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { settings } from './settings.js';
+import { userStore } from '../user/userStore.js';
+import {isValidLogin, isValidPassword, isValidUsername} from '../../modules/isValid';
+import { request } from '../../modules/request';
+import { Actions } from '../../actions/actions';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const sideBarElement = document.querySelector('sideBar');
 

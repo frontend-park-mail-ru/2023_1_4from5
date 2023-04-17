@@ -15,9 +15,6 @@ class Page404 {
     newDiv.id = 'page404Div';
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
-
-    // const page404 = document.getElementById('page404');
-    // page404.style.backgroundImage = 'url(../../images/page404.jpeg)';
   }
 }
 

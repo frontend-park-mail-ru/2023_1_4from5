@@ -1,10 +1,10 @@
-import { Actions } from '../actions/actions.js';
-import { userStore } from './userStore.js';
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { winSettings } from '../components/winSettings/winSettings.js';
-import { router } from '../modules/Router.js';
-import { URLS } from '../modules/Notifier.js';
+import { Actions } from '../../actions/actions.js';
+import { userStore } from '../user/userStore.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { winSettings } from './winSettings.js';
+import { router } from '../../modules/Router.js';
+import { URLS } from '../../modules/Notifier.js';
 
 const contentElement = document.querySelector('main');
 

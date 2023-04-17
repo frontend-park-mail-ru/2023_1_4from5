@@ -282,7 +282,7 @@ export function isValidDescriptionAim(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина описания',
+      error: `Описание не должно превышать ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
@@ -295,7 +295,7 @@ export function isValidTitlePost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина названия поста',
+      error: `Название поста не должно превышать ${LENGTH.MAX_TITLE_POST} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_TITLE_POST) {
@@ -308,7 +308,7 @@ export function isValidTextPost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина текста поста',
+      error: `Длина текста поста не должна превашать ${LENGTH.MAX_TEXT_POST} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_TEXT_POST) {

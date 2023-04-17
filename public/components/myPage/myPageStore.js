@@ -1,10 +1,10 @@
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { myPage } from '../components/myPage/myPage.js';
-import { request } from '../modules/request.js';
-import { userStore } from './userStore.js';
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { isValidDescriptionAim, isValidMoneyString } from '../modules/isValid.js';
-import { color } from '../consts/styles.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { myPage } from './myPage.js';
+import { request } from '../../modules/request.js';
+import { userStore } from '../user/userStore.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
+import { color } from '../../consts/styles.js';
 
 class MyPageStore {
   #config;

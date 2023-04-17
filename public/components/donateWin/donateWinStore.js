@@ -1,11 +1,11 @@
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { donateWin } from '../components/donateWin/donateWin.js';
-import { isValidDonate } from '../modules/isValid.js';
-import { color } from '../consts/styles.js';
-import { request } from '../modules/request.js';
-import { myPage } from '../components/myPage/myPage.js';
-import { myPageStore } from './myPageStore.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { donateWin } from './donateWin.js';
+import { isValidDonate } from '../../modules/isValid.js';
+import { color } from '../../consts/styles.js';
+import { request } from '../../modules/request.js';
+import { myPage } from '../myPage/myPage.js';
+import { myPageStore } from '../myPage/myPageStore.js';
 
 class DonateWinStore {
   constructor() {
