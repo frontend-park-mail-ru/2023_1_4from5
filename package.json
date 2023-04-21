@@ -3,7 +3,8 @@
     "ajv": "^8.12.0",
     "eslint-config-airbnb": "^19.0.4",
     "handlebars": "^4.7.7",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "workbox-precaching": "^6.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
@@ -29,7 +30,7 @@
     "lint": "eslint public",
     "webpack": "webpack --mode development",
     "webpackProd": "webpack --mode production",
-    "serve": "webpack serve --mode development",
+    "serve": "sh getCache.sh | webpack serve --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

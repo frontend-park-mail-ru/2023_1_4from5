@@ -1,25 +1,96 @@
-import { precacheAndRoute } from 'workbox-precaching';
+const CACHE_NAME = 'subme_cache';
+const CACHE_URLS = [
+  '/dist/',
+];
 
-// Этот массив содержит все файлы, которые вы хотите кэшировать с помощью Workbox
-// Вам нужно добавить все необходимые файлы, включая HTML, CSS, JS и т.д.
-precacheAndRoute(self.__WB_MANIFEST);
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open(CACHE_NAME);
+  await cache.addAll(resources);
+};
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+const putInCache = async (request, response) => {
+  const cache = await caches.open(CACHE_NAME);
+  await cache.put(request, response);
+};
 
-const urlsToCache = workbox.core.__precacheManifest.map(({ url }) => url);
+const cacheFirst = async ({ request, preloadResponsePromise, /* fallbackUrl */ }) => {
+  // First try to get the resource from the cache
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
 
-workbox.precaching.precacheAndRoute(urlsToCache);
+  // Next try to use the preloaded response, if it's there
+  const preloadResponse = await preloadResponsePromise;
+  if (preloadResponse) {
+    console.info('using preload response', preloadResponse);
+    await putInCache(request, preloadResponse.clone());
+    return preloadResponse;
+  }
+
+  // Next try to get the resource from the network
+  try {
+    const responseFromNetwork = await fetch(request);
+    // response may be used only once
+    // we need to save clone to put one copy in cache
+    // and serve second one
+    await putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
+  } catch (error) {
+    return new Response('Network error happened', {
+      status: 408,
+      headers: { 'Content-Type': 'text/plain' },
+    });
+  }
+};
+
+const enableNavigationPreload = async () => {
+  if (self.registration.navigationPreload) {
+    // Enable navigation preloads!
+    await self.registration.navigationPreload.enable();
+  }
+};
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(enableNavigationPreload());
+});
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    addResourcesToCache(CACHE_URLS)
+  );
+});
 
 self.addEventListener('fetch', (event) => {
-  console.log('Происходит запрос на сервер');
   event.respondWith(
-    caches.match(event.request)
-      .then((cachedResponse) => {
-        console.log(cachedResponse);
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        return fetch(event.request);
-      })
+    cacheFirst({
+      request: event.request,
+      preloadResponsePromise: event.preloadResponse,
+    })
+    // caches.match(event.request)
+    //   .then((cachedResponse) => {
+    //     if (navigator.onLine) {
+    //       return fetch(event.request).then((response) => {
+    //         if (!response || !response.ok || response.type !== 'basic') {
+    //           return response;
+    //         }
+    //
+    //         const responseToCache = response.clone();
+    //
+    //         caches.open(CACHE_NAME)
+    //           .then((cache) => {
+    //             cache.put(event.request, responseToCache);
+    //           });
+    //
+    //         return response;
+    //       });
+    //     }
+    //     if (cachedResponse) {
+    //       return cachedResponse;
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.stack || err);
+    //   }),
   );
 });

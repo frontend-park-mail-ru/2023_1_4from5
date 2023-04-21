@@ -17,8 +17,19 @@ import { myPageStore } from './components/myPage/myPageStore.js';
 import { donateWinStore } from './components/donateWin/donateWinStore.js';
 import { router } from './modules/Router.js';
 
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('./sw.js')
+//       .then((registration) => {
+//         console.log('SW registration successful');
+//       }, (err) => {
+//         console.log('SW registration failed');
+//       });
+//   });
+// }
+
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js', { scope: '/' })
+  navigator.serviceWorker.register('./sw.js', { scope: '/' })
     .then(() => {
       console.log('SW registered');
     })
