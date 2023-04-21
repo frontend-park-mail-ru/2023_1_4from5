@@ -15,9 +15,11 @@ const putInCache = async (request, response) => {
 
 const cacheFirst = async ({ request, preloadResponsePromise, /* fallbackUrl */ }) => {
   // First try to get the resource from the cache
-  const responseFromCache = await caches.match(request);
-  if (responseFromCache) {
-    return responseFromCache;
+  if (!navigator.onLine) {
+    const responseFromCache = await caches.match(request);
+    if (responseFromCache) {
+      return responseFromCache;
+    }
   }
 
   // Next try to use the preloaded response, if it's there
@@ -34,6 +36,7 @@ const cacheFirst = async ({ request, preloadResponsePromise, /* fallbackUrl */ }
     // response may be used only once
     // we need to save clone to put one copy in cache
     // and serve second one
+
     await putInCache(request, responseFromNetwork.clone());
     return responseFromNetwork;
   } catch (error) {
@@ -67,30 +70,5 @@ self.addEventListener('fetch', (event) => {
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
     })
-    // caches.match(event.request)
-    //   .then((cachedResponse) => {
-    //     if (navigator.onLine) {
-    //       return fetch(event.request).then((response) => {
-    //         if (!response || !response.ok || response.type !== 'basic') {
-    //           return response;
-    //         }
-    //
-    //         const responseToCache = response.clone();
-    //
-    //         caches.open(CACHE_NAME)
-    //           .then((cache) => {
-    //             cache.put(event.request, responseToCache);
-    //           });
-    //
-    //         return response;
-    //       });
-    //     }
-    //     if (cachedResponse) {
-    //       return cachedResponse;
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.stack || err);
-    //   }),
   );
 });
