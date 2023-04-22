@@ -18,12 +18,12 @@ import { donateWinStore } from './components/donateWin/donateWinStore.js';
 import { router } from './modules/Router.js';
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js', { scope: '/' })
+  navigator.serviceWorker.register('../sw.js', { scope: '/' })
     .then(() => {
       console.log('SW registered');
     })
-    .catch(() => {
-      console.log('SW ERR');
+    .catch((err) => {
+      console.log('SW ERR: ', err);
     });
 }
 
