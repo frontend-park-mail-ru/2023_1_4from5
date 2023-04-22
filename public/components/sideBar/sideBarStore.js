@@ -1,10 +1,10 @@
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { userStore } from './userStore.js';
-import { Actions } from '../actions/actions.js';
-import { sideBar } from '../components/sideBar/sideBar.js';
-import { URLS } from '../modules/Notifier.js';
-import { router } from '../modules/Router.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { userStore } from '../user/userStore.js';
+import { Actions } from '../../actions/actions.js';
+import { sideBar } from './sideBar.js';
+import { URLS } from '../../modules/Notifier.js';
+import { router } from '../../modules/Router.js';
 
 const rootElement = document.getElementById('root');
 const contentElement = document.querySelector('main');

@@ -1,9 +1,9 @@
 import { color } from '../../consts/styles.js';
-import { Actions } from '../../actions/actions.js';
+import { Actions } from '../../actions/actions';
 import { request } from '../../modules/request.js';
-import template from './auth.handlebars';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+import template from './auth.handlebars';
 
 const rootElement = document.getElementById('root');
 
@@ -17,10 +17,9 @@ export class Auth {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'authDiv';
-
     newDiv.innerHTML = template();
-
     this.#parent.appendChild(newDiv);
+
     const background = document.getElementById('backAuth');
     background.addEventListener('click', (e) => {
       e.preventDefault();
