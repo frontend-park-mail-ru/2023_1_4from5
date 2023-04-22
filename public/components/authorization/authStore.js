@@ -1,7 +1,7 @@
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { auth } from '../components/authorization/auth.js';
-import { isValidLogin, isValidPassword } from '../modules/isValid.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { auth } from './auth.js';
+import { isValidLogin, isValidPassword } from '../../modules/isValid.js';
 
 class AuthStore {
   #config;

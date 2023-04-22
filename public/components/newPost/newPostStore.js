@@ -1,12 +1,11 @@
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import { newPost } from '../components/newPost/newPost';
-import { ActionTypes } from '../actionTypes/actionTypes';
-import { userStore } from './userStore';
-import { request } from '../modules/request';
-import { router } from '../modules/Router';
-import { URLS } from '../modules/Notifier';
-import { isValidTextPost, isValidTitlePost } from '../modules/isValid';
-import { color } from '../consts/styles';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { newPost } from './newPost';
+import { ActionTypes } from '../../actionTypes/actionTypes';
+import { userStore } from '../user/userStore';
+import { request } from '../../modules/request';
+import { router } from '../../modules/Router';
+import { isValidTextPost, isValidTitlePost } from '../../modules/isValid';
+import { color } from '../../consts/styles';
 
 document.querySelector('main');
 class NewPostStore {

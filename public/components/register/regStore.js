@@ -1,7 +1,7 @@
-import { ActionTypes } from '../actionTypes/actionTypes.js';
-import { dispatcher } from '../dispatcher/dispatcher.js';
-import {isValidLogin, isValidPassword, isValidUsername} from '../modules/isValid.js';
-import { register } from '../components/register/reg.js';
+import { ActionTypes } from '../../actionTypes/actionTypes.js';
+import { dispatcher } from '../../dispatcher/dispatcher.js';
+import { isValidLogin, isValidPassword, isValidUsername } from '../../modules/isValid.js';
+import { register } from './reg.js';
 
 class RegStore {
   #config;

@@ -1,12 +1,9 @@
-import { dispatcher } from '../dispatcher/dispatcher';
-import { becameAuthor } from '../components/becomeAuthor/becomeAuthor';
-import { ActionTypes } from '../actionTypes/actionTypes';
-import { request } from '../modules/request';
-import { router } from '../modules/Router';
-import { URLS } from '../modules/Notifier';
-import { Actions } from '../actions/actions';
-
-const contentElement = document.querySelector('main');
+import { dispatcher } from '../../dispatcher/dispatcher';
+import { becameAuthor } from './becomeAuthor';
+import { ActionTypes } from '../../actionTypes/actionTypes';
+import { request } from '../../modules/request';
+import { router } from '../../modules/Router';
+import { Actions } from '../../actions/actions';
 
 class BecomeAuthorStore {
   constructor() {

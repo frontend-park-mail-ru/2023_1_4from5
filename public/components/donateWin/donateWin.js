@@ -1,5 +1,5 @@
 import { color } from '../../consts/styles.js';
-import { Actions } from '../../actions/actions.js';
+import { Actions } from '../../actions/actions';
 import template from './donateWin.handlebars';
 
 const rootElement = document.getElementById('root');
