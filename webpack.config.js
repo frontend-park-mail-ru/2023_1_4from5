@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'public'),
@@ -46,11 +45,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // new WorkboxWebpackPlugin.InjectManifest({
-    //   swSrc: './public/sw.js', // Путь к вашему сервис-воркеру
-    //   swDest: 'sw.js', // Имя файла, который будет создан
-    //   include: [/.html$/, /.js$/, /.css$/, /.handlebars$/, /.png$/, /.jpg$/, /.jpeg$/, /.gif$/], // Определяем, какие файлы нужно кэшировать
-    // }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
       filename: 'index.html',
