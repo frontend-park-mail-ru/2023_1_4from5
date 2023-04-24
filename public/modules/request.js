@@ -1,4 +1,4 @@
-const WEB_URL = 'http://sub-me.ru';
+const WEB_URL = 'https://sub-me.ru';
 
 export class Request {
   #REQUEST_METHODS = {
@@ -43,6 +43,7 @@ export class Request {
    * post request
    * @param {string} path - end-point
    * @param content
+   * @param token
    * @param contentType
    *
    * @returns {Promise} - response

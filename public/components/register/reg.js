@@ -1,6 +1,6 @@
 import { request } from '../../modules/request.js';
 import { color } from '../../consts/styles.js';
-import { Actions } from '../../actions/actions.js';
+import { Actions } from '../../actions/actions';
 import template from './reg.handlebars';
 
 const rootElement = document.getElementById('root');

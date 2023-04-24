@@ -1,6 +1,6 @@
-import { dispatcher } from '../dispatcher/dispatcher';
-import { request } from '../modules/request';
-import { search } from '../components/search/search';
+import { dispatcher } from '../../dispatcher/dispatcher';
+import { request } from '../../modules/request';
+import { search } from './search';
 
 class SearchStore {
   constructor() {

@@ -1,11 +1,11 @@
 import { Actions } from '../actions/actions.js';
-import { settingsStore } from '../store/settingsStore.js';
-import { myPageStore } from '../store/myPageStore.js';
-import { userStore } from '../store/userStore';
+import { settingsStore } from '../components/settings/settingsStore.js';
+import { myPageStore } from '../components/myPage/myPageStore.js';
+import { userStore } from '../components/user/userStore';
 import { router } from './Router';
-import { newPostStore } from '../store/newPostStore';
-import { searchStore } from '../store/searchStore';
-import { becameAuthorStore } from '../store/becomeAuthorStore';
+import { newPostStore } from '../components/newPost/newPostStore';
+import { searchStore } from '../components/search/searchStore';
+import { becameAuthorStore } from '../components/becomeAuthor/becomeAuthorStore';
 import { page404 } from '../components/page404/page404';
 
 export const URLS = {

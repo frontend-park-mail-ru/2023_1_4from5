@@ -1,17 +1,17 @@
 const LENGTH = {
   MIN_LOGIN: 7,
-  MAX_LOGIN: 40,
+  MAX_LOGIN: 20,
 
   MIN_PASSWORD: 7,
-  MAX_PASSWORD: 40,
+  MAX_PASSWORD: 20,
 
   MIN_USERNAME: 1,
-  MAX_USERNAME: 40,
+  MAX_USERNAME: 20,
 
   MAX_MONEY: 9,
-  MAX_DESCRIPTION_AIM: 100,
-  MAX_TITLE_POST: 40,
-  MAX_TEXT_POST: 4000,
+  MAX_DESCRIPTION_AIM: 50,
+  MAX_TITLE_POST: 20,
+  MAX_TEXT_POST: 2000,
 };
 
 const ASCII = {
@@ -282,7 +282,7 @@ export function isValidDescriptionAim(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина описания',
+      error: `Описание не должно превышать ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
@@ -295,7 +295,7 @@ export function isValidTitlePost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина названия поста',
+      error: `Название поста не должно превышать ${LENGTH.MAX_TITLE_POST} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_TITLE_POST) {
@@ -308,7 +308,7 @@ export function isValidTextPost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина текста поста',
+      error: `Длина текста поста не должна превашать ${LENGTH.MAX_TEXT_POST} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_TEXT_POST) {
