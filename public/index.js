@@ -22,8 +22,8 @@ if ('serviceWorker' in navigator) {
     .then(() => {
       console.log('SW registered');
     })
-    .catch(() => {
-      console.log('SW ERR');
+    .catch((err) => {
+      console.log('SW ERR: ', err);
     });
 }
 
