@@ -6,3 +6,4 @@ public/build
 service.txt
 dist/
 .vscode
+public/images/user/*
