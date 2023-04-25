@@ -2,6 +2,7 @@ import { clickHandler } from '../../modules/handler.js';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import template from './sideBar.handlebars';
+import { Actions } from '../../actions/actions';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -41,6 +42,15 @@ export class SideBar {
     logoBtn.addEventListener('click', (e) => {
       e.preventDefault();
       router.go(URLS.root);
+    });
+
+    const findBtn = document.getElementById('findBtn');
+    findBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const findInput = document.getElementById('find__input');
+      const findContent = findInput.value;
+      router.go(URLS.search, findContent);
+      Actions.searchAuthors(findContent);
     });
   }
 }

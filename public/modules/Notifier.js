@@ -54,7 +54,9 @@ export function notifier(path, data, additionalUrl) {
       break;
 
     case URLS.search:
-      searchStore.renderSearch();
+      if (!data) {
+        searchStore.renderSearch();
+      }
       break;
 
     case URLS.becomeAuthor:
