@@ -54,4 +54,7 @@ export const ActionTypes = {
 
   // become author
   BECOME_AUTHOR: 'BECOME_AUTHOR',
+
+  // search
+  SEARCH_AUTHORS: 'SEARCH_AUTHORS',
 };
