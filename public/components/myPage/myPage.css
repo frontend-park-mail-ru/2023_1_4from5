@@ -153,6 +153,9 @@
 
 #delete-icon {
     margin-top: 0.85em;
+}
+
+.delete-icon {
     cursor: pointer;
 }
 
@@ -195,4 +198,8 @@
 
 .box {
     background-color: #f8f8f8;
+}
+
+#edit-btn-space {
+    text-align: center;
 }
