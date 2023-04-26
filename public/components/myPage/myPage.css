@@ -192,7 +192,7 @@
     font-size: smaller;
 }
 
-.cretor__description {
+.creator__description {
     font-size: 1.2em;
 }
 
@@ -202,4 +202,11 @@
 
 #edit-btn-space {
     text-align: center;
+}
+
+#create-sub-btn {
+    width: 100%;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    font-size: 1em;
 }
