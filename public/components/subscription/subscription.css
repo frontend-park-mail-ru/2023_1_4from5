@@ -18,3 +18,38 @@
 .subscription__body {
     text-align: start;
 }
+
+#sub-title-input {
+    width: 90%;
+    border-radius: 0.5em;
+    padding: 0.5em 1em 0.5em 1em;
+    font-size: 1em;
+}
+
+#sub-description-input {
+    width: 90%;
+    height: 5em;
+    border-radius: 0.5em;
+    padding: 0.5em 1em 0.5em 1em;
+    font-size: 1.3em;
+    resize: none;
+}
+
+#sub-cost-input {
+    width: 90%;
+    border-radius: 0.5em;
+    padding: 0.5em 1em 0.5em 1em;
+    font-size: 1em;
+}
+
+.subscription__btn__container {
+    margin-top: 2em;
+}
+
+#subscription__btn {
+    width: 100%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1em;
+    border-radius: 0.5em;
+}
