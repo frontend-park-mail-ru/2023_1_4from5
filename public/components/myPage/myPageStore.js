@@ -32,22 +32,27 @@ class MyPageStore {
         await request.delete(`/api/post/delete/${action.postId}`, token);
         await this.renderMyPage();
         break;
+
       case ActionTypes.CLICK_LIKE:
         this.changeLikeState(action);
         break;
+
       case ActionTypes.OPEN_EDIT_AIM:
         this.#config.edit_aim = false;
         myPage.config = this.#config;
         myPage.render();
         break;
+
       case ActionTypes.CLOSE_EDIT_AIM:
         this.#config.edit_aim = true;
         myPage.config = this.#config;
         myPage.render();
         break;
+
       case ActionTypes.SAVE_EDIT_AIM:
         this.saveEditAim(action.input);
         break;
+
       default:
         break;
     }

@@ -15,17 +15,18 @@ import { regStore } from './components/register/regStore.js';
 import { settingsStore } from './components/settings/settingsStore.js';
 import { myPageStore } from './components/myPage/myPageStore.js';
 import { donateWinStore } from './components/donateWin/donateWinStore.js';
+import { subscriptionStore } from './components/subscription/subscriptionStore';
 import { router } from './modules/Router.js';
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('../sw.js', { scope: '/' })
-    .then(() => {
-      console.log('SW registered');
-    })
-    .catch((err) => {
-      console.log('SW ERR: ', err);
-    });
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('../sw.js', { scope: '/' })
+//     .then(() => {
+//       console.log('SW registered');
+//     })
+//     .catch((err) => {
+//       console.log('SW ERR: ', err);
+//     });
+// }
 
 async function begin() {
   await startStore.start();

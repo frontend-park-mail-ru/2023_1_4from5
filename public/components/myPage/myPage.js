@@ -115,6 +115,26 @@ class MyPage {
         Actions.renderDonateWin();
       });
     }
+
+    const createSubBtn = document.getElementById('create-sub-btn');
+    if (createSubBtn) {
+      createSubBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.renderSubscription();
+      });
+    }
+
+    const updateSubBtns = document.querySelectorAll('#pencil-sub-icon');
+    for (let index = 0; index < updateSubBtns.length; index++) {
+      const button = updateSubBtns[index];
+      button.addEventListener('click', this.updateSubHandler);
+    }
+
+    const deleteSubBtns = document.querySelectorAll('#delete-sub-icon');
+    for (let index = 0; index < deleteSubBtns.length; index++) {
+      const button = deleteSubBtns[index];
+      button.addEventListener('click', this.deleteSubHandler);
+    }
   }
 
   deleteHandler(e) {
@@ -128,6 +148,30 @@ class MyPage {
     router.go(URLS.editPost, {
       postId,
     }, postId);
+  }
+
+  deleteSubHandler(e) {
+    e.preventDefault();
+    Actions.deleteSub(e.currentTarget.parentElement.parentElement.id);
+  }
+
+  updateSubHandler(e) {
+    e.preventDefault();
+    const subscription = document.getElementById(e.currentTarget.parentElement.parentElement.id);
+    const titleContainer = subscription.querySelector('#sub-title');
+    const title = titleContainer.textContent;
+
+    const descriptionContainer = subscription.querySelector('#sub-description');
+    const description = descriptionContainer.textContent;
+
+    const costContainer = subscription.querySelector('#sub-month_cost');
+    const cost = costContainer.textContent;
+
+    Actions.renderUpdatingSubscription(e.currentTarget.parentElement.parentElement.id, {
+      title,
+      description,
+      cost,
+    });
   }
 }
 

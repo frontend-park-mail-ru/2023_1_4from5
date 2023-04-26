@@ -10,6 +10,7 @@
 @import './components/donateWin/donateWin.css';
 @import './components/becomeAuthor/becomeAuthor.css';
 @import './components/page404/page404.css';
+@import './components/subscription/subscription.css';
 
 #root {
     font-family: 'Roboto Light', sans-serif;
