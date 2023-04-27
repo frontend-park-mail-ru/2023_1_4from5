@@ -1,0 +1,10 @@
+$error-mb: 1em;
+$error-height: 1em;
+$error-color: red;
+
+.error {
+  text-align: center;
+  margin-bottom: $error-mb;
+  height: $error-height;
+  color: $error-color;
+}

@@ -1,0 +1,17 @@
+@import "variables";
+
+$form-input-font-size: 1.3em;
+$form-input-width: 95%;
+$form-input-mb: 3em;
+$form-input-padding-side: 0.5em;
+
+.input--form {
+  font-size: $form-input-font-size;
+
+  height: $input-height;
+  width: $form-input-width;
+  border-radius: $elem-border-radius;
+
+  margin-bottom: $form-input-mb;
+  padding: 0 $form-input-padding-side;
+}

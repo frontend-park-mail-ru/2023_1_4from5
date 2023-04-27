@@ -1,0 +1,234 @@
+.background--popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 2;
+  opacity: 0.7;
+}
+.background--popup:hover {
+  cursor: pointer;
+}
+
+.background--settings {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 2;
+  opacity: 0;
+}
+
+#root {
+  font-size: 16px;
+  font-family: "Roboto Light", sans-serif;
+}
+
+main {
+  margin-top: 4em;
+}
+
+button {
+  background-color: #000;
+  color: white;
+  font-size: 20.8px;
+  border-radius: 10px;
+  width: 100%;
+  height: 60px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #222;
+}
+
+.inactive {
+  color: #777;
+  cursor: default;
+}
+
+.hover--underline:hover {
+  border-bottom: green solid 2px;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.title, .reg__title {
+  margin-top: 3em;
+  margin-bottom: 2em;
+  font-size: 30px;
+  text-align: center;
+}
+
+.input--form, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border-radius: 10px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.error {
+  text-align: center;
+  margin-bottom: 1em;
+  height: 1em;
+  color: red;
+}
+
+.auth__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 40%;
+  margin-left: 30%;
+}
+
+.auth__form {
+  margin: auto;
+  width: 70%;
+}
+
+.text--redirect {
+  margin: 2em auto 0 auto;
+  width: fit-content;
+}
+
+#toReg {
+  margin: auto;
+  width: fit-content;
+  cursor: pointer;
+  color: green;
+  font-weight: bold;
+}
+#toReg:hover {
+  border-bottom: green solid 2px;
+}
+
+.input--form, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border-radius: 10px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.title, .reg__title {
+  margin-top: 3em;
+  margin-bottom: 2em;
+  font-size: 30px;
+  text-align: center;
+}
+
+.auth__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 40%;
+  margin-left: 30%;
+}
+
+.auth__form {
+  margin: auto;
+  width: 70%;
+}
+
+.text--redirect {
+  margin: 2em auto 0 auto;
+  width: fit-content;
+}
+
+#toReg {
+  margin: auto;
+  width: fit-content;
+  cursor: pointer;
+  color: green;
+  font-weight: bold;
+}
+#toReg:hover {
+  border-bottom: green solid 2px;
+}
+
+.reg__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 80%;
+  margin-left: 10%;
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.reg__picture {
+  margin-left: 2em;
+  width: 80%;
+}
+
+.reg__title {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.reg__form {
+  width: 90%;
+}
+
+.reg__tagline {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.reg__input--form {
+  margin-bottom: 0.8em;
+}
+
+#toAuth {
+  margin: auto;
+  width: fit-content;
+  cursor: pointer;
+  color: green;
+  font-weight: bold;
+}
+#toAuth:hover {
+  border-bottom: green solid 2px;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,23 @@
+$title-font-size: 30px;
+$title-margin-top: 3em;
+$title-margin-bottom: 2em;
+
+a {
+  text-decoration: none;
+}
+
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.title {
+  margin-top: $title-margin-top;
+  margin-bottom: $title-margin-bottom;
+  font-size: $title-font-size;
+  text-align: center;
+}
+

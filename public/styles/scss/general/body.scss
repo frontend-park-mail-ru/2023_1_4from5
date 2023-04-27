@@ -1,0 +1,12 @@
+@import "variables";
+
+$font-family: 'Roboto Light', sans-serif;
+
+#root {
+  font-size: $font-size;
+  font-family: $font-family;
+}
+
+main {
+  margin-top: $sidebar-height;
+}

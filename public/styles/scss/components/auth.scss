@@ -1,0 +1,38 @@
+@import "../general/popup";
+@import "../general/variables";
+
+$popup-auth-width: 40%;
+$form-width: 70%;
+
+.auth__container{
+  @include popup__container();
+  width: $popup-auth-width;
+  margin-left: ((100% - $popup-auth-width) / 2);
+}
+
+.auth__form {
+  margin: auto;
+  width: $form-width;
+}
+
+.text--redirect {
+  margin: 2em auto 0 auto;
+  width: fit-content;
+}
+
+@mixin redirect() {
+  margin: auto;
+  width: fit-content;
+  cursor: pointer;
+
+  color: $text-color;
+  font-weight: bold;
+
+  &:hover {
+    border-bottom: $underline-color solid $underline-width;
+  }
+}
+
+#toReg {
+  @include redirect();
+}

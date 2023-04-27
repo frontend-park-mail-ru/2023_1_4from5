@@ -1,0 +1,49 @@
+@import "../general/popup";
+@import "../general/input";
+@import "../general/text";
+@import "auth";
+
+$popup-reg-width: 80%;
+$form-width: 40%;
+
+$reg-title-mt: 1em;
+$reg-title-mb: 1em;
+
+$reg-input-mb: 0.8em;
+
+.reg__container{
+  @include popup__container();
+  width: $popup-reg-width;
+  margin-left: ((100% - $popup-reg-width) / 2);
+  display: grid;
+  grid-template-columns: (100% - $form-width) $form-width;
+}
+
+.reg__picture {
+  margin-left: 2em;
+  width: 80%;
+}
+
+.reg__title {
+  @extend .title;
+  margin-top: $reg-title-mt;
+  margin-bottom: $reg-title-mb;
+}
+
+.reg__form {
+  width: 90%;
+}
+
+.reg__tagline {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.reg__input--form {
+  @extend .input--form;
+  margin-bottom: $reg-input-mb;
+}
+
+#toAuth {
+  @include redirect();
+}

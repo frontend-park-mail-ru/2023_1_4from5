@@ -1,42 +1,29 @@
-<div id="backReg" class="background">
+<div id="backReg" class="background--popup">
 </div>
-<div id="register">
-    <div class="reg-container">
-        <div class="title">
-            Регистрация на SubMe
-        </div>
+<div id="register" class="reg__container">
+    <img src="../../images/usage.jpeg" class="reg__picture" alt="Регистрация">
 
-        <div class="reg__input">
-            <div>
-                <p class="auth-label"> Логин </p>
-                <input id="reg-login" class="auth-input" type="text">
-                <div id="reg-login-error" class="under-input-error-modal"></div>
-            </div>
-            <div>
-                <p class="auth-label"> Ваше имя </p>
-                <input id="reg-username" class="auth-input" type="text">
-                <div id="reg-username-error" class="under-input-error-modal"></div>
-            </div>
-            <div>
-                <p class="auth-label"> Пароль </p>
-                <input id="reg-password" class="auth-input" type="password">
-                <div id="reg-password-error" class="under-input-error-modal"></div>
-            </div>
-            <div>
-                <p class="auth-label"> Повторите пароль </p>
-                <input id="reg-repeat-password" class="auth-input" type="password">
-                <div id="reg-repeat-password-error" class="under-input-error-modal"></div>
-            </div>
-            <div id="reg-error"></div>
-        </div>
+    <div class="reg__form">
+        <div class="reg__title">Регистрация</div>
+        <p class="reg__tagline">Стань частью творческого комьюнити уже сейчас</p>
 
-        <div class="auth-btn-container">
-            <button id="reg-btn" class="reg-btn"> Зарегистрироваться</button>
-        </div>
+        <input id="reg-username" class="reg__input--form" type="text" placeholder="Имя пользователя">
+        <div id="reg-username-error" class="error"></div>
 
-        <div class="authHref__container">
-            <p id="toAuth"> Уже зарегистрированы? Войти</p>
-            </p>
-        </div>
+        <input id="reg-login" class="reg__input--form" type="text" placeholder="Логин">
+        <div id="reg-login-error" class="error"></div>
+
+        <input id="reg-password" class="reg__input--form" type="password" placeholder="Пароль">
+        <div id="reg-password-error" class="error"></div>
+
+        <input id="reg-repeat-password" class="reg__input--form" type="password" placeholder="Повторите пароль">
+        <div id="reg-repeat-password-error" class="error"></div>
+
+        <div id="reg-error"></div>
+
+        <button id="reg-btn" class="reg-btn"> Зарегистрироваться</button>
+
+        <p class="text--redirect">Уже есть аккаунт?</p>
+        <p id="toAuth">Войти</p>
     </div>
 </div>
