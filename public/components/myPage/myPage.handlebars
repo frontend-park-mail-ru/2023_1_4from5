@@ -103,6 +103,12 @@
                         {{#each textWithBreaks}}
                             <p class="post-text">{{text}}</p>
                         {{/each}}
+                        {{#each attachments}}
+                            <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+                            <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+                            <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+                            <input type="file" class="upload" id="attach-photo-upload"/>
+                        {{/each}}
                     {{else}}
                         <p>--- Пост недоступен ---</p>
                     {{/if}}

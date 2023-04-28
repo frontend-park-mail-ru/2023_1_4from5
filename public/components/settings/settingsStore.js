@@ -49,7 +49,7 @@ class SettingsStore {
     formData.append('path', userStore.getUserState().profilePhoto);
 
     const token = await request.getHeader('/api/user/updateProfilePhoto');
-    const update = await request.postMultipart('/api/user/updateProfilePhoto', formData, token);
+    const update = await request.putMultipart('/api/user/updateProfilePhoto', formData, token);
     const newPhoto = await update.json();
     const user = userStore.getUserState();
     user.profilePhoto = newPhoto;

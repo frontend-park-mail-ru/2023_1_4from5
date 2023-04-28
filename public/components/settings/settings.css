@@ -19,6 +19,7 @@
 }
 
 .upload {
+    outline: 0;
     cursor: pointer;
 }
 

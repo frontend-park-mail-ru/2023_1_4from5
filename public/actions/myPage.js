@@ -28,5 +28,4 @@ export const ActionsMyPage = {
       type: ActionTypes.CLOSE_EDIT_AIM,
     });
   },
-
 };
