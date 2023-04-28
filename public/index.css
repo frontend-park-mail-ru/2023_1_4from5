@@ -3,7 +3,7 @@
 @import './components/register/reg.css';
 @import './components/winSettings/winSettings.css';
 @import './components/settings/settings.css';
-@import './components/myPage/myPage.css';
+@import 'author/myPage.css';
 @import './components/startPage/startPage.css';
 @import './components/newPost/newPost.css';
 @import './components/search/search.css';

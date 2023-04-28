@@ -1,12 +1,12 @@
 import { dispatcher } from '../../dispatcher/dispatcher.js';
-import { myPage } from './myPage.js';
+import { myPage } from './authorPage.js';
 import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 
-class MyPageStore {
+class AuthorPage {
   #config;
 
   constructor() {
@@ -150,4 +150,4 @@ class MyPageStore {
   }
 }
 
-export const myPageStore = new MyPageStore();
+export const authorPageStore = new AuthorPage();

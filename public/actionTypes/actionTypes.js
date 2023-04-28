@@ -33,12 +33,12 @@ export const ActionTypes = {
   CHANGE_LOGIN: 'CHANGE_LOGIN',
   CHANGE_PHOTO: 'CHANGE_PHOTO',
 
-  // myPage
+  // authorPage
   RENDER_MYPAGE: 'RENDER_MYPAGE',
   CLICK_LIKE: 'CLICK_LIKE',
   CHANGE_ATTACH_PHOTO: 'CHANGE_ATTACH_PHOTO',
 
-  // myPage-Aim
+  // authorPage-Aim
   OPEN_EDIT_AIM: 'EDIT_AIM',
   CLOSE_EDIT_AIM: 'CLOSE_EDIT_AIM',
   SAVE_EDIT_AIM: 'SAVE_EDIT_AIM',
@@ -56,6 +56,6 @@ export const ActionTypes = {
   DOWNLOAD_ATTACH_VIDEO: 'DOWNLOAD_ATTACH_VIDEO',
   DOWNLOAD_ATTACH_AUDIO: 'DOWNLOAD_ATTACH_AUDIO',
 
-  // become author
+  // become authorPage
   BECOME_AUTHOR: 'BECOME_AUTHOR',
 };

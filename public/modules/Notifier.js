@@ -1,6 +1,6 @@
 import { Actions } from '../actions/actions.js';
 import { settingsStore } from '../components/settings/settingsStore.js';
-import { myPageStore } from '../components/myPage/myPageStore.js';
+import { authorPageStore } from '../components/authorPage/authorPageStore.js';
 import { userStore } from '../components/user/userStore';
 import { router } from './Router';
 import { newPostStore } from '../components/newPost/newPostStore';
@@ -27,14 +27,14 @@ export function notifier(path, data, additionalUrl) {
 
     case URLS.myPage:
       if (userStore.getUserState().isAuthorizedIn) {
-        myPageStore.renderMyPage();
+        authorPageStore.renderMyPage();
       } else {
         router.go('/', data, parent);
       }
       break;
 
     case `${URLS.myPage}/${additionalUrl}`:
-      myPageStore.renderMyPage(additionalUrl);
+      authorPageStore.renderMyPage(additionalUrl);
       break;
 
     case URLS.settings:
