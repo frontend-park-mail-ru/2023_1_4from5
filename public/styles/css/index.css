@@ -265,7 +265,7 @@ p {
   border: 0;
   background-color: #EBEDF0;
   background-position: 2%;
-  color: #797979;
+  color: #545454;
   font-size: 20.8px;
 }
 
@@ -282,7 +282,7 @@ p {
 #sidebar__about {
   margin-left: 1%;
   padding-left: 2%;
-  border-left: #797979 solid 2px;
+  border-left: #c4c4c4 solid 2px;
 }
 
 .sidebar__href {
@@ -291,12 +291,12 @@ p {
 
 #sidebar__feed {
   padding-right: 1em;
-  border-right: #797979 solid 2px;
+  border-right: #c4c4c4 solid 2px;
 }
 
 #sidebar__subs {
   padding-right: 1em;
-  border-right: #797979 solid 2px;
+  border-right: #c4c4c4 solid 2px;
 }
 
 #sidebar__modalWindow {
