@@ -46,7 +46,6 @@ export class SideBar {
 
     const input = document.getElementById('find__input');
     input.style.backgroundImage = 'url(../../images/search_icon.svg)';
-    input.style.backgroundRepeat = 'no-repeat';
     input.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
         event.preventDefault();

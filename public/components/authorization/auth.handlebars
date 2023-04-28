@@ -4,14 +4,21 @@
     <div class="auth__form">
         <div class="title">Вход в аккаунт</div>
 
-        <input id="auth-login" class="input--form" type="text" placeholder="Логин">
-        <input id="auth-password" class="input--form" type="password" placeholder="Пароль">
+        <div id="login--form" class="input--form">
+            <input id="auth__login" type="text" placeholder="Логин">
+            <img id="clear" class="input__img" src="../../images/clear.svg">
+        </div>
 
-        <div id="auth-error" class="error"></div>
+        <div id="password--form" class="input--form">
+            <input id="auth__password" type="password" placeholder="Пароль">
+            <img id="watch" class="input__img" src="../../images/watch.svg">
+        </div>
 
-        <button id="auth-btn">Войти</button>
+        <div id="auth__error" class="error"></div>
 
-        <p class="text--redirect">Ещё не зарегистрированы?</p>
-        <p id="toReg">Регистрация</p>
+        <button id="auth__btn">Войти</button>
+
+        <p class="text--redirect auth__text">Ещё не зарегистрированы?</p>
+        <p id="toReg" class="auth__text">Регистрация</p>
     </div>
 </div>

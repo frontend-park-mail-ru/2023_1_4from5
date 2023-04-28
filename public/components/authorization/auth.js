@@ -20,6 +20,26 @@ export class Auth {
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
 
+    const clearBtn = document.getElementById('clear');
+    clearBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const loginInput = document.getElementById('auth__login');
+      loginInput.value = '';
+    });
+
+    const watchBtn = document.getElementById('watch');
+    let isHide = true;
+    watchBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      isHide = !isHide;
+      const passInput = document.getElementById('auth__password');
+      if (isHide) {
+        passInput.type = 'password';
+      } else {
+        passInput.type = 'text';
+      }
+    });
+
     const background = document.getElementById('backAuth');
     background.addEventListener('click', (e) => {
       e.preventDefault();
@@ -54,10 +74,10 @@ export class Auth {
    * @returns {}
    */
   authentification() {
-    const submitBtn = document.getElementById('auth-btn');
-    const loginInput = document.getElementById('auth-login');
-    const passwordInput = document.getElementById('auth-password');
-    const errorOutput = document.getElementById('auth-error');
+    const submitBtn = document.getElementById('auth__btn');
+    const loginInput = document.getElementById('auth__login');
+    const passwordInput = document.getElementById('auth__password');
+    const errorOutput = document.getElementById('auth__error');
 
     loginInput.style.backgroundColor = color.field;
     passwordInput.style.backgroundColor = color.field;
