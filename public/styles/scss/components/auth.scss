@@ -23,7 +23,7 @@ $form-width: 70%;
 @mixin redirect() {
   margin: auto;
   width: fit-content;
-  cursor: pointer;
+  @include clickable();
 
   color: $text-color;
   font-weight: bold;

@@ -7,9 +7,21 @@ $underline-width: 2px;
 
 $sidebar-height: 4em;
 
+$content-z-index: 1;
 $background-z-index: 2;
 $popup-z-index: 3;
 
 $font-size: 16px;
 
 $input-height: 60px;
+
+$hr-color: rgba(128, 128, 128, 0.45);
+$hr-width: 2px;
+
+@mixin clickable() {
+  cursor: pointer;
+}
+
+@mixin non-clickable() {
+  cursor: default;
+}

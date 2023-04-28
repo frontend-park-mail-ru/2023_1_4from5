@@ -56,6 +56,7 @@ button:hover {
 
 a {
   text-decoration: none;
+  color: #222;
 }
 
 h3 {
@@ -133,6 +134,7 @@ p {
 
 a {
   text-decoration: none;
+  color: #222;
 }
 
 h3 {
@@ -229,6 +231,76 @@ p {
 }
 #toAuth:hover {
   border-bottom: green solid 2px;
+}
+
+#sideBar {
+  top: 0;
+  height: 4em;
+  width: 100%;
+  text-align: end;
+  position: fixed;
+  display: flex;
+  z-index: 1;
+  border-bottom: rgba(128, 128, 128, 0.45) solid 2px;
+}
+
+.sidebar__logo {
+  cursor: pointer;
+  margin-left: 5em;
+}
+
+.sideBar__menu {
+  width: 100%;
+  padding-top: 0.5%;
+  font-size: 20.8px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+.find__input {
+  padding-left: 2em;
+  height: 2em;
+  width: 40%;
+  border-radius: 10px;
+  border: 0;
+  background-color: #EBEDF0;
+  background-position: 2%;
+  color: #797979;
+  font-size: 20.8px;
+}
+
+.sidebar__info {
+  text-align: start;
+}
+
+.sidebar__user {
+  text-align: end;
+  padding-top: 0.4em;
+  padding-right: 3em;
+}
+
+#sidebar__about {
+  margin-left: 1%;
+  padding-left: 2%;
+  border-left: #797979 solid 2px;
+}
+
+.sidebar__href {
+  margin-right: 4%;
+}
+
+#sidebar__feed {
+  padding-right: 1em;
+  border-right: #797979 solid 2px;
+}
+
+#sidebar__subs {
+  padding-right: 1em;
+  border-right: #797979 solid 2px;
+}
+
+#sidebar__modalWindow {
+  margin-right: 0;
 }
 
 /*# sourceMappingURL=index.css.map */

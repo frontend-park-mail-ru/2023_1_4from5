@@ -14,10 +14,19 @@ class SideBarStore {
 
   constructor() {
     this.#config = {
+      about: {
+        name: 'О нас',
+        href: '/about',
+        id: 'sidebar__about',
+        showDisplay: true,
+        parent: contentElement,
+        render() {
+        },
+      },
       feed: {
         name: 'Лента',
         href: '/feed',
-        id: 'sidebar-feed',
+        id: 'sidebar__feed',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
         render() {
@@ -26,15 +35,15 @@ class SideBarStore {
       findAuth: {
         name: 'Авторы',
         href: URLS.search,
-        id: 'sidebar-find',
+        id: 'sidebar__find',
         showDisplay: true,
         parent: contentElement,
         render: router.go,
       },
       subs: {
-        name: 'Мои подписки',
+        name: 'Подписки',
         href: '/subs',
-        id: 'sidebar-subs',
+        id: 'sidebar__subs',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
         render() {
@@ -43,7 +52,7 @@ class SideBarStore {
       reg: {
         name: 'Регистрация',
         href: '/register',
-        id: 'sidebar-reg',
+        id: 'sidebar__reg',
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
         render: Actions.renderReg,
@@ -51,7 +60,7 @@ class SideBarStore {
       auth: {
         name: 'Войти',
         href: '/auth',
-        id: 'sidebar-auth',
+        id: 'sidebar__auth',
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
         render: Actions.renderAuth,
@@ -59,7 +68,7 @@ class SideBarStore {
       beAuthor: {
         name: 'Стать автором',
         href: URLS.becomeAuthor,
-        id: 'sidebar-beAuthor',
+        id: 'sidebar__beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
         render: router.go,
@@ -67,7 +76,7 @@ class SideBarStore {
       modalWindow: {
         name: userStore.getUserState().usernameIn,
         href: '/modalWindow',
-        id: 'sidebar-modalWindow',
+        id: 'sidebar__modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
         render: Actions.renderWinSettings,

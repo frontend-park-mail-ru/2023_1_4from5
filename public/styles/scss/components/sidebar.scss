@@ -1,0 +1,90 @@
+@import "../general/variables";
+
+$logo-ml: 5em;
+$find-height: 2em;
+$find-width: 40%;
+$find-color: #EBEDF0;
+$find-text-color: #797979;
+$find-background-pos: 2%;
+
+$sidebar-pt: 0.5%;
+$sidebar-font-size: ($font-size * 1.3);
+
+$sidebar-href-mr: 4%;
+
+$grid-info-width: 40%;
+
+#sideBar {
+  top: 0;
+  height: $sidebar-height;
+  width: 100%;
+  text-align: end;
+  position: fixed;
+  display: flex;
+  z-index: $content-z-index;
+  border-bottom: $hr-color solid $hr-width;
+}
+
+.sidebar__logo {
+  @include clickable();
+  margin-left: $logo-ml;
+}
+
+.sideBar__menu {
+  width: 100%;
+  padding-top: $sidebar-pt;
+  font-size: $sidebar-font-size;
+
+  display: grid;
+  grid-template-columns: $grid-info-width (100% - $grid-info-width);
+}
+
+.find__input {
+  padding-left: $find-height;
+
+  height: $find-height;
+  width: $find-width;
+
+  border-radius: $elem-border-radius;
+  border: 0;
+
+  background-color: $find-color;
+  background-position: $find-background-pos;
+
+  color: $find-text-color;
+  font-size: $sidebar-font-size;
+}
+
+.sidebar__info {
+  text-align: start;
+}
+
+.sidebar__user {
+  text-align: end;
+  padding-top: 0.4em;
+  padding-right: 3em;
+}
+
+#sidebar__about {
+  margin-left: 1%;
+  padding-left: 2%;
+  border-left: $find-text-color solid 2px;
+}
+
+.sidebar__href {
+  margin-right: $sidebar-href-mr;
+}
+
+#sidebar__feed {
+  padding-right: 1em;
+  border-right: $find-text-color solid 2px;
+}
+
+#sidebar__subs {
+  padding-right: 1em;
+  border-right: $find-text-color solid 2px;
+}
+
+#sidebar__modalWindow {
+  margin-right: 0;
+}

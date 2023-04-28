@@ -2,8 +2,11 @@ $title-font-size: 30px;
 $title-margin-top: 3em;
 $title-margin-bottom: 2em;
 
+$href-color: #222;
+
 a {
   text-decoration: none;
+  color: $href-color;
 }
 
 h3 {

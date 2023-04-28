@@ -15,7 +15,7 @@ button {
   width: 100%;
   height: $input-height;
 
-  cursor: pointer;
+  @include clickable();
 
   &:hover {
     background-color: $btn-background-hover;
@@ -24,7 +24,7 @@ button {
 
 .inactive {
   color: $inactive-btn-color;
-  cursor: default;
+  @include non-clickable();
 }
 
 .hover--underline:hover {

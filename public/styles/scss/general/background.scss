@@ -19,7 +19,7 @@ $settings-background-opacity: 0.0;
   opacity: $popup-background-opacity;
 
   &:hover {
-    cursor: pointer;
+    @include clickable();
   }
 }
 

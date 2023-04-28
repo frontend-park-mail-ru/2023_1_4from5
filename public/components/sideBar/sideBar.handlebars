@@ -1,28 +1,38 @@
 <div id="sideBar">
     <img class="sidebar__logo" id="logo" src="../../images/logo.png" alt="logo">
-    <div id="sideBar-menu">
-        {{#if feed.showDisplay}}
-            <a id="{{feed.id}}" class="inactive" href={{feed.href}}> {{feed.name}} </a>
-        {{/if}}
-        {{#if findAuth.showDisplay}}
-            <a id="{{findAuth.id}}" class="hover--underline" href={{findAuth.href}}> {{findAuth.name}} </a>
-            <input class="find__input" id="find__input" type="text">
-                <button class="btn" id="findBtn">Найти</button>
-        {{/if}}
-        {{#if subs.showDisplay}}
-            <a id="{{subs.id}}" class="inactive" href={{subs.href}}> {{subs.name}} </a>
-        {{/if}}
-        {{#if reg.showDisplay}}
-            <a id="{{reg.id}}" class="hover--underline" href={{reg.href}}> {{reg.name}} </a>
-        {{/if}}
-        {{#if auth.showDisplay}}
-            <a id="{{auth.id}}" class="hover--underline" href={{auth.href}}> {{auth.name}} </a>
-        {{/if}}
-        {{#if beAuthor.showDisplay}}
-            <a id="{{beAuthor.id}}" class="hover--underline" href={{beAuthor.href}}> {{beAuthor.name}} </a>
-        {{/if}}
-        {{#if modalWindow.showDisplay}}
-            <a id="{{modalWindow.id}}" class="hover--underline" href={{modalWindow.href}}> {{modalWindow.name}} </a>
-        {{/if}}
+    <div class="sideBar__menu">
+        <div class="sidebar__info">
+            {{#if about.showDisplay}}
+                <a id="{{about.id}}" class="sidebar__href inactive" href={{abput.href}}> {{about.name}} </a>
+            {{/if}}
+            {{#if beAuthor.showDisplay}}
+                <a id="{{beAuthor.id}}" class="sidebar__href hover--underline"
+                   href={{beAuthor.href}}> {{beAuthor.name}} </a>
+            {{/if}}
+            {{#if findAuth.showDisplay}}
+                <a id="{{findAuth.id}}" class="sidebar__href hover--underline"
+                   href={{findAuth.href}}> {{findAuth.name}} </a>
+            <input class="find__input" id="find__input" type="text" placeholder="Поиск авторов">
+            {{/if}}
+        </div>
+
+        <div class="sidebar__user">
+            {{#if feed.showDisplay}}
+                <a id="{{feed.id}}" class="sidebar__href inactive" href={{feed.href}}> {{feed.name}} </a>
+            {{/if}}
+            {{#if subs.showDisplay}}
+                <a id="{{subs.id}}" class="sidebar__href inactive" href={{subs.href}}> {{subs.name}} </a>
+            {{/if}}
+            {{#if reg.showDisplay}}
+                <a id="{{reg.id}}" class="sidebar__href hover--underline" href={{reg.href}}> {{reg.name}} </a>
+            {{/if}}
+            {{#if auth.showDisplay}}
+                <a id="{{auth.id}}" class="sidebar__href hover--underline" href={{auth.href}}> {{auth.name}} </a>
+            {{/if}}
+            {{#if modalWindow.showDisplay}}
+                <a id="{{modalWindow.id}}" class="sidebar__href hover--underline"
+                   href={{modalWindow.href}}> {{modalWindow.name}} </a>
+            {{/if}}
+        </div>
     </div>
 </div>

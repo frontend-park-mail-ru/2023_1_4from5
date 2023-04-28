@@ -44,13 +44,16 @@ export class SideBar {
       router.go(URLS.root);
     });
 
-    const findBtn = document.getElementById('findBtn');
-    findBtn.addEventListener('click', (event) => {
-      event.preventDefault();
-      const findInput = document.getElementById('find__input');
-      const findContent = findInput.value;
-      router.go(URLS.search, findContent);
-      Actions.searchAuthors(findContent);
+    const input = document.getElementById('find__input');
+    input.style.backgroundImage = 'url(../../images/search_icon.svg)';
+    input.style.backgroundRepeat = 'no-repeat';
+    input.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const content = input.value;
+        router.go(URLS.search, content);
+        Actions.searchAuthors(content);
+      }
     });
   }
 }
