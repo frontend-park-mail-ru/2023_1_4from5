@@ -2,8 +2,8 @@ import { dispatcher } from '../../dispatcher/dispatcher';
 import { ActionTypes } from '../../actionTypes/actionTypes';
 import { subscriptionWin } from './subscription';
 import { request } from '../../modules/request';
-import { myPage } from '../myPage/myPage';
-import { myPageStore } from '../myPage/myPageStore';
+import { authorPage } from '../authorPage/authorPage';
+import { authorPageStore } from '../authorPage/authorPageStore';
 import { donateWin } from '../donateWin/donateWin';
 import { Actions } from '../../actions/actions';
 import { userStore } from '../user/userStore';
@@ -47,7 +47,7 @@ class SubscriptionStore {
           month_cost: Number(action.input.cost),
         }, tokenCreate);
         subscriptionWin.remove();
-        await myPageStore.renderMyPage();
+        await authorPageStore.renderMyPage();
         break;
 
       case ActionTypes.UPDATE_SUB:
@@ -59,13 +59,13 @@ class SubscriptionStore {
           month_cost: Number(action.input.cost),
         }, tokenUpdate);
         subscriptionWin.remove();
-        await myPageStore.renderMyPage();
+        await authorPageStore.renderMyPage();
         break;
 
       case ActionTypes.DELETE_SUB:
         const tokenDelete = await request.getHeader(`/api/subscription/delete/${action.id}`);
         await request.delete(`/api/subscription/delete/${action.id}`, tokenDelete);
-        await myPageStore.renderMyPage();
+        await authorPageStore.renderMyPage();
         break;
 
       default:

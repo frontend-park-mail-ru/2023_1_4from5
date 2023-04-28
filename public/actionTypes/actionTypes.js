@@ -33,11 +33,11 @@ export const ActionTypes = {
   CHANGE_LOGIN: 'CHANGE_LOGIN',
   CHANGE_PHOTO: 'CHANGE_PHOTO',
 
-  // myPage
+  // authorPage
   RENDER_MYPAGE: 'RENDER_MYPAGE',
   CLICK_LIKE: 'CLICK_LIKE',
 
-  // myPage-Aim
+  // authorPage-Aim
   OPEN_EDIT_AIM: 'EDIT_AIM',
   CLOSE_EDIT_AIM: 'CLOSE_EDIT_AIM',
   SAVE_EDIT_AIM: 'SAVE_EDIT_AIM',

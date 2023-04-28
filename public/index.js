@@ -13,7 +13,7 @@ import { winSettingsStore } from './components/winSettings/winsettingsStore.js';
 import { winSettings } from './components/winSettings/winSettings.js';
 import { regStore } from './components/register/regStore.js';
 import { settingsStore } from './components/settings/settingsStore.js';
-import { myPageStore } from './components/myPage/myPageStore.js';
+import { authorPageStore } from './components/authorPage/authorPageStore.js';
 import { donateWinStore } from './components/donateWin/donateWinStore.js';
 import { subscriptionStore } from './components/subscription/subscriptionStore';
 import { router } from './modules/Router.js';

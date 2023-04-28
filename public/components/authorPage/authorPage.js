@@ -1,11 +1,11 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
-import template from './myPage.handlebars';
+import template from './authorPage.handlebars';
 
 const contentElement = document.querySelector('main');
 
-class MyPage {
+class AuthorPage {
   #parent;
 
   #config;
@@ -175,4 +175,4 @@ class MyPage {
   }
 }
 
-export const myPage = new MyPage(contentElement);
+export const authorPage = new AuthorPage(contentElement);

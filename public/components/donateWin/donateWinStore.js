@@ -4,8 +4,8 @@ import { donateWin } from './donateWin.js';
 import { isValidDonate } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { request } from '../../modules/request.js';
-import { myPage } from '../myPage/myPage.js';
-import { myPageStore } from '../myPage/myPageStore.js';
+import { authorPage } from '../authorPage/authorPage.js';
+import { authorPageStore } from '../authorPage/authorPageStore.js';
 
 class DonateWinStore {
   constructor() {
@@ -43,14 +43,14 @@ class DonateWinStore {
     if (!errMoneyGot) {
       const token = await request.getHeader('/api/user/donate');
       const donateAim = await request.post('/api/user/donate', {
-        creator_id: myPageStore.getState().creator_info.creator_id,
+        creator_id: authorPageStore.getState().creator_info.creator_id,
         money_count: Number(moneyCount),
       }, token);
       if (donateAim.ok) {
-        myPageStore.getState().aim.money_got += Number(moneyCount);
-        myPage.config = myPageStore.getState();
+        authorPageStore.getState().aim.money_got += Number(moneyCount);
+        authorPage.config = authorPageStore.getState();
         donateWin.removeDonateWin();
-        myPage.render();
+        authorPage.render();
       } else {
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Некорректная сумма доната';
