@@ -1,7 +1,7 @@
 import { ActionsAuth } from './auth';
 import { ActionsBecomeAuthor } from './becomeAuthor';
 import { ActionsDonateWin } from './donateWin';
-import { ActionsMyPage } from './authorPage';
+import { ActionsMyPage } from './myPage';
 import { ActionsPost } from './post';
 import { ActionsRegister } from './register';
 import { ActionsSettings } from './settings';
