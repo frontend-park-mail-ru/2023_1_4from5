@@ -1,12 +1,12 @@
 import { dispatcher } from '../../dispatcher/dispatcher.js';
-import { myPage } from './authorPage.js';
+import { authorPage } from './authorPage.js';
 import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 
-class AuthorPage {
+class AuthorPageStore {
   #config;
 
   constructor() {
@@ -32,22 +32,27 @@ class AuthorPage {
         await request.delete(`/api/post/delete/${action.postId}`, token);
         await this.renderMyPage();
         break;
+
       case ActionTypes.CLICK_LIKE:
         this.changeLikeState(action);
         break;
+
       case ActionTypes.OPEN_EDIT_AIM:
         this.#config.edit_aim = false;
-        myPage.config = this.#config;
-        myPage.render();
+        authorPage.config = this.#config;
+        authorPage.render();
         break;
+
       case ActionTypes.CLOSE_EDIT_AIM:
         this.#config.edit_aim = true;
-        myPage.config = this.#config;
-        myPage.render();
+        authorPage.config = this.#config;
+        authorPage.render();
         break;
+
       case ActionTypes.SAVE_EDIT_AIM:
         this.saveEditAim(action.input);
         break;
+        
       default:
         break;
     }
@@ -69,14 +74,13 @@ class AuthorPage {
       });
     });
     this.#config = result;
-    console.log(result);
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
       isAuthorized: userStore.getUserState().isAuthorizedIn,
     };
     this.#config = Object.assign(this.#config, renderIcon);
-    myPage.config = this.#config;
-    myPage.render();
+    authorPage.config = this.#config;
+    authorPage.render();
   }
 
   async changeLikeState(action) {
@@ -87,8 +91,8 @@ class AuthorPage {
         const currentPost = this.#config.posts.find((post) => post.id === action.postId);
         currentPost.is_liked = true;
         currentPost.likes_count = res.likes_count;
-        myPage.config = this.#config;
-        myPage.render();
+        authorPage.config = this.#config;
+        authorPage.render();
       }
     } else {
       const result = await request.put('/api/post/removeLike', { post_id: action.postId });
@@ -97,15 +101,16 @@ class AuthorPage {
         const currentPost = this.#config.posts.find((post) => post.id === action.postId);
         currentPost.is_liked = false;
         currentPost.likes_count = res.likes_count;
-        myPage.config = this.#config;
-        myPage.render();
+        authorPage.config = this.#config;
+        authorPage.render();
       }
     }
   }
 
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value.split(' ').join('');
+    let moneyNeeded = input.moneyNeededInput.value.split(' ')
+      .join('');
     const errDescriptionOutput = input.errorDescriptionOutput;
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
     const errDescription = isValidDescriptionAim(description);
@@ -138,8 +143,8 @@ class AuthorPage {
         this.#config.aim.money_needed = Number(moneyNeeded);
 
         this.#config.edit_aim = true;
-        myPage.config = this.#config;
-        myPage.render();
+        authorPage.config = this.#config;
+        authorPage.render();
       } else {
         errMoneyNeededOutput.innerHTML = '';
         errMoneyNeededOutput.innerHTML = 'Введённые данные некорректны';
@@ -150,4 +155,4 @@ class AuthorPage {
   }
 }
 
-export const authorPageStore = new AuthorPage();
+export const authorPageStore = new AuthorPageStore();

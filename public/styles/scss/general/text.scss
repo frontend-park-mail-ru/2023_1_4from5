@@ -1,0 +1,26 @@
+$title-font-size: 36px;
+$title-margin-top: 3em;
+$title-margin-bottom: 2em;
+
+$href-color: #222;
+
+a {
+  text-decoration: none;
+  color: $href-color;
+}
+
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.title {
+  margin-top: $title-margin-top;
+  margin-bottom: $title-margin-bottom;
+  font-size: $title-font-size;
+  text-align: center;
+}
+

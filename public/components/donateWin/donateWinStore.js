@@ -4,7 +4,7 @@ import { donateWin } from './donateWin.js';
 import { isValidDonate } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { request } from '../../modules/request.js';
-import { myPage } from '../authorPage/authorPage.js';
+import { authorPage } from '../authorPage/authorPage.js';
 import { authorPageStore } from '../authorPage/authorPageStore.js';
 
 class DonateWinStore {
@@ -48,9 +48,9 @@ class DonateWinStore {
       }, token);
       if (donateAim.ok) {
         authorPageStore.getState().aim.money_got += Number(moneyCount);
-        myPage.config = authorPageStore.getState();
+        authorPage.config = authorPageStore.getState();
         donateWin.removeDonateWin();
-        myPage.render();
+        authorPage.render();
       } else {
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Некорректная сумма доната';

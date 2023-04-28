@@ -1,0 +1,33 @@
+@import "variables";
+
+$btn-text-color: white;
+$btn-background-color: #000;
+$btn-background-hover: #222;
+$inactive-btn-color: #777;
+
+button {
+  background-color: $btn-background-color;
+  color: $btn-text-color;
+  font-size: $font-size * 1.3;
+
+  border-width: 0;
+  border-radius: $elem-border-radius;
+
+  width: 100%;
+  height: $input-height;
+
+  @include clickable();
+
+  &:hover {
+    background-color: $btn-background-hover;
+  }
+}
+
+.inactive {
+  color: $inactive-btn-color;
+  @include non-clickable();
+}
+
+.hover--underline:hover {
+  border-bottom: $underline-color solid $underline-width;
+}

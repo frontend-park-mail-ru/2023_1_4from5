@@ -13,21 +13,24 @@ const putInCache = async (request, response) => {
   await cache.put(request, response);
 };
 
-const cacheFirst = async ({ request, preloadResponsePromise, /* fallbackUrl */ }) => {
+const cacheFirst = async ({
+  request,
+  preloadResponsePromise, /* fallbackUrl */
+}) => {
   // First try to get the resource from the cache
   if (!navigator.onLine) {
     const responseFromCache = await caches.match(request);
     if (responseFromCache) {
       return responseFromCache;
     }
-  }
 
-  // Next try to use the preloaded response, if it's there
-  const preloadResponse = await preloadResponsePromise;
-  if (preloadResponse) {
-    console.info('using preload response', preloadResponse);
-    await putInCache(request, preloadResponse.clone());
-    return preloadResponse;
+    // Next try to use the preloaded response, if it's there
+    const preloadResponse = await preloadResponsePromise;
+    if (preloadResponse) {
+      console.info('using preload response', preloadResponse);
+      await putInCache(request, preloadResponse.clone());
+      return preloadResponse;
+    }
   }
 
   // Next try to get the resource from the network

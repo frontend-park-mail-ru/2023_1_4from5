@@ -1,10 +1,6 @@
 <div class="myPage-header-container" id="myPage-header-container">
-    {{#if is_my_page}}
-<!--        <img id="settings-icon" class="settings-icon" width="40" src="../../images/settings_icon.svg"-->
-<!--             alt="settings-icon">-->
-    {{/if}}
     <h1 class="myPage-header">
-<!--        <img id="user-photo" width="50" src="../../images/user_photo.png" alt="user-photo">-->
+        <img id="user-photo" width="50" src="../../images/user_photo.png" alt="user-photo">
         {{creator_info.name}}
     </h1>
 </div>
@@ -81,11 +77,11 @@
                 <div class="aboutAuthor-container-header">
                     <h3>О моем блоге:</h3>
                     {{#if is_my_page}}
-<!--                        <img id="pencil-icon-about" class="pencil-icon" width="20"-->
-<!--                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">-->
+                        <!--                        <img id="pencil-icon-about" class="pencil-icon" width="20"-->
+                        <!--                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">-->
                     {{/if}}
                 </div>
-                <p class="cretor__description">{{creator_info.description}}</p>
+                <p class="creator__description">{{creator_info.description}}</p>
             </div>
             {{#each posts}}
                 <div class="post-container box" id="{{id}}">
@@ -102,7 +98,7 @@
                     {{#if is_available}}
                         {{#each textWithBreaks}}
                             <p class="post-text">{{text}}</p>
-                        {{/each}}
+                        {{/each}
                         {{#each attachments}}
                             <audio id="audio" src="../../images/music_test.mp3" controls></audio>
                             <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
@@ -134,7 +130,8 @@
                             {{/unless}}
                             <span>{{likes_count}}</span>
                         </span>
-                        <img id="comment-icon" class="comment-icon inactive" width="25" src="../../images/comment_icon.png"
+                        <img id="comment-icon" class="comment-icon inactive" width="25"
+                             src="../../images/comment_icon.png"
                              alt="comment-icon">
                     </div>
                 </div>
@@ -144,25 +141,36 @@
             <div class="box-3__container box">
                 <div class="box3-header-container">
                     <h3>Уровни подписки</h3>
-                    {{#if is_my_page }}
-<!--                        <img id="pencil-icon-level" class="pencil-icon" width="20"-->
-<!--                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">-->
-                    {{/if}}
                 </div>
                 <hr class="box-3__divider">
                 {{#each subscriptions}}
-                    <h4>{{ title }}</h4>
-                    <div class="box-3__money">{{month_const}} рублей</div>
-                    <div>{{description}}</div>
-                    <hr class="box-3__divider">
+                    <div id="{{id}}">
+                        <h4><span id="sub-title">{{ title }}</span>
+                            {{#if ../is_my_page}}
+                                <img id="pencil-sub-icon" class="pencil-icon" width="20"
+                                     src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
+                                <img id="delete-sub-icon" class="delete-icon" width="25"
+                                     src="../../images/delete_ic_icon.png"
+                                     alt="delete-icon">
+                            {{/if}}
+                        </h4>
+                        <div class="box-3__money"><span id="sub-month_cost">{{month_cost}}</span> рублей</div>
+                        <div id="sub-description">{{description}}</div>
+                        <hr class="box-3__divider">
+                    </div>
                 {{/each}}
+                <div id="edit-btn-space">
+                    {{#if is_my_page }}
+                        <button id="create-sub-btn">Создание подписки</button>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>
     <div id="footer">
         <hr style="opacity: 75%;">
-<!--        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a-->
-<!--                href="https://t.me/averageqqq">TG</a></h6>-->
+        <!--        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a-->
+        <!--                href="https://t.me/averageqqq">TG</a></h6>-->
         <p>Свяжитесь с нами в Телеграмм: @DESOLATE17 @qqq4u @IvanStukalovv @Vector102</p>
     </div>
 

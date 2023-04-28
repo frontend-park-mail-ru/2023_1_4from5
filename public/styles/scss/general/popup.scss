@@ -1,0 +1,16 @@
+@import "variables";
+
+$popup-height: 80%;
+$popup-color: white;
+$popup-opacity: 1;
+
+@mixin popup__container() {
+  top: ((100% - $popup-height) / 2);
+  height: $popup-height;
+  border-radius: $block-border-radius;
+  background-color: $popup-color;
+  position: fixed;
+  z-index: $popup-z-index;
+  opacity: $popup-opacity;
+}
+

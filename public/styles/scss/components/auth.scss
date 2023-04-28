@@ -1,0 +1,65 @@
+@import "../general/popup";
+@import "../general/input";
+@import "../general/variables";
+
+$popup-auth-width: 35%;
+$form-width: 60%;
+
+.auth__container{
+  @include popup__container();
+  width: $popup-auth-width;
+  margin-left: ((100% - $popup-auth-width) / 2);
+}
+
+.auth__form {
+  margin: auto;
+  width: $form-width;
+}
+
+#auth__login, #auth__password {
+  height: 95%;
+  width: 90%;
+
+  border-width: 0;
+
+  font-size: $font-size * 1.3;
+
+  outline: 0;
+  outline-offset: 0;
+}
+
+.input__img {
+  @include clickable();
+  width: 1.05em;
+}
+
+#clear {
+  position: relative;
+  top: 3px;
+}
+
+.text--redirect {
+  margin: 2em auto 0 auto;
+  width: fit-content;
+}
+
+@mixin redirect() {
+  margin: auto;
+  width: fit-content;
+  @include clickable();
+
+  color: $text-color;
+  font-weight: bold;
+
+  &:hover {
+    border-bottom: $underline-color solid $underline-width;
+  }
+}
+
+#toReg {
+  @include redirect();
+}
+
+.auth__text {
+  font-size: 1.09em;
+}

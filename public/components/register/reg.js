@@ -31,6 +31,46 @@ export class Register {
       Actions.removeReg();
       Actions.renderAuth();
     });
+
+    const clearNameBtn = document.getElementById('clear--username');
+    clearNameBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const nameInput = document.getElementById('reg-username');
+      nameInput.value = '';
+    });
+
+    const clearLoginBtn = document.getElementById('clear--login');
+    clearLoginBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const loginInput = document.getElementById('reg-login');
+      loginInput.value = '';
+    });
+
+    const watchPassBtn = document.getElementById('watch--pass');
+    let isPassHide = true;
+    watchPassBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      isPassHide = !isPassHide;
+      const passInput = document.getElementById('reg-password');
+      if (isPassHide) {
+        passInput.type = 'password';
+      } else {
+        passInput.type = 'text';
+      }
+    });
+
+    const watchRepPassBtn = document.getElementById('watch--pass--repeat');
+    let isRepPassHide = true;
+    watchRepPassBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      isRepPassHide = !isRepPassHide;
+      const repPassInput = document.getElementById('reg-repeat-password');
+      if (isRepPassHide) {
+        repPassInput.type = 'password';
+      } else {
+        repPassInput.type = 'text';
+      }
+    });
   }
 
   /**

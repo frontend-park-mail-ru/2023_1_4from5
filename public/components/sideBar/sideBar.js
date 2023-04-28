@@ -2,6 +2,7 @@ import { clickHandler } from '../../modules/handler.js';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import template from './sideBar.handlebars';
+import { Actions } from '../../actions/actions';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -41,6 +42,17 @@ export class SideBar {
     logoBtn.addEventListener('click', (e) => {
       e.preventDefault();
       router.go(URLS.root);
+    });
+
+    const input = document.getElementById('find__input');
+    input.style.backgroundImage = 'url(../../images/search_icon.svg)';
+    input.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const content = input.value;
+        router.go(URLS.search, content);
+        Actions.searchAuthors(content);
+      }
     });
   }
 }

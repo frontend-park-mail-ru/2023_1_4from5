@@ -1,6 +1,7 @@
 import { dispatcher } from '../../dispatcher/dispatcher';
 import { request } from '../../modules/request';
 import { search } from './search';
+import { ActionTypes } from '../../actionTypes/actionTypes';
 
 class SearchStore {
   constructor() {
@@ -9,18 +10,26 @@ class SearchStore {
 
   reduce(action) {
     switch (action.type) {
+      case ActionTypes.SEARCH_AUTHORS:
+        this.renderSearch(action.input);
+        break;
+
       default:
         break;
     }
   }
 
-  async renderSearch() {
-    const creatorListRequest = await request.get('/api/creator/list');
+  async renderSearch(input) {
+    let creatorListRequest;
+    if (!input) {
+      creatorListRequest = await request.get('/api/creator/list');
+    } else {
+      creatorListRequest = await request.get(`/api/creator/search/${input}`);
+    }
     const creatorList = await creatorListRequest.json();
-    const authors = {
+    search.authors = {
       creatorList,
     };
-    search.authors = authors;
     search.render();
   }
 }

@@ -46,7 +46,7 @@ class UserStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.GET_USER:
-        const getPage = await request.get('/api/user/homePage');
+        const getPage = await request.get('/api/user/feed');
         const homePage = await getPage.json();
 
         const getUser = await request.get('/api/user/profile');
@@ -69,7 +69,7 @@ class UserStore {
   }
 
   async logout(parent) {
-    await request.get('/api/auth/logout');
+    await request.put('/api/auth/logout'); // TODO logout - PUT
     this.#user.loginIn = '';
     this.#user.usernameIn = '';
     this.#user.isAuthorIn = false;
