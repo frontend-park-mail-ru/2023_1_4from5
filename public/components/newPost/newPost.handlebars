@@ -25,6 +25,31 @@
             </div>
             <div id="newpost-text-error" class="error"></div>
         </div>
+        <div class="input-file-container">
+            <label class="input-file">
+                <input type="file" name="file" id="attach-photo-download" accept="image/jpeg, image/png, image/webp">
+                <span class="input-file-btn">Фото</span>
+                <span class="input-file-text">jpeg, png, webp</span>
+            </label>
+            <label class="input-file">
+                <input type="file" name="file" id="attach-video-download" accept="video/mp4, video/mpeg">
+                <span class="input-file-btn">Видео</span>
+                <span class="input-file-text">mp4, mpeg</span>
+            </label>
+            <label class="input-file">
+                <input type="file" name="file" id="attach-music-download" accept="audio/mp3, audio/mpeg">
+                <span class="input-file-btn">Аудио</span>
+                <span class="input-file-text">mp3, mpeg</span>
+            </label>
+        </div>
+
+        {{#each attachments}}
+            {{#if (isPhoto file.type)}}
+                <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+            {{/if}}
+
+        {{/each}}
+
 
         <div class="newpost-btn-container">
             <button id="newpost-btn" class="newpost-btn">Опубликовать</button>

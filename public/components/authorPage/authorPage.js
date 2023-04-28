@@ -115,7 +115,7 @@ class AuthorPage {
         Actions.renderDonateWin();
       });
     }
-
+    
     const createSubBtn = document.getElementById('create-sub-btn');
     if (createSubBtn) {
       createSubBtn.addEventListener('click', (event) => {
@@ -176,3 +176,4 @@ class AuthorPage {
 }
 
 export const authorPage = new AuthorPage(contentElement);
+
