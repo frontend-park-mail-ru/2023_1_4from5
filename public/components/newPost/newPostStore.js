@@ -9,7 +9,12 @@ import { color } from '../../consts/styles';
 
 document.querySelector('main');
 class NewPostStore {
+  #config;
+
   constructor() {
+    this.config = {
+      attachments: []
+    };
     dispatcher.register(this.reduce.bind(this));
   }
 
@@ -28,6 +33,18 @@ class NewPostStore {
           const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
           return request.put(`/api/post/edit/${postId}`, body, tokenEdit);
         });
+        break;
+
+      case ActionTypes.DOWNLOAD_ATTACH_PHOTO:
+        this.addAttachPhoto(action.file);
+        break;
+
+      case ActionTypes.DOWNLOAD_ATTACH_VIDEO:
+        await this.downloadAttachVideo(action.file);
+        break;
+
+      case ActionTypes.DOWNLOAD_ATTACH_AUDIO:
+        await this.downloadAttachAudio(action.file);
         break;
 
       default:
@@ -50,6 +67,7 @@ class NewPostStore {
   async sendPost(action, callback) {
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
+    console.log('text in post', createText, action.input.textInput);
     const errTitle = isValidTitlePost(createTitle);
     const errText = isValidTextPost(createText);
     const errorTitleOutput = action.input.errorTitleOutput;
@@ -85,6 +103,13 @@ class NewPostStore {
         action.input.textInput.style.backgroundColor = color.error;
       }
     }
+  }
+
+  addAttachPhoto(file) {
+    this.config.attachments.push(file);
+    newPost.config = this.config;
+    newPost.render();
+    console.log(this.config);
   }
 }
 

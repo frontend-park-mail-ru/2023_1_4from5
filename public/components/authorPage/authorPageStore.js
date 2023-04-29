@@ -52,7 +52,7 @@ class AuthorPageStore {
       case ActionTypes.SAVE_EDIT_AIM:
         this.saveEditAim(action.input);
         break;
-
+        
       default:
         break;
     }
