@@ -63,9 +63,11 @@ class AuthorPageStore {
     if (authorUrl) {
       creatorPage = await request.get(`/api/creator/page/${authorUrl}`);
     } else {
+      console.log(userStore.getUserState().authorURL);
       creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     }
     const result = await creatorPage.json();
+    console.log(result);
     result.posts.forEach((post) => {
       const textArr = post.text.split('\\n');
       post.textWithBreaks = [];
@@ -84,6 +86,7 @@ class AuthorPageStore {
   }
 
   async changeLikeState(action) {
+    console.log(action.postId);
     if (action.typeLike === 'addLike') {
       const result = await request.put('/api/post/addLike', { post_id: action.postId });
       if (result.ok) {
@@ -109,8 +112,7 @@ class AuthorPageStore {
 
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value.split(' ')
-      .join('');
+    let moneyNeeded = input.moneyNeededInput.value.split(' ').join('');
     const errDescriptionOutput = input.errorDescriptionOutput;
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
     const errDescription = isValidDescriptionAim(description);

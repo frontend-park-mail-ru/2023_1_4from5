@@ -1,177 +1,179 @@
-<div class="myPage-header-container" id="myPage-header-container">
-    <h1 class="myPage-header">
-        <img id="user-photo" width="50" src="../../images/user_photo.png" alt="user-photo">
-        {{creator_info.name}}
-    </h1>
-</div>
-<div id="myPage">
-    <div class="myPage-container">
-        <div class="box-1">
-            <div class="box1-btn-container">
-                {{#if is_my_page}}
-                    <button id="createPost-btn" class="subs-btn createPost__btn">Создать пост</button>
-                {{else}}
-                    {{#if isAuthorized }}
-                        <button id="subs-btn" class="subs-btn subme__btn inactive">Подписаться</button>
-                    {{/if}}
-                {{/if}}
-            </div>
-            <div class="box1-info box">
-                <p class="box1-info-text">
-                    <img id="circle-icon" width="10" src="../../images/circle_icon.png" alt="#">
-                    Подписчиков:  {{creator_info.followers_count}}
-                </p>
-                <p class="box1-info-text">
-                    <img id="circle-icon" width="10" src="../../images/circle_icon.png" alt="#">
-                    Доход в месяц: 10000 Руб
-                </p>
-            </div>
-            <div class="box1-info box">
-                {{#if is_my_page}}
-                    {{#if edit_aim}}
-                        <div class="box1-info-container">
-                            <h4>Цели</h4>
-                            <img id="pencil-icon-aim" class="pencil-icon" width="20"
-                                 src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
-                        </div>
-                        <div>{{ aim.description }}</div>
-                        <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
-                    {{else}}
-                        <div class="box1-info-container">
-                            <h4>Цели</h4>
-                            <img id="close-icon-aim" class="pencil-icon" width="20" src="../../images/close.png"
-                                 alt="close-icon">
-                        </div>
-                        <div>
-                            <div>
-                                <label for="description-edit-aim">Описание:</label>
-                            </div>
-                            <textarea id="description-edit-aim"></textarea>
-                            <div id="edit-aim-description-error" class="under-input-error-aim"></div>
+<img src="../../images/author-photo.svg" class="author__photo" alt="creator photo">
+<div id="author__header"></div>
 
-                            <div class="above-input-label-money-needed">
-                                <label for="money-needed-edit-aim">Цель:</label>
-                            </div>
-                            <input id="money-needed-edit-aim" type="text" value="{{ aim.money_needed }}">
-                            <div id="edit-aim-money-needed-error" class="under-input-error-aim"></div>
-                        </div>
-                        <button id="save-btn-aim" class="subs-btn">Сохранить</button>
-                    {{/if}}
-                {{else}}
-                    <div class="box1-info-container">
-                        <h4>Цели</h4>
-                    </div>
-                    <div>{{ aim.description }}</div>
-                    <p>{{aim.money_got}} из {{ aim.money_needed }} рублей</p>
-                    {{#if isAuthorized }}
-                        <div class="donate-btn-container">
-                            <button id="donate-btn-aim" class="subs-btn">Отправить донат</button>
-                        </div>
-                    {{/if}}
-                {{/if}}
-            </div>
+<!------------------------------------------------------------------------------------------------->
+<div class="author__container">
+
+    <div class="auth__service">
+        <div class="subscribers">
+            <h1>{{creator_info.followers_count}}</h1>
+            <h2>
+                <img class="followers__img" src="../../images/followers.svg" alt="followers">
+                подписчиков
+            </h2>
         </div>
 
-        <div class="box-2">
-            <div class="aboutAuthor-container box">
-                <div class="aboutAuthor-container-header">
-                    <h3>О моем блоге:</h3>
-                    {{#if is_my_page}}
-                        <!--                        <img id="pencil-icon-about" class="pencil-icon" width="20"-->
-                        <!--                             src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">-->
-                    {{/if}}
-                </div>
-                <p class="creator__description">{{creator_info.description}}</p>
-            </div>
-            {{#each posts}}
-                <div class="post-container box" id="{{id}}">
-                    <div class="post-container-header">
-                        <h4 class="post-title">{{title}}</h4>
-                        {{#if ../is_my_page}}
-                            <img id="pencil-icon" class="pencil-icon" width="20"
-                                 src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
-                            <img id="delete-icon" class="delete-icon" width="25" src="../../images/delete_ic_icon.png"
-                                 alt="delete-icon">
+        <div class="support">
+            {{#unless is_my_page}}
+                <button class="support__btn follow__btn">
+                    <img src="../../images/follow.svg" alt="follow">
+                    <p class="follow__btn--text">Отслеживать</p>
+                </button>
+                <button id="donate__btn" class="support__btn donate__btn">
+                    <img src="../../images/donate.svg" alt="donate">
+                    <p class="donate__btn--text">Отправить донат</p>
+                </button>
+            {{/unless}}
+        </div>
+
+        <div class="aim">
+            <p>Цель</p>
+            <div class="aim__container">
+                {{#if aim.description}}
+                    <h5>{{aim.money_got}} из {{aim.money_needed}}
+                        {{#if is_my_page}}
+                            <img src="../../images/delete.svg" alt="delete">
+                            <img src="../../images/edit.svg" alt="edit">
                         {{/if}}
-                    </div>
-
-                    {{#if is_available}}
-                        {{#each textWithBreaks}}
-                            <p class="post-text">{{text}}</p>
-                        {{/each}}
-                        {{#each attachments}}
-                            <audio id="audio" src="../../images/music_test.mp3" controls></audio>
-                            <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
-                            <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
-                            <input type="file" class="upload" id="attach-photo-upload"/>
-                        {{/each}}
+                    </h5>
+                    <p>{{aim.description}}</p>
+                {{else}}
+                    {{#if is_my_page}}
+                        <img id="aim__add" class="aim__add" src="../../images/add.svg" alt="add">
+                        <p class="text--default">У вас пока не выбрана цель</p>
                     {{else}}
-                        <p>--- Пост недоступен ---</p>
+                        <p class="text--default">У автора нет цели, есть только путь</p>
                     {{/if}}
-
-                    <div class="post-footer-container">
-                        <span class="like-container">
-                            {{#unless ../isAuthorized }}
-                                <img id="disable-like-icon" class="like-icon--disable" width="27"
-                                     src="../../images/disable_like_icon.png" alt="disable_like-icon">
-                            {{else}}
-                                {{#if ../is_my_page}}
-                                    <img id="disable-like-icon" class="like-icon--disable" width="27"
-                                         src="../../images/disable_like_icon.png" alt="disable_like-icon">
-                                {{else}}
-                                    {{#if is_liked}}
-                                        <img id="love-like-icon" class="like-icon" width="27"
-                                             src="../../images/love_like_icon.png" alt="love_like-icon">
-                                    {{else}}
-                                        <img id="like-icon" class="like-icon" width="25"
-                                             src="../../images/like_icon.png" alt="like-icon">
-                                    {{/if}}
-                                {{/if}}
-                            {{/unless}}
-                            <span>{{likes_count}}</span>
-                        </span>
-                        <img id="comment-icon" class="comment-icon inactive" width="25"
-                             src="../../images/comment_icon.png"
-                             alt="comment-icon">
-                    </div>
-                </div>
-            {{/each}}
+                {{/if}}
+            </div>
         </div>
-        <div class="box-3">
-            <div class="box-3__container box">
-                <div class="box3-header-container">
-                    <h3>Уровни подписки</h3>
-                </div>
-                <hr class="box-3__divider">
-                {{#each subscriptions}}
-                    <div id="{{id}}">
-                        <h4><span id="sub-title">{{ title }}</span>
+
+        {{#if is_my_page}}
+            <button id="create__post">Создать пост</button>
+        {{/if}}
+
+    </div>
+
+    <!------------------------------------------------------------------------------------------------>
+    <div class="auth__content">
+
+        <div class="about">
+            <h1 class="about__title">{{creator_info.name}}
+                {{#if is_my_page}}
+                    <img class="about__edit" src="../../images/edit.svg" alt="edit">
+                {{/if}}
+            </h1>
+            <p class="about__description">{{creator_info.description}}</p>
+        </div>
+
+        <div class="subs">
+            <div class="subs__title">
+                <p class="subs__title--text">Уровни подписки</p>
+                {{#if is_my_page}}
+                    <img id="subs__add" class="subs__add" src="../../images/add.svg" alt="add">
+                {{/if}}
+            </div>
+
+            <div class="sub__container">
+                {{#if subscriptions}}
+                    {{#each subscriptions}}
+                        <div id="{{id}}" class="sub__card">
+                            <div class="sub__title">
+                                <h3 class="sub__title--text">{{title}}</h3>
+                                <img id="sub__delete" src="../../images/delete.svg" alt="delete">
+                            </div>
+                            <p class="sub__description">{{description}}</p>
+                            <div class="sub__cost">
+                                <h1 class="cost">{{month_cost}}</h1>
+                                <h2 class="rpm">р/месяц</h2>
+                            </div>
+
                             {{#if ../is_my_page}}
-                                <img id="pencil-sub-icon" class="pencil-icon" width="20"
-                                     src="../../images/edit_pencil_write_icon.png" alt="pencil-icon">
-                                <img id="delete-sub-icon" class="delete-icon" width="25"
-                                     src="../../images/delete_ic_icon.png"
-                                     alt="delete-icon">
+                                <button id="sub__edit" class="sub__btn">
+                                    <img class="sub__edit" src="../../images/pencil.png" alt="pencil">
+                                    Изменить
+                                </button>
+                            {{else}}
+                                <button class="sub__btn sub__buy">Оформить</button>
                             {{/if}}
-                        </h4>
-                        <div class="box-3__money"><span id="sub-month_cost">{{month_cost}}</span> рублей</div>
-                        <div id="sub-description">{{description}}</div>
-                        <hr class="box-3__divider">
+                        </div>
+                    {{/each}}
+
+                {{else}}
+                    <p>У вас пока нет ни одной подписки</p>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="posts">
+            {{#if posts}}
+                {{#each posts}}
+                    <div id="{{id}}" class="post__container">
+                        <div class="post__header">
+                            <div class="post__privacy">
+                                <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
+                                {{#if subscriptions}}
+                                    Только для подписчиков
+                                {{else}}
+                                    Открыт для всех
+                                {{/if}}
+                            </div>
+                            <div class="post__date">
+                                {{#if ../is_my_page}}
+                                    <img id="edit__post" class="edit__img" src="../../images/edit.svg" alt="edit">
+                                    <img id="delete__post" class="delete__img" src="../../images/delete.svg" alt="delete">
+                                {{/if}}
+                                <p>{{creation_date}}</p>
+                            </div>
+                        </div>
+
+                        <div class="post__content">
+                            <h2 class="content__header">{{title}}</h2>
+                            {{#each textWithBreaks}}
+                                <p>{{text}}</p>
+                                <!--TODO attachments-->
+                            {{/each}}
+                            {{#each attachments}}
+                                <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+                                <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+                                <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+                                <input type="file" class="upload" id="attach-photo-upload"/>
+                            {{/each}}
+
+                            <div class="feedback">
+                                <div class="likes">
+                                    {{#if ../is_my_page}}
+                                        <img id="disable-like-icon" class="icon--like" src="../../images/disable_like_icon.png" alt="like--disable">
+                                    {{else}}
+                                        {{#if is_liked}}
+                                            <img id="love-like-icon" class="icon--like" src="../../images/love_like_icon.png" alt="like--liked">
+                                        {{else}}
+                                            <img id="like-icon" class="icon--like" src="../../images/like_icon.png" alt="like--enable">
+                                        {{/if}}
+                                    {{/if}}
+                                    {{likes_count}}
+                                </div>
+
+                                <div class="comments">
+                                    <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
+                                    0
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 {{/each}}
-                <div id="edit-btn-space">
-                    {{#if is_my_page }}
-                        <button id="create-sub-btn">Создание подписки</button>
-                    {{/if}}
+
+            {{else}}
+                <div class="posts--nothing">
+                    <p>Вы пока не добавили ни одного поста</p>
                 </div>
-            </div>
+            {{/if}}
         </div>
     </div>
-    <div id="footer">
-        <hr style="opacity: 75%;">
-        <!--        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a-->
-        <!--                href="https://t.me/averageqqq">TG</a></h6>-->
-        <p>Свяжитесь с нами в Телеграмм: @DESOLATE17 @qqq4u @IvanStukalovv @Vector102</p>
-    </div>
-
+</div>
+<div id="footer">
+    <hr style="opacity: 75%;">
+    <!--        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a-->
+    <!--                href="https://t.me/averageqqq">TG</a></h6>-->
+    <p>Свяжитесь с нами в Телеграмм: @DESOLATE17 @qqqq4u @IvanStukalovv @Vector102</p>
 </div>

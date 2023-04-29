@@ -34,27 +34,23 @@ class UserStore {
     this.#user.profilePhoto = user.profilePhoto;
   }
 
-  setState(homePage, profile) {
-    this.#user.usernameIn = homePage.name;
-    this.#user.isAuthorIn = homePage.is_creator;
+  setState(profile) {
     this.#user.isAuthorizedIn = true;
-    this.#user.authorURL = homePage.creator_id;
     this.#user.login = profile.login;
+    this.#user.usernameIn = profile.name;
     this.#user.profilePhoto = profile.profile_photo;
+    this.#user.isAuthorIn = profile.is_creator;
+    this.#user.authorURL = profile.creator_id;
   }
 
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.GET_USER:
-        const getPage = await request.get('/api/user/feed');
-        const homePage = await getPage.json();
-
         const getUser = await request.get('/api/user/profile');
         const profile = await getUser.json();
+        console.log(profile);
 
-        this.setState(homePage, profile);
-        console.log('homePage', homePage);
-        console.log('profile', profile);
+        this.setState(profile);
 
         Actions.renderSideBar(sideBarElement, this.#user);
         break;

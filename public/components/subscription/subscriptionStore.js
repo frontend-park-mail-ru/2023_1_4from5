@@ -51,6 +51,7 @@ class SubscriptionStore {
         break;
 
       case ActionTypes.UPDATE_SUB:
+        console.log(action.input);
         const tokenUpdate = await request.getHeader(`/api/subscription/edit/${action.id}`);
         await request.put(`/api/subscription/edit/${action.id}`, {
           creator: userStore.getUserState().authorURL,

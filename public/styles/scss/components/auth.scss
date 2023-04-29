@@ -1,6 +1,7 @@
 @import "../general/popup";
 @import "../general/input";
 @import "../general/variables";
+@import "../general/text";
 
 $popup-auth-width: 35%;
 $form-width: 60%;
@@ -14,6 +15,13 @@ $form-width: 60%;
 .auth__form {
   margin: auto;
   width: $form-width;
+}
+
+$auth-title-mt: 3em;
+
+.auth__title {
+  @extend .title;
+  margin-top: $auth-title-mt;
 }
 
 #auth__login, #auth__password {

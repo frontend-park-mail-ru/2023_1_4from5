@@ -1,0 +1,107 @@
+@import "../general/variables";
+
+$service-top: 8em;
+$service-width: 68%;
+
+.auth__service {
+  margin: $service-top auto 0 auto;
+  width: $service-width;
+}
+
+.subscribers {
+  font-size: $font-size;
+}
+
+
+.followers__img {
+  width: $img-width;
+  position: relative;
+  top: 5px;
+}
+
+$aim-top: 1.5em;
+
+.aim {
+  margin-top: $aim-top;
+  font-size: $font-size * 1.5;
+}
+
+.aim__container {
+  border-radius: $elem-border-radius;
+  background-color: $card-color;
+  text-align: center;
+  margin-bottom: 1em;
+  @include shadow();
+}
+
+$add-width: 10%;
+$add-top: 7px;
+
+.aim__add {
+  width: $add-width;
+  position: relative;
+  top: $add-top;
+  left: (53% - $add-width);
+
+  @include clickable();
+}
+
+.text--default {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: $text--default-color;
+  width: 70%;
+  margin: auto;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+$create-btn-height: 2.5em;
+
+
+#create__post {
+  height: $create-btn-height;
+  background-color: $create-btn-color;
+  color: black;
+  @include shadow();
+
+  &:hover {
+    background-color: $create-btn-color-hover;
+  }
+}
+
+.support__btn {
+  @include shadow();
+  height: $create-btn-height;
+  color: black;
+
+  text-align: start;
+  padding-left: 15%;
+  margin-top: 0.5em;
+
+  display: flex;
+
+  &:hover {
+    background-color: $create-btn-color;
+  }
+
+  & p {
+    padding-top: 0.6em;
+  }
+}
+
+.follow__btn {
+  background-color: $sub__btn-color;
+}
+
+.follow__btn--text {
+  margin-left: 0.5em;
+}
+
+.donate__btn {
+  background-color: $create-btn-color;
+}
+
+.donate__btn--text {
+  margin-left: 1em;
+}

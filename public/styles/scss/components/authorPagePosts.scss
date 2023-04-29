@@ -1,0 +1,85 @@
+@import "../general/variables";
+
+.posts {
+  margin-top: 3em;
+}
+
+$post-mt: 2em;
+
+.post__container {
+  margin-top: $post-mt;
+  padding: 1em 3em 1em 3em;
+  border-radius: $elem-border-radius;
+
+  background-color: $card-color;
+  @include shadow();
+}
+
+//---------header-------------//
+
+$post__header-grid: 75%;
+
+.post__header {
+  font-size: $font-size-2;
+  color: $text--default-color;
+
+  margin-bottom: 2em;
+
+  display: grid;
+  grid-template-columns:  $post__header-grid (100% - $post__header-grid);
+}
+
+$post__header-mr: 0.5em;
+
+.post__privacy {
+  display: flex;
+}
+
+.privacy__img {
+  width: ($img-width * 1.5);
+  margin-right: $post__header-mr;
+}
+
+.post__date {
+  display: flex;
+}
+
+.edit__img {
+  @include clickable();
+  margin-right: 0.5em;
+}
+
+.delete__img {
+  @include clickable();
+  margin-right: $post__header-mr;
+}
+
+//---------content-------------//
+
+.post__content {
+  width: 90%;
+  margin: auto;
+}
+
+.content__header {
+  margin-bottom: 1em;
+}
+
+.feedback {
+  margin-top: 1em;
+  display: flex;
+}
+
+.likes {
+  margin-right: 1em;
+}
+
+$feedback__img-width: 2em;
+
+.icon--like {
+  width: $feedback__img-width;
+}
+
+.icon--comments {
+  width: $feedback__img-width;
+}

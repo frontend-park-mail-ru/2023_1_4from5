@@ -34,10 +34,8 @@ class StartStore {
           userIn.isAuthorizedIn = true;
           userIn.login = result.login;
           userIn.profilePhoto = result.profile_photo;
-          const getPage = await request.get('/api/user/feed');
-          const userHomePage = await getPage.json();
-          userIn.authorURL = userHomePage.creator_id;
-          userIn.isAuthorIn = userHomePage.is_creator;
+          userIn.isAuthorIn = result.is_creator;
+          userIn.authorURL = result.creator_id;
         }
       }
     }
