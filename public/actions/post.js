@@ -24,4 +24,24 @@ export const ActionsPost = {
     });
   },
 
+  downloadAttachPhoto(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.DOWNLOAD_ATTACH_PHOTO,
+      file,
+    });
+  },
+
+  downloadAttachVideo(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.DOWNLOAD_ATTACH_VIDEO,
+      file,
+    });
+  },
+
+  downloadAttachAudio(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.DOWNLOAD_ATTACH_AUDIO,
+      file,
+    });
+  },
 };

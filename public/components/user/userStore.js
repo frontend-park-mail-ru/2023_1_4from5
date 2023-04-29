@@ -50,7 +50,13 @@ class UserStore {
         const profile = await getUser.json();
         console.log(profile);
 
+<<<<<<< HEAD
         this.setState(profile);
+=======
+        this.setState(homePage, profile);
+        console.log('homePage', homePage);
+        console.log('profile', profile);
+>>>>>>> refs/remotes/origin/flux
 
         Actions.renderSideBar(sideBarElement, this.#user);
         break;

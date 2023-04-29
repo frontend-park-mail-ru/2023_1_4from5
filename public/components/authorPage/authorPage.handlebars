@@ -35,12 +35,27 @@
                             <img src="../../images/delete.svg" alt="delete">
                             <img src="../../images/edit.svg" alt="edit">
                         {{/if}}
+<<<<<<< HEAD
                     </h5>
                     <p>{{aim.description}}</p>
                 {{else}}
                     {{#if is_my_page}}
                         <img id="aim__add" class="aim__add" src="../../images/add.svg" alt="add">
                         <p class="text--default">У вас пока не выбрана цель</p>
+=======
+                    </div>
+
+                    {{#if is_available}}
+                        {{#each textWithBreaks}}
+                            <p class="post-text">{{text}}</p>
+                        {{/each}
+                        {{#each attachments}}
+                            <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+                            <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+                            <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+                            <input type="file" class="upload" id="attach-photo-upload"/>
+                        {{/each}}
+>>>>>>> refs/remotes/origin/flux
                     {{else}}
                         <p class="text--default">У автора нет цели, есть только путь</p>
                     {{/if}}

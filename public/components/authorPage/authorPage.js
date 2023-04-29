@@ -108,8 +108,13 @@ class AuthorPage {
         Actions.renderDonateWin();
       });
     }
+<<<<<<< HEAD
 
     const createSubBtn = document.getElementById('subs__add');
+=======
+    
+    const createSubBtn = document.getElementById('create-sub-btn');
+>>>>>>> refs/remotes/origin/flux
     if (createSubBtn) {
       createSubBtn.addEventListener('click', (event) => {
         event.preventDefault();
@@ -170,3 +175,4 @@ class AuthorPage {
 }
 
 export const authorPage = new AuthorPage(contentElement);
+

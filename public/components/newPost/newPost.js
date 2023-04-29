@@ -27,19 +27,54 @@ class NewPost {
   }
 
   render() {
+    console.log('store1', this.config);
+    Handlebars.registerHelper('isPhoto', (value) => value.startsWith('image/'));
+    Handlebars.registerHelper('isVideo', (value) => value.startsWith('video/'));
+    Handlebars.registerHelper('isAudio', (value) => value.startsWith('audio/'));
+    console.log('store2', this.config);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
+    console.log('store2.1', this.config);
+
     newDiv.innerHTML = template(this.#config);
+    console.log('store2.2', this.config);
+
     this.#parent.appendChild(newDiv);
+    console.log('store3', this.config);
 
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
       e.preventDefault();
       router.popstate();
     });
+
+    const photoInput = document.querySelector('#attach-photo-download');
+    photoInput.addEventListener('change', (event) => {
+      event.preventDefault();
+      const files = event.target.files;
+      console.log('photo', files);
+      Actions.downloadAttachPhoto(files[0]);
+    });
+
+    const videoInput = document.querySelector('#attach-video-download');
+    videoInput.addEventListener('change', (event) => {
+      event.preventDefault();
+      const files = event.target.files;
+      console.log('video', files);
+      Actions.downloadAttachVideo(files[0]);
+    });
+
+    const audioInput = document.querySelector('#attach-music-download');
+    audioInput.addEventListener('change', (event) => {
+      event.preventDefault();
+      const files = event.target.files;
+      console.log('music', files);
+      Actions.downloadAttachAudio(files[0]);
+    });
   }
 
+  // TODO в чём проблем засунуть это в рендер?
   publish() {
     const titleInput = document.getElementById('newpost-title-input');
     const textInput = document.getElementById('newpost-text-input');
@@ -82,3 +117,15 @@ class NewPost {
 }
 
 export const newPost = new NewPost(contentElement);
+
+// TODO чтобы можно было вставлять аттачи прямо в input поле, нужно заменить textarea на следующее:
+//  <div class="newpost-text-input-container" contenteditable="true">
+
+// TODO указать, какие именно расширения доступны и правильно подставлять их (из запросов брать)
+
+// {{#if (isVideo file.type)}}
+// <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+// {{/if}}
+//   {{#if (isAudio file.type)}}
+//   <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+//   {{/if}}

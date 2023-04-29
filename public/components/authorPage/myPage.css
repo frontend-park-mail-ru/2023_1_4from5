@@ -1,0 +1,198 @@
+#myPage {
+    background-color: #eee;
+}
+.myPage-container {
+    margin-left: 7em;
+    margin-right: 10em;
+    padding-top: 1em;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 20% 60% 20%;
+    min-height: 41em;
+}
+
+.myPage-header-container {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.post-container {
+    border: 1px solid #7f7e7e;
+    border-radius: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-bottom: 0.2em;
+    margin-top: 1.5em;
+}
+
+.aboutAuthor-container {
+    border: 1px solid #7f7e7e;
+    border-radius: 0.5em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    margin-bottom: 1em;
+}
+
+.aboutAuthor-container-header {
+    display: grid;
+    grid-template-columns: 95% 5%;
+}
+
+.post-container-header {
+    display: grid;
+    grid-template-columns: 90% 5% 5%;
+}
+
+.myPage-header {
+    margin: 0;
+    top: 0;
+    left: 0;
+    padding-left: 25%;
+    padding-top: 4em;
+    padding-bottom: 1em;
+}
+
+.box1-btn-container {
+    text-align: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.3em;
+}
+
+.box1-info-container {
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.box1-info {
+    border: 1px solid #7f7e7e;
+    margin-bottom: 2em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.box-3__container {
+    border: 1px solid #7f7e7e;
+    margin-bottom: 2em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.box-3__divider {
+    color: #7f7e7e;
+}
+
+.box-3__money {
+    padding-bottom: 1em;
+}
+
+#description-edit-aim {
+    resize: vertical;
+    width: 80%;
+}
+
+#money-needed-edit-aim {
+    width: 80%;
+    /*margin-bottom: 1em;*/
+}
+
+/*в будущем можно для label создать общий класс*/
+.above-input-label-money-needed {
+    margin-top: 1em;
+}
+
+.box3-header-container {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.subs-btn {
+    margin-top: 1em;
+    /*margin: auto;*/
+    min-height: 2em;
+    height: min-content;
+    width: 80%;
+    background-color: #333;
+    color: white;
+    font-size: 1.3em;
+}
+
+.subs-btn:hover {
+    background-color: #000;
+}
+
+.subme__btn {
+    background-color: #eee;
+}
+
+.subme__btn:hover {
+    background-color: #eee;
+}
+
+.createPost__btn {
+    width: 100%;
+}
+
+#donate-btn-aim {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#circle-icon {
+    margin-left: 0.5em;
+}
+
+.pencil-icon {
+    margin-top: 1em;
+    cursor: pointer;
+}
+
+#delete-icon {
+    margin-top: 0.85em;
+    cursor: pointer;
+}
+
+#myPage_phone {
+    width: 100%;
+}
+
+.settings-icon {
+    position: absolute;
+    right: 1.3%;
+    top: 5em;
+    cursor: pointer;
+}
+
+.like-container {
+    cursor: pointer;
+}
+
+.like-icon, #comment-icon {
+    margin-left: 1em;
+    /*cursor: pointer;*/
+}
+
+#pencil-icon-about {
+    margin-top: 0;
+}
+
+#user-photo {
+    margin-right: 0.7em;
+}
+
+.under-input-error-aim {
+    color: red;
+    font-size: smaller;
+}
+
+.cretor__description {
+    font-size: 1.2em;
+}
+
+.box {
+    background-color: #f8f8f8;
+}
