@@ -3,7 +3,9 @@
     <div class="sideBar__menu">
         <div class="sidebar__info">
             {{#if about.showDisplay}}
-                <a id="{{about.id}}" class="sidebar__href inactive" href={{abput.href}}> {{about.name}} </a>
+                <div class="{{about.id}}">
+                    <a id="{{about.id}}" class="sidebar__href hover--underline" href={{abput.href}}> {{about.name}} </a>
+                </div>
             {{/if}}
         </div>
 
@@ -15,7 +17,7 @@
             {{#if findAuth.showDisplay}}
                 <a id="{{findAuth.id}}" class="sidebar__href hover--underline"
                    href={{findAuth.href}}> {{findAuth.name}} </a>
-            <input class="find__input" id="find__input" type="text" placeholder="Поиск авторов">
+                <input class="find__input" id="find__input" type="text" placeholder="Поиск авторов">
             {{/if}}
         </div>
 
@@ -33,6 +35,9 @@
                 <a id="{{auth.id}}" class="sidebar__href hover--underline" href={{auth.href}}> {{auth.name}} </a>
             {{/if}}
             {{#if modalWindow.showDisplay}}
+
+                <img class="user__photo" src="../../images/{{modalWindow.photo}}.jpg" alt="фото">
+
                 <a id="{{modalWindow.id}}" class="sidebar__href hover--underline"
                    href={{modalWindow.href}}> {{modalWindow.name}} </a>
             {{/if}}

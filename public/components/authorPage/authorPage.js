@@ -98,7 +98,7 @@ class AuthorPage {
     //       moneyNeededInput,
     //       errorDescriptionOutput,
     //       errorMoneyNeededOutput,
-    //     });
+    //     });Поляков
     //   });
     // }
 
@@ -129,6 +129,22 @@ class AuthorPage {
       const button = deleteSubBtns[index];
       button.addEventListener('click', this.deleteSubHandler);
     }
+
+    const followBtn = document.getElementById('follow__btn');
+    if (followBtn) {
+      followBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.follow(followBtn.parentElement.id);
+      });
+    }
+
+    const unfollowBtn = document.getElementById('unfollow__btn');
+    if (unfollowBtn) {
+      unfollowBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.unfollow(unfollowBtn.parentElement.id);
+      });
+    }
   }
 
   deleteHandler(e) {
@@ -152,7 +168,6 @@ class AuthorPage {
   updateSubHandler(e) {
     e.preventDefault();
     const subscription = document.getElementById(e.currentTarget.parentElement.id);
-    console.log(subscription);
     const titleContainer = subscription.querySelector('.sub__title--text');
     const title = titleContainer.textContent;
 
@@ -162,7 +177,7 @@ class AuthorPage {
     const costContainer = subscription.querySelector('.cost');
     const cost = costContainer.textContent;
 
-    Actions.renderUpdatingSubscription(e.currentTarget.parentElement.parentElement.id, {
+    Actions.renderUpdatingSubscription(e.currentTarget.parentElement.id, {
       title,
       description,
       cost,
@@ -171,4 +186,3 @@ class AuthorPage {
 }
 
 export const authorPage = new AuthorPage(contentElement);
-

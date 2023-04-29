@@ -16,12 +16,11 @@ class SideBarStore {
     this.#config = {
       about: {
         name: 'О нас',
-        href: '/about',
+        href: URLS.root,
         id: 'sidebar__about',
         showDisplay: true,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       feed: {
         name: 'Лента',
@@ -75,6 +74,7 @@ class SideBarStore {
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
+        photo: 'author-photo', // TODO hardcode -> userStore.getUserState().profilePhoto
         href: '/modalWindow',
         id: 'sidebar__modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,

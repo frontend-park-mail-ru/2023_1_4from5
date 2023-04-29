@@ -56,7 +56,6 @@ export const ActionTypes = {
   DOWNLOAD_ATTACH_VIDEO: 'DOWNLOAD_ATTACH_VIDEO',
   DOWNLOAD_ATTACH_AUDIO: 'DOWNLOAD_ATTACH_AUDIO',
 
-
   // become authorPage
   BECOME_AUTHOR: 'BECOME_AUTHOR',
 
@@ -72,4 +71,8 @@ export const ActionTypes = {
   CREATE_SUB: 'CREATE_SUB',
   UPDATE_SUB: 'UPDATE_SUB',
   DELETE_SUB: 'DELETE_SUB',
+
+  // subscribe
+  FOLLOW: 'FOLLOW',
+  UNFOLLOW: 'UNFOLLOW',
 };
