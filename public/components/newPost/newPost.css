@@ -147,10 +147,18 @@
     background-color: #eee;
 }
 
-.preview {
+.preview-container {
     max-width: 500px;
 }
 
-.image-preview {
+.img-preview {
+    max-width: inherit;
+}
+
+.video-preview {
+    max-width: inherit;
+}
+
+.audio-preview {
     max-width: inherit;
 }

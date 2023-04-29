@@ -32,29 +32,33 @@ class NewPost {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
+    newDiv.innerHTML = template(this.#config);
+    this.#parent.appendChild(newDiv);
+    console.log('store3', this.config);
+
     if (this.config) {
       if (this.config.attachments) {
-        console.log('store2');
-        // const divPreview = document.getElementById('preview');
-        // for (const groupAttach of this.config.attachments) {
-        //   for (const attach in groupAttach) {
-        //     console.log('1');
-        //     let src = URL.createObjectURL(files[0]);
-        //     const imagePreview = document.createElement('img');
-        //     imagePreview.className = 'image-preview';
-        //     console.log(src, imagePreview);
-        //     imagePreview.src = src;
-        //     imagePreview.style.display = 'block';
-        //     divPreview.append(imagePreview);
-        //   }
-        // }
+        console.log('store2', this.config.attachments);
+        const divPreview = document.getElementById('preview');
+        console.log(divPreview);
+        for (const groupAttach in this.config.attachments) {
+          console.log(groupAttach, this.config.attachments[groupAttach]);
+          for (const attach of this.config.attachments[groupAttach]) {
+            console.log('1');
+            console.log('11111', attach, groupAttach);
+            let src = URL.createObjectURL(attach);
+            const attachPreview = document.createElement(groupAttach);
+            attachPreview.className = `${groupAttach}-preview`;
+            console.log(src, attachPreview);
+            attachPreview.src = src;
+            attachPreview.controls = true;
+            attachPreview.style.display = 'block';
+            divPreview.append(attachPreview);
+          }
+        }
       }
       console.log('store2.1', this.config);
     }
-
-    newDiv.innerHTML = template(this.#config);
-
-    this.#parent.appendChild(newDiv);
 
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
@@ -68,24 +72,24 @@ class NewPost {
       event.preventDefault();
       const files = event.target.files;
       console.log('add change photo', files);
-      Actions.downloadAttachPhoto(files[0]);
+      Actions.downloadAttach(files[0]);
     });
 
     const videoInput = document.querySelector('#attach-video-download');
     videoInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      Actions.downloadAttachVideo(files[0]);
+      console.log('video', files);
+      Actions.downloadAttach(files[0]);
     });
 
     const audioInput = document.querySelector('#attach-music-download');
     audioInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      Actions.downloadAttachAudio(files[0]);
+      console.log('music', files);
+      Actions.downloadAttach(files[0]);
     });
-
-
   }
 
   // TODO в чём проблем засунуть это в рендер?
