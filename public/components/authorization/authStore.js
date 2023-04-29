@@ -38,6 +38,8 @@ class AuthStore {
           password,
           errLogin,
           errPassword,
+          loginForm: action.input.loginForm,
+          passwordForm: action.input.passwordForm,
         });
         break;
 

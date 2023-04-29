@@ -1,6 +1,6 @@
 @import "../general/variables";
 
-$service-top: 8em;
+$service-top: 25%;
 $service-width: 68%;
 
 .auth__service {
@@ -54,6 +54,7 @@ $add-top: 7px;
   margin: auto;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
+  text-align: center;
 }
 
 $create-btn-height: 2.5em;

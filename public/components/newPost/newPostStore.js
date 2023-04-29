@@ -63,7 +63,6 @@ class NewPostStore {
   async sendPost(action, callback) {
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
-    console.log('text in post', createText, action.input.textInput);
     const errTitle = isValidTitlePost(createTitle);
     const errText = isValidTextPost(createText);
     const errorTitleOutput = action.input.errorTitleOutput;
