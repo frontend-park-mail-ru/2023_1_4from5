@@ -79,8 +79,10 @@ export class Auth {
     const passwordInput = document.getElementById('auth__password');
     const errorOutput = document.getElementById('auth__error');
 
-    loginInput.style.backgroundColor = color.field;
-    passwordInput.style.backgroundColor = color.field;
+    const loginForm = document.getElementById('login--form');
+    const passwordForm = document.getElementById('password--form');
+    loginForm.style.backgroundColor = color.field;
+    passwordForm.style.backgroundColor = color.field;
 
     submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -88,13 +90,15 @@ export class Auth {
         loginInput,
         passwordInput,
         errorOutput,
+        loginForm,
+        passwordForm,
       });
     });
   }
 
   async authorization(input) {
-    input.loginInput.style.backgroundColor = color.field;
-    input.passwordInput.style.backgroundColor = color.field;
+    input.loginForm.style.backgroundColor = color.field;
+    input.passwordForm.style.backgroundColor = color.field;
 
     if (!input.errLogin && !input.errPassword) {
       const signIn = await request.post('/api/auth/signIn', {
@@ -106,15 +110,15 @@ export class Auth {
         Actions.removeAuth();
         router.go(URLS.root);
       } else {
-        input.loginInput.style.backgroundColor = color.error;
-        input.passwordInput.style.backgroundColor = color.error;
+        input.loginForm.style.backgroundColor = color.error;
+        input.passwordForm.style.backgroundColor = color.error;
         input.errorOutput.innerHTML = '';
         input.errorOutput.innerHTML = 'Неверный логин или пароль';
       }
     } else {
       // TODO чтобы не подсказывать юзеру, где именно ошибка, подсвечивать лучше оба поля
-      input.loginInput.style.backgroundColor = color.error;
-      input.passwordInput.style.backgroundColor = color.error;
+      input.loginForm.style.backgroundColor = color.error;
+      input.passwordForm.style.backgroundColor = color.error;
       // if (input.errLogin) {
       //   input.loginInput.style.backgroundColor = color.error;
       // }

@@ -45,7 +45,9 @@ $reg-title-mb: 1em;
   margin-bottom: 0;
 }
 
-#reg-username, #reg-login, #reg-password, #reg-repeat-password {
+.reg__input {
+  background: none;
+
   height: 95%;
   width: 90%;
 

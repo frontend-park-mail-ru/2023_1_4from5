@@ -1,0 +1,36 @@
+@import "../general/variables";
+
+$search__container-padding: 5%;
+$num-of-columns: 4;
+
+.search__container {
+  padding: $search__container-padding;
+  display: grid;
+  grid-template-columns: (100% / $num-of-columns) (100% / $num-of-columns) (100% / $num-of-columns) (100% / $num-of-columns);
+}
+
+$creator__card-width: 80%;
+$creator__card-height: 20em;
+$creator__card-offset-bottom: 5em;
+
+.creator__card {
+  width: $creator__card-width;
+  height: $creator__card-height;
+  margin: 0 auto $creator__card-offset-bottom auto;
+
+  border-radius: $elem-border-radius;
+
+  background-color: $card-color;
+}
+
+.followers {
+  display: flex;
+}
+
+.search__photo {
+  width: 40%;
+}
+
+.search__info {
+  text-align: center;
+}

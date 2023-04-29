@@ -61,7 +61,8 @@ class AuthorPage {
       const likeIcon = likeIcons[index];
       likeIcon.addEventListener('click', (event) => {
         const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
-        Actions.clickLike(eventLike,
+        Actions.clickLike(
+          eventLike,
           event.target.parentElement.parentElement.parentElement.parentElement.id);
       });
     }
@@ -132,12 +133,12 @@ class AuthorPage {
 
   deleteHandler(e) {
     e.preventDefault();
-    Actions.deletePost(e.currentTarget.parentElement.id);
+    Actions.deletePost(e.currentTarget.parentElement.parentElement.parentElement.id);
   }
 
   updateHandler(e) {
     e.preventDefault();
-    const postId = e.currentTarget.parentElement.id;
+    const postId = e.currentTarget.parentElement.parentElement.parentElement.id;
     router.go(URLS.editPost, {
       postId,
     }, postId);
