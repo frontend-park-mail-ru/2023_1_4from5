@@ -26,6 +26,7 @@ class Search {
   }
 
   render() {
+    console.log(this.#authors);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'searchDiv';

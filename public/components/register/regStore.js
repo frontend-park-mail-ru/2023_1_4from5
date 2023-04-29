@@ -54,6 +54,10 @@ class RegStore {
           errLogin,
           errUsername,
           errPassword,
+          usernameForm: action.input.usernameForm,
+          loginForm: action.input.loginForm,
+          passwordForm: action.input.passwordForm,
+          repeatForm: action.input.repeatForm,
         });
         break;
 

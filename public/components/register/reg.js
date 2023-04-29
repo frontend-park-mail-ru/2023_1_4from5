@@ -104,10 +104,15 @@ export class Register {
     const errorPasswordOutput = document.getElementById('reg-password-error');
     const errorRepeatPasswordOutput = document.getElementById('reg-repeat-password-error');
 
-    loginInput.style.backgroundColor = color.field;
-    usernameInput.style.backgroundColor = color.field;
-    passwordInput.style.backgroundColor = color.field;
-    passwordRepeatInput.style.backgroundColor = color.field;
+    const usernameForm = document.getElementById('username__form');
+    const loginForm = document.getElementById('login__form');
+    const passwordForm = document.getElementById('password__form');
+    const repeatForm = document.getElementById('password--repeat__form');
+
+    usernameForm.style.backgroundColor = color.field;
+    loginForm.style.backgroundColor = color.field;
+    passwordForm.style.backgroundColor = color.field;
+    repeatForm.style.backgroundColor = color.field;
 
     submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -121,15 +126,19 @@ export class Register {
         errorUsernameOutput,
         errorPasswordOutput,
         errorRepeatPasswordOutput,
+        usernameForm,
+        loginForm,
+        passwordForm,
+        repeatForm,
       });
     });
   }
 
   async validation(input) {
-    input.loginInput.style.backgroundColor = color.field;
-    input.usernameInput.style.backgroundColor = color.field;
-    input.passwordInput.style.backgroundColor = color.field;
-    input.passwordRepeatInput.style.backgroundColor = color.field;
+    input.usernameForm.style.backgroundColor = color.field;
+    input.loginForm.style.backgroundColor = color.field;
+    input.passwordForm.style.backgroundColor = color.field;
+    input.repeatForm.style.backgroundColor = color.field;
 
     input.errorLoginOutput.innerHTML = '';
     input.errorUsernameOutput.innerHTML = '';
@@ -138,20 +147,20 @@ export class Register {
     input.errorOutput.innerHTML = '';
 
     if (input.errLogin) {
-      input.loginInput.style.backgroundColor = color.error;
+      input.loginForm.style.backgroundColor = color.error;
       input.errorLoginOutput.innerHTML = '';
       input.errorLoginOutput.innerHTML = input.errLogin;
     } else if (input.errUsername) {
-      input.usernameInput.style.backgroundColor = color.error;
+      input.usernameForm.style.backgroundColor = color.error;
       input.errorUsernameOutput.innerHTML = '';
       input.errorUsernameOutput.innerHTML = input.errUsername;
     } else if (input.errPassword) {
-      input.passwordInput.style.backgroundColor = color.error;
+      input.passwordForm.style.backgroundColor = color.error;
       input.errorPasswordOutput.innerHTML = '';
       input.errorPasswordOutput.innerHTML = input.errPassword;
     } else if (input.password !== input.repeatPassword) {
-      input.passwordInput.style.backgroundColor = color.error;
-      input.passwordRepeatInput.style.backgroundColor = color.error;
+      input.passwordForm.style.backgroundColor = color.error;
+      input.repeatForm.style.backgroundColor = color.error;
       input.errorRepeatPasswordOutput.innerHTML = '';
       input.errorRepeatPasswordOutput.innerHTML = 'Пароли не совпадают';
     } else {
