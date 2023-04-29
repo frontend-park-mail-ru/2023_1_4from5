@@ -1,5 +1,4 @@
-$title-font-size: 36px;
-$title-margin-top: 3em;
+@import "variables";
 $title-margin-bottom: 2em;
 
 $href-color: #222;
@@ -9,16 +8,11 @@ a {
   color: $href-color;
 }
 
-h3 {
-  margin: 0;
-}
-
-p {
+p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
 .title {
-  margin-top: $title-margin-top;
   margin-bottom: $title-margin-bottom;
   font-size: $title-font-size;
   text-align: center;

@@ -1,6 +1,9 @@
 $font-size: 16px;
+$font-size-2: 20px;
+$font-size-3: 24px;
+$title-font-size: 36px;
 
-$elem-border-radius: 10px;
+$elem-border-radius: 15px;
 $block-border-radius: 2em;
 
 $text-color: green;
@@ -26,3 +29,18 @@ $hr-width: 2px;
 @mixin non-clickable() {
   cursor: default;
 }
+
+$shadow-color: #b7b7b7;
+$shadow-len: 5px;
+
+@mixin shadow() {
+  box-shadow: $shadow-len $shadow-len $shadow-len $shadow-color;
+}
+
+$img-width: 1em;
+
+$card-color: #F8F8F9;
+$sub__btn-color: #ECEBF0;
+$text--default-color: #A3A3A3;
+$create-btn-color: #D9F1DF;
+$create-btn-color-hover: #bae7c6;

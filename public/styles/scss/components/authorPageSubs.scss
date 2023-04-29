@@ -1,0 +1,79 @@
+@import "../general/popup";
+@import "../general/variables";
+
+$sub__container-offset: 1em;
+
+.sub__container {
+  background-color: $card-color;
+  @include shadow();
+
+  display: flex;
+  margin-top: $sub__container-offset;
+  padding-top: $sub__container-offset;
+  padding-bottom: $sub__container-offset;
+
+  border-radius: $elem-border-radius;
+}
+
+$sub__card-width: 20%;
+
+.sub__card {
+  background-color: $popup-color;
+  width: $sub__card-width;
+  margin: 0 auto 0 auto;
+  padding: 1.5em;
+
+  border-radius: $elem-border-radius;
+}
+
+.sub__title {
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
+
+#sub__delete {
+  @include clickable();
+}
+
+$sub__card-offset: 10%;
+
+.sub__description {
+  margin-top: $sub__card-offset;
+}
+
+.sub__cost {
+  display: flex;
+  margin-top: $sub__card-offset;
+}
+
+.cost {
+  margin-right: 0.5em;
+}
+
+.rpm {
+  margin-top: 0.3em;
+}
+
+.sub__btn {
+  background-color: $sub__btn-color;
+  color: black;
+  height: 2em;
+
+  margin-top: 1em;
+  padding-right: 1em;
+
+  @include shadow();
+
+  &:hover {
+    background-color: $create-btn-color;
+  }
+}
+
+.sub__buy {
+  padding: 0;
+}
+
+.sub__edit {
+  width: $img-width;
+  margin-right: 0.3em;
+}

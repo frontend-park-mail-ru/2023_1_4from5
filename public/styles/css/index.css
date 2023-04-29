@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .background--popup {
   position: fixed;
   top: 0;
@@ -33,12 +32,20 @@ main {
   margin-top: 4em;
 }
 
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 button {
   background-color: #000;
   color: white;
   font-size: 20.8px;
   border-width: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 100%;
   height: 60px;
   cursor: pointer;
@@ -61,16 +68,11 @@ a {
   color: #222;
 }
 
-h3 {
+p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-p {
-  margin: 0;
-}
-
-.title, .reg__title {
-  margin-top: 3em;
+.title, .reg__title, .auth__title {
   margin-bottom: 2em;
   font-size: 36px;
   text-align: center;
@@ -81,7 +83,7 @@ p {
   height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
-  border-radius: 10px;
+  border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
 }
@@ -98,9 +100,24 @@ p {
   height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
-  border-radius: 10px;
+  border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+.title, .reg__title, .auth__title {
+  margin-bottom: 2em;
+  font-size: 36px;
+  text-align: center;
 }
 
 .auth__container {
@@ -118,6 +135,10 @@ p {
 .auth__form {
   margin: auto;
   width: 60%;
+}
+
+.auth__title {
+  margin-top: 3em;
 }
 
 #auth__login, #auth__password {
@@ -164,7 +185,7 @@ p {
   height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
-  border-radius: 10px;
+  border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
 }
@@ -174,16 +195,11 @@ a {
   color: #222;
 }
 
-h3 {
+p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-p {
-  margin: 0;
-}
-
-.title, .reg__title {
-  margin-top: 3em;
+.title, .reg__title, .auth__title {
   margin-bottom: 2em;
   font-size: 36px;
   text-align: center;
@@ -194,9 +210,24 @@ p {
   height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
-  border-radius: 10px;
+  border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+.title, .reg__title, .auth__title {
+  margin-bottom: 2em;
+  font-size: 36px;
+  text-align: center;
 }
 
 .auth__container {
@@ -214,6 +245,10 @@ p {
 .auth__form {
   margin: auto;
   width: 60%;
+}
+
+.auth__title {
+  margin-top: 3em;
 }
 
 #auth__login, #auth__password {
@@ -356,7 +391,7 @@ p {
   padding-left: 2em;
   height: 2em;
   width: 45%;
-  border-radius: 10px;
+  border-radius: 15px;
   border: 0;
   background-color: #EBEDF0;
   background-position: 2%;
@@ -400,218 +435,381 @@ p {
   margin-right: 0;
 }
 
-#myPage {
-  background-color: #eee;
+.auth__service {
+  margin: 8em auto 0 auto;
+  width: 68%;
 }
 
-.myPage-container {
-  margin-left: 7em;
-  margin-right: 10em;
-  padding-top: 1em;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 20% 60% 20%;
-  min-height: 41em;
+.subscribers {
+  font-size: 16px;
 }
 
-.myPage-header-container {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.followers__img {
+  width: 1em;
+  position: relative;
+  top: 5px;
 }
 
-.post-container {
-  border: 1px solid #7f7e7e;
-  border-radius: 0.5em;
-  padding-right: 1em;
-  padding-left: 1em;
-  padding-bottom: 0.2em;
+.aim {
   margin-top: 1.5em;
+  font-size: 24px;
 }
 
-.aboutAuthor-container {
-  border: 1px solid #7f7e7e;
-  border-radius: 0.5em;
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  margin-bottom: 1em;
-}
-
-.aboutAuthor-container-header {
-  display: grid;
-  grid-template-columns: 95% 5%;
-}
-
-.post-container-header {
-  display: grid;
-  grid-template-columns: 90% 5% 5%;
-}
-
-.myPage-header {
-  margin: 0;
-  top: 0;
-  left: 0;
-  padding-left: 25%;
-  padding-top: 4em;
-  padding-bottom: 1em;
-}
-
-.box1-btn-container {
+.aim__container {
+  border-radius: 15px;
+  background-color: #F8F8F9;
   text-align: center;
-  padding-top: 1.5em;
-  padding-bottom: 1.3em;
+  margin-bottom: 1em;
+  box-shadow: 5px 5px 5px #b7b7b7;
 }
 
-.box1-info-container {
-  margin-left: 2%;
-  display: grid;
-  grid-template-columns: 80% 20%;
+.aim__add {
+  width: 10%;
+  position: relative;
+  top: 7px;
+  left: 43%;
+  cursor: pointer;
 }
 
-.box1-info {
-  border: 1px solid #7f7e7e;
-  margin-bottom: 2em;
-  padding: 0.5em 0.5em 0.5em 0.5em;
+.text--default {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #A3A3A3;
+  width: 70%;
+  margin: auto;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
-.box-3__container {
-  border: 1px solid #7f7e7e;
-  margin-bottom: 2em;
-  padding: 0.5em 0.5em 0.5em 0.5em;
+#create__post {
+  height: 2.5em;
+  background-color: #D9F1DF;
+  color: black;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+#create__post:hover {
+  background-color: #bae7c6;
 }
 
-.box-3__divider {
-  color: #7f7e7e;
+.support__btn {
+  box-shadow: 5px 5px 5px #b7b7b7;
+  height: 2.5em;
+  color: black;
+  text-align: start;
+  padding-left: 15%;
+  margin-top: 0.5em;
+  display: flex;
+}
+.support__btn:hover {
+  background-color: #D9F1DF;
+}
+.support__btn p {
+  padding-top: 0.6em;
 }
 
-.box-3__money {
-  padding-bottom: 1em;
+.follow__btn {
+  background-color: #ECEBF0;
 }
 
-#description-edit-aim {
-  resize: vertical;
-  width: 80%;
+.follow__btn--text {
+  margin-left: 0.5em;
 }
 
-#money-needed-edit-aim {
-  width: 80%;
-  /*margin-bottom: 1em;*/
+.donate__btn {
+  background-color: #D9F1DF;
 }
 
-/*в будущем можно для label создать общий класс*/
-.above-input-label-money-needed {
+.donate__btn--text {
+  margin-left: 1em;
+}
+
+.auth__service {
+  margin: 8em auto 0 auto;
+  width: 68%;
+}
+
+.subscribers {
+  font-size: 16px;
+}
+
+.followers__img {
+  width: 1em;
+  position: relative;
+  top: 5px;
+}
+
+.aim {
+  margin-top: 1.5em;
+  font-size: 24px;
+}
+
+.aim__container {
+  border-radius: 15px;
+  background-color: #F8F8F9;
+  text-align: center;
+  margin-bottom: 1em;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+
+.aim__add {
+  width: 10%;
+  position: relative;
+  top: 7px;
+  left: 43%;
+  cursor: pointer;
+}
+
+.text--default {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #A3A3A3;
+  width: 70%;
+  margin: auto;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+#create__post {
+  height: 2.5em;
+  background-color: #D9F1DF;
+  color: black;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+#create__post:hover {
+  background-color: #bae7c6;
+}
+
+.support__btn {
+  box-shadow: 5px 5px 5px #b7b7b7;
+  height: 2.5em;
+  color: black;
+  text-align: start;
+  padding-left: 15%;
+  margin-top: 0.5em;
+  display: flex;
+}
+.support__btn:hover {
+  background-color: #D9F1DF;
+}
+.support__btn p {
+  padding-top: 0.6em;
+}
+
+.follow__btn {
+  background-color: #ECEBF0;
+}
+
+.follow__btn--text {
+  margin-left: 0.5em;
+}
+
+.donate__btn {
+  background-color: #D9F1DF;
+}
+
+.donate__btn--text {
+  margin-left: 1em;
+}
+
+.sub__container {
+  background-color: #F8F8F9;
+  box-shadow: 5px 5px 5px #b7b7b7;
+  display: flex;
   margin-top: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-radius: 15px;
 }
 
-.box3-header-container {
+.sub__card {
+  background-color: white;
+  width: 20%;
+  margin: 0 auto 0 auto;
+  padding: 1.5em;
+  border-radius: 15px;
+}
+
+.sub__title {
   display: grid;
   grid-template-columns: 90% 10%;
 }
 
-.subs-btn {
-  margin-top: 1em;
-  /*margin: auto;*/
-  min-height: 2em;
-  height: min-content;
-  width: 80%;
-  background-color: #333;
-  color: white;
-  font-size: 1.3em;
+#sub__delete {
+  cursor: pointer;
 }
 
-.subs-btn:hover {
-  background-color: #000;
+.sub__description {
+  margin-top: 10%;
 }
 
-.subme__btn {
-  background-color: #eee;
-}
-
-.subme__btn:hover {
-  background-color: #eee;
-}
-
-.createPost__btn {
-  width: 100%;
-}
-
-#donate-btn-aim {
-  width: 100%;
+.sub__cost {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 10%;
 }
 
-#circle-icon {
-  margin-left: 0.5em;
+.cost {
+  margin-right: 0.5em;
 }
 
-.pencil-icon {
+.rpm {
+  margin-top: 0.3em;
+}
+
+.sub__btn {
+  background-color: #ECEBF0;
+  color: black;
+  height: 2em;
   margin-top: 1em;
+  padding-right: 1em;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+.sub__btn:hover {
+  background-color: #D9F1DF;
+}
+
+.sub__buy {
+  padding: 0;
+}
+
+.sub__edit {
+  width: 1em;
+  margin-right: 0.3em;
+}
+
+.posts {
+  margin-top: 3em;
+}
+
+.post__container {
+  margin-top: 2em;
+  padding: 1em 3em 1em 3em;
+  border-radius: 15px;
+  background-color: #F8F8F9;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+
+.post__header {
+  font-size: 20px;
+  color: #A3A3A3;
+  margin-bottom: 2em;
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
+.post__privacy {
+  display: flex;
+}
+
+.privacy__img {
+  width: 1.5em;
+  margin-right: 0.5em;
+}
+
+.post__date {
+  display: flex;
+}
+
+.edit__img {
   cursor: pointer;
+  margin-right: 0.5em;
 }
 
-#delete-icon {
-  margin-top: 0.85em;
-}
-
-.delete-icon {
+.delete__img {
   cursor: pointer;
+  margin-right: 0.5em;
 }
 
-#myPage_phone {
-  width: 100%;
+.post__content {
+  width: 90%;
+  margin: auto;
 }
 
-.settings-icon {
-  position: absolute;
-  right: 1.3%;
-  top: 5em;
-  cursor: pointer;
+.content__header {
+  margin-bottom: 1em;
 }
 
-.like-container {
-  cursor: pointer;
+.feedback {
+  margin-top: 1em;
+  display: flex;
 }
 
-.like-icon, #comment-icon {
-  margin-left: 1em;
-  /*cursor: pointer;*/
+.likes {
+  margin-right: 1em;
 }
 
-#pencil-icon-about {
-  margin-top: 0;
+.icon--like {
+  width: 2em;
 }
 
-#user-photo {
-  margin-right: 0.7em;
+.icon--comments {
+  width: 2em;
 }
 
-.under-input-error-aim {
-  color: red;
-  font-size: smaller;
+a {
+  text-decoration: none;
+  color: #222;
 }
 
-.creator__description {
-  font-size: 1.2em;
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
 }
 
-.box {
-  background-color: #f8f8f8;
-}
-
-#edit-btn-space {
+.title, .auth__title, .reg__title {
+  margin-bottom: 2em;
+  font-size: 36px;
   text-align: center;
 }
 
-#create-sub-btn {
-  width: 100%;
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
-  font-size: 1em;
+.auth__content {
+  width: 92%;
+}
+
+.about__edit {
+  width: 1em;
+  cursor: pointer;
+}
+
+.about__title {
+  font-size: 36px;
+  margin-top: 0.5em;
+}
+
+.about__description {
+  font-size: 20px;
+  margin-top: 0.5em;
+}
+
+.subs__title {
+  font-size: 24px;
+  margin-top: 1em;
+  display: flex;
+}
+
+.subs__title--text {
+  margin-top: 0.1em;
+  margin-right: 1em;
+}
+
+.subs__add {
+  cursor: pointer;
+}
+
+.author__photo {
+  position: absolute;
+  width: 20%;
+  top: 12%;
+  left: 5%;
+}
+
+#author__header {
+  height: 20em;
+  background-position: center center;
+  background-size: 80%;
+}
+
+.author__container {
+  display: grid;
+  grid-template-columns: 30% 70%;
 }
 
 /*# sourceMappingURL=index.css.map */
