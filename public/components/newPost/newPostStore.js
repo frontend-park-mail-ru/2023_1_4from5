@@ -13,7 +13,11 @@ class NewPostStore {
 
   constructor() {
     this.config = {
-      attachments: []
+      attachments: {
+        images: [],
+        video: [],
+        audio: [],
+      }
     };
     dispatcher.register(this.reduce.bind(this));
   }
@@ -106,7 +110,16 @@ class NewPostStore {
   }
 
   addAttachPhoto(file) {
-    this.config.attachments.push(file);
+    // type: "image/jpeg"
+    if (file.type.startsWith('image')) {
+      this.config.attachments.images.push(file);
+    } else if (file.type.startsWith('video')) {
+      this.config.attachments.video.push(file);
+    } else if (file.type.startsWith('audio')) {
+      this.config.attachments.audio.push(file);
+    }
+    console.log('store add attach', file);
+
     newPost.config = this.config;
     newPost.render();
     console.log(this.config);

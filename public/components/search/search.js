@@ -32,7 +32,7 @@ class Search {
     newDiv.innerHTML = template(this.#authors);
     this.#parent.appendChild(newDiv);
 
-    let cards = document.querySelectorAll('.authorPage-card');
+    let cards = document.querySelectorAll('.author-card');
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
       card.addEventListener('click', this.selectAuthor.bind(this));
