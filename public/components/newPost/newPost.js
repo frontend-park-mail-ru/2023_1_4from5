@@ -27,21 +27,16 @@ class NewPost {
   }
 
   render() {
-    console.log('store1', this.config);
     Handlebars.registerHelper('isPhoto', (value) => value.startsWith('image/'));
     Handlebars.registerHelper('isVideo', (value) => value.startsWith('video/'));
     Handlebars.registerHelper('isAudio', (value) => value.startsWith('audio/'));
-    console.log('store2', this.config);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
-    console.log('store2.1', this.config);
 
     newDiv.innerHTML = template(this.#config);
-    console.log('store2.2', this.config);
 
     this.#parent.appendChild(newDiv);
-    console.log('store3', this.config);
 
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
@@ -53,7 +48,6 @@ class NewPost {
     photoInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('photo', files);
       Actions.downloadAttachPhoto(files[0]);
     });
 
@@ -61,7 +55,6 @@ class NewPost {
     videoInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('video', files);
       Actions.downloadAttachVideo(files[0]);
     });
 
@@ -69,7 +62,6 @@ class NewPost {
     audioInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('music', files);
       Actions.downloadAttachAudio(files[0]);
     });
   }
