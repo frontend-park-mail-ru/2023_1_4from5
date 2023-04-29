@@ -441,6 +441,10 @@ p, h1, h2, h3, h4, h5 {
   border-right: #c4c4c4 solid 2px;
 }
 
+#sidebar__reg, #sidebar__auth {
+  top: 0.4em;
+}
+
 .user__photo {
   border-radius: 1em;
   height: 2em;
@@ -976,6 +980,10 @@ p, h1, h2, h3, h4, h5 {
 #sidebar__subs {
   padding-right: 4%;
   border-right: #c4c4c4 solid 2px;
+}
+
+#sidebar__reg, #sidebar__auth {
+  top: 0.4em;
 }
 
 .user__photo {
