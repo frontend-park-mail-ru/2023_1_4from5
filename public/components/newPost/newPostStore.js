@@ -14,7 +14,7 @@ class NewPostStore {
   constructor() {
     this.config = {
       attachments: {
-        images: [],
+        img: [],
         video: [],
         audio: [],
       }
@@ -39,16 +39,8 @@ class NewPostStore {
         });
         break;
 
-      case ActionTypes.DOWNLOAD_ATTACH_PHOTO:
-        this.addAttachPhoto(action.file);
-        break;
-
-      case ActionTypes.DOWNLOAD_ATTACH_VIDEO:
-        await this.downloadAttachVideo(action.file);
-        break;
-
-      case ActionTypes.DOWNLOAD_ATTACH_AUDIO:
-        await this.downloadAttachAudio(action.file);
+      case ActionTypes.DOWNLOAD_ATTACH:
+        this.addAttach(action.file);
         break;
 
       default:
@@ -109,10 +101,10 @@ class NewPostStore {
     }
   }
 
-  addAttachPhoto(file) {
+  addAttach(file) {
     // type: "image/jpeg"
     if (file.type.startsWith('image')) {
-      this.config.attachments.images.push(file);
+      this.config.attachments.img.push(file);
     } else if (file.type.startsWith('video')) {
       this.config.attachments.video.push(file);
     } else if (file.type.startsWith('audio')) {
