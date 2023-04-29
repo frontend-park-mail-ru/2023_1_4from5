@@ -1,7 +1,7 @@
 import { dispatcher } from '../dispatcher/dispatcher';
 import { ActionTypes } from '../actionTypes/actionTypes';
 
-export const ActionsMyPage = {
+export const ActionsAuthorPage = {
   clickLike(typeLike, postId) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
@@ -26,6 +26,20 @@ export const ActionsMyPage = {
   closeEditAim() {
     dispatcher.dispatch({
       type: ActionTypes.CLOSE_EDIT_AIM,
+    });
+  },
+
+  follow(id) {
+    dispatcher.dispatch({
+      type: ActionTypes.FOLLOW,
+      id,
+    });
+  },
+
+  unfollow(id) {
+    dispatcher.dispatch({
+      type: ActionTypes.UNFOLLOW,
+      id,
     });
   },
 };

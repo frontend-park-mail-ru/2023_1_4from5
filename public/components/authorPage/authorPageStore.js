@@ -53,6 +53,20 @@ class AuthorPageStore {
         this.saveEditAim(action.input);
         break;
 
+      case ActionTypes.FOLLOW:
+        await request.post(`/api/user/follow/${action.id}`);
+        this.#config.follows = true;
+        authorPage.config = this.#config;
+        authorPage.render();
+        break;
+
+      case ActionTypes.UNFOLLOW:
+        await request.put(`/api/user/unfollow/${action.id}`);
+        this.#config.follows = false;
+        authorPage.config = this.#config;
+        authorPage.render();
+        break;
+
       default:
         break;
     }
@@ -109,7 +123,8 @@ class AuthorPageStore {
 
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value.split(' ').join('');
+    let moneyNeeded = input.moneyNeededInput.value.split(' ')
+      .join('');
     const errDescriptionOutput = input.errorDescriptionOutput;
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
     const errDescription = isValidDescriptionAim(description);

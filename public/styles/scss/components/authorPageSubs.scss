@@ -24,11 +24,18 @@ $sub__card-width: 20%;
   padding: 1.5em;
 
   border-radius: $elem-border-radius;
+
+  display: grid;
+  grid-template-rows: 20% 40% 20% 20%;
 }
 
 .sub__title {
   display: grid;
   grid-template-columns: 90% 10%;
+}
+
+.sub__title--text {
+  height: fit-content;
 }
 
 #sub__delete {

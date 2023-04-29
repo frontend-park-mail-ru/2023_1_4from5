@@ -408,11 +408,14 @@ p, h1, h2, h3, h4, h5 {
 
 .sidebar__user {
   text-align: end;
-  padding-top: 0.4em;
   padding-right: 2em;
 }
+.sidebar__user a {
+  position: relative;
+  top: -0.5em;
+}
 
-#sidebar__about {
+.sidebar__about {
   margin-left: 20%;
   padding-left: 20%;
   position: relative;
@@ -424,6 +427,10 @@ p, h1, h2, h3, h4, h5 {
   margin-right: 4%;
 }
 
+#sidebar__find {
+  padding-left: 4px;
+}
+
 #sidebar__feed {
   padding-right: 4%;
   border-right: #c4c4c4 solid 2px;
@@ -432,6 +439,12 @@ p, h1, h2, h3, h4, h5 {
 #sidebar__subs {
   padding-right: 4%;
   border-right: #c4c4c4 solid 2px;
+}
+
+.user__photo {
+  border-radius: 1em;
+  height: 2em;
+  margin-right: 1em;
 }
 
 #sidebar__modalWindow {
@@ -632,11 +645,17 @@ p, h1, h2, h3, h4, h5 {
   margin: 0 auto 0 auto;
   padding: 1.5em;
   border-radius: 15px;
+  display: grid;
+  grid-template-rows: 20% 40% 20% 20%;
 }
 
 .sub__title {
   display: grid;
   grid-template-columns: 90% 10%;
+}
+
+.sub__title--text {
+  height: fit-content;
 }
 
 #sub__delete {
@@ -824,12 +843,13 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .creator__card {
-  width: 60%;
+  width: 65%;
   height: 20em;
   margin: 0 auto 5em auto;
   padding: 1em;
   border-radius: 15px;
   background-color: #F8F8F9;
+  cursor: pointer;
 }
 .creator__card:hover {
   background-color: #D9F1DF;
@@ -841,6 +861,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .followers {
+  margin-left: 0.5em;
   display: flex;
 }
 
@@ -849,8 +870,8 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .search__photo {
-  margin-top: 10%;
-  width: 40%;
+  width: 50%;
+  border-radius: 20em;
 }
 
 .search__info {
@@ -858,7 +879,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .search__name {
-  margin-top: 20%;
+  margin-top: 15%;
 }
 
 .card__footer {
@@ -875,6 +896,130 @@ p, h1, h2, h3, h4, h5 {
 
 .search__tag--img {
   width: 1.5em;
+}
+
+#sideBar {
+  top: 0;
+  height: 4em;
+  width: 100%;
+  text-align: end;
+  position: fixed;
+  display: flex;
+  z-index: 1;
+  border-bottom: rgba(128, 128, 128, 0.45) solid 2px;
+  background-color: white;
+}
+
+.sidebar__logo {
+  cursor: pointer;
+  margin-left: 5em;
+}
+
+.sideBar__menu {
+  width: 100%;
+  padding-top: 0.5%;
+  font-size: 20.8px;
+  display: grid;
+  grid-template-columns: 10% 45% 45%;
+}
+
+#find__input {
+  background-repeat: no-repeat;
+}
+
+.find__input {
+  padding-left: 2em;
+  height: 2em;
+  width: 45%;
+  border-radius: 15px;
+  border: 0;
+  background-color: #EBEDF0;
+  background-position: 2%;
+  color: #545454;
+  font-size: 20.8px;
+}
+
+.sidebar__info {
+  text-align: start;
+}
+
+.sidebar__user {
+  text-align: end;
+  padding-right: 2em;
+}
+.sidebar__user a {
+  position: relative;
+  top: -0.5em;
+}
+
+.sidebar__about {
+  margin-left: 20%;
+  padding-left: 20%;
+  position: relative;
+  top: 15%;
+  border-left: #c4c4c4 solid 2px;
+}
+
+.sidebar__href {
+  margin-right: 4%;
+}
+
+#sidebar__find {
+  padding-left: 4px;
+}
+
+#sidebar__feed {
+  padding-right: 4%;
+  border-right: #c4c4c4 solid 2px;
+}
+
+#sidebar__subs {
+  padding-right: 4%;
+  border-right: #c4c4c4 solid 2px;
+}
+
+.user__photo {
+  border-radius: 1em;
+  height: 2em;
+  margin-right: 1em;
+}
+
+#sidebar__modalWindow {
+  margin-right: 0;
+}
+
+#winSettings {
+  position: fixed;
+  top: 4em;
+  right: 0;
+  padding: 0.3em;
+  width: fit-content;
+  height: fit-content;
+  background: white;
+  border: rgba(128, 128, 128, 0.45) solid 2px;
+  border-radius: 0 0 15px 15px;
+  z-index: 3;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+
+.winsettings__chapter {
+  height: fit-content;
+  margin: 0.7em 1em 0.7em 1em;
+}
+
+.winsettins__img {
+  width: 1.5em;
+  margin-right: 0.5em;
+}
+
+.winsettings__href {
+  display: flex;
+  font-size: 1.1em;
+}
+
+.winsettings__hr {
+  width: 80%;
+  color: rgba(128, 128, 128, 0.45);
 }
 
 /*# sourceMappingURL=index.css.map */
