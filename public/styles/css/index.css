@@ -824,23 +824,57 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .creator__card {
-  width: 80%;
+  width: 60%;
   height: 20em;
   margin: 0 auto 5em auto;
+  padding: 1em;
   border-radius: 15px;
   background-color: #F8F8F9;
+}
+.creator__card:hover {
+  background-color: #D9F1DF;
+}
+
+.card__header {
+  border-bottom: #d3d3d3 solid 2px;
+  height: 80%;
 }
 
 .followers {
   display: flex;
 }
 
+.followers__count {
+  margin-left: 0.2em;
+}
+
 .search__photo {
+  margin-top: 10%;
   width: 40%;
 }
 
 .search__info {
   text-align: center;
+}
+
+.search__name {
+  margin-top: 20%;
+}
+
+.card__footer {
+  margin-top: 1em;
+  display: flex;
+}
+
+.search__tag {
+  margin-left: 1em;
+  padding: 3px 10px 3px 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 159, 45, 0.5);
+}
+
+.search__tag--img {
+  width: 1.5em;
 }
 
 /*# sourceMappingURL=index.css.map */

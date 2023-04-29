@@ -9,7 +9,7 @@ $num-of-columns: 4;
   grid-template-columns: (100% / $num-of-columns) (100% / $num-of-columns) (100% / $num-of-columns) (100% / $num-of-columns);
 }
 
-$creator__card-width: 80%;
+$creator__card-width: 60%;
 $creator__card-height: 20em;
 $creator__card-offset-bottom: 5em;
 
@@ -17,20 +17,57 @@ $creator__card-offset-bottom: 5em;
   width: $creator__card-width;
   height: $creator__card-height;
   margin: 0 auto $creator__card-offset-bottom auto;
+  padding: 1em;
 
   border-radius: $elem-border-radius;
 
   background-color: $card-color;
+
+  &:hover {
+    background-color: $create-btn-color;
+  }
+}
+
+.card__header {
+  border-bottom: $card-content-color solid 2px;
+  height: 80%;
 }
 
 .followers {
   display: flex;
 }
 
+.followers__count {
+  margin-left: 0.2em;
+}
+
 .search__photo {
+  margin-top: 10%;
   width: 40%;
 }
 
 .search__info {
   text-align: center;
+}
+
+.search__name {
+  margin-top: 20%;
+}
+
+.card__footer {
+  margin-top: 1em;
+  display: flex;
+}
+
+$tag-color: #009F2D;
+
+.search__tag {
+  margin-left: 1em;
+  padding: 3px 10px 3px 10px;
+  border-radius: $tag-border-radius;
+  background-color: rgba($tag-color, 0.5);
+}
+
+.search__tag--img {
+  width: 1.5em;
 }
