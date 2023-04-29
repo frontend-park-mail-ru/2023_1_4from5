@@ -107,7 +107,6 @@
 
         <div class="posts">
             {{#if posts}}
-
                 {{#each posts}}
                     <div id="{{id}}" class="post__container">
                         <div class="post__header">
@@ -119,7 +118,6 @@
                                     Открыт для всех
                                 {{/if}}
                             </div>
-
                             <div class="post__date">
                                 {{#if ../is_my_page}}
                                     <img id="edit__post" class="edit__img" src="../../images/edit.svg" alt="edit">
@@ -134,6 +132,12 @@
                             {{#each textWithBreaks}}
                                 <p>{{text}}</p>
                                 <!--TODO attachments-->
+                            {{/each}}
+                            {{#each attachments}}
+                                <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+                                <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+                                <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+                                <input type="file" class="upload" id="attach-photo-upload"/>
                             {{/each}}
 
                             <div class="feedback">

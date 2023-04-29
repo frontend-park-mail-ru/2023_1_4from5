@@ -118,6 +118,7 @@
     padding: 10px 20px;
     box-sizing: border-box;
     border: none;
+    border-radius: 10px;
     margin: 0;
     transition: background-color 0.2s;
 }
@@ -144,4 +145,12 @@
 /* Disabled */
 .input-file input[type=file]:disabled + .input-file-btn {
     background-color: #eee;
+}
+
+.preview {
+    max-width: 500px;
+}
+
+.image-preview {
+    max-width: inherit;
 }
