@@ -27,12 +27,30 @@ class NewPost {
   }
 
   render() {
-    Handlebars.registerHelper('isPhoto', (value) => value.startsWith('image/'));
-    Handlebars.registerHelper('isVideo', (value) => value.startsWith('video/'));
-    Handlebars.registerHelper('isAudio', (value) => value.startsWith('audio/'));
+    console.log('store1', this.config);
+    // console.log('store2', this.config);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
+    if (this.config) {
+      if (this.config.attachments) {
+        console.log('store2');
+        // const divPreview = document.getElementById('preview');
+        // for (const groupAttach of this.config.attachments) {
+        //   for (const attach in groupAttach) {
+        //     console.log('1');
+        //     let src = URL.createObjectURL(files[0]);
+        //     const imagePreview = document.createElement('img');
+        //     imagePreview.className = 'image-preview';
+        //     console.log(src, imagePreview);
+        //     imagePreview.src = src;
+        //     imagePreview.style.display = 'block';
+        //     divPreview.append(imagePreview);
+        //   }
+        // }
+      }
+      console.log('store2.1', this.config);
+    }
 
     newDiv.innerHTML = template(this.#config);
 
@@ -46,8 +64,10 @@ class NewPost {
 
     const photoInput = document.querySelector('#attach-photo-download');
     photoInput.addEventListener('change', (event) => {
+      console.log('add change input file');
       event.preventDefault();
       const files = event.target.files;
+      console.log('add change photo', files);
       Actions.downloadAttachPhoto(files[0]);
     });
 
@@ -64,6 +84,8 @@ class NewPost {
       const files = event.target.files;
       Actions.downloadAttachAudio(files[0]);
     });
+
+
   }
 
   // TODO в чём проблем засунуть это в рендер?
