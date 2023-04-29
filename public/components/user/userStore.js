@@ -65,7 +65,7 @@ class UserStore {
   }
 
   async logout(parent) {
-    await request.put('/api/auth/logout'); // TODO logout - PUT
+    await request.put('/api/auth/logout');
     this.#user.loginIn = '';
     this.#user.usernameIn = '';
     this.#user.isAuthorIn = false;

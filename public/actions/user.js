@@ -8,7 +8,7 @@ export const ActionsUser = {
     });
   },
 
-  logout(href, data, parent) {
+  logout(href, parent) {
     dispatcher.dispatch({
       type: ActionTypes.LOGOUT,
       parent,

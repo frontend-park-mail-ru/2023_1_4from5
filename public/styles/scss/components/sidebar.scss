@@ -108,6 +108,10 @@ $sidebar-about-offset: 20%;
   border-right: $row-color solid $vertical-row-width;
 }
 
+#sidebar__reg, #sidebar__auth {
+  top: 0.4em;
+}
+
 $sidebar__img-height: 2em;
 
 .user__photo {
