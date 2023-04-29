@@ -100,7 +100,11 @@
                     {{/each}}
 
                 {{else}}
-                    <p>У вас пока нет ни одной подписки</p>
+                    {{#if is_my_page}}
+                        <p>У вас пока нет ни одной подписки</p>
+                    {{else}}
+                        <p>У автора пока нет ни одной подписки</p>
+                    {{/if}}
                 {{/if}}
             </div>
         </div>
@@ -121,7 +125,8 @@
                             <div class="post__date">
                                 {{#if ../is_my_page}}
                                     <img id="edit__post" class="edit__img" src="../../images/edit.svg" alt="edit">
-                                    <img id="delete__post" class="delete__img" src="../../images/delete.svg" alt="delete">
+                                    <img id="delete__post" class="delete__img" src="../../images/delete.svg"
+                                         alt="delete">
                                 {{/if}}
                                 <p>{{creation_date}}</p>
                             </div>
@@ -143,12 +148,15 @@
                             <div class="feedback">
                                 <div class="likes">
                                     {{#if ../is_my_page}}
-                                        <img id="disable-like-icon" class="icon--like" src="../../images/disable_like_icon.png" alt="like--disable">
+                                        <img id="disable-like-icon" class="icon--like"
+                                             src="../../images/disable_like_icon.png" alt="like--disable">
                                     {{else}}
                                         {{#if is_liked}}
-                                            <img id="love-like-icon" class="icon--like" src="../../images/love_like_icon.png" alt="like--liked">
+                                            <img id="love-like-icon" class="icon--like"
+                                                 src="../../images/love_like_icon.png" alt="like--liked">
                                         {{else}}
-                                            <img id="like-icon" class="icon--like" src="../../images/like_icon.png" alt="like--enable">
+                                            <img id="like-icon" class="icon--like" src="../../images/like_icon.png"
+                                                 alt="like--enable">
                                         {{/if}}
                                     {{/if}}
                                     {{likes_count}}

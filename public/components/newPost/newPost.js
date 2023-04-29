@@ -53,10 +53,8 @@ class NewPost {
     }
 
     newDiv.innerHTML = template(this.#config);
-    console.log('store2.2', this.config);
 
     this.#parent.appendChild(newDiv);
-    console.log('store3', this.config);
 
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
@@ -77,7 +75,6 @@ class NewPost {
     videoInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('video', files);
       Actions.downloadAttachVideo(files[0]);
     });
 
@@ -85,7 +82,6 @@ class NewPost {
     audioInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('music', files);
       Actions.downloadAttachAudio(files[0]);
     });
 
