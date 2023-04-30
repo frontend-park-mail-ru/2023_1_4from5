@@ -1346,6 +1346,11 @@ p, h1, h2, h3, h4, h5 {
   cursor: pointer;
 }
 
+#user-photo {
+  width: 10em;
+  border-radius: 15px;
+}
+
 .photo__load--label {
   width: 100%;
   text-align: center;

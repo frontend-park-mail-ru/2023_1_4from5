@@ -80,6 +80,11 @@ $settings__form-width: 50%;
   cursor: pointer;
 }
 
+#user-photo {
+  width: 10em;
+  border-radius: $elem-border-radius;
+}
+
 .photo__load--label {
   width: 100%;
   text-align: center;
