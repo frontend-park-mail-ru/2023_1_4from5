@@ -64,11 +64,6 @@ $settings__form-width: 50%;
 
 //---photo---//
 
-.user-photo {
-  width: 200px;
-  border-radius: $elem-border-radius;
-}
-
 .settings__photo {
   padding: 5em;
 }
@@ -80,13 +75,18 @@ $settings__form-width: 50%;
   cursor: pointer;
 }
 
+#user-photo {
+  width: 100%;
+  border-radius: $elem-border-radius;
+}
+
 .photo__load--label {
   width: 100%;
   text-align: center;
   height: fit-content;
   display: block;
-  margin: 1em;
-  padding: 1em;
+  margin-top: 1em;
+  padding: 1em 0 1em 0;
   border-radius: $elem-border-radius;
   background-color: $sub__btn-color;
 }
