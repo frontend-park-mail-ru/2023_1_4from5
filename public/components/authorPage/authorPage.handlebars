@@ -86,12 +86,13 @@
     <div class="auth__content">
 
         <div class="about">
-            <h1 class="about__title">{{creator_info.name}}
+            <h1 class="about__title">
+                <p id="creator__name">{{creator_info.name}}</p>
                 {{#if is_my_page}}
-                    <img class="about__edit" src="../../images/edit.svg" alt="edit">
+                    <img id="edit__profile" class="about__edit" src="../../images/edit.svg" alt="edit">
                 {{/if}}
             </h1>
-            <p class="about__description">{{creator_info.description}}</p>
+            <p id="creator__description" class="about__description">{{creator_info.description}}</p>
         </div>
 
         <div class="subs">

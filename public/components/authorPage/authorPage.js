@@ -4,6 +4,7 @@ import { Actions } from '../../actions/actions';
 import template from './authorPage.handlebars';
 import { aim } from './aim';
 import { getSubscription } from './getSubscription';
+import { userStore } from '../user/userStore';
 
 const contentElement = document.querySelector('main');
 
@@ -37,8 +38,6 @@ class AuthorPage {
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
-    const coverPhoto = this.#config.creator_info.cover_photo;
-    backGnd.style.backgroundImage = `url(../../images/${coverPhoto}.jpeg)`;
 
     const cover = document.getElementById('cover__upload');
     if (cover) {
@@ -49,6 +48,12 @@ class AuthorPage {
         Actions.creatorCoverUpdate(files[0]);
       });
     }
+
+    const editProfile = document.getElementById('edit__profile');
+    editProfile.addEventListener('click', (event) => {
+      event.preventDefault();
+      router.go(URLS.becomeAuthor, '', userStore.getUserState().authorURL);
+    });
 
     const createPostBtn = document.getElementById('create__post');
     if (createPostBtn) {

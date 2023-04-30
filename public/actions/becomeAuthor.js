@@ -8,4 +8,11 @@ export const ActionsBecomeAuthor = {
       input,
     });
   },
+
+  updateProfile(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.UPDATE_PROFILE,
+      input,
+    });
+  },
 };

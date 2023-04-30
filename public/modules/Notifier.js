@@ -66,6 +66,10 @@ export function notifier(path, data, additionalUrl) {
       becameAuthorStore.renderBecomeAuthor();
       break;
 
+    case `${URLS.becomeAuthor}/${additionalUrl}`:
+      becameAuthorStore.renderBecomeAuthor(additionalUrl);
+      break;
+
     case URLS.subscriptions:
       Actions.renderSubscriptions();
       break;

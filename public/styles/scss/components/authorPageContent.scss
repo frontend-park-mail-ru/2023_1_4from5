@@ -20,6 +20,11 @@ $about-mt: 0.5em;
 .about__title {
   font-size: $title-font-size;
   margin-top: $about-mt;
+  display: flex;
+}
+
+#creator__name {
+  margin-right: 1em;
 }
 
 .about__description {

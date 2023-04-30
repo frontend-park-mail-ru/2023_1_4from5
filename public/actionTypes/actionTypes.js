@@ -57,6 +57,7 @@ export const ActionTypes = {
 
   // become authorPage
   BECOME_AUTHOR: 'BECOME_AUTHOR',
+  UPDATE_PROFILE: 'UPDATE_PROFILE',
 
   // search
   SEARCH_AUTHORS: 'SEARCH_AUTHORS',

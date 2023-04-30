@@ -878,6 +878,11 @@ p, h1, h2, h3, h4, h5 {
 .about__title {
   font-size: 36px;
   margin-top: 0.5em;
+  display: flex;
+}
+
+#creator__name {
+  margin-right: 1em;
 }
 
 .about__description {

@@ -16,13 +16,26 @@ class BecomeAuthorStore {
         this.becomeAuthor(action);
         break;
 
+      case ActionTypes.UPDATE_PROFILE:
+        this.updateProfile(action.input);
+        break;
+
       default:
         break;
     }
   }
 
-  renderBecomeAuthor() {
+  async renderBecomeAuthor(creatorId) {
     becameAuthor.render();
+    if (creatorId) {
+      const req = await request.get(`/api/creator/page/${creatorId}`);
+      const res = await req.json();
+      const name = res.creator_info.name;
+      const description = res.creator_info.description;
+      becameAuthor.update(name, description);
+    } else {
+      becameAuthor.publish();
+    }
   }
 
   async becomeAuthor(action) {
@@ -36,6 +49,15 @@ class BecomeAuthorStore {
     const token = await request.getHeader('/api/user/becameCreator');
     await request.post('/api/user/becameCreator', body, token);
     Actions.getUser();
+    router.popstate();
+  }
+
+  async updateProfile(input) {
+    const token = await request.getHeader('/api/creator/updateData');
+    await request.put('/api/creator/updateData', {
+      name: input.newName,
+      description: input.newDescription,
+    }, token);
     router.popstate();
   }
 }
