@@ -581,6 +581,14 @@ p, h1, h2, h3, h4, h5 {
   margin-left: 1em;
 }
 
+.aim__text {
+  margin-top: 1em;
+}
+
+.aim__description {
+  padding-bottom: 0.5em;
+}
+
 .auth__service {
   margin: 25% auto 0 auto;
   width: 68%;
@@ -692,6 +700,14 @@ p, h1, h2, h3, h4, h5 {
 
 .donate__btn--text {
   margin-left: 1em;
+}
+
+.aim__text {
+  margin-top: 1em;
+}
+
+.aim__description {
+  padding-bottom: 0.5em;
 }
 
 .sub__container {
