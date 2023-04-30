@@ -16,6 +16,8 @@ import { settingsStore } from './components/settings/settingsStore.js';
 import { authorPageStore } from './components/authorPage/authorPageStore.js';
 import { donateWinStore } from './components/donateWin/donateWinStore.js';
 import { subscriptionStore } from './components/subscription/subscriptionStore';
+import { aim } from './components/authorPage/aim';
+import { getSubscription } from './components/authorPage/getSubscription';
 import { router } from './modules/Router.js';
 
 // if ('serviceWorker' in navigator) {

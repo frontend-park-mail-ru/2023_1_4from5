@@ -2,6 +2,9 @@ import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
 import template from './authorPage.handlebars';
+import { aim } from './aim';
+import { getSubscription } from './getSubscription';
+import * as events from 'events';
 
 const contentElement = document.querySelector('main');
 
@@ -27,7 +30,6 @@ class AuthorPage {
   }
 
   render() {
-    console.log(this.#config)
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
@@ -37,12 +39,34 @@ class AuthorPage {
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
 
+    const cover = document.getElementById('cover__upload');
+    cover.addEventListener('change', (event) => {
+      event.preventDefault();
+      const files = event.target.files;
+      console.log(files);
+      Actions.creatorCoverUpdate(files[0]);
+    });
+
     const createPostBtn = document.getElementById('create__post');
     if (createPostBtn) {
       createPostBtn.addEventListener('click', (e) => {
         e.preventDefault();
         router.go(URLS.newPost);
       });
+    }
+
+    const getSubBtns = document.querySelectorAll('#get__sub');
+    if (getSubBtns) {
+      for (let index = 0; index < getSubBtns.length; index++) {
+        const button = getSubBtns[index];
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          const subId = event.target.parentElement.id;
+          const price = event.target.parentElement.querySelector('#sub__price').textContent;
+          const creatorId = event.target.parentElement.parentElement.id;
+          getSubscription.render(subId, price, creatorId);
+        });
+      }
     }
 
     const deletePostBtns = document.querySelectorAll('#delete__post');
@@ -64,7 +88,8 @@ class AuthorPage {
         const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
         Actions.clickLike(
           eventLike,
-          event.target.parentElement.parentElement.parentElement.parentElement.id);
+          event.target.parentElement.parentElement.parentElement.parentElement.id
+        );
       });
     }
 
@@ -129,7 +154,13 @@ class AuthorPage {
     }
 
     const aimBar = document.getElementById('bar--row');
-    aimBar.style.width = `${String((this.#config.aim.money_got / this.#config.aim.money_needed) * 100)}%`;
+    if (aimBar) {
+      let width = String((this.#config.aim.money_got / this.#config.aim.money_needed) * 100);
+      if (width > 100) {
+        width = 100;
+      }
+      aimBar.style.width = `${width}%`;
+    }
   }
 
   deleteHandler(e) {

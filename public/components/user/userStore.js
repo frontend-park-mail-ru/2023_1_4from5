@@ -48,7 +48,6 @@ class UserStore {
       case ActionTypes.GET_USER:
         const getUser = await request.get('/api/user/profile');
         const profile = await getUser.json();
-        console.log(profile);
 
         this.setState(profile);
 
