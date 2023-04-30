@@ -7,6 +7,7 @@ import { request } from './modules/request.js';
 import { authStore } from './components/authorization/authStore.js';
 import { userStore } from './components/user/userStore.js';
 import { Actions } from './actions/actions.js';
+import { subscriptions } from './components/subscriptions/subscriptions';
 import { startStore } from './components/startPage/startStore.js';
 import { sideBarStore } from './components/sideBar/sideBarStore.js';
 import { winSettingsStore } from './components/winSettings/winsettingsStore.js';
@@ -18,6 +19,7 @@ import { donateWinStore } from './components/donateWin/donateWinStore.js';
 import { subscriptionStore } from './components/subscription/subscriptionStore';
 import { aim } from './components/authorPage/aim';
 import { getSubscription } from './components/authorPage/getSubscription';
+import { subscriptionsStore } from './components/subscriptions/subscriptionsStore';
 import { router } from './modules/Router.js';
 
 // if ('serviceWorker' in navigator) {

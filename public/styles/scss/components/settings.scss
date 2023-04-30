@@ -25,7 +25,7 @@ $chapter__bar-height: 0.3em;
 
 #chapter__account {
   color: $text-color;
-  border-left: $text-color solid 3px;
+  border-left: $text-color solid $chapter-border-width;
 }
 
 //---settings---//

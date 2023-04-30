@@ -41,12 +41,11 @@ class SideBarStore {
       },
       subs: {
         name: 'Подписки',
-        href: '/subs',
+        href: URLS.subscriptions,
         id: 'sidebar__subs',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       reg: {
         name: 'Регистрация',

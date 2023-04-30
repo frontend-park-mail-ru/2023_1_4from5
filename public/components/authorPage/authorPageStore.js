@@ -77,8 +77,6 @@ class AuthorPageStore {
           money: Number(action.money),
           creator_id: action.creatorId,
         }, tokenSub);
-        authorPage.config = this.#config;
-        authorPage.render();
         getSubscription.remove();
         break;
 

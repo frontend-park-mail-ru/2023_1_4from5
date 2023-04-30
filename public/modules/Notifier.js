@@ -7,12 +7,13 @@ import { newPostStore } from '../components/newPost/newPostStore';
 import { searchStore } from '../components/search/searchStore';
 import { becameAuthorStore } from '../components/becomeAuthor/becomeAuthorStore';
 import { page404 } from '../components/page404/page404';
+import { subscriptions } from '../components/subscriptions/subscriptions';
 
 export const URLS = {
   root: '/',
   myPage: '/creatorPage',
   settings: '/settings',
-  authorSettings: '/authorSettings',
+  subscriptions: '/subscriptions',
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
@@ -63,8 +64,8 @@ export function notifier(path, data, additionalUrl) {
       becameAuthorStore.renderBecomeAuthor();
       break;
 
-    case URLS.authorSettings:
-      console.log('authorSettings');
+    case URLS.subscriptions:
+      Actions.renderSubscriptions();
       break;
 
     default:
