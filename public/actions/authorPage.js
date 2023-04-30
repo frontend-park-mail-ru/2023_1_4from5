@@ -10,22 +10,29 @@ export const ActionsAuthorPage = {
     });
   },
 
-  editAim() {
+  renderAim() {
     dispatcher.dispatch({
-      type: ActionTypes.OPEN_EDIT_AIM,
+      type: ActionTypes.RENDER_AIM,
     });
   },
 
-  saveEditAim(input) {
+  removeAim() {
     dispatcher.dispatch({
-      type: ActionTypes.SAVE_EDIT_AIM,
+      type: ActionTypes.REMOVE_AIM,
+    });
+  },
+
+  updateAim(aim) {
+    dispatcher.dispatch({
+      type: ActionTypes.UPDATE_AIM,
+      aim,
+    });
+  },
+
+  saveAim(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.SAVE_AIM,
       input,
-    });
-  },
-
-  closeEditAim() {
-    dispatcher.dispatch({
-      type: ActionTypes.CLOSE_EDIT_AIM,
     });
   },
 

@@ -39,9 +39,6 @@ export const ActionTypes = {
   CHANGE_ATTACH_PHOTO: 'CHANGE_ATTACH_PHOTO',
 
   // authorPage-Aim
-  OPEN_EDIT_AIM: 'EDIT_AIM',
-  CLOSE_EDIT_AIM: 'CLOSE_EDIT_AIM',
-  SAVE_EDIT_AIM: 'SAVE_EDIT_AIM',
 
   // donateWin
   RENDER_DONATE_WIN: 'RENDER_DONATE_WIN',
@@ -58,7 +55,6 @@ export const ActionTypes = {
   DOWNLOAD_ATTACH_AUDIO: 'DOWNLOAD_ATTACH_AUDIO',
 
   DOWNLOAD_ATTACH: 'DOWNLOAD_ATTACH',
-
 
   // become authorPage
   BECOME_AUTHOR: 'BECOME_AUTHOR',
@@ -79,4 +75,11 @@ export const ActionTypes = {
   // subscribe
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW',
+
+  // aim
+  RENDER_AIM: 'RENDER_AIM',
+  REMOVE_AIM: 'REMOVE_AIM',
+  UPDATE_AIM: 'UPDATE_AIM',
+  SAVE_AIM: 'SAVE_AIM',
+
 };

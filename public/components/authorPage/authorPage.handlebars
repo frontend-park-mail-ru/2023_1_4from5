@@ -14,34 +14,35 @@
         </div>
 
         <div id="{{creator_info.creator_id}}" class="support">
-            {{#unless is_my_page}}
-                {{#if follows}}
-                    <button id="unfollow__btn" class="support__btn follow__btn">
-                        <p class="follow__btn--text">Перестать отслеживать</p>
+            {{#if isAuthorized}}
+                {{#unless is_my_page}}
+                    {{#if follows}}
+                        <button id="unfollow__btn" class="support__btn follow__btn">
+                            <p class="follow__btn--text">Перестать отслеживать</p>
+                        </button>
+                    {{else}}
+                        <button id="follow__btn" class="support__btn follow__btn">
+                            <img src="../../images/follow.svg" alt="follow">
+                            <p class="follow__btn--text">Отслеживать</p>
+                        </button>
+                    {{/if}}
+                    <button id="donate__btn" class="support__btn donate__btn">
+                        <img src="../../images/donate.svg" alt="donate">
+                        <p class="donate__btn--text">Отправить донат</p>
                     </button>
-                {{else}}
-                    <button id="follow__btn" class="support__btn follow__btn">
-                        <img src="../../images/follow.svg" alt="follow">
-                        <p class="follow__btn--text">Отслеживать</p>
-                    </button>
-                {{/if}}
-                <button id="donate__btn" class="support__btn donate__btn">
-                    <img src="../../images/donate.svg" alt="donate">
-                    <p class="donate__btn--text">Отправить донат</p>
-                </button>
-            {{/unless}}
+                {{/unless}}
+            {{/if}}
         </div>
 
         <div class="aim">
             <p>Цель</p>
             <div class="aim__container">
                 {{#if aim.description}}
-                    <h5>{{aim.money_got}} из {{aim.money_needed}}
+                    <p class="aim__header">{{aim.money_got}} из {{aim.money_needed}} р
                         {{#if is_my_page}}
-                            <img src="../../images/delete.svg" alt="delete">
-                            <img src="../../images/edit.svg" alt="edit">
+                            <img id="aim__edit" src="../../images/edit.svg" alt="edit">
                         {{/if}}
-                    </h5>
+                    </p>
                     <p>{{aim.description}}</p>
                 {{else}}
                     {{#if is_my_page}}
@@ -102,7 +103,9 @@
                                     Изменить
                                 </button>
                             {{else}}
-                                <button class="sub__btn sub__buy">Оформить</button>
+                                {{#if isAuthorized}}
+                                    <button class="sub__btn sub__buy">Оформить</button>
+                                {{/if}}
                             {{/if}}
                         </div>
                     {{/each}}

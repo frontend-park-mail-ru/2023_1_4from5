@@ -5,6 +5,7 @@ import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
+import { aim } from './aim';
 
 class AuthorPageStore {
   #config;
@@ -37,20 +38,21 @@ class AuthorPageStore {
         this.changeLikeState(action);
         break;
 
-      case ActionTypes.OPEN_EDIT_AIM:
-        this.#config.edit_aim = false;
-        authorPage.config = this.#config;
-        authorPage.render();
+      case ActionTypes.RENDER_AIM:
+        aim.render();
         break;
 
-      case ActionTypes.CLOSE_EDIT_AIM:
-        this.#config.edit_aim = true;
-        authorPage.config = this.#config;
-        authorPage.render();
+      case ActionTypes.REMOVE_AIM:
+        aim.remove();
         break;
 
-      case ActionTypes.SAVE_EDIT_AIM:
+      case ActionTypes.UPDATE_AIM:
+        aim.render(action.aim);
+        break;
+
+      case ActionTypes.SAVE_AIM:
         this.saveEditAim(action.input);
+        aim.remove();
         break;
 
       case ActionTypes.FOLLOW:
