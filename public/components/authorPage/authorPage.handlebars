@@ -147,14 +147,20 @@
                             <h2 class="content__header">{{title}}</h2>
                             {{#each textWithBreaks}}
                                 <p>{{text}}</p>
-                                <!--TODO attachments-->
                             {{/each}}
-                            {{#each attachments}}
-                                <audio id="audio" src="../../images/music_test.mp3" controls></audio>
-                                <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
-                                <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
-                                <input type="file" class="upload" id="attach-photo-upload"/>
-                            {{/each}}
+                            <!--TODO проверить, норм ли отображается-->
+                            {{#if attachments}}
+                                {{#each attachments.img}}
+                                    <!-- TODO попробовать тэг <{{id}}>-->
+                                    <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+                                {{/each}}
+                                {{#each attachments.video}}
+                                    <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+                                {{/each}}
+                                {{#each attachments.audio}}
+                                    <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+                                {{/each}}
+                            {{/if}}
 
                             <div class="feedback">
                                 <div class="likes">

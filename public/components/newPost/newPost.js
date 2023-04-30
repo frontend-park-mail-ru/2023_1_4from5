@@ -26,30 +26,36 @@ class NewPost {
     return this.#parent;
   }
 
-  render() {
-    console.log('store1', this.config);
-    // console.log('store2', this.config);
+  render(serveAttachments = '') {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
-    console.log('store3', this.config);
-
+    if (serveAttachments) {
+      this.config = [...serveAttachments, ...this.config];
+    }
     if (this.config) {
-      if (this.config.attachments) {
-        console.log('store2', this.config.attachments);
+      if (this.config.attachments.length > 0) {
         const divPreview = document.getElementById('preview');
-        console.log(divPreview);
-        for (const groupAttach in this.config.attachments) {
-          console.log(groupAttach, this.config.attachments[groupAttach]);
-          for (const attach of this.config.attachments[groupAttach]) {
-            console.log('1');
-            console.log('11111', attach, groupAttach);
-            let src = URL.createObjectURL(attach);
-            const attachPreview = document.createElement(groupAttach);
-            attachPreview.className = `${groupAttach}-preview`;
-            console.log(src, attachPreview);
+        for (const attach of this.config.attachments) {
+          let src = URL.createObjectURL(attach);
+          if (attach.type.startsWith('image')) {
+            const attachPreview = document.createElement('img');
+            attachPreview.className = 'img-preview';
+            attachPreview.src = src;
+            attachPreview.style.display = 'block';
+            divPreview.append(attachPreview);
+          } else if (attach.type.startsWith('video')) {
+            const attachPreview = document.createElement('video');
+            attachPreview.className = 'video-preview';
+            attachPreview.src = src;
+            attachPreview.controls = true;
+            attachPreview.style.display = 'block';
+            divPreview.append(attachPreview);
+          } else if (attach.type.startsWith('audio')) {
+            const attachPreview = document.createElement('audio');
+            attachPreview.className = 'audio-preview';
             attachPreview.src = src;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
@@ -57,7 +63,6 @@ class NewPost {
           }
         }
       }
-      console.log('store2.1', this.config);
     }
 
     const backBtn = document.getElementById('newpost-btn-back');
@@ -68,10 +73,8 @@ class NewPost {
 
     const photoInput = document.querySelector('#attach-photo-download');
     photoInput.addEventListener('change', (event) => {
-      console.log('add change input file');
       event.preventDefault();
       const files = event.target.files;
-      console.log('add change photo', files);
       Actions.downloadAttach(files[0]);
     });
 
@@ -79,7 +82,6 @@ class NewPost {
     videoInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('video', files);
       Actions.downloadAttach(files[0]);
     });
 
@@ -87,12 +89,10 @@ class NewPost {
     audioInput.addEventListener('change', (event) => {
       event.preventDefault();
       const files = event.target.files;
-      console.log('music', files);
       Actions.downloadAttach(files[0]);
     });
   }
 
-  // TODO в чём проблем засунуть это в рендер?
   publish() {
     const titleInput = document.getElementById('newpost-title-input');
     const textInput = document.getElementById('newpost-text-input');
@@ -102,12 +102,31 @@ class NewPost {
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      Actions.createPost({
-        titleInput,
-        textInput,
-        errorTitleOutput,
-        errorTextOutput,
-      });
+      // e.stopPropagation();
+      if (this.config) {
+        console.log('ACTION WITN ATTACH');
+        Actions.createPost({
+          attachments: this.config.attachments,
+          titleInput,
+          textInput,
+          errorTitleOutput,
+          errorTextOutput,
+        });
+      } else {
+        console.log('ACTION WITNOUT ATTACH');
+        Actions.createPost({
+          titleInput,
+          textInput,
+          errorTitleOutput,
+          errorTextOutput,
+        });
+      }
+    });
+
+    const form = document.getElementById('create-post');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      console.log('submit');
     });
   }
 
