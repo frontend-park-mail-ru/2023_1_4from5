@@ -8,6 +8,7 @@ import { searchStore } from '../components/search/searchStore';
 import { becameAuthorStore } from '../components/becomeAuthor/becomeAuthorStore';
 import { page404 } from '../components/page404/page404';
 import { subscriptions } from '../components/subscriptions/subscriptions';
+import { feedStore } from '../components/feed/feedStore';
 
 export const URLS = {
   root: '/',
@@ -18,6 +19,7 @@ export const URLS = {
   editPost: '/editPost',
   search: '/search',
   becomeAuthor: '/becomeAuthor',
+  feed: '/feed',
 };
 
 export function notifier(path, data, additionalUrl) {
@@ -66,6 +68,10 @@ export function notifier(path, data, additionalUrl) {
 
     case URLS.subscriptions:
       Actions.renderSubscriptions();
+      break;
+
+    case URLS.feed:
+      feedStore.renderFeed();
       break;
 
     default:

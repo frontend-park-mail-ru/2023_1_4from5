@@ -12,12 +12,14 @@ import { ActionsWinSettings } from './winSettings';
 import { ActionsSearch } from './search';
 import { ActionSubscription } from './subscription';
 import { ActionSubscriptions } from './subscriptions';
+import { ActionsFeed } from './feed';
 
 export const Actions = {
   ...ActionsAuth,
+  ...ActionsAuthorPage,
   ...ActionsBecomeAuthor,
   ...ActionsDonateWin,
-  ...ActionsAuthorPage,
+  ...ActionsFeed,
   ...ActionsPost,
   ...ActionsRegister,
   ...ActionsSearch,
