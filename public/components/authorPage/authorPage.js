@@ -171,4 +171,3 @@ class AuthorPage {
 }
 
 export const authorPage = new AuthorPage(contentElement);
-

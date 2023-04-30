@@ -74,6 +74,7 @@ class AuthorPageStore {
       });
     });
     this.#config = result;
+    console.log(result);
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
       isAuthorized: userStore.getUserState().isAuthorizedIn,
