@@ -1,0 +1,30 @@
+@import "../general/input";
+@import "../general/variables";
+$popup__donate-width: 30%;
+
+#donateWin {
+    @include popup__container();
+    width: $popup__donate-width;
+    height: 60%;
+    margin-left: ((100% - $popup__donate-width) / 2);
+}
+
+.donateWin__container {
+    width: 70%;
+    margin: 3em auto 0 auto;
+    text-align: center;
+}
+
+.donateWin__label {
+    font-size: $font-size-2;
+}
+
+.donate__input {
+    margin-top: 2em;
+    @extend .input--form;
+}
+
+//---donateWin-error---//
+#donateWin-error {
+    height: 1em;
+}

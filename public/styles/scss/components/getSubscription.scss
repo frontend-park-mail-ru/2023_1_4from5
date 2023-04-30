@@ -1,0 +1,31 @@
+@import "../general/variables";
+@import "../general/popup";
+@import "../general/input";
+@import "subscription";
+
+$popup__getsub-width: 30%;
+$popup__getsub-height: 70%;
+
+.getsub--popup__container {
+  @include popup__container();
+  width: $popup__getsub-width;
+  height: $popup__getsub-height;
+  margin-left: ((100% - $popup__getsub-width) / 2);
+}
+
+$getsub__form-width: 80%;
+
+.getsub__form {
+  width: $getsub__form-width;
+  margin: 3em auto 0 auto;
+  text-align: center;
+}
+
+#getsub__months {
+  text-align: center;
+  margin-top: 5%;
+}
+
+#getsub__btn {
+  margin-top: 30%;
+}

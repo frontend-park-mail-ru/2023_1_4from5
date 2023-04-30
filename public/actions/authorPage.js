@@ -49,4 +49,35 @@ export const ActionsAuthorPage = {
       id,
     });
   },
+
+  getSubscription(id, monthCount, money, creatorId) {
+    dispatcher.dispatch({
+      type: ActionTypes.GET_SUBSCRIPION,
+      id,
+      monthCount,
+      money,
+      creatorId,
+    });
+  },
+
+  creatorCoverUpdate(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATOR_COVER_UPDATE,
+      file,
+    });
+  },
+
+  creatorPhotoUpdate(file) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATOR_PHOTO_UPDATE,
+      file,
+    });
+  },
+
+  creatorInfoUpdate(info) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATOR_INFO_UPDATE,
+      info,
+    });
+  },
 };

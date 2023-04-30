@@ -6,6 +6,7 @@ import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { aim } from './aim';
+import { getSubscription } from './getSubscription';
 
 class AuthorPageStore {
   #config;
@@ -69,6 +70,34 @@ class AuthorPageStore {
         authorPage.render();
         break;
 
+      case ActionTypes.GET_SUBSCRIPION:
+        const tokenSub = await request.getHeader(`/api/user/subscribe/${action.id}`);
+        await request.post(`/api/user/subscribe/${action.id}`, {
+          month_count: Number(action.monthCount),
+          money: Number(action.money),
+          creator_id: action.creatorId,
+        }, tokenSub);
+        authorPage.config = this.#config;
+        authorPage.render();
+        getSubscription.remove();
+        break;
+
+      case ActionTypes.CREATOR_COVER_UPDATE:
+        const formData = new FormData();
+        formData.append('upload', action.file);
+        const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+        const result = await creatorPage.json();
+        const coverId = result.creator_info.cover_photo;
+        formData.append('path', coverId);
+
+        console.log(formData);
+
+        const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
+        await request.put('/api/creator/updateCoverPhoto', formData, tokenCover);
+
+        await this.renderMyPage();
+        break;
+
       default:
         break;
     }
@@ -90,7 +119,6 @@ class AuthorPageStore {
       });
     });
     this.#config = result;
-    console.log(result);
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
       isAuthorized: userStore.getUserState().isAuthorizedIn,

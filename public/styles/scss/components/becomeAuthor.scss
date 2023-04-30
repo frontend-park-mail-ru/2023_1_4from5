@@ -1,0 +1,32 @@
+@import "../general/popup";
+@import "../general/variables";
+@import "../general/input";
+$becomeAuthor-width: 30%;
+
+.becameAuthor {
+  @include popup__container();
+  width: $becomeAuthor-width;
+  background-color: $card-color;
+  position: relative;
+  margin-top: 7%;
+  left: ((100% - $becomeAuthor-width) / 2);
+}
+
+.becameAuthor__form {
+  padding: 3em;
+  text-align: center;
+}
+
+.becameAuthor__name {
+  margin-top: 3em;
+}
+
+.becameAuthor--input {
+  @extend .input--form;
+}
+
+#becameAuthor__description--input {
+  resize: none;
+  height: 5em;
+  padding-top: 0.5em;
+}
