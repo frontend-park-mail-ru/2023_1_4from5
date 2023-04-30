@@ -26,7 +26,7 @@ $vertical-row-width: 2px;
   text-align: end;
   position: fixed;
   display: flex;
-  z-index: $content-z-index;
+  z-index: $sidebar-z-index;
   border-bottom: $hr-color solid $hr-width;
   background-color: white;
 }
@@ -71,7 +71,6 @@ $vertical-row-width: 2px;
 
 .sidebar__user {
   text-align: end;
-  //padding-top: 0.4em;
   padding-right: 2em;
 
   a {
@@ -98,14 +97,18 @@ $sidebar-about-offset: 20%;
   padding-left: 4px;
 }
 
-#sidebar__feed {
+.sidebar__feed, .sidebar__subs {
+  position: relative;
+  top: -0.5em;
   padding-right: $sidebar-href-offset;
+  margin-right: 1em;
   border-right: $row-color solid $vertical-row-width;
-}
 
-#sidebar__subs {
-  padding-right: $sidebar-href-offset;
-  border-right: $row-color solid $vertical-row-width;
+  a {
+    position: relative;
+    top: 0.05em;
+    left: 1em;
+  }
 }
 
 #sidebar__reg, #sidebar__auth {

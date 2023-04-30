@@ -23,10 +23,14 @@
 
         <div class="sidebar__user">
             {{#if feed.showDisplay}}
-                <a id="{{feed.id}}" class="sidebar__href" href={{feed.href}}> {{feed.name}} </a>
+                <span class="sidebar__feed">
+                    <a id="{{feed.id}}" class="sidebar__href hover--underline" href={{feed.href}}> {{feed.name}} </a>
+                </span>
             {{/if}}
             {{#if subs.showDisplay}}
-                <a id="{{subs.id}}" class="sidebar__href" href={{subs.href}}> {{subs.name}} </a>
+                <span class="sidebar__subs">
+                    <a id="{{subs.id}}" class="sidebar__href hover--underline" href={{subs.href}}> {{subs.name}} </a>
+                </span>
             {{/if}}
             {{#if reg.showDisplay}}
                 <a id="{{reg.id}}" class="sidebar__href hover--underline" href={{reg.href}}> {{reg.name}} </a>

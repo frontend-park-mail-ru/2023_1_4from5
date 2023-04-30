@@ -1,0 +1,40 @@
+@import "../general/variables";
+
+#startPage {
+  padding: 5% 0 5% 5%;
+}
+
+.startPage__intro {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  margin-bottom: 3em;
+}
+
+.startPage__usage {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  margin-bottom: 3em;
+}
+
+.startPage__forWhom {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  margin-bottom: 3em;
+}
+
+.start__photo {
+  width: 80%;
+}
+
+.startPage__text--header {
+  font-size: $title-font-size;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.start__text {
+  width: 90%;
+  font-size: $font-size-3;
+  margin-top: 1em;
+}

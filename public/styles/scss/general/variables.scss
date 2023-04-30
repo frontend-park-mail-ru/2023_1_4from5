@@ -3,6 +3,7 @@ $font-size-2: 20px;
 $font-size-3: 24px;
 $font-size-4: 32px;
 $title-font-size: 36px;
+$ultra-title-font-size: 54px;
 
 $tag-border-radius: 10px;
 $elem-border-radius: 15px;
@@ -16,9 +17,11 @@ $underline-width: 2px;
 
 $sidebar-height: 4em;
 
+$lower-z-index: 0;
 $content-z-index: 1;
-$background-z-index: 2;
-$popup-z-index: 3;
+$sidebar-z-index: 2;
+$background-z-index: 3;
+$popup-z-index: 4;
 
 
 $input-height: 60px;
@@ -48,6 +51,7 @@ $card-color: #F8F8F9;
 $card-color-hover: #ececec;
 $card-content-color: #d3d3d3;
 $sub__btn-color: #ECEBF0;
+$sub__btn-color-hover: #d6d5d9;
 $text--default-color: #A3A3A3;
 $create-btn-color: #D9F1DF;
 $create-btn-color-hover: #bae7c6;
