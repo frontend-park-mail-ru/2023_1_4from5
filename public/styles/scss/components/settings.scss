@@ -81,10 +81,14 @@ $settings__form-width: 50%;
 }
 
 .photo__load--label {
-  width: fit-content;
+  width: 100%;
+  text-align: center;
   height: fit-content;
-  border: black solid 1px;
-  background-color: green;
+  display: block;
+  margin: 1em;
+  padding: 1em;
+  border-radius: $elem-border-radius;
+  background-color: $sub__btn-color;
 }
 
 //---change__res---//
