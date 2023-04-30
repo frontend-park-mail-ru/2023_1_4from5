@@ -18,6 +18,14 @@ class BecomeAuthor {
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
 
+    const backBtn = document.getElementById('becameAuthor__backBtn');
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.popstate();
+    });
+  }
+
+  publish() {
     const bcmAuthorBtn = document.getElementById('becameAuthor__btn');
     const nameInput = document.getElementById('becameAuthor__name--input');
     const descriptionInput = document.getElementById('becameAuthor__description--input');
@@ -29,11 +37,24 @@ class BecomeAuthor {
         descriptionInput,
       });
     });
+  }
 
-    const backBtn = document.getElementById('becameAuthor__backBtn');
-    backBtn.addEventListener('click', (e) => {
+  update(name, description) {
+    const bcmAuthorBtn = document.getElementById('becameAuthor__btn');
+    bcmAuthorBtn.innerHTML = 'Обновить профиль';
+    const nameInput = document.getElementById('becameAuthor__name--input');
+    nameInput.value = name;
+    const descriptionInput = document.getElementById('becameAuthor__description--input');
+    descriptionInput.value = description;
+
+    bcmAuthorBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      router.popstate();
+      const newName = nameInput.value;
+      const newDescription = descriptionInput.value;
+      Actions.updateProfile({
+        newName,
+        newDescription,
+      });
     });
   }
 }
