@@ -4,7 +4,6 @@ import { Actions } from '../../actions/actions';
 import template from './authorPage.handlebars';
 import { aim } from './aim';
 import { getSubscription } from './getSubscription';
-import * as events from 'events';
 
 const contentElement = document.querySelector('main');
 
@@ -38,6 +37,8 @@ class AuthorPage {
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
+    const coverPhoto = this.#config.creator_info.cover_photo;
+    backGnd.style.backgroundImage = `url(../../images/${coverPhoto}.jpeg)`;
 
     const cover = document.getElementById('cover__upload');
     if (cover) {

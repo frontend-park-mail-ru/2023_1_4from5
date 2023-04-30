@@ -91,7 +91,9 @@ class AuthorPageStore {
         console.log(formData);
 
         const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
-        await request.put('/api/creator/updateCoverPhoto', formData, tokenCover);
+        const req = await request.put('/api/creator/updateCoverPhoto', formData, tokenCover);
+
+        console.log(req);
 
         await this.renderMyPage();
         break;
