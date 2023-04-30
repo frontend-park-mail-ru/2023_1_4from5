@@ -1,6 +1,7 @@
 @import "../general/popup";
 @import "../general/variables";
 @import "../general/input";
+
 $becomeAuthor-width: 30%;
 
 .becameAuthor {
@@ -29,4 +30,25 @@ $becomeAuthor-width: 30%;
   resize: none;
   height: 5em;
   padding-top: 0.5em;
+}
+
+.back__btn--container {
+  text-align: start;
+}
+
+.becameAuthor--header {
+  font-size: $font-size-3;
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+
+.becameAuthor__backBtn {
+  background-color: $sub__btn-color;
+  width: 50%;
+  height: 2em;
+  color: black;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
 }

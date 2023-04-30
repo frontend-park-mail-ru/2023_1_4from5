@@ -13,7 +13,7 @@ $author__photo--left: 5%;
   width: $author__photo--width;
   top: $author__photo--top;
   left: $author__photo--left;
-  z-index: $background-z-index;
+  z-index: $content-z-index;
 }
 
 #author__header {
@@ -28,7 +28,7 @@ $author__photo--left: 5%;
   display: block;
   width: 100%;
   height: 100%;
-  z-index: $content-z-index;
+  z-index: $lower-z-index;
   opacity: 0;
   @include clickable();
 

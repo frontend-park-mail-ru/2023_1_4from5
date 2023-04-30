@@ -5,6 +5,7 @@ $font-family: 'DM Sans', sans-serif;
 #root {
   font-size: $font-size;
   font-family: $font-family;
+  overflow-x:hidden;
 }
 
 main {

@@ -40,12 +40,14 @@ class AuthorPage {
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
 
     const cover = document.getElementById('cover__upload');
-    cover.addEventListener('change', (event) => {
-      event.preventDefault();
-      const files = event.target.files;
-      console.log(files);
-      Actions.creatorCoverUpdate(files[0]);
-    });
+    if (cover) {
+      cover.addEventListener('change', (event) => {
+        event.preventDefault();
+        const files = event.target.files;
+        console.log(files);
+        Actions.creatorCoverUpdate(files[0]);
+      });
+    }
 
     const createPostBtn = document.getElementById('create__post');
     if (createPostBtn) {

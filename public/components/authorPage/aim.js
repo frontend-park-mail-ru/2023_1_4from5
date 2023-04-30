@@ -16,10 +16,12 @@ export class Aim {
     newDiv.innerHTML = template(content);
     this.#parent.appendChild(newDiv);
 
-    const description = document.getElementById('aim__description');
-    description.value = content.description;
-    const cost = document.getElementById('aim__cost');
-    cost.value = content.money_needed;
+    if (content) {
+      const description = document.getElementById('aim__description');
+      description.value = content.description;
+      const cost = document.getElementById('aim__cost');
+      cost.value = content.money_needed;
+    }
 
     const background = document.getElementById('backAim');
     background.addEventListener('click', (e) => {

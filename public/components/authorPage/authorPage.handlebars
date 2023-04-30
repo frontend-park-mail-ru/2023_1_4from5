@@ -3,15 +3,17 @@
 </div>
 
 <div id="author__header">
-    <label class="cover__load--label">
-        <input id="cover__upload" type="file" class="upload"/>
-        <span id="author__header--hover">
-            <h2 class="cover__title">
-                <img class="cover__img" src="../../images/load-cover.svg" alt="load-cover">
-                <p class="cover__title--text">Загрузить фото</p>
-            </h2>
-        </span>
-    </label>
+    {{#if is_my_page}}
+        <label class="cover__load--label">
+            <input id="cover__upload" type="file" class="upload"/>
+            <span id="author__header--hover">
+                <h2 class="cover__title">
+                    <img class="cover__img" src="../../images/load-cover.svg" alt="load-cover">
+                    <p class="cover__title--text">Загрузить фото</p>
+                </h2>
+            </span>
+        </label>
+    {{/if}}
 </div>
 
 <!------------------------------------------------------------------------------------------------->
