@@ -137,7 +137,7 @@ class NewPost {
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
-    titleInput.textContent = title;
+    titleInput.value = title;
     textInput.textContent = text;
     postBtn.textContent = 'готово';
 

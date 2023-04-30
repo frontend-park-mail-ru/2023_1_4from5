@@ -1,56 +1,94 @@
-<div class="newpost-form-container">
+<div class="newpost__container">
 
-    <div class="newpost-header-container">
+    <div class="post__form">
         <button id="newpost-btn-back" class="newpost-btn">Назад</button>
-        <span class="newpost-title"> Мой пост </span>
+        <div class="newpost-title">Пост</div>
+
+        <form id="create-post" class="newpost-form">
+            <div class="newpost-title-container">
+                <div class="newpost-title-input-container">
+                    <input id="newpost-title-input" class="newpost__input" placeholder="Название поста">
+                </div>
+                <div id="newpost-title-error" class="error"></div>
+            </div>
+
+            <div class="newpost-text-container">
+                <div class="newpost-text-input-container">
+                    <textarea id="newpost-text-input" class="newpost__input" placeholder="Текст поста"></textarea>
+                </div>
+                <div id="newpost-text-error" class="error"></div>
+            </div>
+            <div class="input-file-container">
+                <label class="input-file">
+                    <input type="file" name="file" id="attach-photo-download"
+                           accept="image/jpeg, image/png, image/webp">
+                    <span class="input-file-btn">Фото</span>
+                    <span class="input-file-text">jpeg, png, webp</span>
+                </label>
+                <label class="input-file">
+                    <input type="file" name="file" id="attach-video-download" accept="video/mp4, video/mpeg">
+                    <span class="input-file-btn">Видео</span>
+                    <span class="input-file-text">mp4, mpeg</span>
+                </label>
+                <label class="input-file">
+                    <input type="file" name="file" id="attach-music-download" accept="audio/mp3, audio/mpeg">
+                    <span class="input-file-btn">Аудио</span>
+                    <span class="input-file-text">mp3, mpeg</span>
+                </label>
+            </div>
+
+            <div id="preview" class="preview-container">
+                <!--            <img id="file-preview">-->
+            </div>
+        </form>
     </div>
 
-    <form id="create-post" class="newpost-form">
-        <div class="newpost-title-container">
-            <div class="newpost-title-label-container">
-                <label class="newpost-title-label">Название поста</label>
+    <div class="post__settings">
+        <div class="post__settings--form">
+            <p class="post__settings--header">Кто может смотреть</p>
+
+            <div class="subscribers__class">
+                <div class="switch">
+                    <img class="switch__img" src="../../images/radio-active.svg" alt="active">
+                    <p class="switch__text">Открыт для всех</p>
+                </div>
+                <div class="switch">
+                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">
+                    <p class="switch__text">Только подписчики</p>
+                </div>
+                <div class="switch">
+                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">
+                    <p class="switch__text">Подписчики или разовая оплата</p>
+                </div>
+                <div class="switch">
+                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">
+                    <p class="switch__text">Только разовая оплата</p>
+                </div>
             </div>
-            <div class="newpost-title-input-container">
-                <textarea id="newpost-title-input" class="newpost-title-input"></textarea>
+
+            <div class="subscription__levels">
+                <p>Уровень</p>
+                <div class="sub__level--container">
+                    <div class="sub__level">
+                        <img src="../../images/radio-inactive.svg" alt="inactive">
+                        <p class="sub__level--text">Уровень 1</p>
+                    </div>
+                    <div class="sub__level">
+                        <img src="../../images/radio-inactive.svg" alt="inactive">
+                        <p class="sub__level--text">Уровень 2</p>
+                    </div>
+                    <div class="sub__level">
+                        <img src="../../images/radio-inactive.svg" alt="inactive">
+                        <p class="sub__level--text">Уровень 3</p>
+                    </div>
+                </div>
             </div>
-            <div id="newpost-title-error" class="error"></div>
-        </div>
 
-        <div class="newpost-text-container">
-            <div class="newpost-text-label-container">
-                <label class="newpost-text-label">Текст</label>
+            <div class="comments">
+                <p>Комментарии</p>
+                <img src="../../images/switcher-inactive.svg" alt="inactive">
             </div>
-            <div class="newpost-text-input-container">
-                <textarea id="newpost-text-input" class="newpost-text-input"></textarea>
-            </div>
-            <div id="newpost-text-error" class="error"></div>
         </div>
-        <div class="input-file-container">
-            <label class="input-file">
-                <input type="file" name="file" id="attach-photo-download" accept="image/jpeg, image/png, image/webp">
-                <span class="input-file-btn">Фото</span>
-                <span class="input-file-text">jpeg, png, webp</span>
-            </label>
-            <label class="input-file">
-                <input type="file" name="file" id="attach-video-download" accept="video/mp4, video/mpeg">
-                <span class="input-file-btn">Видео</span>
-                <span class="input-file-text">mp4, mpeg</span>
-            </label>
-            <label class="input-file">
-                <input type="file" name="file" id="attach-music-download" accept="audio/mp3, audio/mpeg">
-                <span class="input-file-btn">Аудио</span>
-                <span class="input-file-text">mp3, mpeg</span>
-            </label>
-        </div>
-
-        <div id="preview" class="preview-container">
-<!--            <img id="file-preview">-->
-        </div>
-
-
-        <div class="newpost-btn-container">
-            <button id="newpost-btn" class="newpost-btn">Опубликовать</button>
-        </div>
-
-    </form>
+        <button id="newpost-btn" class="newpost-btn">Сохранить</button>
+    </div>
 </div>
