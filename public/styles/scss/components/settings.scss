@@ -24,6 +24,7 @@ $chapter__bar-height: 0.3em;
 }
 
 #chapter__account {
+  @include clickable();
   color: $text-color;
   border-left: $text-color solid $chapter-border-width;
 }

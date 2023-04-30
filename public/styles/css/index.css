@@ -823,6 +823,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .icon--like {
+  cursor: pointer;
   width: 2em;
 }
 
@@ -1344,6 +1345,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 #chapter__account {
+  cursor: pointer;
   color: #009d00;
   border-left: #009d00 solid 3px;
 }
@@ -1609,7 +1611,8 @@ p, h1, h2, h3, h4, h5 {
   margin-bottom: 3em;
 }
 
-#chapter--follow {
+#chapter--paid {
+  cursor: pointer;
   border-left: #009d00 solid 3px;
   color: #009d00;
 }
@@ -1671,6 +1674,86 @@ p, h1, h2, h3, h4, h5 {
 }
 .subs__extend:hover {
   background-color: #bae7c6;
+}
+
+.feed {
+  width: 60%;
+  margin: 5% auto auto;
+}
+
+.feed__card {
+  border-radius: 15px;
+  background-color: #F8F8F9;
+  padding: 2%;
+  margin-bottom: 5em;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+
+.feed__header {
+  display: grid;
+  grid-template-columns: 13% 60% 27%;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: #d3d3d3 solid 2px;
+}
+
+.feed__creator--photo {
+  height: 5em;
+  border-radius: 100%;
+  margin-left: 1em;
+}
+
+.feed__creator--name {
+  margin-top: 1.2em;
+  font-size: 20px;
+}
+
+.feed__date--container {
+  text-align: end;
+  margin-right: 2.5em;
+}
+
+.feed__date {
+  margin-top: 1em;
+  font-size: 20px;
+}
+
+.feed__content {
+  padding: 1em 7% 1em 7%;
+}
+
+.feed__title {
+  margin-bottom: 1em;
+}
+
+.feed__footer {
+  padding: 0 7% 1em 7%;
+  font-size: 24px;
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
+
+.feed__like--space {
+  display: flex;
+}
+.feed__like--space p {
+  margin: 0.2em 0.5em 0.5em 0.3em;
+}
+
+.feed__likes--count {
+  width: 1em;
+}
+
+.feed__icon {
+  height: 1.5em;
+}
+
+.feed__like {
+  cursor: pointer;
+}
+
+.feed__comment--container {
+  text-align: end;
 }
 
 /*# sourceMappingURL=index.css.map */

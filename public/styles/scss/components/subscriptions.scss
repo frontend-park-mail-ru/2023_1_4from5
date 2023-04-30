@@ -16,7 +16,8 @@ $subs__content-width: 80%;
   margin-bottom: 3em;
 }
 
-#chapter--follow {
+#chapter--paid {
+  @include clickable();
   border-left: $text-color solid $chapter-border-width;
   color: $text-color;
 }

@@ -77,6 +77,7 @@ $post__header-mr: 0.5em;
 $feedback__img-width: 2em;
 
 .icon--like {
+  @include clickable();
   width: $feedback__img-width;
 }
 

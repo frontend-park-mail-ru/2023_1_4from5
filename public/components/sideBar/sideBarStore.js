@@ -24,12 +24,11 @@ class SideBarStore {
       },
       feed: {
         name: 'Лента',
-        href: '/feed',
+        href: URLS.feed,
         id: 'sidebar__feed',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       findAuth: {
         name: 'Авторы',
