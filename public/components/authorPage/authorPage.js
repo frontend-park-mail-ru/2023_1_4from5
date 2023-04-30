@@ -27,6 +27,7 @@ class AuthorPage {
   }
 
   render() {
+    console.log(this.#config)
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
@@ -66,41 +67,22 @@ class AuthorPage {
           event.target.parentElement.parentElement.parentElement.parentElement.id);
       });
     }
-    //
-    // const editAimIcon = document.getElementById('pencil-icon-aim');
-    // if (editAimIcon) {
-    //   editAimIcon.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     Actions.editAim();
-    //     const aimInput = document.getElementById('description-edit-aim');
-    //     aimInput.textContent = this.#config.aim.description;
-    //   });
-    // }
-    //
-    // const closeEditAimIcon = document.getElementById('close-icon-aim');
-    // if (closeEditAimIcon) {
-    //   closeEditAimIcon.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     Actions.closeEditAim();
-    //   });
-    // }
-    //
-    // const saveBtnAim = document.getElementById('save-btn-aim');
-    // if (saveBtnAim) {
-    //   const descriptionInput = document.getElementById('description-edit-aim');
-    //   const moneyNeededInput = document.getElementById('money-needed-edit-aim');
-    //   const errorDescriptionOutput = document.getElementById('edit-aim-description-error');
-    //   const errorMoneyNeededOutput = document.getElementById('edit-aim-money-needed-error');
-    //   saveBtnAim.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     Actions.saveEditAim({
-    //       descriptionInput,
-    //       moneyNeededInput,
-    //       errorDescriptionOutput,
-    //       errorMoneyNeededOutput,
-    //     });Поляков
-    //   });
-    // }
+
+    const addAimBtn = document.getElementById('aim__add');
+    if (addAimBtn) {
+      addAimBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.renderAim();
+      });
+    }
+
+    const editAimBtn = document.getElementById('aim__edit');
+    if (editAimBtn) {
+      editAimBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.updateAim(this.#config.aim);
+      });
+    }
 
     const donateBtnAim = document.getElementById('donate__btn');
     if (donateBtnAim) {

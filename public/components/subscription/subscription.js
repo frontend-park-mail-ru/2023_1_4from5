@@ -31,6 +31,9 @@ export class SubscriptionWin {
   }
 
   publish() {
+    const titleHead = document.getElementById('sub__title');
+    titleHead.innerHTML = 'Создание подписки';
+
     const createSubBtn = document.getElementById('subscription__btn');
     createSubBtn.addEventListener('click', (event) => {
       event.preventDefault();
@@ -52,6 +55,9 @@ export class SubscriptionWin {
   }
 
   update(id) {
+    const titleHead = document.getElementById('sub__title');
+    titleHead.innerHTML = 'Редактирование подписки';
+
     const createSubBtn = document.getElementById('subscription__btn');
     createSubBtn.addEventListener('click', (event) => {
       event.preventDefault();

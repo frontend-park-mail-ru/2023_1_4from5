@@ -1,0 +1,58 @@
+@import "../general/variables";
+@import "../general/popup";
+@import "../general/input";
+
+$popup__sub-width: 45%;
+
+.subscription__container {
+  @include popup__container();
+  width: $popup__sub-width;
+  margin-left: ((100% - $popup__sub-width) / 2);
+}
+
+$popup__content-width: 60%;
+
+.subscription {
+  width: $popup__content-width;
+  margin: 2em auto auto;
+}
+
+.subscription__body {
+  font-size: $font-size-3;
+}
+
+.subscription__win--title {
+  text-align: center;
+  font-size: $font-size-4;
+  margin-bottom: 5%;
+}
+
+$sub__input-mb: 7%;
+
+.sub__input--container {
+  margin-bottom: $sub__input-mb;
+}
+
+$sub__input--title-mb: 5%;
+
+.sub__input--title {
+  margin-bottom: $sub__input--title-mb;
+}
+
+.sub__input {
+  width: 98%;
+  font-size: $font-size-2;
+  border-radius: $elem-border-radius;
+  border: $form-input-border-color solid $form-input-border-width;
+  padding: 1em;
+}
+
+#sub-description-input {
+  resize: none;
+  height: 5em;
+}
+
+#sub-cost-input {
+  font-size: $font-size-3;
+  height: 1em;
+}

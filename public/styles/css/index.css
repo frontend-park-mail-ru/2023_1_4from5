@@ -491,6 +491,14 @@ p, h1, h2, h3, h4, h5 {
   cursor: pointer;
 }
 
+.aim__header {
+  text-align: end;
+}
+
+#aim__edit {
+  margin: 10px 10px 0 20%;
+}
+
 .text--default {
   font-weight: bold;
   font-size: 1.2em;
@@ -578,6 +586,14 @@ p, h1, h2, h3, h4, h5 {
   top: 7px;
   left: 43%;
   cursor: pointer;
+}
+
+.aim__header {
+  text-align: end;
+}
+
+#aim__edit {
+  margin: 10px 10px 0 20%;
 }
 
 .text--default {
@@ -1028,6 +1044,197 @@ p, h1, h2, h3, h4, h5 {
 .winsettings__hr {
   width: 80%;
   color: rgba(128, 128, 128, 0.45);
+}
+
+.input--form, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.subscription__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 45%;
+  margin-left: 27.5%;
+}
+
+.subscription {
+  width: 60%;
+  margin: 2em auto auto;
+}
+
+.subscription__body {
+  font-size: 24px;
+}
+
+.subscription__win--title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 5%;
+}
+
+.sub__input--container {
+  margin-bottom: 7%;
+}
+
+.sub__input--title {
+  margin-bottom: 5%;
+}
+
+.sub__input {
+  width: 98%;
+  font-size: 20px;
+  border-radius: 15px;
+  border: #cccccc solid 2px;
+  padding: 1em;
+}
+
+#sub-description-input {
+  resize: none;
+  height: 5em;
+}
+
+#sub-cost-input {
+  font-size: 24px;
+  height: 1em;
+}
+
+.input--form, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.input--form, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.subscription__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 45%;
+  margin-left: 27.5%;
+}
+
+.subscription {
+  width: 60%;
+  margin: 2em auto auto;
+}
+
+.subscription__body {
+  font-size: 24px;
+}
+
+.subscription__win--title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 5%;
+}
+
+.sub__input--container {
+  margin-bottom: 7%;
+}
+
+.sub__input--title {
+  margin-bottom: 5%;
+}
+
+.sub__input {
+  width: 98%;
+  font-size: 20px;
+  border-radius: 15px;
+  border: #cccccc solid 2px;
+  padding: 1em;
+}
+
+#sub-description-input {
+  resize: none;
+  height: 5em;
+}
+
+#sub-cost-input {
+  font-size: 24px;
+  height: 1em;
+}
+
+.aim--popup__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 45%;
+  height: 70%;
+  margin-left: 27.5%;
+}
+
+.aim__form {
+  width: 60%;
+  margin: 2em auto 0 auto;
+}
+
+.aim__title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 7%;
+}
+
+.aim__block {
+  margin-bottom: 7%;
+}
+
+.description--title {
+  font-size: 24px;
+  margin-bottom: 1em;
+}
+
+#aim__description {
+  resize: none;
+  height: 4em;
+}
+
+#aim__cost {
+  font-size: 24px;
+}
+
+.aim__input {
+  width: 92%;
+  font-size: 20px;
+  border-radius: 15px;
+  border: #cccccc solid 2px;
+  padding: 1em;
+}
+
+.aim--err {
+  margin-top: 1em;
+  height: 1em;
 }
 
 /*# sourceMappingURL=index.css.map */

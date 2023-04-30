@@ -46,6 +46,14 @@ $add-top: 7px;
   @include clickable();
 }
 
+.aim__header {
+  text-align: end;
+}
+
+#aim__edit {
+  margin: 10px 10px 0 20%;
+}
+
 .text--default {
   font-weight: bold;
   font-size: 1.2em;
