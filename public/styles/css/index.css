@@ -78,7 +78,7 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -95,7 +95,7 @@ p, h1, h2, h3, h4, h5 {
   color: red;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -181,7 +181,7 @@ p, h1, h2, h3, h4, h5 {
   font-size: 1.09em;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -206,7 +206,7 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -328,6 +328,10 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .reg__input--form {
+  margin-bottom: 0;
+}
+
+#username__form, #login__form, #password__form, #password--repeat__form {
   margin-bottom: 0;
 }
 
@@ -453,6 +457,11 @@ p, h1, h2, h3, h4, h5 {
 
 #sidebar__modalWindow {
   margin-right: 0;
+}
+
+.sidebar__notification {
+  margin-right: 0.5em;
+  padding-bottom: 0.2em;
 }
 
 .auth__service {
@@ -875,12 +884,44 @@ p, h1, h2, h3, h4, h5 {
   width: 20%;
   top: 12%;
   left: 5%;
+  z-index: 2;
 }
 
 #author__header {
   height: 20em;
   background-position: center center;
   background-size: 80%;
+}
+
+#author__header--hover {
+  position: relative;
+  top: -1em;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+#author__header--hover:hover {
+  background-color: gray;
+  opacity: 50%;
+}
+
+.cover__title {
+  position: relative;
+  top: 45%;
+  left: 42%;
+  display: flex;
+}
+
+.cover__img {
+  height: 2em;
+}
+
+.cover__title--text {
+  margin-top: 0.5em;
+  margin-left: 1em;
 }
 
 .author__container {
@@ -1044,6 +1085,11 @@ p, h1, h2, h3, h4, h5 {
   margin-right: 0;
 }
 
+.sidebar__notification {
+  margin-right: 0.5em;
+  padding-bottom: 0.2em;
+}
+
 #winSettings {
   position: fixed;
   top: 4em;
@@ -1078,7 +1124,7 @@ p, h1, h2, h3, h4, h5 {
   color: rgba(128, 128, 128, 0.45);
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1141,7 +1187,7 @@ p, h1, h2, h3, h4, h5 {
   height: 1em;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1151,7 +1197,7 @@ p, h1, h2, h3, h4, h5 {
   padding: 0 0.5em;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1269,7 +1315,7 @@ p, h1, h2, h3, h4, h5 {
   height: 1em;
 }
 
-.input--form, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1330,11 +1376,6 @@ p, h1, h2, h3, h4, h5 {
   margin-bottom: 2em;
 }
 
-.user-photo {
-  width: 200px;
-  border-radius: 15px;
-}
-
 .settings__photo {
   padding: 5em;
 }
@@ -1347,7 +1388,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 #user-photo {
-  width: 10em;
+  width: 100%;
   border-radius: 15px;
 }
 
@@ -1356,8 +1397,8 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
   height: fit-content;
   display: block;
-  margin: 1em;
-  padding: 1em;
+  margin-top: 1em;
+  padding: 1em 0 1em 0;
   border-radius: 15px;
   background-color: #ECEBF0;
 }
@@ -1373,6 +1414,188 @@ p, h1, h2, h3, h4, h5 {
 
 #change-password-error {
   color: red;
+}
+
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form, .change__input {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+#donateWin {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 30%;
+  height: 60%;
+  margin-left: 35%;
+}
+
+.donateWin__container {
+  width: 70%;
+  margin: 3em auto 0 auto;
+  text-align: center;
+}
+
+.donateWin__label {
+  font-size: 20px;
+}
+
+.donate__input {
+  margin-top: 2em;
+}
+
+#donateWin-error {
+  height: 1em;
+}
+
+.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.subscription__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 45%;
+  margin-left: 27.5%;
+}
+
+.subscription {
+  width: 60%;
+  margin: 2em auto auto;
+}
+
+.subscription__body {
+  font-size: 24px;
+}
+
+.subscription__win--title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 5%;
+}
+
+.sub__input--container {
+  margin-bottom: 7%;
+}
+
+.sub__input--title {
+  margin-bottom: 5%;
+}
+
+.sub__input {
+  width: 98%;
+  font-size: 20px;
+  border-radius: 15px;
+  border: #cccccc solid 2px;
+  padding: 1em;
+}
+
+#sub-description-input {
+  resize: none;
+  height: 5em;
+}
+
+#sub-cost-input {
+  font-size: 24px;
+  height: 1em;
+}
+
+.getsub--popup__container {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 30%;
+  height: 70%;
+  margin-left: 35%;
+}
+
+.getsub__form {
+  width: 80%;
+  margin: 3em auto 0 auto;
+  text-align: center;
+}
+
+#getsub__months {
+  text-align: center;
+  margin-top: 5%;
+}
+
+#getsub__btn {
+  margin-top: 30%;
+}
+
+.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.becameAuthor {
+  top: 10%;
+  height: 80%;
+  border-radius: 2em;
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+  width: 30%;
+  background-color: #F8F8F9;
+  position: relative;
+  margin-top: 7%;
+  left: 35%;
+}
+
+.becameAuthor__form {
+  padding: 3em;
+  text-align: center;
+}
+
+.becameAuthor__name {
+  margin-top: 3em;
+}
+
+#becameAuthor__description--input {
+  resize: none;
+  height: 5em;
+  padding-top: 0.5em;
 }
 
 /*# sourceMappingURL=index.css.map */
