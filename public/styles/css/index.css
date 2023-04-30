@@ -1598,4 +1598,79 @@ p, h1, h2, h3, h4, h5 {
   padding-top: 0.5em;
 }
 
+.subscriptions {
+  padding: 3.5% 7% 0 7%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.chapters__title {
+  font-size: 36px;
+  margin-bottom: 3em;
+}
+
+#chapter--follow {
+  border-left: #009d00 solid 3px;
+  color: #009d00;
+}
+
+.subscriptions__container {
+  padding: 5%;
+  border-radius: 2em;
+  background-color: #F8F8F9;
+  display: grid;
+  grid-template-columns: 33.3333333333% 33.3333333333% 33.3333333333%;
+}
+
+.subs__card {
+  border-radius: 15px;
+  background-color: white;
+  text-align: center;
+  padding: 10% 15% 15%;
+  margin: 3%;
+  display: grid;
+  grid-template-rows: 90% 10%;
+}
+
+.subs__photo {
+  width: 60%;
+  border-radius: 100%;
+  margin-bottom: 1em;
+}
+
+.subs__creator {
+  margin-bottom: 1em;
+}
+
+.subs__info {
+  background-color: #ECEBF0;
+  border-radius: 15px;
+  padding: 1em;
+  margin-bottom: 1em;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+
+.month__cost--container {
+  display: flex;
+  margin-top: 0.2em;
+  padding-left: 1.2em;
+}
+
+#month__cost {
+  margin-right: 0.3em;
+}
+
+.subs__info--title {
+  font-size: 20px;
+}
+
+.subs__extend {
+  color: black;
+  background-color: #D9F1DF;
+  box-shadow: 5px 5px 5px #b7b7b7;
+}
+.subs__extend:hover {
+  background-color: #bae7c6;
+}
+
 /*# sourceMappingURL=index.css.map */

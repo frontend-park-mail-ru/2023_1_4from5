@@ -11,6 +11,7 @@ import { ActionsUser } from './user';
 import { ActionsWinSettings } from './winSettings';
 import { ActionsSearch } from './search';
 import { ActionSubscription } from './subscription';
+import { ActionSubscriptions } from './subscriptions';
 
 export const Actions = {
   ...ActionsAuth,
@@ -24,6 +25,7 @@ export const Actions = {
   ...ActionsSideBar,
   ...ActionsStartPage,
   ...ActionSubscription,
+  ...ActionSubscriptions,
   ...ActionsUser,
   ...ActionsWinSettings,
 };
