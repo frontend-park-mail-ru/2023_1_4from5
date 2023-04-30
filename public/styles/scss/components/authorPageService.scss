@@ -47,11 +47,30 @@ $add-top: 7px;
 }
 
 .aim__header {
-  text-align: end;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+$aim__bar-height: 8px;
+$aim__bar-color: #009F2D;
+
+.aim__bar {
+  margin: 1em auto 1em auto;
+  width: 90%;
+  height: $aim__bar-height;
+  border: $text--default-color solid 1px;
+  border-radius: ($aim__bar-height / 2 + 1px);
+}
+
+#bar--row {
+  background-color: $aim__bar-color;
+  height: $aim__bar-height;
+  border-radius: ($aim__bar-height / 2 + 1px);
 }
 
 #aim__edit {
-  margin: 10px 10px 0 20%;
+  margin: 10px 10px 0 0;
+  @include clickable();
 }
 
 .text--default {

@@ -38,11 +38,16 @@
             <p>Цель</p>
             <div class="aim__container">
                 {{#if aim.description}}
-                    <p class="aim__header">{{aim.money_got}} из {{aim.money_needed}} р
+                    <div class="aim__header">
+                        <div></div>
+                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} р</p>
                         {{#if is_my_page}}
                             <img id="aim__edit" src="../../images/edit.svg" alt="edit">
                         {{/if}}
-                    </p>
+                    </div>
+                    <div class="aim__bar">
+                        <div id="bar--row"></div>
+                    </div>
                     <p>{{aim.description}}</p>
                 {{else}}
                     {{#if is_my_page}}

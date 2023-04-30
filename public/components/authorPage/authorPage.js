@@ -127,6 +127,9 @@ class AuthorPage {
         Actions.unfollow(unfollowBtn.parentElement.id);
       });
     }
+
+    const aimBar = document.getElementById('bar--row');
+    aimBar.style.width = `${String((this.#config.aim.money_got / this.#config.aim.money_needed) * 100)}%`;
   }
 
   deleteHandler(e) {

@@ -60,7 +60,7 @@ button:hover {
 }
 
 .hover--underline:hover {
-  border-bottom: green solid 2px;
+  border-bottom: #009d00 solid 2px;
 }
 
 a {
@@ -78,7 +78,7 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -95,7 +95,7 @@ p, h1, h2, h3, h4, h5 {
   color: red;
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -170,18 +170,18 @@ p, h1, h2, h3, h4, h5 {
   margin: auto;
   width: fit-content;
   cursor: pointer;
-  color: green;
+  color: #009d00;
   font-weight: bold;
 }
 #toReg:hover {
-  border-bottom: green solid 2px;
+  border-bottom: #009d00 solid 2px;
 }
 
 .auth__text {
   font-size: 1.09em;
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -206,7 +206,7 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -281,11 +281,11 @@ p, h1, h2, h3, h4, h5 {
   margin: auto;
   width: fit-content;
   cursor: pointer;
-  color: green;
+  color: #009d00;
   font-weight: bold;
 }
 #toReg:hover {
-  border-bottom: green solid 2px;
+  border-bottom: #009d00 solid 2px;
 }
 
 .auth__text {
@@ -354,11 +354,11 @@ p, h1, h2, h3, h4, h5 {
   margin: auto;
   width: fit-content;
   cursor: pointer;
-  color: green;
+  color: #009d00;
   font-weight: bold;
 }
 #toAuth:hover {
-  border-bottom: green solid 2px;
+  border-bottom: #009d00 solid 2px;
 }
 
 #sideBar {
@@ -492,11 +492,27 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .aim__header {
-  text-align: end;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+.aim__bar {
+  margin: 1em auto 1em auto;
+  width: 90%;
+  height: 8px;
+  border: #A3A3A3 solid 1px;
+  border-radius: 5px;
+}
+
+#bar--row {
+  background-color: #009F2D;
+  height: 8px;
+  border-radius: 5px;
 }
 
 #aim__edit {
-  margin: 10px 10px 0 20%;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 .text--default {
@@ -589,11 +605,27 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .aim__header {
-  text-align: end;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+.aim__bar {
+  margin: 1em auto 1em auto;
+  width: 90%;
+  height: 8px;
+  border: #A3A3A3 solid 1px;
+  border-radius: 5px;
+}
+
+#bar--row {
+  background-color: #009F2D;
+  height: 8px;
+  border-radius: 5px;
 }
 
 #aim__edit {
-  margin: 10px 10px 0 20%;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 .text--default {
@@ -1046,7 +1078,7 @@ p, h1, h2, h3, h4, h5 {
   color: rgba(128, 128, 128, 0.45);
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1109,7 +1141,7 @@ p, h1, h2, h3, h4, h5 {
   height: 1em;
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1119,7 +1151,7 @@ p, h1, h2, h3, h4, h5 {
   padding: 0 0.5em;
 }
 
-.input--form, .reg__input--form {
+.input--form, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1235,6 +1267,91 @@ p, h1, h2, h3, h4, h5 {
 .aim--err {
   margin-top: 1em;
   height: 1em;
+}
+
+.input--form, .change__input, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+.settings {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.settings__chapters {
+  padding-left: 30%;
+  padding-top: 4em;
+}
+
+.chapter {
+  font-size: 20px;
+  padding-left: 1em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+}
+
+#chapter__account {
+  color: #009d00;
+  border-left: #009d00 solid 3px;
+}
+
+.settings__container {
+  margin: 4em auto auto;
+  width: 70%;
+  padding: 4em;
+  background-color: #F8F8F9;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.settings__title {
+  font-size: 32px;
+  margin-bottom: 1em;
+}
+
+.settings__input--title {
+  font-size: 20px;
+  margin-bottom: 1em;
+}
+
+.change__input {
+  margin-bottom: 0;
+}
+
+#old-password-input {
+  margin-bottom: 2em;
+}
+
+.settings__photo {
+  padding: 5em;
+}
+
+.upload {
+  width: 0;
+  height: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.change__res {
+  height: 1em;
+  margin: 0;
+}
+
+.change-success {
+  color: green;
+}
+
+#change-password-error {
+  color: red;
 }
 
 /*# sourceMappingURL=index.css.map */
