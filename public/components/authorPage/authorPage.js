@@ -61,6 +61,9 @@ class AuthorPage {
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
 
+    const coverPhoto = document.getElementById('author__header--photo');
+    coverPhoto.style.backgroundImage = `url(../../images/${this.#config.creator_info.cover_photo}.jpg")`;
+
     const cover = document.getElementById('cover__upload');
     if (cover) {
       cover.addEventListener('change', (event) => {
