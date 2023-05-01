@@ -1,5 +1,5 @@
 <div class="author__photo">
-<!--    <div></div>-->
+    <!--    <div></div>-->
     <img src="../../images/author-photo.svg" alt="creator photo">
 </div>
 
@@ -105,6 +105,7 @@
 
             <div id="{{creator_info.creator_id}}" class="sub__container">
                 {{#if subscriptions}}
+<!--                    <img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">-->
                     {{#each subscriptions}}
                         <div id="{{id}}" class="sub__card">
                             <div class="sub__title">
@@ -115,8 +116,8 @@
                             </div>
                             <p class="sub__description">{{description}}</p>
                             <div class="sub__cost">
-                                <h1 id="sub__price" class="cost">{{month_cost}}</h1>
-                                <h2 class="rpm">р/месяц</h2>
+                                <h2 id="sub__price" class="cost">{{month_cost}}</h2>
+                                <h3 class="rpm">р/месяц</h3>
                             </div>
 
                             {{#if ../is_my_page}}
@@ -131,6 +132,7 @@
                             {{/if}}
                         </div>
                     {{/each}}
+<!--                    <img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">-->
 
                 {{else}}
                     {{#if is_my_page}}
@@ -161,14 +163,21 @@
                                     <img id="delete__post" class="delete__img" src="../../images/delete.svg"
                                          alt="delete">
                                 {{/if}}
-                                <p>{{creation_date}}</p>
+                                <p id="creation__date">{{creation_date}}</p>
                             </div>
                         </div>
 
                         <div class="post__content">
                             <h2 class="content__header">{{title}}</h2>
                             {{#each textWithBreaks}}
-                                <p>{{text}}</p>
+                                {{#if ../is_available}}
+                                    <p>{{text}}</p>
+                                {{else}}
+                                    <div class="no__access--container">
+                                        <p>У вас нет доступа к этому посту</p>
+                                        <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
+                                    </div>
+                                {{/if}}
                             {{/each}}
                             <!--TODO проверить, норм ли отображается-->
                             {{#if attachments}}
@@ -185,7 +194,7 @@
                             {{/if}}
 
                             <div class="feedback">
-                                <div class="likes">
+                                <div class="post__likes">
                                     {{#if ../is_my_page}}
                                         <img id="disable-like-icon" class="icon--like"
                                              src="../../images/disable_like_icon.png" alt="like--disable">
@@ -201,7 +210,7 @@
                                     {{likes_count}}
                                 </div>
 
-                                <div class="comments">
+                                <div class="post__comments">
                                     <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
                                     0
                                 </div>
@@ -212,7 +221,11 @@
 
             {{else}}
                 <div class="posts--nothing">
-                    <p>Вы пока не добавили ни одного поста</p>
+                    {{#if is_my_page}}
+                        <p>Вы пока не добавили ни одного поста</p>
+                    {{else}}
+                        <p>Автор пока не добавил ни одного поста</p>
+                    {{/if}}
                 </div>
             {{/if}}
         </div>

@@ -1,8 +1,11 @@
+@import "variables";
+
 $error-mb: 1em;
-$error-height: 1em;
+$error-height: 2em;
 $error-color: red;
 
 .error {
+  font-size: $font-size-err;
   text-align: center;
   margin-bottom: $error-mb;
   height: $error-height;

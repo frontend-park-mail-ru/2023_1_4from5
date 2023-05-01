@@ -13,9 +13,15 @@ $sub__container-offset: 1em;
   padding-bottom: $sub__container-offset;
 
   border-radius: $elem-border-radius;
+
 }
 
-$sub__card-width: 20%;
+.arrows {
+  width: 5%;
+  @include clickable();
+}
+
+$sub__card-width: 15%;
 
 .sub__card {
   background-color: $popup-color;
@@ -31,11 +37,13 @@ $sub__card-width: 20%;
 
 .sub__title {
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 80% 20%;
 }
 
 .sub__title--text {
   height: fit-content;
+  padding-right: 0.2em;
+  font-size: $font-size;
 }
 
 #sub__delete {
@@ -51,6 +59,7 @@ $sub__card-offset: 10%;
 .sub__cost {
   display: flex;
   margin-top: $sub__card-offset;
+  font-size: $font-size;
 }
 
 .cost {

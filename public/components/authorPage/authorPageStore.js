@@ -7,6 +7,7 @@ import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid
 import { color } from '../../consts/styles.js';
 import { aim } from './aim';
 import { getSubscription } from './getSubscription';
+import { Actions } from '../../actions/actions';
 
 class AuthorPageStore {
   #config;
