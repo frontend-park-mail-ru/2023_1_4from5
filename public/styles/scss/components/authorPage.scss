@@ -8,12 +8,41 @@ $author__photo--width: 20%;
 $author__photo--top: 12%;
 $author__photo--left: 5%;
 
-.author__photo {
+.author__photo--container {
   position: absolute;
-  width: $author__photo--width;
+  width: fit-content;
   top: $author__photo--top;
   left: $author__photo--left;
   z-index: $content-z-index;
+}
+
+.photo--hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: $content-z-index;
+  border-radius: $block-border-radius;
+  background-color: gray;
+  opacity: 0;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.photo__img {
+  position: relative;
+  top: 40%;
+  left: 40%;
+  border-radius: $block-border-radius;
+}
+
+.photo__text {
+  position: relative;
+  top: 40%;
+  left: 20%;
 }
 
 #author__header {

@@ -1020,12 +1020,40 @@ p, h1, h2, h3, h4, h5 {
   width: 80%;
 }
 
-.author__photo {
+.author__photo--container {
   position: absolute;
-  width: 20%;
+  width: fit-content;
   top: 12%;
   left: 5%;
   z-index: 1;
+}
+
+.photo--hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: 2em;
+  background-color: gray;
+  opacity: 0;
+}
+.photo--hover:hover {
+  opacity: 0.5;
+}
+
+.photo__img {
+  position: relative;
+  top: 40%;
+  left: 40%;
+  border-radius: 2em;
+}
+
+.photo__text {
+  position: relative;
+  top: 40%;
+  left: 20%;
 }
 
 #author__header {

@@ -1,5 +1,8 @@
-<div class="author__photo">
-    <!--    <div></div>-->
+<div id="author__photo" class="author__photo--container">
+    <div class="photo--hover">
+        <img class="photo__img" src="../../images/load-cover.svg" alt="load">
+        <h3 class="photo__text">Загрузить фото</h3>
+    </div>
     <img src="../../images/author-photo.svg" alt="creator photo">
 </div>
 
@@ -105,7 +108,7 @@
 
             <div id="{{creator_info.creator_id}}" class="sub__container">
                 {{#if subscriptions}}
-<!--                    <img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">-->
+                    <!--                    <img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">-->
                     {{#each subscriptions}}
                         <div id="{{id}}" class="sub__card">
                             <div class="sub__title">
@@ -132,7 +135,7 @@
                             {{/if}}
                         </div>
                     {{/each}}
-<!--                    <img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">-->
+                    <!--                    <img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">-->
 
                 {{else}}
                     {{#if is_my_page}}
