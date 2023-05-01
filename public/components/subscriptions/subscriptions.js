@@ -22,6 +22,12 @@ class Subscriptions {
     newDiv.innerHTML = template(subs);
     this.#parent.appendChild(newDiv);
 
+    const photos = document.querySelectorAll('#subs__photo');
+    for (let index = 0; index < photos.length; index++) {
+      const photo = photos[index];
+      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    }
+
     const extendBtns = document.querySelectorAll('#subs__extend');
     for (let index = 0; index < extendBtns.length; index++) {
       const card = extendBtns[index];
