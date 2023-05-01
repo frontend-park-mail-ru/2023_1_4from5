@@ -3,6 +3,8 @@ import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import template from './sideBar.handlebars';
 import { Actions } from '../../actions/actions';
+import { sideBarStore } from './sideBarStore';
+import { userStore } from '../user/userStore';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -28,6 +30,8 @@ export class SideBar {
   }
 
   render() {
+    this.#config.modalWindow.photo = userStore.getUserState().profilePhoto;
+
     const lastSideBar = document.getElementById('sidebarDiv');
     if (lastSideBar) {
       lastSideBar.remove();

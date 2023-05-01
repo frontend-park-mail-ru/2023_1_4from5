@@ -62,7 +62,6 @@ class UserStore {
   async getUser() {
     const getUser = await request.get('/api/user/profile');
     const profile = await getUser.json();
-
     this.setState(profile);
 
     Actions.renderSideBar(sideBarElement, this.#user);
