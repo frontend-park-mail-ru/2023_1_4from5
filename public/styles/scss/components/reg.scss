@@ -72,7 +72,12 @@ $reg-title-mb: 1em;
   top: 5px;
 }
 
-
 #toAuth {
   @include redirect();
+}
+
+#reg-error {
+  text-align: center;
+  height: 1em;
+  margin-bottom: 1em;
 }
