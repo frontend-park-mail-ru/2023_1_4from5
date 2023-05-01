@@ -96,7 +96,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -136,7 +136,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -244,7 +244,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -290,7 +290,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1286,7 +1286,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1371,7 +1371,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1403,7 +1403,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1543,7 +1543,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1560,6 +1560,10 @@ textarea {
 .settings {
   display: grid;
   grid-template-columns: 20% 80%;
+}
+
+.settings__chapters--title {
+  margin-bottom: 2em;
 }
 
 .settings__chapters {
@@ -1582,9 +1586,9 @@ textarea {
 }
 
 .settings__container {
-  margin: 4em auto auto;
+  margin: 3em auto auto;
   width: 70%;
-  padding: 4em;
+  padding: 3em 4em 3em 4em;
   background-color: #f0f0f0;
   border-radius: 15px;
   display: grid;
@@ -1602,7 +1606,13 @@ textarea {
 }
 
 .change__input {
-  margin-bottom: 0;
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  padding: 0 0.5em;
+  margin-bottom: 1em;
 }
 
 #old-password-input {
@@ -1642,7 +1652,7 @@ textarea {
 
 .change__res {
   height: 1em;
-  margin: 0;
+  margin: 0 0 1em;
 }
 
 .change-success {
@@ -1671,7 +1681,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form, .change__input {
+.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1734,7 +1744,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+.input--form, .becameAuthor--input, .reg__input--form, .donate__input {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1766,7 +1776,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+.input--form, .becameAuthor--input, .reg__input--form, .donate__input {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -1879,7 +1889,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+.input--form, .becameAuthor--input, .reg__input--form, .donate__input {
   font-size: 1.3em;
   height: 60px;
   width: 95%;
@@ -2159,7 +2169,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .reg__input--form, .change__input, .donate__input, .becameAuthor--input {
+.input--form, .reg__input--form, .donate__input, .becameAuthor--input {
   font-size: 1.3em;
   height: 60px;
   width: 95%;

@@ -8,6 +8,10 @@ $settings__container--space-width: 80%;
   grid-template-columns: (100% - $settings__container--space-width) $settings__container--space-width;
 }
 
+.settings__chapters--title {
+  margin-bottom: 2em;
+}
+
 .settings__chapters {
   padding-left: 30%;
   padding-top: 4em;
@@ -34,9 +38,9 @@ $chapter__bar-height: 0.3em;
 $settings__form-width: 50%;
 
 .settings__container {
-  margin: 4em auto auto;
+  margin: 3em auto auto;
   width: 70%;
-  padding: 4em;
+  padding: 3em 4em 3em 4em;
   background-color: $card-color;
   border-radius: $elem-border-radius;
 
@@ -55,8 +59,16 @@ $settings__form-width: 50%;
 }
 
 .change__input {
-  @extend .input--form;
-  margin-bottom: 0;
+  font-size: $form-input-font-size;
+
+  height: $input-height;
+  width: $form-input-width;
+
+  border: $form-input-border-color solid $form-input-border-width;
+  border-radius: $elem-border-radius;
+
+  padding: 0 $form-input-padding-side;
+  margin-bottom: 1em;
 }
 
 #old-password-input {
@@ -101,7 +113,7 @@ $settings__form-width: 50%;
 
 .change__res {
   height: 1em;
-  margin: 0;
+  margin: 0 0 1em;
 }
 
 .change-success {
