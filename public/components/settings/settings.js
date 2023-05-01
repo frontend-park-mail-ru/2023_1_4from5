@@ -64,12 +64,12 @@ class Settings {
     const errorDiv = document.getElementById('change-password-error');
     errorDiv.textContent = err;
 
-    const successTitle = document.getElementById('change-success-password');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = '';
   }
 
   invalidLogin(err) {
-    const successTitle = document.getElementById('change-success-login');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = '';
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = err;
@@ -86,18 +86,18 @@ class Settings {
     const errorDiv = document.getElementById('change-username-error');
     errorDiv.textContent = '';
     const successTitle = document.getElementById('change-success-name');
-    successTitle.textContent = 'Имя успешно изменено';
+    successTitle.textContent = 'Данные успешно сохранены';
   }
 
   successLoginChanged() {
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = '';
-    const successTitle = document.getElementById('change-success-login');
-    successTitle.textContent = 'Логин успешно изменен';
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = 'Данные успешно сохранены';
   }
 
   successPasswordChanged() {
-    const successTitle = document.getElementById('change-success-password');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = 'Пароль успешно изменен';
 
     const errTitle = document.getElementById('change-password-error');
