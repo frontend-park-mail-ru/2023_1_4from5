@@ -78,6 +78,24 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
@@ -86,6 +104,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .error {
@@ -96,6 +118,24 @@ p, h1, h2, h3, h4, h5 {
   color: red;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
@@ -104,6 +144,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 a {
@@ -182,6 +226,24 @@ p, h1, h2, h3, h4, h5 {
   font-size: 1.09em;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
@@ -190,6 +252,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 a {
@@ -206,6 +272,24 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
@@ -214,6 +298,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 a {
@@ -489,7 +577,7 @@ p, h1, h2, h3, h4, h5 {
 
 .aim__container {
   border-radius: 15px;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   text-align: center;
   margin-bottom: 1em;
   box-shadow: 5px 5px 5px #b7b7b7;
@@ -540,12 +628,12 @@ p, h1, h2, h3, h4, h5 {
 
 #create__post {
   height: 2.5em;
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
   color: black;
   box-shadow: 5px 5px 5px #b7b7b7;
 }
 #create__post:hover {
-  background-color: #bae7c6;
+  background-color: #b3efc2;
 }
 
 .support__btn {
@@ -558,14 +646,14 @@ p, h1, h2, h3, h4, h5 {
   display: flex;
 }
 .support__btn:hover {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
 }
 .support__btn p {
   padding-top: 0.6em;
 }
 
 .follow__btn {
-  background-color: #ECEBF0;
+  background-color: #dddde0;
 }
 
 .follow__btn--text {
@@ -573,7 +661,10 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .donate__btn {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
+}
+.donate__btn:hover {
+  background-color: #b3efc2;
 }
 
 .donate__btn--text {
@@ -610,7 +701,7 @@ p, h1, h2, h3, h4, h5 {
 
 .aim__container {
   border-radius: 15px;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   text-align: center;
   margin-bottom: 1em;
   box-shadow: 5px 5px 5px #b7b7b7;
@@ -661,12 +752,12 @@ p, h1, h2, h3, h4, h5 {
 
 #create__post {
   height: 2.5em;
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
   color: black;
   box-shadow: 5px 5px 5px #b7b7b7;
 }
 #create__post:hover {
-  background-color: #bae7c6;
+  background-color: #b3efc2;
 }
 
 .support__btn {
@@ -679,14 +770,14 @@ p, h1, h2, h3, h4, h5 {
   display: flex;
 }
 .support__btn:hover {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
 }
 .support__btn p {
   padding-top: 0.6em;
 }
 
 .follow__btn {
-  background-color: #ECEBF0;
+  background-color: #dddde0;
 }
 
 .follow__btn--text {
@@ -694,7 +785,10 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .donate__btn {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
+}
+.donate__btn:hover {
+  background-color: #b3efc2;
 }
 
 .donate__btn--text {
@@ -710,7 +804,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .sub__container {
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   box-shadow: 5px 5px 5px #b7b7b7;
   display: flex;
   margin-top: 1em;
@@ -768,7 +862,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .sub__btn {
-  background-color: #ECEBF0;
+  background-color: #dddde0;
   color: black;
   height: 2em;
   margin-top: 1em;
@@ -776,7 +870,7 @@ p, h1, h2, h3, h4, h5 {
   box-shadow: 5px 5px 5px #b7b7b7;
 }
 .sub__btn:hover {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
 }
 
 .sub__buy {
@@ -796,7 +890,7 @@ p, h1, h2, h3, h4, h5 {
   margin-top: 2em;
   padding: 1em 3em 1em 3em;
   border-radius: 15px;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   box-shadow: 5px 5px 5px #b7b7b7;
 }
 
@@ -988,11 +1082,11 @@ p, h1, h2, h3, h4, h5 {
   margin: 0 auto 5em auto;
   padding: 1em;
   border-radius: 15px;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   cursor: pointer;
 }
 .creator__card:hover {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
 }
 
 .card__header {
@@ -1174,6 +1268,24 @@ p, h1, h2, h3, h4, h5 {
   color: rgba(128, 128, 128, 0.45);
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
@@ -1182,6 +1294,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .subscription__container {
@@ -1237,14 +1353,22 @@ p, h1, h2, h3, h4, h5 {
   height: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
-  font-size: 1.3em;
-  height: 60px;
-  width: 95%;
-  border: #cccccc solid 2px;
-  border-radius: 15px;
-  margin-bottom: 3em;
-  padding: 0 0.5em;
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
 }
 
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
@@ -1255,6 +1379,42 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
+}
+
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
+.input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .subscription__container {
@@ -1365,6 +1525,24 @@ p, h1, h2, h3, h4, h5 {
   height: 1em;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .change__input, .reg__input--form {
   font-size: 1.3em;
   height: 60px;
@@ -1373,6 +1551,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .settings {
@@ -1403,7 +1585,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 4em auto auto;
   width: 70%;
   padding: 4em;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   border-radius: 15px;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -1451,11 +1633,11 @@ p, h1, h2, h3, h4, h5 {
   margin-top: 1em;
   padding: 1em 0 1em 0;
   border-radius: 15px;
-  background-color: #ECEBF0;
+  background-color: #dddde0;
   cursor: pointer;
 }
 .photo__load--label:hover {
-  background-color: #d6d5d9;
+  background-color: #ceced3;
 }
 
 .change__res {
@@ -1471,6 +1653,24 @@ p, h1, h2, h3, h4, h5 {
   color: red;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .donate__input, .reg__input--form, .change__input {
   font-size: 1.3em;
   height: 60px;
@@ -1479,6 +1679,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 #donateWin {
@@ -1512,14 +1716,22 @@ p, h1, h2, h3, h4, h5 {
   height: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
-  font-size: 1.3em;
-  height: 60px;
-  width: 95%;
-  border: #cccccc solid 2px;
-  border-radius: 15px;
-  margin-bottom: 3em;
-  padding: 0 0.5em;
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
 }
 
 .input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
@@ -1530,6 +1742,42 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
+}
+
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
+.input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .subscription__container {
@@ -1613,6 +1861,24 @@ p, h1, h2, h3, h4, h5 {
   margin-top: 30%;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .becameAuthor--input, .reg__input--form, .change__input, .donate__input {
   font-size: 1.3em;
   height: 60px;
@@ -1621,6 +1887,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .becameAuthor {
@@ -1632,7 +1902,7 @@ p, h1, h2, h3, h4, h5 {
   z-index: 4;
   opacity: 1;
   width: 30%;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   left: 35%;
 }
 
@@ -1662,13 +1932,13 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .becameAuthor__backBtn {
-  background-color: #ECEBF0;
+  background-color: #dddde0;
   width: 50%;
   height: 2em;
   color: black;
 }
 .becameAuthor__backBtn:hover {
-  background-color: #d6d5d9;
+  background-color: #ceced3;
 }
 
 .subscriptions {
@@ -1691,7 +1961,7 @@ p, h1, h2, h3, h4, h5 {
 .subscriptions__container {
   padding: 5%;
   border-radius: 2em;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   display: grid;
   grid-template-columns: 33.3333333333% 33.3333333333% 33.3333333333%;
 }
@@ -1717,7 +1987,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .subs__info {
-  background-color: #ECEBF0;
+  background-color: #dddde0;
   border-radius: 15px;
   padding: 1em;
   margin-bottom: 1em;
@@ -1740,11 +2010,11 @@ p, h1, h2, h3, h4, h5 {
 
 .subs__extend {
   color: black;
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
   box-shadow: 5px 5px 5px #b7b7b7;
 }
 .subs__extend:hover {
-  background-color: #bae7c6;
+  background-color: #b3efc2;
 }
 
 .feed {
@@ -1754,7 +2024,7 @@ p, h1, h2, h3, h4, h5 {
 
 .feed__card {
   border-radius: 15px;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   padding: 2%;
   margin-bottom: 5em;
   box-shadow: 5px 5px 5px #b7b7b7;
@@ -1871,6 +2141,24 @@ p, h1, h2, h3, h4, h5 {
   margin-left: 20%;
 }
 
+#root {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 4em;
+}
+
+body {
+  margin: 0;
+}
+
+#footer {
+  margin-top: 1em;
+}
+
 .input--form, .reg__input--form, .change__input, .donate__input, .becameAuthor--input {
   font-size: 1.3em;
   height: 60px;
@@ -1879,6 +2167,10 @@ p, h1, h2, h3, h4, h5 {
   border-radius: 15px;
   margin-bottom: 3em;
   padding: 0 0.5em;
+}
+
+textarea {
+  font-family: "DM Sans", sans-serif;
 }
 
 .search__container {
@@ -1893,11 +2185,11 @@ p, h1, h2, h3, h4, h5 {
   margin: 0 auto 5em auto;
   padding: 1em;
   border-radius: 15px;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   cursor: pointer;
 }
 .creator__card:hover {
-  background-color: #D9F1DF;
+  background-color: #d2f1da;
 }
 
 .card__header {
@@ -1949,13 +2241,13 @@ p, h1, h2, h3, h4, h5 {
 }
 
 #newpost-btn-back {
-  background-color: #ECEBF0;
+  background-color: #dddde0;
   width: 30%;
   height: 2em;
   color: black;
 }
 #newpost-btn-back:hover {
-  background-color: #d6d5d9;
+  background-color: #ceced3;
 }
 
 .post__form {
@@ -1974,7 +2266,7 @@ p, h1, h2, h3, h4, h5 {
   width: 100%;
   font-size: 24px;
   padding: 1em;
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
 }
 
 #newpost-title-input {
@@ -1991,7 +2283,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .post__settings--form {
-  background-color: #F8F8F9;
+  background-color: #f0f0f0;
   border-radius: 15px;
   padding: 1em;
 }
