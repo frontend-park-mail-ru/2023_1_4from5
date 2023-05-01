@@ -82,13 +82,22 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.CREATOR_COVER_UPDATE:
-        const formData = new FormData();
-        formData.append('upload', action.file);
-        formData.append('path', action.coverId);
+        const formDataCover = new FormData();
+        formDataCover.append('upload', action.file);
+        formDataCover.append('path', action.coverId);
 
         const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
-        await request.putMultipart('/api/creator/updateCoverPhoto', formData, tokenCover);
+        await request.putMultipart('/api/creator/updateCoverPhoto', formDataCover, tokenCover);
+        await this.renderMyPage();
+        break;
 
+      case ActionTypes.CREATOR_PHOTO_UPDATE:
+        const formDataPhoto = new FormData();
+        formDataPhoto.append('upload', action.file);
+        formDataPhoto.append('path', action.profilePhoto);
+
+        const tokenPhoto = await request.getHeader('/api/creator/updateProfilePhoto');
+        await request.putMultipart('/api/creator/updateProfilePhoto', formDataPhoto, tokenPhoto);
         await this.renderMyPage();
         break;
 

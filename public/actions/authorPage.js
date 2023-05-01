@@ -68,17 +68,11 @@ export const ActionsAuthorPage = {
     });
   },
 
-  creatorPhotoUpdate(file) {
+  creatorPhotoUpdate(file, profilePhoto) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_PHOTO_UPDATE,
       file,
-    });
-  },
-
-  creatorInfoUpdate(info) {
-    dispatcher.dispatch({
-      type: ActionTypes.CREATOR_INFO_UPDATE,
-      info,
+      profilePhoto,
     });
   },
 };
