@@ -60,8 +60,11 @@ $subs__card--info-height: 90%;
 .subs__info {
   background-color: $sub__btn-color;
   border-radius: $elem-border-radius;
-  padding: 1em;
+  width: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
   margin-bottom: 1em;
+  text-align: center;
   @include shadow();
 }
 
