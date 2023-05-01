@@ -35,8 +35,18 @@ export class SideBar {
     const newDiv = document.createElement('div');
     newDiv.id = 'sidebarDiv';
     newDiv.innerHTML = template(this.#config);
-
     this.#parent.appendChild(newDiv);
+
+    const logo = document.getElementById('logo');
+    logo.addEventListener('click', (event) => {
+      event.preventDefault();
+      router.go(URLS.root);
+    });
+
+    const photo = document.getElementById('sidebar__user--photo');
+    if (photo) {
+      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    }
 
     const logoBtn = document.getElementById('logo');
     logoBtn.addEventListener('click', (e) => {

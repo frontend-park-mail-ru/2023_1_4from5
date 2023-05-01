@@ -34,6 +34,7 @@ $sub__card-height: 20em;
 
 .arrows {
   width: 100%;
+  @include clickable();
 }
 
 $sub__card-width: 18%;

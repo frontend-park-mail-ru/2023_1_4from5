@@ -27,6 +27,9 @@ class Settings {
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
 
+    const photo = document.getElementById('user-photo');
+    photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+
     const settingsBtn = document.getElementById('settings__btn');
     settingsBtn.addEventListener('click', (event) => {
       event.preventDefault();

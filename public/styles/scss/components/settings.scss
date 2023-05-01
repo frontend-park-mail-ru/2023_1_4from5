@@ -88,9 +88,15 @@ $settings__form-width: 50%;
   cursor: pointer;
 }
 
+$settings__photo-width: 100%;
+
 #user-photo {
-  width: 100%;
+  display: flex;
+  width: $settings__photo-width;
+  height: $settings__photo-width;
   border-radius: $elem-border-radius;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .photo__load--label {
@@ -98,7 +104,7 @@ $settings__form-width: 50%;
   text-align: center;
   height: fit-content;
   display: block;
-  margin-top: 1em;
+  margin-bottom: 3em;
   padding: 1em 0 1em 0;
   border-radius: $elem-border-radius;
   background-color: $sub__btn-color;

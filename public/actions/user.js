@@ -8,10 +8,9 @@ export const ActionsUser = {
     });
   },
 
-  logout(href, parent) {
+  logout() {
     dispatcher.dispatch({
       type: ActionTypes.LOGOUT,
-      parent,
     });
   },
 };
