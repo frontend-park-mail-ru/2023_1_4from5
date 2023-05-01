@@ -16,21 +16,19 @@ class SideBarStore {
     this.#config = {
       about: {
         name: 'О нас',
-        href: '/about',
+        href: URLS.root,
         id: 'sidebar__about',
         showDisplay: true,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       feed: {
         name: 'Лента',
-        href: '/feed',
+        href: URLS.feed,
         id: 'sidebar__feed',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       findAuth: {
         name: 'Авторы',
@@ -42,12 +40,11 @@ class SideBarStore {
       },
       subs: {
         name: 'Подписки',
-        href: '/subs',
+        href: URLS.subscriptions,
         id: 'sidebar__subs',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       reg: {
         name: 'Регистрация',
@@ -67,14 +64,15 @@ class SideBarStore {
       },
       beAuthor: {
         name: 'Стать автором',
-        href: URLS.becomeAuthor,
+        href: '',
         id: 'sidebar__beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
-        render: router.go,
+        render: Actions.renderBecomeAuthor,
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
+        photo: 'author-photo', // TODO hardcode -> userStore.getUserState().profilePhoto
         href: '/modalWindow',
         id: 'sidebar__modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,

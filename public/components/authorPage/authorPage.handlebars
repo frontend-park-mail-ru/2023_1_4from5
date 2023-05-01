@@ -1,5 +1,21 @@
-<img src="../../images/author-photo.svg" class="author__photo" alt="creator photo">
-<div id="author__header"></div>
+<div class="author__photo">
+    <!--    <div></div>-->
+    <img src="../../images/author-photo.svg" alt="creator photo">
+</div>
+
+<div id="author__header">
+    {{#if is_my_page}}
+        <label class="cover__load--label">
+            <input id="cover__upload" type="file" class="upload"/>
+            <span id="author__header--hover">
+                <h2 class="cover__title">
+                    <img class="cover__img" src="../../images/load-cover.svg" alt="load-cover">
+                    <p class="cover__title--text">Загрузить фото</p>
+                </h2>
+            </span>
+        </label>
+    {{/if}}
+</div>
 
 <!------------------------------------------------------------------------------------------------->
 <div class="author__container">
@@ -13,30 +29,42 @@
             </h2>
         </div>
 
-        <div class="support">
-            {{#unless is_my_page}}
-                <button class="support__btn follow__btn">
-                    <img src="../../images/follow.svg" alt="follow">
-                    <p class="follow__btn--text">Отслеживать</p>
-                </button>
-                <button id="donate__btn" class="support__btn donate__btn">
-                    <img src="../../images/donate.svg" alt="donate">
-                    <p class="donate__btn--text">Отправить донат</p>
-                </button>
-            {{/unless}}
+        <div id="{{creator_info.creator_id}}" class="support">
+            {{#if isAuthorized}}
+                {{#unless is_my_page}}
+                    {{#if follows}}
+                        <button id="unfollow__btn" class="support__btn follow__btn">
+                            <p class="follow__btn--text">Перестать отслеживать</p>
+                        </button>
+                    {{else}}
+                        <button id="follow__btn" class="support__btn follow__btn">
+                            <img src="../../images/follow.svg" alt="follow">
+                            <p class="follow__btn--text">Отслеживать</p>
+                        </button>
+                    {{/if}}
+                    <button id="donate__btn" class="support__btn donate__btn">
+                        <img src="../../images/donate.svg" alt="donate">
+                        <p class="donate__btn--text">Отправить донат</p>
+                    </button>
+                {{/unless}}
+            {{/if}}
         </div>
 
         <div class="aim">
             <p>Цель</p>
             <div class="aim__container">
                 {{#if aim.description}}
-                    <h5>{{aim.money_got}} из {{aim.money_needed}}
+                    <div class="aim__header">
+                        <div></div>
+                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} р</p>
                         {{#if is_my_page}}
-                            <img src="../../images/delete.svg" alt="delete">
-                            <img src="../../images/edit.svg" alt="edit">
+                            <img id="aim__edit" src="../../images/edit.svg" alt="edit">
                         {{/if}}
-                    </h5>
-                    <p>{{aim.description}}</p>
+                    </div>
+                    <div class="aim__bar">
+                        <div id="bar--row"></div>
+                    </div>
+                    <p class="aim__description">{{aim.description}}</p>
                 {{else}}
                     {{#if is_my_page}}
                         <img id="aim__add" class="aim__add" src="../../images/add.svg" alt="add">
@@ -58,12 +86,13 @@
     <div class="auth__content">
 
         <div class="about">
-            <h1 class="about__title">{{creator_info.name}}
+            <h1 class="about__title">
+                <p id="creator__name">{{creator_info.name}}</p>
                 {{#if is_my_page}}
-                    <img class="about__edit" src="../../images/edit.svg" alt="edit">
+                    <img id="edit__profile" class="about__edit" src="../../images/edit.svg" alt="edit">
                 {{/if}}
             </h1>
-            <p class="about__description">{{creator_info.description}}</p>
+            <p id="creator__description" class="about__description">{{creator_info.description}}</p>
         </div>
 
         <div class="subs">
@@ -74,18 +103,21 @@
                 {{/if}}
             </div>
 
-            <div class="sub__container">
+            <div id="{{creator_info.creator_id}}" class="sub__container">
                 {{#if subscriptions}}
+<!--                    <img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">-->
                     {{#each subscriptions}}
                         <div id="{{id}}" class="sub__card">
                             <div class="sub__title">
                                 <h3 class="sub__title--text">{{title}}</h3>
-                                <img id="sub__delete" src="../../images/delete.svg" alt="delete">
+                                {{#if ../is_my_page}}
+                                    <img id="sub__delete" src="../../images/delete.svg" alt="delete">
+                                {{/if}}
                             </div>
                             <p class="sub__description">{{description}}</p>
                             <div class="sub__cost">
-                                <h1 class="cost">{{month_cost}}</h1>
-                                <h2 class="rpm">р/месяц</h2>
+                                <h2 id="sub__price" class="cost">{{month_cost}}</h2>
+                                <h3 class="rpm">р/месяц</h3>
                             </div>
 
                             {{#if ../is_my_page}}
@@ -94,10 +126,13 @@
                                     Изменить
                                 </button>
                             {{else}}
-                                <button class="sub__btn sub__buy">Оформить</button>
+                                {{#if ../isAuthorized}}
+                                    <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
+                                {{/if}}
                             {{/if}}
                         </div>
                     {{/each}}
+<!--                    <img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">-->
 
                 {{else}}
                     {{#if is_my_page}}
@@ -128,14 +163,21 @@
                                     <img id="delete__post" class="delete__img" src="../../images/delete.svg"
                                          alt="delete">
                                 {{/if}}
-                                <p>{{creation_date}}</p>
+                                <p id="creation__date">{{creation_date}}</p>
                             </div>
                         </div>
 
                         <div class="post__content">
                             <h2 class="content__header">{{title}}</h2>
                             {{#each textWithBreaks}}
-                                <p>{{text}}</p>
+                                {{#if ../is_available}}
+                                    <p>{{text}}</p>
+                                {{else}}
+                                    <div class="no__access--container">
+                                        <p>У вас нет доступа к этому посту</p>
+                                        <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
+                                    </div>
+                                {{/if}}
                             {{/each}}
                             <!--TODO проверить, норм ли отображается-->
                             {{#if attachments}}
@@ -152,7 +194,7 @@
                             {{/if}}
 
                             <div class="feedback">
-                                <div class="likes">
+                                <div class="post__likes">
                                     {{#if ../is_my_page}}
                                         <img id="disable-like-icon" class="icon--like"
                                              src="../../images/disable_like_icon.png" alt="like--disable">
@@ -168,7 +210,7 @@
                                     {{likes_count}}
                                 </div>
 
-                                <div class="comments">
+                                <div class="post__comments">
                                     <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
                                     0
                                 </div>
@@ -179,7 +221,11 @@
 
             {{else}}
                 <div class="posts--nothing">
-                    <p>Вы пока не добавили ни одного поста</p>
+                    {{#if is_my_page}}
+                        <p>Вы пока не добавили ни одного поста</p>
+                    {{else}}
+                        <p>Автор пока не добавил ни одного поста</p>
+                    {{/if}}
                 </div>
             {{/if}}
         </div>

@@ -1,57 +1,51 @@
 <div class="settings">
+    <div class="settings__chapters">
+        <p class="title">Настройки</p>
+        <p id="chapter__account" class="chapter">Аккаунт</p>
+        <p class="chapter inactive">Уведомления</p>
+    </div>
+
     <div class="settings__container">
-        <h1>Настройки</h1>
+        <div class="settings__form">
+            <p class="settings__title">Аккаунт</p>
 
-        <img id="user-photo" width="200" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
-        <input type="file" class="upload" id="photo-upload"/>
-        <hr>
-        <div class="settings__nameLogin">
             <div class="settings__block">
-                <h3>Имя</h3>
-                <input class="change-name change__input" id="change-username-input" type="text" value="{{usernameIn}}">
-                <br>
-                <div id="change-username-error" class="error"></div>
-                <div class="change-success" id="change-success-name"></div>
-
-                <div class="change-btn__container">
-                    <button class="change-btn" id="change-username-btn">Сменить имя</button>
-                </div>
+                <p class="settings__input--title">Имя пользователя</p>
+                <input class="change-name change__input" id="change-username-input" type="text"
+                       value="{{usernameIn}}">
+                <div id="change-username-error" class="change__res error"></div>
+                <div class="change__res change-success" id="change-success-name"></div>
             </div>
 
 
             <div class="settings__block">
-                <h3>Логин</h3>
+                <p class="settings__input--title">Логин</p>
                 <input class="change-name change__input" id="change-login-input" type="text" value="{{login}}">
-                <br>
-                <div id="change-login-error" class="error"></div>
-                <br>
-                <div class="change-success" id="change-success-login"></div>
-
-                <div class="change-btn__container">
-                    <button class="change-btn" id="change-login-btn">Сменить логин</button>
-                </div>
+                <div id="change-login-error" class="change__res error"></div>
+                <div class="change__res change-success" id="change-success-login"></div>
             </div>
+
+            <div class="change-password settings__block">
+                <p class="settings__input--title">Пароль</p>
+                <input class="change-password-input change__input" id="old-password-input" type="password"
+                       placeholder="Старый пароль">
+                <input class="change-password-input change__input" id="new-password-input" type="password"
+                       placeholder="Новый пароль">
+
+                <div class="change__res change-success" id="change-success-password"></div>
+                <div id="change-password-error" class="change__res error"></div>
+            </div>
+
+            <button class="settings__btn" id="settings__btn">Сохранить</button>
         </div>
-        <hr>
 
-        <div class="change-password settings__block">
-            <h3 class="change__password--header">Изменить пароль</h3>
-            <div>
-                <label class="change-password-label" for="password">Старый пароль</label>
-                <input class="change-password-input change__input" id="old-password-input" type="password">
-            </div>
-
-            <div>
-                <label class="change-password-label" for="password">Новый пароль</label>
-                <input class="change-password-input change__input" id="new-password-input" type="password">
-            </div>
-
-            <div class="change-success" id="change-success-password"></div>
-            <div id="change-password-error"></div>
-
-            <div class="change-btn__container">
-                <button class="change-btn" id="change-password-btn">Сменить пароль</button>
-            </div>
+        <div class="settings__photo">
+            <p class="settings__input--title">Фото профиля</p>
+            <img id="user-photo" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
+            <label class="photo__load--label">
+                <input id="photo-upload" type="file" class="upload"/>
+                <span class="photo__load--btn">Выбрать фото</span>
+            </label>
         </div>
     </div>
 </div>

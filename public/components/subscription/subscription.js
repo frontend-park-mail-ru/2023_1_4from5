@@ -31,6 +31,9 @@ export class SubscriptionWin {
   }
 
   publish() {
+    const titleHead = document.getElementById('sub__title');
+    titleHead.innerHTML = 'Создание подписки';
+
     const createSubBtn = document.getElementById('subscription__btn');
     createSubBtn.addEventListener('click', (event) => {
       event.preventDefault();
@@ -43,15 +46,20 @@ export class SubscriptionWin {
       const costInput = document.getElementById('sub-cost-input');
       const cost = costInput.value;
 
-      Actions.createSub({
-        title,
-        description,
-        cost,
-      });
+      if (this.isCostValid(cost)) {
+        Actions.createSub({
+          title,
+          description,
+          cost,
+        });
+      }
     });
   }
 
   update(id) {
+    const titleHead = document.getElementById('sub__title');
+    titleHead.innerHTML = 'Редактирование подписки';
+
     const createSubBtn = document.getElementById('subscription__btn');
     createSubBtn.addEventListener('click', (event) => {
       event.preventDefault();
@@ -70,6 +78,15 @@ export class SubscriptionWin {
         cost,
       });
     });
+  }
+
+  isCostValid(cost) {
+    if (Number(cost)) {
+      return true;
+    }
+    const err = document.getElementById('cost__err');
+    err.textContent = 'Стоимость подписки должна быть числом';
+    return false;
   }
 }
 

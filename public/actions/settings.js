@@ -9,16 +9,10 @@ export const ActionsSettings = {
     });
   },
 
-  changeUsername(username) {
+  changeUsernameLogin(username, login) {
     dispatcher.dispatch({
-      type: ActionTypes.CHANGE_USERNAME,
+      type: ActionTypes.CHANGE_USERNAME_LOGIN,
       username,
-    });
-  },
-
-  changeLogin(login) {
-    dispatcher.dispatch({
-      type: ActionTypes.CHANGE_LOGIN,
       login,
     });
   },

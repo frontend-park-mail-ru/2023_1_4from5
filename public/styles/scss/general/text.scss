@@ -1,5 +1,4 @@
 @import "variables";
-$title-margin-bottom: 2em;
 
 $href-color: #222;
 
@@ -13,7 +12,6 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .title {
-  margin-bottom: $title-margin-bottom;
   font-size: $title-font-size;
   text-align: center;
 }

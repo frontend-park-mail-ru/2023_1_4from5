@@ -18,15 +18,11 @@ class SettingsStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.CHANGE_PASSWORD:
-        this.changePassword(action.input);
+        await this.changePassword(action.input);
         break;
 
-      case ActionTypes.CHANGE_USERNAME:
-        this.changeUsername(action.username);
-        break;
-
-      case ActionTypes.CHANGE_LOGIN:
-        this.changeLogin(action.login);
+      case ActionTypes.CHANGE_USERNAME_LOGIN:
+        await this.changeUsernameLogin(action.username, action.login);
         break;
 
       case ActionTypes.CHANGE_PHOTO:
@@ -77,12 +73,16 @@ class SettingsStore {
     }
   }
 
-  async changeUsername(usernameInput) {
+  async changeUsernameLogin(usernameInput, loginInput) {
     const name = usernameInput.value;
-    const login = userStore.getUserState().login;
+    const login = loginInput.value;
+
     const errUsername = isValidUsername(name);
     settings.invalidUsername(errUsername);
-    if (!errUsername) {
+    const errLogin = isValidLogin(login);
+    settings.invalidLogin(errLogin);
+
+    if (!errUsername && !errLogin) {
       const token = await request.getHeader('/api/user/updateData');
       const response = await request.put('/api/user/updateData', {
         login,
@@ -92,35 +92,32 @@ class SettingsStore {
       if (response.ok) {
         const user = userStore.getUserState();
         user.usernameIn = name;
+        user.login = login;
         userStore.setUserState(user);
         Actions.renderSideBar(sideBarElement, user);
         settings.successNameChanged();
-      }
-    }
-  }
-
-  async changeLogin(loginInput) {
-    const login = loginInput.value;
-    const name = userStore.getUserState().usernameIn;
-
-    const errLogin = isValidLogin(login);
-    settings.invalidLogin(errLogin);
-
-    if (!errLogin) {
-      const token = await request.getHeader('/api/user/updateData');
-      const response = await request.put('/api/user/updateData', {
-        login,
-        name,
-      }, token);
-
-      if (response.ok) {
-        const user = userStore.getUserState();
-        user.login = login;
-        userStore.setUserState(user);
         settings.successLoginChanged();
       }
     }
   }
+  //
+  // async changeLogin(loginInput) {
+  //
+  //   if (!errLogin) {
+  //     const token = await request.getHeader('/api/user/updateData');
+  //     const response = await request.put('/api/user/updateData', {
+  //       login,
+  //       name,
+  //     }, token);
+  //
+  //     if (response.ok) {
+  //       const user = userStore.getUserState();
+  //       user.login = login;
+  //       userStore.setUserState(user);
+  //       settings.successLoginChanged();
+  //     }
+  //   }
+  // }
 }
 
 export const settingsStore = new SettingsStore();

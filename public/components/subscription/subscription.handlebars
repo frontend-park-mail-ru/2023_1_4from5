@@ -2,22 +2,25 @@
 </div>
 <div class="subscription__container">
     <div class="subscription">
-        <div class="title subscription__win--title">
-            <p>Создание подписки</p>
+        <div class="subscription__win--title">
+            <p id="sub__title">Создание подписки</p>
         </div>
 
         <div class="subscription__body">
-            <div class="subscription__title">
-                <p>Название подписки</p>
-                <input id="sub-title-input" type="text" value="{{title}}">
+            <div class="subscription__title sub__input--container">
+                <p class="sub__input--title">Название подписки</p>
+                <input id="sub-title-input" class="sub__input" type="text" value="{{title}}">
             </div>
-            <div class="subscription__description">
-                <p>Описание подписки</p>
-                <textarea id="sub-description-input">{{description}}</textarea>
+
+            <div class="subscription__description sub__input--container">
+                <p class="sub__input--title">Описание подписки</p>
+                <textarea id="sub-description-input" class="sub__input">{{description}}</textarea>
             </div>
-            <div class="subscription__cost">
-                <p>Цена в месяц</p>
-                <input id="sub-cost-input" type="text" value="{{cost}}">
+
+            <div class="subscription__cost sub__input--container">
+                <p class="sub__input--title">Цена в месяц</p>
+                <input id="sub-cost-input" class="sub__input" type="text" value="{{cost}}">
+                <div id="cost__err" class="error"></div>
             </div>
         </div>
 

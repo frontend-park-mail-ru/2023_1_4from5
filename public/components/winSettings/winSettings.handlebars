@@ -2,23 +2,45 @@
 </div>
 <div id="winSettings">
     {{#if profile.showDisplay}}
-        <div class="winsettings--href">
-            <a id={{profile.id}} class="hover--underline" href={{profile.href}}> {{profile.name}} </a>
+        <div class="winsettings__chapter">
+            <a id="{{profile.id}}" class="winsettings__href" href={{profile.href}}>
+                <img class="winsettins__img" src="../../images/tag.svg" alt="myPage">
+                <p>{{profile.name}}</p>
+            </a>
         </div>
+        <hr class="winsettings__hr">
     {{/if}}
+
+
     {{#if finance.showDisplay}}
-        <div class="winsettings--href">
-            <a id={{finance.id}} class="inactive" href={{finance.href}}> {{finance.name}} </a>
+        <div class="winsettings__chapter">
+            <a id="{{finance.id}}" class="winsettings__href inactive"
+               href={{finance.href}}>
+                <img class="winsettins__img" src="../../images/finance.svg" alt="finance">
+                <p>{{finance.name}}</p>
+            </a>
         </div>
+        <hr class="winsettings__hr">
     {{/if}}
+
+
     {{#if settings.showDisplay}}
-        <div class="winsettings--href">
-            <a id={{settings.id}} class="hover--underline" href={{settings.href}}> {{settings.name}} </a>
+        <div class="winsettings__chapter">
+            <a id="{{settings.id}}" class="winsettings__href" href={{settings.href}}>
+                <img class="winsettins__img" src="../../images/settings.svg" alt="settings">
+                <p>{{settings.name}}</p>
+            </a>
         </div>
+        <hr class="winsettings__hr">
     {{/if}}
+
+
     {{#if logout.showDisplay}}
-        <div class="winsettings--href">
-            <a id={{logout.id}} class="hover--underline" href={{logout.href}}> {{logout.name}} </a>
+        <div class="winsettings__chapter">
+            <a id="{{logout.id}}" class="winsettings__href" href={{logout.href}}>
+                <img class="winsettins__img" src="../../images/logout.svg" alt="logout">
+                <p>{{logout.name}}</p>
+            </a>
         </div>
     {{/if}}
 </div>

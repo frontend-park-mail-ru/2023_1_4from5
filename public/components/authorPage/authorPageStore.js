@@ -5,6 +5,9 @@ import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
+import { aim } from './aim';
+import { getSubscription } from './getSubscription';
+import { Actions } from '../../actions/actions';
 
 class AuthorPageStore {
   #config;
@@ -37,20 +40,63 @@ class AuthorPageStore {
         this.changeLikeState(action);
         break;
 
-      case ActionTypes.OPEN_EDIT_AIM:
-        this.#config.edit_aim = false;
-        authorPage.config = this.#config;
-        authorPage.render();
+      case ActionTypes.RENDER_AIM:
+        aim.render();
         break;
 
-      case ActionTypes.CLOSE_EDIT_AIM:
-        this.#config.edit_aim = true;
-        authorPage.config = this.#config;
-        authorPage.render();
+      case ActionTypes.REMOVE_AIM:
+        aim.remove();
         break;
 
-      case ActionTypes.SAVE_EDIT_AIM:
+      case ActionTypes.UPDATE_AIM:
+        aim.render(action.aim);
+        break;
+
+      case ActionTypes.SAVE_AIM:
         this.saveEditAim(action.input);
+        aim.remove();
+        break;
+
+      case ActionTypes.FOLLOW:
+        await request.post(`/api/user/follow/${action.id}`);
+        this.#config.follows = true;
+        authorPage.config = this.#config;
+        authorPage.render();
+        break;
+
+      case ActionTypes.UNFOLLOW:
+        await request.put(`/api/user/unfollow/${action.id}`);
+        this.#config.follows = false;
+        authorPage.config = this.#config;
+        authorPage.render();
+        break;
+
+      case ActionTypes.GET_SUBSCRIPION:
+        const tokenSub = await request.getHeader(`/api/user/subscribe/${action.id}`);
+        await request.post(`/api/user/subscribe/${action.id}`, {
+          month_count: Number(action.monthCount),
+          money: Number(action.money),
+          creator_id: action.creatorId,
+        }, tokenSub);
+        getSubscription.remove();
+        break;
+
+      case ActionTypes.CREATOR_COVER_UPDATE:
+        const formData = new FormData();
+        formData.append('upload', action.file);
+        const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+        const result = await creatorPage.json();
+        const coverId = result.creator_info.cover_photo;
+        formData.append('path', coverId);
+
+        console.log(formData);
+
+        const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
+        const req = await request.put('/api/creator/updateCoverPhoto', formData, tokenCover);
+
+        console.log(req);
+
+        await this.renderMyPage();
         break;
 
       default:
@@ -74,7 +120,6 @@ class AuthorPageStore {
       });
     });
     this.#config = result;
-    console.log(result);
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
       isAuthorized: userStore.getUserState().isAuthorizedIn,
@@ -110,7 +155,8 @@ class AuthorPageStore {
 
   async saveEditAim(input) {
     let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value.split(' ').join('');
+    let moneyNeeded = input.moneyNeededInput.value.split(' ')
+      .join('');
     const errDescriptionOutput = input.errorDescriptionOutput;
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
     const errDescription = isValidDescriptionAim(description);

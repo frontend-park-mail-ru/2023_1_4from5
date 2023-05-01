@@ -5,18 +5,18 @@ import { userStore } from '../components/user/userStore';
 import { router } from './Router';
 import { newPostStore } from '../components/newPost/newPostStore';
 import { searchStore } from '../components/search/searchStore';
-import { becameAuthorStore } from '../components/becomeAuthor/becomeAuthorStore';
 import { page404 } from '../components/page404/page404';
+import { feedStore } from '../components/feed/feedStore';
 
 export const URLS = {
   root: '/',
   myPage: '/creatorPage',
   settings: '/settings',
-  authorSettings: '/authorSettings',
+  subscriptions: '/subscriptions',
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
-  becomeAuthor: '/becomeAuthor',
+  feed: '/feed',
 };
 
 export function notifier(path, data, additionalUrl) {
@@ -59,12 +59,12 @@ export function notifier(path, data, additionalUrl) {
       }
       break;
 
-    case URLS.becomeAuthor:
-      becameAuthorStore.renderBecomeAuthor();
+    case URLS.subscriptions:
+      Actions.renderSubscriptions();
       break;
 
-    case URLS.authorSettings:
-      console.log('authorSettings');
+    case URLS.feed:
+      feedStore.renderFeed();
       break;
 
     default:

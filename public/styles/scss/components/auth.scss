@@ -22,6 +22,7 @@ $auth-title-mt: 3em;
 .auth__title {
   @extend .title;
   margin-top: $auth-title-mt;
+  margin-bottom: 2em;
 }
 
 #auth__login, #auth__password {

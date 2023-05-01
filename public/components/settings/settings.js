@@ -27,14 +27,12 @@ class Settings {
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
 
-    const changePwdBtn = document.getElementById('change-password-btn');
-    changePwdBtn.addEventListener('click', this.changePwd);
-
-    const changeNameBtn = document.getElementById('change-username-btn');
-    changeNameBtn.addEventListener('click', this.changeName);
-
-    const changeLoginBtn = document.getElementById('change-login-btn');
-    changeLoginBtn.addEventListener('click', this.changeLogin);
+    const settingsBtn = document.getElementById('settings__btn');
+    settingsBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.changeNameLogin();
+      this.changePwd();
+    });
 
     const fileInput = document.querySelector('#photo-upload');
     fileInput.addEventListener('change', (event) => {
@@ -44,26 +42,22 @@ class Settings {
     });
   }
 
-  changePwd(e) {
-    e.preventDefault();
+  changePwd() {
     const oldPwdInput = document.getElementById('old-password-input');
     const newPwdInput = document.getElementById('new-password-input');
-    Actions.changePassword({
-      oldPwdInput,
-      newPwdInput,
-    });
+
+    if (oldPwdInput.value && newPwdInput.value) {
+      Actions.changePassword({
+        oldPwdInput,
+        newPwdInput,
+      });
+    }
   }
 
-  changeName(e) {
-    e.preventDefault();
+  changeNameLogin() {
     const usernameInput = document.getElementById('change-username-input');
-    Actions.changeUsername(usernameInput);
-  }
-
-  changeLogin(e) {
-    e.preventDefault();
     const loginInput = document.getElementById('change-login-input');
-    Actions.changeLogin(loginInput);
+    Actions.changeUsernameLogin(usernameInput, loginInput);
   }
 
   invalidPassword(err) {

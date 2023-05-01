@@ -1,0 +1,113 @@
+@import "../general/variables";
+@import "../general/input";
+
+$settings__container--space-width: 80%;
+
+.settings {
+  display: grid;
+  grid-template-columns: (100% - $settings__container--space-width) $settings__container--space-width;
+}
+
+.settings__chapters {
+  padding-left: 30%;
+  padding-top: 4em;
+}
+
+$chapter__bar-height: 0.3em;
+
+.chapter {
+  font-size: $font-size-2;
+  padding-left: 1em;
+  padding-top: $chapter__bar-height;
+  padding-bottom: $chapter__bar-height;
+  margin-bottom: 1em;
+}
+
+#chapter__account {
+  @include clickable();
+  color: $text-color;
+  border-left: $text-color solid $chapter-border-width;
+}
+
+//---settings---//
+
+$settings__form-width: 50%;
+
+.settings__container {
+  margin: 4em auto auto;
+  width: 70%;
+  padding: 4em;
+  background-color: $card-color;
+  border-radius: $elem-border-radius;
+
+  display: grid;
+  grid-template-columns: $settings__form-width (100% - $settings__form-width);
+}
+
+.settings__title {
+  font-size: $font-size-4;
+  margin-bottom: 1em;
+}
+
+.settings__input--title {
+  font-size: $font-size-2;
+  margin-bottom: 1em;
+}
+
+.change__input {
+  @extend .input--form;
+  margin-bottom: 0;
+}
+
+#old-password-input {
+  margin-bottom: 2em;
+}
+
+//---photo---//
+
+.settings__photo {
+  padding: 5em;
+}
+
+.upload {
+  width: 0;
+  height: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+#user-photo {
+  width: 100%;
+  border-radius: $elem-border-radius;
+}
+
+.photo__load--label {
+  width: 100%;
+  text-align: center;
+  height: fit-content;
+  display: block;
+  margin-top: 1em;
+  padding: 1em 0 1em 0;
+  border-radius: $elem-border-radius;
+  background-color: $sub__btn-color;
+  @include clickable();
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
+//---change__res---//
+
+.change__res {
+  height: 1em;
+  margin: 0;
+}
+
+.change-success {
+  color: green;
+}
+
+#change-password-error {
+  color: red;
+}

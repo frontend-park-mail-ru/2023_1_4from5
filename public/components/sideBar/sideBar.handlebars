@@ -3,7 +3,9 @@
     <div class="sideBar__menu">
         <div class="sidebar__info">
             {{#if about.showDisplay}}
-                <a id="{{about.id}}" class="sidebar__href inactive" href={{abput.href}}> {{about.name}} </a>
+                <div class="{{about.id}}">
+                    <a id="{{about.id}}" class="sidebar__href hover--underline" href={{abput.href}}> {{about.name}} </a>
+                </div>
             {{/if}}
         </div>
 
@@ -15,16 +17,20 @@
             {{#if findAuth.showDisplay}}
                 <a id="{{findAuth.id}}" class="sidebar__href hover--underline"
                    href={{findAuth.href}}> {{findAuth.name}} </a>
-            <input class="find__input" id="find__input" type="text" placeholder="Поиск авторов">
+                <input class="find__input" id="find__input" type="text" placeholder="Поиск авторов">
             {{/if}}
         </div>
 
         <div class="sidebar__user">
             {{#if feed.showDisplay}}
-                <a id="{{feed.id}}" class="sidebar__href inactive" href={{feed.href}}> {{feed.name}} </a>
+                <span class="sidebar__feed">
+                    <a id="{{feed.id}}" class="sidebar__href hover--underline" href={{feed.href}}> {{feed.name}} </a>
+                </span>
             {{/if}}
             {{#if subs.showDisplay}}
-                <a id="{{subs.id}}" class="sidebar__href inactive" href={{subs.href}}> {{subs.name}} </a>
+                <span class="sidebar__subs">
+                    <a id="{{subs.id}}" class="sidebar__href hover--underline" href={{subs.href}}> {{subs.name}} </a>
+                </span>
             {{/if}}
             {{#if reg.showDisplay}}
                 <a id="{{reg.id}}" class="sidebar__href hover--underline" href={{reg.href}}> {{reg.name}} </a>
@@ -33,6 +39,10 @@
                 <a id="{{auth.id}}" class="sidebar__href hover--underline" href={{auth.href}}> {{auth.name}} </a>
             {{/if}}
             {{#if modalWindow.showDisplay}}
+
+                <img class="sidebar__notification" src="../../images/notification.svg" alt="notification">
+                <img class="user__photo" src="../../images/{{modalWindow.photo}}.jpg" alt="фото">
+
                 <a id="{{modalWindow.id}}" class="sidebar__href hover--underline"
                    href={{modalWindow.href}}> {{modalWindow.name}} </a>
             {{/if}}

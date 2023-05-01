@@ -46,6 +46,33 @@ $add-top: 7px;
   @include clickable();
 }
 
+.aim__header {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+$aim__bar-height: 8px;
+$aim__bar-color: #009F2D;
+
+.aim__bar {
+  margin: 1em auto 1em auto;
+  width: 90%;
+  height: $aim__bar-height;
+  border: $text--default-color solid 1px;
+  border-radius: ($aim__bar-height / 2 + 1px);
+}
+
+#bar--row {
+  background-color: $aim__bar-color;
+  height: $aim__bar-height;
+  border-radius: ($aim__bar-height / 2 + 1px);
+}
+
+#aim__edit {
+  margin: 10px 10px 0 0;
+  @include clickable();
+}
+
 .text--default {
   font-weight: bold;
   font-size: 1.2em;
@@ -101,8 +128,20 @@ $create-btn-height: 2.5em;
 
 .donate__btn {
   background-color: $create-btn-color;
+
+  &:hover {
+    background-color: $create-btn-color-hover;
+  }
 }
 
 .donate__btn--text {
   margin-left: 1em;
+}
+
+.aim__text {
+  margin-top: 1em;
+}
+
+.aim__description {
+  padding-bottom: 0.5em;
 }

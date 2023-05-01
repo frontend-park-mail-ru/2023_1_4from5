@@ -44,6 +44,11 @@ $post__header-mr: 0.5em;
   display: flex;
 }
 
+#creation__date {
+  position: relative;
+  top: 0.2em;
+}
+
 .edit__img {
   @include clickable();
   margin-right: 0.5em;
@@ -70,13 +75,15 @@ $post__header-mr: 0.5em;
   display: flex;
 }
 
-.likes {
+.post__likes, .post__comments {
   margin-right: 1em;
+  font-size: $font-size-2;
 }
 
-$feedback__img-width: 2em;
+$feedback__img-width: 32px;
 
 .icon--like {
+  @include clickable();
   width: $feedback__img-width;
 }
 

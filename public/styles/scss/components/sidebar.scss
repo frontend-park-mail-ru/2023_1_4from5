@@ -16,7 +16,7 @@ $sidebar-href-offset: 4%;
 $grid-info-width: 10%;
 $grid-authors-width: 45%;
 
-$vertical-row-color: #c4c4c4;
+$row-color: #c4c4c4;
 $vertical-row-width: 2px;
 
 #sideBar {
@@ -26,7 +26,7 @@ $vertical-row-width: 2px;
   text-align: end;
   position: fixed;
   display: flex;
-  z-index: $content-z-index;
+  z-index: $sidebar-z-index;
   border-bottom: $hr-color solid $hr-width;
   background-color: white;
 }
@@ -71,34 +71,63 @@ $vertical-row-width: 2px;
 
 .sidebar__user {
   text-align: end;
-  padding-top: 0.4em;
   padding-right: 2em;
+
+  a {
+    position: relative;
+    top: -0.5em;
+  }
 }
 
 $sidebar-about-offset: 20%;
 
-#sidebar__about {
+.sidebar__about {
   margin-left: $sidebar-about-offset;
   padding-left: $sidebar-about-offset;
   position: relative;
   top: 15%;
-  border-left: $vertical-row-color solid $vertical-row-width;
+  border-left: $row-color solid $vertical-row-width;
 }
 
 .sidebar__href {
   margin-right: $sidebar-href-offset;
 }
 
-#sidebar__feed {
-  padding-right: $sidebar-href-offset;
-  border-right: $vertical-row-color solid $vertical-row-width;
+#sidebar__find {
+  padding-left: 4px;
 }
 
-#sidebar__subs {
+.sidebar__feed, .sidebar__subs {
+  position: relative;
+  top: -0.5em;
   padding-right: $sidebar-href-offset;
-  border-right: $vertical-row-color solid $vertical-row-width;
+  margin-right: 1em;
+  border-right: $row-color solid $vertical-row-width;
+
+  a {
+    position: relative;
+    top: 0.05em;
+    left: 1em;
+  }
+}
+
+#sidebar__reg, #sidebar__auth {
+  top: 0.4em;
+}
+
+$sidebar__img-height: 2em;
+
+.user__photo {
+  border-radius: ($sidebar__img-height / 2);
+  height: $sidebar__img-height;
+  margin-right: 1em;
 }
 
 #sidebar__modalWindow {
   margin-right: 0;
+}
+
+.sidebar__notification {
+  margin-right: 0.5em;
+  padding-bottom: 0.2em;
 }

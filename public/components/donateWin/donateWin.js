@@ -14,7 +14,6 @@ export class DonateWin {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'donateWinDiv';
-
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
 

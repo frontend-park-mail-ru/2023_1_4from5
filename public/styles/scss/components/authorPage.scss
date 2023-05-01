@@ -1,5 +1,6 @@
 @import "authorPageService";
 @import "authorPageContent";
+@import "../general/variables";
 
 $header-height: 20em;
 
@@ -12,12 +13,45 @@ $author__photo--left: 5%;
   width: $author__photo--width;
   top: $author__photo--top;
   left: $author__photo--left;
+  z-index: $content-z-index;
 }
 
 #author__header {
   height: $header-height;
   background-position: center center;
   background-size: 80%;
+}
+
+#author__header--hover {
+  position: relative;
+  top: -1em;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: $lower-z-index;
+  opacity: 0;
+  @include clickable();
+
+  &:hover {
+    background-color: gray;
+    opacity: 50%;
+  }
+}
+
+.cover__title {
+  position: relative;
+  top: 45%;
+  left: 42%;
+  display: flex;
+}
+
+.cover__img {
+  height: 2em;
+}
+
+.cover__title--text{
+  margin-top: 0.5em;
+  margin-left: 1em;
 }
 
 $author__service--width: 30%;
