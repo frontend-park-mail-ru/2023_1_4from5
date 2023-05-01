@@ -7,6 +7,7 @@ import { request } from '../../modules/request';
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+import { sideBar } from '../sideBar/sideBar';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -50,6 +51,7 @@ class SettingsStore {
     const user = userStore.getUserState();
     user.profilePhoto = newPhoto;
     this.renderSettings();
+    Actions.renderSideBar(user);
   }
 
   async changePassword(input) {
@@ -94,7 +96,7 @@ class SettingsStore {
         user.usernameIn = name;
         user.login = login;
         userStore.setUserState(user);
-        Actions.renderSideBar(sideBarElement, user);
+        Actions.renderSideBar(user);
         settings.successNameChanged();
         settings.successLoginChanged();
       }
