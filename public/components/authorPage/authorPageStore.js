@@ -84,11 +84,7 @@ class AuthorPageStore {
       case ActionTypes.CREATOR_COVER_UPDATE:
         const formData = new FormData();
         formData.append('upload', action.file);
-        const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
-        const result = await creatorPage.json();
-        const coverId = result.creator_info.cover_photo;
-        formData.append('path', coverId);
-
+        formData.append('path', action.coverId);
         console.log(formData);
 
         const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
