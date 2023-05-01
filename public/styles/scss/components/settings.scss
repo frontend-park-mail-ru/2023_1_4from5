@@ -90,6 +90,11 @@ $settings__form-width: 50%;
   padding: 1em 0 1em 0;
   border-radius: $elem-border-radius;
   background-color: $sub__btn-color;
+  @include clickable();
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
 }
 
 //---change__res---//

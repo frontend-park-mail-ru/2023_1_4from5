@@ -5,9 +5,7 @@ import { userStore } from '../components/user/userStore';
 import { router } from './Router';
 import { newPostStore } from '../components/newPost/newPostStore';
 import { searchStore } from '../components/search/searchStore';
-import { becameAuthorStore } from '../components/becomeAuthor/becomeAuthorStore';
 import { page404 } from '../components/page404/page404';
-import { subscriptions } from '../components/subscriptions/subscriptions';
 import { feedStore } from '../components/feed/feedStore';
 
 export const URLS = {
@@ -18,7 +16,6 @@ export const URLS = {
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
-  becomeAuthor: '/becomeAuthor',
   feed: '/feed',
 };
 
@@ -60,14 +57,6 @@ export function notifier(path, data, additionalUrl) {
       if (!data) {
         searchStore.renderSearch();
       }
-      break;
-
-    case URLS.becomeAuthor:
-      becameAuthorStore.renderBecomeAuthor();
-      break;
-
-    case `${URLS.becomeAuthor}/${additionalUrl}`:
-      becameAuthorStore.renderBecomeAuthor(additionalUrl);
       break;
 
     case URLS.subscriptions:

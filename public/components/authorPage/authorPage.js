@@ -2,7 +2,6 @@ import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
 import template from './authorPage.handlebars';
-import { aim } from './aim';
 import { getSubscription } from './getSubscription';
 import { userStore } from '../user/userStore';
 
@@ -12,6 +11,8 @@ class AuthorPage {
   #parent;
 
   #config;
+
+  #subsPos = 0;
 
   constructor(parent) {
     this.#parent = parent;
@@ -30,11 +31,32 @@ class AuthorPage {
   }
 
   render() {
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
+
+    // const prev = document.getElementById('prev');
+    // prev.addEventListener('click', (event) => {
+    //   event.preventDefault();
+    //   if (this.#subsPos >= 4) {
+    //     this.#subsPos -= 4;
+    //     console.log(this.#subsPos);
+    //   }
+    // });
+    //
+    // const next = document.getElementById('next');
+    // next.addEventListener('click', (event) => {
+    //   event.preventDefault();
+    //   console.log(this.#subsPos);
+    //   console.log(this.#config.subscriptions[3])
+    //   if (this.#config.subscriptions[this.#subsPos + 4]) {
+    //     this.#subsPos += 4;
+    //     console.log(this.#subsPos);
+    //   }
+    // });
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
@@ -44,16 +66,17 @@ class AuthorPage {
       cover.addEventListener('change', (event) => {
         event.preventDefault();
         const files = event.target.files;
-        console.log(files);
         Actions.creatorCoverUpdate(files[0]);
       });
     }
 
     const editProfile = document.getElementById('edit__profile');
-    editProfile.addEventListener('click', (event) => {
-      event.preventDefault();
-      router.go(URLS.becomeAuthor, '', userStore.getUserState().authorURL);
-    });
+    if (editProfile) {
+      editProfile.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.renderBecomeAuthor(userStore.getUserState().authorURL);
+      });
+    }
 
     const createPostBtn = document.getElementById('create__post');
     if (createPostBtn) {
@@ -168,6 +191,18 @@ class AuthorPage {
         width = 100;
       }
       aimBar.style.width = `${width}%`;
+    }
+
+    const creationDates = document.querySelectorAll('#creation__date');
+    for (let index = 0; index < creationDates.length; index++) {
+      const timestamp = creationDates[index];
+      const dateRaw = new Date(Date.parse(timestamp.textContent));
+      const day = dateRaw.getDay();
+      const month = dateRaw.getMonth();
+      const year = dateRaw.getFullYear();
+      const hour = dateRaw.getHours();
+      const min = dateRaw.getMinutes();
+      timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
     }
   }
 

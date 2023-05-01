@@ -46,21 +46,25 @@ class UserStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.GET_USER:
-        const getUser = await request.get('/api/user/profile');
-        const profile = await getUser.json();
-
-        this.setState(profile);
-
-        Actions.renderSideBar(sideBarElement, this.#user);
+        await this.getUser();
         break;
 
       case ActionTypes.LOGOUT:
-        this.logout(action.parent);
+        await this.logout(action.parent);
         break;
 
       default:
         break;
     }
+  }
+
+  async getUser() {
+    const getUser = await request.get('/api/user/profile');
+    const profile = await getUser.json();
+
+    this.setState(profile);
+
+    Actions.renderSideBar(sideBarElement, this.#user);
   }
 
   async logout(parent) {

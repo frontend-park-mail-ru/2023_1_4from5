@@ -4,12 +4,14 @@
 
 $becomeAuthor-width: 30%;
 
+.becomeAuthor--back {
+
+}
+
 .becameAuthor {
   @include popup__container();
   width: $becomeAuthor-width;
   background-color: $card-color;
-  position: relative;
-  margin-top: 7%;
   left: ((100% - $becomeAuthor-width) / 2);
 }
 

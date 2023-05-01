@@ -64,11 +64,11 @@ class SideBarStore {
       },
       beAuthor: {
         name: 'Стать автором',
-        href: URLS.becomeAuthor,
+        href: '',
         id: 'sidebar__beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
-        render: router.go,
+        render: Actions.renderBecomeAuthor,
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,

@@ -12,17 +12,23 @@ class BecomeAuthor {
   }
 
   render() {
-    this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'becameAuthorDiv';
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
 
-    const backBtn = document.getElementById('becameAuthor__backBtn');
-    backBtn.addEventListener('click', (e) => {
+    const background = document.getElementById('becomeAuthor--back');
+    background.addEventListener('click', (e) => {
       e.preventDefault();
-      router.popstate();
+      Actions.removeBecomeAuthor();
     });
+  }
+
+  remove() {
+    const lastBecomeAuthor = document.getElementById('becameAuthorDiv');
+    if (lastBecomeAuthor) {
+      lastBecomeAuthor.remove();
+    }
   }
 
   publish() {
