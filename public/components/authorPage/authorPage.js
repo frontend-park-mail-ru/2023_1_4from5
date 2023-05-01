@@ -123,7 +123,7 @@ class AuthorPage {
           event.preventDefault();
           const subId = event.target.parentElement.id;
           const price = event.target.parentElement.querySelector('#sub__price').textContent;
-          const creatorId = event.target.parentElement.parentElement.id;
+          const creatorId = event.target.parentElement.parentElement.parentElement.id;
           getSubscription.render(subId, price, creatorId);
         });
       }

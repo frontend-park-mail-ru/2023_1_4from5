@@ -120,7 +120,11 @@ $sidebar__img-height: 2em;
 .user__photo {
   border-radius: ($sidebar__img-height / 2);
   height: $sidebar__img-height;
+  width: $sidebar__img-height;
   margin-right: 1em;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #sidebar__modalWindow {

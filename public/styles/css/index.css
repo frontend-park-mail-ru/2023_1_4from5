@@ -549,7 +549,10 @@ p, h1, h2, h3, h4, h5 {
 .user__photo {
   border-radius: 1em;
   height: 2em;
+  width: 2em;
   margin-right: 1em;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #sidebar__modalWindow {
@@ -833,6 +836,7 @@ p, h1, h2, h3, h4, h5 {
 
 .arrows {
   width: 100%;
+  cursor: pointer;
 }
 
 .sub__card {
@@ -1292,7 +1296,10 @@ p, h1, h2, h3, h4, h5 {
 .user__photo {
   border-radius: 1em;
   height: 2em;
+  width: 2em;
   margin-right: 1em;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #sidebar__modalWindow {
@@ -1701,8 +1708,12 @@ textarea {
 }
 
 #user-photo {
+  display: flex;
   width: 100%;
+  height: 100%;
   border-radius: 15px;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .photo__load--label {
@@ -1710,7 +1721,7 @@ textarea {
   text-align: center;
   height: fit-content;
   display: block;
-  margin-top: 1em;
+  margin-bottom: 3em;
   padding: 1em 0 1em 0;
   border-radius: 15px;
   background-color: #dddde0;

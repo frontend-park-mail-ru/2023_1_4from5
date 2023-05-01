@@ -72,7 +72,7 @@ class SideBarStore {
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
-        photo: 'author-photo', // TODO hardcode -> userStore.getUserState().profilePhoto
+        photo: userStore.getUserState().profilePhoto,
         href: '/modalWindow',
         id: 'sidebar__modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,

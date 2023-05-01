@@ -25,7 +25,7 @@ class Router {
     }
 
     // TODO разобраться, что такое url.searchParams.toString() === ''
-    if (window.location.pathname === path && data !== 'logout' && url.searchParams.toString() === '') return;
+    if (window.location.pathname === path && url.searchParams.toString() === '') return;
     contentElement.innerHTML = '';
 
     if (data) {

@@ -3,6 +3,7 @@ import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { request } from '../../modules/request.js';
 import { Actions } from '../../actions/actions.js';
 import { router } from '../../modules/Router.js';
+import { URLS } from '../../modules/Notifier';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -50,7 +51,7 @@ class UserStore {
         break;
 
       case ActionTypes.LOGOUT:
-        await this.logout(action.parent);
+        await this.logout();
         break;
 
       default:
@@ -67,7 +68,7 @@ class UserStore {
     Actions.renderSideBar(sideBarElement, this.#user);
   }
 
-  async logout(parent) {
+  async logout() {
     await request.put('/api/auth/logout');
     this.#user.loginIn = '';
     this.#user.usernameIn = '';
@@ -76,7 +77,7 @@ class UserStore {
     this.#user.profilePhoto = '';
     Actions.removeWinSettings();
     Actions.renderSideBar(sideBarElement, this.#user);
-    router.go('/', 'logout', parent);
+    router.go(URLS.root);
   }
 }
 
