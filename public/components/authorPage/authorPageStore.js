@@ -85,12 +85,9 @@ class AuthorPageStore {
         const formData = new FormData();
         formData.append('upload', action.file);
         formData.append('path', action.coverId);
-        console.log(formData);
 
         const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
-        const req = await request.put('/api/creator/updateCoverPhoto', formData, tokenCover);
-
-        console.log(req);
+        await request.putMultipart('/api/creator/updateCoverPhoto', formData, tokenCover);
 
         await this.renderMyPage();
         break;
