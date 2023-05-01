@@ -64,7 +64,7 @@ class UserStore {
     const profile = await getUser.json();
     this.setState(profile);
 
-    Actions.renderSideBar(sideBarElement, this.#user);
+    Actions.renderSideBar(this.#user);
   }
 
   async logout() {
@@ -75,7 +75,7 @@ class UserStore {
     this.#user.isAuthorizedIn = false;
     this.#user.profilePhoto = '';
     Actions.removeWinSettings();
-    Actions.renderSideBar(sideBarElement, this.#user);
+    Actions.renderSideBar(this.#user);
     router.go(URLS.root);
   }
 }

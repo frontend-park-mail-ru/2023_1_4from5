@@ -39,7 +39,7 @@ class StartStore {
         }
       }
     }
-    Actions.renderSideBar(sideBarElement, userIn);
+    Actions.renderSideBar(userIn);
   }
 }
 
