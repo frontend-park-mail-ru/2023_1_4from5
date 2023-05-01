@@ -21,6 +21,12 @@ class Feed {
     newDiv.innerHTML = template(posts);
     this.#parent.appendChild(newDiv);
 
+    const photos = document.querySelectorAll('#feed__creator--photo');
+    for (let index = 0; index < photos.length; index++) {
+      const photo = photos[index];
+      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    }
+
     const likeIcons = document.querySelectorAll('.feed__like');
     for (let index = 0; index < likeIcons.length; index++) {
       const likeIcon = likeIcons[index];

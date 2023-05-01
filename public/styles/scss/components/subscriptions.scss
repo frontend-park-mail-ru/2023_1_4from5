@@ -47,10 +47,16 @@ $subs__card--info-height: 90%;
   grid-template-rows: $subs__card--info-height (100% - $subs__card--info-height);
 }
 
+$subs__photo-width: 7em;
+
 .subs__photo {
-  width: 60%;
+  width: $subs__photo-width;
+  height: $subs__photo-width;
   border-radius: 100%;
   margin-bottom: 1em;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .subs__creator {
@@ -71,7 +77,7 @@ $subs__card--info-height: 90%;
 .month__cost--container {
   display: flex;
   margin-top: 0.2em;
-  padding-left: 1.2em;
+  justify-content: center;
 }
 
 #month__cost {

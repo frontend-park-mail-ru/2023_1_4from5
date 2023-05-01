@@ -2068,9 +2068,12 @@ textarea {
 }
 
 .subs__photo {
-  width: 60%;
+  width: 7em;
+  height: 7em;
   border-radius: 100%;
   margin-bottom: 1em;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .subs__creator {
@@ -2091,7 +2094,7 @@ textarea {
 .month__cost--container {
   display: flex;
   margin-top: 0.2em;
-  padding-left: 1.2em;
+  justify-content: center;
 }
 
 #month__cost {
@@ -2132,10 +2135,13 @@ textarea {
   border-bottom: #d3d3d3 solid 2px;
 }
 
-.feed__creator--photo {
+#feed__creator--photo {
   height: 5em;
+  width: 5em;
   border-radius: 100%;
   margin-left: 1em;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .feed__creator--name {

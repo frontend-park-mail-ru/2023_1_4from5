@@ -29,10 +29,14 @@ $feed__photo-width: 13%;
   border-bottom: $card-content-color solid 2px;
 }
 
-.feed__creator--photo {
+#feed__creator--photo {
   height: 5em;
+  width: 5em;
   border-radius: 100%;
   margin-left: 1em;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .feed__creator--name {
