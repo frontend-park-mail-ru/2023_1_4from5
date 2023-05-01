@@ -31,32 +31,49 @@ class AuthorPage {
   }
 
   render() {
+    const subs = [];
+    Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + 4));
+    const config = {};
+    Object.assign(config, this.#config);
+    config.subscriptions = subs;
 
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
-    newDiv.innerHTML = template(this.#config);
+    newDiv.innerHTML = template(config);
     this.#parent.appendChild(newDiv);
 
-    // const prev = document.getElementById('prev');
-    // prev.addEventListener('click', (event) => {
-    //   event.preventDefault();
-    //   if (this.#subsPos >= 4) {
-    //     this.#subsPos -= 4;
-    //     console.log(this.#subsPos);
-    //   }
-    // });
-    //
-    // const next = document.getElementById('next');
-    // next.addEventListener('click', (event) => {
-    //   event.preventDefault();
-    //   console.log(this.#subsPos);
-    //   console.log(this.#config.subscriptions[3])
-    //   if (this.#config.subscriptions[this.#subsPos + 4]) {
-    //     this.#subsPos += 4;
-    //     console.log(this.#subsPos);
-    //   }
-    // });
+    if (this.#subsPos > 0) {
+      const prevDiv = document.getElementById('arrow--prev');
+      prevDiv.innerHTML = '<img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">';
+    }
+
+    if (this.#subsPos < this.#config.subscriptions.length - 4) {
+      const prevDiv = document.getElementById('arrow--next');
+      prevDiv.innerHTML = '<img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">';
+    }
+
+    const prev = document.getElementById('prev');
+    if (prev) {
+      prev.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (this.#subsPos >= 4) {
+          this.#subsPos -= 4;
+          this.render();
+        }
+      });
+    }
+
+    const next = document.getElementById('next');
+    if (next) {
+      next.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (this.#config.subscriptions[this.#subsPos + 4]) {
+          this.#subsPos += 4;
+          this.render();
+        }
+      });
+    }
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';

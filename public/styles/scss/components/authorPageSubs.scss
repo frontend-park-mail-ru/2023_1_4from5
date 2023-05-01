@@ -2,26 +2,41 @@
 @import "../general/variables";
 
 $sub__container-offset: 1em;
+$sub__container-width: 90%;
+$sub__card-height: 20em;
 
-.sub__container {
+.sub__space {
   background-color: $card-color;
   @include shadow();
 
-  display: flex;
+  height: ($sub__card-height + $sub__container-offset);
+
   margin-top: $sub__container-offset;
   padding-top: $sub__container-offset;
   padding-bottom: $sub__container-offset;
 
   border-radius: $elem-border-radius;
+  display: grid;
+  grid-template-columns: ((100% - $sub__container-width) / 2) $sub__container-width ((100% - $sub__container-width) / 2);
+}
 
+
+.sub__container {
+  display: flex;
+  height: $sub__card-height;
+}
+
+
+.arrow__container {
+  width: 3em;
+  padding-top: ($sub__card-height / 2 - 1.5em);
 }
 
 .arrows {
-  width: 5%;
-  @include clickable();
+  width: 100%;
 }
 
-$sub__card-width: 15%;
+$sub__card-width: 18%;
 
 .sub__card {
   background-color: $popup-color;

@@ -114,36 +114,38 @@
                 {{/if}}
             </div>
 
-            <div id="{{creator_info.creator_id}}" class="sub__container">
+            <div id="{{creator_info.creator_id}}" class="sub__space">
                 {{#if subscriptions}}
-                    <!--                    <img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">-->
-                    {{#each subscriptions}}
-                        <div id="{{id}}" class="sub__card">
-                            <div class="sub__title">
-                                <h3 class="sub__title--text">{{title}}</h3>
-                                {{#if ../is_my_page}}
-                                    <img id="sub__delete" src="../../images/delete.svg" alt="delete">
-                                {{/if}}
-                            </div>
-                            <p class="sub__description">{{description}}</p>
-                            <div class="sub__cost">
-                                <h2 id="sub__price" class="cost">{{month_cost}}</h2>
-                                <h3 class="rpm">р/месяц</h3>
-                            </div>
+                    <div id="arrow--prev" class="arrow__container"></div>
+                    <div class="sub__container">
+                        {{#each subscriptions}}
+                            <div id="{{id}}" class="sub__card">
+                                <div class="sub__title">
+                                    <h3 class="sub__title--text">{{title}}</h3>
+                                    {{#if ../is_my_page}}
+                                        <img id="sub__delete" src="../../images/delete.svg" alt="delete">
+                                    {{/if}}
+                                </div>
+                                <p class="sub__description">{{description}}</p>
+                                <div class="sub__cost">
+                                    <h2 id="sub__price" class="cost">{{month_cost}}</h2>
+                                    <h3 class="rpm">р/месяц</h3>
+                                </div>
 
-                            {{#if ../is_my_page}}
-                                <button id="sub__edit" class="sub__btn">
-                                    <img class="sub__edit" src="../../images/pencil.png" alt="pencil">
-                                    Изменить
-                                </button>
-                            {{else}}
-                                {{#if ../isAuthorized}}
-                                    <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
+                                {{#if ../is_my_page}}
+                                    <button id="sub__edit" class="sub__btn">
+                                        <img class="sub__edit" src="../../images/pencil.png" alt="pencil">
+                                        Изменить
+                                    </button>
+                                {{else}}
+                                    {{#if ../isAuthorized}}
+                                        <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
+                                    {{/if}}
                                 {{/if}}
-                            {{/if}}
-                        </div>
-                    {{/each}}
-                    <!--                    <img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">-->
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div id="arrow--next" class="arrow__container"></div>
 
                 {{else}}
                     {{#if is_my_page}}
