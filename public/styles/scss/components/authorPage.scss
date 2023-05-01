@@ -98,3 +98,9 @@ $author__service--width: 30%;
   display: grid;
   grid-template-columns: $author__service--width (100% - $author__service--width);
 }
+
+.creatorphoto__load--label {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}

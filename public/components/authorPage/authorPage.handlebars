@@ -1,8 +1,13 @@
 <div id="author__photo" class="author__photo--container">
-    <div class="photo--hover">
-        <img class="photo__img" src="../../images/load-cover.svg" alt="load">
-        <h3 class="photo__text">Загрузить фото</h3>
-    </div>
+    {{#if is_my_page}}
+        <div class="photo--hover">
+            <label class="creatorphoto__load--label">
+                <input id="photo__upload" type="file" class="upload"/>
+                <img class="photo__img" src="../../images/load-cover.svg" alt="load">
+                <h3 class="photo__text">Загрузить фото</h3>
+            </label>
+        </div>
+    {{/if}}
     <img src="../../images/author-photo.svg" alt="creator photo">
 </div>
 

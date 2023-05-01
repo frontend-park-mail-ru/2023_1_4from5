@@ -1107,6 +1107,12 @@ p, h1, h2, h3, h4, h5 {
   grid-template-columns: 30% 70%;
 }
 
+.creatorphoto__load--label {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 .search__container {
   padding: 5%;
   display: grid;

@@ -73,12 +73,12 @@ class AuthorPage {
       });
     }
 
-    const photo = document.getElementById('author__photo');
+    const photo = document.getElementById('photo__upload');
     if (photo) {
       photo.addEventListener('change', (event) => {
         event.preventDefault();
         const files = event.target.files;
-        Actions.creatorCoverUpdate(files[0], this.#config.creator_info.cover_photo);
+        Actions.creatorPhotoUpdate(files[0], this.#config.creator_info.profile_photo);
       });
     }
 
