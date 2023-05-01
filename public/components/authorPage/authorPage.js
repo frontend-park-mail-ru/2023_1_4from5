@@ -66,7 +66,7 @@ class AuthorPage {
       cover.addEventListener('change', (event) => {
         event.preventDefault();
         const files = event.target.files;
-        Actions.creatorCoverUpdate(files[0]);
+        Actions.creatorCoverUpdate(files[0], this.#config.creator_info.cover_photo);
       });
     }
 

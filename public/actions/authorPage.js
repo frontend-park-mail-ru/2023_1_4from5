@@ -60,10 +60,11 @@ export const ActionsAuthorPage = {
     });
   },
 
-  creatorCoverUpdate(file) {
+  creatorCoverUpdate(file, coverId) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_COVER_UPDATE,
       file,
+      coverId,
     });
   },
 
