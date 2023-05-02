@@ -6,10 +6,12 @@ import { request } from '../../modules/request';
 import { router } from '../../modules/Router';
 import { isValidTextPost, isValidTitlePost } from '../../modules/isValid';
 import { color } from '../../consts/styles';
+import { URLS } from '../../modules/Notifier';
 
 document.querySelector('main');
 class NewPostStore {
   #config;
+  #levels;
 
   constructor() {
     this.config = {
@@ -44,16 +46,27 @@ class NewPostStore {
     }
   }
 
-  renderNewPost() {
-    newPost.render();
+  async renderNewPost() {
+    const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+    const creatorPage = await req.json();
+    const levels = {
+      subs: creatorPage.subscriptions,
+    };
+    newPost.render(levels);
     newPost.publish();
   }
 
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
-    console.log(post);
-    newPost.render();
+
+    const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+    const creatorPage = await req.json();
+    const levels = {
+      subs: creatorPage.subscriptions,
+    };
+
+    newPost.render(levels);
     newPost.update(postId, post.title, post.text);
   }
 
@@ -83,14 +96,14 @@ class NewPostStore {
         title: createTitle,
         text: createText,
         creator: userStore.getUserState().authorURL,
-        attachments: action.input.attachments
+        attachments: action.input.attachments,
+        // subscriptions: action.input.availableSubscriptions,
       };
       console.log(body, action);
       const result = await callback(body, action);
       console.log(result);
       if (result.ok) {
-        console.log('OK');
-        router.popstate();
+        router.go(URLS.myPage);
       } else {
         console.log('ERROR');
         errorTextOutput.innerHTML = '';

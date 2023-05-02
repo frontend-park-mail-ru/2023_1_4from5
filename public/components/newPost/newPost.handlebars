@@ -43,48 +43,53 @@
         </form>
     </div>
 
-<!-------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------------------------------------->
 
     <div class="post__settings">
         <div class="post__settings--form">
             <p class="post__settings--header">Кто может смотреть</p>
 
             <div class="subscribers__class">
-                <div class="switch">
-                    <img class="switch__img" src="../../images/radio-active.svg" alt="active">
+                <div id="switch__level--all" class="switch">
+                    {{#if switch.all}}
+                    <img id="switch__img--all" class="switch__img" src="../../images/radio-active.svg" alt="active">
+                    {{else}}
+                        <img id="switch__img--all" class="switch__img" src="../../images/radio-inactive.svg" alt="active">
+                    {{/if}}
                     <p class="switch__text">Открыт для всех</p>
                 </div>
-                <div class="switch">
-                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">
+                <div id="switch__level--subs-only" class="switch">
+                    {{#if switch.subsOnly}}
+                        <img id="switch__img--subs-only" class="switch__img" src="../../images/radio-active.svg" alt="active">
+                    {{else}}
+                        <img id="switch__img--subs-only" class="switch__img" src="../../images/radio-inactive.svg" alt="active">
+                    {{/if}}
                     <p class="switch__text">Только подписчики</p>
                 </div>
-                <div class="switch">
-                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">
-                    <p class="switch__text">Подписчики или разовая оплата</p>
-                </div>
-                <div class="switch">
-                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">
-                    <p class="switch__text">Только разовая оплата</p>
-                </div>
+                <!--                <div class="switch">-->
+                <!--                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">-->
+                <!--                    <p class="switch__text">Подписчики или разовая оплата</p>-->
+                <!--                </div>-->
+                <!--                <div class="switch">-->
+                <!--                    <img class="switch__img" src="../../images/radio-inactive.svg" alt="inactive">-->
+                <!--                    <p class="switch__text">Только разовая оплата</p>-->
+                <!--                </div>-->
             </div>
 
-            <div class="subscription__levels">
-                <p>Уровень</p>
-                <div class="sub__level--container">
-                    <div class="sub__level">
-                        <img src="../../images/radio-inactive.svg" alt="inactive">
-                        <p class="sub__level--text">Уровень 1</p>
-                    </div>
-                    <div class="sub__level">
-                        <img src="../../images/radio-inactive.svg" alt="inactive">
-                        <p class="sub__level--text">Уровень 2</p>
-                    </div>
-                    <div class="sub__level">
-                        <img src="../../images/radio-inactive.svg" alt="inactive">
-                        <p class="sub__level--text">Уровень 3</p>
+            {{#if switch.subsOnly}}
+                <div id="subscription__levels" class="subscription__levels">
+                    <p>Уровень</p>
+                    <div class="sub__level--container">
+                        {{#each subs}}
+                            <div id="{{id}}" class="sub__level">
+                                <img id="sub__level--radio" class="sub__level--inactive"
+                                     src="../../images/radio-inactive.svg" alt="">
+                                <p class="sub__level--text">{{title}}</p>
+                            </div>
+                        {{/each}}
                     </div>
                 </div>
-            </div>
+            {{/if}}
 
             <div class="comments">
                 <p>Комментарии</p>

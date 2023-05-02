@@ -20,6 +20,7 @@ $settings__container--space-width: 80%;
 $chapter__bar-height: 0.3em;
 
 .chapter {
+  @include clickable();
   font-size: $font-size-2;
   padding-left: 1em;
   padding-top: $chapter__bar-height;
@@ -88,7 +89,7 @@ $settings__form-width: 50%;
   cursor: pointer;
 }
 
-$settings__photo-width: 100%;
+$settings__photo-width: 22em;
 
 #user-photo {
   display: flex;
