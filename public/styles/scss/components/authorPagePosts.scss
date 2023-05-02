@@ -56,10 +56,14 @@ $post__header-mr: 0.5em;
 .edit__img {
   @include clickable();
   margin-right: 0.5em;
+  width: 2em;
+  height: 2em;
 }
 
 .delete__img {
   @include clickable();
+  width: 2em;
+  height: 2em;
   margin-right: $post__header-mr;
 }
 

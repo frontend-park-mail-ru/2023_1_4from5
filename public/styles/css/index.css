@@ -962,10 +962,14 @@ p, h1, h2, h3, h4, h5 {
 .edit__img {
   cursor: pointer;
   margin-right: 0.5em;
+  width: 2em;
+  height: 2em;
 }
 
 .delete__img {
   cursor: pointer;
+  width: 2em;
+  height: 2em;
   margin-right: 0.5em;
 }
 
