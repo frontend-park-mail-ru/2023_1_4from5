@@ -100,11 +100,12 @@ $settings__photo-width: 100%;
 }
 
 .photo__load--label {
-  width: 100%;
+  width: 95%;
   text-align: center;
   height: fit-content;
   display: block;
   margin-bottom: 3em;
+  margin-right: 1em;
   padding: 1em 0 1em 0;
   border-radius: $elem-border-radius;
   background-color: $sub__btn-color;
@@ -113,6 +114,19 @@ $settings__photo-width: 100%;
   &:hover {
     background-color: $sub__btn-color-hover;
   }
+}
+
+.settings__photo--btns {
+  height: 3em;
+  margin-bottom: 2em;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.settings__delete--btn {
+  margin-left: 1em;
+  width: 90%;
+  height: 51%;
 }
 
 //---change__res---//

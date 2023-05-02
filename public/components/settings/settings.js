@@ -43,6 +43,12 @@ class Settings {
       const files = event.target.files;
       Actions.changePhoto(files[0]);
     });
+
+    const deletePhoto = document.getElementById('settings__delete--btn');
+    deletePhoto.addEventListener('click', (event) => {
+      event.preventDefault();
+      Actions.deletePhoto(event.target.parentElement.parentElement.id);
+    });
   }
 
   changePwd() {
