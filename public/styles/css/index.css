@@ -946,6 +946,10 @@ p, h1, h2, h3, h4, h5 {
   margin-right: 0.5em;
 }
 
+.post__subs {
+  margin-left: 1em;
+}
+
 .post__date {
   display: flex;
 }
