@@ -99,6 +99,18 @@ class AuthorPage {
       });
     }
 
+    const delPhoto = document.getElementById('delete__creator--photo');
+    delPhoto.addEventListener('click', (event) => {
+      event.preventDefault();
+      Actions.creatorPhotoDelete(this.#config.creator_info.profile_photo);
+    });
+
+    const delCover = document.getElementById('delete__creator--cover');
+    delCover.addEventListener('click', (event) => {
+      event.preventDefault();
+      Actions.creatorCoverDelete(this.#config.creator_info.cover_photo);
+    });
+
     const editProfile = document.getElementById('edit__profile');
     if (editProfile) {
       editProfile.addEventListener('click', (event) => {

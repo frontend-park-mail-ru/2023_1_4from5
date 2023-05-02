@@ -101,6 +101,14 @@ class AuthorPageStore {
         await this.renderMyPage();
         break;
 
+      case ActionTypes.CREATOR_PHOTO_DELETE:
+        await this.creatorPhotoDelete(action.photoId);
+        break;
+
+      case ActionTypes.CREATOR_COVER_DELETE:
+        await this.creatorCoverDelete(action.coverId);
+        break;
+
       default:
         break;
     }
@@ -200,6 +208,20 @@ class AuthorPageStore {
         input.moneyNeededInput.style.backgroundColor = color.error;
       }
     }
+  }
+
+  async creatorPhotoDelete(photoId) {
+    console.log(photoId);
+    const token = await request.getHeader('/api/creator/deleteProfilePhoto');
+    await request.delete(`/api/creator/deleteProfilePhoto/${photoId}`, token);
+    await this.renderMyPage();
+  }
+
+  async creatorCoverDelete(coverId) {
+    console.log(coverId);
+    const token = await request.getHeader('/api/creator/deleteCoverPhoto');
+    await request.delete(`/api/creator/deleteCoverPhoto/${coverId}`, token);
+    await this.renderMyPage();
   }
 }
 
