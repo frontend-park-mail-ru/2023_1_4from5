@@ -75,4 +75,18 @@ export const ActionsAuthorPage = {
       profilePhoto,
     });
   },
+
+  creatorCoverDelete(coverId) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATOR_COVER_DELETE,
+      coverId,
+    });
+  },
+
+  creatorPhotoDelete(photoId) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATOR_PHOTO_DELETE,
+      photoId,
+    });
+  },
 };

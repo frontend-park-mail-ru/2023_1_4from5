@@ -21,6 +21,7 @@ class Settings {
   }
 
   render() {
+    console.log(this.#user);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
