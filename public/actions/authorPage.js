@@ -2,6 +2,12 @@ import { dispatcher } from '../dispatcher/dispatcher';
 import { ActionTypes } from '../actionTypes/actionTypes';
 
 export const ActionsAuthorPage = {
+  renderAuthorPage() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_AUTHOR_PAGE,
+    });
+  },
+
   clickLike(typeLike, postId) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
@@ -43,10 +49,11 @@ export const ActionsAuthorPage = {
     });
   },
 
-  unfollow(id) {
+  unfollow(id, page) {
     dispatcher.dispatch({
       type: ActionTypes.UNFOLLOW,
       id,
+      page,
     });
   },
 

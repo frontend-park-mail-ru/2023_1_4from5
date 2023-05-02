@@ -26,8 +26,8 @@ class AuthorPageStore {
 
   async reduce(action) {
     switch (action.type) {
-      case ActionTypes.RENDER_MYPAGE:
-        this.renderMyPage();
+      case ActionTypes.RENDER_AUTHOR_PAGE:
+        await this.renderMyPage();
         break;
 
       case ActionTypes.DELETE_POST:
@@ -37,7 +37,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.CLICK_LIKE:
-        this.changeLikeState(action);
+        await this.changeLikeState(action);
         break;
 
       case ActionTypes.RENDER_AIM:
@@ -53,7 +53,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.SAVE_AIM:
-        this.saveEditAim(action.input);
+        await this.saveEditAim(action.input);
         aim.remove();
         break;
 
@@ -68,7 +68,12 @@ class AuthorPageStore {
         await request.put(`/api/user/unfollow/${action.id}`);
         this.#config.follows = false;
         authorPage.config = this.#config;
-        authorPage.render();
+        if (action.page === 'authorPage') {
+          authorPage.render();
+        }
+        if (action.page === 'subscriptions') {
+          Actions.renderSubscriptions();
+        }
         break;
 
       case ActionTypes.GET_SUBSCRIPION:

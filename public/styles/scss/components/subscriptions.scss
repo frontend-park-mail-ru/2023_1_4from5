@@ -18,6 +18,9 @@ $subs__content-width: 80%;
 
 #chapter--paid {
   @include clickable();
+}
+
+.chapter--active {
   border-left: $text-color solid $chapter-border-width;
   color: $text-color;
 }
@@ -40,8 +43,8 @@ $subs__card--info-height: 90%;
   border-radius: $elem-border-radius;
   background-color: $default-color;
   text-align: center;
-  padding: 10% 15% 15%;
-  margin: 3%;
+  padding: 10% 10% 15% 10%;
+  margin: 3% 5% 3% 5%;
 
   display: grid;
   grid-template-rows: $subs__card--info-height (100% - $subs__card--info-height);
@@ -86,6 +89,8 @@ $subs__photo-width: 7em;
 
 .subs__info--title {
   font-size: $font-size-2;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .subs__extend {
@@ -95,5 +100,17 @@ $subs__photo-width: 7em;
 
   &:hover {
     background-color: $create-btn-color-hover;
+  }
+}
+
+.subs__disfollow {
+  color: black;
+  background-color: $sub__btn-color;
+  @include shadow();
+  height: 2.5em;
+  margin-bottom: 1em;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
   }
 }
