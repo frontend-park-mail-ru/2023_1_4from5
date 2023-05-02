@@ -2075,6 +2075,9 @@ textarea {
 
 #chapter--paid {
   cursor: pointer;
+}
+
+.chapter--active {
   border-left: #009d00 solid 3px;
   color: #009d00;
 }
@@ -2091,8 +2094,8 @@ textarea {
   border-radius: 15px;
   background-color: white;
   text-align: center;
-  padding: 10% 15% 15%;
-  margin: 3%;
+  padding: 10% 10% 15% 10%;
+  margin: 3% 5% 3% 5%;
   display: grid;
   grid-template-rows: 90% 10%;
 }
@@ -2133,6 +2136,8 @@ textarea {
 
 .subs__info--title {
   font-size: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .subs__extend {
@@ -2142,6 +2147,17 @@ textarea {
 }
 .subs__extend:hover {
   background-color: #b3efc2;
+}
+
+.subs__disfollow {
+  color: black;
+  background-color: #dddde0;
+  box-shadow: 5px 5px 5px #b7b7b7;
+  height: 2.5em;
+  margin-bottom: 1em;
+}
+.subs__disfollow:hover {
+  background-color: #ceced3;
 }
 
 .feed {

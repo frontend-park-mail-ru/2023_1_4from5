@@ -2,27 +2,40 @@
     <div class="subscriptions__chapters">
         <p class="chapters__title">Подписки</p>
         <p id="chapter--paid" class="chapter">Платные подписки</p>
-        <p id="chapter--follow" class="chapter inactive">Отслеживается</p>
+        <p id="chapter--follow" class="chapter">Отслеживается</p>
     </div>
 
     <div class="subscriptions__container">
-        {{#each subs}}
-            <div id="{{id}}" class="subs__card">
-                <div class="subs__info--container">
-                    <img id="subs__photo" class="subs__photo" src="../../images/{{creator_photo}}.jpg" alt="">
-                    <h3 id="{{creator}}" class="subs__creator">{{creator_name}}</h3>
+        {{#if isPaid}}
+            {{#each subs}}
+                <div id="{{id}}" class="subs__card">
+                    <div class="subs__info--container">
+                        <img id="subs__photo" class="subs__photo" src="../../images/{{creator_photo}}.jpg" alt="">
+                        <h3 id="{{creator}}" class="subs__creator">{{creator_name}}</h3>
 
-                    <div class="subs__info">
-                        <p class="subs__info--title">{{title}}</p>
-                        <h2 class="month__cost--container">
-                            <p id="month__cost">{{month_cost}}</p>
-                            <p>р/месяц</p>
-                        </h2>
+                        <div class="subs__info">
+                            <p class="subs__info--title">{{title}}</p>
+                            <h2 class="month__cost--container">
+                                <p id="month__cost">{{month_cost}}</p>
+                                <p>р/месяц</p>
+                            </h2>
+                        </div>
                     </div>
-                </div>
 
-                <button id="subs__extend" class="subs__extend">Продлить</button>
-            </div>
-        {{/each}}
+                    <button id="subs__extend" class="subs__extend">Продлить</button>
+                </div>
+            {{/each}}
+        {{else}}
+            {{#each follows}}
+                <div id="{{creator}}" class="subs__card">
+                    <div class="subs__info--container">
+                        <img id="subs__photo" class="subs__photo" src="../../images/{{creator_photo}}.jpg" alt="">
+                        <h3 class="subs__creator">{{creator_name}}</h3>
+                    </div>
+
+                    <button id="subs__disfollow" class="subs__disfollow">Отписаться</button>
+                </div>
+            {{/each}}
+        {{/if}}
     </div>
 </div>

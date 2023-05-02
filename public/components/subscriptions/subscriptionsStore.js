@@ -11,12 +11,16 @@ class SubscriptionsStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_SUBSCRIPTIONS:
-        const req = await request.get('/api/user/subscriptions');
-        const subs = await req.json();
+        const reqSubs = await request.get('/api/user/subscriptions');
+        const subs = await reqSubs.json();
+
+        const reqFollows = await request.get('/api/user/follows');
+        const follows = await reqFollows.json();
+
         const subsObj = {
           subs,
+          follows,
         };
-        console.log(subsObj);
         subscriptions.render(subsObj);
         break;
 

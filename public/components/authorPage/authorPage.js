@@ -225,7 +225,7 @@ class AuthorPage {
     if (unfollowBtn) {
       unfollowBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        Actions.unfollow(unfollowBtn.parentElement.id);
+        Actions.unfollow(unfollowBtn.parentElement.id, 'authorPage');
       });
     }
 
