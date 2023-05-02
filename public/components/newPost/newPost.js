@@ -52,7 +52,7 @@ class NewPost {
             attachPreview.className = 'img-preview';
             attachPreview.id = item.id;
             attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
-            attachPreview.style.display = 'block';
+            // attachPreview.style.display = 'block';
 
             divPreview.append(attachPreview);
             flag = true;
@@ -63,7 +63,7 @@ class NewPost {
             attachPreview.id = item.id;
             attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
             attachPreview.controls = true;
-            attachPreview.style.display = 'block';
+            // attachPreview.style.display = 'block';
 
             divPreview.append(attachPreview);
             flag = true;
@@ -74,7 +74,7 @@ class NewPost {
             attachPreview.id = item.id;
             attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
             attachPreview.controls = true;
-            attachPreview.style.display = 'block';
+            // attachPreview.style.display = 'block';
 
             divPreview.append(attachPreview);
             flag = true;
@@ -89,18 +89,14 @@ class NewPost {
             deleteAttachBtn.addEventListener('click', (event) => {
               event.preventDefault();
               const id = event.target.id.split('#')[1];
-              console.log(id);
               // eslint-disable-next-line max-len
               const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
-              console.log(deletedAttach);
               // this.#config.attachments.split(deletedAttach).join();
               this.#config.attachments.splice(deletedAttach, 1);
-              console.log(this.#config.attachments);
 
               const deletedAttachDOM = document.getElementById(id);
               deletedAttachDOM.remove();
               event.target.remove();
-              console.log(event);
             });
           }
         });
@@ -147,125 +143,17 @@ class NewPost {
 
     const photoInput = document.querySelector('#attach-photo-download');
     photoInput.addEventListener('change', (event) => {
-      event.preventDefault();
-      const files = event.target.files[0];
-
-      const errOutput = document.getElementById('newpost-attachments-error');
-      if (files.size > 5242800) {
-        errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
-        return;
-      }
-
-      errOutput.innerHTML = '';
-      if (this.#config && this.#config.attachments) {
-        this.#config.attachments.push(files);
-      } else {
-        this.#config = {
-          attachments: [files],
-        };
-      }
-
-      const divPreview = document.getElementById('preview');
-      const container = document.createElement('div');
-      container.style.display = 'inline-block';
-      container.className = 'attach-container';
-      // container.style.verticalAlign = 'top';
-
-      const attachPreview = document.createElement('img');
-      const src = URL.createObjectURL(files);
-      attachPreview.className = 'img-preview';
-      attachPreview.src = src;
-      attachPreview.id = files.name;
-      // attachPreview.style.display = 'block';
-
-      const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
-
-      divPreview.append(container);
-      container.append(attachPreview, deleteAttachBtn);
+      this.addAttachListener(event, 'img');
     });
 
     const videoInput = document.querySelector('#attach-video-download');
     videoInput.addEventListener('change', (event) => {
-      event.preventDefault();
-      const files = event.target.files[0];
-
-      const errOutput = document.getElementById('newpost-attachments-error');
-      if (Number(files.size) > 5242800) {
-        errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
-        return;
-      }
-
-      errOutput.innerHTML = '';
-      if (this.#config && this.#config.attachments) {
-        this.#config.attachments.push(files);
-      } else {
-        this.#config = {
-          attachments: [files],
-        };
-      }
-
-      const divPreview = document.getElementById('preview');
-      const container = document.createElement('div');
-      container.style.display = 'inline-block';
-      container.className = 'attach-container';
-
-      const attachPreview = document.createElement('video');
-      const src = URL.createObjectURL(files);
-      attachPreview.className = 'video-preview';
-      attachPreview.src = src;
-      attachPreview.id = files.name;
-      attachPreview.controls = true;
-      // attachPreview.style.display = 'block';
-
-      const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
-
-      divPreview.append(container);
-      container.append(attachPreview, deleteAttachBtn);
-      console.log(this.#config);
-
-      // Actions.downloadAttach(files[0]);
+      this.addAttachListener(event, 'video');
     });
 
     const audioInput = document.querySelector('#attach-music-download');
     audioInput.addEventListener('change', (event) => {
-      event.preventDefault();
-      const files = event.target.files[0];
-
-      const errOutput = document.getElementById('newpost-attachments-error');
-      if (files.size > 5242800) {
-        errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
-        return;
-      }
-
-      errOutput.innerHTML = '';
-      if (this.#config && this.#config.attachments) {
-        this.#config.attachments.push(files);
-      } else {
-        this.#config = {
-          attachments: [files],
-        };
-      }
-
-      const divPreview = document.getElementById('preview');
-      const container = document.createElement('div');
-      container.style.display = 'inline-block';
-      container.className = 'attach-container';
-
-      const attachPreview = document.createElement('audio');
-      const src = URL.createObjectURL(files);
-      attachPreview.className = 'audio-preview';
-      attachPreview.src = src;
-      attachPreview.id = files.name;
-      attachPreview.controls = true;
-      // attachPreview.style.display = 'block';
-
-      const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
-
-      divPreview.append(container);
-      container.append(attachPreview, deleteAttachBtn);
-      console.log(this.#config);
-
-      // Actions.downloadAttach(files[0]);
+      this.addAttachListener(event, 'audio');
     });
   }
 
@@ -312,6 +200,47 @@ class NewPost {
         errorTextOutput,
       });
     });
+  }
+
+  addAttachListener(event, type) {
+    event.preventDefault();
+    const files = event.target.files[0];
+
+    const errOutput = document.getElementById('newpost-attachments-error');
+    if (files.size > 5242800) {
+      errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
+      return;
+    }
+
+    errOutput.innerHTML = '';
+    if (this.#config && this.#config.attachments) {
+      this.#config.attachments.push(files);
+    } else {
+      this.#config = {
+        attachments: [files],
+      };
+    }
+
+    const divPreview = document.getElementById('preview');
+    const container = document.createElement('div');
+    container.style.display = 'inline-block';
+    container.className = 'attach-container';
+    // container.style.verticalAlign = 'top';
+
+    const attachPreview = document.createElement(type);
+    const src = URL.createObjectURL(files);
+    attachPreview.className = `${type}-preview`;
+    attachPreview.src = src;
+    attachPreview.id = files.name;
+    if (type !== 'img') {
+      attachPreview.controls = true;
+    }
+    // attachPreview.style.display = 'block';
+
+    const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
+
+    divPreview.append(container);
+    container.append(attachPreview, deleteAttachBtn);
   }
 
   addAttachDeleteBtn(attachName) {
