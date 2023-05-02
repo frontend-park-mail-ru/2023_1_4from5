@@ -1208,7 +1208,9 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .search__photo {
-  width: 50%;
+  width: 5em;
+  height: 5em;
+  background-size: 5em;
   border-radius: 20em;
 }
 
@@ -2382,7 +2384,9 @@ textarea {
 }
 
 .search__photo {
-  width: 50%;
+  width: 5em;
+  height: 5em;
+  background-size: 5em;
   border-radius: 20em;
 }
 

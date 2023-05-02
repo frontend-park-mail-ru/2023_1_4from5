@@ -44,10 +44,12 @@ $creator__card-offset-bottom: 5em;
   margin-left: 0.2em;
 }
 
-$search__photo-width: 50%;
+$search__photo-width: 5em;
 
 .search__photo {
   width: $search__photo-width;
+  height: $search__photo-width;
+  background-size: $search__photo-width;
   border-radius: 20em;
 }
 
@@ -76,3 +78,4 @@ $tag-color: #009F2D;
 .search__tag--img {
   width: 1.5em;
 }
+
