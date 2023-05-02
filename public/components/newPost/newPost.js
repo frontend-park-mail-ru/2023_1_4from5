@@ -43,6 +43,7 @@ class NewPost {
     if (this.#config) {
       if (this.#config.attachments) {
         const divPreview = document.getElementById('preview');
+        let flag = false;
 
         this.#config.attachments.forEach((item) => {
           if (item.type.startsWith('image')) {
@@ -54,6 +55,7 @@ class NewPost {
             attachPreview.style.display = 'block';
 
             divPreview.append(attachPreview);
+            flag = true;
           } else if (item.type.startsWith('video')) {
             const attachPreview = document.createElement('video');
 
@@ -64,6 +66,7 @@ class NewPost {
             attachPreview.style.display = 'block';
 
             divPreview.append(attachPreview);
+            flag = true;
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
 
@@ -74,29 +77,32 @@ class NewPost {
             attachPreview.style.display = 'block';
 
             divPreview.append(attachPreview);
+            flag = true;
           }
+          if (flag) {
+            const deleteAttachBtn = document.createElement('img');
+            deleteAttachBtn.id = `delete#${item.id}`;
+            deleteAttachBtn.className = 'delete-icon';
+            deleteAttachBtn.src = '../../images/delete.svg';
+            divPreview.append(deleteAttachBtn);
 
-          const deleteAttachBtn = document.createElement('img');
-          deleteAttachBtn.id = `delete_${item.id}`;
-          deleteAttachBtn.className = 'delete-icon';
-          deleteAttachBtn.src = '../../images/delete.svg';
-          divPreview.append(deleteAttachBtn);
+            deleteAttachBtn.addEventListener('click', (event) => {
+              event.preventDefault();
+              const id = event.target.id.split('#')[1];
+              console.log(id);
+              // eslint-disable-next-line max-len
+              const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
+              console.log(deletedAttach);
+              // this.#config.attachments.split(deletedAttach).join();
+              this.#config.attachments.splice(deletedAttach, 1);
+              console.log(this.#config.attachments);
 
-          deleteAttachBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            const id = event.target.id.split('_')[1];
-            console.log(id);
-            const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
-            console.log(deletedAttach);
-            // this.#config.attachments.split(deletedAttach).join();
-            delete this.#config.attachments[deletedAttach];
-            console.log(this.#config.attachments);
-
-            const deletedAttachDOM = document.getElementById(id);
-            deletedAttachDOM.remove();
-            event.target.remove();
-            console.log(event);
-          });
+              const deletedAttachDOM = document.getElementById(id);
+              deletedAttachDOM.remove();
+              event.target.remove();
+              console.log(event);
+            });
+          }
         });
       }
     }
@@ -162,19 +168,17 @@ class NewPost {
       const divPreview = document.getElementById('preview');
       const container = document.createElement('div');
       container.style.display = 'inline-block';
+      container.className = 'attach-container';
       // container.style.verticalAlign = 'top';
 
       const attachPreview = document.createElement('img');
       const src = URL.createObjectURL(files);
       attachPreview.className = 'img-preview';
       attachPreview.src = src;
+      attachPreview.id = files.name;
       // attachPreview.style.display = 'block';
 
-      const deleteAttachBtn = document.createElement('img');
-      deleteAttachBtn.id = `delete-${files.name}`;
-      deleteAttachBtn.className = 'delete-icon';
-      deleteAttachBtn.src = '../../images/delete.svg';
-      deleteAttachBtn.addEventListener()
+      const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
 
       divPreview.append(container);
       container.append(attachPreview, deleteAttachBtn);
@@ -203,18 +207,17 @@ class NewPost {
       const divPreview = document.getElementById('preview');
       const container = document.createElement('div');
       container.style.display = 'inline-block';
+      container.className = 'attach-container';
 
       const attachPreview = document.createElement('video');
       const src = URL.createObjectURL(files);
       attachPreview.className = 'video-preview';
       attachPreview.src = src;
+      attachPreview.id = files.name;
       attachPreview.controls = true;
       // attachPreview.style.display = 'block';
 
-      const deleteAttachBtn = document.createElement('img');
-      deleteAttachBtn.id = `delete-${files.name}`;
-      deleteAttachBtn.className = 'delete-icon';
-      deleteAttachBtn.src = '../../images/delete.svg';
+      const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
 
       divPreview.append(container);
       container.append(attachPreview, deleteAttachBtn);
@@ -246,18 +249,17 @@ class NewPost {
       const divPreview = document.getElementById('preview');
       const container = document.createElement('div');
       container.style.display = 'inline-block';
+      container.className = 'attach-container';
 
       const attachPreview = document.createElement('audio');
       const src = URL.createObjectURL(files);
       attachPreview.className = 'audio-preview';
       attachPreview.src = src;
+      attachPreview.id = files.name;
       attachPreview.controls = true;
       // attachPreview.style.display = 'block';
 
-      const deleteAttachBtn = document.createElement('img');
-      deleteAttachBtn.id = `delete-${files.name}`;
-      deleteAttachBtn.className = 'delete-icon';
-      deleteAttachBtn.src = '../../images/delete.svg';
+      const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
 
       divPreview.append(container);
       container.append(attachPreview, deleteAttachBtn);
@@ -302,7 +304,7 @@ class NewPost {
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
 
-      Actions.updatePost({
+      Actions.updatePost(postId, {
         attachments: this.#config.attachments,
         titleInput,
         textInput,
@@ -310,6 +312,26 @@ class NewPost {
         errorTextOutput,
       });
     });
+  }
+
+  addAttachDeleteBtn(attachName) {
+    const deleteAttachBtn = document.createElement('img');
+    deleteAttachBtn.id = `delete#${attachName}`;
+    deleteAttachBtn.className = 'delete-icon';
+    deleteAttachBtn.src = '../../images/delete.svg';
+
+    deleteAttachBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const name = event.target.id.split('#')[1];
+      const deletedAttach = this.#config.attachments.findIndex((attach) => attach.name === name);
+      // this.#config.attachments.split(deletedAttach).join();
+      this.#config.attachments.splice(deletedAttach, 1);
+
+      const deletedAttachDOM = document.getElementById(name);
+      deletedAttachDOM.remove();
+      event.target.remove();
+    });
+    return deleteAttachBtn;
   }
 }
 
