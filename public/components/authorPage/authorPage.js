@@ -33,27 +33,22 @@ class AuthorPage {
   render() {
     const subs = [];
 
-    if (this.#config.subscriptions) {
-      Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + 4));
-      const config = {};
-      Object.assign(config, this.#config);
-      config.subscriptions = subs;
-
-      const levels = { subs };
-      Object.assign(levels.subs, this.#config.subscriptions);
-
-      this.#parent.innerHTML = '';
-      const newDiv = document.createElement('div');
-      newDiv.id = 'myPageDiv';
-      newDiv.innerHTML = template(config);
-      this.#parent.appendChild(newDiv);
-    } else {
-      this.#parent.innerHTML = '';
-      const newDiv = document.createElement('div');
-      newDiv.id = 'myPageDiv';
-      newDiv.innerHTML = template(this.#config);
-      this.#parent.appendChild(newDiv);
+    if (!this.#config.subscriptions) {
+      this.#config.subscriptions = [];
     }
+    Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + 4));
+    const config = {};
+    Object.assign(config, this.#config);
+    config.subscriptions = subs;
+
+    const levels = { subs };
+    Object.assign(levels.subs, this.#config.subscriptions);
+
+    this.#parent.innerHTML = '';
+    const newDiv = document.createElement('div');
+    newDiv.id = 'myPageDiv';
+    newDiv.innerHTML = template(config);
+    this.#parent.appendChild(newDiv);
 
     if (this.#subsPos > 0) {
       const prevDiv = document.getElementById('arrow--prev');
