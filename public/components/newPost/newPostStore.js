@@ -41,6 +41,9 @@ class NewPostStore {
   }
 
   renderNewPost() {
+    if (newPost.config && newPost.config.attachments) {
+      newPost.config.attachments = [];
+    }
     newPost.render();
     newPost.publish();
   }
@@ -48,6 +51,7 @@ class NewPostStore {
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
+    this.#config.attachments = [];
     post.attachments.forEach((item) => {
       this.#config.attachments.push(item);
     });
@@ -117,8 +121,9 @@ class NewPostStore {
       creator: userStore.getUserState().authorURL,
     };
     const result = await callback(body, action);
-    let deleteStatus;
-    let addStatus;
+    let deleteStatus = true;
+    let addStatus = true;
+    console.log(this.#config.attachments, action.input.attachments);
 
     if (this.#config.attachments) {
       for (const attach of this.#config.attachments) {
@@ -130,7 +135,7 @@ class NewPostStore {
             attach,
             tokenEdit
           );
-          deleteStatus = deleteResult.ok + 1;
+          deleteStatus = true;
           // TODO в будущем сделать обработку ошибок отдельно
         }
       }
@@ -148,10 +153,11 @@ class NewPostStore {
             formData,
             tokenEdit
           );
-          addStatus = addResult.ok + 1;
+          addStatus = true;
         }
       }
     }
+    console.log(result.ok && deleteStatus && addStatus);
     return result.ok && deleteStatus && addStatus;
   }
 }

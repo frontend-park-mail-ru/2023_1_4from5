@@ -5,8 +5,6 @@ import { router } from '../../modules/Router';
 //  более лучшая валидация файлов (обработка 413 и общий размер)
 // TODO сделать режим ожидания загрузки файлов
 
-// TODO удаление аттача
-
 const template = require('./newPost.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -40,100 +38,67 @@ class NewPost {
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
 
-    if (this.#config) {
-      if (this.#config.attachments) {
-        const divPreview = document.getElementById('preview');
-        let flag = false;
+    if (this.#config && this.#config.attachments) {
+      const divPreview = document.getElementById('preview');
+      let flag = false;
 
-        this.#config.attachments.forEach((item) => {
-          if (item.type.startsWith('image')) {
-            const attachPreview = document.createElement('img');
+      this.#config.attachments.forEach((item) => {
+        if (item.type.startsWith('image')) {
+          const attachPreview = document.createElement('img');
 
-            attachPreview.className = 'img-preview';
-            attachPreview.id = item.id;
-            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
-            // attachPreview.style.display = 'block';
+          attachPreview.className = 'img-preview';
+          attachPreview.id = item.id;
+          attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+          // attachPreview.style.display = 'block';
 
-            divPreview.append(attachPreview);
-            flag = true;
-          } else if (item.type.startsWith('video')) {
-            const attachPreview = document.createElement('video');
+          divPreview.append(attachPreview);
+          flag = true;
+        } else if (item.type.startsWith('video')) {
+          const attachPreview = document.createElement('video');
 
-            attachPreview.className = 'video-preview';
-            attachPreview.id = item.id;
-            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
-            attachPreview.controls = true;
-            // attachPreview.style.display = 'block';
+          attachPreview.className = 'video-preview';
+          attachPreview.id = item.id;
+          attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.controls = true;
+          // attachPreview.style.display = 'block';
 
-            divPreview.append(attachPreview);
-            flag = true;
-          } else if (item.type.startsWith('audio')) {
-            const attachPreview = document.createElement('audio');
+          divPreview.append(attachPreview);
+          flag = true;
+        } else if (item.type.startsWith('audio')) {
+          const attachPreview = document.createElement('audio');
 
-            attachPreview.className = 'audio-preview';
-            attachPreview.id = item.id;
-            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
-            attachPreview.controls = true;
-            // attachPreview.style.display = 'block';
+          attachPreview.className = 'audio-preview';
+          attachPreview.id = item.id;
+          attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.controls = true;
+          // attachPreview.style.display = 'block';
 
-            divPreview.append(attachPreview);
-            flag = true;
-          }
-          if (flag) {
-            const deleteAttachBtn = document.createElement('img');
-            deleteAttachBtn.id = `delete#${item.id}`;
-            deleteAttachBtn.className = 'delete-icon';
-            deleteAttachBtn.src = '../../images/delete.svg';
-            divPreview.append(deleteAttachBtn);
+          divPreview.append(attachPreview);
+          flag = true;
+        }
+        if (flag) {
+          const deleteAttachBtn = document.createElement('img');
+          deleteAttachBtn.id = `delete#${item.id}`;
+          deleteAttachBtn.className = 'delete-icon';
+          deleteAttachBtn.src = '../../images/delete.svg';
 
-            deleteAttachBtn.addEventListener('click', (event) => {
-              event.preventDefault();
-              const id = event.target.id.split('#')[1];
-              // eslint-disable-next-line max-len
-              const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
-              // this.#config.attachments.split(deletedAttach).join();
-              this.#config.attachments.splice(deletedAttach, 1);
+          deleteAttachBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const id = event.target.id.split('#')[1];
+            // eslint-disable-next-line max-len
+            const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
+            // this.#config.attachments.split(deletedAttach).join();
+            this.#config.attachments.splice(deletedAttach, 1);
 
-              const deletedAttachDOM = document.getElementById(id);
-              deletedAttachDOM.remove();
-              event.target.remove();
-            });
-          }
-        });
-      }
+            const deletedAttachDOM = document.getElementById(id);
+            deletedAttachDOM.remove();
+            event.target.remove();
+          });
+
+          divPreview.append(deleteAttachBtn);
+        }
+      });
     }
-    // if (serveAttachments) {
-    //   this.config = [...serveAttachments, ...this.config];
-    // }
-    // if (this.config) {
-    //   if (this.config.attachments.length > 0) {
-    //     const divPreview = document.getElementById('preview');
-    //     for (const attach of this.config.attachments) {
-    //       let src = URL.createObjectURL(attach);
-    //       if (attach.type.startsWith('image')) {
-    //         const attachPreview = document.createElement('img');
-    //         attachPreview.className = 'img-preview';
-    //         attachPreview.src = src;
-    //         attachPreview.style.display = 'block';
-    //         divPreview.append(attachPreview);
-    //       } else if (attach.type.startsWith('video')) {
-    //         const attachPreview = document.createElement('video');
-    //         attachPreview.className = 'video-preview';
-    //         attachPreview.src = src;
-    //         attachPreview.controls = true;
-    //         attachPreview.style.display = 'block';
-    //         divPreview.append(attachPreview);
-    //       } else if (attach.type.startsWith('audio')) {
-    //         const attachPreview = document.createElement('audio');
-    //         attachPreview.className = 'audio-preview';
-    //         attachPreview.src = src;
-    //         attachPreview.controls = true;
-    //         attachPreview.style.display = 'block';
-    //         divPreview.append(attachPreview);
-    //       }
-    //     }
-    //   }
-    // }
 
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
@@ -262,18 +227,28 @@ class NewPost {
     });
     return deleteAttachBtn;
   }
+  func () {
+    const deleteAttachBtn = document.createElement('img');
+    deleteAttachBtn.id = `delete#${item.id}`;
+    deleteAttachBtn.className = 'delete-icon';
+    deleteAttachBtn.src = '../../images/delete.svg';
+
+    deleteAttachBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const id = event.target.id.split('#')[1];
+      // eslint-disable-next-line max-len
+      const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
+      // this.#config.attachments.split(deletedAttach).join();
+      this.#config.attachments.splice(deletedAttach, 1);
+
+      const deletedAttachDOM = document.getElementById(id);
+      deletedAttachDOM.remove();
+      event.target.remove();
+    });
+  }
 }
 
 export const newPost = new NewPost(contentElement);
 
 // TODO чтобы можно было вставлять аттачи прямо в input поле, нужно заменить textarea на следующее:
 //  <div class="newpost-text-input-container" contenteditable="true">
-
-// TODO указать, какие именно расширения доступны и правильно подставлять их (из запросов брать)
-
-// {{#if (isVideo file.type)}}
-// <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
-// {{/if}}
-//   {{#if (isAudio file.type)}}
-//   <audio id="audio" src="../../images/music_test.mp3" controls></audio>
-//   {{/if}}

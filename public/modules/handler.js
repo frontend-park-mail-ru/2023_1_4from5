@@ -1,5 +1,3 @@
-import { URLS } from './Notifier';
-
 /**
  * function of click handler
  * @param {MouseEvent} event - event
