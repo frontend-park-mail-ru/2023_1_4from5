@@ -24,14 +24,26 @@ class NewPostStore {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
         this.sendPost(action, async (body) => {
+          const formData = new FormData();
+
+          for (const key in body) {
+            if (key !== 'subscriptions') {
+              formData.append(`${key}`, body[key]);
+            } else {
+              for (const sub in body[key]) {
+                formData.append('subscriptions', body[key][sub]);
+              }
+            }
+          }
           const tokenCreate = await request.getHeader('/api/post/create');
-          return request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
+          return request.postMultipart('/api/post/create', formData, tokenCreate);
         });
         break;
 
       case ActionTypes.UPDATE_POST:
         this.sendPost(action, async (body, action) => {
           const postId = action.postId;
+          body.available_subscriptions = body.subscriptions;
           const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
           return request.put(`/api/post/edit/${postId}`, body, tokenEdit);
         });
@@ -97,15 +109,12 @@ class NewPostStore {
         text: createText,
         creator: userStore.getUserState().authorURL,
         attachments: action.input.attachments,
-        // subscriptions: action.input.availableSubscriptions,
+        subscriptions: action.input.availableSubscriptions,
       };
-      console.log(body, action);
       const result = await callback(body, action);
-      console.log(result);
       if (result.ok) {
         router.go(URLS.myPage);
       } else {
-        console.log('ERROR');
         errorTextOutput.innerHTML = '';
         errorTextOutput.innerHTML = 'Введённые данные некорректны';
         action.input.titleInput.style.backgroundColor = color.error;

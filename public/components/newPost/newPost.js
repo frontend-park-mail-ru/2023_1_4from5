@@ -1,7 +1,7 @@
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
-import * as events from 'events';
 import { newPostStore } from './newPostStore';
+import { subLevels } from './levels';
 
 const template = require('./newPost.handlebars');
 
@@ -107,39 +107,28 @@ class NewPost {
 
     const levelAll = document.getElementById('switch__level--all');
     const levelSubsOnly = document.getElementById('switch__level--subs-only');
+
     levelAll.addEventListener('click', (event) => {
       event.preventDefault();
       this.#switch.all = true;
       this.#switch.subsOnly = false;
-      newPostStore.renderNewPost();
+      const imgLevelAll = levelAll.querySelector('#switch__img--all');
+      imgLevelAll.src = '../../images/radio-active.svg';
+      const imgLevelSubOnly = levelSubsOnly.querySelector('#switch__img--subs-only');
+      imgLevelSubOnly.src = '../../images/radio-inactive.svg';
+      subLevels.remove();
     });
 
     levelSubsOnly.addEventListener('click', (event) => {
       event.preventDefault();
       this.#switch.all = false;
       this.#switch.subsOnly = true;
-      newPostStore.renderNewPost();
+      const imgLevelAll = levelAll.querySelector('#switch__img--all');
+      imgLevelAll.src = '../../images/radio-inactive.svg';
+      const imgLevelSubOnly = levelSubsOnly.querySelector('#switch__img--subs-only');
+      imgLevelSubOnly.src = '../../images/radio-active.svg';
+      subLevels.render(levels);
     });
-
-    const subs = document.querySelectorAll('.sub__level');
-    if (subs) {
-      for (let index = 0; index < subs.length; index++) {
-        const sub = subs[index];
-        sub.addEventListener('click', (event) => {
-          event.preventDefault();
-          const radio = sub.querySelector('#sub__level--radio');
-          if (radio.classList.contains('sub__level--inactive')) {
-            radio.classList.remove('sub__level--inactive');
-            radio.classList.add('sub__level--active');
-            radio.src = '../../images/radio-active.svg';
-          } else if (radio.classList.contains('sub__level--active')) {
-            radio.classList.remove('sub__level--active');
-            radio.classList.add('sub__level--inactive');
-            radio.src = '../../images/radio-inactive.svg';
-          }
-        });
-      }
-    }
   }
 
   publish() {

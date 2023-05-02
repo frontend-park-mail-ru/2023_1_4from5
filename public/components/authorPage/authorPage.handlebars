@@ -170,7 +170,12 @@
                             <div class="post__privacy">
                                 <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
                                 {{#if subscriptions}}
-                                    Только для подписчиков
+                                    С подпиской:
+                                    <div class="post__subs">
+                                        {{#each subscriptions}}
+                                            <p>{{title}}</p>
+                                        {{/each}}
+                                    </div>
                                 {{else}}
                                     Открыт для всех
                                 {{/if}}

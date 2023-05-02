@@ -32,7 +32,6 @@ class AuthorPage {
 
   render() {
     const subs = [];
-
     if (!this.#config.subscriptions) {
       this.#config.subscriptions = [];
     }
@@ -40,9 +39,6 @@ class AuthorPage {
     const config = {};
     Object.assign(config, this.#config);
     config.subscriptions = subs;
-
-    const levels = { subs };
-    Object.assign(levels.subs, this.#config.subscriptions);
 
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');

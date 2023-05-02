@@ -50,7 +50,6 @@ export function notifier(path, data, additionalUrl) {
       break;
 
     case `${URLS.editPost}/${additionalUrl}`:
-      console.log('update router')
       newPostStore.renderUpdatingPost(additionalUrl);
       break;
 
