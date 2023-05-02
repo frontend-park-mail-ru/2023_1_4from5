@@ -1,5 +1,7 @@
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
+import * as events from 'events';
+import { newPostStore } from './newPostStore';
 
 const template = require('./newPost.handlebars');
 
@@ -9,6 +11,15 @@ class NewPost {
   #parent;
 
   #config;
+
+  #levels;
+
+  #switch = {
+    all: true,
+    subsOnly: false,
+    subsOrPaid: false,
+    paidOnly: false,
+  };
 
   constructor(parent) {
     this.#parent = parent;
@@ -26,11 +37,13 @@ class NewPost {
     return this.#parent;
   }
 
-  render(serveAttachments = '') {
+  render(levels, serveAttachments = '') {
+    levels.switch = this.#switch;
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
-    newDiv.innerHTML = template(this.#config);
+    newDiv.innerHTML = template(levels);
     this.#parent.appendChild(newDiv);
     if (serveAttachments) {
       this.config = [...serveAttachments, ...this.config];
@@ -91,6 +104,42 @@ class NewPost {
       const files = event.target.files;
       Actions.downloadAttach(files[0]);
     });
+
+    const levelAll = document.getElementById('switch__level--all');
+    const levelSubsOnly = document.getElementById('switch__level--subs-only');
+    levelAll.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.#switch.all = true;
+      this.#switch.subsOnly = false;
+      newPostStore.renderNewPost();
+    });
+
+    levelSubsOnly.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.#switch.all = false;
+      this.#switch.subsOnly = true;
+      newPostStore.renderNewPost();
+    });
+
+    const subs = document.querySelectorAll('.sub__level');
+    if (subs) {
+      for (let index = 0; index < subs.length; index++) {
+        const sub = subs[index];
+        sub.addEventListener('click', (event) => {
+          event.preventDefault();
+          const radio = sub.querySelector('#sub__level--radio');
+          if (radio.classList.contains('sub__level--inactive')) {
+            radio.classList.remove('sub__level--inactive');
+            radio.classList.add('sub__level--active');
+            radio.src = '../../images/radio-active.svg';
+          } else if (radio.classList.contains('sub__level--active')) {
+            radio.classList.remove('sub__level--active');
+            radio.classList.add('sub__level--inactive');
+            radio.src = '../../images/radio-inactive.svg';
+          }
+        });
+      }
+    }
   }
 
   publish() {
@@ -100,9 +149,22 @@ class NewPost {
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
+    const availableSubscriptions = [];
+
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      // e.stopPropagation();
+
+      const subs = document.querySelectorAll('.sub__level');
+      if (subs) {
+        for (let index = 0; index < subs.length; index++) {
+          const sub = subs[index];
+          const radio = sub.querySelector('#sub__level--radio');
+          if (radio.classList.contains('sub__level--active')) {
+            availableSubscriptions.push(sub.id);
+          }
+        }
+      }
+
       if (this.config) {
         console.log('ACTION WITN ATTACH');
         Actions.createPost({
@@ -111,6 +173,7 @@ class NewPost {
           textInput,
           errorTitleOutput,
           errorTextOutput,
+          availableSubscriptions,
         });
       } else {
         console.log('ACTION WITNOUT ATTACH');
@@ -119,6 +182,7 @@ class NewPost {
           textInput,
           errorTitleOutput,
           errorTextOutput,
+          availableSubscriptions,
         });
       }
     });
@@ -137,17 +201,32 @@ class NewPost {
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
+    const availableSubscriptions = [];
+
     titleInput.value = title;
     textInput.textContent = text;
     postBtn.textContent = 'готово';
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
+
+      const subs = document.querySelectorAll('.sub__level');
+      if (subs) {
+        for (let index = 0; index < subs.length; index++) {
+          const sub = subs[index];
+          const radio = sub.querySelector('#sub__level--radio');
+          if (radio.classList.contains('sub__level--active')) {
+            availableSubscriptions.push(sub.id);
+          }
+        }
+      }
+
       Actions.updatePost(postId, {
         titleInput,
         textInput,
         errorTitleOutput,
         errorTextOutput,
+        availableSubscriptions,
       });
     });
   }

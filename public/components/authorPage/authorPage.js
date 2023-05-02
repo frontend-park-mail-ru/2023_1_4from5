@@ -37,6 +37,9 @@ class AuthorPage {
     Object.assign(config, this.#config);
     config.subscriptions = subs;
 
+    const levels = { subs };
+    Object.assign(levels.subs, this.#config.subscriptions);
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
@@ -131,6 +134,18 @@ class AuthorPage {
       });
     }
 
+    const updatePostBtns = document.querySelectorAll('#edit__post');
+    for (let index = 0; index < updatePostBtns.length; index++) {
+      const button = updatePostBtns[index];
+      button.addEventListener('click', this.updateHandler.bind(this));
+    }
+
+    const deletePostBtns = document.querySelectorAll('#delete__post');
+    for (let index = 0; index < deletePostBtns.length; index++) {
+      const button = deletePostBtns[index];
+      button.addEventListener('click', this.deleteHandler);
+    }
+
     const getSubBtns = document.querySelectorAll('#get__sub');
     if (getSubBtns) {
       for (let index = 0; index < getSubBtns.length; index++) {
@@ -143,18 +158,6 @@ class AuthorPage {
           getSubscription.render(subId, price, creatorId);
         });
       }
-    }
-
-    const deletePostBtns = document.querySelectorAll('#delete__post');
-    for (let index = 0; index < deletePostBtns.length; index++) {
-      const button = deletePostBtns[index];
-      button.addEventListener('click', this.deleteHandler);
-    }
-
-    const updatePostBtns = document.querySelectorAll('#edit__post');
-    for (let index = 0; index < updatePostBtns.length; index++) {
-      const button = updatePostBtns[index];
-      button.addEventListener('click', this.updateHandler.bind(this));
     }
 
     const likeIcons = document.querySelectorAll('.icon--like');

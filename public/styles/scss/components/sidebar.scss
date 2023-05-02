@@ -11,7 +11,7 @@ $find-background-pos: 2%;
 $sidebar-pt: 0.5%;
 $sidebar-font-size: ($font-size * 1.3);
 
-$sidebar-href-offset: 4%;
+$sidebar-href-offset: 3%;
 
 $grid-info-width: 10%;
 $grid-authors-width: 45%;
@@ -97,8 +97,23 @@ $sidebar-about-offset: 20%;
   padding-left: 4px;
 }
 
-.sidebar__feed, .sidebar__subs {
+.sidebar__feed {
   position: relative;
+  width: fit-content;
+  top: -0.5em;
+  padding-right: $sidebar-href-offset;
+  border-right: $row-color solid $vertical-row-width;
+
+  a {
+    position: relative;
+    top: 0.05em;
+    left: 1em;
+  }
+}
+
+.sidebar__subs {
+  position: relative;
+  width: fit-content;
   top: -0.5em;
   padding-right: $sidebar-href-offset;
   margin-right: 1em;
