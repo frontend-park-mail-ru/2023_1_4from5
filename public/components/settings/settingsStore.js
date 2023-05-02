@@ -109,12 +109,10 @@ class SettingsStore {
 
   async deletePhoto(photoId) {
     console.log(photoId);
-    const token = await request.getHeader('/api/user/deleteProfilePhoto');
+    const token = await request.getHeader(`/api/user/deleteProfilePhoto${photoId}`);
     await request.delete(`/api/user/deleteProfilePhoto/${photoId}`, token);
-    const user = userStore.getUserState();
-    user.profilePhoto = '00000000-0000-0000-0000-000000000000';
+    await userStore.getUser();
     this.renderSettings();
-    Actions.renderSideBar(user);
   }
 }
 
