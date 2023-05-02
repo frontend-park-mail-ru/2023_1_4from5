@@ -23,7 +23,8 @@ class NewPostStore {
       case ActionTypes.CREATE_POST:
         this.sendPost(action, async (body) => {
           const tokenCreate = await request.getHeader('/api/post/create');
-          return request.post('/api/post/create', body, tokenCreate, 'multipart/form-data');
+          console.log(body);
+          return request.postMultipart('/api/post/create', body, tokenCreate);
         });
         break;
 
@@ -33,10 +34,6 @@ class NewPostStore {
           const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
           return request.put(`/api/post/edit/${postId}`, body, tokenEdit);
         });
-        break;
-
-      case ActionTypes.DOWNLOAD_ATTACH:
-        this.addAttach(action.file);
         break;
 
       default:
@@ -53,6 +50,7 @@ class NewPostStore {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
     console.log(post);
+    newPost.config.attachments = post.attachments;
     newPost.render();
     newPost.update(postId, post.title, post.text);
   }
@@ -79,43 +77,25 @@ class NewPostStore {
       errorTextOutput.innerHTML = errText;
       action.input.textInput.style.backgroundColor = color.error;
     } else {
-      const body = {
-        title: createTitle,
-        text: createText,
-        creator: userStore.getUserState().authorURL,
-        attachments: action.input.attachments
-      };
-      console.log(body, action);
-      const result = await callback(body, action);
-      console.log(result);
+      const formData = new FormData();
+      formData.append('title', createTitle);
+      formData.append('text', createText);
+      formData.append('creator', userStore.getUserState().authorURL);
+      if (action.input.attachments) {
+        action.input.attachments.forEach((attach) => formData.append('attachments', attach));
+      }
+
+      const result = await callback(formData, action);
       if (result.ok) {
-        console.log('OK');
+        newPost.config.attachments = [];
         router.popstate();
       } else {
-        console.log('ERROR');
         errorTextOutput.innerHTML = '';
         errorTextOutput.innerHTML = 'Введённые данные некорректны';
         action.input.titleInput.style.backgroundColor = color.error;
         action.input.textInput.style.backgroundColor = color.error;
       }
     }
-  }
-
-  addAttach(file) {
-    // if (file.type.startsWith('image')) {
-    //   this.config.attachments.img.push(file);
-    // } else if (file.type.startsWith('video')) {
-    //   this.config.attachments.video.push(file);
-    // } else if (file.type.startsWith('audio')) {
-    //   this.config.attachments.audio.push(file);
-    // }
-
-    this.config.attachments.push(file);
-    console.log('store add attach', file);
-
-    newPost.config = this.config;
-    newPost.render();
-    console.log(this.config);
   }
 }
 

@@ -31,7 +31,6 @@ class AuthorPage {
   }
 
   render() {
-
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
@@ -57,6 +56,36 @@ class AuthorPage {
     //     console.log(this.#subsPos);
     //   }
     // });
+    console.log(this.#config);
+    this.#config.posts.forEach((post) => {
+      if (post.attachments) {
+        console.log('post', post.attachments);
+        const divAttaches = document.getElementById(`attachments-${post.id}`);
+        post.attachments.forEach((item) => {
+          if (item.type.startsWith('image')) {
+            const attachPreview = document.createElement('img');
+            attachPreview.className = 'img-preview';
+            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.style.display = 'block';
+            divAttaches.append(attachPreview);
+          } else if (item.type.startsWith('video')) {
+            const attachPreview = document.createElement('video');
+            attachPreview.className = 'video-preview';
+            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.controls = true;
+            attachPreview.style.display = 'block';
+            divAttaches.append(attachPreview);
+          } else if (item.type.startsWith('audio')) {
+            const attachPreview = document.createElement('audio');
+            attachPreview.className = 'audio-preview';
+            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.controls = true;
+            attachPreview.style.display = 'block';
+            divAttaches.append(attachPreview);
+          }
+        });
+      }
+    });
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
@@ -245,3 +274,18 @@ class AuthorPage {
 }
 
 export const authorPage = new AuthorPage(contentElement);
+
+// кусок из hbs с аттачами, которые разделены по типам:
+// <!--TOD проверить, норм ли отображается-->
+// {{#if attachments}}
+// {{#each attachments.img}}
+// <!-- TOD попробовать тэг <{{id}}>-->
+// <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
+//   {{/each}}
+//   {{#each attachments.video}}
+//     <audio id="audio" src="../../images/music_test.mp3" controls></audio>
+//   {{/each}}
+//   {{#each attachments.audio}}
+//     <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
+//   {{/each}}
+//   {{/if}}

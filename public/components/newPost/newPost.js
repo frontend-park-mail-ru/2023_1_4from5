@@ -1,6 +1,12 @@
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 
+// TODO (сделал минимальную валидацию на каждый файл < 5 Мб)
+//  более лучшая валидация файлов (обработка 413 и общий размер)
+// TODO сделать режим ожидания загрузки файлов
+
+// TODO удаление аттача
+
 const template = require('./newPost.handlebars');
 
 const contentElement = document.querySelector('main');
@@ -12,6 +18,7 @@ class NewPost {
 
   constructor(parent) {
     this.#parent = parent;
+    this.#config = {};
   }
 
   get config() {
@@ -26,44 +33,105 @@ class NewPost {
     return this.#parent;
   }
 
-  render(serveAttachments = '') {
+  render() {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
     newDiv.innerHTML = template(this.#config);
     this.#parent.appendChild(newDiv);
-    if (serveAttachments) {
-      this.config = [...serveAttachments, ...this.config];
-    }
-    if (this.config) {
-      if (this.config.attachments.length > 0) {
+
+    if (this.#config) {
+      if (this.#config.attachments) {
         const divPreview = document.getElementById('preview');
-        for (const attach of this.config.attachments) {
-          let src = URL.createObjectURL(attach);
-          if (attach.type.startsWith('image')) {
+
+        this.#config.attachments.forEach((item) => {
+          if (item.type.startsWith('image')) {
             const attachPreview = document.createElement('img');
+
             attachPreview.className = 'img-preview';
-            attachPreview.src = src;
+            attachPreview.id = item.id;
+            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
             attachPreview.style.display = 'block';
+
             divPreview.append(attachPreview);
-          } else if (attach.type.startsWith('video')) {
+          } else if (item.type.startsWith('video')) {
             const attachPreview = document.createElement('video');
+
             attachPreview.className = 'video-preview';
-            attachPreview.src = src;
+            attachPreview.id = item.id;
+            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
+
             divPreview.append(attachPreview);
-          } else if (attach.type.startsWith('audio')) {
+          } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
+
             attachPreview.className = 'audio-preview';
-            attachPreview.src = src;
+            attachPreview.id = item.id;
+            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
+
             divPreview.append(attachPreview);
           }
-        }
+
+          const deleteAttachBtn = document.createElement('img');
+          deleteAttachBtn.id = `delete_${item.id}`;
+          deleteAttachBtn.className = 'delete-icon';
+          deleteAttachBtn.src = '../../images/delete.svg';
+          divPreview.append(deleteAttachBtn);
+
+          deleteAttachBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const id = event.target.id.split('_')[1];
+            console.log(id);
+            const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
+            console.log(deletedAttach);
+            // this.#config.attachments.split(deletedAttach).join();
+            delete this.#config.attachments[deletedAttach];
+            console.log(this.#config.attachments);
+
+            const deletedAttachDOM = document.getElementById(id);
+            deletedAttachDOM.remove();
+            event.target.remove();
+            console.log(event);
+          });
+        });
       }
     }
+    // if (serveAttachments) {
+    //   this.config = [...serveAttachments, ...this.config];
+    // }
+    // if (this.config) {
+    //   if (this.config.attachments.length > 0) {
+    //     const divPreview = document.getElementById('preview');
+    //     for (const attach of this.config.attachments) {
+    //       let src = URL.createObjectURL(attach);
+    //       if (attach.type.startsWith('image')) {
+    //         const attachPreview = document.createElement('img');
+    //         attachPreview.className = 'img-preview';
+    //         attachPreview.src = src;
+    //         attachPreview.style.display = 'block';
+    //         divPreview.append(attachPreview);
+    //       } else if (attach.type.startsWith('video')) {
+    //         const attachPreview = document.createElement('video');
+    //         attachPreview.className = 'video-preview';
+    //         attachPreview.src = src;
+    //         attachPreview.controls = true;
+    //         attachPreview.style.display = 'block';
+    //         divPreview.append(attachPreview);
+    //       } else if (attach.type.startsWith('audio')) {
+    //         const attachPreview = document.createElement('audio');
+    //         attachPreview.className = 'audio-preview';
+    //         attachPreview.src = src;
+    //         attachPreview.controls = true;
+    //         attachPreview.style.display = 'block';
+    //         divPreview.append(attachPreview);
+    //       }
+    //     }
+    //   }
+    // }
 
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
@@ -74,22 +142,128 @@ class NewPost {
     const photoInput = document.querySelector('#attach-photo-download');
     photoInput.addEventListener('change', (event) => {
       event.preventDefault();
-      const files = event.target.files;
-      Actions.downloadAttach(files[0]);
+      const files = event.target.files[0];
+
+      const errOutput = document.getElementById('newpost-attachments-error');
+      if (files.size > 5242800) {
+        errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
+        return;
+      }
+
+      errOutput.innerHTML = '';
+      if (this.#config && this.#config.attachments) {
+        this.#config.attachments.push(files);
+      } else {
+        this.#config = {
+          attachments: [files],
+        };
+      }
+
+      const divPreview = document.getElementById('preview');
+      const container = document.createElement('div');
+      container.style.display = 'inline-block';
+      // container.style.verticalAlign = 'top';
+
+      const attachPreview = document.createElement('img');
+      const src = URL.createObjectURL(files);
+      attachPreview.className = 'img-preview';
+      attachPreview.src = src;
+      // attachPreview.style.display = 'block';
+
+      const deleteAttachBtn = document.createElement('img');
+      deleteAttachBtn.id = `delete-${files.name}`;
+      deleteAttachBtn.className = 'delete-icon';
+      deleteAttachBtn.src = '../../images/delete.svg';
+      deleteAttachBtn.addEventListener()
+
+      divPreview.append(container);
+      container.append(attachPreview, deleteAttachBtn);
     });
 
     const videoInput = document.querySelector('#attach-video-download');
     videoInput.addEventListener('change', (event) => {
       event.preventDefault();
-      const files = event.target.files;
-      Actions.downloadAttach(files[0]);
+      const files = event.target.files[0];
+
+      const errOutput = document.getElementById('newpost-attachments-error');
+      if (Number(files.size) > 5242800) {
+        errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
+        return;
+      }
+
+      errOutput.innerHTML = '';
+      if (this.#config && this.#config.attachments) {
+        this.#config.attachments.push(files);
+      } else {
+        this.#config = {
+          attachments: [files],
+        };
+      }
+
+      const divPreview = document.getElementById('preview');
+      const container = document.createElement('div');
+      container.style.display = 'inline-block';
+
+      const attachPreview = document.createElement('video');
+      const src = URL.createObjectURL(files);
+      attachPreview.className = 'video-preview';
+      attachPreview.src = src;
+      attachPreview.controls = true;
+      // attachPreview.style.display = 'block';
+
+      const deleteAttachBtn = document.createElement('img');
+      deleteAttachBtn.id = `delete-${files.name}`;
+      deleteAttachBtn.className = 'delete-icon';
+      deleteAttachBtn.src = '../../images/delete.svg';
+
+      divPreview.append(container);
+      container.append(attachPreview, deleteAttachBtn);
+      console.log(this.#config);
+
+      // Actions.downloadAttach(files[0]);
     });
 
     const audioInput = document.querySelector('#attach-music-download');
     audioInput.addEventListener('change', (event) => {
       event.preventDefault();
-      const files = event.target.files;
-      Actions.downloadAttach(files[0]);
+      const files = event.target.files[0];
+
+      const errOutput = document.getElementById('newpost-attachments-error');
+      if (files.size > 5242800) {
+        errOutput.innerHTML = 'Размер файла превышает допустимый предел и не может быть сохранен';
+        return;
+      }
+
+      errOutput.innerHTML = '';
+      if (this.#config && this.#config.attachments) {
+        this.#config.attachments.push(files);
+      } else {
+        this.#config = {
+          attachments: [files],
+        };
+      }
+
+      const divPreview = document.getElementById('preview');
+      const container = document.createElement('div');
+      container.style.display = 'inline-block';
+
+      const attachPreview = document.createElement('audio');
+      const src = URL.createObjectURL(files);
+      attachPreview.className = 'audio-preview';
+      attachPreview.src = src;
+      attachPreview.controls = true;
+      // attachPreview.style.display = 'block';
+
+      const deleteAttachBtn = document.createElement('img');
+      deleteAttachBtn.id = `delete-${files.name}`;
+      deleteAttachBtn.className = 'delete-icon';
+      deleteAttachBtn.src = '../../images/delete.svg';
+
+      divPreview.append(container);
+      container.append(attachPreview, deleteAttachBtn);
+      console.log(this.#config);
+
+      // Actions.downloadAttach(files[0]);
     });
   }
 
@@ -103,30 +277,14 @@ class NewPost {
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
       // e.stopPropagation();
-      if (this.config) {
-        console.log('ACTION WITN ATTACH');
-        Actions.createPost({
-          attachments: this.config.attachments,
-          titleInput,
-          textInput,
-          errorTitleOutput,
-          errorTextOutput,
-        });
-      } else {
-        console.log('ACTION WITNOUT ATTACH');
-        Actions.createPost({
-          titleInput,
-          textInput,
-          errorTitleOutput,
-          errorTextOutput,
-        });
-      }
-    });
 
-    const form = document.getElementById('create-post');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      console.log('submit');
+      Actions.createPost({
+        attachments: this.#config.attachments,
+        titleInput,
+        textInput,
+        errorTitleOutput,
+        errorTextOutput,
+      });
     });
   }
 
@@ -139,11 +297,13 @@ class NewPost {
 
     titleInput.value = title;
     textInput.textContent = text;
-    postBtn.textContent = 'готово';
+    postBtn.textContent = 'Готово';
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      Actions.updatePost(postId, {
+
+      Actions.updatePost({
+        attachments: this.#config.attachments,
         titleInput,
         textInput,
         errorTitleOutput,
