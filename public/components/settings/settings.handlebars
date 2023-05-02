@@ -36,12 +36,16 @@
             <div class="change__res change-success" id="change-success-name"></div>
             <button class="settings__btn" id="settings__btn">Сохранить</button>
         </div>
+        <!------------------------------------------------------------------------------------------------------------->
+        <div id="{{profilePhoto}}" class="settings__photo">
+            <div class="settings__photo--btns">
+                <label class="photo__load--label">
+                    <input id="photo-upload" type="file" class="upload"/>
+                    <span class="photo__load--btn">Выбрать фото</span>
+                </label>
+                <button id="settings__delete--btn" class="settings__delete--btn">Удалить фото</button>
+            </div>
 
-        <div class="settings__photo">
-            <label class="photo__load--label">
-                <input id="photo-upload" type="file" class="upload"/>
-                <span class="photo__load--btn">Выбрать фото</span>
-            </label>
             <img id="user-photo" src="../../images/{{profilePhoto}}.jpg" alt="">
         </div>
     </div>
