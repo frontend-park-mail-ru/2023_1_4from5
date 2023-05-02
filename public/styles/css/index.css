@@ -1061,7 +1061,7 @@ p, h1, h2, h3, h4, h5 {
   opacity: 0;
 }
 .photo--hover:hover {
-  opacity: 0.5;
+  opacity: 60%;
 }
 
 .photo__img {
@@ -1104,7 +1104,7 @@ p, h1, h2, h3, h4, h5 {
 }
 #author__header--hover:hover {
   background-color: gray;
-  opacity: 50%;
+  opacity: 60%;
 }
 
 .cover__title {
@@ -1129,8 +1129,8 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .creatorphoto__load--label {
+  cursor: pointer;
   position: absolute;
-  z-index: 10;
   height: 100%;
   width: 100%;
 }
@@ -1142,6 +1142,22 @@ p, h1, h2, h3, h4, h5 {
   z-index: 5;
   top: 0;
   border-radius: 2em;
+}
+
+#delete__creator--photo {
+  cursor: pointer;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+#delete__creator--cover {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  top: 10%;
+  right: 2%;
+  width: 2em;
 }
 
 .search__container {

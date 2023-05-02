@@ -212,14 +212,14 @@ class AuthorPageStore {
 
   async creatorPhotoDelete(photoId) {
     console.log(photoId);
-    const token = await request.getHeader('/api/creator/deleteProfilePhoto');
+    const token = await request.getHeader(`/api/creator/deleteProfilePhoto/${photoId}`);
     await request.delete(`/api/creator/deleteProfilePhoto/${photoId}`, token);
     await this.renderMyPage();
   }
 
   async creatorCoverDelete(coverId) {
     console.log(coverId);
-    const token = await request.getHeader('/api/creator/deleteCoverPhoto');
+    const token = await request.getHeader(`/api/creator/deleteCoverPhoto/${coverId}`);
     await request.delete(`/api/creator/deleteCoverPhoto/${coverId}`, token);
     await this.renderMyPage();
   }

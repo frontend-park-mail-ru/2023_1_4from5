@@ -28,7 +28,7 @@ $author__photo--left: 5%;
   opacity: 0;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 60%;
   }
 }
 
@@ -72,7 +72,7 @@ $author__photo--left: 5%;
 
   &:hover {
     background-color: gray;
-    opacity: 50%;
+    opacity: 60%;
   }
 }
 
@@ -100,8 +100,8 @@ $author__service--width: 30%;
 }
 
 .creatorphoto__load--label {
+  @include clickable();
   position: absolute;
-  z-index: 10;
   height: 100%;
   width: 100%;
 }
@@ -113,4 +113,20 @@ $author__service--width: 30%;
   z-index: 5;
   top: 0;
   border-radius: $block-border-radius;
+}
+
+#delete__creator--photo {
+  @include clickable();
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+#delete__creator--cover {
+  @include clickable();
+  position: absolute;
+  z-index: $content-z-index;
+  top: 10%;
+  right: 2%;
+  width: 2em;
 }
