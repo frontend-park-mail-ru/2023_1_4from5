@@ -42,7 +42,6 @@ class NewPost {
     return this.#parent;
   }
 
-
   render(levels, serveAttachments = '') {
     levels.switch = this.#switch;
 
@@ -83,7 +82,8 @@ class NewPost {
 
           attachPreview.className = 'audio-preview';
           attachPreview.id = item.id;
-          attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+          // attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.src = `../../images/${item.id}.mp3`;
           attachPreview.controls = true;
           // attachPreview.style.display = 'block';
 
@@ -184,34 +184,13 @@ class NewPost {
         }
       }
 
-      if (this.config) {
-        console.log('ACTION WITN ATTACH');
-        Actions.createPost({
-          attachments: this.config.attachments,
-          titleInput,
-          textInput,
-          errorTitleOutput,
-          errorTextOutput,
-          availableSubscriptions,
-        });
-      } else {
-        console.log('ACTION WITNOUT ATTACH');
-        Actions.createPost({
-          titleInput,
-          textInput,
-          errorTitleOutput,
-          errorTextOutput,
-          availableSubscriptions,
-        });
-      }
-    });
-
       Actions.createPost({
         attachments: this.#config.attachments,
         titleInput,
         textInput,
         errorTitleOutput,
         errorTextOutput,
+        availableSubscriptions,
       });
     });
   }
@@ -242,7 +221,6 @@ class NewPost {
           }
         }
       }
-
 
       Actions.updatePost(postId, {
         attachments: this.#config.attachments,
@@ -315,7 +293,8 @@ class NewPost {
     });
     return deleteAttachBtn;
   }
-  func () {
+
+  func() {
     const deleteAttachBtn = document.createElement('img');
     deleteAttachBtn.id = `delete#${item.id}`;
     deleteAttachBtn.className = 'delete-icon';
