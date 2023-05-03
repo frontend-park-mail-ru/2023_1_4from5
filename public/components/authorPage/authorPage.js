@@ -69,7 +69,7 @@ class AuthorPage {
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
             attachPreview.className = 'audio-preview';
-            attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.src = `../../images/${item.id}.mp3`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
