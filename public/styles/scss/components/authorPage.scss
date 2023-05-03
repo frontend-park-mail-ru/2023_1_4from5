@@ -4,22 +4,60 @@
 
 $header-height: 20em;
 
-$author__photo--width: 20%;
+$author__photo--width: 22em;
 $author__photo--top: 12%;
 $author__photo--left: 5%;
 
-.author__photo {
+.author__photo--container {
   position: absolute;
-  width: $author__photo--width;
+  width: fit-content;
   top: $author__photo--top;
   left: $author__photo--left;
   z-index: $content-z-index;
+}
+
+.photo--hover {
+  position: absolute;
+  width: $author__photo--width;
+  height: $author__photo--width;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border-radius: $block-border-radius;
+  background-color: gray;
+  opacity: 0;
+
+  &:hover {
+    opacity: 60%;
+  }
+}
+
+.photo__img {
+  position: relative;
+  top: 40%;
+  left: 40%;
+  border-radius: $block-border-radius;
+}
+
+.photo__text {
+  position: relative;
+  top: 40%;
+  left: 20%;
 }
 
 #author__header {
   height: $header-height;
   background-position: center center;
   background-size: 80%;
+}
+
+#author__header--photo {
+  height: 100%;
+  width: 100%;
+}
+
+.cover__photo {
+  width: 100%;
 }
 
 #author__header--hover {
@@ -34,7 +72,7 @@ $author__photo--left: 5%;
 
   &:hover {
     background-color: gray;
-    opacity: 50%;
+    opacity: 60%;
   }
 }
 
@@ -59,4 +97,36 @@ $author__service--width: 30%;
 .author__container {
   display: grid;
   grid-template-columns: $author__service--width (100% - $author__service--width);
+}
+
+.creatorphoto__load--label {
+  @include clickable();
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.creator__photo {
+  position: absolute;
+  width: $author__photo--width;
+  height: $author__photo--width;
+  z-index: 5;
+  top: 0;
+  border-radius: $block-border-radius;
+}
+
+#delete__creator--photo {
+  @include clickable();
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+#delete__creator--cover {
+  @include clickable();
+  position: absolute;
+  z-index: $content-z-index;
+  top: 10%;
+  right: 2%;
+  width: 2em;
 }

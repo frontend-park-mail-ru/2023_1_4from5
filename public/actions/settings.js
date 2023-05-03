@@ -23,4 +23,11 @@ export const ActionsSettings = {
       file,
     });
   },
+
+  deletePhoto(photoId) {
+    dispatcher.dispatch({
+      type: ActionTypes.DELETE_PHOTO,
+      photoId,
+    });
+  },
 };

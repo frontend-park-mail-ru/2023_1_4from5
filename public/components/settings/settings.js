@@ -21,11 +21,15 @@ class Settings {
   }
 
   render() {
+    console.log(this.#user);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
+
+    const photo = document.getElementById('user-photo');
+    photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
 
     const settingsBtn = document.getElementById('settings__btn');
     settingsBtn.addEventListener('click', (event) => {
@@ -39,6 +43,12 @@ class Settings {
       event.preventDefault();
       const files = event.target.files;
       Actions.changePhoto(files[0]);
+    });
+
+    const deletePhoto = document.getElementById('settings__delete--btn');
+    deletePhoto.addEventListener('click', (event) => {
+      event.preventDefault();
+      Actions.deletePhoto(event.target.parentElement.parentElement.id);
     });
   }
 
@@ -64,12 +74,12 @@ class Settings {
     const errorDiv = document.getElementById('change-password-error');
     errorDiv.textContent = err;
 
-    const successTitle = document.getElementById('change-success-password');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = '';
   }
 
   invalidLogin(err) {
-    const successTitle = document.getElementById('change-success-login');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = '';
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = err;
@@ -86,18 +96,18 @@ class Settings {
     const errorDiv = document.getElementById('change-username-error');
     errorDiv.textContent = '';
     const successTitle = document.getElementById('change-success-name');
-    successTitle.textContent = 'Имя успешно изменено';
+    successTitle.textContent = 'Данные успешно сохранены';
   }
 
   successLoginChanged() {
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = '';
-    const successTitle = document.getElementById('change-success-login');
-    successTitle.textContent = 'Логин успешно изменен';
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = 'Данные успешно сохранены';
   }
 
   successPasswordChanged() {
-    const successTitle = document.getElementById('change-success-password');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = 'Пароль успешно изменен';
 
     const errTitle = document.getElementById('change-password-error');

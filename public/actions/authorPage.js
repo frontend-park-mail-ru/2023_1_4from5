@@ -2,6 +2,12 @@ import { dispatcher } from '../dispatcher/dispatcher';
 import { ActionTypes } from '../actionTypes/actionTypes';
 
 export const ActionsAuthorPage = {
+  renderAuthorPage() {
+    dispatcher.dispatch({
+      type: ActionTypes.RENDER_AUTHOR_PAGE,
+    });
+  },
+
   clickLike(typeLike, postId) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
@@ -43,10 +49,11 @@ export const ActionsAuthorPage = {
     });
   },
 
-  unfollow(id) {
+  unfollow(id, page) {
     dispatcher.dispatch({
       type: ActionTypes.UNFOLLOW,
       id,
+      page,
     });
   },
 
@@ -60,24 +67,33 @@ export const ActionsAuthorPage = {
     });
   },
 
-  creatorCoverUpdate(file) {
+  creatorCoverUpdate(file, coverId) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_COVER_UPDATE,
       file,
+      coverId,
     });
   },
 
-  creatorPhotoUpdate(file) {
+  creatorPhotoUpdate(file, profilePhoto) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_PHOTO_UPDATE,
       file,
+      profilePhoto,
     });
   },
 
-  creatorInfoUpdate(info) {
+  creatorCoverDelete(coverId) {
     dispatcher.dispatch({
-      type: ActionTypes.CREATOR_INFO_UPDATE,
-      info,
+      type: ActionTypes.CREATOR_COVER_DELETE,
+      coverId,
+    });
+  },
+
+  creatorPhotoDelete(photoId) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATOR_PHOTO_DELETE,
+      photoId,
     });
   },
 };

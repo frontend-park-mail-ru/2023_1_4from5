@@ -1,5 +1,7 @@
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
+import { newPostStore } from './newPostStore';
+import { subLevels } from './levels';
 
 // TODO (сделал минимальную валидацию на каждый файл < 5 Мб)
 //  более лучшая валидация файлов (обработка 413 и общий размер)
@@ -13,6 +15,15 @@ class NewPost {
   #parent;
 
   #config;
+
+  #levels;
+
+  #switch = {
+    all: true,
+    subsOnly: false,
+    subsOrPaid: false,
+    paidOnly: false,
+  };
 
   constructor(parent) {
     this.#parent = parent;
@@ -31,11 +42,14 @@ class NewPost {
     return this.#parent;
   }
 
-  render() {
+
+  render(levels, serveAttachments = '') {
+    levels.switch = this.#switch;
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'newPostDiv';
-    newDiv.innerHTML = template(this.#config);
+    newDiv.innerHTML = template(levels);
     this.#parent.appendChild(newDiv);
 
     if (this.#config && this.#config.attachments) {
@@ -120,6 +134,31 @@ class NewPost {
     audioInput.addEventListener('change', (event) => {
       this.addAttachListener(event, 'audio');
     });
+
+    const levelAll = document.getElementById('switch__level--all');
+    const levelSubsOnly = document.getElementById('switch__level--subs-only');
+
+    levelAll.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.#switch.all = true;
+      this.#switch.subsOnly = false;
+      const imgLevelAll = levelAll.querySelector('#switch__img--all');
+      imgLevelAll.src = '../../images/radio-active.svg';
+      const imgLevelSubOnly = levelSubsOnly.querySelector('#switch__img--subs-only');
+      imgLevelSubOnly.src = '../../images/radio-inactive.svg';
+      subLevels.remove();
+    });
+
+    levelSubsOnly.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.#switch.all = false;
+      this.#switch.subsOnly = true;
+      const imgLevelAll = levelAll.querySelector('#switch__img--all');
+      imgLevelAll.src = '../../images/radio-inactive.svg';
+      const imgLevelSubOnly = levelSubsOnly.querySelector('#switch__img--subs-only');
+      imgLevelSubOnly.src = '../../images/radio-active.svg';
+      subLevels.render(levels);
+    });
   }
 
   publish() {
@@ -129,9 +168,43 @@ class NewPost {
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
+    const availableSubscriptions = [];
+
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      // e.stopPropagation();
+
+      const subs = document.querySelectorAll('.sub__level');
+      if (subs) {
+        for (let index = 0; index < subs.length; index++) {
+          const sub = subs[index];
+          const radio = sub.querySelector('#sub__level--radio');
+          if (radio.classList.contains('sub__level--active')) {
+            availableSubscriptions.push(sub.id);
+          }
+        }
+      }
+
+      if (this.config) {
+        console.log('ACTION WITN ATTACH');
+        Actions.createPost({
+          attachments: this.config.attachments,
+          titleInput,
+          textInput,
+          errorTitleOutput,
+          errorTextOutput,
+          availableSubscriptions,
+        });
+      } else {
+        console.log('ACTION WITNOUT ATTACH');
+        Actions.createPost({
+          titleInput,
+          textInput,
+          errorTitleOutput,
+          errorTextOutput,
+          availableSubscriptions,
+        });
+      }
+    });
 
       Actions.createPost({
         attachments: this.#config.attachments,
@@ -150,6 +223,8 @@ class NewPost {
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
+    const availableSubscriptions = [];
+
     titleInput.value = title;
     textInput.textContent = text;
     postBtn.textContent = 'Готово';
@@ -157,12 +232,25 @@ class NewPost {
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
 
+      const subs = document.querySelectorAll('.sub__level');
+      if (subs) {
+        for (let index = 0; index < subs.length; index++) {
+          const sub = subs[index];
+          const radio = sub.querySelector('#sub__level--radio');
+          if (radio.classList.contains('sub__level--active')) {
+            availableSubscriptions.push(sub.id);
+          }
+        }
+      }
+
+
       Actions.updatePost(postId, {
         attachments: this.#config.attachments,
         titleInput,
         textInput,
         errorTitleOutput,
         errorTextOutput,
+        availableSubscriptions,
       });
     });
   }

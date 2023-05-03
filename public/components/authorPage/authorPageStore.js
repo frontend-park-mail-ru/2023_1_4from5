@@ -26,8 +26,8 @@ class AuthorPageStore {
 
   async reduce(action) {
     switch (action.type) {
-      case ActionTypes.RENDER_MYPAGE:
-        this.renderMyPage();
+      case ActionTypes.RENDER_AUTHOR_PAGE:
+        await this.renderMyPage();
         break;
 
       case ActionTypes.DELETE_POST:
@@ -37,7 +37,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.CLICK_LIKE:
-        this.changeLikeState(action);
+        await this.changeLikeState(action);
         break;
 
       case ActionTypes.RENDER_AIM:
@@ -53,7 +53,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.SAVE_AIM:
-        this.saveEditAim(action.input);
+        await this.saveEditAim(action.input);
         aim.remove();
         break;
 
@@ -68,7 +68,12 @@ class AuthorPageStore {
         await request.put(`/api/user/unfollow/${action.id}`);
         this.#config.follows = false;
         authorPage.config = this.#config;
-        authorPage.render();
+        if (action.page === 'authorPage') {
+          authorPage.render();
+        }
+        if (action.page === 'subscriptions') {
+          Actions.renderSubscriptions();
+        }
         break;
 
       case ActionTypes.GET_SUBSCRIPION:
@@ -82,21 +87,31 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.CREATOR_COVER_UPDATE:
-        const formData = new FormData();
-        formData.append('upload', action.file);
-        const creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
-        const result = await creatorPage.json();
-        const coverId = result.creator_info.cover_photo;
-        formData.append('path', coverId);
-
-        console.log(formData);
+        const formDataCover = new FormData();
+        formDataCover.append('upload', action.file);
+        formDataCover.append('path', action.coverId);
 
         const tokenCover = await request.getHeader('/api/creator/updateCoverPhoto');
-        const req = await request.put('/api/creator/updateCoverPhoto', formData, tokenCover);
-
-        console.log(req);
-
+        await request.putMultipart('/api/creator/updateCoverPhoto', formDataCover, tokenCover);
         await this.renderMyPage();
+        break;
+
+      case ActionTypes.CREATOR_PHOTO_UPDATE:
+        const formDataPhoto = new FormData();
+        formDataPhoto.append('upload', action.file);
+        formDataPhoto.append('path', action.profilePhoto);
+
+        const tokenPhoto = await request.getHeader('/api/creator/updateProfilePhoto');
+        await request.putMultipart('/api/creator/updateProfilePhoto', formDataPhoto, tokenPhoto);
+        await this.renderMyPage();
+        break;
+
+      case ActionTypes.CREATOR_PHOTO_DELETE:
+        await this.creatorPhotoDelete(action.photoId);
+        break;
+
+      case ActionTypes.CREATOR_COVER_DELETE:
+        await this.creatorCoverDelete(action.coverId);
         break;
 
       default:
@@ -199,6 +214,20 @@ class AuthorPageStore {
         input.moneyNeededInput.style.backgroundColor = color.error;
       }
     }
+  }
+
+  async creatorPhotoDelete(photoId) {
+    console.log(photoId);
+    const token = await request.getHeader(`/api/creator/deleteProfilePhoto/${photoId}`);
+    await request.delete(`/api/creator/deleteProfilePhoto/${photoId}`, token);
+    await this.renderMyPage();
+  }
+
+  async creatorCoverDelete(coverId) {
+    console.log(coverId);
+    const token = await request.getHeader(`/api/creator/deleteCoverPhoto/${coverId}`);
+    await request.delete(`/api/creator/deleteCoverPhoto/${coverId}`, token);
+    await this.renderMyPage();
   }
 }
 

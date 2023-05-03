@@ -3,6 +3,8 @@ import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import template from './sideBar.handlebars';
 import { Actions } from '../../actions/actions';
+import { sideBarStore } from './sideBarStore';
+import { userStore } from '../user/userStore';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -28,6 +30,8 @@ export class SideBar {
   }
 
   render() {
+    this.#config.modalWindow.photo = userStore.getUserState().profilePhoto;
+
     const lastSideBar = document.getElementById('sidebarDiv');
     if (lastSideBar) {
       lastSideBar.remove();
@@ -35,8 +39,18 @@ export class SideBar {
     const newDiv = document.createElement('div');
     newDiv.id = 'sidebarDiv';
     newDiv.innerHTML = template(this.#config);
-
     this.#parent.appendChild(newDiv);
+
+    const logo = document.getElementById('logo');
+    logo.addEventListener('click', (event) => {
+      event.preventDefault();
+      router.go(URLS.root);
+    });
+
+    const photo = document.getElementById('sidebar__user--photo');
+    if (photo) {
+      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    }
 
     const logoBtn = document.getElementById('logo');
     logoBtn.addEventListener('click', (e) => {

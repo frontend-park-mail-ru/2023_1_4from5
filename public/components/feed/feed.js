@@ -21,6 +21,12 @@ class Feed {
     newDiv.innerHTML = template(posts);
     this.#parent.appendChild(newDiv);
 
+    const photos = document.querySelectorAll('#feed__creator--photo');
+    for (let index = 0; index < photos.length; index++) {
+      const photo = photos[index];
+      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    }
+
     const likeIcons = document.querySelectorAll('.feed__like');
     for (let index = 0; index < likeIcons.length; index++) {
       const likeIcon = likeIcons[index];
@@ -32,6 +38,18 @@ class Feed {
           event.target.parentElement.parentElement.parentElement.id,
         );
       });
+    }
+
+    const creationDates = document.querySelectorAll('.feed__date');
+    for (let index = 0; index < creationDates.length; index++) {
+      const timestamp = creationDates[index];
+      const dateRaw = new Date(Date.parse(timestamp.textContent));
+      const day = dateRaw.getDay();
+      const month = dateRaw.getMonth();
+      const year = dateRaw.getFullYear();
+      const hour = dateRaw.getHours();
+      const min = dateRaw.getMinutes();
+      timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
     }
   }
 }

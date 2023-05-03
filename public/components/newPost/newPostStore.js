@@ -6,10 +6,12 @@ import { request } from '../../modules/request';
 import { router } from '../../modules/Router';
 import { isValidTextPost, isValidTitlePost } from '../../modules/isValid';
 import { color } from '../../consts/styles';
+import { URLS } from '../../modules/Notifier';
 
 document.querySelector('main');
 class NewPostStore {
   #config;
+  #levels;
 
   constructor() {
     this.#config = {
@@ -21,15 +23,33 @@ class NewPostStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
+// RK3-Alik
         this.sendPost(action.type, action, async (body) => {
           const tokenCreate = await request.getHeader('/api/post/create');
           return request.postMultipart('/api/post/create', body, tokenCreate);
+//==
+        this.sendPost(action, async (body) => {
+          const formData = new FormData();
+
+          for (const key in body) {
+            if (key !== 'subscriptions') {
+              formData.append(`${key}`, body[key]);
+            } else {
+              for (const sub in body[key]) {
+                formData.append('subscriptions', body[key][sub]);
+              }
+            }
+          }
+          const tokenCreate = await request.getHeader('/api/post/create');
+          return request.postMultipart('/api/post/create', formData, tokenCreate);
+// RK3
         });
         break;
 
       case ActionTypes.UPDATE_POST:
         this.sendPost(action.type, action, async (body, action) => {
           const postId = action.postId;
+          body.available_subscriptions = body.subscriptions;
           const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
           return request.put(`/api/post/edit/${postId}`, body, tokenEdit);
         });
@@ -40,23 +60,44 @@ class NewPostStore {
     }
   }
 
+// RK3-Alik
   renderNewPost() {
     if (newPost.config && newPost.config.attachments) {
       newPost.config.attachments = [];
     }
     newPost.render();
+//==
+  async renderNewPost() {
+    const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+    const creatorPage = await req.json();
+    const levels = {
+      subs: creatorPage.subscriptions,
+    };
+    newPost.render(levels);
+// RK3
     newPost.publish();
   }
 
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
+// RK3-Alik
     this.#config.attachments = [];
     post.attachments.forEach((item) => {
       this.#config.attachments.push(item);
     });
     newPost.config.attachments = post.attachments;
     newPost.render();
+//=======
+
+    const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
+    const creatorPage = await req.json();
+    const levels = {
+      subs: creatorPage.subscriptions,
+    };
+
+    newPost.render(levels);
+// RK3
     newPost.update(postId, post.title, post.text);
   }
 
@@ -82,6 +123,7 @@ class NewPostStore {
       errorTextOutput.innerHTML = errText;
       action.input.textInput.style.backgroundColor = color.error;
     } else {
+// RK3-Alik
       let status;
       if (actionType === ActionTypes.CREATE_POST) {
         status = await this.sendCreatedPost(action, createTitle, createText, callback);
@@ -92,6 +134,18 @@ class NewPostStore {
         newPost.config.attachments = [];
         this.#config.attachments = [];
         router.popstate();
+//==
+      const body = {
+        title: createTitle,
+        text: createText,
+        creator: userStore.getUserState().authorURL,
+        attachments: action.input.attachments,
+        subscriptions: action.input.availableSubscriptions,
+      };
+      const result = await callback(body, action);
+      if (result.ok) {
+        router.go(URLS.myPage);
+// RK3
       } else {
         errorTextOutput.innerHTML = '';
         errorTextOutput.innerHTML = 'Введённые данные некорректны';

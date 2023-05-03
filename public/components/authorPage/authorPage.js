@@ -31,31 +31,22 @@ class AuthorPage {
   }
 
   render() {
+    const subs = [];
+    if (!this.#config.subscriptions) {
+      this.#config.subscriptions = [];
+    }
+    Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + 4));
+    const config = {};
+    Object.assign(config, this.#config);
+    config.subscriptions = subs;
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';
-    newDiv.innerHTML = template(this.#config);
+    newDiv.innerHTML = template(config);
     this.#parent.appendChild(newDiv);
 
-    // const prev = document.getElementById('prev');
-    // prev.addEventListener('click', (event) => {
-    //   event.preventDefault();
-    //   if (this.#subsPos >= 4) {
-    //     this.#subsPos -= 4;
-    //     console.log(this.#subsPos);
-    //   }
-    // });
-    //
-    // const next = document.getElementById('next');
-    // next.addEventListener('click', (event) => {
-    //   event.preventDefault();
-    //   console.log(this.#subsPos);
-    //   console.log(this.#config.subscriptions[3])
-    //   if (this.#config.subscriptions[this.#subsPos + 4]) {
-    //     this.#subsPos += 4;
-    //     console.log(this.#subsPos);
-    //   }
-    // });
+
     this.#config.posts.forEach((post) => {
       console.log(post);
       if (post.attachments) {
@@ -87,15 +78,76 @@ class AuthorPage {
       }
     });
 
+    if (this.#subsPos > 0) {
+      const prevDiv = document.getElementById('arrow--prev');
+      prevDiv.innerHTML = '<img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">';
+    }
+
+    if (this.#subsPos < this.#config.subscriptions.length - 4) {
+      const prevDiv = document.getElementById('arrow--next');
+      prevDiv.innerHTML = '<img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">';
+    }
+
+    const prev = document.getElementById('prev');
+    if (prev) {
+      prev.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (this.#subsPos >= 4) {
+          this.#subsPos -= 4;
+          this.render();
+        }
+      });
+    }
+
+    const next = document.getElementById('next');
+    if (next) {
+      next.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (this.#config.subscriptions[this.#subsPos + 4]) {
+          this.#subsPos += 4;
+          this.render();
+        }
+      });
+    }
+
+
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
+
+    const coverPhoto = document.getElementById('author__header--photo');
+    coverPhoto.style.backgroundImage = `url(../../images/${this.#config.creator_info.cover_photo}.jpg)`;
 
     const cover = document.getElementById('cover__upload');
     if (cover) {
       cover.addEventListener('change', (event) => {
         event.preventDefault();
         const files = event.target.files;
-        Actions.creatorCoverUpdate(files[0]);
+        Actions.creatorCoverUpdate(files[0], this.#config.creator_info.cover_photo);
+      });
+    }
+
+    const photo = document.getElementById('photo__upload');
+    if (photo) {
+      photo.addEventListener('change', (event) => {
+        event.preventDefault();
+        const files = event.target.files;
+        Actions.creatorPhotoUpdate(files[0], this.#config.creator_info.profile_photo);
+      });
+    }
+
+    const delPhoto = document.getElementById('delete__creator--photo');
+    if (delPhoto) {
+      delPhoto.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.creatorPhotoDelete(this.#config.creator_info.profile_photo);
+      });
+    }
+
+    const delCover = document.getElementById('delete__creator--cover');
+    if (delCover) {
+      delCover.addEventListener('click', (event) => {
+        event.preventDefault();
+        Actions.creatorCoverDelete(this.#config.creator_info.cover_photo);
       });
     }
 
@@ -115,18 +167,10 @@ class AuthorPage {
       });
     }
 
-    const getSubBtns = document.querySelectorAll('#get__sub');
-    if (getSubBtns) {
-      for (let index = 0; index < getSubBtns.length; index++) {
-        const button = getSubBtns[index];
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          const subId = event.target.parentElement.id;
-          const price = event.target.parentElement.querySelector('#sub__price').textContent;
-          const creatorId = event.target.parentElement.parentElement.id;
-          getSubscription.render(subId, price, creatorId);
-        });
-      }
+    const updatePostBtns = document.querySelectorAll('#edit__post');
+    for (let index = 0; index < updatePostBtns.length; index++) {
+      const button = updatePostBtns[index];
+      button.addEventListener('click', this.updateHandler.bind(this));
     }
 
     const deletePostBtns = document.querySelectorAll('#delete__post');
@@ -135,10 +179,18 @@ class AuthorPage {
       button.addEventListener('click', this.deleteHandler);
     }
 
-    const updatePostBtns = document.querySelectorAll('#edit__post');
-    for (let index = 0; index < updatePostBtns.length; index++) {
-      const button = updatePostBtns[index];
-      button.addEventListener('click', this.updateHandler.bind(this));
+    const getSubBtns = document.querySelectorAll('#get__sub');
+    if (getSubBtns) {
+      for (let index = 0; index < getSubBtns.length; index++) {
+        const button = getSubBtns[index];
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          const subId = event.target.parentElement.id;
+          const price = event.target.parentElement.querySelector('#sub__price').textContent;
+          const creatorId = event.target.parentElement.parentElement.parentElement.id;
+          getSubscription.render(subId, price, creatorId);
+        });
+      }
     }
 
     const likeIcons = document.querySelectorAll('.icon--like');
@@ -209,7 +261,7 @@ class AuthorPage {
     if (unfollowBtn) {
       unfollowBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        Actions.unfollow(unfollowBtn.parentElement.id);
+        Actions.unfollow(unfollowBtn.parentElement.id, 'authorPage');
       });
     }
 

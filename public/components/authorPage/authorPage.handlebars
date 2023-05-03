@@ -1,20 +1,35 @@
-<div class="author__photo">
-    <!--    <div></div>-->
-    <img src="../../images/author-photo.svg" alt="creator photo">
+<div id="author__photo" class="author__photo--container">
+
+    <img class="creator__photo" src="../../images/author-photo.jpg" alt="">
+    <img class="creator__photo" src="../../images/{{creator_info.profile_photo}}.jpg" alt="">
+    {{#if is_my_page}}
+        <div class="photo--hover">
+            <label class="creatorphoto__load--label">
+                <input id="photo__upload" type="file" class="upload"/>
+                <img class="photo__img" src="../../images/load-cover.svg" alt="load">
+                <h3 class="photo__text">Загрузить фото</h3>
+            </label>
+            <img id="delete__creator--photo" src="../../images/delete.svg" alt="">
+        </div>
+    {{/if}}
 </div>
 
 <div id="author__header">
-    {{#if is_my_page}}
-        <label class="cover__load--label">
-            <input id="cover__upload" type="file" class="upload"/>
-            <span id="author__header--hover">
-                <h2 class="cover__title">
-                    <img class="cover__img" src="../../images/load-cover.svg" alt="load-cover">
-                    <p class="cover__title--text">Загрузить фото</p>
-                </h2>
-            </span>
-        </label>
-    {{/if}}
+    <div id="author__header--photo">
+        {{#if is_my_page}}
+            <label class="cover__load--label">
+                <input id="cover__upload" type="file" class="upload"/>
+                <span id="author__header--hover">
+                    <h2 class="cover__title">
+                        <img class="cover__img" src="../../images/load-cover.svg" alt="load-cover">
+                        <p class="cover__title--text">Загрузить фото</p>
+                    </h2>
+                </span>
+            </label>
+            <img id="delete__creator--cover" src="../../images/delete.svg" alt="">
+
+        {{/if}}
+    </div>
 </div>
 
 <!------------------------------------------------------------------------------------------------->
@@ -22,10 +37,9 @@
 
     <div class="auth__service">
         <div class="subscribers">
-            <h1>{{creator_info.followers_count}}</h1>
-            <h2>
+            <h2 class="subs__count">
                 <img class="followers__img" src="../../images/followers.svg" alt="followers">
-                подписчиков
+                подписчиков: {{creator_info.followers_count}}
             </h2>
         </div>
 
@@ -103,41 +117,45 @@
                 {{/if}}
             </div>
 
-            <div id="{{creator_info.creator_id}}" class="sub__container">
+            <div id="{{creator_info.creator_id}}" class="sub__space">
                 {{#if subscriptions}}
-<!--                    <img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">-->
-                    {{#each subscriptions}}
-                        <div id="{{id}}" class="sub__card">
-                            <div class="sub__title">
-                                <h3 class="sub__title--text">{{title}}</h3>
-                                {{#if ../is_my_page}}
-                                    <img id="sub__delete" src="../../images/delete.svg" alt="delete">
-                                {{/if}}
-                            </div>
-                            <p class="sub__description">{{description}}</p>
-                            <div class="sub__cost">
-                                <h2 id="sub__price" class="cost">{{month_cost}}</h2>
-                                <h3 class="rpm">р/месяц</h3>
-                            </div>
+                    <div id="arrow--prev" class="arrow__container"></div>
+                    <div class="sub__container">
+                        {{#each subscriptions}}
+                            <div id="{{id}}" class="sub__card">
+                                <div class="sub__title">
+                                    <h3 class="sub__title--text">{{title}}</h3>
+                                    {{#if ../is_my_page}}
+                                        <img id="sub__delete" src="../../images/delete.svg" alt="delete">
+                                    {{/if}}
+                                </div>
+                                <p class="sub__description">{{description}}</p>
+                                <div class="sub__cost">
+                                    <h2 id="sub__price" class="cost">{{month_cost}}</h2>
+                                    <h3 class="rpm">р/месяц</h3>
+                                </div>
 
-                            {{#if ../is_my_page}}
-                                <button id="sub__edit" class="sub__btn">
-                                    <img class="sub__edit" src="../../images/pencil.png" alt="pencil">
-                                    Изменить
-                                </button>
-                            {{else}}
-                                {{#if ../isAuthorized}}
-                                    <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
+                                {{#if ../is_my_page}}
+                                    <button id="sub__edit" class="sub__btn">
+                                        <img class="sub__edit" src="../../images/pencil.png" alt="pencil">
+                                        Изменить
+                                    </button>
+                                {{else}}
+                                    {{#if ../isAuthorized}}
+                                        <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
+                                    {{/if}}
                                 {{/if}}
-                            {{/if}}
-                        </div>
-                    {{/each}}
-<!--                    <img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">-->
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div id="arrow--next" class="arrow__container"></div>
 
                 {{else}}
                     {{#if is_my_page}}
+                        <p></p>
                         <p class="text--default">У вас пока нет ни одной подписки</p>
                     {{else}}
+                        <p></p>
                         <p class="text--default">У автора пока нет ни одной подписки</p>
                     {{/if}}
                 {{/if}}
@@ -152,7 +170,12 @@
                             <div class="post__privacy">
                                 <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
                                 {{#if subscriptions}}
-                                    Только для подписчиков
+                                    С подпиской:
+                                    <div class="post__subs">
+                                        {{#each subscriptions}}
+                                            <p>{{title}}</p>
+                                        {{/each}}
+                                    </div>
                                 {{else}}
                                     Открыт для всех
                                 {{/if}}

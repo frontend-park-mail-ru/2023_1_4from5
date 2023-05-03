@@ -72,7 +72,7 @@ class SideBarStore {
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
-        photo: 'author-photo', // TODO hardcode -> userStore.getUserState().profilePhoto
+        photo: userStore.getUserState().profilePhoto,
         href: '/modalWindow',
         id: 'sidebar__modalWindow',
         showDisplay: userStore.getUserState().isAuthorizedIn,
@@ -94,21 +94,21 @@ class SideBarStore {
     this.#config.modalWindow.name = userIn.usernameIn;
   }
 
-  renderSideBar(parent, user) {
-    this.setState(user);
-    sideBar.config = this.#config;
-    sideBar.render();
-  }
-
   reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_SIDEBAR:
-        this.renderSideBar(action.parent, action.user);
+        this.renderSideBar(action.user);
         break;
 
       default:
         break;
     }
+  }
+
+  renderSideBar(user) {
+    this.setState(user);
+    sideBar.config = this.#config;
+    sideBar.render();
   }
 }
 

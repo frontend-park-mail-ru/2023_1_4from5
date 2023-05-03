@@ -2,11 +2,12 @@ import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { settings } from './settings.js';
 import { userStore } from '../user/userStore.js';
-import {isValidLogin, isValidPassword, isValidUsername} from '../../modules/isValid';
+import { isValidLogin, isValidPassword, isValidUsername } from '../../modules/isValid';
 import { request } from '../../modules/request';
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+import { sideBar } from '../sideBar/sideBar';
 
 const sideBarElement = document.querySelector('sideBar');
 
@@ -27,6 +28,10 @@ class SettingsStore {
 
       case ActionTypes.CHANGE_PHOTO:
         await this.changePhoto(action.file);
+        break;
+
+      case ActionTypes.DELETE_PHOTO:
+        await this.deletePhoto(action.photoId);
         break;
 
       default:
@@ -50,6 +55,7 @@ class SettingsStore {
     const user = userStore.getUserState();
     user.profilePhoto = newPhoto;
     this.renderSettings();
+    Actions.renderSideBar(user);
   }
 
   async changePassword(input) {
@@ -94,30 +100,20 @@ class SettingsStore {
         user.usernameIn = name;
         user.login = login;
         userStore.setUserState(user);
-        Actions.renderSideBar(sideBarElement, user);
+        Actions.renderSideBar(user);
         settings.successNameChanged();
         settings.successLoginChanged();
       }
     }
   }
-  //
-  // async changeLogin(loginInput) {
-  //
-  //   if (!errLogin) {
-  //     const token = await request.getHeader('/api/user/updateData');
-  //     const response = await request.put('/api/user/updateData', {
-  //       login,
-  //       name,
-  //     }, token);
-  //
-  //     if (response.ok) {
-  //       const user = userStore.getUserState();
-  //       user.login = login;
-  //       userStore.setUserState(user);
-  //       settings.successLoginChanged();
-  //     }
-  //   }
-  // }
+
+  async deletePhoto(photoId) {
+    console.log(photoId);
+    const token = await request.getHeader(`/api/user/deleteProfilePhoto/${photoId}`);
+    await request.delete(`/api/user/deleteProfilePhoto/${photoId}`, token);
+    await userStore.getUser();
+    this.renderSettings();
+  }
 }
 
 export const settingsStore = new SettingsStore();
