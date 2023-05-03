@@ -48,7 +48,7 @@ class NewPost {
 
           attachPreview.className = 'img-preview';
           attachPreview.id = item.id;
-          attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
           // attachPreview.style.display = 'block';
 
           divPreview.append(attachPreview);
@@ -58,7 +58,7 @@ class NewPost {
 
           attachPreview.className = 'video-preview';
           attachPreview.id = item.id;
-          attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
           attachPreview.controls = true;
           // attachPreview.style.display = 'block';
 
@@ -69,7 +69,7 @@ class NewPost {
 
           attachPreview.className = 'audio-preview';
           attachPreview.id = item.id;
-          attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
           attachPreview.controls = true;
           // attachPreview.style.display = 'block';
 
