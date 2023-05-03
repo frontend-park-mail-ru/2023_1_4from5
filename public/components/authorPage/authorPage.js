@@ -56,8 +56,8 @@ class AuthorPage {
     //     console.log(this.#subsPos);
     //   }
     // });
-    console.log(this.#config);
     this.#config.posts.forEach((post) => {
+      console.log(post);
       if (post.attachments) {
         console.log('post', post.attachments);
         const divAttaches = document.getElementById(`attachments-${post.id}`);
