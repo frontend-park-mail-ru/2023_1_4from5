@@ -62,11 +62,14 @@ class AuthorPage {
           } else if (item.type.startsWith('video')) {
             const attachPreview = document.createElement('video');
             const source = document.createElement('source');
+
             attachPreview.className = 'video-preview';
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
+
             source.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
             source.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+            attachPreview.append(source);
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
