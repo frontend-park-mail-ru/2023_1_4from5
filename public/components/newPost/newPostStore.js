@@ -9,6 +9,7 @@ import { color } from '../../consts/styles';
 import { URLS } from '../../modules/Notifier';
 
 document.querySelector('main');
+
 class NewPostStore {
   #config;
   #levels;
@@ -23,26 +24,9 @@ class NewPostStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
-// RK3-Alik
         this.sendPost(action.type, action, async (body) => {
           const tokenCreate = await request.getHeader('/api/post/create');
           return request.postMultipart('/api/post/create', body, tokenCreate);
-//==
-        this.sendPost(action, async (body) => {
-          const formData = new FormData();
-
-          for (const key in body) {
-            if (key !== 'subscriptions') {
-              formData.append(`${key}`, body[key]);
-            } else {
-              for (const sub in body[key]) {
-                formData.append('subscriptions', body[key][sub]);
-              }
-            }
-          }
-          const tokenCreate = await request.getHeader('/api/post/create');
-          return request.postMultipart('/api/post/create', formData, tokenCreate);
-// RK3
         });
         break;
 
@@ -60,50 +44,42 @@ class NewPostStore {
     }
   }
 
-// RK3-Alik
-  renderNewPost() {
+  async renderNewPost() {
     if (newPost.config && newPost.config.attachments) {
       newPost.config.attachments = [];
     }
-    newPost.render();
-//==
-  async renderNewPost() {
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     const creatorPage = await req.json();
     const levels = {
       subs: creatorPage.subscriptions,
     };
     newPost.render(levels);
-// RK3
     newPost.publish();
   }
 
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
-// RK3-Alik
     this.#config.attachments = [];
     post.attachments.forEach((item) => {
       this.#config.attachments.push(item);
     });
     newPost.config.attachments = post.attachments;
-    newPost.render();
-//=======
 
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     const creatorPage = await req.json();
     const levels = {
       subs: creatorPage.subscriptions,
     };
-
     newPost.render(levels);
-// RK3
     newPost.update(postId, post.title, post.text);
   }
 
   async sendPost(actionType, action, callback) {
+    console.log('action.input ', action.input);
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
+    const subscriptions = action.input.availableSubscriptions;
     const errTitle = isValidTitlePost(createTitle);
     const errText = isValidTextPost(createText);
     const errorTitleOutput = action.input.errorTitleOutput;
@@ -123,29 +99,16 @@ class NewPostStore {
       errorTextOutput.innerHTML = errText;
       action.input.textInput.style.backgroundColor = color.error;
     } else {
-// RK3-Alik
       let status;
       if (actionType === ActionTypes.CREATE_POST) {
-        status = await this.sendCreatedPost(action, createTitle, createText, callback);
+        status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       } else {
-        status = await this.sendEditedPost(action, createTitle, createText, callback);
+        status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
       }
       if (status) {
         newPost.config.attachments = [];
         this.#config.attachments = [];
-        router.popstate();
-//==
-      const body = {
-        title: createTitle,
-        text: createText,
-        creator: userStore.getUserState().authorURL,
-        attachments: action.input.attachments,
-        subscriptions: action.input.availableSubscriptions,
-      };
-      const result = await callback(body, action);
-      if (result.ok) {
         router.go(URLS.myPage);
-// RK3
       } else {
         errorTextOutput.innerHTML = '';
         errorTextOutput.innerHTML = 'Введённые данные некорректны';
@@ -155,11 +118,14 @@ class NewPostStore {
     }
   }
 
-  async sendCreatedPost(action, createTitle, createText, callback) {
+  async sendCreatedPost(action, createTitle, createText, subscriptions, callback) {
     const formData = new FormData();
     formData.append('title', createTitle);
     formData.append('text', createText);
     formData.append('creator', userStore.getUserState().authorURL);
+    for (const sub in subscriptions) {
+      formData.append('subscriptions', subscriptions[sub]);
+    }
     if (action.input.attachments) {
       action.input.attachments.forEach((attach) => formData.append('attachments', attach));
     }
@@ -168,11 +134,12 @@ class NewPostStore {
     return result.ok;
   }
 
-  async sendEditedPost(action, createTitle, createText, callback) {
+  async sendEditedPost(action, createTitle, createText, subscriptions, callback) {
     const body = {
       title: createTitle,
       text: createText,
       creator: userStore.getUserState().authorURL,
+      subscriptions: action.input.availableSubscriptions,
     };
     const result = await callback(body, action);
     let deleteStatus = true;
