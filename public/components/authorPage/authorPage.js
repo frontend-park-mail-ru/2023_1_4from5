@@ -46,11 +46,8 @@ class AuthorPage {
     newDiv.innerHTML = template(config);
     this.#parent.appendChild(newDiv);
 
-
     this.#config.posts.forEach((post) => {
-      console.log(post);
       if (post.attachments) {
-        console.log('post', post.attachments);
         const divAttaches = document.getElementById(`attachments-${post.id}`);
         post.attachments.forEach((item) => {
           if (item.type.startsWith('image')) {

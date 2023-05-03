@@ -21,6 +21,41 @@ class Feed {
     newDiv.innerHTML = template(posts);
     this.#parent.appendChild(newDiv);
 
+    console.log(posts.posts)
+    posts.posts.forEach((post) => {
+      if (post.attachments) {
+        const divAttaches = document.getElementById(`attachments-${post.id}`);
+        post.attachments.forEach((item) => {
+          if (item.type.startsWith('image')) {
+            const attachPreview = document.createElement('img');
+            attachPreview.className = 'img-preview';
+            attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.style.display = 'block';
+            divAttaches.append(attachPreview);
+          } else if (item.type.startsWith('video')) {
+            const attachPreview = document.createElement('video');
+            const source = document.createElement('source');
+
+            attachPreview.className = 'video-preview';
+            attachPreview.controls = true;
+            attachPreview.style.display = 'block';
+
+            source.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            source.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+            attachPreview.append(source);
+            divAttaches.append(attachPreview);
+          } else if (item.type.startsWith('audio')) {
+            const attachPreview = document.createElement('audio');
+            attachPreview.className = 'audio-preview';
+            attachPreview.src = `../../images/${item.id}.mp3`;
+            attachPreview.controls = true;
+            attachPreview.style.display = 'block';
+            divAttaches.append(attachPreview);
+          }
+        });
+      }
+    });
+
     const photos = document.querySelectorAll('#feed__creator--photo');
     for (let index = 0; index < photos.length; index++) {
       const photo = photos[index];
