@@ -190,14 +190,18 @@ $comment-title-width: 80%;
   max-width: 500px;
 }
 
+.attach-container {
+  max-width: 100%;
+}
+
 .img-preview {
-  max-width: inherit;
+  max-width: 100%;
 }
 
 .video-preview {
-  max-width: inherit;
+  max-width: 100%;
 }
 
 .audio-preview {
-  max-width: inherit;
+  max-width: 100%;
 }

@@ -202,19 +202,8 @@
                                     </div>
                                 {{/if}}
                             {{/each}}
-                            <!--TODO проверить, норм ли отображается-->
-                            {{#if attachments}}
-                                {{#each attachments.img}}
-                                    <!-- TODO попробовать тэг <{{id}}>-->
-                                    <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
-                                {{/each}}
-                                {{#each attachments.video}}
-                                    <audio id="audio" src="../../images/music_test.mp3" controls></audio>
-                                {{/each}}
-                                {{#each attachments.audio}}
-                                    <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
-                                {{/each}}
-                            {{/if}}
+
+                            <div id="attachments-{{id}}" class="attach-container"></div>
 
                             <div class="feedback">
                                 <div class="post__likes">

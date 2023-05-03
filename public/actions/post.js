@@ -24,10 +24,10 @@ export const ActionsPost = {
     });
   },
 
-  downloadAttach(file) {
-    dispatcher.dispatch({
-      type: ActionTypes.DOWNLOAD_ATTACH,
-      file,
-    });
-  },
+  // downloadAttach(file) {
+  //   dispatcher.dispatch({
+  //     type: ActionTypes.DOWNLOAD_ATTACH,
+  //     file,
+  //   });
+  // },
 };

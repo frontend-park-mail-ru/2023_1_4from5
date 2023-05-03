@@ -117,6 +117,19 @@ export class Request {
     return res;
   }
 
+  async deleteWithBody(path, body, token) {
+    const res = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.DELETE,
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'X-Csrf-Token': token,
+      },
+      body: JSON.stringify(body),
+    });
+    return res;
+  }
+
   async put(path, body, token) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,

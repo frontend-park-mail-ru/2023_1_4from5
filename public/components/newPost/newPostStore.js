@@ -9,12 +9,13 @@ import { color } from '../../consts/styles';
 import { URLS } from '../../modules/Notifier';
 
 document.querySelector('main');
+
 class NewPostStore {
   #config;
   #levels;
 
   constructor() {
-    this.config = {
+    this.#config = {
       attachments: [],
     };
     dispatcher.register(this.reduce.bind(this));
@@ -23,34 +24,19 @@ class NewPostStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
-        this.sendPost(action, async (body) => {
-          const formData = new FormData();
-
-          for (const key in body) {
-            if (key !== 'subscriptions') {
-              formData.append(`${key}`, body[key]);
-            } else {
-              for (const sub in body[key]) {
-                formData.append('subscriptions', body[key][sub]);
-              }
-            }
-          }
+        this.sendPost(action.type, action, async (body) => {
           const tokenCreate = await request.getHeader('/api/post/create');
-          return request.postMultipart('/api/post/create', formData, tokenCreate);
+          return request.postMultipart('/api/post/create', body, tokenCreate);
         });
         break;
 
       case ActionTypes.UPDATE_POST:
-        this.sendPost(action, async (body, action) => {
+        this.sendPost(action.type, action, async (body, action) => {
           const postId = action.postId;
           body.available_subscriptions = body.subscriptions;
           const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
           return request.put(`/api/post/edit/${postId}`, body, tokenEdit);
         });
-        break;
-
-      case ActionTypes.DOWNLOAD_ATTACH:
-        this.addAttach(action.file);
         break;
 
       default:
@@ -59,6 +45,9 @@ class NewPostStore {
   }
 
   async renderNewPost() {
+    if (newPost.config && newPost.config.attachments) {
+      newPost.config.attachments = [];
+    }
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     const creatorPage = await req.json();
     const levels = {
@@ -71,20 +60,26 @@ class NewPostStore {
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
+    this.#config.attachments = [];
+    post.attachments.forEach((item) => {
+      this.#config.attachments.push(item);
+    });
+    newPost.config.attachments = post.attachments;
 
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     const creatorPage = await req.json();
     const levels = {
       subs: creatorPage.subscriptions,
     };
-
     newPost.render(levels);
     newPost.update(postId, post.title, post.text);
   }
 
-  async sendPost(action, callback) {
+  async sendPost(actionType, action, callback) {
+    console.log('action.input ', action.input);
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
+    const subscriptions = action.input.availableSubscriptions;
     const errTitle = isValidTitlePost(createTitle);
     const errText = isValidTextPost(createText);
     const errorTitleOutput = action.input.errorTitleOutput;
@@ -104,15 +99,15 @@ class NewPostStore {
       errorTextOutput.innerHTML = errText;
       action.input.textInput.style.backgroundColor = color.error;
     } else {
-      const body = {
-        title: createTitle,
-        text: createText,
-        creator: userStore.getUserState().authorURL,
-        attachments: action.input.attachments,
-        subscriptions: action.input.availableSubscriptions,
-      };
-      const result = await callback(body, action);
-      if (result.ok) {
+      let status;
+      if (actionType === ActionTypes.CREATE_POST) {
+        status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
+      } else {
+        status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
+      }
+      if (status) {
+        newPost.config.attachments = [];
+        this.#config.attachments = [];
         router.go(URLS.myPage);
       } else {
         errorTextOutput.innerHTML = '';
@@ -123,21 +118,68 @@ class NewPostStore {
     }
   }
 
-  addAttach(file) {
-    // if (file.type.startsWith('image')) {
-    //   this.config.attachments.img.push(file);
-    // } else if (file.type.startsWith('video')) {
-    //   this.config.attachments.video.push(file);
-    // } else if (file.type.startsWith('audio')) {
-    //   this.config.attachments.audio.push(file);
-    // }
+  async sendCreatedPost(action, createTitle, createText, subscriptions, callback) {
+    const formData = new FormData();
+    formData.append('title', createTitle);
+    formData.append('text', createText);
+    formData.append('creator', userStore.getUserState().authorURL);
+    for (const sub in subscriptions) {
+      formData.append('subscriptions', subscriptions[sub]);
+    }
+    if (action.input.attachments) {
+      action.input.attachments.forEach((attach) => formData.append('attachments', attach));
+    }
 
-    this.config.attachments.push(file);
-    console.log('store add attach', file);
+    const result = await callback(formData, action);
+    return result.ok;
+  }
 
-    newPost.config = this.config;
-    newPost.render();
-    console.log(this.config);
+  async sendEditedPost(action, createTitle, createText, subscriptions, callback) {
+    const body = {
+      title: createTitle,
+      text: createText,
+      creator: userStore.getUserState().authorURL,
+      subscriptions: action.input.availableSubscriptions,
+    };
+    const result = await callback(body, action);
+    let deleteStatus = true;
+    let addStatus = true;
+    console.log(this.#config.attachments, action.input.attachments);
+
+    if (this.#config.attachments) {
+      for (const attach of this.#config.attachments) {
+        if (!action.input.attachments.includes(attach)) {
+          console.log('deleted file: ', attach);
+          const tokenEdit = await request.getHeader(`/api/post/deleteAttach/${action.postId}`);
+          const deleteResult = await request.deleteWithBody(
+            `/api/post/deleteAttach/${action.postId}`,
+            attach,
+            tokenEdit
+          );
+          deleteStatus = true;
+          // TODO в будущем сделать обработку ошибок отдельно
+        }
+      }
+    }
+
+    if (action.input.attachments) {
+      for (const attach of action.input.attachments) {
+        if (!this.#config.attachments.includes(attach)) {
+          console.log('new file: ', attach);
+          const formData = new FormData();
+          formData.append('attachment', attach);
+          const tokenEdit = await request.getHeader(`/api/post/addAttach/${action.postId}`);
+          const addResult = await request.postMultipart(
+            `/api/post/addAttach/${action.postId}`,
+            formData,
+            tokenEdit
+          );
+          addStatus = true;
+        }
+      }
+    }
+    console.log(result.ok && deleteStatus && addStatus);
+    return result.ok && deleteStatus && addStatus;
   }
 }
 
