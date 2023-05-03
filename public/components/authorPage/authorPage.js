@@ -65,20 +65,20 @@ class AuthorPage {
           if (item.type.startsWith('image')) {
             const attachPreview = document.createElement('img');
             attachPreview.className = 'img-preview';
-            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('video')) {
             const attachPreview = document.createElement('video');
             attachPreview.className = 'video-preview';
-            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.src = `../../${item.id}.${item.type.split('/')[1]}`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
             attachPreview.className = 'audio-preview';
-            attachPreview.src = `${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.src = `../../${item.id}.${item.type.split('/')[1]}`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
