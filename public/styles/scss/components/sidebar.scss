@@ -31,7 +31,7 @@ $sidebar__element-offset: 0.4vw;
   margin-left: 0.8vw;
 }
 
-.sidebar__logo--container, .sidebar__user {
+.sidebar__user {
   @include v-align($sidebar-height);
 }
 
@@ -59,6 +59,13 @@ $sidebar-offset: 0.4vw;
 .sidebar__logo {
   height: ($sidebar-height * 0.9);
   padding-left: $sidebar-offset;
+}
+
+.sidebar__logo--fav {
+  width: 100%;
+  padding-left: 2vw;
+  padding-top: 40%;
+  display: none;
 }
 
 $sidebar__input-background-color: #ebedf0;
@@ -112,6 +119,11 @@ $sidebar__user--photo-height: 2em;
 //------1300px------//
 
 @media (max-width: 1300px) {
+  .sidebar__logo {
+    height: fit-content;
+    width: 100%;
+  }
+
   .sidebar__media--1300px {
     display: none;
   }
@@ -120,6 +132,53 @@ $sidebar__user--photo-height: 2em;
 @media (max-width: 1000px) {
   .sidebar__media--1000px {
     display: none;
+    font-size: $font-size;
+  }
+
+  .sidebar {
+    grid-template-columns: 7% 1fr fit-content(100%);
+  }
+
+  .sidebar__input {
+    width: 50%;
+    font-size: $font-size;
+  }
+
+  .sidebar__logo {
+    margin-top: 0.5em;
+    margin-left: 10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    grid-template-columns: 10% 1fr fit-content(100%);
+  }
+
+  .sidebar__input {
+    font-size: $font-size-small;
+  }
+
+  .sidebar__element {
+    font-size: $font-size;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar__logo {
+    display: none;
+  }
+
+  .sidebar__logo--fav {
+    display: block;
+  }
+
+  .sidebar__user--name {
+    display: none;
+  }
+
+  .sidebar__user--photo {
+    margin-right: 1em;
   }
 }
 

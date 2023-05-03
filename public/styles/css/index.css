@@ -479,7 +479,7 @@ p, h1, h2, h3, h4, h5 {
   margin-left: 0.8vw;
 }
 
-.sidebar__logo--container, .sidebar__user {
+.sidebar__user {
   line-height: 3.5em;
 }
 
@@ -503,6 +503,13 @@ p, h1, h2, h3, h4, h5 {
 .sidebar__logo {
   height: 3.15em;
   padding-left: 0.4vw;
+}
+
+.sidebar__logo--fav {
+  width: 100%;
+  padding-left: 2vw;
+  padding-top: 40%;
+  display: none;
 }
 
 .sidebar__input {
@@ -544,6 +551,10 @@ p, h1, h2, h3, h4, h5 {
 }
 
 @media (max-width: 1300px) {
+  .sidebar__logo {
+    height: fit-content;
+    width: 100%;
+  }
   .sidebar__media--1300px {
     display: none;
   }
@@ -551,6 +562,43 @@ p, h1, h2, h3, h4, h5 {
 @media (max-width: 1000px) {
   .sidebar__media--1000px {
     display: none;
+    font-size: 16px;
+  }
+  .sidebar {
+    grid-template-columns: 7% 1fr fit-content(100%);
+  }
+  .sidebar__input {
+    width: 50%;
+    font-size: 16px;
+  }
+  .sidebar__logo {
+    margin-top: 0.5em;
+    margin-left: 10%;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    grid-template-columns: 10% 1fr fit-content(100%);
+  }
+  .sidebar__input {
+    font-size: 14px;
+  }
+  .sidebar__element {
+    font-size: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .sidebar__logo {
+    display: none;
+  }
+  .sidebar__logo--fav {
+    display: block;
+  }
+  .sidebar__user--name {
+    display: none;
+  }
+  .sidebar__user--photo {
+    margin-right: 1em;
   }
 }
 .auth__service {
