@@ -2602,19 +2602,19 @@ textarea {
 }
 
 .attach-container {
-  max-width: inherit;
+  max-width: 500px;
 }
 
 .img-preview {
-  max-width: inherit;
+  max-width: 100%;
 }
 
 .video-preview {
-  max-width: inherit;
+  max-width: 100%;
 }
 
 .audio-preview {
-  max-width: inherit;
+  max-width: 100%;
 }
 
 /*# sourceMappingURL=index.css.map */
