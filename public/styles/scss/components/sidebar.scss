@@ -1,152 +1,125 @@
 @import "../general/variables";
 
-$logo-ml: 5em;
-$find-height: 2em;
-$find-width: 45%;
-$find-color: #EBEDF0;
+@mixin v-align($height) {
+  line-height: $height;
+}
 
-$find-text-color: #545454;
-$find-background-pos: 2%;
+$sidebar__border-weight: 2px;
 
-$sidebar-pt: 0.5%;
-$sidebar-font-size: ($font-size * 1.3);
-
-$sidebar-href-offset: 3%;
-
-$grid-info-width: 10%;
-$grid-authors-width: 45%;
-
-$row-color: #c4c4c4;
-$vertical-row-width: 2px;
-
-#sideBar {
-  top: 0;
-  height: $sidebar-height;
-  width: 100%;
-  text-align: end;
+.sidebar {
   position: fixed;
-  display: flex;
-  z-index: $sidebar-z-index;
-  border-bottom: $hr-color solid $hr-width;
-  background-color: white;
-}
-
-.sidebar__logo {
-  @include clickable();
-  margin-left: $logo-ml;
-}
-
-.sideBar__menu {
-  width: 100%;
-  padding-top: $sidebar-pt;
-  font-size: $sidebar-font-size;
 
   display: grid;
-  grid-template-columns: $grid-info-width $grid-authors-width (100% - $grid-info-width - $grid-authors-width);
+  grid-template-columns: 7% 7% 1fr fit-content(100%);
+
+  width: 100%;
+  height: $sidebar-height;
+  font-size: $font-size-2;
+
+  border-bottom: $hr-color solid $sidebar__border-weight;
+  background-color: $default-color;
 }
 
-#find__input {
-  background-repeat: no-repeat;
+$sidebar__element-offset: 0.4vw;
+
+.sidebar__element {
+  margin-left: $sidebar__element-offset;
+  margin-right: $sidebar__element-offset;
 }
 
-.find__input {
-  padding-left: $find-height;
+.sidebar__about--element {
+  margin-left: 0.8vw;
+}
 
-  height: $find-height;
-  width: $find-width;
-
-  border-radius: $elem-border-radius;
-  border: 0;
-
-  background-color: $find-color;
-  background-position: $find-background-pos;
-
-  color: $find-text-color;
-  font-size: $sidebar-font-size;
+.sidebar__logo--container, .sidebar__user {
+  @include v-align($sidebar-height);
 }
 
 .sidebar__info {
-  text-align: start;
+  @include v-align($sidebar-height);
 }
 
-.sidebar__user {
-  text-align: end;
-  padding-right: 2em;
-
-  a {
-    position: relative;
-    top: -0.5em;
-  }
-}
-
-$sidebar-about-offset: 20%;
+$sidebar__element-height: 1em;
 
 .sidebar__about {
-  margin-left: $sidebar-about-offset;
-  padding-left: $sidebar-about-offset;
+  height: $sidebar__element-height;
   position: relative;
-  top: 15%;
-  border-left: $row-color solid $vertical-row-width;
+  top: (($sidebar-height - $sidebar__element-height) / 2);
+  border-left: $hr-color solid $sidebar__border-weight;
+  @include v-align($sidebar__element-height)
 }
 
-.sidebar__href {
-  margin-right: $sidebar-href-offset;
+.sidebar__authors {
+  @include v-align($sidebar-height);
+  text-align: center;
 }
 
-#sidebar__find {
-  padding-left: 4px;
+$sidebar-offset: 0.4vw;
+
+.sidebar__logo {
+  height: ($sidebar-height * 0.9);
+  padding-left: $sidebar-offset;
 }
 
-.sidebar__feed {
-  position: relative;
-  width: fit-content;
-  top: -0.5em;
-  padding-right: $sidebar-href-offset;
-  border-right: $row-color solid $vertical-row-width;
+$sidebar__input-background-color: #ebedf0;
 
-  a {
-    position: relative;
-    top: 0.05em;
-    left: 1em;
-  }
+.sidebar__input {
+  height: ($sidebar-height * 0.6);
+  width: 30%;
+  font-size: $font-size-2;
+
+  padding-left: 2em;
+  padding-right: 0.5em;
+
+  border: none;
+  border-radius: 0.9em;
+
+  background-color: $sidebar__input-background-color;
+  background-repeat: no-repeat;
+  background-position: 2%;
 }
 
 .sidebar__subs {
-  position: relative;
-  width: fit-content;
-  top: -0.5em;
-  padding-right: $sidebar-href-offset;
-  margin-right: 1em;
-  border-right: $row-color solid $vertical-row-width;
+  border-left: $hr-color solid $sidebar__border-weight;
+  border-right: $hr-color solid $sidebar__border-weight;
+}
 
-  a {
-    position: relative;
-    top: 0.05em;
-    left: 1em;
+.sidebar__user {
+  text-align: right;
+  padding-right: $sidebar-offset;
+}
+
+$sidebar__notification-height: 1.5em;
+
+.sidebar__notification {
+  height: $sidebar__notification-height;
+  position: relative;
+  top: (($sidebar-height - $sidebar__notification-height) / 4);
+}
+
+$sidebar__user--photo-height: 2em;
+
+.sidebar__user--photo {
+  width: $sidebar__user--photo-height;
+  height: $sidebar__user--photo-height;
+  border-radius: 100%;
+  background-size: 100%;
+
+  position: relative;
+  top: (($sidebar-height - $sidebar__user--photo-height) / 2);
+}
+
+//------1300px------//
+
+@media (max-width: 1300px) {
+  .sidebar__media--1300px {
+    display: none;
   }
 }
 
-#sidebar__reg, #sidebar__auth {
-  top: 0.4em;
+@media (max-width: 1000px) {
+  .sidebar__media--1000px {
+    display: none;
+  }
 }
 
-$sidebar__img-height: 2em;
-
-.user__photo {
-  border-radius: ($sidebar__img-height / 2);
-  height: $sidebar__img-height;
-  width: $sidebar__img-height;
-  margin-right: 1em;
-
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-#sidebar__modalWindow {
-  margin-right: 0;
-}
-
-.sidebar__notification {
-  margin-right: 0.5em;
-  padding-bottom: 0.2em;
-}

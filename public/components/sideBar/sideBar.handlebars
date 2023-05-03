@@ -1,50 +1,58 @@
-<div id="sideBar">
-    <img class="sidebar__logo" id="logo" src="../../images/logo.png" alt="logo">
-    <div class="sideBar__menu">
-        <div class="sidebar__info">
-            {{#if about.showDisplay}}
-                <div class="{{about.id}}">
-                    <a id="{{about.id}}" class="sidebar__href hover--underline" href={{abput.href}}> {{about.name}} </a>
-                </div>
-            {{/if}}
-        </div>
+<div id="sideBar" class="sidebar">
+    <div class="sidebar__logo--container">
+        <img class="sidebar__logo" id="logo" src="../../images/logo.png" alt="logo">
+    </div>
+    <div class="sidebar__info sidebar__media--1000px">
+        {{#if about.showDisplay}}
+            <div class="sidebar__about">
+                <a id="{{about.id}}" class="sidebar__about--element hover--underline"
+                   href={{abput.href}}>
+                    О нас
+                </a>
+            </div>
+        {{/if}}
+    </div>
 
-        <div class="sidebar__authors">
-            {{#if beAuthor.showDisplay}}
-                <a id="{{beAuthor.id}}" class="sidebar__href hover--underline"
-                   href={{beAuthor.href}}> {{beAuthor.name}} </a>
-            {{/if}}
-            {{#if findAuth.showDisplay}}
-                <a id="{{findAuth.id}}" class="sidebar__href hover--underline"
-                   href={{findAuth.href}}> {{findAuth.name}} </a>
-                <input class="find__input" id="find__input" type="text" placeholder="Поиск авторов">
-            {{/if}}
-        </div>
+    <div class="sidebar__authors">
+        {{#if beAuthor.showDisplay}}
+            <a id="{{beAuthor.id}}" class="sidebar__element hover--underline sidebar__media--1000px"
+               href={{beAuthor.href}}> Стать автором </a>
+        {{/if}}
 
-        <div class="sidebar__user">
-            {{#if feed.showDisplay}}
-                <span class="sidebar__feed">
-                    <a id="{{feed.id}}" class="sidebar__href hover--underline" href={{feed.href}}> {{feed.name}} </a>
-                </span>
-            {{/if}}
-            {{#if subs.showDisplay}}
-                <span class="sidebar__subs">
-                    <a id="{{subs.id}}" class="sidebar__href hover--underline" href={{subs.href}}> {{subs.name}} </a>
-                </span>
-            {{/if}}
-            {{#if reg.showDisplay}}
-                <a id="{{reg.id}}" class="sidebar__href hover--underline" href={{reg.href}}> {{reg.name}} </a>
-            {{/if}}
-            {{#if auth.showDisplay}}
-                <a id="{{auth.id}}" class="sidebar__href hover--underline" href={{auth.href}}> {{auth.name}} </a>
-            {{/if}}
-            {{#if modalWindow.showDisplay}}
+        {{#if findAuth.showDisplay}}
+            <a id="{{findAuth.id}}" class="sidebar__element hover--underline sidebar__media--1000px"
+               href={{findAuth.href}}> Авторы </a>
+            <input class="sidebar__input sidebar__element" id="find__input" type="text" placeholder="Поиск авторов">
+        {{/if}}
+    </div>
 
-                <img class="sidebar__notification" src="../../images/notification.svg" alt="notification">
-                <img id="sidebar__user--photo" class="user__photo" src="../../images/{{modalWindow.photo}}.jpg" alt="">
-                <a id="{{modalWindow.id}}" class="sidebar__href hover--underline"
-                   href={{modalWindow.href}}> {{modalWindow.name}} </a>
-            {{/if}}
-        </div>
+    <div class="sidebar__user">
+        {{#if feed.showDisplay}}
+            <span class="sidebar__feed sidebar__media--1300px">
+                <a id="{{feed.id}}" class="sidebar__element hover--underline" href={{feed.href}}> Лента </a>
+            </span>
+        {{/if}}
+
+        {{#if subs.showDisplay}}
+            <span class="sidebar__subs sidebar__media--1300px">
+                <a id="{{subs.id}}" class="sidebar__element hover--underline" href={{subs.href}}> Подписки </a>
+            </span>
+        {{/if}}
+
+        {{#if reg.showDisplay}}
+            <a id="{{reg.id}}" class="sidebar__element hover--underline" href={{reg.href}}> Регистрация </a>
+        {{/if}}
+
+        {{#if auth.showDisplay}}
+            <a id="{{auth.id}}" class="sidebar__element hover--underline" href={{auth.href}}> Войти </a>
+        {{/if}}
+
+        {{#if modalWindow.showDisplay}}
+            <img class="sidebar__notification sidebar__element sidebar__media--1300px" src="../../images/notification.svg" alt="notification">
+            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element"
+                 src="../../images/{{modalWindow.photo}}.jpg" alt="">
+            <a id="{{modalWindow.id}}" class="sidebar__element hover--underline"
+               href={{modalWindow.href}}> {{modalWindow.name}} </a>
+        {{/if}}
     </div>
 </div>

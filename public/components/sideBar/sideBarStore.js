@@ -13,9 +13,8 @@ class SideBarStore {
   #config;
 
   constructor() {
-    this.#config = {
+    this.#config = { // TODO уведомления
       about: {
-        name: 'О нас',
         href: URLS.root,
         id: 'sidebar__about',
         showDisplay: true,
@@ -23,7 +22,6 @@ class SideBarStore {
         render: router.go,
       },
       feed: {
-        name: 'Лента',
         href: URLS.feed,
         id: 'sidebar__feed',
         showDisplay: userStore.getUserState().isAuthorizedIn,
@@ -31,7 +29,6 @@ class SideBarStore {
         render: router.go,
       },
       findAuth: {
-        name: 'Авторы',
         href: URLS.search,
         id: 'sidebar__find',
         showDisplay: true,
@@ -39,7 +36,6 @@ class SideBarStore {
         render: router.go,
       },
       subs: {
-        name: 'Подписки',
         href: URLS.subscriptions,
         id: 'sidebar__subs',
         showDisplay: userStore.getUserState().isAuthorizedIn,
@@ -47,23 +43,20 @@ class SideBarStore {
         render: router.go,
       },
       reg: {
-        name: 'Регистрация',
-        href: '/register',
+        href: '',
         id: 'sidebar__reg',
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
         render: Actions.renderReg,
       },
       auth: {
-        name: 'Войти',
-        href: '/auth',
+        href: '',
         id: 'sidebar__auth',
         showDisplay: !userStore.getUserState().isAuthorizedIn,
         parent: rootElement,
         render: Actions.renderAuth,
       },
       beAuthor: {
-        name: 'Стать автором',
         href: '',
         id: 'sidebar__beAuthor',
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
@@ -92,6 +85,10 @@ class SideBarStore {
     this.#config.beAuthor.showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
     this.#config.modalWindow.showDisplay = userIn.isAuthorizedIn;
     this.#config.modalWindow.name = userIn.usernameIn;
+  }
+
+  getState() {
+    return this.#config;
   }
 
   reduce(action) {
