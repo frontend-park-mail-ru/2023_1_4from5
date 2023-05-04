@@ -1662,13 +1662,14 @@ textarea {
   z-index: 4;
   opacity: 1;
   width: 45%;
-  height: 70%;
+  height: 80%;
   margin-left: 27.5%;
 }
 
 .aim__form {
   width: 60%;
   margin: 2em auto 0 auto;
+  text-align: center;
 }
 
 .aim__title {
@@ -1708,6 +1709,35 @@ textarea {
   height: 1em;
 }
 
+@media (max-width: 1000px) {
+  .aim--popup__container {
+    width: 60vw;
+    margin-left: 20vw;
+  }
+}
+@media (max-width: 800px) {
+  .aim--popup__container {
+    width: 80vw;
+    margin-left: 10vw;
+  }
+  .aim__form {
+    width: 80%;
+  }
+  .description--title {
+    font-size: 20px;
+  }
+}
+@media (max-width: 500px) {
+  .aim--popup__container {
+    height: 70vh;
+  }
+  .aim__title {
+    font-size: 24px;
+  }
+  .aim__input {
+    font-size: 16px;
+  }
+}
 #root {
   font-size: 16px;
   font-family: "DM Sans", sans-serif;
