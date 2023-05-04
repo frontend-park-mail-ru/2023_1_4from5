@@ -5,6 +5,7 @@ import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { winSettings } from './winSettings.js';
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
+import { sideBarStore } from '../sideBar/sideBarStore';
 
 const contentElement = document.querySelector('main');
 
@@ -59,7 +60,9 @@ class WinSettingsStore {
     switch (action.type) {
       case ActionTypes.RENDER_WINSETTINGS:
         this.setState(userStore.getUserState());
-        winSettings.config = this.#config;
+        const sidebarState = sideBarStore.getState();
+
+        winSettings.config = Object.assign(this.#config, sidebarState);
         winSettings.render();
         break;
 
