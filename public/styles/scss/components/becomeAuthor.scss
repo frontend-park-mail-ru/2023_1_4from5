@@ -18,6 +18,7 @@ $becomeAuthor-width: 30%;
 
 .becameAuthor__name {
   margin-top: 3em;
+  margin-bottom: $form-input-mb;
 }
 
 .becameAuthor--input {
@@ -28,7 +29,6 @@ $becomeAuthor-width: 30%;
   border: $form-input-border-color solid $form-input-border-width;
   border-radius: $elem-border-radius;
 
-  margin-bottom: $form-input-mb;
   padding: 0 $form-input-padding-side;
 }
 
