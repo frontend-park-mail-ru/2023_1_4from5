@@ -16,7 +16,9 @@ export function clickHandler(event, config) {
         target = config[element];
       }
     }
-    target.render(target.href);
+    if (target) {
+      target.render(target.href);
+    }
   } else if (event.target.parentElement instanceof HTMLAnchorElement) {
     event.preventDefault();
     const targetId = event.target.parentElement.id;
@@ -26,6 +28,8 @@ export function clickHandler(event, config) {
         target = config[element];
       }
     }
-    target.render(target.href);
+    if (target) {
+      target.render(target.href);
+    }
   }
 }
