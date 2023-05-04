@@ -63,6 +63,15 @@ class SideBarStore {
         parent: contentElement,
         render: Actions.renderBecomeAuthor,
       },
+      notifications: {
+        href: '',
+        id: 'sidebar__notifications',
+        showDisplay: userStore.getUserState().isAuthorizedIn,
+        parent: contentElement,
+        render() {
+          console.log('Уведомления');
+        }
+      },
       modalWindow: {
         name: userStore.getUserState().usernameIn,
         photo: userStore.getUserState().profilePhoto,
@@ -72,6 +81,13 @@ class SideBarStore {
         parent: contentElement,
         render: Actions.renderWinSettings,
       },
+      menu: {
+        href: '/modalWindow',
+        id: 'sidebar__menu',
+        showDisplay: userStore.getUserState().isAuthorizedIn,
+        parent: contentElement,
+        render: Actions.renderWinSettings,
+      }
     };
     dispatcher.register(this.reduce.bind(this));
   }
@@ -83,6 +99,7 @@ class SideBarStore {
     this.#config.reg.showDisplay = !userIn.isAuthorizedIn;
     this.#config.auth.showDisplay = !userIn.isAuthorizedIn;
     this.#config.beAuthor.showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
+    this.#config.notifications.showDisplay = userIn.isAuthorizedIn;
     this.#config.modalWindow.showDisplay = userIn.isAuthorizedIn;
     this.#config.modalWindow.name = userIn.usernameIn;
   }

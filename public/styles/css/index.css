@@ -1315,6 +1315,18 @@ p, h1, h2, h3, h4, h5 {
   box-shadow: 5px 5px 5px #b7b7b7;
 }
 
+.media__1300px {
+  display: none;
+}
+
+.media__1000px {
+  display: none;
+}
+
+.media__480px {
+  display: none;
+}
+
 .winsettings__chapter {
   height: fit-content;
   margin: 0.7em 1em 0.7em 1em;
@@ -1335,6 +1347,21 @@ p, h1, h2, h3, h4, h5 {
   color: rgba(128, 128, 128, 0.45);
 }
 
+@media (max-width: 1300px) {
+  .media__1300px {
+    display: block;
+  }
+}
+@media (max-width: 1000px) {
+  .media__1000px {
+    display: block;
+  }
+}
+@media (max-width: 480px) {
+  .media__480px {
+    display: block;
+  }
+}
 #root {
   font-size: 16px;
   font-family: "DM Sans", sans-serif;

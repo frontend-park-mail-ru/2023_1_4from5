@@ -2,6 +2,17 @@
 </div>
 <div id="winSettings">
 <!--TODO порядок-->
+    <div class="media__480px">
+        {{#if modalWindow.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{modalWindow.id}}" class="winsettings__href" href={{modalWindow.href}}>
+                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    <p>{{modalWindow.name}}</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+    </div>
     <div class="media__1300px">
         {{#if feed.showDisplay}}
             <div class="winsettings__chapter">
@@ -50,16 +61,6 @@
                 <a id="{{findAuth.id}}" class="winsettings__href" href={{findAuth.href}}>
                     <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
                     <p>Авторы</p>
-                </a>
-            </div>
-            <hr class="winsettings__hr">
-        {{/if}}
-
-        {{#if modalWindow.showDisplay}}
-            <div class="winsettings__chapter">
-                <a id="{{modalWindow.id}}" class="winsettings__href" href={{modalWindow.href}}>
-                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
-                    <p>{{modalWindow.name}}</p>
                 </a>
             </div>
             <hr class="winsettings__hr">
