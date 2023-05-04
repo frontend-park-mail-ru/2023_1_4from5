@@ -11,6 +11,7 @@ class SubscriptionsStore {
   async reduce(action) {
     switch (action.type) {
       case ActionTypes.RENDER_SUBSCRIPTIONS:
+        console.log('SubscriptionsStore');
         const reqSubs = await request.get('/api/user/subscriptions');
         const subs = await reqSubs.json();
 

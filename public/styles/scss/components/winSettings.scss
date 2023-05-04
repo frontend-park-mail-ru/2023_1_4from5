@@ -4,7 +4,7 @@ $winsettings-width: fit-content;
 
 #winSettings {
   position: fixed;
-  top: $sidebar-height;
+  top: $sidebar-height * 1.25;
   right: 0;
 
   padding: 0.3em;
@@ -74,5 +74,10 @@ $winsettings__hr-width: 80%;
 @media (max-width: 480px) {
   .media__480px {
     display: block;
+  }
+  .disabled {
+    pointer-events: none; /* делаем элемент неактивным для взаимодействия */
+    cursor: default; /*  курсор в виде стрелки */
+    color: #888;/* цвет текста серый */
   }
 }
