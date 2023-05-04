@@ -1,6 +1,5 @@
 import template from './becomeAuthor.handlebars';
 import { Actions } from '../../actions/actions';
-import { router } from '../../modules/Router';
 
 const contentElement = document.querySelector('main');
 
@@ -36,11 +35,16 @@ class BecomeAuthor {
     const nameInput = document.getElementById('becameAuthor__name--input');
     const descriptionInput = document.getElementById('becameAuthor__description--input');
 
+    const errorNameOutput = document.getElementById('becameAuthor__description--err');
+    const errorDescriptionOutput = document.getElementById('becameAuthor__name--err');
+
     bcmAuthorBtn.addEventListener('click', (e) => {
       e.preventDefault();
       Actions.becomeAuthor({
         nameInput,
         descriptionInput,
+        errorNameOutput,
+        errorDescriptionOutput,
       });
     });
   }
@@ -53,13 +57,16 @@ class BecomeAuthor {
     const descriptionInput = document.getElementById('becameAuthor__description--input');
     descriptionInput.value = description;
 
+    const errorNameOutput = document.getElementById('becameAuthor__name--err');
+    const errorDescriptionOutput = document.getElementById('becameAuthor__description--err');
+
     bcmAuthorBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const newName = nameInput.value;
-      const newDescription = descriptionInput.value;
       Actions.updateProfile({
-        newName,
-        newDescription,
+        nameInput,
+        descriptionInput,
+        errorNameOutput,
+        errorDescriptionOutput,
       });
     });
   }

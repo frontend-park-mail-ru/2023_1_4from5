@@ -8,6 +8,12 @@ const LENGTH = {
   MIN_USERNAME: 1,
   MAX_USERNAME: 20,
 
+  MIN_CREATOR_NAME: 1,
+  MAX_CREATOR_NAME: 40,
+
+  MIN_CREATOR_DESCRIPTION: 1,
+  MAX_CREATOR_DESCRIPTION: 250,
+
   MAX_MONEY: 9,
   MAX_DESCRIPTION_AIM: 50,
   MAX_TITLE_POST: 40,
@@ -66,9 +72,6 @@ function isLetter(code) {
 //       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
 // }
 function isWhiteSignWithRus(code) {
-  // space, dash, point, zero-nine, ENG_UPPER_A-ENG_UPPER_Z,
-  // underlining, ENG_LOWER_A - ENG_LOWER_Z,
-  // RUS_UPPER_A - RUS_LOWER_P, RUS_LOWER_R - RUS_LOWER_E
   return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
@@ -76,6 +79,7 @@ function isWhiteSignWithRus(code) {
       || code === ASCII.UNDERLINING || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
       || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
+
 function isWhiteSign(code) {
   return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
@@ -87,6 +91,7 @@ function isWhiteSign(code) {
 function isWhiteSignPassword(code) {
   return (code >= ASCII.SPACE && code <= ASCII.TILDE);
 }
+
 /**
  * validation of password input
  * @param {String} inputStr - injected password
@@ -107,15 +112,6 @@ export function isValidPassword(inputStr) {
       flag: false,
       error: 'Превышена максимальная длина пароля',
     },
-    // убрал, потому что кажется Саша так говорил и бэк его послушал
-    // hasUpper: {
-    //   flag: false,
-    //   error: 'Пароль должен содержать хотя бы 1 заглавную букву',
-    // },
-    // hasLower: {
-    //   flag: false,
-    //   error: 'Пароль должен содержать хотя бы 1 букву',
-    // },
     hasLetter: {
       flag: false,
       error: 'Пароль должен содержать хотя бы 1 букву',
@@ -124,10 +120,6 @@ export function isValidPassword(inputStr) {
       flag: false,
       error: 'Пароль должен содержать хотя бы 1 цифру',
     },
-    // hasSpecial: {
-    //   flag: true,
-    //   error: 'Пароль должен содержать хотя бы 1 спец. символ',
-    // },
   };
   if (inputStr.length >= LENGTH.MIN_PASSWORD) {
     flags.hasMinLen.flag = true;
@@ -227,6 +219,50 @@ export function isValidUsername(inputStr) {
   return '';
 }
 
+export function isValidCreatorName(inputStr) {
+  console.log(inputStr);
+  const flags = {
+    hasBlackSign: {
+      flag: false,
+      error: 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители',
+    },
+    hasMinLen: {
+      flag: false,
+      error: 'Введите название блога',
+    },
+    hasMaxLen: {
+      flag: false,
+      error: `Название блога не должно превышать ${LENGTH.MAX_CREATOR_NAME} символов`,
+    },
+  };
+  if (!inputStr || inputStr.length < LENGTH.MIN_CREATOR_NAME) {
+    return flags.hasMinLen.error;
+  }
+  if (inputStr.length > LENGTH.MAX_CREATOR_NAME) {
+    return flags.hasMaxLen.error;
+  }
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isWhiteSignWithRus(code)) {
+      return flags.hasBlackSign.error;
+    }
+  }
+  return '';
+}
+
+export function isValidCreateDescription(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Описание блога не должно превышать ${LENGTH.MAX_CREATOR_DESCRIPTION} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_CREATOR_DESCRIPTION) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
 export function isValidMoneyString(inputStr) {
   const flags = {
     onlyNumber: {
@@ -308,7 +344,7 @@ export function isValidTextPost(inputStr) {
   const flags = {
     hasMaxLen: {
       flag: true,
-      error: `Длина текста поста не должна превашать ${LENGTH.MAX_TEXT_POST} символов`,
+      error: `Длина текста поста не должна превышать ${LENGTH.MAX_TEXT_POST} символов`,
     },
   };
   if (inputStr.length > LENGTH.MAX_TEXT_POST) {

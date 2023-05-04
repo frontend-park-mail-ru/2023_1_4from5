@@ -4,14 +4,14 @@ $feed-width: 60%;
 
 .feed {
   width: $feed-width;
-  margin: 5% auto auto;
+  margin: 5.5em auto auto;
 }
 
 .feed__card {
   border-radius: $elem-border-radius;
   background-color: $card-color;
   padding: 2%;
-  margin-bottom: 5em;
+  margin-bottom: 2em;
   @include shadow();
 }
 
@@ -72,7 +72,7 @@ $content-side-offset: 7%;
 $like__space-width: 90%;
 
 .feed__footer {
-  padding: 0 $content-side-offset 1em $content-side-offset;
+  padding: 0 $content-side-offset 0.1em $content-side-offset;
   font-size: $font-size-3;
   display: grid;
   grid-template-columns: $like__space-width (100% - $like__space-width);
@@ -100,4 +100,116 @@ $like__space-width: 90%;
 
 .feed__comment--container {
   text-align: end;
+}
+
+// -------- 1500 -------- //
+
+@media (max-width: 1500px) {
+  #feed__creator--photo {
+    height: 3.5em;
+    width: 3.5em;
+  }
+
+  .feed__date {
+    font-size: 18px;
+  }
+
+  .feed__footer {
+    font-size: 18px;
+  }
+
+}
+
+// -------- 1200 -------- //
+
+@media (max-width: 1200px) {
+  .feed {
+    width: 70%;
+  }
+
+  .feed__header {
+    grid-template-columns: 12% 88%;
+    grid-template-rows: 70% 30%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .feed__date--container {
+    grid-column-start: 2;
+  }
+
+  .feed__creator--name {
+    margin-top: 0.5em;
+    height: fit-content;
+    text-align: start;
+  }
+
+  .feed__date {
+    margin-top: 0;
+    text-align: start;
+    font-size: 16px;
+  }
+
+  .feed__creator--photo {
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  #feed__creator--photo {
+    height: 3em;
+    width: 3em;
+  }
+
+  .feed__footer {
+    font-size: 16px;
+  }
+}
+
+// -------- 1000 -------- //
+
+@media (max-width: 1000px) {
+  .feed {
+    width: 80%;
+  }
+
+  .feed__card {
+    margin-bottom: 1em;
+  }
+
+  .feed__header {
+    grid-template-columns: 15% 85%;
+  }
+
+  #feed__creator--photo {
+    height: 2.5em;
+    width: 2.5em;
+  }
+
+  .feed__creator--name {
+    font-size: 18px;
+  }
+
+  .feed__date {
+    font-size: 16px;
+  }
+}
+
+// -------- 768 -------- //
+
+@media (max-width: 768px) {
+  .feed {
+    width: 90%;
+  }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+  .feed {
+    width: 95%;
+  }
+
+  .feed__header {
+    grid-template-columns: 20% 80%;
+  }
 }
