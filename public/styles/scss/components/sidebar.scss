@@ -18,6 +18,8 @@ $sidebar__border-weight: 2px;
 
   border-bottom: $hr-color solid $sidebar__border-weight;
   background-color: $default-color;
+
+  z-index: $sidebar-z-index;
 }
 
 $sidebar__element-offset: 0.4vw;
