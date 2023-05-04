@@ -35,7 +35,7 @@ class WinSettingsStore {
         name: 'Настройки',
         href: URLS.settings,
         id: 'winSetting-settings',
-        showDisplay: true,
+        showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
         render: router.go,
       },
@@ -43,7 +43,7 @@ class WinSettingsStore {
         name: 'Выйти',
         href: URLS.root,
         id: 'winSetting-startPage',
-        showDisplay: true,
+        showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
         render: Actions.logout,
       },
@@ -54,6 +54,8 @@ class WinSettingsStore {
   setState(user) {
     this.#config.profile.showDisplay = user.isAuthorIn;
     this.#config.finance.showDisplay = user.isAuthorIn;
+    this.#config.settings.showDisplay = user.isAuthorizedIn;
+    this.#config.logout.showDisplay = user.isAuthorizedIn;
   }
 
   reduce(action) {

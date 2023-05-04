@@ -623,6 +623,7 @@ p, h1, h2, h3, h4, h5 {
 .sidebar__logo {
   height: 3.15em;
   padding-left: 0.4vw;
+  cursor: pointer;
 }
 
 .sidebar__logo--fav {
@@ -630,6 +631,7 @@ p, h1, h2, h3, h4, h5 {
   padding-left: 3vw;
   padding-top: 40%;
   display: none;
+  cursor: pointer;
 }
 
 .sidebar__input {
@@ -671,6 +673,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .sidebar__menu {
+  cursor: pointer;
   display: none;
 }
 
@@ -699,6 +702,19 @@ p, h1, h2, h3, h4, h5 {
     margin-top: 0.5em;
     margin-left: 10%;
   }
+  .sidebar__user--name {
+    display: none;
+  }
+  .sidebar__menu {
+    display: inline;
+    position: relative;
+    top: 0.45em;
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
+  .sidebar__user--photo {
+    top: 0.45em;
+  }
 }
 @media (max-width: 768px) {
   .sidebar {
@@ -724,19 +740,6 @@ p, h1, h2, h3, h4, h5 {
   .sidebar__logo--fav {
     margin-top: 0.5em;
     display: block;
-  }
-  .sidebar__user--name {
-    display: none;
-  }
-  .sidebar__menu {
-    display: inline;
-    position: relative;
-    top: 0.45em;
-    margin-right: 2vw;
-    margin-left: 2vw;
-  }
-  .sidebar__user--photo {
-    top: 0.45em;
   }
 }
 .auth__service {
@@ -1474,11 +1477,6 @@ p, h1, h2, h3, h4, h5 {
 }
 @media (max-width: 1000px) {
   .media__1000px {
-    display: block;
-  }
-}
-@media (max-width: 480px) {
-  .media__480px {
     display: block;
   }
   .disabled {
