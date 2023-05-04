@@ -507,7 +507,7 @@ p, h1, h2, h3, h4, h5 {
 
 .sidebar__logo--fav {
   width: 100%;
-  padding-left: 2vw;
+  padding-left: 3vw;
   padding-top: 40%;
   display: none;
 }
@@ -550,6 +550,10 @@ p, h1, h2, h3, h4, h5 {
   top: 0.75em;
 }
 
+.sidebar__menu {
+  display: none;
+}
+
 @media (max-width: 1300px) {
   .sidebar__logo {
     height: fit-content;
@@ -580,25 +584,39 @@ p, h1, h2, h3, h4, h5 {
   .sidebar {
     grid-template-columns: 10% 1fr fit-content(100%);
   }
-  .sidebar__input {
-    font-size: 14px;
-  }
   .sidebar__element {
     font-size: 16px;
   }
+  .sidebar__input {
+    font-size: 14px;
+  }
 }
 @media (max-width: 480px) {
+  .sidebar {
+    grid-template-columns: 7% 1fr fit-content(100%);
+  }
+  .sidebar__reg {
+    display: none;
+  }
   .sidebar__logo {
     display: none;
   }
   .sidebar__logo--fav {
+    margin-top: 0.5em;
     display: block;
   }
   .sidebar__user--name {
     display: none;
   }
+  .sidebar__menu {
+    display: inline;
+    position: relative;
+    top: 0.45em;
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
   .sidebar__user--photo {
-    margin-right: 1em;
+    top: 0.45em;
   }
 }
 .auth__service {
