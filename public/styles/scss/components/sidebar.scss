@@ -63,7 +63,7 @@ $sidebar-offset: 0.4vw;
 
 .sidebar__logo--fav {
   width: 100%;
-  padding-left: 2vw;
+  padding-left: 3vw;
   padding-top: 40%;
   display: none;
 }
@@ -116,6 +116,10 @@ $sidebar__user--photo-height: 2em;
   top: (($sidebar-height - $sidebar__user--photo-height) / 2);
 }
 
+.sidebar__menu {
+  display: none;
+}
+
 //------1300px------//
 
 @media (max-width: 1300px) {
@@ -155,21 +159,31 @@ $sidebar__user--photo-height: 2em;
     grid-template-columns: 10% 1fr fit-content(100%);
   }
 
-  .sidebar__input {
-    font-size: $font-size-small;
-  }
-
   .sidebar__element {
     font-size: $font-size;
+  }
+
+  .sidebar__input {
+    font-size: $font-size-small;
   }
 }
 
 @media (max-width: 480px) {
+  .sidebar {
+    grid-template-columns: 7% 1fr fit-content(100%);
+  }
+
+  .sidebar__reg {
+    display: none;
+  }
+
   .sidebar__logo {
     display: none;
   }
 
   .sidebar__logo--fav {
+    margin-top: 0.5em;
+    //margin-top: 0.5em;
     display: block;
   }
 
@@ -177,8 +191,18 @@ $sidebar__user--photo-height: 2em;
     display: none;
   }
 
+  $sidebar__img-top: 0.45em;
+
+  .sidebar__menu {
+    display: inline;
+    position: relative;
+    top: $sidebar__img-top;
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
+
   .sidebar__user--photo {
-    margin-right: 1em;
+    top: $sidebar__img-top;
   }
 }
 

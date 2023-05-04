@@ -41,7 +41,7 @@
         {{/if}}
 
         {{#if reg.showDisplay}}
-            <a id="{{reg.id}}" class="sidebar__element hover--underline" href={{reg.href}}> Регистрация </a>
+            <a id="{{reg.id}}" class="sidebar__reg sidebar__element hover--underline" href={{reg.href}}> Регистрация </a>
         {{/if}}
 
         {{#if auth.showDisplay}}
@@ -55,5 +55,7 @@
             <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
                href={{modalWindow.href}}> {{modalWindow.name}} </a>
         {{/if}}
+<!--        TODO логика для меню-->
+        <img id="sidebar__menu" class="sidebar__menu" src="../../images/menu.svg" alt="">
     </div>
 </div>
