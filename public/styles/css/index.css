@@ -2351,8 +2351,13 @@ textarea {
   margin-bottom: 3em;
 }
 
-.start__photo {
+.start__photo, .start__photo--top {
   width: 80%;
+}
+
+.start__photo--bottom {
+  width: 80%;
+  display: none;
 }
 
 .startPage__text--header {
@@ -2368,6 +2373,41 @@ textarea {
   margin-top: 1em;
 }
 
+@media (max-width: 1500px) {
+  .startPage__text--header {
+    font-size: 32px;
+  }
+  .start__text {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1200px) {
+  .startPage__text--header {
+    font-size: 24px;
+  }
+  .start__text {
+    font-size: 16px;
+  }
+}
+@media (max-width: 1000px) {
+  .startPage__intro, .startPage__usage, .startPage__forWhom {
+    grid-template-columns: 1fr;
+  }
+  .start__photo--top {
+    display: none;
+  }
+  .start__photo--bottom {
+    display: block;
+  }
+}
+@media (max-width: 500px) {
+  .startPage__text--header {
+    font-size: 20px;
+  }
+  .start__text {
+    font-size: 14px;
+  }
+}
 .img404 {
   width: 50%;
   margin-left: 20%;
