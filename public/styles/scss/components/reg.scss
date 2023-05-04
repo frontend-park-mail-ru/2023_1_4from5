@@ -7,8 +7,8 @@
 $popup-reg-width: 70%;
 $form-width: 40%;
 
-$reg-title-mt: 1em;
-$reg-title-mb: 1em;
+$reg-title-mt: 0.7em;
+$reg-title-mb: 0.5em;
 
 .reg__container{
   @include popup__container();
@@ -19,13 +19,13 @@ $reg-title-mb: 1em;
 }
 
 .reg__picture {
-  margin-top: 2em;
-  margin-left: 2em;
+  margin: auto;
   width: 85%;
 }
 
 .reg__title {
-  @extend .title;
+  font-size: $title-font-size;
+  text-align: center;
   margin-top: $reg-title-mt;
   margin-bottom: $reg-title-mb;
 }
@@ -35,14 +35,16 @@ $reg-title-mb: 1em;
 }
 
 .reg__tagline {
-  font-size: 1.09em;
+  font-size: $font-size;
+  height: 2em;
   text-align: center;
   margin-bottom: 1em;
 }
 
 .reg__input--form {
-  @extend .input--form;
-  margin-bottom: 0;
+  height: ($input-height * 0.8);
+  display: grid;
+  grid-template-columns: 90% 10%;
 }
 
 #username__form, #login__form, #password__form, #password--repeat__form {
@@ -63,13 +65,8 @@ $reg-title-mb: 1em;
   outline-offset: 0;
 }
 
-#clear--username, #clear--login, #watch--pass, #watch--pass--repeat {
-  position: relative;
-  left: 10px;
-}
-
-#clear--username, #clear--login {
-  top: 5px;
+.reg__btn {
+  height: ($input-height * 0.8);
 }
 
 #toAuth {
@@ -80,4 +77,46 @@ $reg-title-mb: 1em;
   text-align: center;
   height: 1em;
   margin-bottom: 1em;
+}
+
+@media (max-width: 1500px) {
+  .reg__container {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .reg__picture {
+    display: none;
+  }
+
+  .reg__container {
+    grid-template-columns: 1fr;
+  }
+
+  .reg__form {
+    margin: auto;
+    width: 70%;
+  }
+}
+
+@media (max-width: 700px) {
+  $popup-reg-width-700px: 90vw;
+
+  .reg__container {
+    width: $popup-reg-width-700px;
+    margin-left: ((100vw - $popup-reg-width-700px) / 2);
+  }
+
+  .reg__title {
+    font-size: $font-size-3;
+  }
+
+  .reg__tagline {
+    font-size: $font-size-small;
+  }
+
+  .reg__input {
+    font-size: $font-size;
+  }
 }
