@@ -22,7 +22,7 @@ export class WinSettings {
   }
 
   render() {
-    console.log(this.#config)
+    console.log(this.#config);
     const newDiv = document.createElement('div');
     newDiv.id = 'winSettingsDiv';
     newDiv.innerHTML = template(this.#config);
@@ -48,3 +48,10 @@ export class WinSettings {
 }
 
 export const winSettings = new WinSettings(contentElement);
+
+// TODO при открытии модального окна (стать автором, рег/авто и др) winSettings спрятать
+//  (просто поменять z-index)
+
+// TODO сделать имя в winSettings некликабельный
+
+// TODO не работают Лента и Подписки в winSettings
