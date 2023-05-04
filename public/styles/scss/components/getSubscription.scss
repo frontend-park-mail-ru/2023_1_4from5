@@ -1,6 +1,7 @@
 @import "../general/variables";
 @import "../general/popup";
 @import "../general/input";
+@import "../general/text";
 @import "subscription";
 
 $popup__getsub-width: 30%;
@@ -21,6 +22,20 @@ $getsub__form-width: 80%;
   text-align: center;
 }
 
+.getsub__title {
+  @include title();
+  margin-bottom: 0.5em;
+}
+
+.getsub__description--title {
+  font-size: $font-size-3;
+  margin-bottom: 1em;
+}
+
+.aim__input {
+  width: 80%;
+}
+
 #getsub__months {
   text-align: center;
   margin-top: 5%;
@@ -28,4 +43,53 @@ $getsub__form-width: 80%;
 
 #getsub__btn {
   margin-top: 30%;
+}
+
+@media (max-width: 1600px) {
+  .getsub__title {
+    font-size: $font-size-4;
+  }
+
+  .getsub__description--title {
+    font-size: $font-size-2;
+  }
+}
+
+@media (max-width: 1200px) {
+  $popup__getsub-width-1200px: 50vw;
+
+  .getsub--popup__container {
+    width: $popup__getsub-width-1200px;
+    margin-left: ((100vw - $popup__getsub-width-1200px) / 2);
+  }
+}
+
+@media (max-width: 800px) {
+  $popup__getsub-width-800px: 60vw;
+
+  .getsub--popup__container {
+    width: $popup__getsub-width-800px;
+    margin-left: ((100vw - $popup__getsub-width-800px) / 2);
+  }
+
+  .getsub__title {
+    font-size: $font-size-3;
+  }
+
+  .getsub__description--title {
+    font-size: $font-size;
+  }
+
+  #getsub__btn {
+    margin-top: 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  $popup__getsub-width-600px: 90vw;
+
+  .getsub--popup__container {
+    width: $popup__getsub-width-600px;
+    margin-left: ((100vw - $popup__getsub-width-600px) / 2);
+  }
 }

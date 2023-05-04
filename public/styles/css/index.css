@@ -96,7 +96,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -135,7 +135,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -288,7 +288,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -333,7 +333,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1472,7 +1472,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1556,7 +1556,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1587,7 +1587,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1726,7 +1726,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1882,7 +1882,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1944,7 +1944,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -1955,6 +1955,20 @@ body {
 
 textarea {
   font-family: "DM Sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+.title {
+  font-size: 36px;
+  text-align: center;
 }
 
 #root {
@@ -1975,7 +1989,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -2060,6 +2074,21 @@ textarea {
   text-align: center;
 }
 
+.getsub__title {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.getsub__description--title {
+  font-size: 24px;
+  margin-bottom: 1em;
+}
+
+.aim__input {
+  width: 80%;
+}
+
 #getsub__months {
   text-align: center;
   margin-top: 5%;
@@ -2069,6 +2098,41 @@ textarea {
   margin-top: 30%;
 }
 
+@media (max-width: 1600px) {
+  .getsub__title {
+    font-size: 32px;
+  }
+  .getsub__description--title {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1200px) {
+  .getsub--popup__container {
+    width: 50vw;
+    margin-left: 25vw;
+  }
+}
+@media (max-width: 800px) {
+  .getsub--popup__container {
+    width: 60vw;
+    margin-left: 20vw;
+  }
+  .getsub__title {
+    font-size: 24px;
+  }
+  .getsub__description--title {
+    font-size: 16px;
+  }
+  #getsub__btn {
+    margin-top: 40%;
+  }
+}
+@media (max-width: 600px) {
+  .getsub--popup__container {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+}
 #root {
   font-size: 16px;
   font-family: "DM Sans", sans-serif;
@@ -2087,7 +2151,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
@@ -2109,8 +2173,8 @@ textarea {
   z-index: 4;
   opacity: 1;
   width: 30%;
-  background-color: #f0f0f0;
-  left: 35%;
+  background-color: white;
+  margin-left: 35%;
 }
 
 .becameAuthor__form {
@@ -2120,6 +2184,16 @@ textarea {
 
 .becameAuthor__name {
   margin-top: 3em;
+}
+
+.becameAuthor--input {
+  font-size: 1.3em;
+  height: 60px;
+  width: 95%;
+  border: #cccccc solid 2px;
+  border-radius: 15px;
+  margin-bottom: 3em;
+  padding: 0 0.5em;
 }
 
 #becameAuthor__description--input {
@@ -2148,6 +2222,49 @@ textarea {
   background-color: #ceced3;
 }
 
+@media (max-width: 1400px) {
+  .becameAuthor {
+    width: 40vw;
+    margin-left: 30vw;
+  }
+}
+@media (max-width: 1000px) {
+  .becameAuthor {
+    width: 50vw;
+    margin-left: 25vw;
+  }
+}
+@media (max-width: 800px) {
+  .becameAuthor__form {
+    padding: 2em;
+  }
+  .becameAuthor {
+    width: 60vw;
+    margin-left: 20vw;
+    font-size: 20px;
+  }
+  .becameAuthor--input {
+    margin-bottom: 2em;
+  }
+}
+@media (max-width: 800px) {
+  .becameAuthor {
+    width: 70vw;
+    margin-left: 15vw;
+  }
+  .becameAuthor--input {
+    font-size: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .becameAuthor {
+    width: 80vw;
+    margin-left: 10vw;
+  }
+  .becameAuthor--header {
+    font-size: 20px;
+  }
+}
 .subscriptions {
   padding: 3.5% 7% 0 7%;
   display: grid;
@@ -2431,7 +2548,7 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .donate__input, .becameAuthor--input {
+.input--form, .donate__input {
   font-size: 1.3em;
   width: 95%;
   border: #cccccc solid 2px;
