@@ -5,7 +5,7 @@
 @import "subscription";
 
 $popup__getsub-width: 30%;
-$popup__getsub-height: 70%;
+$popup__getsub-height: 70vh;
 
 .getsub--popup__container {
   @include popup__container();
@@ -42,7 +42,7 @@ $getsub__form-width: 80%;
 }
 
 #getsub__btn {
-  margin-top: 30%;
+  margin-top: 10vh;
 }
 
 @media (max-width: 1600px) {
@@ -80,9 +80,9 @@ $getsub__form-width: 80%;
     font-size: $font-size;
   }
 
-  #getsub__btn {
-    margin-top: 40%;
-  }
+  //#getsub__btn {
+  //  margin-top: ;
+  //}
 }
 
 @media (max-width: 600px) {

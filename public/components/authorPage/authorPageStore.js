@@ -5,8 +5,8 @@ import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
-import { aim } from './aim';
-import { getSubscription } from './getSubscription';
+import { aim } from '../aim/aim';
+import { getSubscription } from '../getSubscription/getSubscription';
 import { Actions } from '../../actions/actions';
 
 class AuthorPageStore {
