@@ -1957,6 +1957,20 @@ textarea {
   font-family: "DM Sans", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+.title {
+  font-size: 36px;
+  text-align: center;
+}
+
 #root {
   font-size: 16px;
   font-family: "DM Sans", sans-serif;
@@ -2060,6 +2074,21 @@ textarea {
   text-align: center;
 }
 
+.getsub__title {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.getsub__description--title {
+  font-size: 24px;
+  margin-bottom: 1em;
+}
+
+.aim__input {
+  width: 80%;
+}
+
 #getsub__months {
   text-align: center;
   margin-top: 5%;
@@ -2069,6 +2098,41 @@ textarea {
   margin-top: 30%;
 }
 
+@media (max-width: 1600px) {
+  .getsub__title {
+    font-size: 32px;
+  }
+  .getsub__description--title {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1200px) {
+  .getsub--popup__container {
+    width: 50vw;
+    margin-left: 25vw;
+  }
+}
+@media (max-width: 800px) {
+  .getsub--popup__container {
+    width: 60vw;
+    margin-left: 20vw;
+  }
+  .getsub__title {
+    font-size: 24px;
+  }
+  .getsub__description--title {
+    font-size: 16px;
+  }
+  #getsub__btn {
+    margin-top: 40%;
+  }
+}
+@media (max-width: 600px) {
+  .getsub--popup__container {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+}
 #root {
   font-size: 16px;
   font-family: "DM Sans", sans-serif;
