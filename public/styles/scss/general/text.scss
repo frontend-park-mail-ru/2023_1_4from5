@@ -16,3 +16,8 @@ p, h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
+@mixin title() {
+  font-size: $title-font-size;
+  text-align: center;
+}
+

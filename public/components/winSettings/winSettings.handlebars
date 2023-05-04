@@ -1,6 +1,82 @@
 <div id="background" class="background--settings">
 </div>
 <div id="winSettings">
+<!--TODO порядок-->
+    <div class="media__480px">
+        {{#if modalWindow.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{modalWindow.id}}" class="winsettings__href" href={{modalWindow.href}}>
+                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    <p>{{modalWindow.name}}</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+    </div>
+    <div class="media__1300px">
+        {{#if feed.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{feed.id}}" class="winsettings__href" href={{feed.href}}>
+                    <img class="winsettins__img" src="../../images/tag.svg" alt="myPage">
+                    <p>Лента</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+
+        {{#if feed.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{feed.id}}" class="winsettings__href" href={{feed.href}}>
+                    <img class="winsettins__img" src="../../images/tag.svg" alt="myPage">
+                    <p>Подписки</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+
+        {{#if notifications.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{notifications.id}}" class="winsettings__href" href={{notifications.href}}>
+                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    <p>Уведомления</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+    </div>
+
+    <div class="media__1000px">
+        {{#if beAuthor.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{beAuthor.id}}" class="winsettings__href" href={{beAuthor.href}}>
+                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    <p>Cтать автором</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+
+        {{#if findAuth.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{findAuth.id}}" class="winsettings__href" href={{findAuth.href}}>
+                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    <p>Авторы</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+
+        {{#if about.showDisplay}}
+            <div class="winsettings__chapter">
+                <a id="{{about.id}}" class="winsettings__href" href={{about.href}}>
+                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    <p>О нас</p>
+                </a>
+            </div>
+            <hr class="winsettings__hr">
+        {{/if}}
+    </div>
+
     {{#if profile.showDisplay}}
         <div class="winsettings__chapter">
             <a id="{{profile.id}}" class="winsettings__href" href={{profile.href}}>

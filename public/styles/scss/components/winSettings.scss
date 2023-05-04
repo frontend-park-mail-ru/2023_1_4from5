@@ -1,5 +1,4 @@
 @import "../general/variables";
-@import "sidebar";
 
 $winsettings-width: fit-content;
 
@@ -18,6 +17,18 @@ $winsettings-width: fit-content;
 
   z-index: $popup-z-index;
   @include shadow();
+}
+
+.media__1300px {
+  display: none;
+}
+
+.media__1000px {
+  display: none;
+}
+
+.media__480px {
+  display: none;
 }
 
 .winsettings__chapter {
@@ -40,4 +51,28 @@ $winsettings__hr-width: 80%;
 .winsettings__hr {
   width: $winsettings__hr-width;
   color: $hr-color;
+}
+
+// -------- 1300 -------- //
+
+@media (max-width: 1300px) {
+  .media__1300px {
+    display: block;
+  }
+}
+
+// -------- 1000 -------- //
+
+@media (max-width: 1000px) {
+  .media__1000px {
+    display: block;
+  }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+  .media__480px {
+    display: block;
+  }
 }
