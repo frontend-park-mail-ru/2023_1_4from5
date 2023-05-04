@@ -2,8 +2,10 @@ import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
 import template from './authorPage.handlebars';
-import { getSubscription } from './getSubscription';
+import { getSubscription } from '../getSubscription/getSubscription';
 import { userStore } from '../user/userStore';
+import { subscriptionLevels } from '../subscriptionLevels/subscriptionLevels';
+import { posts } from '../posts/posts';
 
 const contentElement = document.querySelector('main');
 
@@ -45,6 +47,9 @@ class AuthorPage {
     newDiv.id = 'myPageDiv';
     newDiv.innerHTML = template(config);
     this.#parent.appendChild(newDiv);
+
+    subscriptionLevels.render(config);
+    posts.render(config);
 
     this.#config.posts.forEach((post) => {
       if (post.attachments) {

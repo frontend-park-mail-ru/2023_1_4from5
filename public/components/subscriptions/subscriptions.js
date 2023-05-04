@@ -1,6 +1,6 @@
 import template from './subscriptions.handlebars';
 import { Actions } from '../../actions/actions';
-import { getSubscription } from '../authorPage/getSubscription';
+import { getSubscription } from '../getSubscription/getSubscription';
 
 const contentElement = document.querySelector('main');
 
