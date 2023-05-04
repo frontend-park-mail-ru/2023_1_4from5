@@ -73,7 +73,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-.title, .reg__title {
+.title {
   font-size: 36px;
   text-align: center;
 }
@@ -96,9 +96,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -136,9 +135,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -159,7 +157,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-.title, .reg__title {
+.title {
   font-size: 36px;
   text-align: center;
 }
@@ -198,6 +196,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .auth__input {
+  height: 60px;
   display: grid;
   grid-template-columns: 90% 10%;
 }
@@ -225,7 +224,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .auth__text {
-  font-size: 1.09em;
+  font-size: 16px;
 }
 
 @media (max-width: 1500px) {
@@ -289,9 +288,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -312,7 +310,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-.title, .reg__title {
+.title {
   font-size: 36px;
   text-align: center;
 }
@@ -335,9 +333,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -358,7 +355,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-.title, .reg__title {
+.title {
   font-size: 36px;
   text-align: center;
 }
@@ -397,6 +394,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .auth__input {
+  height: 60px;
   display: grid;
   grid-template-columns: 90% 10%;
 }
@@ -424,7 +422,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .auth__text {
-  font-size: 1.09em;
+  font-size: 16px;
 }
 
 @media (max-width: 1500px) {
@@ -485,14 +483,15 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .reg__picture {
-  margin-top: 2em;
-  margin-left: 2em;
+  margin: auto;
   width: 85%;
 }
 
 .reg__title {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 0.7em;
+  margin-bottom: 0.5em;
 }
 
 .reg__form {
@@ -500,13 +499,16 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .reg__tagline {
-  font-size: 1.09em;
+  font-size: 16px;
+  height: 2em;
   text-align: center;
   margin-bottom: 1em;
 }
 
 .reg__input--form {
-  margin-bottom: 0;
+  height: 48px;
+  display: grid;
+  grid-template-columns: 90% 10%;
 }
 
 #username__form, #login__form, #password__form, #password--repeat__form {
@@ -523,13 +525,8 @@ p, h1, h2, h3, h4, h5 {
   outline-offset: 0;
 }
 
-#clear--username, #clear--login, #watch--pass, #watch--pass--repeat {
-  position: relative;
-  left: 10px;
-}
-
-#clear--username, #clear--login {
-  top: 5px;
+.reg__btn {
+  height: 48px;
 }
 
 #toAuth {
@@ -549,6 +546,38 @@ p, h1, h2, h3, h4, h5 {
   margin-bottom: 1em;
 }
 
+@media (max-width: 1500px) {
+  .reg__container {
+    grid-template-columns: 50% 50%;
+  }
+}
+@media (max-width: 1200px) {
+  .reg__picture {
+    display: none;
+  }
+  .reg__container {
+    grid-template-columns: 1fr;
+  }
+  .reg__form {
+    margin: auto;
+    width: 70%;
+  }
+}
+@media (max-width: 700px) {
+  .reg__container {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+  .reg__title {
+    font-size: 24px;
+  }
+  .reg__tagline {
+    font-size: 14px;
+  }
+  .reg__input {
+    font-size: 16px;
+  }
+}
 .sidebar {
   position: fixed;
   display: grid;
@@ -1141,7 +1170,7 @@ p, h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-.title, .reg__title {
+.title {
   font-size: 36px;
   text-align: center;
 }
@@ -1443,9 +1472,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -1528,9 +1556,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -1560,9 +1587,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -1700,9 +1726,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -1857,9 +1882,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .donate__input, .reg__input--form {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -1920,9 +1944,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .donate__input {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -1952,9 +1975,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .donate__input {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -2065,9 +2087,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .becameAuthor--input, .reg__input--form, .donate__input {
+.input--form, .becameAuthor--input, .donate__input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;
@@ -2370,9 +2391,8 @@ body {
   margin-top: 1em;
 }
 
-.input--form, .reg__input--form, .donate__input, .becameAuthor--input {
+.input--form, .donate__input, .becameAuthor--input {
   font-size: 1.3em;
-  height: 60px;
   width: 95%;
   border: #cccccc solid 2px;
   border-radius: 15px;

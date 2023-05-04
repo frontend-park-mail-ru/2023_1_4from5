@@ -38,6 +38,7 @@ $auth-title-mt: 3em;
 }
 
 .auth__input {
+  height: $input-height;
   display: grid;
   grid-template-columns: 90% 10%;
 }
@@ -71,8 +72,10 @@ $auth-title-mt: 3em;
 }
 
 .auth__text {
-  font-size: 1.09em;
+  font-size: $font-size;
 }
+
+//--------media----------------------
 
 @media (max-width: 1500px) {
   $popup-auth-width-1500px: 50vw;
