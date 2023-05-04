@@ -51,7 +51,3 @@ export const winSettings = new WinSettings(contentElement);
 
 // TODO при открытии модального окна (стать автором, рег/авто и др) winSettings спрятать
 //  (просто поменять z-index)
-
-// TODO сделать имя в winSettings некликабельный
-
-// TODO не работают Лента и Подписки в winSettings

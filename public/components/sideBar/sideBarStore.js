@@ -13,7 +13,7 @@ class SideBarStore {
   #config;
 
   constructor() {
-    this.#config = { // TODO уведомления
+    this.#config = {
       about: {
         href: URLS.root,
         id: 'sidebar__about',
