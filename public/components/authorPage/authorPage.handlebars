@@ -35,6 +35,8 @@
 <!------------------------------------------------------------------------------------------------->
 <div class="author__container">
 
+
+
     <div class="auth__service">
         <div class="subscribers">
             <h2 class="subs__count">
@@ -109,138 +111,9 @@
             <p id="creator__description" class="about__description">{{creator_info.description}}</p>
         </div>
 
-        <div class="subs">
-            <div class="subs__title">
-                <p class="subs__title--text">Уровни подписки</p>
-                {{#if is_my_page}}
-                    <img id="subs__add" class="subs__add" src="../../images/add.svg" alt="add">
-                {{/if}}
-            </div>
+        <div id="subscriptionLevels" class="subs"></div>
+        <div id="posts" class="posts"></div>
 
-            <div id="{{creator_info.creator_id}}" class="sub__space">
-                {{#if subscriptions}}
-                    <div id="arrow--prev" class="arrow__container"></div>
-                    <div class="sub__container">
-                        {{#each subscriptions}}
-                            <div id="{{id}}" class="sub__card">
-                                <div class="sub__title">
-                                    <h3 class="sub__title--text">{{title}}</h3>
-                                    {{#if ../is_my_page}}
-                                        <img id="sub__delete" src="../../images/delete.svg" alt="delete">
-                                    {{/if}}
-                                </div>
-                                <p class="sub__description">{{description}}</p>
-                                <div class="sub__cost">
-                                    <h2 id="sub__price" class="cost">{{month_cost}}</h2>
-                                    <h3 class="rpm">р/месяц</h3>
-                                </div>
-
-                                {{#if ../is_my_page}}
-                                    <button id="sub__edit" class="sub__btn">
-                                        <img class="sub__edit" src="../../images/pencil.png" alt="pencil">
-                                        Изменить
-                                    </button>
-                                {{else}}
-                                    {{#if ../isAuthorized}}
-                                        <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
-                                    {{/if}}
-                                {{/if}}
-                            </div>
-                        {{/each}}
-                    </div>
-                    <div id="arrow--next" class="arrow__container"></div>
-
-                {{else}}
-                    {{#if is_my_page}}
-                        <p></p>
-                        <p class="text--default">У вас пока нет ни одной подписки</p>
-                    {{else}}
-                        <p></p>
-                        <p class="text--default">У автора пока нет ни одной подписки</p>
-                    {{/if}}
-                {{/if}}
-            </div>
-        </div>
-
-        <div class="posts">
-            {{#if posts}}
-                {{#each posts}}
-                    <div id="{{id}}" class="post__container">
-                        <div class="post__header">
-                            <div class="post__privacy">
-                                <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
-                                {{#if subscriptions}}
-                                    С подпиской:
-                                    <div class="post__subs">
-                                        {{#each subscriptions}}
-                                            <p>{{title}}</p>
-                                        {{/each}}
-                                    </div>
-                                {{else}}
-                                    Открыт для всех
-                                {{/if}}
-                            </div>
-                            <div class="post__date">
-                                {{#if ../is_my_page}}
-                                    <img id="edit__post" class="edit__img" src="../../images/edit.svg" alt="edit">
-                                    <img id="delete__post" class="delete__img" src="../../images/delete.svg"
-                                         alt="delete">
-                                {{/if}}
-                                <p id="creation__date">{{creation_date}}</p>
-                            </div>
-                        </div>
-
-                        <div class="post__content">
-                            <h2 class="content__header">{{title}}</h2>
-                            {{#each textWithBreaks}}
-                                {{#if ../is_available}}
-                                    <p>{{text}}</p>
-                                {{else}}
-                                    <div class="no__access--container">
-                                        <p>У вас нет доступа к этому посту</p>
-                                        <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
-                                    </div>
-                                {{/if}}
-                            {{/each}}
-
-                            <div id="attachments-{{id}}" class="attach-container"></div>
-
-                            <div class="feedback">
-                                <div class="post__likes">
-                                    {{#if ../is_my_page}}
-                                        <img id="disable-like-icon" class="icon--like"
-                                             src="../../images/disable_like_icon.png" alt="like--disable">
-                                    {{else}}
-                                        {{#if is_liked}}
-                                            <img id="love-like-icon" class="icon--like"
-                                                 src="../../images/love_like_icon.png" alt="like--liked">
-                                        {{else}}
-                                            <img id="like-icon" class="icon--like" src="../../images/like_icon.png"
-                                                 alt="like--enable">
-                                        {{/if}}
-                                    {{/if}}
-                                    {{likes_count}}
-                                </div>
-
-                                <div class="post__comments">
-                                    <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
-                                    0
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-
-            {{else}}
-                <div class="posts--nothing">
-                    {{#if is_my_page}}
-                        <p>Вы пока не добавили ни одного поста</p>
-                    {{else}}
-                        <p>Автор пока не добавил ни одного поста</p>
-                    {{/if}}
-                </div>
-            {{/if}}
-        </div>
     </div>
 </div>
 <div id="footer">
