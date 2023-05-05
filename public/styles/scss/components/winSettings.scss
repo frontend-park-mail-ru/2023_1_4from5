@@ -67,17 +67,16 @@ $winsettings__hr-width: 80%;
   .media__1000px {
     display: block;
   }
-}
 
-// -------- 480 -------- //
-
-@media (max-width: 480px) {
-  .media__480px {
-    display: block;
-  }
   .disabled {
     pointer-events: none; /* делаем элемент неактивным для взаимодействия */
     cursor: default; /*  курсор в виде стрелки */
     color: #888;/* цвет текста серый */
   }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+
 }

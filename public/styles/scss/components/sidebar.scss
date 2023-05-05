@@ -59,6 +59,7 @@ $sidebar-offset: 0.4vw;
 .sidebar__logo {
   height: ($sidebar-height * 0.9);
   padding-left: $sidebar-offset;
+  cursor: pointer;
 }
 
 .sidebar__logo--fav {
@@ -66,6 +67,7 @@ $sidebar-offset: 0.4vw;
   padding-left: 3vw;
   padding-top: 40%;
   display: none;
+  cursor: pointer;
 }
 
 $sidebar__input-background-color: #ebedf0;
@@ -117,6 +119,7 @@ $sidebar__user--photo-height: 2em;
 }
 
 .sidebar__menu {
+  cursor: pointer;
   display: none;
 }
 
@@ -132,6 +135,8 @@ $sidebar__user--photo-height: 2em;
     display: none;
   }
 }
+
+$sidebar__img-top: 0.45em;
 
 @media (max-width: 1000px) {
   .sidebar__media--1000px {
@@ -151,6 +156,22 @@ $sidebar__user--photo-height: 2em;
   .sidebar__logo {
     margin-top: 0.5em;
     margin-left: 10%;
+  }
+
+  .sidebar__user--name {
+    display: none;
+  }
+
+  .sidebar__menu {
+    display: inline;
+    position: relative;
+    top: $sidebar__img-top;
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
+
+  .sidebar__user--photo {
+    top: $sidebar__img-top;
   }
 }
 
@@ -185,24 +206,6 @@ $sidebar__user--photo-height: 2em;
     margin-top: 0.5em;
     //margin-top: 0.5em;
     display: block;
-  }
-
-  .sidebar__user--name {
-    display: none;
-  }
-
-  $sidebar__img-top: 0.45em;
-
-  .sidebar__menu {
-    display: inline;
-    position: relative;
-    top: $sidebar__img-top;
-    margin-right: 2vw;
-    margin-left: 2vw;
-  }
-
-  .sidebar__user--photo {
-    top: $sidebar__img-top;
   }
 }
 
