@@ -1,3 +1,5 @@
+import { Actions } from '../../actions/actions';
+
 const template = require('./subscriptionLevels.handlebars');
 
 class SubscriptionLevels {

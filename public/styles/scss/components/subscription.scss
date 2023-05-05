@@ -40,11 +40,11 @@ $sub__input--title-mb: 5%;
 }
 
 .sub__input {
-  width: 98%;
+  width: 95%;
   font-size: $font-size-2;
   border-radius: $elem-border-radius;
   border: $form-input-border-color solid $form-input-border-width;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 #sub-description-input {
@@ -55,4 +55,58 @@ $sub__input--title-mb: 5%;
 #sub-cost-input {
   font-size: $font-size-3;
   height: 1em;
+}
+
+@media (max-width: 1300px) {
+  .subscription__win--title {
+    font-size: $font-size-3;
+  }
+
+  .sub__input--title {
+    font-size: $font-size-2;
+  }
+
+  .sub__input {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .subscription {
+    width: 80%;
+  }
+
+  .subscription__win--title {
+    font-size: $font-size-2;
+  }
+
+  .sub__input--title {
+    font-size: $font-size;
+  }
+
+  .sub__input {
+    font-size: $font-size;
+  }
+
+  .subscription__btn {
+    font-size: $font-size;
+  }
+}
+
+@media (max-width: 800px) {
+  $popup__sub-width-800px: 60%;
+
+  .subscription__container {
+    width: $popup__sub-width-800px;
+    margin-left: ((100% - $popup__sub-width-800px) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  $popup__sub-width-600px: 80%;
+
+  .subscription__container {
+    width: $popup__sub-width-600px;
+    margin-left: ((100% - $popup__sub-width-600px) / 2);
+  }
 }

@@ -95,6 +95,17 @@ class AuthorPage {
       }
     });
 
+    const createSubBtn = document.querySelectorAll('#subs__add');
+    if (createSubBtn) {
+      for (let index = 0; index < createSubBtn.length; index++) {
+        const button = createSubBtn[index];
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          Actions.renderSubscription();
+        });
+      }
+    }
+
     if (this.#subsPos > 0) {
       const prevDiv = document.getElementById('arrow--prev');
       if (prevDiv) {
@@ -130,7 +141,6 @@ class AuthorPage {
         }
       });
     }
-
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
@@ -247,14 +257,6 @@ class AuthorPage {
       donateBtnAim.addEventListener('click', (e) => {
         e.preventDefault();
         Actions.renderDonateWin();
-      });
-    }
-
-    const createSubBtn = document.getElementById('subs__add');
-    if (createSubBtn) {
-      createSubBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        Actions.renderSubscription();
       });
     }
 
