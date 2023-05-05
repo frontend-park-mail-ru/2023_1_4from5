@@ -108,7 +108,7 @@ class SettingsStore {
   }
 
   async deletePhoto(photoId) {
-    console.log(photoId);
+    //.log(photoId);
     const token = await request.getHeader(`/api/user/deleteProfilePhoto/${photoId}`);
     await request.delete(`/api/user/deleteProfilePhoto/${photoId}`, token);
     await userStore.getUser();

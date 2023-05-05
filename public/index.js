@@ -28,10 +28,10 @@ import { router } from './modules/Router.js';
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../sw.js', { scope: '/' })
     .then(() => {
-      console.log('SW registered');
+      //.log('SW registered');
     })
     .catch((err) => {
-      console.log('SW ERR: ', err);
+      //.log('SW ERR: ', err);
     });
 }
 

@@ -135,7 +135,6 @@ class AuthorPageStore {
       });
     });
     this.#config = result;
-    console.log(result);
     const renderIcon = {
       edit_aim: this.#config.is_my_page,
       isAuthorized: userStore.getUserState().isAuthorizedIn,
@@ -217,14 +216,12 @@ class AuthorPageStore {
   }
 
   async creatorPhotoDelete(photoId) {
-    console.log(photoId);
     const token = await request.getHeader(`/api/creator/deleteProfilePhoto/${photoId}`);
     await request.delete(`/api/creator/deleteProfilePhoto/${photoId}`, token);
     await this.renderMyPage();
   }
 
   async creatorCoverDelete(coverId) {
-    console.log(coverId);
     const token = await request.getHeader(`/api/creator/deleteCoverPhoto/${coverId}`);
     await request.delete(`/api/creator/deleteCoverPhoto/${coverId}`, token);
     await this.renderMyPage();

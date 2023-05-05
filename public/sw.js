@@ -27,7 +27,7 @@ const cacheFirst = async ({
     // Next try to use the preloaded response, if it's there
     const preloadResponse = await preloadResponsePromise;
     if (preloadResponse) {
-      console.info('using preload response', preloadResponse);
+      //.info('using preload response', preloadResponse);
       await putInCache(request, preloadResponse.clone());
       return preloadResponse;
     }

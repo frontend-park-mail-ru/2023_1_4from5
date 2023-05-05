@@ -220,7 +220,7 @@ export function isValidUsername(inputStr) {
 }
 
 export function isValidCreatorName(inputStr) {
-  console.log(inputStr);
+  //.log(inputStr);
   const flags = {
     hasBlackSign: {
       flag: false,

@@ -21,7 +21,7 @@ class Feed {
     newDiv.innerHTML = template(posts);
     this.#parent.appendChild(newDiv);
 
-    console.log(posts.posts)
+    //.log(posts.posts)
     posts.posts.forEach((post) => {
       if (post.attachments) {
         const divAttaches = document.getElementById(`attachments-${post.id}`);

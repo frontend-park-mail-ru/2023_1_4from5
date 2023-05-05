@@ -76,7 +76,7 @@ class NewPostStore {
   }
 
   async sendPost(actionType, action, callback) {
-    console.log('action.input ', action.input);
+    //.log('action.input ', action.input);
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
     const subscriptions = action.input.availableSubscriptions;
@@ -144,12 +144,12 @@ class NewPostStore {
     const result = await callback(body, action);
     let deleteStatus = true;
     let addStatus = true;
-    console.log(this.#config.attachments, action.input.attachments);
+    //.log(this.#config.attachments, action.input.attachments);
 
     if (this.#config.attachments) {
       for (const attach of this.#config.attachments) {
         if (!action.input.attachments.includes(attach)) {
-          console.log('deleted file: ', attach);
+          //.log('deleted file: ', attach);
           const tokenEdit = await request.getHeader(`/api/post/deleteAttach/${action.postId}`);
           const deleteResult = await request.deleteWithBody(
             `/api/post/deleteAttach/${action.postId}`,
@@ -165,7 +165,7 @@ class NewPostStore {
     if (action.input.attachments) {
       for (const attach of action.input.attachments) {
         if (!this.#config.attachments.includes(attach)) {
-          console.log('new file: ', attach);
+          //.log('new file: ', attach);
           const formData = new FormData();
           formData.append('attachment', attach);
           const tokenEdit = await request.getHeader(`/api/post/addAttach/${action.postId}`);
@@ -178,7 +178,7 @@ class NewPostStore {
         }
       }
     }
-    console.log(result.ok && deleteStatus && addStatus);
+    //.log(result.ok && deleteStatus && addStatus);
     return result.ok && deleteStatus && addStatus;
   }
 }
