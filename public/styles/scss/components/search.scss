@@ -4,14 +4,14 @@ $search__container-padding: 5%;
 $num-of-columns: 4;
 
 .search__container {
-  padding: $search__container-padding;
+  padding: 4% $search__container-padding $search__container-padding;
   display: grid;
-  grid-template-columns: (100% / $num-of-columns) (100% / $num-of-columns) (100% / $num-of-columns) (100% / $num-of-columns);
+  grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
 }
 
 $creator__card-width: 65%;
 $creator__card-height: 20em;
-$creator__card-offset-bottom: 5em;
+$creator__card-offset-bottom: 2em;
 
 .creator__card {
   width: $creator__card-width;
@@ -58,6 +58,8 @@ $search__photo-width: 5em;
 }
 
 .search__name {
+  text-overflow: ellipsis;
+  overflow: hidden;
   margin-top: 15%;
 }
 
@@ -91,4 +93,44 @@ $tag-color: #009F2D;
 
 .no-authors__img {
   width: 40%;
+}
+
+// -------- 1200 -------- //
+
+$num-of-columns: 3;
+
+@media (max-width: 1200px) {
+  .search__container {
+    grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  }
+}
+
+// -------- 1000 -------- //
+
+$num-of-columns: 2;
+
+@media (max-width: 1000px) {
+  .search__container {
+    padding-top: 5%;
+    grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  }
+}
+
+// -------- 600 -------- //
+
+$num-of-columns: 1;
+
+@media (max-width: 600px) {
+  .search__container {
+    padding-top: 7%;
+    grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+  .search__container {
+    padding-top: 10%;
+  }
 }
