@@ -1,0 +1,180 @@
+@import "../general/variables";
+
+.posts__container {
+  width: 90%;
+}
+
+.post__container {
+  @include shadow();
+  padding: 1em;
+  margin-bottom: 3em;
+  height: fit-content;
+  background-color: $card-color;
+  display: grid;
+  grid-template-rows: 5em 1fr;
+
+  border-radius: $elem-border-radius;
+}
+
+//------header---------
+.post__header {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
+.post__privacy {
+  display: flex;
+  font-weight: bold;
+  color: $text--default-color;
+}
+
+.privacy__img {
+  height: 1.5em;
+  margin-right: 1em;
+}
+
+.post__subs {
+  margin-left: 1em;
+}
+
+.post__date {
+  display: flex;
+}
+
+.edit__img, .delete__img {
+  height: $font-size-4;
+}
+
+.delete__img {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.creation__date {
+  font-size: ($font-size * 1.1);
+}
+
+//-------content--------
+.post__content {
+  width: 90%;
+  margin: auto;
+}
+
+.content__header {
+  font-weight: bold;
+  font-size: $font-size-2;
+  margin-bottom: 1em;
+}
+
+
+//-------footer--------
+.feedback {
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 10% 10% 1fr;
+}
+
+.post__likes, .post__comments {
+  display: flex;
+  font-size: $font-size-3;
+}
+
+.post__comments {
+  position: relative;
+}
+
+.icon--like {
+  height: 1.5em;
+  margin-right: 0.3em;
+}
+
+.icon--comments {
+  position: relative;
+  top: 0.1em;
+  height: 1.1em;
+  margin-right: 0.3em;
+}
+
+.no__access {
+  width: 100%;
+}
+
+//-----media------
+@media (max-width: 1400px) {
+  .post__privacy {
+    font-size: $font-size-small;
+  }
+
+  .creation__date {
+    font-size: $font-size-small;
+  }
+
+  .feedback {
+    grid-template-columns: 15% 15% 1fr;
+  }
+
+  #footer {
+    font-size: $font-size-small;
+  }
+}
+
+@media (max-width: 1000px) {
+  .posts__container {
+    margin: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .post__header {
+    grid-template-columns: 70% 30%;
+  }
+
+  .post__content {
+    font-size: $font-size-small;
+  }
+
+  .content__header {
+    font-size: $font-size;
+  }
+}
+
+@media (max-width: 600px) {
+  .icon--like {
+    position: relative;
+    top: 0.2em;
+    height: 1em;
+  }
+
+  .creation__date {
+    display: none;
+  }
+
+  .post__header {
+    grid-template-columns: 80% 20%;
+  }
+}
+
+@media (max-width: 500px) {
+  .post__header {
+    grid-template-columns: 70% 30%;
+  }
+
+  .feedback {
+    grid-template-columns: 20% 20% 1fr;
+  }
+
+  .post__privacy {
+    font-size: 12px;
+  }
+
+  .privacy__img {
+    display: none;
+  }
+
+  .edit__img, .delete__img {
+    height: $font-size-3;
+  }
+}
+
