@@ -205,3 +205,76 @@ $comment-title-width: 80%;
 .audio-preview {
   max-width: 100%;
 }
+
+//--------media---------
+
+@media (max-width: 1300px) {
+  .newpost__container {
+    grid-template-columns: 60% 40%;
+  }
+
+  .newpost__input {
+    font-size: $font-size-2;
+  }
+
+  .newpost-title {
+    font-size: $font-size-4;
+  }
+
+  .post__settings--header {
+    font-size: $font-size-2;
+  }
+
+  .comments {
+    font-size: $font-size-2;
+  }
+
+  .comment__switch {
+    height: $font-size-3;
+  }
+}
+
+@media (max-width: 1000px) {
+  .newpost__container {
+    grid-template-columns: 1fr;
+  }
+
+  .newpost__input {
+    width: 80%;
+  }
+
+  .newpost-btn {
+    margin-top: 2em;
+    font-size: $font-size;
+  }
+
+  .newpost-title {
+    font-size: $font-size-3;
+  }
+
+  .newpost__input {
+    font-size: $font-size;
+  }
+
+  .post__settings--header {
+    font-size: $font-size;
+  }
+
+  .switch__text {
+    font-size: $font-size;
+  }
+
+  .newpost__comments {
+    font-size: $font-size;
+  }
+}
+
+@media (max-width: 600px) {
+  .newpost__input {
+    width: 90%;
+  }
+
+  .post__settings {
+    padding: 10%;
+  }
+}
