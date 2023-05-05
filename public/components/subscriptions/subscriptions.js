@@ -19,7 +19,6 @@ class Subscriptions {
 
   render(subs) {
     subs.isPaid = this.#isPaid;
-    console.log(subs);
 
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
