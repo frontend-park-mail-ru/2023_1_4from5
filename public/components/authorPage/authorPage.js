@@ -20,6 +20,14 @@ class AuthorPage {
     this.#parent = parent;
   }
 
+  getSubsPos() {
+    return this.#subsPos;
+  }
+
+  setSubsPos(subsPos) {
+    this.#subsPos = subsPos;
+  }
+
   get config() {
     return this.#config;
   }
@@ -33,11 +41,13 @@ class AuthorPage {
   }
 
   render() {
+    const subNum = 4;
+
     const subs = [];
     if (!this.#config.subscriptions) {
       this.#config.subscriptions = [];
     }
-    Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + 4));
+    Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + subNum));
     const config = {};
     Object.assign(config, this.#config);
     config.subscriptions = subs;
@@ -87,20 +97,24 @@ class AuthorPage {
 
     if (this.#subsPos > 0) {
       const prevDiv = document.getElementById('arrow--prev');
-      prevDiv.innerHTML = '<img id="prev" class="arrows" src="../../images/arrow-left.svg" alt="left">';
+      if (prevDiv) {
+        prevDiv.innerHTML = '<img id="prev" class="arrows clickable" src="../../images/arrow-left.svg" alt="left">';
+      }
     }
 
-    if (this.#subsPos < this.#config.subscriptions.length - 4) {
-      const prevDiv = document.getElementById('arrow--next');
-      prevDiv.innerHTML = '<img id="next" class="arrows" src="../../images/arrow-right.svg" alt="right">';
+    if (this.#subsPos < this.#config.subscriptions.length - subNum) {
+      const nextDiv = document.getElementById('arrow--next');
+      if (nextDiv) {
+        nextDiv.innerHTML = '<img id="next" class="arrows clickable" src="../../images/arrow-right.svg" alt="right">';
+      }
     }
 
     const prev = document.getElementById('prev');
     if (prev) {
       prev.addEventListener('click', (event) => {
         event.preventDefault();
-        if (this.#subsPos >= 4) {
-          this.#subsPos -= 4;
+        if (this.#subsPos >= subNum) {
+          this.#subsPos -= subNum;
           this.render();
         }
       });
@@ -110,8 +124,8 @@ class AuthorPage {
     if (next) {
       next.addEventListener('click', (event) => {
         event.preventDefault();
-        if (this.#config.subscriptions[this.#subsPos + 4]) {
-          this.#subsPos += 4;
+        if (this.#config.subscriptions[this.#subsPos + subNum]) {
+          this.#subsPos += subNum;
           this.render();
         }
       });

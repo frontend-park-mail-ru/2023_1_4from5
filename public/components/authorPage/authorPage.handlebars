@@ -35,9 +35,29 @@
 <!------------------------------------------------------------------------------------------------->
 <div class="author__container">
 
+    <div class="author__empty-space"></div>
+
+    <div class="about">
+        <p id="creator__name" class="about__name">
+            {{creator_info.name}}
+            {{#if is_my_page}}
+                <img id="edit__profile" class="about__edit clickable" src="../../images/edit.svg" alt="edit">
+            {{/if}}
+        </p>
+        <p id="creator__description" class="about__description">{{creator_info.description}}</p>
+
+        <div class="subscribers-1000px">
+            <h2 class="subs__count">
+                <img class="followers__img" src="../../images/followers.svg" alt="followers">
+                подписчиков: {{creator_info.followers_count}}
+            </h2>
+        </div>
+
+        <div id="subscriptionLevels" class="subs-1000px"></div>
+    </div>
 
 
-    <div class="auth__service">
+    <div class="author__service">
         <div class="subscribers">
             <h2 class="subs__count">
                 <img class="followers__img" src="../../images/followers.svg" alt="followers">
@@ -54,68 +74,63 @@
                         </button>
                     {{else}}
                         <button id="follow__btn" class="support__btn follow__btn">
-                            <img src="../../images/follow.svg" alt="follow">
-                            <p class="follow__btn--text">Отслеживать</p>
+                            <div class="support__btn--container">
+                                <img src="../../images/follow.svg" alt="follow">
+                                <p class="support__btn--text">Отслеживать</p>
+                            </div>
                         </button>
                     {{/if}}
                     <button id="donate__btn" class="support__btn donate__btn">
-                        <img src="../../images/donate.svg" alt="donate">
-                        <p class="donate__btn--text">Отправить донат</p>
+                        <div class="support__btn--container">
+                            <img src="../../images/donate.svg" alt="donate">
+                            <p class="support__btn--text">Отправить донат</p>
+                        </div>
                     </button>
                 {{/unless}}
             {{/if}}
         </div>
 
         <div class="aim">
-            <p>Цель</p>
+            <p class="aim__header">Цель</p>
             <div class="aim__container">
                 {{#if aim.description}}
-                    <div class="aim__header">
-                        <div></div>
+                    <div class="aim__money">
                         <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} р</p>
                         {{#if is_my_page}}
-                            <img id="aim__edit" src="../../images/edit.svg" alt="edit">
+                            <img id="aim__edit" class="clickable" src="../../images/edit.svg" alt="edit">
                         {{/if}}
                     </div>
                     <div class="aim__bar">
-                        <div id="bar--row"></div>
+                        <div id="bar--row" class="bar--row"></div>
                     </div>
                     <p class="aim__description">{{aim.description}}</p>
                 {{else}}
                     {{#if is_my_page}}
-                        <img id="aim__add" class="aim__add" src="../../images/add.svg" alt="add">
-                        <p class="text--default">У вас пока не выбрана цель</p>
+                        <div class="aim__add--container">
+                            <img id="aim__add" class="aim__add clickable" src="../../images/add.svg" alt="add">
+                        </div>
+                        <p class="no-aim">У вас пока не выбрана цель</p>
                     {{else}}
-                        <p class="text--default">У автора нет цели, есть только путь</p>
+                        <p class="no-aim">У автора нет цели, есть только путь</p>
                     {{/if}}
                 {{/if}}
             </div>
         </div>
 
         {{#if is_my_page}}
-            <button id="create__post">Создать пост</button>
+            <button id="create__post" class="create__post">Создать пост</button>
         {{/if}}
-
     </div>
 
-    <!------------------------------------------------------------------------------------------------>
-    <div class="auth__content">
+    <div id="subscriptionLevels" class="subs"></div>
 
-        <div class="about">
-            <h1 class="about__title">
-                <p id="creator__name">{{creator_info.name}}</p>
-                {{#if is_my_page}}
-                    <img id="edit__profile" class="about__edit" src="../../images/edit.svg" alt="edit">
-                {{/if}}
-            </h1>
-            <p id="creator__description" class="about__description">{{creator_info.description}}</p>
-        </div>
+    <div class="author__empty-space"></div>
 
-        <div id="subscriptionLevels" class="subs"></div>
-        <div id="posts" class="posts"></div>
+    <div id="posts" class="posts"></div>
 
-    </div>
 </div>
+
+
 <div id="footer">
     <hr style="opacity: 75%;">
     <!--        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a-->

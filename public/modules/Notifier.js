@@ -7,6 +7,7 @@ import { newPostStore } from '../components/newPost/newPostStore';
 import { searchStore } from '../components/search/searchStore';
 import { page404 } from '../components/page404/page404';
 import { feedStore } from '../components/feed/feedStore';
+import { authorPage } from '../components/authorPage/authorPage';
 
 export const URLS = {
   root: '/',
@@ -27,6 +28,7 @@ export function notifier(path, data, additionalUrl) {
 
     case URLS.myPage:
       if (userStore.getUserState().isAuthorizedIn) {
+        authorPage.setSubsPos(0);
         authorPageStore.renderMyPage();
       } else {
         router.go('/', data, parent);
@@ -34,6 +36,7 @@ export function notifier(path, data, additionalUrl) {
       break;
 
     case `${URLS.myPage}/${additionalUrl}`:
+      authorPage.setSubsPos(0);
       authorPageStore.renderMyPage(additionalUrl);
       break;
 
