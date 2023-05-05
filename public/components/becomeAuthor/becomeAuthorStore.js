@@ -3,10 +3,11 @@ import { becameAuthor } from './becomeAuthor';
 import { ActionTypes } from '../../actionTypes/actionTypes';
 import { request } from '../../modules/request';
 import { router } from '../../modules/Router';
-import { Actions } from '../../actions/actions';
 import { URLS } from '../../modules/Notifier';
 import { authorPageStore } from '../authorPage/authorPageStore';
 import { userStore } from '../user/userStore';
+import {isValidCreateDescription, isValidCreatorName} from "../../modules/isValid";
+import {color} from "../../consts/styles";
 
 class BecomeAuthorStore {
   constructor() {
@@ -24,7 +25,7 @@ class BecomeAuthorStore {
         break;
 
       case ActionTypes.BECOME_AUTHOR:
-        this.becomeAuthor(action);
+        this.becomeAuthor(action.input);
         break;
 
       case ActionTypes.UPDATE_PROFILE:
@@ -49,30 +50,73 @@ class BecomeAuthorStore {
     }
   }
 
-  async becomeAuthor(action) {
-    const name = action.input.nameInput.value;
-    const description = action.input.descriptionInput.value;
-    const body = {
-      name,
-      description,
-    };
-
-    const token = await request.getHeader('/api/user/becameCreator');
-    await request.post('/api/user/becameCreator', body, token);
-    await userStore.getUser();
-    becameAuthor.remove();
-    router.go(URLS.myPage);
+  async becomeAuthor(input) {
+    this.validation(
+      input,
+      async (body) => {
+        const token = await request.getHeader('/api/user/becameCreator');
+        return request.post('/api/user/becameCreator', body, token);
+      },
+      async () => {
+        await userStore.getUser();
+        becameAuthor.remove();
+        router.go(URLS.myPage);
+      }
+    );
   }
 
   async updateProfile(input) {
-    const token = await request.getHeader('/api/creator/updateData');
-    await request.put('/api/creator/updateData', {
-      name: input.newName,
-      description: input.newDescription,
-    }, token);
-    becameAuthor.remove();
-    router.go(URLS.myPage);
-    await authorPageStore.renderMyPage();
+    this.validation(
+      input,
+      async (body) => {
+        const token = await request.getHeader('/api/creator/updateData');
+        return request.put('/api/creator/updateData', body, token);
+      },
+      async () => {
+        becameAuthor.remove();
+        router.go(URLS.myPage);
+        await authorPageStore.renderMyPage();
+      }
+    );
+  }
+
+  async validation(input, require, callback) {
+    const name = input.nameInput.value;
+    const description = input.descriptionInput.value;
+
+    const errorNameOutput = input.errorNameOutput;
+    const errDescriptionOutput = input.errorDescriptionOutput;
+    const errName = isValidCreatorName(name);
+    const errDescription = isValidCreateDescription(description);
+
+    input.nameInput.style.backgroundColor = color.field;
+    input.descriptionInput.style.backgroundColor = color.field;
+    errorNameOutput.innerHTML = '';
+    errDescriptionOutput.innerHTML = '';
+
+    if (errName) {
+      errorNameOutput.innerHTML = errDescription;
+      input.nameInput.style.backgroundColor = color.error;
+    } else if (errDescription) {
+      errDescriptionOutput.innerHTML = '';
+      errDescriptionOutput.innerHTML = errDescription;
+      input.descriptionInput.style.backgroundColor = color.error;
+    } else {
+      const body = {
+        name,
+        description,
+      };
+      const status = await require(body);
+
+      if (status.ok) {
+        await callback();
+      } else {
+        errDescriptionOutput.innerHTML = '';
+        errDescriptionOutput.innerHTML = 'Введённые данные некорректны';
+        input.nameInput.style.backgroundColor = color.error;
+        input.descriptionInput.style.backgroundColor = color.error;
+      }
+    }
   }
 }
 

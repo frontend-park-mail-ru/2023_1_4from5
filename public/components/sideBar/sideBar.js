@@ -47,6 +47,12 @@ export class SideBar {
       router.go(URLS.root);
     });
 
+    const logoSmall = document.getElementById('logo--small');
+    logoSmall.addEventListener('click', (event) => {
+      event.preventDefault();
+      router.go(URLS.root);
+    });
+
     const photo = document.getElementById('sidebar__user--photo');
     if (photo) {
       photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
