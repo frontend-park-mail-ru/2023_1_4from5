@@ -3674,4 +3674,60 @@ textarea {
   max-width: 100%;
 }
 
+@media (max-width: 1300px) {
+  .newpost__container {
+    grid-template-columns: 60% 40%;
+  }
+  .newpost__input {
+    font-size: 20px;
+  }
+  .newpost-title {
+    font-size: 32px;
+  }
+  .post__settings--header {
+    font-size: 20px;
+  }
+  .comments {
+    font-size: 20px;
+  }
+  .comment__switch {
+    height: 24px;
+  }
+}
+@media (max-width: 1000px) {
+  .newpost__container {
+    grid-template-columns: 1fr;
+  }
+  .newpost__input {
+    width: 80%;
+  }
+  .newpost-btn {
+    margin-top: 2em;
+    font-size: 16px;
+  }
+  .newpost-title {
+    font-size: 24px;
+  }
+  .newpost__input {
+    font-size: 16px;
+  }
+  .post__settings--header {
+    font-size: 16px;
+  }
+  .switch__text {
+    font-size: 16px;
+  }
+  .newpost__comments {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .newpost__input {
+    width: 90%;
+  }
+  .post__settings {
+    padding: 10%;
+  }
+}
+
 /*# sourceMappingURL=index.css.map */
