@@ -78,13 +78,13 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
 
 .sub__cost {
   font-weight: bold;
-  font-size: $font-size-2;
+  font-size: $font-size;
   display: flex;
   margin: auto;
 }
 
 .cost {
-  margin-right: 1em;
+  margin-right: 0.3em;
 }
 
 .sub__btn {
