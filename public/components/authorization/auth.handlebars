@@ -1,23 +1,24 @@
-<div id="backAuth" class="background">
+<div id="backAuth" class="background--popup">
 </div>
-<div id="auth">
-    <div class="auth-container">
-        <div class="title">
-            Войти на SubMe
+<div id="auth" class="auth__container">
+    <div class="auth__form">
+        <div class="auth__title">Вход в аккаунт</div>
+
+        <div id="login--form" class="input--form auth__input">
+            <input id="auth__login" class="auth" type="text" placeholder="Логин">
+            <img id="clear" class="input__img" src="../../images/clear.svg">
         </div>
-        <div class="input-auth-container">
-            <div>
-                <label class="auth-label" for="username">Логин</label>
-                <input id="auth-login" class="auth-input" type="text">
-            </div>
-            <div>
-                <label class="auth-label" for="password">Пароль</label>
-                <input id="auth-password" class="auth-input" type="password">
-            </div>
-            <div id="auth-error"></div>
-            <div class="auth-btn-container">
-                <button id="auth-btn" class="auth-btn"> Войти</button>
-            </div>
+
+        <div id="password--form" class="input--form auth__input">
+            <input id="auth__password" type="password" placeholder="Пароль">
+            <img id="watch" class="input__img" src="../../images/watch.svg">
         </div>
+
+        <div id="auth__error" class="error"></div>
+
+        <button id="auth__btn">Войти</button>
+
+        <p class="text--redirect auth__text">Ещё не зарегистрированы?</p>
+        <p id="toReg" class="auth__text">Регистрация</p>
     </div>
 </div>

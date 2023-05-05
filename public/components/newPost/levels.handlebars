@@ -1,0 +1,10 @@
+<p>Уровень</p>
+<div class="sub__level--container">
+    {{#each subs}}
+        <div id="{{id}}" class="sub__level clickable">
+            <img id="sub__level--radio" class="sub__level--inactive"
+                 src="../../images/radio-inactive.svg" alt="">
+            <p class="sub__level--text">{{title}}</p>
+        </div>
+    {{/each}}
+</div>

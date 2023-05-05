@@ -1,21 +1,26 @@
 import { Actions } from '../actions/actions.js';
-import { settingsStore } from '../store/settingsStore.js';
-import { myPageStore } from '../store/myPageStore.js';
-import { userStore } from '../store/userStore';
+import { settingsStore } from '../components/settings/settingsStore.js';
+import { authorPageStore } from '../components/authorPage/authorPageStore.js';
+import { userStore } from '../components/user/userStore';
 import { router } from './Router';
-import { newPostStore } from '../store/newPostStore';
-import { searchStore } from '../store/searchStore';
+import { newPostStore } from '../components/newPost/newPostStore';
+import { searchStore } from '../components/search/searchStore';
+import { page404 } from '../components/page404/page404';
+import { feedStore } from '../components/feed/feedStore';
+import { authorPage } from '../components/authorPage/authorPage';
 
 export const URLS = {
   root: '/',
-  myPage: '/myPage',
+  myPage: '/creatorPage',
   settings: '/settings',
+  subscriptions: '/subscriptions',
   newPost: '/newPost',
   editPost: '/editPost',
   search: '/search',
+  feed: '/feed',
 };
 
-export function notifier(path, data, parent, additionalUrl) {
+export function notifier(path, data, additionalUrl) {
   switch (path.pathname) {
     case URLS.root:
       Actions.renderStartPage();
@@ -23,14 +28,16 @@ export function notifier(path, data, parent, additionalUrl) {
 
     case URLS.myPage:
       if (userStore.getUserState().isAuthorizedIn) {
-        myPageStore.renderMyPage();
+        authorPage.setSubsPos(0);
+        authorPageStore.renderMyPage();
       } else {
         router.go('/', data, parent);
       }
       break;
 
     case `${URLS.myPage}/${additionalUrl}`:
-      myPageStore.renderMyPage(additionalUrl);
+      authorPage.setSubsPos(0);
+      authorPageStore.renderMyPage(additionalUrl);
       break;
 
     case URLS.settings:
@@ -50,11 +57,21 @@ export function notifier(path, data, parent, additionalUrl) {
       break;
 
     case URLS.search:
-      searchStore.renderSearch();
+      if (!data) {
+        searchStore.renderSearch();
+      }
+      break;
+
+    case URLS.subscriptions:
+      Actions.renderSubscriptions();
+      break;
+
+    case URLS.feed:
+      feedStore.renderFeed();
       break;
 
     default:
-      console.log('undefined url: ', path.pathname);
+      page404.render();
       break;
   }
 }

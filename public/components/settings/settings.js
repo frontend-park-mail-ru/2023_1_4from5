@@ -21,20 +21,22 @@ class Settings {
   }
 
   render() {
+    //.log(this.#user);
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'settingsDiv';
     newDiv.innerHTML = template(this.#user);
     this.#parent.appendChild(newDiv);
 
-    const changePwdBtn = document.getElementById('change-password-btn');
-    changePwdBtn.addEventListener('click', this.changePwd);
+    const photo = document.getElementById('user-photo');
+    photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
 
-    const changeNameBtn = document.getElementById('change-username-btn');
-    changeNameBtn.addEventListener('click', this.changeName);
-
-    const changeLoginBtn = document.getElementById('change-login-btn');
-    changeLoginBtn.addEventListener('click', this.changeLogin);
+    const settingsBtn = document.getElementById('settings__btn');
+    settingsBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.changeNameLogin();
+      this.changePwd();
+    });
 
     const fileInput = document.querySelector('#photo-upload');
     fileInput.addEventListener('change', (event) => {
@@ -42,55 +44,70 @@ class Settings {
       const files = event.target.files;
       Actions.changePhoto(files[0]);
     });
-  }
 
-  changePwd(e) {
-    e.preventDefault();
-    const oldPwdInput = document.getElementById('old-password-input');
-    const newPwdInput = document.getElementById('new-password-input');
-    Actions.changePassword({
-      oldPwdInput,
-      newPwdInput,
+    const deletePhoto = document.getElementById('settings__delete--btn');
+    deletePhoto.addEventListener('click', (event) => {
+      event.preventDefault();
+      Actions.deletePhoto(event.target.parentElement.parentElement.id);
     });
   }
 
-  changeName(e) {
-    e.preventDefault();
-    const usernameInput = document.getElementById('change-username-input');
-    Actions.changeUsername(usernameInput);
+  changePwd() {
+    const oldPwdInput = document.getElementById('old-password-input');
+    const newPwdInput = document.getElementById('new-password-input');
+
+    if (oldPwdInput.value && newPwdInput.value) {
+      Actions.changePassword({
+        oldPwdInput,
+        newPwdInput,
+      });
+    }
   }
 
-  changeLogin(e) {
-    e.preventDefault();
+  changeNameLogin() {
+    const usernameInput = document.getElementById('change-username-input');
     const loginInput = document.getElementById('change-login-input');
-    Actions.changeLogin(loginInput);
+    Actions.changeUsernameLogin(usernameInput, loginInput);
   }
 
   invalidPassword(err) {
     const errorDiv = document.getElementById('change-password-error');
     errorDiv.textContent = err;
 
-    const successTitle = document.getElementById('change-success-password');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = '';
   }
 
   invalidLogin(err) {
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = '';
     const errorDiv = document.getElementById('change-login-error');
     errorDiv.textContent = err;
   }
 
-  successNameChanged() {
+  invalidUsername(err) {
     const successTitle = document.getElementById('change-success-name');
-    successTitle.textContent = 'Имя успешно изменено';
+    successTitle.textContent = '';
+    const errorDiv = document.getElementById('change-username-error');
+    errorDiv.textContent = err;
+  }
+
+  successNameChanged() {
+    const errorDiv = document.getElementById('change-username-error');
+    errorDiv.textContent = '';
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = 'Данные успешно сохранены';
   }
 
   successLoginChanged() {
-    const successTitle = document.getElementById('change-success-login');
-    successTitle.textContent = 'Логин успешно изменен';
+    const errorDiv = document.getElementById('change-login-error');
+    errorDiv.textContent = '';
+    const successTitle = document.getElementById('change-success-name');
+    successTitle.textContent = 'Данные успешно сохранены';
   }
 
   successPasswordChanged() {
-    const successTitle = document.getElementById('change-success-password');
+    const successTitle = document.getElementById('change-success-name');
     successTitle.textContent = 'Пароль успешно изменен';
 
     const errTitle = document.getElementById('change-password-error');

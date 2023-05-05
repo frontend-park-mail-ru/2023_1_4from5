@@ -47,3 +47,6 @@ export class WinSettings {
 }
 
 export const winSettings = new WinSettings(contentElement);
+
+// TODO при открытии модального окна (стать автором, рег/авто и др) winSettings спрятать
+//  (просто поменять z-index)

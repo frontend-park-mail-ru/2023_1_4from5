@@ -1,0 +1,81 @@
+<div class="posts__container">
+    {{#if posts}}
+        {{#each posts}}
+            <div id="{{id}}" class="post__container">
+                <div class="post__header">
+                    <div class="post__privacy">
+                        <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
+                        {{#if subscriptions}}
+                            С подпиской:
+                            <div class="post__subs">
+                                {{#each subscriptions}}
+                                    <p>{{title}}</p>
+                                {{/each}}
+                            </div>
+                        {{else}}
+                            Открыт для всех
+                        {{/if}}
+                    </div>
+                    <div class="post__date">
+                        {{#if ../is_my_page}}
+                            <img id="edit__post" class="edit__img clickable" src="../../images/edit.svg" alt="edit">
+                            <img id="delete__post" class="delete__img clickable" src="../../images/delete.svg"
+                                 alt="delete">
+                        {{/if}}
+                        <p id="creation__date" class="creation__date">{{creation_date}}</p>
+                    </div>
+                </div>
+
+                <div class="post__content">
+                    <p class="content__header">{{title}}</p>
+                    {{#each textWithBreaks}}
+                        {{#if ../is_available}}
+                            <p>{{text}}</p>
+                        {{else}}
+                            <div class="no__access--container">
+                                <p>У вас нет доступа к этому посту</p>
+                                <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
+                            </div>
+                        {{/if}}
+                    {{/each}}
+
+                    <div id="attachments-{{id}}" class="attach-container"></div>
+
+                    <div class="feedback">
+                        <div class="post__likes">
+                            {{#if ../is_my_page}}
+                                <img id="disable-like-icon" class="icon--like"
+                                     src="../../images/disable_like_icon.png" alt="like--disable">
+                            {{else}}
+                                {{#if is_liked}}
+                                    <img id="love-like-icon" class="icon--like"
+                                         src="../../images/love_like_icon.png" alt="like--liked">
+                                {{else}}
+                                    <img id="like-icon" class="icon--like" src="../../images/like_icon.png"
+                                         alt="like--enable">
+                                {{/if}}
+                            {{/if}}
+                            {{likes_count}}
+                        </div>
+
+                        <div class="post__comments">
+                            <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
+                            0
+                        </div>
+
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+    {{else}}
+        <div class="posts--nothing">
+            {{#if is_my_page}}
+                <p>Вы пока не добавили ни одного поста</p>
+            {{else}}
+                <p>Автор пока не добавил ни одного поста</p>
+            {{/if}}
+        </div>
+    {{/if}}
+</div>

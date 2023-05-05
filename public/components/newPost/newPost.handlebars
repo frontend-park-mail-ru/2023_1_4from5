@@ -1,32 +1,72 @@
-<div class="newpost-form-container">
+<div class="newpost__container">
 
-    <div class="newpost-header-container">
+    <div class="post__form">
         <button id="newpost-btn-back" class="newpost-btn">Назад</button>
-        <span class="newpost-title"> Мой пост </span>
+        <div class="newpost-title">Пост</div>
+
+        <form id="create-post" class="newpost-form">
+            <div class="newpost-title-container">
+                <div class="newpost-title-input-container">
+                    <input id="newpost-title-input" class="newpost__input" placeholder="Название поста">
+                </div>
+                <div id="newpost-title-error" class="error"></div>
+            </div>
+
+            <div class="newpost-text-container">
+                <div class="newpost-text-input-container">
+                    <textarea id="newpost-text-input" class="newpost__input" placeholder="Текст поста"></textarea>
+                </div>
+                <div id="newpost-text-error" class="error"></div>
+            </div>
+            <div class="input-file-container">
+                <label class="input-file">
+                    <input type="file" name="file" id="attach-photo-download"
+                           accept="image/jpeg, image/png, image/webp">
+                    <span class="input-file-btn">Фото</span>
+                    <span class="input-file-text">jpeg, png, webp</span>
+                </label>
+                <label class="input-file">
+                    <input type="file" name="file" id="attach-video-download" accept="video/mp4, video/mpeg">
+                    <span class="input-file-btn">Видео</span>
+                    <span class="input-file-text">mp4, mpeg</span>
+                </label>
+                <label class="input-file">
+                    <input type="file" name="file" id="attach-music-download" accept="audio/mp3, audio/mpeg">
+                    <span class="input-file-btn">Аудио</span>
+                    <span class="input-file-text">mp3, mpeg</span>
+                </label>
+            </div>
+            <div id="newpost-attachments-error" class="error"></div>
+            <div id="preview" class="preview-container">
+                <!--            <img id="file-preview">-->
+            </div>
+        </form>
     </div>
 
-    <form id="create-post" class="newpost-form">
-        <div class="newpost-title-container">
-            <div class="newpost-title-label-container">
-                <label class="newpost-title-label">Название поста</label>
+    <!-------------------------------------------------------------------------------------------------------------->
+
+    <div class="post__settings">
+        <div class="post__settings--form">
+            <p class="post__settings--header">Кто может смотреть</p>
+
+            <div class="subscribers__class">
+                <div id="switch__level--all" class="switch clickable">
+                    <img id="switch__img--all" class="switch__img" src="../../images/radio-active.svg" alt="">
+                    <p class="switch__text">Открыт для всех</p>
+                </div>
+                <div id="switch__level--subs-only" class="switch clickable">
+                    <img id="switch__img--subs-only" class="switch__img" src="../../images/radio-inactive.svg" alt="">
+                    <p class="switch__text">Только подписчики</p>
+                </div>
             </div>
-            <div class="newpost-title-input-container">
-                <textarea id="newpost-title-input" class="newpost-title-input" type="text"></textarea>
+
+            <div id="subscription__levels" class="subscription__levels"></div>
+
+            <div class="comments">
+                <p class="newpost__comments">Комментарии</p>
+                <img class="comment__switch" src="../../images/switcher-inactive.svg" alt="inactive">
             </div>
         </div>
-
-        <div class="newpost-text-container">
-            <div class="newpost-text-label-container">
-                <label class="newpost-text-label">Текст</label>
-            </div>
-            <div class="newpost-text-input-container">
-                <textarea id="newpost-text-input" class="newpost-text-input" type="text"></textarea>
-            </div>
-        </div>
-
-        <div class="newpost-btn-container">
-            <button id="newpost-btn" class="newpost-btn">Опубликовать</button>
-        </div>
-
-    </form>
+        <button id="newpost-btn" class="newpost-btn">Сохранить</button>
+    </div>
 </div>

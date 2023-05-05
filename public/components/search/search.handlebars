@@ -1,11 +1,33 @@
-<div class="search-container">
-    {{#each creatorList}}
-        <div class="author-card" id="{{creator_id}}">
-            <div class="author-card-info">
-                <h1>{{name}}</h1>
-                <p>{{description}}</p>
-                <p>Подписчиков: {{followers_count}}</p>
+{{#if creatorList}}
+    <div class="search__container">
+        {{#each creatorList}}
+            <div class="creator__card" id="{{creator_id}}">
+                <div class="card__header">
+                    <div class="followers">
+                        <img src="../../images/followers.svg" alt="followers">
+                        <p class="followers__count">{{followers_count}}</p>
+                    </div>
+                    <div class="search__info">
+                        <img id="search__photo" class="search__photo" src="../../images/{{profile_photo}}.jpg" alt="">
+                        <h3 class="search__name">{{name}}</h3>
+                    </div>
+                </div>
+
+                <div class="card__footer">
+                    <img class="search__tag--img" src="../../images/tag.svg" alt="tag">
+                    <div class="search__tag">
+                        <p>Тэг 1</p>
+                    </div>
+                    <div class="search__tag">
+                        <p>Тэг 2</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    {{/each}}
-</div>
+        {{/each}}
+    </div>
+{{else}}
+    <div class="no-authors__container">
+        <h1 class="search__no-authors">Не найдено ни одного автора</h1>
+        <img class="no-authors__img" src="../../images/no-access.jpeg" alt="">
+    </div>
+{{/if}}

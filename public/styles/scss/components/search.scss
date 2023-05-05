@@ -1,0 +1,156 @@
+@import "../general/variables";
+
+$search__container-padding: 5%;
+$num-of-columns: 4;
+
+.search__container {
+  padding: 4% $search__container-padding $search__container-padding;
+  display: grid;
+  grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+}
+
+$creator__card-width: 65%;
+$creator__card-height: 20em;
+$creator__card-offset-bottom: 2em;
+
+.creator__card {
+  width: $creator__card-width;
+  height: $creator__card-height;
+  margin: 0 auto $creator__card-offset-bottom auto;
+  padding: 1em;
+
+  border-radius: $elem-border-radius;
+
+  background-color: $card-color;
+
+  @include clickable();
+
+  &:hover {
+    background-color: $create-btn-color;
+  }
+}
+
+.card__header {
+  border-bottom: $card-content-color solid 2px;
+  height: 80%;
+}
+
+.followers {
+  margin-left: 0.5em;
+  display: flex;
+}
+
+.followers__count {
+  margin-left: 0.2em;
+}
+
+$search__photo-width: 5em;
+
+.search__photo {
+  width: $search__photo-width;
+  height: $search__photo-width;
+  background-size: $search__photo-width;
+  border-radius: 20em;
+}
+
+.search__info {
+  text-align: center;
+}
+
+.search__name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 15%;
+}
+
+.card__footer {
+  margin-top: 1em;
+  display: flex;
+}
+
+$tag-color: #009F2D;
+
+.search__tag {
+  margin-left: 1em;
+  padding: 3px 10px 3px 10px;
+  border-radius: $tag-border-radius;
+  background-color: rgba($tag-color, 0.5);
+}
+
+.search__tag--img {
+  width: 1.5em;
+}
+
+.no-authors__container {
+  margin-top: 7%;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.search__no-authors {
+  width: 100%;
+}
+
+.no-authors__img {
+  width: 40%;
+}
+
+// -------- 1200 -------- //
+
+$num-of-columns: 3;
+
+@media (max-width: 1200px) {
+  .search__container {
+    grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  }
+
+  .no-authors__container {
+    margin-top: 10%;
+  }
+}
+
+// -------- 1000 -------- //
+
+$num-of-columns: 2;
+
+@media (max-width: 1000px) {
+  .search__container {
+    padding-top: 5%;
+    grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  }
+
+  .no-authors__container {
+    margin-top: 12%;
+    font-size: 14px;
+  }
+}
+
+// -------- 600 -------- //
+
+$num-of-columns: 1;
+
+@media (max-width: 600px) {
+  .search__container {
+    padding-top: 7%;
+    grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  }
+
+  .no-authors__container {
+    margin-top: 17%;
+    font-size: 12px;
+  }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+  .search__container {
+    padding-top: 10%;
+  }
+
+  .no-authors__container {
+    margin-top: 30%;
+    font-size: 10px;
+  }
+}

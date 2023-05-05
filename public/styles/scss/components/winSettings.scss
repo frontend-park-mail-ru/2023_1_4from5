@@ -1,0 +1,82 @@
+@import "../general/variables";
+
+$winsettings-width: fit-content;
+
+#winSettings {
+  position: fixed;
+  top: $sidebar-height * 1.25;
+  right: 0;
+
+  padding: 0.3em;
+  width: $winsettings-width;
+  height: fit-content;
+  background: $default-color;
+
+  border: $hr-color solid 2px;
+  border-radius: 0 0 $elem-border-radius $elem-border-radius;
+
+  z-index: $popup-z-index;
+  @include shadow();
+}
+
+.media__1300px {
+  display: none;
+}
+
+.media__1000px {
+  display: none;
+}
+
+.media__480px {
+  display: none;
+}
+
+.winsettings__chapter {
+  height: fit-content;
+  margin: 0.7em 1em 0.7em 1em;
+}
+
+.winsettins__img {
+  width: 1.5em;
+  margin-right: 0.5em;
+}
+
+.winsettings__href {
+  display: flex;
+  font-size: 1.1em;
+}
+
+$winsettings__hr-width: 80%;
+
+.winsettings__hr {
+  width: $winsettings__hr-width;
+  color: $hr-color;
+}
+
+// -------- 1300 -------- //
+
+@media (max-width: 1300px) {
+  .media__1300px {
+    display: block;
+  }
+}
+
+// -------- 1000 -------- //
+
+@media (max-width: 1000px) {
+  .media__1000px {
+    display: block;
+  }
+
+  .disabled {
+    pointer-events: none; /* делаем элемент неактивным для взаимодействия */
+    cursor: default; /*  курсор в виде стрелки */
+    color: #888;/* цвет текста серый */
+  }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+
+}

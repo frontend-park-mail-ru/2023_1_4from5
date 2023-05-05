@@ -1,0 +1,210 @@
+@import "../general/variables";
+
+$subs-offset: 7%;
+$subs__content-width: 80%;
+
+.subscriptions {
+  padding: ($subs-offset / 2) $subs-offset 0 $subs-offset;
+  display: grid;
+  grid-template-columns: (100% - $subs__content-width) $subs__content-width;
+}
+
+//---chapters---//
+
+.chapters__title {
+  font-size: $title-font-size;
+  margin-bottom: 3em;
+}
+
+#chapter--paid {
+  @include clickable();
+}
+
+.chapter--active {
+  border-left: $text-color solid $chapter-border-width;
+  color: $text-color;
+}
+
+//---content---//
+
+$num-of-sub-columns: 3;
+
+.subscriptions__container {
+  margin-bottom: 3em;
+  padding: 5%;
+  border-radius: $block-border-radius;
+  background-color: $card-color;
+  display: grid;
+  grid-template-columns: (100% / $num-of-sub-columns) (100% / $num-of-sub-columns) (100% / $num-of-sub-columns);
+}
+
+$subs__card--info-height: 90%;
+
+.subs__card {
+  border-radius: $elem-border-radius;
+  background-color: $default-color;
+  text-align: center;
+  padding: 10% 10% 15% 10%;
+  margin: 3% 5% 3% 5%;
+
+  display: grid;
+  grid-template-rows: $subs__card--info-height (100% - $subs__card--info-height);
+}
+
+.subs__info--container {
+  display: grid;
+  grid-template-rows: 35% 20% 45%;
+}
+
+$subs__photo-width: 7em;
+
+.subs__photo {
+  width: $subs__photo-width;
+  height: $subs__photo-width;
+  border-radius: 100%;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.subs__creator {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.subs__info {
+  background-color: $sub__btn-color;
+  border-radius: $elem-border-radius;
+  width: 100%;
+  height: 70%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: center;
+  @include shadow();
+}
+
+.month__cost--container {
+  display: flex;
+  margin-top: 0.2em;
+  justify-content: center;
+}
+
+#month__cost {
+  margin-right: 0.3em;
+}
+
+.subs__info--title {
+  font-size: $font-size-2;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.subs__extend {
+  color: black;
+  background-color: $create-btn-color;
+  @include shadow();
+
+  &:hover {
+    background-color: $create-btn-color-hover;
+  }
+}
+
+.subs__disfollow {
+  color: black;
+  background-color: $sub__btn-color;
+  @include shadow();
+  height: 2.5em;
+  margin-bottom: 1em;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
+.follow__creator {
+  margin-top: 3em;
+}
+
+//----------media-----------
+
+@media (max-width: 1400px) {
+  .subscriptions {
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+
+  .chapters__title {
+    font-size: $font-size-3;
+  }
+
+  .chapter {
+    font-size: $font-size;
+  }
+
+  .subscriptions__container {
+    padding: 2em;
+  }
+
+  .subscriptions__chapters {
+    margin-right: 1em;
+  }
+
+  .subs__card {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .subs__info {
+    height: 50%;
+    padding-bottom: 2em;
+  }
+
+  .subs__info--title {
+    font-size: $font-size;
+  }
+
+  .month__cost--container {
+    font-size: $font-size-2;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .subscriptions {
+    grid-template-columns: 30% 70%;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .subscriptions__container {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  .subscriptions__container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .subscriptions {
+    grid-template-columns: 1fr;
+  }
+
+  .subscriptions__chapters {
+    margin-top: 1em;
+    margin-left: 2em;
+  }
+
+  .chapters__title {
+    margin-bottom: 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .subscriptions__container {
+    padding: 0.2em;
+    border-radius: $elem-border-radius;
+  }
+}

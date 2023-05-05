@@ -1,5 +1,5 @@
 import { color } from '../../consts/styles.js';
-import { Actions } from '../../actions/actions.js';
+import { Actions } from '../../actions/actions';
 import template from './donateWin.handlebars';
 
 const rootElement = document.getElementById('root');
@@ -14,7 +14,6 @@ export class DonateWin {
   render() {
     const newDiv = document.createElement('div');
     newDiv.id = 'donateWinDiv';
-
     newDiv.innerHTML = template();
     this.#parent.appendChild(newDiv);
 

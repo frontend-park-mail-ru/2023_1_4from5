@@ -1,0 +1,67 @@
+$font-size-err: 14px;
+$font-size-small: 14px;
+$font-size: 16px;
+$font-size-2: 20px;
+$font-size-3: 24px;
+$font-size-4: 32px;
+$title-font-size: 36px;
+$ultra-title-font-size: 54px;
+
+$tag-border-radius: 10px;
+$elem-border-radius: 15px;
+$block-border-radius: 2em;
+
+$chapter-border-width: 3px;
+
+$text-color: #009d00;
+$underline-color: $text-color;
+$underline-width: 2px;
+
+$sidebar-height: 3.5em;
+
+$lower-z-index: 0;
+$content-z-index: 1;
+$sidebar-z-index: 2;
+$background-z-index: 3;
+$popup-z-index: 4;
+
+
+$input-height: 60px;
+
+$hr-color: rgba(128, 128, 128, 0.45);
+$hr-width: 2px;
+
+@mixin clickable() {
+  cursor: pointer;
+}
+
+.clickable {
+  @include clickable();
+}
+
+@mixin non-clickable() {
+  cursor: default;
+}
+
+@mixin v-align($height) {
+  line-height: $height;
+}
+
+$shadow-color: #b7b7b7;
+$shadow-len: 5px;
+
+@mixin shadow() {
+  box-shadow: $shadow-len $shadow-len $shadow-len $shadow-color;
+}
+
+$img-width: 1em;
+
+$default-color: white;
+$card-color: #f0f0f0;
+$card-color-hover: #ececec;
+$card-content-color: #d3d3d3;
+$sub__btn-color: #dddde0;
+$sub__btn-color-hover: #ceced3;
+$text--default-color: #A3A3A3;
+$create-btn-color: #d2f1da;
+$create-btn-color-hover: #b3efc2;

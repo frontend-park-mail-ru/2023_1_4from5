@@ -1,0 +1,139 @@
+<div id="author__photo" class="author__photo--container">
+
+    <img class="creator__photo" src="../../images/author-photo.jpg" alt="">
+    <img class="creator__photo" src="../../images/{{creator_info.profile_photo}}.jpg" alt="">
+    {{#if is_my_page}}
+        <div class="photo--hover">
+            <label class="creatorphoto__load--label">
+                <input id="photo__upload" type="file" class="upload"/>
+                <img class="photo__img" src="../../images/load-cover.svg" alt="load">
+                <h3 class="photo__text">Загрузить фото</h3>
+            </label>
+            <img id="delete__creator--photo" src="../../images/delete.svg" alt="">
+        </div>
+    {{/if}}
+</div>
+
+<div id="author__header">
+    <div id="author__header--photo">
+        {{#if is_my_page}}
+            <label class="cover__load--label">
+                <input id="cover__upload" type="file" class="upload"/>
+                <span id="author__header--hover">
+                    <h2 class="cover__title">
+                        <img class="cover__img" src="../../images/load-cover.svg" alt="load-cover">
+                        <p class="cover__title--text">Загрузить фото</p>
+                    </h2>
+                </span>
+            </label>
+            <img id="delete__creator--cover" src="../../images/delete.svg" alt="">
+
+        {{/if}}
+    </div>
+</div>
+
+<!------------------------------------------------------------------------------------------------->
+<div class="author__container">
+
+    <div class="author__empty-space"></div>
+
+    <div class="about">
+        <p id="creator__name" class="about__name">
+            {{creator_info.name}}
+            {{#if is_my_page}}
+                <img id="edit__profile" class="about__edit clickable" src="../../images/edit.svg" alt="edit">
+            {{/if}}
+        </p>
+        <p id="creator__description" class="about__description">{{creator_info.description}}</p>
+
+        <div class="subscribers-1000px">
+            <h2 class="subs__count">
+                <img class="followers__img" src="../../images/followers.svg" alt="followers">
+                подписчиков: {{creator_info.followers_count}}
+            </h2>
+        </div>
+
+        <div id="subscriptionLevels" class="subs-1000px"></div>
+    </div>
+
+
+    <div class="author__service">
+        <div class="subscribers">
+            <h2 class="subs__count">
+                <img class="followers__img" src="../../images/followers.svg" alt="followers">
+                подписчиков: {{creator_info.followers_count}}
+            </h2>
+        </div>
+
+        <div id="{{creator_info.creator_id}}" class="support">
+            {{#if isAuthorized}}
+                {{#unless is_my_page}}
+                    {{#if follows}}
+                        <button id="unfollow__btn" class="support__btn follow__btn">
+                            <p class="follow__btn--text">Перестать отслеживать</p>
+                        </button>
+                    {{else}}
+                        <button id="follow__btn" class="support__btn follow__btn">
+                            <div class="support__btn--container">
+                                <img src="../../images/follow.svg" alt="follow">
+                                <p class="support__btn--text">Отслеживать</p>
+                            </div>
+                        </button>
+                    {{/if}}
+                    <button id="donate__btn" class="support__btn donate__btn">
+                        <div class="support__btn--container">
+                            <img src="../../images/donate.svg" alt="donate">
+                            <p class="support__btn--text">Отправить донат</p>
+                        </div>
+                    </button>
+                {{/unless}}
+            {{/if}}
+        </div>
+
+        <div class="aim">
+            <p class="aim__header">Цель</p>
+            <div class="aim__container">
+                {{#if aim.description}}
+                    <div class="aim__money">
+                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} р</p>
+                        {{#if is_my_page}}
+                            <img id="aim__edit" class="clickable" src="../../images/edit.svg" alt="edit">
+                        {{/if}}
+                    </div>
+                    <div class="aim__bar">
+                        <div id="bar--row" class="bar--row"></div>
+                    </div>
+                    <p class="aim__description">{{aim.description}}</p>
+                {{else}}
+                    {{#if is_my_page}}
+                        <div class="aim__add--container">
+                            <img id="aim__add" class="aim__add clickable" src="../../images/add.svg" alt="add">
+                        </div>
+                        <p class="no-aim">У вас пока не выбрана цель</p>
+                    {{else}}
+                        <p class="no-aim">У автора нет цели, есть только путь</p>
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+
+        {{#if is_my_page}}
+            <button id="create__post" class="create__post">Создать пост</button>
+        {{/if}}
+    </div>
+
+    <div id="subscriptionLevels" class="subs"></div>
+
+    <div class="author__empty-space"></div>
+
+    <div id="posts" class="posts"></div>
+
+</div>
+
+
+<div id="footer">
+    <hr style="opacity: 75%;">
+    <!--        <h6>©️ 2023 4from5 All rights reserved. All trademarks are the property of their respective owners. <a-->
+    <!--                href="https://t.me/averageqqq">TG</a></h6>-->
+    <p>Свяжитесь с нами в Телеграмм: @DESOLATE17 @qqqq4u @IvanStukalovv @Vector102</p>
+</div>

@@ -16,6 +16,20 @@ export function clickHandler(event, config) {
         target = config[element];
       }
     }
-    target.render(target.href, '', target.parent);
+    if (target) {
+      target.render(target.href);
+    }
+  } else if (event.target.parentElement instanceof HTMLAnchorElement) {
+    event.preventDefault();
+    const targetId = event.target.parentElement.id;
+    let target;
+    for (let element in config) {
+      if (config[element].id === targetId) {
+        target = config[element];
+      }
+    }
+    if (target) {
+      target.render(target.href);
+    }
   }
 }

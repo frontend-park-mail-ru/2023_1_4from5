@@ -1,0 +1,42 @@
+<div class="feed">
+    {{#each posts}}
+        <div id="{{id}}" class="feed__card">
+            <div class="feed__header">
+                <div class="feed__creator--photo">
+                    <img id="feed__creator--photo" src="../../images/{{creator_photo}}.jpg" alt="">
+                </div>
+
+                <h3 class="feed__creator--name">{{creator_name}}</h3>
+
+                <div class="feed__date--container">
+                    <p class="feed__date">{{creation_date}}</p>
+                </div>
+            </div>
+
+            <div class="feed__content">
+                <h2 class="feed__title">{{title}}</h2>
+                <p class="feed__title">{{text}}</p>
+
+                <div id="attachments-{{id}}" class="attach-container"></div>
+            </div>
+
+            <div class="feed__footer">
+                <div class="feed__like--space">
+                    {{#if is_liked}}
+                        <img id="love-like-icon" class="feed__icon feed__like" src="../../images/love_like_icon.png" alt="liked">
+                    {{else}}
+                        <img id="like-icon" class="feed__icon feed__like" src="../../images/like_icon.png" alt="not-liked">
+                    {{/if}}
+                    <p class="feed__likes--count">{{likes_count}}</p>
+
+                    <img class="feed__icon" src="../../images/comment_icon.png" alt="comment">
+                    <p>0</p>
+                </div>
+
+                <div class="feed__comment--container">
+                    <img class="feed__icon" src="../../images/share.svg" alt="share">
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

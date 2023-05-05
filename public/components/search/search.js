@@ -32,7 +32,17 @@ class Search {
     newDiv.innerHTML = template(this.#authors);
     this.#parent.appendChild(newDiv);
 
-    let cards = document.querySelectorAll('.author-card');
+    // if (this.#authors.length === 0) {
+    //
+    // }
+    //
+    const photos = document.querySelectorAll('#search__photo');
+    for (let index = 0; index < photos.length; index++) {
+      const photo = photos[index];
+      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    }
+
+    let cards = document.querySelectorAll('.creator__card');
     for (let index = 0; index < cards.length; index++) {
       const card = cards[index];
       card.addEventListener('click', this.selectAuthor.bind(this));
@@ -41,7 +51,7 @@ class Search {
 
   selectAuthor(e) {
     e.preventDefault();
-    router.go(URLS.myPage, {}, this.getParent(), e.currentTarget.id);
+    router.go(URLS.myPage, {}, e.currentTarget.id);
   }
 }
 

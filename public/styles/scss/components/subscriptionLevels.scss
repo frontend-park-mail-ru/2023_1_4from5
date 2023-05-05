@@ -1,0 +1,268 @@
+@import "../general/variables";
+
+$subs__title-height: $font-size-4;
+
+.subs__title {
+  display: flex;
+  height: $subs__title-height;
+  padding-bottom: 2em;
+}
+
+.subs__title--text {
+  font-size: $font-size-3;
+  margin-right: 1em;
+
+  position: relative;
+  top: (($font-size-4 - $font-size-3) / 2);
+}
+
+.subs__add {
+  height: ($font-size-3 * 1.7);
+}
+
+//------subscriptions-------------
+$subs__container-width: 90%;
+$sub__card-height: 20em;
+$sub__container-offset: 1em;
+
+$sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
+
+.sub__space {
+  @include shadow();
+  width: 90%;
+  height: $sub__space-height;
+
+  border-radius: $elem-border-radius;
+  background-color: $card-color;
+  margin-right: 5em;
+
+  display: grid;
+  grid-template-columns: ((100% - $subs__container-width) / 2) $subs__container-width ((100% - $subs__container-width) / 2);
+}
+
+
+.sub__container {
+  display: flex;
+  width: 100%;
+  margin: $sub__container-offset auto $sub__container-offset auto;
+}
+
+//------sub__card---------------------
+
+.sub__card {
+  background-color: $default-color;
+  height: $sub__card-height;
+  width: ($subs__container-width / 5);
+  border-radius: $elem-border-radius;
+
+  margin: auto;
+  padding: 1em;
+
+  display: grid;
+  grid-template-rows: 30% 1fr 15% 15%;
+}
+
+.sub__title {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.sub__delete {
+  margin: 0 auto 0 auto;
+}
+
+.sub__title--text {
+  font-size: $font-size-2;
+  font-weight: bold;
+}
+
+.sub__cost {
+  font-weight: bold;
+  font-size: $font-size;
+  display: flex;
+  margin: auto;
+}
+
+.cost {
+  margin-right: 0.3em;
+}
+
+.sub__btn {
+  @include shadow();
+  height: 2em;
+  padding: 0.5em;
+  margin: auto;
+  background-color: $sub__btn-color;
+  color: black;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
+.sub__edit {
+  height: 50%;
+}
+
+$arrow-height: 3em;
+
+.arrows {
+  height: $arrow-height;
+  margin-top: (($sub__space-height - $arrow-height) / 2);
+}
+
+//-------no-subs--------
+.no-subs {
+  font-weight: bold;
+  font-size: $font-size-3;
+  color: $text--default-color;
+  margin: auto;
+}
+
+//-------media-------
+@media (max-width: 1400px) {
+  .sub__space {
+    width: 97%;
+  }
+
+  .sub__btn {
+    font-size: $font-size;
+    width: fit-content;
+  }
+
+  .sub__edit {
+    display: none;
+  }
+
+  .sub__cost {
+    font-size: $font-size;
+  }
+
+  .sub__title--text {
+    font-size: $font-size;
+  }
+
+  .sub__description {
+    font-size: $font-size-small;
+  }
+}
+
+@media (max-width: 1000px) {
+  .sub__container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+  }
+
+  .sub__card {
+    width: 70%;
+    margin-bottom: 1em;
+  }
+
+  .sub__btn {
+    font-size: $font-size-2;
+    width: fit-content;
+  }
+
+  .sub__edit {
+    display: inline;
+    height: 80%;
+  }
+
+  .sub__cost {
+    font-size: $font-size-2;
+  }
+
+  .subs__title {
+    margin-bottom: 2em;
+  }
+
+  .sub__title--text {
+    font-size: $font-size-2;
+  }
+
+  .sub__description {
+    font-size: $font-size;
+  }
+
+  .sub__space {
+    height: fit-content;
+  }
+
+
+  #next {
+    position: relative;
+    top: -14em;
+    right: 40vw;
+  }
+
+  #prev {
+    position: relative;
+    top: -14em;
+    left: 40vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .sub__space {
+    width: 99%;
+  }
+}
+
+@media (max-width: 600px) {
+  .subs__title {
+    margin-bottom: 1em;
+  }
+
+  .subs__title--text {
+    font-size: $font-size-2;
+  }
+
+  .subs__add {
+    height: ($font-size-2 * 1.7);
+  }
+
+  #next {
+    position: relative;
+    top: -14em;
+    right: 40vw;
+  }
+
+  #prev {
+    position: relative;
+    top: -14em;
+    left: 35vw;
+  }
+
+  .sub__title--text {
+    font-size: $font-size;
+  }
+
+  .sub__description {
+    font-size: $font-size-small;
+  }
+
+  .sub__cost {
+    font-size: $font-size;
+  }
+
+  .cost {
+    margin-right: 0.5em;
+  }
+}
+
+@media (max-width: 500px) {
+  .sub__edit {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .sub__container {
+    display: block;
+  }
+
+  .sub__edit {
+    display: inline;
+  }
+}

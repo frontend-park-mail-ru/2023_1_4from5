@@ -1,0 +1,398 @@
+@import "../general/variables";
+@import "../general/input";
+
+$settings__container--space-width: 80%;
+
+.settings {
+  display: grid;
+  grid-template-columns: (100% - $settings__container--space-width) $settings__container--space-width;
+}
+
+.chapter__container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(2, auto);
+}
+
+.settings__chapters--title {
+  margin-bottom: 2em;
+}
+
+.settings__chapters {
+  padding-left: 30%;
+  padding-top: 4em;
+}
+
+$chapter__bar-height: 0.3em;
+
+.chapter {
+  @include clickable();
+  font-size: $font-size-2;
+  padding-left: 1em;
+  padding-top: $chapter__bar-height;
+  padding-bottom: $chapter__bar-height;
+  margin-bottom: 1em;
+}
+
+.settings__chapters--title {
+  text-align: center;
+  font-size: 36px;
+}
+
+#chapter__account {
+  @include clickable();
+  color: $text-color;
+  border-left: $text-color solid $chapter-border-width;
+}
+
+//---settings---//
+
+$settings__form-width: 50%;
+
+.settings__container {
+  margin: 3em auto auto;
+  width: 70%;
+  padding: 3em 4em 3em 4em;
+  background-color: $card-color;
+  border-radius: $elem-border-radius;
+
+  display: grid;
+  grid-template-columns: $settings__form-width (100% - $settings__form-width);
+  grid-template-rows: auto auto;
+}
+
+.settings__title {
+  height: fit-content;
+  font-size: $font-size-4;
+  margin-bottom: 1em;
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+
+.settings__form {
+  grid-row: 2/3;
+  grid-column: 1/2;
+}
+
+.settings__input--title {
+  font-size: $font-size-2;
+  margin-bottom: 1em;
+}
+
+.change__input {
+  font-size: $form-input-font-size;
+
+  height: $input-height;
+  width: $form-input-width;
+
+  border: $form-input-border-color solid $form-input-border-width;
+  border-radius: $elem-border-radius;
+
+  padding: 0 $form-input-padding-side;
+  margin-bottom: 1em;
+}
+
+#old-password-input {
+  margin-bottom: 2em;
+}
+
+//---photo---//
+
+$settings__photo-width: 22em;
+
+.settings__photo--btns {
+  width: $settings__photo-width;
+}
+
+.settings__photo {
+  padding: 5em;
+  grid-column: 2/3;
+  grid-row: 1/3;
+}
+
+.upload {
+  width: 0;
+  height: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+#user-photo {
+  display: flex;
+  width: $settings__photo-width;
+  height: $settings__photo-width;
+  border-radius: $elem-border-radius;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.photo__load--label {
+  width: 95%;
+  text-align: center;
+  height: fit-content;
+  display: block;
+  margin-bottom: 3em;
+  margin-right: 1em;
+  padding: 1em 0 1em 0;
+  border-radius: $elem-border-radius;
+  background-color: $sub__btn-color;
+  @include clickable();
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
+.settings__photo--btns {
+  height: 3em;
+  margin-bottom: 2em;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.settings__delete--btn {
+  font-size: 16px;
+  margin-left: 1em;
+  width: 90%;
+  height: 51%;
+}
+
+//---change__res---//
+
+.change__res {
+  height: 1em;
+  margin: 0 0 1em;
+}
+
+.change-success {
+  color: green;
+}
+
+#change-password-error {
+  color: red;
+}
+
+// -------- 1500 -------- //
+
+$settings__photo-width: 20em;
+
+@media (max-width: 1500px) {
+  #user-photo {
+    width: $settings__photo-width;
+    height: $settings__photo-width;
+  }
+
+  .settings__photo--btns {
+    width: $settings__photo-width;
+  }
+}
+
+// -------- 1300 -------- //
+
+$settings__photo-width: 18em;
+
+@media (max-width: 1300px) {
+  #user-photo {
+    width: $settings__photo-width;
+    height: $settings__photo-width;
+  }
+
+  .settings__photo--btns {
+    width: $settings__photo-width;
+  }
+}
+
+// -------- 1200 -------- //
+
+@media (max-width: 1200px) {
+  .settings {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, auto);
+  }
+
+  .settings__chapters {
+    padding-left: 0;
+  }
+
+  .settings__chapters--title{
+    margin-bottom: 0.5em;
+    font-size: 32px;
+  }
+
+  .chapter__container {
+    text-align: center;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(1, auto);
+  }
+
+  #chapter__account {
+    border-left: 0;
+  }
+
+  .settings__container {
+    margin: 0.5em auto auto;
+  }
+
+  .settings__title {
+    font-size: 30px;
+  }
+}
+
+// -------- 1000 -------- //
+
+$settings__photo-width: 16em;
+
+@media (max-width: 1000px) {
+  .settings__chapters--title{
+    font-size: 30px;
+  }
+
+  .settings__title {
+    font-size: 28px;
+  }
+
+  #user-photo {
+    width: $settings__photo-width;
+    height: $settings__photo-width;
+  }
+
+  .settings__photo--btns {
+    font-size: 14px;
+    width: $settings__photo-width * 1.13;
+  }
+
+  .settings__delete--btn {
+    font-size: 14px;
+  }
+
+  .change__input {
+    font-size: 1.1em;
+    height: 45px;
+  }
+
+  .settings__input--title {
+    font-size: 18px;
+  }
+
+  .settings__btn {
+    font-size: 18px;
+    height: 45px;
+  }
+}
+
+// -------- 850 -------- //
+
+$settings__photo-width: 14em;
+
+@media (max-width: 850px) {
+  #user-photo {
+    width: $settings__photo-width;
+    height: $settings__photo-width;
+  }
+
+  .settings__photo--btns {
+    width: $settings__photo-width * 1.13;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, auto);
+    height: fit-content;
+  }
+
+  .settings__photo--btns {
+    width: 15.82em;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(2, auto);
+    height: fit-content;
+    margin-bottom: 1em
+  }
+
+  .settings__delete--btn {
+    font-size: 14px;
+    height: 3.1em;
+    margin-left: 0;
+    margin-top: 1em;
+  }
+
+  .photo__load--label {
+    width: 90%;
+    text-align: center;
+    margin-bottom: 0;
+    margin-right: 0;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+  }
+}
+
+// -------- 850 -------- //
+
+$settings__photo-width: 16em;
+
+@media (max-width: 850px) {
+  .settings__container {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(3, auto);
+  }
+
+  .settings__photo {
+    grid-row: 2/3;
+    grid-column: 1/2;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(1, auto);
+    padding: 2em 0;
+  }
+
+  #user-photo {
+    width: $settings__photo-width;
+    height: $settings__photo-width;
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .settings__photo--btns {
+    width: $settings__photo-width * 1.13;
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  .settings__form {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+}
+
+// -------- 768 -------- //
+
+@media (max-width: 768px) {
+  .settings__photo {
+    grid-template-columns: 60% 40%;
+  }
+}
+
+// -------- 640 -------- //
+
+@media (max-width: 640px) {
+  .settings__container {
+    width: 60%;
+  }
+  .settings__photo {
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+  }
+  .settings__photo--btns {
+    margin-top: 1em;
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+}
+
+// -------- 480 -------- //
+
+@media (max-width: 480px) {
+  .chapter__container {
+    grid-template-columns: 45% 55%;
+  }
+  .settings__container {
+    width: 75%;
+    padding: 1em 2em;
+  }
+}

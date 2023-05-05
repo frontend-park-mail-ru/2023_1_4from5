@@ -1,44 +1,55 @@
 <div class="settings">
-    <h1>Настройки</h1>
-
-    <img id="user-photo" width="200" src="../../images/{{profilePhoto}}.jpg" alt="user_photo">
-    <input type="file" class="upload" id="photo-upload"/>
-
-    <hr>
-    <div>
-        <h3>Имя</h3>
-        <input class="change-name" id="change-username-input" type="text" value="{{usernameIn}}">
-        <br>
-        <div class="change-success" id="change-success-name"></div>
-        <button class="change-btn" id="change-username-btn">Сменить имя</button>
+    <div class="settings__chapters">
+        <p class="settings__chapters--title">Настройки</p>
+        <div class="chapter__container">
+            <p id="chapter__account" class="chapter">Аккаунт</p>
+            <p class="chapter inactive">Уведомления</p>
+        </div>
     </div>
 
-    <div>
-        <h3>Логин</h3>
-        <input class="change-name" id="change-login-input" type="text" value="{{login}}">
-        <br>
-        <div id="change-login-error"></div>
-        <br>
-        <div class="change-success" id="change-success-login"></div>
-        <button class="change-btn" id="change-login-btn">Сменть логин</button>
-    </div>
 
-    <hr>
-    <div class="change-password">
-        <h4>Изменить пароль</h4>
-        <div>
-            <label class="change-password-label" for="password">Старый пароль</label>
-            <input class="change-password-input" id="old-password-input" type="password">
+    <div class="settings__container">
+        <p class="settings__title">Аккаунт</p>
+
+        <div class="settings__form">
+            <div class="settings__block">
+                <p class="settings__input--title">Имя пользователя</p>
+                <input class="change-name change__input" id="change-username-input" type="text"
+                       value="{{usernameIn}}">
+                <div id="change-username-error" class="change__res error"></div>
+            </div>
+
+
+            <div class="settings__block">
+                <p class="settings__input--title">Логин</p>
+                <input class="change-name change__input" id="change-login-input" type="text" value="{{login}}">
+                <div id="change-login-error" class="change__res error"></div>
+            </div>
+
+            <div class="change-password settings__block">
+                <p class="settings__input--title">Пароль</p>
+                <input class="change-password-input change__input" id="old-password-input" type="password"
+                       placeholder="Старый пароль">
+                <input class="change-password-input change__input" id="new-password-input" type="password"
+                       placeholder="Новый пароль">
+
+                <div id="change-password-error" class="change__res error"></div>
+            </div>
+
+            <div class="change__res change-success" id="change-success-name"></div>
+            <button class="settings__btn" id="settings__btn">Сохранить</button>
         </div>
+        <!------------------------------------------------------------------------------------------------------------->
+        <div id="{{profilePhoto}}" class="settings__photo">
+            <div class="settings__photo--btns">
+                <label class="photo__load--label">
+                    <input id="photo-upload" type="file" class="upload"/>
+                    <span class="photo__load--btn">Выбрать фото</span>
+                </label>
+                <button id="settings__delete--btn" class="settings__delete--btn">Удалить фото</button>
+            </div>
 
-        <div>
-            <label class="change-password-label" for="password">Новый пароль</label>
-            <input class="change-password-input" id="new-password-input" type="password">
+            <img id="user-photo" src="../../images/{{profilePhoto}}.jpg" alt="">
         </div>
-
-        <div class="change-success" id="change-success-password"></div>
-        <div id="change-password-error"></div>
-
-        <button class="change-btn" id="change-password-btn">Сменить пароль</button>
     </div>
 </div>

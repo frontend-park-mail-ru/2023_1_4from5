@@ -1,0 +1,56 @@
+<div class="subs__container">
+    <div class="subs__title">
+        <p class="subs__title--text">Уровни подписки</p>
+        {{#if is_my_page}}
+            <img id="subs__add" class="subs__add clickable" src="../../images/add.svg" alt="">
+        {{/if}}
+    </div>
+
+    <div id="{{creator_info.creator_id}}" class="sub__space">
+        {{#if subscriptions}}
+            <div id="arrow--prev" class="arrow__container"></div>
+            <div class="sub__container">
+                {{#each subscriptions}}
+                    <div id="{{id}}" class="sub__card">
+                        <div class="sub__title">
+                            <p class="sub__title--text">{{title}}</p>
+                            {{#if ../is_my_page}}
+                                <img id="sub__delete" class="sub__delete clickable" src="../../images/delete.svg" alt="">
+                            {{else}}
+                                <div></div>
+                            {{/if}}
+                        </div>
+                        <p class="sub__description">{{description}}</p>
+                        <div class="sub__cost">
+                            <p id="sub__price" class="cost">{{month_cost}}</p>
+                            <p class="rpm">р/месяц</p>
+                        </div>
+
+                        {{#if ../is_my_page}}
+                            <button id="sub__edit" class="sub__btn">
+                                <img class="sub__edit" src="../../images/pencil.png" alt="">
+                                Изменить
+                            </button>
+                        {{else}}
+                            {{#if ../isAuthorized}}
+                                <button id="get__sub" class="sub__btn sub__buy">Оформить</button>
+                            {{else}}
+                                <div></div>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                {{/each}}
+            </div>
+            <div id="arrow--next" class="arrow__container"></div>
+
+        {{else}}
+            {{#if is_my_page}}
+                <p></p>
+                <p class="no-subs">У вас пока нет ни одной подписки</p>
+            {{else}}
+                <p></p>
+                <p class="no-subs">У автора пока нет ни одной подписки</p>
+            {{/if}}
+        {{/if}}
+    </div>
+</div>

@@ -1,4 +1,4 @@
-const WEB_URL = 'http://sub-me.ru';
+const WEB_URL = 'https://sub-me.ru';
 
 export class Request {
   #REQUEST_METHODS = {
@@ -23,18 +23,36 @@ export class Request {
     return res;
   }
 
+  async getHeader(path) {
+    const get = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.GET,
+      mode: 'cors',
+      credentials: 'include',
+    });
+    const header = [...get.headers.entries()];
+    let token;
+    for (const title in header) {
+      if (header[title][0] === 'x-csrf-token') {
+        token = header[title][1];
+      }
+    }
+    return token;
+  }
+
   /**
    * post request
    * @param {string} path - end-point
    * @param content
+   * @param token
    * @param contentType
    *
    * @returns {Promise} - response
    */
-  async post(path, content, contentType = 'application/json') {
+  async post(path, content, token, contentType = 'application/json') {
     let body;
     if (contentType === 'multipart/form-data') {
-      const boundary = String(Math.random()).slice(2);
+      const boundary = String(Math.random())
+        .slice(2);
       const boundaryMiddle = `--${boundary}\r\n`;
       const boundaryLast = `--${boundary}--\r\n`;
       body = ['\r\n'];
@@ -54,38 +72,72 @@ export class Request {
       credentials: 'include',
       headers: {
         'Content-Type': contentType,
+        'X-Csrf-Token': token,
       },
       body,
     });
     return res;
   }
 
-  async postMultipart(path, body) {
+  async putMultipart(path, body, token) {
     const response = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',
       credentials: 'include',
+      headers: {
+        'x-csrf-token': token,
+      },
       body,
     });
     return response;
   }
 
-  async delete(path) {
+  async postMultipart(path, body, token) {
+    const response = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.POST,
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'x-csrf-token': token,
+      },
+      body,
+    });
+    return response;
+  }
+
+  async delete(path, token) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.DELETE,
       mode: 'cors',
       credentials: 'include',
+      headers: {
+        'X-Csrf-Token': token,
+      }
     });
     return res;
   }
 
-  async put(path, body) {
+  async deleteWithBody(path, body, token) {
+    const res = await fetch(WEB_URL + path, {
+      method: this.#REQUEST_METHODS.DELETE,
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'X-Csrf-Token': token,
+      },
+      body: JSON.stringify(body),
+    });
+    return res;
+  }
+
+  async put(path, body, token) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        'X-Csrf-Token': token,
       },
       body: JSON.stringify(body),
     });

@@ -1,0 +1,123 @@
+@import "../general/popup";
+@import "../general/variables";
+@import "../general/input";
+
+$becomeAuthor-width: 30%;
+
+.becameAuthor {
+  @include popup__container();
+  width: $becomeAuthor-width;
+  background-color: $default-color;
+  margin-left: ((100% - $becomeAuthor-width) / 2);
+}
+
+.becameAuthor__form {
+  padding: 3em;
+  text-align: center;
+}
+
+.becameAuthor__name {
+  margin-top: 3em;
+  margin-bottom: $form-input-mb;
+}
+
+.becameAuthor--input {
+  font-size: $form-input-font-size;
+  height: $input-height;
+  width: $form-input-width;
+
+  border: $form-input-border-color solid $form-input-border-width;
+  border-radius: $elem-border-radius;
+
+  padding: 0 $form-input-padding-side;
+}
+
+#becameAuthor__description--input {
+  resize: none;
+  height: 5em;
+  padding-top: 0.5em;
+}
+
+.back__btn--container {
+  text-align: start;
+}
+
+.becameAuthor--header {
+  font-size: $font-size-3;
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+
+.becameAuthor__backBtn {
+  background-color: $sub__btn-color;
+  width: 50%;
+  height: 2em;
+  color: black;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
+@media (max-width: 1400px) {
+  $becomeAuthor-width-1400px: 40vw;
+
+  .becameAuthor {
+    width: $becomeAuthor-width-1400px;
+    margin-left: ((100vw - $becomeAuthor-width-1400px) / 2);
+  }
+}
+
+@media (max-width: 1000px) {
+  $becomeAuthor-width-1000px: 50vw;
+
+  .becameAuthor {
+    width: $becomeAuthor-width-1000px;
+    margin-left: ((100vw - $becomeAuthor-width-1000px) / 2);
+  }
+}
+
+@media (max-width: 800px) {
+  $becomeAuthor-width-1000px: 60vw;
+
+  .becameAuthor__form {
+    padding: 2em;
+  }
+
+  .becameAuthor {
+    width: $becomeAuthor-width-1000px;
+    margin-left: ((100vw - $becomeAuthor-width-1000px) / 2);
+
+    font-size: $font-size-2;
+  }
+
+  .becameAuthor--input {
+    margin-bottom: 2em;
+  }
+}
+
+@media (max-width: 800px) {
+  $becomeAuthor-width-800px: 70vw;
+
+  .becameAuthor {
+    width: $becomeAuthor-width-800px;
+    margin-left: ((100vw - $becomeAuthor-width-800px) / 2);
+  }
+
+  .becameAuthor--input {
+    font-size: $font-size-2;
+  }
+}
+
+@media (max-width: 600px) {
+  $becomeAuthor-width-600px: 80vw;
+
+  .becameAuthor {
+    width: $becomeAuthor-width-600px;
+    margin-left: ((100vw - $becomeAuthor-width-600px) / 2);
+  }
+
+  .becameAuthor--header {
+    font-size: $font-size-2;
+  }
+}

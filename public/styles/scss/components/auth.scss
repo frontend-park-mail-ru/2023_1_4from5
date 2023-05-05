@@ -1,0 +1,138 @@
+@import "../general/popup";
+@import "../general/input";
+@import "../general/variables";
+@import "../general/text";
+
+$popup-auth-width: 35vw;
+$form-width: 60%;
+
+.auth__container{
+  @include popup__container();
+  width: $popup-auth-width;
+  margin-left: ((100vw - $popup-auth-width) / 2);
+}
+
+.auth__form {
+  margin: auto;
+  width: $form-width;
+}
+
+$auth-title-mt: 3em;
+
+.auth__title {
+  font-size: $title-font-size;
+  text-align: center;
+  margin-top: $auth-title-mt;
+  margin-bottom: 2em;
+}
+
+#auth__login, #auth__password {
+  height: 95%;
+  border-width: 0;
+  font-size: $font-size * 1.3;
+
+  outline: 0;
+  outline-offset: 0;
+
+  background: none;
+}
+
+.auth__input {
+  height: $input-height;
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
+
+.input__img {
+  @include clickable();
+  width: 1.05em;
+  margin: auto;
+}
+
+.text--redirect {
+  margin: 2em auto 0 auto;
+  width: fit-content;
+}
+
+@mixin redirect() {
+  margin: auto;
+  width: fit-content;
+  @include clickable();
+
+  color: $text-color;
+  font-weight: bold;
+
+  &:hover {
+    border-bottom: $underline-color solid $underline-width;
+  }
+}
+
+#toReg {
+  @include redirect();
+}
+
+.auth__text {
+  font-size: $font-size;
+}
+
+//--------media----------------------
+
+@media (max-width: 1500px) {
+  $popup-auth-width-1500px: 50vw;
+
+  .auth__container {
+    width: $popup-auth-width-1500px;
+    margin-left: ((100vw - $popup-auth-width-1500px) / 2);
+  }
+}
+
+@media (max-width: 1000px) {
+  $popup-auth-width-1000px: 70vw;
+
+  .auth__container {
+    width: $popup-auth-width-1000px;
+    margin-left: ((100vw - $popup-auth-width-1000px) / 2);
+  }
+}
+
+@media (max-width: 1000px) {
+  $popup-auth-width-1000px: 70vw;
+
+  .auth__container {
+    width: $popup-auth-width-1000px;
+    margin-left: ((100vw - $popup-auth-width-1000px) / 2);
+  }
+}
+
+@media (max-width: 700px) {
+  .auth__container {
+    height: 80%;
+  }
+
+  .auth__form {
+    width: 80%;
+  }
+
+  .auth__title {
+    font-size: $font-size-4;
+    margin-top: 2em;
+  }
+}
+
+@media (max-width: 500px) {
+  $popup-auth-width-500px: 90vw;
+
+  .auth__container {
+    width: $popup-auth-width-500px;
+    margin-left: ((100vw - $popup-auth-width-500px) / 2);
+    height: 75%;
+  }
+
+  .auth__title {
+    font-size: $font-size-3;
+  }
+
+  .auth__text {
+    font-size: $font-size-small;
+  }
+}
