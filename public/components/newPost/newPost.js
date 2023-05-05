@@ -10,6 +10,7 @@ import { URLS } from '../../modules/Notifier';
 
 const template = require('./newPost.handlebars');
 
+
 const contentElement = document.querySelector('main');
 
 class NewPost {
