@@ -2,6 +2,7 @@ import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { newPostStore } from './newPostStore';
 import { subLevels } from './levels';
+import { URLS } from '../../modules/Notifier';
 
 // TODO (сделал минимальную валидацию на каждый файл < 5 Мб)
 //  более лучшая валидация файлов (обработка 413 и общий размер)
@@ -117,7 +118,7 @@ class NewPost {
     const backBtn = document.getElementById('newpost-btn-back');
     backBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      router.popstate();
+      router.go(URLS.myPage);
     });
 
     const photoInput = document.querySelector('#attach-photo-download');
