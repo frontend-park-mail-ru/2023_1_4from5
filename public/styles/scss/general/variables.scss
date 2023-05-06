@@ -35,8 +35,16 @@ $hr-width: 2px;
   cursor: pointer;
 }
 
+.clickable {
+  @include clickable();
+}
+
 @mixin non-clickable() {
   cursor: default;
+}
+
+@mixin v-align($height) {
+  line-height: $height;
 }
 
 $shadow-color: #b7b7b7;

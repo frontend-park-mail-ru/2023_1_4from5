@@ -1,0 +1,68 @@
+@import "../general/variables";
+
+.about {
+  padding: 1em 1em 0 0;
+}
+
+.about__name {
+  font-size: $font-size-4;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.about__edit {
+  margin-left: 1em;
+}
+
+.about__description {
+  width: 90%;
+}
+
+.subscribers-1000px {
+  display: none;
+}
+
+//--------media--------------
+
+@media (max-width: 1000px) {
+  .about {
+    padding: 0;
+    width: 90%;
+    height: fit-content;
+    margin: 1em auto 2em auto;
+  }
+
+  .about__description {
+    margin-bottom: 2em;
+  }
+
+  .subscribers-1000px {
+    display: block;
+  }
+
+  .subscribers {
+    display: none;
+  }
+
+  .subs__count {
+    margin: 0 0 1em 0;
+  }
+
+  .about__name, .about__description, .subs__count, .subs__title {
+    margin-left: 5vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .about__name {
+    font-size: $font-size-3;
+  }
+
+  .about__description {
+    font-size: $font-size-small;
+  }
+
+  .subs__count {
+    font-size: $font-size;
+  }
+}

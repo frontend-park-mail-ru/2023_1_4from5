@@ -3,7 +3,7 @@
 
 $form-input-font-size: 1.3em;
 $form-input-width: 95%;
-$form-input-mb: 3em;
+$form-input-mb: 5%;
 $form-input-padding-side: 0.5em;
 
 $form-input-border-width: 2px;
@@ -12,7 +12,6 @@ $form-input-border-color: #cccccc;
 .input--form {
   font-size: $form-input-font-size;
 
-  //height: $input-height;
   width: $form-input-width;
 
   border: $form-input-border-color solid $form-input-border-width;
