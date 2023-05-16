@@ -76,7 +76,7 @@ class NewPostStore {
   }
 
   async sendPost(actionType, action, callback) {
-    //.log('action.input ', action.input);
+    // .log('action.input ', action.input);
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
     const subscriptions = action.input.availableSubscriptions;
@@ -103,7 +103,7 @@ class NewPostStore {
       if (actionType === ActionTypes.CREATE_POST) {
         status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       } else {
-        status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
+        status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       }
       if (status) {
         newPost.config.attachments = [];
