@@ -126,33 +126,39 @@ class AuthorPage {
       }
     }
 
-    const prev = document.getElementById('prev');
-    if (prev) {
-      prev.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (this.#subsPos >= subNum) {
-          this.#subsPos -= subNum;
-          this.render();
-        }
-      });
+    const prevs = document.querySelectorAll('#prev');
+    if (prevs) {
+      for (let index = 0; index < prevs.length; index++) {
+        const prev = prevs[index];
+        prev.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (this.#subsPos >= subNum) {
+            this.#subsPos -= subNum;
+            this.render();
+          }
+        });
+      }
     }
 
-    const next = document.getElementById('next');
-    if (next) {
-      next.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (this.#config.subscriptions[this.#subsPos + subNum]) {
-          this.#subsPos += subNum;
-          this.render();
-        }
-      });
+    const nexts = document.querySelectorAll('#next');
+    if (nexts) {
+      for (let index = 0; index < nexts.length; index++) {
+        const next = nexts[index];
+        next.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (this.#config.subscriptions[this.#subsPos + subNum]) {
+            this.#subsPos += subNum;
+            this.render();
+          }
+        });
+      }
     }
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
 
     const coverPhoto = document.getElementById('author__header--photo');
-    coverPhoto.style.backgroundImage = `url(../../images/${this.#config.creator_info.cover_photo}.jpg)`;
+    coverPhoto.style.backgroundImage = `url(../../images/user/${this.#config.creator_info.cover_photo}.jpg)`;
 
     const cover = document.getElementById('cover__upload');
     if (cover) {
