@@ -28,7 +28,7 @@
   },
   "scripts": {
     "lint": "eslint public",
-    "webpack": "webpack --mode development",
+    "webpack": "sass public/styles/scss/index.scss public/styles/css/index.css | webpack --mode development",
     "webpackProd": "webpack --mode production",
     "serve": "sass --watch public/styles/scss/index.scss public/styles/css/index.css | webpack serve --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"

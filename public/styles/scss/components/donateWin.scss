@@ -5,8 +5,12 @@ $popup__donate-width: 30%;
 #donateWin {
     @include popup__container();
     width: $popup__donate-width;
-    height: 60%;
+    height: 70%;
     margin-left: ((100% - $popup__donate-width) / 2);
+}
+
+.donate__title {
+    font-size: $title-font-size;
 }
 
 .donateWin__container {
@@ -22,9 +26,42 @@ $popup__donate-width: 30%;
 .donate__input {
     margin-top: 2em;
     @extend .input--form;
+    height: 3em;
 }
 
 //---donateWin-error---//
 #donateWin-error {
     height: 1em;
+}
+
+@media (max-width: 1000px) {
+    $popup__donate-width-1000px: 50%;
+
+    #donateWin {
+        width: $popup__donate-width-1000px;
+        margin-left: ((100% - $popup__donate-width-1000px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    $popup__donate-width-600px: 70%;
+
+    #donateWin {
+        width: $popup__donate-width-600px;
+        margin-left: ((100% - $popup__donate-width-600px) / 2);
+    }
+
+    .donate__title {
+        font-size: $font-size-3;
+        margin-bottom: 1em;
+    }
+}
+
+@media (max-width: 450px) {
+    $popup__donate-width-600px: 90%;
+
+    #donateWin {
+        width: $popup__donate-width-600px;
+        margin-left: ((100% - $popup__donate-width-600px) / 2);
+    }
 }

@@ -107,16 +107,22 @@ class AuthorPage {
     }
 
     if (this.#subsPos > 0) {
-      const prevDiv = document.getElementById('arrow--prev');
-      if (prevDiv) {
-        prevDiv.innerHTML = '<img id="prev" class="arrows clickable" src="../../images/arrow-left.svg" alt="left">';
+      const prevDivs = document.querySelectorAll('#arrow--prev');
+      if (prevDivs) {
+        for (let index = 0; index < prevDivs.length; index++) {
+          const prevDiv = prevDivs[index];
+          prevDiv.innerHTML = '<img id="prev" class="arrows clickable" src="../../images/arrow-left.svg" alt="left">';
+        }
       }
     }
 
     if (this.#subsPos < this.#config.subscriptions.length - subNum) {
-      const nextDiv = document.getElementById('arrow--next');
-      if (nextDiv) {
-        nextDiv.innerHTML = '<img id="next" class="arrows clickable" src="../../images/arrow-right.svg" alt="right">';
+      const nextDivs = document.querySelectorAll('#arrow--next');
+      if (nextDivs) {
+        for (let index = 0; index < nextDivs.length; index++) {
+          const nextDiv = nextDivs[index];
+          nextDiv.innerHTML = '<img id="next" class="arrows clickable" src="../../images/arrow-right.svg" alt="right">';
+        }
       }
     }
 

@@ -22,7 +22,6 @@ export class WinSettings {
   }
 
   render() {
-    console.log(this.#config);
     const newDiv = document.createElement('div');
     newDiv.id = 'winSettingsDiv';
     newDiv.innerHTML = template(this.#config);

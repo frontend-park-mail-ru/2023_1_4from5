@@ -69,7 +69,7 @@ class SideBarStore {
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
         render() {
-          console.log('Уведомления');
+          //.log('Уведомления');
         }
       },
       modalWindow: {
