@@ -6,6 +6,7 @@ public/build
 service.txt
 dist/
 .vscode
-#public/images/user/*
+#public/images/user
+/*
 public/styles/css/index.css
 public/styles/css/index.css.map
