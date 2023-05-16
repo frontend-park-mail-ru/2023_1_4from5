@@ -1,6 +1,5 @@
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
-import { newPostStore } from './newPostStore';
 import { subLevels } from './levels';
 import { URLS } from '../../modules/Notifier';
 
@@ -9,7 +8,6 @@ import { URLS } from '../../modules/Notifier';
 // TODO сделать режим ожидания загрузки файлов
 
 const template = require('./newPost.handlebars');
-
 
 const contentElement = document.querySelector('main');
 
@@ -44,7 +42,7 @@ class NewPost {
     return this.#parent;
   }
 
-  render(levels, serveAttachments = '') {
+  render(levels) {
     levels.switch = this.#switch;
 
     this.#parent.innerHTML = '';
@@ -63,8 +61,7 @@ class NewPost {
 
           attachPreview.className = 'img-preview';
           attachPreview.id = item.id;
-          attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
-          // attachPreview.style.display = 'block';
+          attachPreview.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
 
           divPreview.append(attachPreview);
           flag = true;
@@ -73,9 +70,8 @@ class NewPost {
 
           attachPreview.className = 'video-preview';
           attachPreview.id = item.id;
-          attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+          attachPreview.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
           attachPreview.controls = true;
-          // attachPreview.style.display = 'block';
 
           divPreview.append(attachPreview);
           flag = true;
@@ -84,10 +80,8 @@ class NewPost {
 
           attachPreview.className = 'audio-preview';
           attachPreview.id = item.id;
-          // attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
-          attachPreview.src = `../../images/${item.id}.mp3`;
+          attachPreview.src = `../../images/user/${item.id}.mp3`;
           attachPreview.controls = true;
-          // attachPreview.style.display = 'block';
 
           divPreview.append(attachPreview);
           flag = true;
@@ -101,9 +95,7 @@ class NewPost {
           deleteAttachBtn.addEventListener('click', (event) => {
             event.preventDefault();
             const id = event.target.id.split('#')[1];
-            // eslint-disable-next-line max-len
             const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
-            // this.#config.attachments.split(deletedAttach).join();
             this.#config.attachments.splice(deletedAttach, 1);
 
             const deletedAttachDOM = document.getElementById(id);
@@ -258,7 +250,6 @@ class NewPost {
     const container = document.createElement('div');
     container.style.display = 'inline-block';
     container.className = 'attach-container';
-    // container.style.verticalAlign = 'top';
 
     const attachPreview = document.createElement(type);
     const src = URL.createObjectURL(files);
@@ -268,7 +259,6 @@ class NewPost {
     if (type !== 'img') {
       attachPreview.controls = true;
     }
-    // attachPreview.style.display = 'block';
 
     const deleteAttachBtn = this.addAttachDeleteBtn(files.name);
 
@@ -286,7 +276,6 @@ class NewPost {
       event.preventDefault();
       const name = event.target.id.split('#')[1];
       const deletedAttach = this.#config.attachments.findIndex((attach) => attach.name === name);
-      // this.#config.attachments.split(deletedAttach).join();
       this.#config.attachments.splice(deletedAttach, 1);
 
       const deletedAttachDOM = document.getElementById(name);
@@ -305,9 +294,7 @@ class NewPost {
     deleteAttachBtn.addEventListener('click', (event) => {
       event.preventDefault();
       const id = event.target.id.split('#')[1];
-      // eslint-disable-next-line max-len
       const deletedAttach = this.#config.attachments.findIndex((attach) => attach.id === id);
-      // this.#config.attachments.split(deletedAttach).join();
       this.#config.attachments.splice(deletedAttach, 1);
 
       const deletedAttachDOM = document.getElementById(id);
