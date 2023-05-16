@@ -21,7 +21,6 @@ class Feed {
     newDiv.innerHTML = template(posts);
     this.#parent.appendChild(newDiv);
 
-    //.log(posts.posts)
     posts.posts.forEach((post) => {
       if (post.attachments) {
         const divAttaches = document.getElementById(`attachments-${post.id}`);
@@ -29,7 +28,7 @@ class Feed {
           if (item.type.startsWith('image')) {
             const attachPreview = document.createElement('img');
             attachPreview.className = 'img-preview';
-            attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('video')) {
@@ -40,14 +39,14 @@ class Feed {
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
 
-            source.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            source.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             source.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
             attachPreview.append(source);
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
             attachPreview.className = 'audio-preview';
-            attachPreview.src = `../../images/${item.id}.mp3`;
+            attachPreview.src = `../../images/user/${item.id}.mp3`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
