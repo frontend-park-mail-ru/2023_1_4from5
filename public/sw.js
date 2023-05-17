@@ -3,6 +3,18 @@ const CACHE_URLS = [
   '/dist/',
 ];
 
+self.addEventListener('activate', (event) => {
+  console.log('SW activated');
+  event.waitUntil(enableNavigationPreload());
+});
+
+self.addEventListener('install', (event) => {
+  console.log('SW installed');
+  event.waitUntil(
+    addResourcesToCache(CACHE_URLS)
+  );
+});
+
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(CACHE_NAME);
   await cache.addAll(resources);
@@ -56,16 +68,6 @@ const enableNavigationPreload = async () => {
     await self.registration.navigationPreload.enable();
   }
 };
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(enableNavigationPreload());
-});
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    addResourcesToCache(CACHE_URLS)
-  );
-});
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
