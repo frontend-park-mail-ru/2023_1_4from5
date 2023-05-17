@@ -5,6 +5,7 @@ node_modules/
 public/build
 service.txt
 dist/index*
+dist/main*
 .vscode
 public/images/user
 public/styles/css/index.css
