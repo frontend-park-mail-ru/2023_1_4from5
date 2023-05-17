@@ -52,7 +52,7 @@ module.exports = {
     new FileManagerPlugin({
       events: {
         onStart: {
-          delete: ['public/dist'],
+          delete: ['public/dist/index*', 'public/dist/main*'],
         },
       },
     }),
