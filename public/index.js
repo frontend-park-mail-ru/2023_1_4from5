@@ -9,6 +9,7 @@ import { userStore } from './components/user/userStore.js';
 import { Actions } from './actions/actions.js';
 import { subscriptions } from './components/subscriptions/subscriptions';
 import { becameAuthor } from './components/becomeAuthor/becomeAuthor';
+import { post } from './components/post/post';
 
 import { startStore } from './components/startPage/startStore.js';
 import { sideBarStore } from './components/sideBar/sideBarStore.js';
@@ -23,6 +24,7 @@ import { aim } from './components/aim/aim';
 import { getSubscription } from './components/getSubscription/getSubscription';
 import { subscriptionsStore } from './components/subscriptions/subscriptionsStore';
 import { becameAuthorStore } from './components/becomeAuthor/becomeAuthorStore';
+import { postStore } from './components/post/postStore';
 import { router } from './modules/Router.js';
 
  if ('serviceWorker' in navigator) {
