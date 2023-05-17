@@ -1,5 +1,7 @@
 import template from './feed.handlebars';
 import { Actions } from '../../actions/actions';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const contentElement = document.querySelector('main');
 
@@ -84,6 +86,17 @@ class Feed {
       const hour = dateRaw.getHours();
       const min = dateRaw.getMinutes();
       timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
+    }
+
+    const comments = document.querySelectorAll('#post__comment');
+    if (comments) {
+      for (let index = 0; index < comments.length; index++) {
+        const comment = comments[index];
+        comment.addEventListener('click', (event) => {
+          event.preventDefault();
+          router.go(URLS.post, '', event.target.parentElement.parentElement.parentElement.id);
+        });
+      }
     }
   }
 }

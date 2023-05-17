@@ -1,0 +1,13 @@
+.footer__comment--input {
+  display: grid;
+  grid-template-columns: 1fr 3em;
+}
+
+.comment__input {
+  width: 98%;
+  resize: none;
+}
+
+.comment__send {
+  width: 2em;
+}
