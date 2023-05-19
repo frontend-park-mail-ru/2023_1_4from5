@@ -4,12 +4,10 @@ const CACHE_URLS = [
 ];
 
 self.addEventListener('activate', (event) => {
-  console.log('SW activated');
   event.waitUntil(enableNavigationPreload());
 });
 
 self.addEventListener('install', (event) => {
-  console.log('SW installed');
   event.waitUntil(
     addResourcesToCache(CACHE_URLS)
   );
@@ -44,8 +42,10 @@ const cacheFirst = async ({
         headers: { 'Content-Type': 'text/plain' },
       });
     }
-
-    await putInCache(request, responseFromNetwork.clone());
+    
+    if (request.method === 'GET') {
+      await putInCache(request, responseFromNetwork.clone());
+    }
     return responseFromNetwork;
   }
 
