@@ -4,8 +4,8 @@ node_modules/
 *.pem
 public/build
 service.txt
-dist/index*
-dist/main*
+public/dist/index*
+public/dist/main*
 .vscode
 public/images/user
 public/styles/css/index.css
