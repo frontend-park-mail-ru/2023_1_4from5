@@ -9,17 +9,17 @@
             "type": "image/x-icon"
         },
         {
-            "src": "images/logo.ico",
+            "src": "images/logo.png",
             "sizes": "209x145",
             "type": "image/x-icon"
         },
         {
-            "src": "images/logo.ico",
+            "src": "images/logo.png",
             "sizes": "383ч341",
             "type": "image/x-icon"
         },
         {
-            "src": "images/logo.ico",
+            "src": "images/logo.png",
             "sizes": "512x512",
             "type": "image/x-icon"
         }
