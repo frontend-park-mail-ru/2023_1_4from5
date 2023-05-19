@@ -28,7 +28,26 @@ const putInCache = async (request, response) => {
 const cacheFirst = async ({
   request,
   preloadResponsePromise, /* fallbackUrl */
+// eslint-disable-next-line consistent-return
 }) => {
+  if (navigator.onLine) {
+    // Next try to get the resource from the network
+    try {
+      const responseFromNetwork = await fetch(request);
+      // response may be used only once
+      // we need to save clone to put one copy in cache
+      // and serve second one
+
+      await putInCache(request, responseFromNetwork.clone());
+      return responseFromNetwork;
+    } catch (error) {
+      return new Response('Network error happened', {
+        status: 408,
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    }
+  }
+
   // First try to get the resource from the cache
   if (!navigator.onLine) {
     const responseFromCache = await caches.match(request);
@@ -39,26 +58,9 @@ const cacheFirst = async ({
     // Next try to use the preloaded response, if it's there
     const preloadResponse = await preloadResponsePromise;
     if (preloadResponse) {
-      //.info('using preload response', preloadResponse);
       await putInCache(request, preloadResponse.clone());
       return preloadResponse;
     }
-  }
-
-  // Next try to get the resource from the network
-  try {
-    const responseFromNetwork = await fetch(request);
-    // response may be used only once
-    // we need to save clone to put one copy in cache
-    // and serve second one
-
-    await putInCache(request, responseFromNetwork.clone());
-    return responseFromNetwork;
-  } catch (error) {
-    return new Response('Network error happened', {
-      status: 408,
-      headers: { 'Content-Type': 'text/plain' },
-    });
   }
 };
 
