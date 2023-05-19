@@ -32,20 +32,28 @@ const cacheFirst = async ({
 }) => {
   if (navigator.onLine) {
     // Next try to get the resource from the network
+    let responseFromNetwork;
     try {
-      const responseFromNetwork = await fetch(request);
+      responseFromNetwork = await fetch(request);
       // response may be used only once
       // we need to save clone to put one copy in cache
       // and serve second one
-
-      await putInCache(request, responseFromNetwork.clone());
-      return responseFromNetwork;
     } catch (error) {
       return new Response('Network error happened', {
         status: 408,
         headers: { 'Content-Type': 'text/plain' },
       });
     }
+
+    try {
+      await putInCache(request, responseFromNetwork.clone());
+    } catch (error) {
+      return new Response('Response didnt put in cache', {
+        status: 408,
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    }
+    return responseFromNetwork;
   }
 
   // First try to get the resource from the cache
