@@ -4,22 +4,22 @@
     "description": "Progressive Web App that allows you to share your creation.",
     "icons": [
         {
-            "src": "images/favicon.ico",
+            "src": "images/logo.png",
             "sizes": "32x32",
             "type": "image/x-icon"
         },
         {
-            "src": "images/favicon.ico",
-            "sizes": "192x192",
+            "src": "images/logo.ico",
+            "sizes": "209x145",
             "type": "image/x-icon"
         },
         {
-            "src": "images/favicon.ico",
+            "src": "images/logo.ico",
             "sizes": "383ч341",
             "type": "image/x-icon"
         },
         {
-            "src": "images/favicon.ico",
+            "src": "images/logo.ico",
             "sizes": "512x512",
             "type": "image/x-icon"
         }
