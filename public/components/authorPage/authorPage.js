@@ -68,7 +68,7 @@ class AuthorPage {
           if (item.type.startsWith('image')) {
             const attachPreview = document.createElement('img');
             attachPreview.className = 'img-preview';
-            attachPreview.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            attachPreview.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('video')) {
@@ -79,14 +79,14 @@ class AuthorPage {
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
 
-            source.src = `../../images/${item.id}.${item.type.split('/')[1]}`;
+            source.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             source.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
             attachPreview.append(source);
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
             attachPreview.className = 'audio-preview';
-            attachPreview.src = `../../images/${item.id}.mp3`;
+            attachPreview.src = `../../images/user/${item.id}.mp3`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
             divAttaches.append(attachPreview);
@@ -126,33 +126,39 @@ class AuthorPage {
       }
     }
 
-    const prev = document.getElementById('prev');
-    if (prev) {
-      prev.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (this.#subsPos >= subNum) {
-          this.#subsPos -= subNum;
-          this.render();
-        }
-      });
+    const prevs = document.querySelectorAll('#prev');
+    if (prevs) {
+      for (let index = 0; index < prevs.length; index++) {
+        const prev = prevs[index];
+        prev.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (this.#subsPos >= subNum) {
+            this.#subsPos -= subNum;
+            this.render();
+          }
+        });
+      }
     }
 
-    const next = document.getElementById('next');
-    if (next) {
-      next.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (this.#config.subscriptions[this.#subsPos + subNum]) {
-          this.#subsPos += subNum;
-          this.render();
-        }
-      });
+    const nexts = document.querySelectorAll('#next');
+    if (nexts) {
+      for (let index = 0; index < nexts.length; index++) {
+        const next = nexts[index];
+        next.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (this.#config.subscriptions[this.#subsPos + subNum]) {
+            this.#subsPos += subNum;
+            this.render();
+          }
+        });
+      }
     }
 
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
 
     const coverPhoto = document.getElementById('author__header--photo');
-    coverPhoto.style.backgroundImage = `url(../../images/${this.#config.creator_info.cover_photo}.jpg)`;
+    coverPhoto.style.backgroundImage = `url(../../images/user/${this.#config.creator_info.cover_photo}.jpg)`;
 
     const cover = document.getElementById('cover__upload');
     if (cover) {

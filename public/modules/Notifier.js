@@ -8,6 +8,8 @@ import { searchStore } from '../components/search/searchStore';
 import { page404 } from '../components/page404/page404';
 import { feedStore } from '../components/feed/feedStore';
 import { authorPage } from '../components/authorPage/authorPage';
+import { post } from '../components/post/post';
+import { postStore } from '../components/post/postStore';
 
 export const URLS = {
   root: '/',
@@ -18,6 +20,7 @@ export const URLS = {
   editPost: '/editPost',
   search: '/search',
   feed: '/feed',
+  post: '/post',
 };
 
 export function notifier(path, data, additionalUrl) {
@@ -68,6 +71,10 @@ export function notifier(path, data, additionalUrl) {
 
     case URLS.feed:
       feedStore.renderFeed();
+      break;
+
+    case `${URLS.post}/${additionalUrl}`:
+      postStore.renderPost(additionalUrl);
       break;
 
     default:

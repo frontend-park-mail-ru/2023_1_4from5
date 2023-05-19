@@ -32,10 +32,6 @@ class Search {
     newDiv.innerHTML = template(this.#authors);
     this.#parent.appendChild(newDiv);
 
-    // if (this.#authors.length === 0) {
-    //
-    // }
-    //
     const photos = document.querySelectorAll('#search__photo');
     for (let index = 0; index < photos.length; index++) {
       const photo = photos[index];
