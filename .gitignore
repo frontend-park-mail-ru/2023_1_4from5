@@ -6,10 +6,6 @@ public/build
 service.txt
 dist/
 .vscode
-#public/images/user/*.jpg
-#public/images/user/*.jpeg
-#public/images/user/*.png
-#public/images/user/*.svg
 public/images/user
 public/styles/css/index.css
 public/styles/css/index.css.map
