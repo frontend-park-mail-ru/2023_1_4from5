@@ -45,7 +45,9 @@ const cacheFirst = async ({
       });
     }
 
-    await putInCache(request, responseFromNetwork.clone());
+    if (request.method === 'GET') {
+      await putInCache(request, responseFromNetwork.clone());
+    }
     return responseFromNetwork;
   }
 
