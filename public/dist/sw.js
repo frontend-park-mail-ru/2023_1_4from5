@@ -42,7 +42,7 @@ const cacheFirst = async ({
         headers: { 'Content-Type': 'text/plain' },
       });
     }
-    
+
     if (request.method === 'GET') {
       await putInCache(request, responseFromNetwork.clone());
     }
