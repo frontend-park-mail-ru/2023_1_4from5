@@ -45,14 +45,7 @@ const cacheFirst = async ({
       });
     }
 
-    try {
-      await putInCache(request, responseFromNetwork.clone());
-    } catch (error) {
-      return new Response('Response didnt put in cache', {
-        status: 408,
-        headers: { 'Content-Type': 'text/plain' },
-      });
-    }
+    await putInCache(request, responseFromNetwork.clone());
     return responseFromNetwork;
   }
 
