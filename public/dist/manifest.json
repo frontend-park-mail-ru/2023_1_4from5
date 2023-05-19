@@ -7,10 +7,25 @@
             "src": "images/favicon.ico",
             "sizes": "32x32",
             "type": "image/x-icon"
+        },
+        {
+            "src": "images/favicon.ico",
+            "sizes": "192x192",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "images/favicon.ico",
+            "sizes": "383ч341",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "images/favicon.ico",
+            "sizes": "512x512",
+            "type": "image/x-icon"
         }
     ],
     "start_url": "index.html",
-    "display": "fullscreen",
+    "display": "standalone",
     "theme_color": "#009d00",
     "background_color": "#000000"
 }
