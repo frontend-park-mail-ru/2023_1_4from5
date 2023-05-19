@@ -1,3 +1,4 @@
+
 import './index.css';
 
 import { startPage } from './components/startPage/startPage.js';
