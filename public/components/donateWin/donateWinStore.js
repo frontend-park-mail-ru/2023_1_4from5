@@ -41,26 +41,31 @@ class DonateWinStore {
     input.moneyInput.style.backgroundColor = color.field;
 
     if (!errMoneyGot) {
-      const token = await request.getHeader('/api/user/donate');
-      const donateAim = await request.post('/api/user/donate', {
-        creator_id: authorPageStore.getState().creator_info.creator_id,
-        money_count: Number(moneyCount),
-      }, token);
-      if (donateAim.ok) {
-        authorPageStore.getState().aim.money_got += Number(moneyCount);
-        authorPage.config = authorPageStore.getState();
-        donateWin.removeDonateWin();
-        authorPage.render();
-      } else {
-        input.errorOutput.innerHTML = '';
-        input.errorOutput.innerHTML = 'Некорректная сумма доната';
-        input.moneyInput.style.backgroundColor = color.error;
-      }
+      const creatorIdIn = authorPageStore.getState().creator_info.creator_id;
+      input.donateWinFormLabel.value = `donate; ${creatorIdIn};`;
+      console.log(input.donateWinForm);
+      input.donateWinForm.submit();
+
+      // const token = await request.getHeader('/api/user/donate');
+      // const donateAim = await request.post('/api/user/donate', {
+      //   creator_id: authorPageStore.getState().creator_info.creator_id,
+      //   money_count: Number(moneyCount),
+      // }, token);
+
+      authorPageStore.getState().aim.money_got += Number(moneyCount);
+      authorPage.config = authorPageStore.getState();
+      donateWin.removeDonateWin();
+      authorPage.render();
     } else {
       input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = errMoneyGot;
+      input.errorOutput.innerHTML = 'Некорректная сумма доната';
       input.moneyInput.style.backgroundColor = color.error;
     }
+    // } else {
+    //   input.errorOutput.innerHTML = '';
+    //   input.errorOutput.innerHTML = errMoneyGot;
+    //   input.moneyInput.style.backgroundColor = color.error;
+    // }
   }
 }
 
