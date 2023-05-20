@@ -42,24 +42,9 @@ class DonateWinStore {
 
     if (!errMoneyGot) {
       const creatorIdIn = authorPageStore.getState().creator_info.creator_id;
-      // const money = Number(moneyCount);
-      // if (responseUserId.ok) {
-      // const result = await responseUserId.json();
-      // if (result.user_id) {
-      //   userIdIn = result.user_id;
-      // }
-      input.donateWinFormLabel.value = {
-        operation: 'donate',
-        creator_id: creatorIdIn,
-        // user_id: userIdIn,
-        // money: money
-      };
+      input.donateWinFormLabel.value = `donate; ${creatorIdIn};`;
       console.log(input.donateWinForm);
-      // input.donateWinForm.submit();
-
-      // eslint-disable-next-line max-len
-      // label = {"operation" : "donate",   "creator_id" : "10b0d1b8-0e67-4e7e-9f08-124b3e32cce4",
-      // "user_id_in": "c3d5be1f-64ba-49d1-bb1d-06516c64bcba", "money":"1000"}
+      input.donateWinForm.submit();
 
       // const token = await request.getHeader('/api/user/donate');
       // const donateAim = await request.post('/api/user/donate', {
