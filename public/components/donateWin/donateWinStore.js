@@ -3,7 +3,6 @@ import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { donateWin } from './donateWin.js';
 import { isValidDonate } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
-import { request } from '../../modules/request.js';
 import { authorPage } from '../authorPage/authorPage.js';
 import { authorPageStore } from '../authorPage/authorPageStore.js';
 
@@ -32,7 +31,7 @@ class DonateWinStore {
     }
   }
 
-  async donate(input) {
+  donate(input) {
     let moneyCount = input.moneyInput.value.split(' ').join('');
     const errMoneyGot = isValidDonate(moneyCount);
     if (moneyCount.isEmpty) {
@@ -42,10 +41,8 @@ class DonateWinStore {
 
     if (!errMoneyGot) {
       const creatorIdIn = authorPageStore.getState().creator_info.creator_id;
-      input.donateWinFormLabel.value = `donate; ${creatorIdIn};`;
-      console.log(input.donateWinForm);
+      input.donateWinFormLabel.value = `donate;${creatorIdIn}`;
       input.donateWinForm.submit();
-
       // const token = await request.getHeader('/api/user/donate');
       // const donateAim = await request.post('/api/user/donate', {
       //   creator_id: authorPageStore.getState().creator_info.creator_id,
