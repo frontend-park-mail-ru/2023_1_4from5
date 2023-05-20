@@ -3,7 +3,7 @@
         <div class="post__header">
             <div class="post__privacy">
                 <div class="feed__creator--photo">
-                    <img id="feed__creator--photo" src="../../images/user/{{post.creator_photo}}.jpg" alt="">
+                    <img id="feed__creator--photo" class="post__photo" src="../../images/user/{{post.creator_photo}}.jpg" alt="">
                 </div>
                 <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
                 {{#if post.subscriptions}}
@@ -14,7 +14,7 @@
                         {{/each}}
                     </div>
                 {{else}}
-                    Открыт для всех
+                    <p class="privacy__all">Открыт для всех</p>
                 {{/if}}
             </div>
             <div class="post__date">
@@ -43,7 +43,7 @@
             <div id="attachments-{{post.id}}" class="attach-container"></div>
 
             <div class="feedback">
-                <div class="post__likes">
+                <div class="post__likes post__likes--lonely">
                     {{#if ../post.is_my_page}}
                         <img id="disable-like-icon" class="icon--like"
                              src="../../images/disable_like_icon.png" alt="like--disable">
@@ -61,7 +61,7 @@
 
                 <div class="post__comments">
                     <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
-                    0
+                    {{commentsNum}}
                 </div>
 
                 <div></div>
@@ -70,7 +70,6 @@
 
         <div class="post__footer">
             <hr class="comment__hr">
-            <p class="comment__header">0 комментариев</p>
             <div class="footer__comment--input">
                 <textarea id="comment__input" class="input--form comment__input"></textarea>
                 <img id="comment__send" class="comment__send clickable" src="../../images/send.svg">
