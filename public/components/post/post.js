@@ -6,7 +6,9 @@ const contentElement = document.querySelector('main');
 
 class Post {
   render(config) {
-    console.log(config);
+    const commentsNum = config.comments.length;
+    config.commentsNum = commentsNum;
+
     contentElement.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'postDiv';
