@@ -57,13 +57,10 @@ export const ActionsAuthorPage = {
     });
   },
 
-  getSubscription(id, monthCount, money, creatorId) {
+  getSubscription(input) {
     dispatcher.dispatch({
       type: ActionTypes.GET_SUBSCRIPION,
-      id,
-      monthCount,
-      money,
-      creatorId,
+      input,
     });
   },
 
