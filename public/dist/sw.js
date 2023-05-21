@@ -43,7 +43,7 @@ const netFirst = async ({
       });
     }
 
-    if (!request.url.includes('/api/')) {
+    if (!request.url.includes('/api/') && !request.url.endsWith('.mp4') && !request.url.endsWith('.mp3')) {
       await putInCache(request, responseFromNetwork.clone());
     }
     return responseFromNetwork;
