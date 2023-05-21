@@ -7,8 +7,6 @@ class Posts {
   render(config) {
     const postsSpace = document.getElementById('posts');
 
-    console.log(config);
-
     postsSpace.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'postsDiv';

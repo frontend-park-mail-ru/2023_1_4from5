@@ -23,13 +23,13 @@ const putInCache = async (request, response) => {
   await cache.put(request, response);
 };
 
-const cacheFirst = async ({
+const netFirst = async ({
   request,
   preloadResponsePromise, /* fallbackUrl */
 // eslint-disable-next-line consistent-return
 }) => {
   if (navigator.onLine) {
-    // Next try to get the resource from the network
+    // try to get the resource from the network
     let responseFromNetwork;
     try {
       responseFromNetwork = await fetch(request);
@@ -43,20 +43,18 @@ const cacheFirst = async ({
       });
     }
 
-    if (request.method === 'GET') {
+    if (!request.url.includes('/api/')) {
       await putInCache(request, responseFromNetwork.clone());
     }
     return responseFromNetwork;
   }
 
-  // First try to get the resource from the cache
   if (!navigator.onLine) {
     const responseFromCache = await caches.match(request);
     if (responseFromCache) {
       return responseFromCache;
     }
 
-    // Next try to use the preloaded response, if it's there
     const preloadResponse = await preloadResponsePromise;
     if (preloadResponse) {
       await putInCache(request, preloadResponse.clone());
@@ -74,7 +72,7 @@ const enableNavigationPreload = async () => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    cacheFirst({
+    netFirst({
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
     })
