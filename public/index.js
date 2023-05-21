@@ -55,18 +55,18 @@ if ('serviceWorker' in navigator) {
 //     console.log(token);
 //   });
 
-getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' }).then((currentToken) => {
-  if (currentToken) {
-    fetch('https://park-akino.ru/api/v1/user/subscribePush', {
-      method: 'POST',
-      body: JSON.stringify({ token: currentToken }),
-    }).finally();
-  } else {
-    console.log('No registration token available. Request permission to generate one.');
-  }
-}).catch((err) => {
-  console.log('An error occurred while retrieving token. ', err);
-});
+//getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' }).then((currentToken) => {
+//  if (currentToken) {
+//    fetch('https://park-akino.ru/api/v1/user/subscribePush', {
+//      method: 'POST',
+//      body: JSON.stringify({ token: currentToken }),
+//    }).finally();
+//  } else {
+//    console.log('No registration token available. Request permission to generate one.');
+//  }
+//}).catch((err) => {
+//  console.log('An error occurred while retrieving token. ', err);
+//});
 
 // onMessage(messaging, (payload) => {
 //   const title = payload.notification.title;
