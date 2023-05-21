@@ -3,7 +3,7 @@ import { authorPage } from './authorPage.js';
 import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
-import { isValidDescriptionAim, isValidMoneyString } from '../../modules/isValid.js';
+import {isValidDescriptionAim, isValidDonate, isValidMoneyString} from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { aim } from '../aim/aim';
 import { getSubscription } from '../getSubscription/getSubscription';
@@ -77,13 +77,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.GET_SUBSCRIPION:
-        const tokenSub = await request.getHeader(`/api/user/subscribe/${action.id}`);
-        await request.post(`/api/user/subscribe/${action.id}`, {
-          month_count: Number(action.monthCount),
-          money: Number(action.money),
-          creator_id: action.creatorId,
-        }, tokenSub);
-        getSubscription.remove();
+        this.getSub(action.input);
         break;
 
       case ActionTypes.CREATOR_COVER_UPDATE:
@@ -225,6 +219,42 @@ class AuthorPageStore {
     const token = await request.getHeader(`/api/creator/deleteCoverPhoto/${coverId}`);
     await request.delete(`/api/creator/deleteCoverPhoto/${coverId}`, token);
     await this.renderMyPage();
+  }
+
+  async getSub(input) {
+    // getSubForm, getSubFormLabel
+    //   money: Number(action.money),
+    // let moneyCount = input.moneyInput.value.split(' ').join('');
+    // const errMoneyGot = isValidDonate(moneyCount);
+    // if (moneyCount.isEmpty) {
+    //   moneyCount = '0';
+    // }
+    // input.moneyInput.style.backgroundColor = color.field;
+
+    // if (!errMoneyGot) {
+    // проверка того, что в monthCount лежит число, а не что-то ещё
+    const monthCount = Number(input.monthCount.value);
+
+    const money = monthCount * Number(input.price);
+
+    console.log(input, monthCount);
+    const tokenSub = await request.getHeader(`/api/user/subscribe/${input.subscriptionId}`);
+    const result = await request.post(`/api/user/subscribe/${input.subscriptionId}`, {
+      creator_id: input.creatorId,
+      month_count: monthCount
+    }, tokenSub);
+
+    if (result.ok) {
+      const subId = await result.json();
+      // const subId = 'f4234b81-1df7-4277-bbaa-5aff550862f3';
+      input.getSubFormSum.value = money;
+      input.getSubFormLabel.value = `submit;${subId}`;
+      input.getSubForm.submit();
+    } else {
+      input.getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
+    }
+
+    getSubscription.remove();
   }
 }
 
