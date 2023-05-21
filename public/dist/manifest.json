@@ -5,26 +5,16 @@
     "icons": [
         {
             "src": "images/logo.png",
-            "sizes": "32x32",
-            "type": "image/x-icon"
-        },
-        {
-            "src": "images/logo.png",
             "sizes": "209x145",
             "type": "image/x-icon"
         },
         {
-            "src": "images/logo.png",
-            "sizes": "383ч341",
-            "type": "image/x-icon"
-        },
-        {
-            "src": "images/logo.png",
+            "src": "images/manifest_icon.png",
             "sizes": "512x512",
-            "type": "image/x-icon"
+            "type": "image/png"
         }
     ],
-    "start_url": "index.html",
+    "start_url": ".",
     "display": "standalone",
     "theme_color": "#009d00",
     "background_color": "#ffffff"

@@ -1,13 +1,76 @@
+@import "../general/variables";
+
+.post__space {
+  margin: 7em 5em 5em 5em;
+}
+
+.post__photo {
+  margin-right: 2em;
+}
+
+.privacy__img, .post__subs, .privacy__all {
+  margin-top: 0.7em;
+}
+
+.post__footer {
+  width: 90%;
+  margin: auto;
+}
+
+.comment__hr {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.comment__header {
+  margin-bottom: 1em;
+}
+
+$comment__input-height: 70px;
+$comment__send-height: 40px;
+
 .footer__comment--input {
   display: grid;
-  grid-template-columns: 1fr 3em;
+  grid-template-columns: 1fr 5em;
+}
+
+.comment__send {
+  height: $comment__send-height;
+  margin-left: 1em;
+  margin-top: (($comment__input-height - $comment__send-height) / 2);
 }
 
 .comment__input {
   width: 98%;
+  height: $comment__input-height;
   resize: none;
 }
 
-.comment__send {
-  width: 2em;
+.comment__list {
+  width: 95%;
+}
+
+.comment__container {
+  display: grid;
+  grid-template-columns: 5em 1fr 7em;
+  margin-bottom: 3em;
+}
+
+$comment__photo-size: 3em;
+#comment__photo {
+  height: $comment__photo-size;
+  width: $comment__photo-size;
+  background-size: 100%;
+  border-radius: 100%;
+}
+
+.comment__icon {
+  height: 2em;
+}
+
+.comment__input--edit {
+  resize: none;
+  font-size: $font-size;
+  margin-bottom: 1em;
+  height: 3em;
 }

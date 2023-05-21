@@ -24,10 +24,26 @@ export const ActionsPost = {
     });
   },
 
-  // downloadAttach(file) {
-  //   dispatcher.dispatch({
-  //     type: ActionTypes.DOWNLOAD_ATTACH,
-  //     file,
-  //   });
-  // },
+  createComment(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.CREATE_COMMENT,
+      input,
+    });
+  },
+
+  updateComment(commentId, input) {
+    dispatcher.dispatch({
+      type: ActionTypes.UPDATE_COMMENT,
+      commentId,
+      input,
+    });
+  },
+
+  deleteComment(commentId, postId) {
+    dispatcher.dispatch({
+      type: ActionTypes.DELETE_COMMENT,
+      commentId,
+      postId,
+    });
+  },
 };
