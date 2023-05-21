@@ -5,12 +5,28 @@
     <div class="getsub__form">
         <p class="getsub__title">Купить подписку</p>
 
-        <div class="getsub__block">
-            <p class="getsub__description--title">Укажите, на сколько месяцев вы хотите оформить подписку</p>
-            <input id="getsub__months" class="aim__input" type="text">
-            <div id="getsub__cost--err" class="aim--err"></div>
-        </div>
+<!--        <div class="getsub__block">-->
+<!--            <p class="getsub__description--title">Укажите, на сколько месяцев вы хотите оформить подписку</p>-->
+<!--            <input id="getsub__months" class="aim__input" type="text">-->
+<!--            <div id="getsub__cost--err" class="aim--err"></div>-->
+<!--        </div>-->
 
-        <button id="getsub__btn">Оформить</button>
+<!--        <button id="getsub__btn">Оформить</button>-->
+
+        <form id="getsub__payForm" method="POST" action="https://yoomoney.ru/quickpay/confirm.xml">
+            <input type="hidden" name="receiver" value="4100118197577777"/>
+            <input id="getsub__label" type="hidden" name="label" value=""/>
+            <input type="hidden" name="quickpay-form" value="button"/>
+            <input id="getsub__sum" type="hidden" name="sum" value="" data-type="number">
+            <div class="getsub__block">
+                <p class="getsub__description--title">Укажите, на сколько месяцев вы хотите оформить подписку</p>
+                <input id="getsub__months" class="aim__input" type="text">
+                <div id="getsub__cost--err" class="aim--err"></div>
+            </div>
+            <div class="donateWin-btn-container">
+                <button  id="getsub__btn"> Перейти к оплате</button>
+<!--                <button  id="getsub__btn" class="auth-btn"> Перейти к оплате</button>-->
+            </div>
+        </form>
     </div>
 </div>

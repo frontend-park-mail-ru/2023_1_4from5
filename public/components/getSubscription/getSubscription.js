@@ -23,11 +23,24 @@ export class GetSubscription {
     });
 
     const getSub = document.getElementById('getsub__btn');
+    const getSubErr = document.getElementById('getsub__cost--err');
+    const getSubForm = document.getElementById('getsub__payForm');
+    const getSubFormLabel = document.getElementById('getsub__label');
+    const getSubFormSum = document.getElementById('getsub__sum');
+    const monthCount = document.getElementById('getsub__months');
+
     getSub.addEventListener('click', (event) => {
       event.preventDefault();
-      const monthCount = document.getElementById('getsub__months').value;
-      const money = Number(monthCount) * Number(price);
-      Actions.getSubscription(subscriptionId, monthCount, money, creatorId);
+      Actions.getSubscription({
+        subscriptionId,
+        monthCount,
+        price,
+        creatorId,
+        getSubForm,
+        getSubFormLabel,
+        getSubFormSum,
+        getSubErr
+      });
     });
   }
 
