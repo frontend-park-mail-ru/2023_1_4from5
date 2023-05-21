@@ -19,6 +19,7 @@ export class Request {
       method: this.#REQUEST_METHODS.GET,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
     });
     return res;
   }
@@ -28,6 +29,7 @@ export class Request {
       method: this.#REQUEST_METHODS.GET,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
     });
     const header = [...get.headers.entries()];
     let token;
@@ -70,6 +72,7 @@ export class Request {
       method: this.#REQUEST_METHODS.POST,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
       headers: {
         'Content-Type': contentType,
         'X-Csrf-Token': token,
@@ -84,6 +87,7 @@ export class Request {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
       headers: {
         'x-csrf-token': token,
       },
@@ -97,6 +101,7 @@ export class Request {
       method: this.#REQUEST_METHODS.POST,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
       headers: {
         'x-csrf-token': token,
       },
@@ -110,6 +115,7 @@ export class Request {
       method: this.#REQUEST_METHODS.DELETE,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
       headers: {
         'X-Csrf-Token': token,
       }
@@ -123,6 +129,7 @@ export class Request {
       method: this.#REQUEST_METHODS.DELETE,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
       headers: {
         'X-Csrf-Token': token,
       },
@@ -136,6 +143,7 @@ export class Request {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',
       credentials: 'include',
+      cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
         'X-Csrf-Token': token,
