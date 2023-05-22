@@ -27,7 +27,6 @@ class StartStore {
     const userIn = userStore.getUserState();
     if (!userIn.isAuthorizedIn) {
       const response = await request.get('/api/user/profile');
-      Actions.followAll();
       if (response.ok) {
         const result = await response.json();
         if (result.login) {
@@ -41,6 +40,7 @@ class StartStore {
       }
     }
     Actions.renderSideBar(userIn);
+    await userStore.followAll();
   }
 }
 

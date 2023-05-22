@@ -4,6 +4,7 @@ import { request } from '../../modules/request.js';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import template from './auth.handlebars';
+import { userStore } from '../user/userStore';
 
 const rootElement = document.getElementById('root');
 
