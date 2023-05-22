@@ -1,0 +1,55 @@
+@import "../general/variables";
+
+.notifications__container {
+  @include shadow();
+
+  position: fixed;
+  z-index: $popup-z-index;
+  top: ($sidebar-height + 1em);
+  right: 1vw;
+  background-color: $default-color;
+  width: 30vw;
+  border-radius: $elem-border-radius;
+}
+
+.notifications__body {
+  width: 90%;
+  margin: 0.5em auto 0.5em auto;
+}
+
+.notifications__header {
+  margin-bottom: 0.5em;
+  text-align: center;
+  font-size: $font-size-3;
+}
+
+//----------each-------------//
+
+$notification__image-size: 5em;
+$notification__dot-size: 1em;
+
+.notification {
+  display: grid;
+  grid-template-columns: $notification__image-size 1fr $notification__dot-size;
+  margin-bottom: 1em;
+}
+
+.notification__image {
+  width: $notification__image-size;
+  height: $notification__image-size;
+  background-size: $notification__image-size;
+  border-radius: 1em;
+}
+
+.notification__info {
+  padding: 0 1em 0 1em;
+}
+
+.notification__dot {
+  width: $notification__dot-size;
+  margin-top: (($notification__image-size - $notification__dot-size) / 2);
+}
+
+.no-notifications {
+  text-align: center;
+}

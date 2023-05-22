@@ -68,9 +68,7 @@ class SideBarStore {
         id: 'sidebar__notifications',
         showDisplay: userStore.getUserState().isAuthorizedIn,
         parent: contentElement,
-        render() {
-          //.log('Уведомления');
-        }
+        render: Actions.renderNotifications,
       },
       modalWindow: {
         name: userStore.getUserState().usernameIn,

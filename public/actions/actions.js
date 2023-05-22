@@ -13,6 +13,7 @@ import { ActionsSearch } from './search';
 import { ActionSubscription } from './subscription';
 import { ActionSubscriptions } from './subscriptions';
 import { ActionsFeed } from './feed';
+import { ActionsNotifications } from './notifications';
 
 export const Actions = {
   ...ActionsAuth,
@@ -20,6 +21,7 @@ export const Actions = {
   ...ActionsBecomeAuthor,
   ...ActionsDonateWin,
   ...ActionsFeed,
+  ...ActionsNotifications,
   ...ActionsPost,
   ...ActionsRegister,
   ...ActionsSearch,
