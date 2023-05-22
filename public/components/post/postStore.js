@@ -2,6 +2,7 @@ import { dispatcher } from '../../dispatcher/dispatcher';
 import { request } from '../../modules/request';
 import { post } from './post';
 import { ActionTypes } from '../../actionTypes/actionTypes';
+import { authorPage } from '../authorPage/authorPage';
 
 class PostStore {
   #config;
@@ -24,8 +25,26 @@ class PostStore {
         await this.deleteComment(action.commentId, action.postId);
         break;
 
+      case ActionTypes.CLICK_LIKE_LONELY:
+        await this.changeLikeState(action);
+        break;
+
       default:
         break;
+    }
+  }
+
+  async changeLikeState(action) {
+    if (action.typeLike === 'addLike') {
+      const result = await request.put('/api/post/addLike', { post_id: action.postId });
+      if (result.ok) {
+        await this.renderPost(action.postId);
+      }
+    } else {
+      const result = await request.put('/api/post/removeLike', { post_id: action.postId });
+      if (result.ok) {
+        await postStore.renderPost(action.postId);
+      }
     }
   }
 
@@ -55,6 +74,7 @@ class PostStore {
   }
 
   async renderPost(postId) {
+    console.log(2)
     const req = await request.get(`/api/post/get/${postId}`);
     const result = await req.json();
     const textArr = result.post.text.split('\\n');

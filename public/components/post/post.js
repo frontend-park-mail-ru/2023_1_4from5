@@ -52,9 +52,10 @@ class Post {
     const likeIcon = document.querySelector('.icon--like');
     likeIcon.addEventListener('click', (event) => {
       const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
-      Actions.clickLike(
+      Actions.clickLikeLonely(
         eventLike,
         event.target.parentElement.parentElement.parentElement.parentElement.id,
+
       );
     });
 
