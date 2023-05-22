@@ -410,3 +410,34 @@ export function isValidPhone(inputStr) {
   }
   return '';
 }
+
+export function isValidSelectedDate(input) {
+  console.log(input);
+  const flags = {
+    hasCorrectYears: {
+      flag: true,
+      error: 'Начальный год больше конечного',
+    },
+    hasCorrectMonths: {
+      flag: true,
+      error: 'Начальный месяц дальше конечного',
+    },
+    hasCorrectCurrentMonth: {
+      flag: true,
+      error: 'В качестве конечного месяца выбран будущий',
+    },
+  };
+
+  if (input.startYearSelected > input.endYearSelected) {
+    return flags.hasCorrectYears.error;
+  }
+  if (input.startYearSelected === input.endYearSelected
+      && input.startMonthSelected > input.endMonthSelected) {
+    return flags.hasCorrectMonths.error;
+  }
+  if (input.endYearSelected === input.currentYear
+      && input.endMonthSelected > input.currentMonth) {
+    return flags.hasCorrectCurrentMonth.error;
+  }
+  return '';
+}

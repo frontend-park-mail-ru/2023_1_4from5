@@ -54,7 +54,7 @@ class Statistics {
       });
     });
 
-    const selectDateErr = document.getElementById('statistics__err');
+    const selectDateErr = document.getElementById('select_date__err');
     const showButton = document.getElementById('select_date__show_button');
 
     showButton.addEventListener('click', (event) => {
