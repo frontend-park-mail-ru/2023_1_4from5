@@ -6,7 +6,7 @@ const contentElement = document.querySelector('main');
 
 class Post {
   render(config) {
-    if (config.comments.length !== 0) {
+    if (config.comments) {
       config.commentsNum = config.comments.length;
     } else {
       config.commentsNum = 0;
@@ -52,9 +52,10 @@ class Post {
     const likeIcon = document.querySelector('.icon--like');
     likeIcon.addEventListener('click', (event) => {
       const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
-      Actions.clickLike(
+      Actions.clickLikeLonely(
         eventLike,
         event.target.parentElement.parentElement.parentElement.parentElement.id,
+
       );
     });
 
