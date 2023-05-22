@@ -1,4 +1,5 @@
 <div class="statistics">
+    <p class="statistics__title">Статистика</p>
     <div class="statistics__total">
         {{#each statisticsTotalList}}
             <div class="statistics__card">
@@ -20,7 +21,7 @@
     </div>
 
     <div class="statistics__select_date">
-        <label>Статистика с
+        <label class="statistics__label">Статистика с
             <select id="select_date__start_month" name="start_month">
                 {{#each startMonths}}
                     <option value={{id}}>{{name}}</option>
@@ -58,6 +59,8 @@
                 <div>{{description}}</div>
             </div>
         {{/each}}
+    </div>
+    <div class="statistics__interval_money">
         {{#each statisticsIntervalListMoney}}
             <div class="statistics__card">
                 <div>{{count}} ₽</div>
