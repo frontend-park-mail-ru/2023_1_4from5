@@ -9,7 +9,7 @@ $statistics-offset: 10em;
   font-size: $font-size-4;
 }
 
-$search__container-padding: 5%;
+$search__container-padding: 1%;
 $num-of-columns: 2;
 
 .statistics__total {
@@ -18,9 +18,44 @@ $num-of-columns: 2;
   grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
 }
 
+.statistics__select_date {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 10em;
+  font-size: $font-size-2;
+  margin-top: 2em;
+}
+
+.select_date__show_button {
+  margin-left: 2em;
+  padding: 0 1em 0 1em;
+  height: 2em;
+  width: fit-content;
+  font-size: $font-size-2;
+  color: black;
+  background-color: $sub__btn-color;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
 .statistics__card {
-  border: $text--default-color solid 2px;
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  background-color: $card-color;
   border-radius: $elem-border-radius;
+  margin: 1em;
+  padding: 1em 2em 1em 2em;
+
+  &:hover {
+    background-color: $card-color-hover;
+  }
+}
+
+.statistics__icon {
+  height: 2em;
+  width: 2em;
 }
 
 $num-of-columns: 3;
@@ -39,4 +74,39 @@ $num-of-columns: 3;
 .statistics__interval_money {
   display: grid;
   grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+}
+
+.get_money {
+  margin-top: 2em;
+  padding: 2em;
+  width: fit-content;
+  border-radius: $elem-border-radius;
+  background-color: $card-color;
+}
+
+.statistics__withdraw {
+  margin-bottom: 0.5em;
+  font-size: $font-size-3;
+}
+
+.statistics__balance {
+  margin-bottom: 1em;
+}
+
+.statistics__input--form {
+  height: 2em;
+  width: 10em;
+}
+
+.statistics__input--title {
+  margin-top: 0.5em;
+}
+
+.get_money__button {
+  margin-top: 0.5em;
+  height: 2em;
+}
+
+.statistics__count {
+  font-size: $font-size-2;
 }

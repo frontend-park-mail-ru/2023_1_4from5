@@ -6,7 +6,7 @@ const contentElement = document.querySelector('main');
 
 class Post {
   render(config) {
-    if (config.comments.length !== 0) {
+    if (config.comments) {
       config.commentsNum = config.comments.length;
     } else {
       config.commentsNum = 0;
