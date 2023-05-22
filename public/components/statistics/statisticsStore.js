@@ -27,7 +27,7 @@ class StatisticsStore {
       },
       {
         name: 'new_followers',
-        card_icon: 'user_photo.png',
+        card_icon: 'watch.svg',
         count: 0,
         description: 'наблюдателей',
       },
@@ -52,37 +52,37 @@ class StatisticsStore {
     statisticsIntervalList: [
       {
         name: 'subscriptions_bought',
-        card_icon: 'user_photo.png',
+        card_icon: 'follow.svg',
         count: 0,
         description: 'подписчиков',
       },
       {
         name: 'new_followers',
-        card_icon: 'user_photo.png',
+        card_icon: 'watch.svg',
         count: 0,
         description: 'наблюдателей',
       },
       {
         name: 'posts_per_month',
-        card_icon: 'user_photo.png',
+        card_icon: 'feed.svg',
         count: 0,
         description: 'постов',
       },
       {
         name: 'likes_count',
-        card_icon: 'user_photo.png',
+        card_icon: 'like_icon.png',
         count: 0,
         description: 'лайков',
       },
       {
         name: 'comments_count',
-        card_icon: 'user_photo.png',
+        card_icon: 'comment_icon.png',
         count: 0,
         description: 'комментариев',
       },
       {
         name: 'donations_count',
-        card_icon: 'user_photo.png',
+        card_icon: 'donate.svg',
         count: 0,
         description: 'донатов',
       },
