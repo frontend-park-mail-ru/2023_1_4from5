@@ -1,0 +1,21 @@
+{
+    "name": "Sub-Me Progressive Web App",
+    "short_name": "Sub-Me",
+    "description": "Progressive Web App that allows you to share your creation.",
+    "icons": [
+        {
+            "src": "images/logo.png",
+            "sizes": "209x145",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "images/manifest_icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#009d00",
+    "background_color": "#ffffff"
+}

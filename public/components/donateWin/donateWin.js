@@ -24,6 +24,8 @@ export class DonateWin {
     });
 
     const donateWinBtn = document.getElementById('donateWin-btn');
+    const donateWinForm = document.getElementById('donateWin__form');
+    const donateWinFormLabel = document.getElementById('donateWin__label');
     const moneyInput = document.getElementById('donateWin-money');
     const errorOutput = document.getElementById('donateWin-error');
 
@@ -31,8 +33,11 @@ export class DonateWin {
 
     donateWinBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      console.log(donateWinForm);
       Actions.donate({
         moneyInput,
+        donateWinForm,
+        donateWinFormLabel,
         errorOutput,
       });
     });

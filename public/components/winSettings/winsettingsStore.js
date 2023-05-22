@@ -28,8 +28,7 @@ class WinSettingsStore {
         id: 'winSetting-finance',
         showDisplay: userStore.getUserState().isAuthorIn,
         parent: contentElement,
-        render() {
-        },
+        render: router.go,
       },
       settings: {
         name: 'Настройки',
