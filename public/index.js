@@ -68,12 +68,6 @@ if ('serviceWorker' in navigator) {
 //  console.log('An error occurred while retrieving token. ', err);
 //});
 
-// onMessage(messaging, (payload) => {
-//   const title = payload.notification.title;
-//   const greeting = new Notification(title, {
-//     body: payload.notification.body,
-//   });
-// });
 onMessage(messaging, (payload) => {
   console.log('Message received. ', payload);
   // ...
