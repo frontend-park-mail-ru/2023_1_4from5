@@ -41,13 +41,16 @@ class Statistics {
     const sumInput = document.getElementById('get_money__sum');
     const getMoneyBtn = document.getElementById('get_money__button');
     const getMoneyErr = document.getElementById('get_money__err');
+    const getPhoneErr = document.getElementById('get_phone__err');
 
     getMoneyBtn.addEventListener('click', (event) => {
       event.preventDefault();
       Actions.getMoney({
+        balance: this.#config.balance,
         phoneInput,
         sumInput,
         getMoneyErr,
+        getPhoneErr,
       });
     });
 
@@ -56,7 +59,6 @@ class Statistics {
 
     showButton.addEventListener('click', (event) => {
       event.preventDefault();
-      console.log('click', this.#config);
       Actions.showStatistics({
         startMonth,
         startYear,

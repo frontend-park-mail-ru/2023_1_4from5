@@ -2,6 +2,8 @@ import { dispatcher } from '../../dispatcher/dispatcher';
 import { statistics } from './statistics';
 import { request } from '../../modules/request';
 import { ActionTypes } from '../../actionTypes/actionTypes';
+import {isValidGetSum, isValidPhone} from "../../modules/isValid";
+import {color} from "../../consts/styles";
 
 class StatisticsStore {
   #config = {
@@ -228,17 +230,36 @@ class StatisticsStore {
   }
 
   async getMoney(input) {
-    const phoneNumber = input.phoneInput.value;
-    const money = Number(input.sumInput.value);
-    const getMoneyReq = await request.put('/api/creator/transferMoney', {
-      money: money,
-      phone_number: phoneNumber
-    });
-    if (getMoneyReq.ok) {
-      input.getMoneyErr.innerHTML = 'Зачисление прошло успешно :)';
-      this.renderStatistics();
+    const phoneNumber = input.phoneInput.value.split(' ').join('').split('-').join('');
+    const money = input.sumInput.value.split(' ').join('');
+
+    input.getMoneyErr.innerHTML = '';
+    input.getPhoneErr.innerHTML = '';
+    input.sumInput.style.backgroundColor = color.field;
+    input.phoneInput.style.backgroundColor = color.field;
+
+    const errMoney = isValidGetSum(money, input.balance);
+    const errPhoneNumber = isValidPhone(phoneNumber);
+    if (errMoney || errPhoneNumber) {
+      if (errMoney) {
+        input.getMoneyErr.innerHTML = errMoney;
+        input.sumInput.style.backgroundColor = color.error;
+      }
+      if (errPhoneNumber) {
+        input.getPhoneErr.innerHTML = errPhoneNumber;
+        input.phoneInput.style.backgroundColor = color.error;
+      }
     } else {
-      input.getMoneyErr.innerHTML = 'Произошла ошибка. Пожалуйста повторите позже :(';
+      const getMoneyReq = await request.put('/api/creator/transferMoney', {
+        money: Number(money),
+        phone_number: phoneNumber.substring(1),
+      });
+      if (getMoneyReq.ok) {
+        input.getMoneyErr.innerHTML = 'Зачисление прошло успешно';
+        this.renderStatistics();
+      } else {
+        input.getMoneyErr.innerHTML = 'Произошла ошибка. Пожалуйста повторите позже';
+      }
     }
   }
 
