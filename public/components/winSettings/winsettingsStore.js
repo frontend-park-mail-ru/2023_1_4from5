@@ -23,8 +23,8 @@ class WinSettingsStore {
         render: router.go,
       },
       finance: {
-        name: 'Статистика',
-        href: '/statistics',
+        name: 'Мои доходы',
+        href: '/finance',
         id: 'winSetting-finance',
         showDisplay: userStore.getUserState().isAuthorIn,
         parent: contentElement,
