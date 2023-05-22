@@ -11,10 +11,7 @@ export class Notifications {
   }
 
   render(ntfs) {
-    const lastNotifications = document.getElementById('notificationsDiv');
-    if (lastNotifications) {
-      lastNotifications.remove();
-    }
+    this.removeNotifications();
 
     const config = {
       ntfs,

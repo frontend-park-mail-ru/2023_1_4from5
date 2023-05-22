@@ -13,6 +13,7 @@ class NotificationsStore {
 
   addNotification(ntf) {
     this.#notifications.push(ntf);
+    notifications.removeNotifications();
     notifications.render(this.#notifications);
   }
 
@@ -32,6 +33,7 @@ class NotificationsStore {
   }
 
   renderNotifications(config) {
+    this.removeNotifications();
     notifications.render(config);
   }
 
