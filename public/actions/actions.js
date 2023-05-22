@@ -14,6 +14,7 @@ import { ActionSubscription } from './subscription';
 import { ActionSubscriptions } from './subscriptions';
 import { ActionsFeed } from './feed';
 import { ActionsNotifications } from './notifications';
+import { ActionsStatistics } from './statistics';
 
 export const Actions = {
   ...ActionsAuth,
@@ -32,4 +33,5 @@ export const Actions = {
   ...ActionSubscriptions,
   ...ActionsUser,
   ...ActionsWinSettings,
+  ...ActionsStatistics,
 };
