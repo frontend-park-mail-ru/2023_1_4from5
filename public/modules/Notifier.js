@@ -21,7 +21,7 @@ export const URLS = {
   search: '/search',
   feed: '/feed',
   post: '/post',
-  statistics: '/statistics',
+  statistics: '/finance',
 };
 
 export function notifier(path, data, additionalUrl) {

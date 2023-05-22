@@ -10,6 +10,10 @@ class StatisticsStore {
     startYear: 0,
     currentMonth: 0,
     currentYear: 0,
+    selectedStarMonth: 0,
+    selectedStartYear: 0,
+    selectedEndMonth: 0,
+    selectedEndYear: 0,
     startMonths: [],
     startYears: [],
     endMonths: [],
@@ -159,8 +163,11 @@ class StatisticsStore {
     const now = new Date();
     this.#config.currentMonth = now.getMonth();
     this.#config.currentYear = now.getFullYear();
-    this.#config.starMonth = now.getMonth();
+    this.#config.startMonth = now.getMonth();
     this.#config.startYear = now.getFullYear();
+    this.#config.selectedStartMonth = now.getMonth();
+    this.#config.selectedEndMonth = now.getMonth();
+    console.log(now.getFullYear());
     let statisticsTotal = {};
     let statisticsLastMonth = {};
 
@@ -180,6 +187,9 @@ class StatisticsStore {
       }
       count++;
     }
+    this.#config.selectedStartYear = count - 1;
+    this.#config.selectedEndYear = count - 1;
+
     this.#config.months.forEach((item, index) => {
       if (!this.#config.startMonths.find((item) => item.id === index)) {
         this.#config.startMonths.push({ id: index, name: item });
@@ -192,22 +202,9 @@ class StatisticsStore {
       second_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.000Z`
     });
     if (statisticsTotalReq.ok) {
-      console.log('123123123123');
       statisticsTotal = await statisticsTotalReq.json();
-      console.log(statisticsTotal);
       this.setCardStatistics(statisticsTotal, 'total');
     }
-    // this.setCardStatistics({
-    //   creator_id: '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4',
-    //   posts_per_month: 1,
-    //   subscriptions_bought: 1,
-    //   donations_count: 5,
-    //   money_from_donations: 4,
-    //   money_from_subscriptions: 3,
-    //   new_followers: 2,
-    //   likes_count: 6,
-    //   comments_count: 7
-    // }, 'total');
 
     // TODO сделать проверку на <>10 (если меньше, прикастовать 0
     const statisticsLastMonthReq = await request.post('/api/creator/statistics', {
@@ -218,32 +215,6 @@ class StatisticsStore {
       statisticsLastMonth = await statisticsLastMonthReq.json();
       this.setCardStatistics(statisticsLastMonth, 'interval');
     }
-
-    // this.setCardStatistics({
-    //   creator_id: '10b0d1b8-0e67-4e7e-9f08-124b3e32cce4',
-    //   posts_per_month: 3,
-    //   subscriptions_bought: 1,
-    //   donations_count: 6,
-    //   money_from_donations: 8,
-    //   money_from_subscriptions: 7,
-    //   new_followers: 2,
-    //   likes_count: 4,
-    //   comments_count: 5
-    // }, 'interval');
-    //
-    // 2023-03-18T21:54:42.123Z
-
-    // {
-    //   "creator_id": "10b0d1b8-0e67-4e7e-9f08-124b3e32cce4",
-    //     "posts_per_month": 8,
-    //     "subscriptions_bought": 0,
-    //     "donations_count": 0,
-    //     "money_from_donations": 0,
-    //     "money_from_subscriptions": 0,
-    //     "new_followers": 0,
-    //     "likes_count": 0,
-    //     "comments_count": 0
-    // }
 
     const balanceReq = await request.get('/api/creator/balance');
     if (balanceReq.ok) {
@@ -259,9 +230,6 @@ class StatisticsStore {
   }
 
   async getMoney(input) {
-  //    phoneInput,
-    //         sumInput,
-    //         getMoneyErr,
     const phoneNumber = input.phoneInput.value;
     const money = Number(input.sumInput.value);
     const getMoneyReq = await request.put('/api/creator/transferMoney', {
@@ -274,6 +242,42 @@ class StatisticsStore {
     } else {
       input.getMoneyErr.innerHTML = 'Произошла ошибка. Пожалуйста повторите позже :(';
     }
+  }
+
+  async showStatistics(input) {
+    const startMonth = Number(input.startMonth.value);
+    const startYear = Number(input.startYear.value);
+    const endMonth = Number(input.endMonth.value);
+    const endYear = Number(input.endYear.value);
+    let statisticsInterval;
+    this.#config.selectedStartMonth = startMonth;
+    this.#config.selectedStartYear = startYear;
+    this.#config.selectedEndMonth = endMonth;
+    this.#config.selectedEndYear = endYear;
+
+    console.log(this.#config, {
+      first_month: `${this.#config.startYears[startYear]}-0${startMonth + 1}-01T00:00:00.000Z`,
+      second_month: `${this.#config.endYears[endYear]}-0${endMonth + 1}-01T00:00:00.000Z`
+    });
+
+    //  startMonth,
+    //         startYear,
+    //         endMonth,
+    //         endYear,
+    //         selectDateErr,
+
+    const statisticsIntervalReq = await request.post('/api/creator/statistics', {
+      first_month: `${this.#config.startYears[startYear].name}-0${startMonth + 1}-01T00:00:00.000Z`,
+      second_month: `${this.#config.endYears[endYear].name}-0${endMonth + 1}-01T00:00:00.000Z`
+    });
+    if (statisticsIntervalReq.ok) {
+      statisticsInterval = await statisticsIntervalReq.json();
+      this.setCardStatistics(statisticsInterval, 'interval');
+    }
+
+    console.log('store', this.#config);
+    statistics.config = this.#config;
+    statistics.render();
   }
 }
 

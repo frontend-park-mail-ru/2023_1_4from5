@@ -1,3 +1,19 @@
 .statistics {
-  margin-top: 70px;
+  margin-top: 100px;
+}
+
+$search__container-padding: 5%;
+$num-of-columns: 2;
+
+.statistics__total {
+  padding: 4% $search__container-padding $search__container-padding;
+  display: grid;
+  grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+}
+
+$num-of-columns: 3;
+.statistics__total_money {
+  padding: 4% $search__container-padding $search__container-padding;
+  display: grid;
+  grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
 }
