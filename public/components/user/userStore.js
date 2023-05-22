@@ -154,7 +154,6 @@ class UserStore {
 
     const reqFollows = await request.get('/api/user/follows');
     const follows = await reqFollows.json();
-    console.log(follows)
     for (const i in follows) {
       const follow = follows[i];
       getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })

@@ -58,11 +58,6 @@ const netFirst = async ({
     await putInCache(request, responseFromNetwork.clone());
   }
   return responseFromNetwork;
-  // }
-
-  // if (!navigator.onLine) {
-
-  // }
 };
 
 const enableNavigationPreload = async () => {
