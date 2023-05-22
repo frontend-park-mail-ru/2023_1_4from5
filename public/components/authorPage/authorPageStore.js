@@ -222,8 +222,6 @@ class AuthorPageStore {
   }
 
   async getSub(input) {
-    // getSubForm, getSubFormLabel
-    //   money: Number(action.money),
     // let moneyCount = input.moneyInput.value.split(' ').join('');
     // const errMoneyGot = isValidDonate(moneyCount);
     // if (moneyCount.isEmpty) {
@@ -246,9 +244,8 @@ class AuthorPageStore {
 
     if (result.ok) {
       const subId = await result.json();
-      // const subId = 'f4234b81-1df7-4277-bbaa-5aff550862f3';
       input.getSubFormSum.value = money;
-      input.getSubFormLabel.value = `submit;${subId}`;
+      input.getSubFormLabel.value = `subscribe;${subId}`;
       input.getSubForm.submit();
     } else {
       input.getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
