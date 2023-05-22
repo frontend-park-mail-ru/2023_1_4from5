@@ -47,6 +47,7 @@
             </select>
         </label>
         <button id="select_date__show_button" class="select_date__show_button">Показать</button>
+        <div id="select_date__err" class="error"></div>
     </div>
 
     <div class="statistics__interval">
@@ -68,17 +69,17 @@
             </div>
         {{/each}}
     </div>
-    <div id="statistics__err"></div>
     <div class="get_money">
         <h2>Вывод денег</h2>
         <h3>Доступный для вывода баланс: {{balance}}</h3>
-        <label>Введите номер телефона
+        <label>Введите номер телефона (начиная с +7)
             <input id="get_money__phone" name="phone" value="+7">
         </label>
-        <label>Введите желаемую сумму вывода
+        <div id="get_phone__err" class="error"></div>
+        <label>Введите желаемую сумму вывода (не менее 2 рублей)
             <input id="get_money__sum">
         </label>
-        <div id="get_money__err"></div>
+        <div id="get_money__err" class="error"></div>
         <button id="get_money__button">Готово</button>
     </div>
 </div>

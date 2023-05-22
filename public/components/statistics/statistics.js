@@ -31,25 +31,26 @@ class Statistics {
     const startYear = document.getElementById('select_date__start_year');
     const endMonth = document.getElementById('select_date__end_month');
     const endYear = document.getElementById('select_date__end_year');
-    console.log(endYear);
 
     startMonth.value = this.#config.selectedStartMonth;
     startYear.value = this.#config.selectedStartYear;
     endMonth.value = this.#config.selectedEndMonth;
     endYear.value = this.#config.selectedStartYear;
-    console.log(endYear);
 
     const phoneInput = document.getElementById('get_money__phone');
     const sumInput = document.getElementById('get_money__sum');
     const getMoneyBtn = document.getElementById('get_money__button');
     const getMoneyErr = document.getElementById('get_money__err');
+    const getPhoneErr = document.getElementById('get_phone__err');
 
     getMoneyBtn.addEventListener('click', (event) => {
       event.preventDefault();
       Actions.getMoney({
+        balance: this.#config.balance,
         phoneInput,
         sumInput,
         getMoneyErr,
+        getPhoneErr,
       });
     });
 
@@ -58,7 +59,6 @@ class Statistics {
 
     showButton.addEventListener('click', (event) => {
       event.preventDefault();
-      console.log('click', this.#config);
       Actions.showStatistics({
         startMonth,
         startYear,

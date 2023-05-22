@@ -352,3 +352,61 @@ export function isValidTextPost(inputStr) {
   }
   return '';
 }
+
+export function isValidGetSum(inputStr, balance) {
+  const flags = {
+    onlyNumber: {
+      flag: true,
+      error: 'В поле сумма доната можно вводить только число',
+    },
+    hasMaxLen: {
+      flag: true,
+      error: 'Желаемая сумма вывода больше суммы на балансе',
+    },
+    hasPositive: {
+      flag: true,
+      error: 'Сумма вывода должна быть не менее 2 рублей',
+    }
+  };
+  if (Number(inputStr) > balance) {
+    return flags.hasMaxLen.error;
+  }
+  if (Number(inputStr) < 2) {
+    return flags.hasPositive.error;
+  }
+  for (const char of inputStr) {
+    if (isNaN(char)) {
+      return flags.onlyNumber.error;
+    }
+  }
+  return '';
+}
+
+export function isValidPhone(inputStr) {
+  const flags = {
+    onlyNumber: {
+      flag: true,
+      error: 'В поле номер телефона допустимы только цифры',
+    },
+    hasCorrectStart: {
+      flag: true,
+      error: 'Номер телефона должен начинаться с +7',
+    },
+    hasCorrectLen: {
+      flag: true,
+      error: 'Некорректная длина номера телефона',
+    },
+  };
+  if (!inputStr.startsWith('+7')) {
+    return flags.hasCorrectStart.error;
+  }
+  for (let i = 1; i < inputStr.length; ++i) {
+    if (isNaN(inputStr[i])) {
+      return flags.onlyNumber.error;
+    }
+  }
+  if (inputStr.length !== 12) {
+    return flags.hasCorrectLen.error;
+  }
+  return '';
+}
