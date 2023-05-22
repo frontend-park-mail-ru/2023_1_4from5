@@ -168,12 +168,11 @@ class UserStore {
         .catch((err) => {
           console.log('An error occurred while retrieving token. ', err);
         });
-
-      onMessage(messaging, (payload) => {
-        console.log('Message received. ', payload);
-        notificationsStore.addNotification(payload);
-      });
     }
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      notificationsStore.addNotification(payload);
+    });
   }
 }
 
