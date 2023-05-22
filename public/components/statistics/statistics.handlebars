@@ -19,7 +19,7 @@
 
     <div class="statistics__select_date">
         <label>Статистика с
-            <select name="start_month">
+            <select id="select_date__start_month" name="start_month">
                 {{#each startMonths}}
                     <option value={{id}}>{{name}}</option>
                 {{/each}}
@@ -36,7 +36,7 @@
                 <!--        <option value="12">Декабрь</option>-->
             </select>
 
-            <select name="start_year">
+            <select id="select_date__start_year" name="start_year">
                 {{#each startYears}}
                     <option value={{id}}>{{name}}</option>
                 {{/each}}
@@ -49,7 +49,7 @@
             </select>
         </label>
         <label>до
-            <select name="end_month">
+            <select id="select_date__end_month" name="end_month">
                 {{#each endMonths}}
                     <option value={{id}}>{{name}}</option>
                 {{/each}}
@@ -66,7 +66,7 @@
                 <!--            <option value="11">Ноябрь</option>-->
                 <!--            <option value="12">Декабрь</option>-->
             </select>
-            <select name="end_year">
+            <select id="select_date__end_year" name="end_year">
                 {{#each endYears}}
                     <option value={{id}}>{{name}}</option>
                 {{/each}}
@@ -75,7 +75,7 @@
                 <!--            <option value="3">2023</option>-->
             </select>
         </label>
-        <button class="select_date__show_button">Показать</button>
+        <button id="select_date__show_button" class="select_date__show_button">Показать</button>
     </div>
 
     <div class="statistics__interval">
@@ -95,6 +95,7 @@
             </div>
         {{/each}}
     </div>
+    <div id="statistics__err"></div>
     <div class="get_money">
         <h2>Вывод денег</h2>
         <h3>Доступный для вывода баланс: {{balance}}</h3>

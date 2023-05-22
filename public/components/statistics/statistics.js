@@ -40,6 +40,25 @@ class Statistics {
         getMoneyErr,
       });
     });
+
+    const startMonth = document.getElementById('select_date__start_month');
+    const startYear = document.getElementById('select_date__start_year');
+    const endMonth = document.getElementById('select_date__end_month');
+    const endYear = document.getElementById('select_date__end_year');
+    const selectDateErr = document.getElementById('statistics__err');
+    const showButton = document.getElementById('select_date__show_button');
+
+    showButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      Actions.showStatistics({
+        startMonth,
+        startYear,
+        endMonth,
+        endYear,
+        selectDateErr,
+      });
+    });
+
     // photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
     //
     // const settingsBtn = document.getElementById('settings__btn');

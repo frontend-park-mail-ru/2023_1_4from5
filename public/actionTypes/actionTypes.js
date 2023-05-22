@@ -100,4 +100,5 @@ export const ActionTypes = {
 
   // statistics
   GET_MONEY: 'GET_MONEY',
+  SHOW_STATISTICS: 'SHOW_STATISTICS',
 };

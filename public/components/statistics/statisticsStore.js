@@ -113,7 +113,9 @@ class StatisticsStore {
       case ActionTypes.GET_MONEY:
         await this.getMoney(action.input);
         break;
-
+      case ActionTypes.SHOW_STATISTICS:
+        await this.showStatistics(action.input);
+        break;
       default:
         break;
     }
@@ -172,19 +174,19 @@ class StatisticsStore {
 
     let count = 0;
     for (let i = this.#config.startYear; i <= this.#config.currentYear; ++i) {
-      this.#config.endYears.push({ id: count, name: i });
-      this.#config.startYears.push({ id: count, name: i });
+      if (!this.#config.endYears.find((item) => item.name === i)) {
+        this.#config.endYears.push({ id: count, name: i });
+        this.#config.startYears.push({ id: count, name: i });
+      }
       count++;
     }
     this.#config.months.forEach((item, index) => {
-      this.#config.startMonths.push({ id: index, name: item });
-      this.#config.endMonths.push({ id: index, name: item });
+      if (!this.#config.startMonths.find((item) => item.id === index)) {
+        this.#config.startMonths.push({ id: index, name: item });
+        this.#config.endMonths.push({ id: index, name: item });
+      }
     });
 
-    console.log({
-      first_month: `${this.#config.startYear}-0${this.#config.starMonth + 1}-01T00:00:00.123Z`,
-      second_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.123Z`
-    }, new Date('2025-05-01 0:00'));
     const statisticsTotalReq = await request.post('/api/creator/statistics', {
       first_month: `${this.#config.startYear}-0${this.#config.starMonth + 1}-01T00:00:00.000Z`,
       second_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.000Z`
@@ -206,11 +208,6 @@ class StatisticsStore {
     //   likes_count: 6,
     //   comments_count: 7
     // }, 'total');
-
-    console.log({
-      first_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.123Z`,
-      second_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.123Z`
-    }, new Date(this.#config.currentYear, this.#config.currentMonth, 1));
 
     // TODO сделать проверку на <>10 (если меньше, прикастовать 0
     const statisticsLastMonthReq = await request.post('/api/creator/statistics', {

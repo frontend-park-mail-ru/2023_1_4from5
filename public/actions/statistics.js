@@ -8,4 +8,10 @@ export const ActionsStatistics = {
       input,
     });
   },
+  showStatistics(input) {
+    dispatcher.dispatch({
+      type: ActionTypes.SHOW_STATISTICS,
+      input,
+    });
+  },
 };
