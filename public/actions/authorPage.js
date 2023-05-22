@@ -8,11 +8,12 @@ export const ActionsAuthorPage = {
     });
   },
 
-  clickLike(typeLike, postId) {
+  clickLike(typeLike, postId, page) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
       typeLike,
       postId,
+      page,
     });
   },
 

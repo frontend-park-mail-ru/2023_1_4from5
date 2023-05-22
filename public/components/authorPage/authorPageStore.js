@@ -3,11 +3,12 @@ import { authorPage } from './authorPage.js';
 import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
-import {isValidDescriptionAim, isValidDonate, isValidMoneyString} from '../../modules/isValid.js';
+import { isValidDescriptionAim, isValidDonate, isValidMoneyString } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { aim } from '../aim/aim';
 import { getSubscription } from '../getSubscription/getSubscription';
 import { Actions } from '../../actions/actions';
+import { postStore } from '../post/postStore';
 
 class AuthorPageStore {
   #config;

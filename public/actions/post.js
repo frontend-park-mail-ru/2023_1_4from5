@@ -46,4 +46,12 @@ export const ActionsPost = {
       postId,
     });
   },
+
+  clickLikeLonely(typeLike, postId) {
+    dispatcher.dispatch({
+      type: ActionTypes.CLICK_LIKE_LONELY,
+      typeLike,
+      postId,
+    });
+  },
 };
