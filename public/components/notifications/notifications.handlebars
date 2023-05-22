@@ -1,0 +1,27 @@
+<div id="backNotifications" class="background--settings"></div>
+
+<div class="notifications__container">
+    <div class="notifications__body">
+        <p class="notifications__header">Уведомления</p>
+        <div class="notifications__content">
+            {{#if ntfs}}
+                {{#each ntfs}}
+                    <div class="notification">
+                        <img id="notification__image" class="notification__image" src="{{notification.image}}" alt="">
+
+                        <div class="notification__info">
+                            <p class="notification__creator">{{notification.title}}</p>
+                            <p class="notification__description">{{notification.body}}</p>
+                        </div>
+
+                        <div class="notification__dot--container">
+                            <img class="notification__dot" src="../../images/new_notification.svg" alt="">
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <p class="no-notifications">Нет новых уведомлений</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
