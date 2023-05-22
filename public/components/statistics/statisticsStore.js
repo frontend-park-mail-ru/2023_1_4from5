@@ -169,7 +169,6 @@ class StatisticsStore {
     this.#config.startYear = now.getFullYear();
     this.#config.selectedStartMonth = now.getMonth();
     this.#config.selectedEndMonth = now.getMonth();
-    console.log(now.getFullYear());
     let statisticsTotal = {};
     let statisticsLastMonth = {};
 
@@ -226,7 +225,6 @@ class StatisticsStore {
       }
     }
 
-    console.log('store', this.#config);
     statistics.config = this.#config;
     statistics.render();
   }
@@ -276,17 +274,6 @@ class StatisticsStore {
     this.#config.selectedEndMonth = endMonth;
     this.#config.selectedEndYear = endYear;
 
-    console.log(this.#config, {
-      first_month: `${this.#config.startYears[startYear]}-0${startMonth + 1}-01T00:00:00.000Z`,
-      second_month: `${this.#config.endYears[endYear]}-0${endMonth + 1}-01T00:00:00.000Z`
-    });
-
-    //  startMonth,
-    //         startYear,
-    //         endMonth,
-    //         endYear,
-    //         selectDateErr,
-
     const statisticsIntervalReq = await request.post('/api/creator/statistics', {
       first_month: `${this.#config.startYears[startYear].name}-0${startMonth + 1}-01T00:00:00.000Z`,
       second_month: `${this.#config.endYears[endYear].name}-0${endMonth + 1}-01T00:00:00.000Z`
@@ -296,7 +283,6 @@ class StatisticsStore {
       this.setCardStatistics(statisticsInterval, 'interval');
     }
 
-    console.log('store', this.#config);
     statistics.config = this.#config;
     statistics.render();
   }

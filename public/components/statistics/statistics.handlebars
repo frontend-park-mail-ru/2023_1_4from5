@@ -4,9 +4,10 @@
         {{#each statisticsTotalList}}
             <div class="statistics__card">
                 <div class="card__icon">
-                    <img src="../../images/{{card_icon}}" width="25" alt="statistics_icon">
+                    <img class="statistics__icon" src="../../images/{{card_icon}}" width="25" alt="statistics_icon">
                 </div>
-                <div>{{count}}</div>
+                <div class="statistics__count">{{count}}</div>
+                <div></div>
                 <div>{{description}}</div>
             </div>
         {{/each}}
@@ -14,38 +15,44 @@
     <div class="statistics__total_money">
         {{#each statisticsTotalListMoney}}
             <div class="statistics__card">
-                <div>{{count}} ₽</div>
+                <div></div>
+                <div class="statistics__count">{{count}} ₽</div>
+                <div></div>
                 <div>{{description}}</div>
             </div>
         {{/each}}
     </div>
 
-    <div class="statistics__select_date">
-        <label class="statistics__label">Статистика с
-            <select id="select_date__start_month" name="start_month">
-                {{#each startMonths}}
-                    <option value={{id}}>{{name}}</option>
-                {{/each}}
-            </select>
+    <hr>
 
-            <select id="select_date__start_year" name="start_year">
-                {{#each startYears}}
-                    <option value={{id}}>{{name}}</option>
-                {{/each}}
-            </select>
-        </label>
-        <label>до
-            <select id="select_date__end_month" name="end_month">
-                {{#each endMonths}}
-                    <option value={{id}}>{{name}}</option>
-                {{/each}}
-            </select>
-            <select id="select_date__end_year" name="end_year">
-                {{#each endYears}}
-                    <option value={{id}}>{{name}}</option>
-                {{/each}}
-            </select>
-        </label>
+    <div class="statistics__select_date">
+        <div class="statistics__date">
+            <label class="statistics__label">Статистика с
+                <select id="select_date__start_month" name="start_month">
+                    {{#each startMonths}}
+                        <option class="statistics__option" value={{id}}>{{name}}</option>
+                    {{/each}}
+                </select>
+
+                <select id="select_date__start_year" name="start_year">
+                    {{#each startYears}}
+                        <option class="statistics__option" value={{id}}>{{name}}</option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>до
+                <select id="select_date__end_month" name="end_month">
+                    {{#each endMonths}}
+                        <option class="statistics__option" value={{id}}>{{name}}</option>
+                    {{/each}}
+                </select>
+                <select id="select_date__end_year" name="end_year">
+                    {{#each endYears}}
+                        <option class="statistics__option" value={{id}}>{{name}}</option>
+                    {{/each}}
+                </select>
+            </label>
+        </div>
         <button id="select_date__show_button" class="select_date__show_button">Показать</button>
         <div id="select_date__err" class="error"></div>
     </div>
@@ -54,9 +61,10 @@
         {{#each statisticsIntervalList}}
             <div class="statistics__card">
                 <div class="card__icon">
-                    <img src="../../images/{{card_icon}}" width="25" alt="statistics_icon">
+                    <img class="statistics__icon" src="../../images/{{card_icon}}" width="25" alt="statistics_icon">
                 </div>
-                <div>{{count}}</div>
+                <div class="statistics__count">{{count}}</div>
+                <div></div>
                 <div>{{description}}</div>
             </div>
         {{/each}}
@@ -64,22 +72,29 @@
     <div class="statistics__interval_money">
         {{#each statisticsIntervalListMoney}}
             <div class="statistics__card">
-                <div>{{count}} ₽</div>
+                <div></div>
+                <div class="statistics__count">{{count}} ₽</div>
+                <div></div>
                 <div>{{description}}</div>
             </div>
         {{/each}}
     </div>
+
+    <hr>
+
     <div class="get_money">
-        <h2>Вывод денег</h2>
-        <h3>Доступный для вывода баланс: {{balance}}</h3>
-        <label>Введите номер телефона (начиная с +7)
-            <input id="get_money__phone" name="phone" value="+7">
+        <p class="statistics__withdraw">Вывод денег</p>
+        <p class="statistics__balance statistics__count" >Доступный для вывода баланс: {{balance}}</p>
+        <label class="statistics__input">
+            <p class="statistics__input--title">Введите номер телефона</p>
+            <input id="get_money__phone" class="input--form statistics__input--form" name="phone" value="+7">
         </label>
         <div id="get_phone__err" class="error"></div>
-        <label>Введите желаемую сумму вывода (не менее 2 рублей)
-            <input id="get_money__sum">
+        <label class="statistics__input">
+            <p class="statistics__input--title">Введите желаемую сумму вывода</p>
+            <input id="get_money__sum" class="input--form statistics__input--form">
         </label>
         <div id="get_money__err" class="error"></div>
-        <button id="get_money__button">Готово</button>
+        <button id="get_money__button" class="get_money__button">Готово</button>
     </div>
 </div>
