@@ -8,8 +8,8 @@ import { searchStore } from '../components/search/searchStore';
 import { page404 } from '../components/page404/page404';
 import { feedStore } from '../components/feed/feedStore';
 import { authorPage } from '../components/authorPage/authorPage';
-import { post } from '../components/post/post';
 import { postStore } from '../components/post/postStore';
+import { statisticsStore } from '../components/statistics/statisticsStore';
 
 export const URLS = {
   root: '/',
@@ -21,6 +21,7 @@ export const URLS = {
   search: '/search',
   feed: '/feed',
   post: '/post',
+  statistics: '/statistics',
 };
 
 export function notifier(path, data, additionalUrl) {
@@ -75,6 +76,14 @@ export function notifier(path, data, additionalUrl) {
 
     case `${URLS.post}/${additionalUrl}`:
       postStore.renderPost(additionalUrl);
+      break;
+
+    case URLS.statistics:
+      if (userStore.getUserState().isAuthorizedIn) {
+        statisticsStore.renderStatistics();
+      } else {
+        router.go('/', data, parent);
+      }
       break;
 
     default:

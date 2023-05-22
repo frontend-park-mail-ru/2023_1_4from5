@@ -97,4 +97,8 @@ export const ActionTypes = {
 
   // feed
   LIKE_FEED: 'LIKE_FEED',
+
+  // statistics
+  GET_MONEY: 'GET_MONEY',
+  SHOW_STATISTICS: 'SHOW_STATISTICS',
 };
