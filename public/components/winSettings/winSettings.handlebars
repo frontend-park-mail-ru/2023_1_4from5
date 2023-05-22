@@ -5,7 +5,6 @@
         {{#if modalWindow.showDisplay}}
             <div class="winsettings__chapter">
                 <a id="{{modalWindow.id}}" class="winsettings__href disabled" href={{modalWindow.href}}>
-                    <!--<img class="winsettins__img" src="../../images/notification.svg" alt="myPage">-->
                     <p>{{modalWindow.name}}</p>
                 </a>
             </div>
@@ -70,7 +69,7 @@
     <div class="media__1300px">
         {{#if notifications.showDisplay}}
             <div class="winsettings__chapter">
-                <a id="{{notifications.id}}" class="winsettings__href inactive" href={{notifications.href}}>
+                <a id="{{notifications.id}}" class="winsettings__href clickable" href={{notifications.href}}>
                     <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
                     <p>Уведомления</p>
                 </a>
@@ -84,7 +83,7 @@
             <a id="{{finance.id}}" class="winsettings__href inactive"
                href={{finance.href}}>
                 <img class="winsettins__img" src="../../images/finance.svg" alt="finance">
-                <p>Мои доходы</p>
+                <p>Статистика</p>
             </a>
         </div>
         <hr class="winsettings__hr">

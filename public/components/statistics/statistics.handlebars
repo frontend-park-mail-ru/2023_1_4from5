@@ -1,0 +1,111 @@
+<div class="statistics">
+    <div class="statistics__total">
+        {{#each statisticsTotalList}}
+            <div class="statistics__card">
+                <div class="card__icon">
+                    <img src="../../images/{{card_icon}}" width="25" alt="statistics_icon">
+                </div>
+                <div>{{count}}</div>
+                <div>{{description}}</div>
+            </div>
+        {{/each}}
+        {{#each statisticsTotalListMoney}}
+            <div class="statistics__card">
+                <div>{{count}} ₽</div>
+                <div>{{description}}</div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="statistics__select_date">
+        <label>Статистика с
+            <select id="select_date__start_month" name="start_month">
+                {{#each startMonths}}
+                    <option value={{id}}>{{name}}</option>
+                {{/each}}
+                <!--        <option value="2">Февраль</option>-->
+                <!--        <option value="3">Март</option>-->
+                <!--        <option value="4">Апрель</option>-->
+                <!--        <option value="5">Май</option>-->
+                <!--        <option value="6">Июнь</option>-->
+                <!--        <option value="7">Июль</option>-->
+                <!--        <option value="8">Август</option>-->
+                <!--        <option value="9">Сентябрь</option>-->
+                <!--        <option value="10">Октябрь</option>-->
+                <!--        <option value="11">Ноябрь</option>-->
+                <!--        <option value="12">Декабрь</option>-->
+            </select>
+
+            <select id="select_date__start_year" name="start_year">
+                {{#each startYears}}
+                    <option value={{id}}>{{name}}</option>
+                {{/each}}
+                <!--            <option value="1">2021</option>-->
+                <!--            <option value="2">2022</option>-->
+                <!--            <option value="3">2023</option>-->
+                <!--            <option value="4">Красный</option>-->
+                <!--            <option value="5">Оранжевый</option>-->
+                <!--            <option value="6">Черный</option>-->
+            </select>
+        </label>
+        <label>до
+            <select id="select_date__end_month" name="end_month">
+                {{#each endMonths}}
+                    <option value={{id}}>{{name}}</option>
+                {{/each}}
+                <!--            <option value="1">Январь</option>-->
+                <!--            <option value="2">Февраль</option>-->
+                <!--            <option value="3">Март</option>-->
+                <!--            <option value="4">Апрель</option>-->
+                <!--            <option value="5">Май</option>-->
+                <!--            <option value="6">Июнь</option>-->
+                <!--            <option value="7">Июль</option>-->
+                <!--            <option value="8">Август</option>-->
+                <!--            <option value="9">Сентябрь</option>-->
+                <!--            <option value="10">Октябрь</option>-->
+                <!--            <option value="11">Ноябрь</option>-->
+                <!--            <option value="12">Декабрь</option>-->
+            </select>
+            <select id="select_date__end_year" name="end_year">
+                {{#each endYears}}
+                    <option value={{id}}>{{name}}</option>
+                {{/each}}
+                <!--            <option value="1">2021</option>-->
+                <!--            <option value="2">2022</option>-->
+                <!--            <option value="3">2023</option>-->
+            </select>
+        </label>
+        <button id="select_date__show_button" class="select_date__show_button">Показать</button>
+    </div>
+
+    <div class="statistics__interval">
+        {{#each statisticsIntervalList}}
+            <div class="statistics__card">
+                <div class="card__icon">
+                    <img src="../../images/{{card_icon}}" width="25" alt="statistics_icon">
+                </div>
+                <div>{{count}}</div>
+                <div>{{description}}</div>
+            </div>
+        {{/each}}
+        {{#each statisticsIntervalListMoney}}
+            <div class="statistics__card">
+                <div>{{count}} ₽</div>
+                <div>{{description}}</div>
+            </div>
+        {{/each}}
+    </div>
+    <div id="statistics__err"></div>
+    <div class="get_money">
+        <h2>Вывод денег</h2>
+        <h3>Доступный для вывода баланс: {{balance}}</h3>
+        <label>Введите номер телефона
+            <input id="get_money__phone" name="phone" value="+7">
+        </label>
+        <label>Введите желаемую сумму вывода
+            <input id="get_money__sum">
+        </label>
+        <div id="get_money__err"></div>
+        <button id="get_money__button">Готово</button>
+    </div>
+</div>

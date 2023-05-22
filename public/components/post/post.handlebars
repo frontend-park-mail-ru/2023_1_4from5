@@ -1,0 +1,99 @@
+<div class="post__space">
+    <div id="{{post.id}}" class="post__container">
+        <div class="post__header">
+            <div class="post__privacy">
+                <div class="feed__creator--photo">
+                    <img id="feed__creator--photo" class="post__photo" src="../../images/user/{{post.creator_photo}}.jpg" alt="">
+                </div>
+                <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
+                {{#if post.subscriptions}}
+                    С подпиской:
+                    <div class="post__subs">
+                        {{#each post.subscriptions}}
+                            <p>{{title}}</p>
+                        {{/each}}
+                    </div>
+                {{else}}
+                    <p class="privacy__all">Открыт для всех</p>
+                {{/if}}
+            </div>
+            <div class="post__date">
+                {{#if ../post.is_my_page}}
+                    <img id="edit__post" class="edit__img clickable" src="../../images/edit.svg" alt="edit">
+                    <img id="delete__post" class="delete__img clickable" src="../../images/delete.svg"
+                         alt="delete">
+                {{/if}}
+                <p id="creation__date" class="creation__date">{{post.creation_date}}</p>
+            </div>
+        </div>
+
+        <div class="post__content">
+            <p class="content__header">{{post.title}}</p>
+            {{#each post.textWithBreaks}}
+                {{#if ../post.is_available}}
+                    <p>{{text}}</p>
+                {{else}}
+                    <div class="no__access--container">
+                        <p>У вас нет доступа к этому посту</p>
+                        <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
+                    </div>
+                {{/if}}
+            {{/each}}
+
+            <div id="attachments-{{post.id}}" class="attach-container"></div>
+
+            <div class="feedback">
+                <div class="post__likes post__likes--lonely">
+                    {{#if ../post.is_my_page}}
+                        <img id="disable-like-icon" class="icon--like"
+                             src="../../images/disable_like_icon.png" alt="like--disable">
+                    {{else}}
+                        {{#if post.is_liked}}
+                            <img id="love-like-icon" class="icon--like clickable"
+                                 src="../../images/love_like_icon.png" alt="like--liked">
+                        {{else}}
+                            <img id="like-icon" class="icon--like clickable" src="../../images/like_icon.png"
+                                 alt="like--enable">
+                        {{/if}}
+                    {{/if}}
+                    {{post.likes_count}}
+                </div>
+
+                <div class="post__comments">
+                    <img class="icon--comments" src="../../images/comment_icon.png" alt="comment">
+                    {{commentsNum}}
+                </div>
+
+                <div></div>
+            </div>
+        </div>
+
+        <div class="post__footer">
+            <hr class="comment__hr">
+            <div class="footer__comment--input">
+                <textarea id="comment__input" class="input--form comment__input"></textarea>
+                <img id="comment__send" class="comment__send clickable" src="../../images/send.svg">
+            </div>
+
+            <div id="comment__list" class="comment__list">
+                {{#each comments}}
+                    <div id="{{comment_id}}" class="comment__container">
+                        <img id="comment__photo" src="../../images/user/{{user_photo}}.jpg" alt="">
+                        <div id="comment__info" class="comment__info">
+                            <p id="comment__text">{{text}}</p>
+                            <p id="comment__date">{{creation}}</p>
+                        </div>
+                        <div class="comment__edit-del">
+                            <img id="comment__edit" class="comment__icon clickable" src="../../images/edit.svg" alt="">
+                            <img id="comment__close" class="comment__icon clickable" style="display: none" src="../../images/close.png" alt="">
+                            <img id="comment__save" class="comment__icon clickable" style="display: none"
+                                 src="../../images/send.svg" alt="">
+                            <img id="comment__delete" class="comment__icon clickable" src="../../images/delete.svg"
+                                 alt="">
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

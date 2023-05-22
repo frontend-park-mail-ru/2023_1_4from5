@@ -9,8 +9,6 @@ import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import { sideBar } from '../sideBar/sideBar';
 
-const sideBarElement = document.querySelector('sideBar');
-
 class SettingsStore {
   constructor() {
     dispatcher.register(this.reduce.bind(this));

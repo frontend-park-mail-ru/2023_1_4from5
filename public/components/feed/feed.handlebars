@@ -1,9 +1,11 @@
+{{#if posts}}
+
 <div class="feed">
     {{#each posts}}
         <div id="{{id}}" class="feed__card">
             <div class="feed__header">
                 <div class="feed__creator--photo">
-                    <img id="feed__creator--photo" src="../../images/{{creator_photo}}.jpg" alt="">
+                    <img id="feed__creator--photo" src="../../images/user/{{creator_photo}}.jpg" alt="">
                 </div>
 
                 <h3 class="feed__creator--name">{{creator_name}}</h3>
@@ -29,7 +31,7 @@
                     {{/if}}
                     <p class="feed__likes--count">{{likes_count}}</p>
 
-                    <img class="feed__icon" src="../../images/comment_icon.png" alt="comment">
+                    <img id="post__comment" class="feed__icon clickable" src="../../images/comment_icon.png" alt="comment">
                     <p>0</p>
                 </div>
 
@@ -40,3 +42,9 @@
         </div>
     {{/each}}
 </div>
+{{else}}
+    <div class="no-authors__container">
+        <h1 class="search__no-authors">Нет ни одного поста</h1>
+        <img class="no-authors__img" src="../../images/no-access.jpeg" alt="">
+    </div>
+{{/if}}

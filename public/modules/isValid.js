@@ -16,6 +16,7 @@ const LENGTH = {
 
   MAX_MONEY: 9,
   MAX_DESCRIPTION_AIM: 50,
+
   MAX_TITLE_POST: 40,
   MAX_TEXT_POST: 2000,
 };
@@ -220,7 +221,6 @@ export function isValidUsername(inputStr) {
 }
 
 export function isValidCreatorName(inputStr) {
-  //.log(inputStr);
   const flags = {
     hasBlackSign: {
       flag: false,

@@ -12,7 +12,6 @@ document.querySelector('main');
 
 class NewPostStore {
   #config;
-  #levels;
 
   constructor() {
     this.#config = {
@@ -76,7 +75,6 @@ class NewPostStore {
   }
 
   async sendPost(actionType, action, callback) {
-    //.log('action.input ', action.input);
     const createTitle = action.input.titleInput.value;
     const createText = action.input.textInput.value;
     const subscriptions = action.input.availableSubscriptions;
@@ -103,7 +101,7 @@ class NewPostStore {
       if (actionType === ActionTypes.CREATE_POST) {
         status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       } else {
-        status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
+        status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       }
       if (status) {
         newPost.config.attachments = [];
@@ -144,12 +142,10 @@ class NewPostStore {
     const result = await callback(body, action);
     let deleteStatus = true;
     let addStatus = true;
-    //.log(this.#config.attachments, action.input.attachments);
 
     if (this.#config.attachments) {
       for (const attach of this.#config.attachments) {
         if (!action.input.attachments.includes(attach)) {
-          //.log('deleted file: ', attach);
           const tokenEdit = await request.getHeader(`/api/post/deleteAttach/${action.postId}`);
           const deleteResult = await request.deleteWithBody(
             `/api/post/deleteAttach/${action.postId}`,
@@ -165,7 +161,6 @@ class NewPostStore {
     if (action.input.attachments) {
       for (const attach of action.input.attachments) {
         if (!this.#config.attachments.includes(attach)) {
-          //.log('new file: ', attach);
           const formData = new FormData();
           formData.append('attachment', attach);
           const tokenEdit = await request.getHeader(`/api/post/addAttach/${action.postId}`);
@@ -178,7 +173,6 @@ class NewPostStore {
         }
       }
     }
-    //.log(result.ok && deleteStatus && addStatus);
     return result.ok && deleteStatus && addStatus;
   }
 }

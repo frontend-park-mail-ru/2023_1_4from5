@@ -49,13 +49,13 @@
         {{/if}}
         {{#if notifications.showDisplay}}
             <a id="{{notifications.id}}">
-                <img class="sidebar__notification sidebar__element sidebar__media--1300px" src="../../images/notification.svg" alt="notification">
+                <img class="sidebar__notification sidebar__element sidebar__media--1300px clickable" src="../../images/notification.svg" alt="notification">
             </a>
         {{/if}}
 
         {{#if modalWindow.showDisplay}}
             <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element"
-                 src="../../images/{{modalWindow.photo}}.jpg" alt="">
+                 src="../../images/user/{{modalWindow.photo}}.jpg" alt="">
             <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
                href={{modalWindow.href}}> {{modalWindow.name}} </a>
         {{/if}}
