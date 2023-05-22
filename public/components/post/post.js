@@ -6,8 +6,12 @@ const contentElement = document.querySelector('main');
 
 class Post {
   render(config) {
-    const commentsNum = config.comments.length;
-    config.commentsNum = commentsNum;
+    if (config.comments.length !== 0) {
+      config.commentsNum = config.comments.length;
+    } else {
+      config.commentsNum = 0;
+      config.comments = [];
+    }
 
     contentElement.innerHTML = '';
     const newDiv = document.createElement('div');

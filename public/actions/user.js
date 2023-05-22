@@ -13,4 +13,18 @@ export const ActionsUser = {
       type: ActionTypes.LOGOUT,
     });
   },
+
+  subToNotification(creatorId) {
+    dispatcher.dispatch({
+      type: ActionTypes.SUB_TO_NOTIFICATIONS,
+      creatorId,
+    });
+  },
+
+  unsubToNotification(creatorId) {
+    dispatcher.dispatch({
+      type: ActionTypes.UNSUB_TO_NOTIFICATIONS,
+      creatorId,
+    });
+  }
 };
