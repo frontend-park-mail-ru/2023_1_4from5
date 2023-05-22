@@ -1,5 +1,12 @@
+@import "../general/variables";
+
+$statistics-offset: 10em;
 .statistics {
-  margin-top: 100px;
+  margin: ($sidebar-height + 3em) $statistics-offset 3em $statistics-offset;
+}
+
+.statistics__title {
+  font-size: $font-size-4;
 }
 
 $search__container-padding: 5%;
@@ -11,9 +18,25 @@ $num-of-columns: 2;
   grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
 }
 
+.statistics__card {
+  border: $text--default-color solid 2px;
+  border-radius: $elem-border-radius;
+}
+
 $num-of-columns: 3;
 .statistics__total_money {
   padding: 4% $search__container-padding $search__container-padding;
+  display: grid;
+  grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+}
+
+.statistics__interval {
+  display: grid;
+  grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
+  grid-template-rows: 10em 10em;
+}
+
+.statistics__interval_money {
   display: grid;
   grid-template-columns: repeat($num-of-columns, 100% / $num-of-columns);
 }
