@@ -12,5 +12,17 @@ export const ActionsNotifications = {
     dispatcher.dispatch({
       type: ActionTypes.REMOVE_NOTIFICATIONS,
     });
-  }
+  },
+
+  followAll() {
+    dispatcher.dispatch({
+      type: ActionTypes.FOLLOW_ALL,
+    });
+  },
+
+  subscribeAll() {
+    dispatcher.dispatch({
+      type: ActionTypes.SUBSCRIBE_ALL,
+    });
+  },
 };

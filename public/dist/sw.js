@@ -23,36 +23,30 @@ const putInCache = async (request, response) => {
   await cache.put(request, response);
 };
 
-const cacheFirst = async ({
+const netFirst = async ({
   request,
   preloadResponsePromise, /* fallbackUrl */
+// eslint-disable-next-line consistent-return
 }) => {
+  // if (navigator.onLine) {
+  // try to get the resource from the network
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
     return responseFromCache;
   }
 
-  let preloadResponse;
-  try {
-    preloadResponse = await Promise.race([
-      preloadResponsePromise,
-      new Promise((resolve, reject) => {
-        setTimeout(() => reject(new Error('Preload response timed out')), 5000);
-      }),
-    ]);
-  } catch (error) {
-    console.error(error);
-  }
-
+  const preloadResponse = await preloadResponsePromise;
   if (preloadResponse) {
-    const cache = await caches.open(CACHE_NAME);
-    await cache.put(request, preloadResponse.clone());
+    await putInCache(request, preloadResponse.clone());
     return preloadResponse;
   }
 
   let responseFromNetwork;
   try {
     responseFromNetwork = await fetch(request);
+    // response may be used only once
+    // we need to save clone to put one copy in cache
+    // and serve second one
   } catch (error) {
     return new Response('Network error happened', {
       status: 408,
@@ -64,6 +58,11 @@ const cacheFirst = async ({
     await putInCache(request, responseFromNetwork.clone());
   }
   return responseFromNetwork;
+  // }
+
+  // if (!navigator.onLine) {
+
+  // }
 };
 
 const enableNavigationPreload = async () => {
@@ -75,7 +74,7 @@ const enableNavigationPreload = async () => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    cacheFirst({
+    netFirst({
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
     })

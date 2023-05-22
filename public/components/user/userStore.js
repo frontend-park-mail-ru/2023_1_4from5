@@ -79,6 +79,10 @@ class UserStore {
         await this.unsubToNotifications(action.creatorId);
         break;
 
+      case ActionTypes.FOLLOW_ALL:
+        await this.followAll();
+        break;
+
       default:
         break;
     }
@@ -90,6 +94,7 @@ class UserStore {
     this.setState(profile);
 
     Actions.renderSideBar(this.#user);
+    await this.followAll();
   }
 
   async logout() {
@@ -122,7 +127,7 @@ class UserStore {
 
     onMessage(messaging, (payload) => {
       console.log('Message received. ', payload);
-      notificationsStore.addNotificaiton(payload);
+      notificationsStore.addNotification(payload);
     });
   }
 
@@ -141,6 +146,35 @@ class UserStore {
       .catch((err) => {
         console.log('An error occurred while retrieving token. ', err);
       });
+  }
+
+  async followAll() {
+    const app = initializeApp(this.#firebaseConfig);
+    const messaging = getMessaging(app);
+
+    const reqFollows = await request.get('/api/user/follows');
+    const follows = await reqFollows.json();
+    console.log(follows)
+    for (const i in follows) {
+      const follow = follows[i];
+      getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
+        // eslint-disable-next-line no-loop-func
+        .then(async (currentToken) => {
+          if (currentToken) {
+            await request.put(`/api/user/subscribeToNotifications/${follow.creator}`, { notification_token: currentToken });
+          } else {
+            console.log('No registration token available. Request permission to generate one.');
+          }
+        })
+        .catch((err) => {
+          console.log('An error occurred while retrieving token. ', err);
+        });
+
+      onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        notificationsStore.addNotification(payload);
+      });
+    }
   }
 }
 

@@ -11,8 +11,9 @@ class NotificationsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  addNotificaiton(ntf) {
+  addNotification(ntf) {
     this.#notifications.push(ntf);
+    notifications.render(this.#notifications);
   }
 
   async reduce(action) {
