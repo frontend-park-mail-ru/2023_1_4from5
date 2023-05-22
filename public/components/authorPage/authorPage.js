@@ -289,6 +289,7 @@ class AuthorPage {
       followBtn.addEventListener('click', (event) => {
         event.preventDefault();
         Actions.follow(followBtn.parentElement.id);
+        Actions.subToNotification(followBtn.parentElement.id);
       });
     }
 
@@ -297,6 +298,7 @@ class AuthorPage {
       unfollowBtn.addEventListener('click', (event) => {
         event.preventDefault();
         Actions.unfollow(unfollowBtn.parentElement.id, 'authorPage');
+        Actions.unsubToNotification(unfollowBtn.parentElement.id);
       });
     }
 

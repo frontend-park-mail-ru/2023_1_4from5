@@ -1,8 +1,5 @@
 import './index.css';
 
-import { initializeApp } from 'firebase/app';
-import { getMessaging, onMessage, getToken } from 'firebase/messaging';
-
 import { startPage } from './components/startPage/startPage.js';
 import { sideBar } from './components/sideBar/sideBar.js';
 import { Register } from './components/register/reg.js';
@@ -13,6 +10,7 @@ import { Actions } from './actions/actions.js';
 import { subscriptions } from './components/subscriptions/subscriptions';
 import { becameAuthor } from './components/becomeAuthor/becomeAuthor';
 import { post } from './components/post/post';
+import { notifications } from './components/notifications/notifications';
 
 import { startStore } from './components/startPage/startStore.js';
 import { sideBarStore } from './components/sideBar/sideBarStore.js';
@@ -28,20 +26,8 @@ import { getSubscription } from './components/getSubscription/getSubscription';
 import { subscriptionsStore } from './components/subscriptions/subscriptionsStore';
 import { becameAuthorStore } from './components/becomeAuthor/becomeAuthorStore';
 import { postStore } from './components/post/postStore';
+import { notificationsStore } from './components/notifications/notificationsStore';
 import { router } from './modules/Router.js';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyCs9v1WpgN0G-GKCBS8whPK2hPzwDiiyfU',
-  authDomain: 'subme-ef6b7.firebaseapp.com',
-  projectId: 'subme-ef6b7',
-  storageBucket: 'subme-ef6b7.appspot.com',
-  messagingSenderId: '759387159264',
-  appId: '1:759387159264:web:8bfcf46c688a421c586e85',
-  measurementId: 'G-RDQS51ZNB6'
-};
-
-const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js', { scope: '/' })
@@ -49,29 +35,6 @@ if ('serviceWorker' in navigator) {
       console.log('SW ERR: ', err);
     });
 }
-
-// getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
-//   .then((token) => {
-//     console.log(token);
-//   });
-
-//getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' }).then((currentToken) => {
-//  if (currentToken) {
-//    fetch('https://park-akino.ru/api/v1/user/subscribePush', {
-//      method: 'POST',
-//      body: JSON.stringify({ token: currentToken }),
-//    }).finally();
-//  } else {
-//    console.log('No registration token available. Request permission to generate one.');
-//  }
-//}).catch((err) => {
-//  console.log('An error occurred while retrieving token. ', err);
-//});
-
-onMessage(messaging, (payload) => {
-  console.log('Message received. ', payload);
-  // ...
-});
 
 async function begin() {
   await startStore.start();

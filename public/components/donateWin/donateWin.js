@@ -33,6 +33,7 @@ export class DonateWin {
 
     donateWinBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      console.log(donateWinForm);
       Actions.donate({
         moneyInput,
         donateWinForm,
