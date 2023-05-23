@@ -33,3 +33,25 @@ export function clickHandler(event, config) {
     }
   }
 }
+
+export function dateParse(timestamp) {
+  const dateRaw = new Date(Date.parse(timestamp.textContent));
+  let day = dateRaw.getDate().toString();
+  let month = (dateRaw.getMonth() + 1).toString();
+  let year = dateRaw.getFullYear().toString();
+  let hour = dateRaw.getHours().toString();
+  let min = dateRaw.getMinutes().toString();
+  if (day.length === 1) {
+    day = `0${day}`;
+  }
+  if (month.length === 1) {
+    month = `0${month}`;
+  }
+  if (hour.length === 1) {
+    hour = `0${hour}`;
+  }
+  if (min.length === 1) {
+    min = `0${min}`;
+  }
+  timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
+}

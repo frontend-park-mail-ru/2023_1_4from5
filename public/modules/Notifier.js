@@ -61,9 +61,11 @@ export function notifier(path, data, additionalUrl) {
       break;
 
     case URLS.search:
-      if (!data) {
-        searchStore.renderSearch();
-      }
+      searchStore.renderSearch(data);
+      break;
+
+    case `${URLS.search}/${encodeURIComponent(additionalUrl)}`:
+      searchStore.renderSearch(decodeURIComponent(additionalUrl));
       break;
 
     case URLS.subscriptions:
