@@ -42,7 +42,6 @@ class DonateWinStore {
     if (!errMoneyGot) {
       const creatorIdIn = authorPageStore.getState().creator_info.creator_id;
       input.donateWinFormLabel.value = `donate;${creatorIdIn}`;
-      console.log(input);
       // input.donateWinForm.submit();
       // const token = await request.getHeader('/api/user/donate');
       // const donateAim = await request.post('/api/user/donate', {

@@ -412,7 +412,6 @@ export function isValidPhone(inputStr) {
 }
 
 export function isValidSelectedDate(input) {
-  console.log(input);
   const flags = {
     hasCorrectYears: {
       flag: true,

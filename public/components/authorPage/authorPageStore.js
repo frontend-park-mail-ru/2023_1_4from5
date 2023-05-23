@@ -236,7 +236,6 @@ class AuthorPageStore {
 
     const money = monthCount * Number(input.price);
 
-    console.log(input, monthCount);
     const tokenSub = await request.getHeader(`/api/user/subscribe/${input.subscriptionId}`);
     const result = await request.post(`/api/user/subscribe/${input.subscriptionId}`, {
       creator_id: input.creatorId,

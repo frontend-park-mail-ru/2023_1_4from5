@@ -74,9 +74,7 @@ export class SideBar {
       if (event.key === 'Enter') {
         event.preventDefault();
         const content = input.value;
-        console.log('content: ', content);
         router.go(URLS.search, content, content);
-        // Actions.searchAuthors(content);
       }
     });
   }

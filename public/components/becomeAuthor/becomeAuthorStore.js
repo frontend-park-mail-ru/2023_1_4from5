@@ -6,8 +6,8 @@ import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import { authorPageStore } from '../authorPage/authorPageStore';
 import { userStore } from '../user/userStore';
-import {isValidCreateDescription, isValidCreatorName} from "../../modules/isValid";
-import {color} from "../../consts/styles";
+import { isValidCreateDescription, isValidCreatorName } from '../../modules/isValid';
+import { color } from '../../consts/styles';
 
 class BecomeAuthorStore {
   constructor() {
@@ -51,7 +51,7 @@ class BecomeAuthorStore {
   }
 
   async becomeAuthor(input) {
-    this.validation(
+    await this.validation(
       input,
       async (body) => {
         const token = await request.getHeader('/api/user/becameCreator');
@@ -66,7 +66,7 @@ class BecomeAuthorStore {
   }
 
   async updateProfile(input) {
-    this.validation(
+    await this.validation(
       input,
       async (body) => {
         const token = await request.getHeader('/api/creator/updateData');
