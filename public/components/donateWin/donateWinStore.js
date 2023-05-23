@@ -42,17 +42,11 @@ class DonateWinStore {
     if (!errMoneyGot) {
       const creatorIdIn = authorPageStore.getState().creator_info.creator_id;
       input.donateWinFormLabel.value = `donate;${creatorIdIn}`;
-      // input.donateWinForm.submit();
-      // const token = await request.getHeader('/api/user/donate');
-      // const donateAim = await request.post('/api/user/donate', {
-      //   creator_id: authorPageStore.getState().creator_info.creator_id,
-      //   money_count: Number(moneyCount),
-      // }, token);
+      input.donateWinFormSum.value = Number(moneyCount);
+      console.log(input.donateWinForm);
+      input.donateWinForm.submit();
 
-      authorPageStore.getState().aim.money_got += Number(moneyCount);
-      authorPage.config = authorPageStore.getState();
-      donateWin.removeDonateWin();
-      authorPage.render();
+      // donateWin.removeDonateWin(); - ломает переход на юмани
     } else {
       input.errorOutput.innerHTML = '';
       input.errorOutput.innerHTML = 'Некорректная сумма доната';
