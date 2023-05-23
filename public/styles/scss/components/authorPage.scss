@@ -37,7 +37,7 @@ $author__photo--left: 5%;
 
 .creator__photo {
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
 }
 
@@ -64,7 +64,7 @@ $author__photo--left: 5%;
   height: 100%;
   width: 100%;
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

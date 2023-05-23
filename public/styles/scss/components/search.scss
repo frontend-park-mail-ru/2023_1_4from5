@@ -50,7 +50,7 @@ $search__photo-width: 5em;
   width: $search__photo-width;
   height: $search__photo-width;
   border-radius: 20em;
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
