@@ -35,7 +35,7 @@ class Search {
     const photos = document.querySelectorAll('#search__photo');
     for (let index = 0; index < photos.length; index++) {
       const photo = photos[index];
-      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+      // photo.style.backgroundImage = `url(../../images/user/${}.jpg)`;
     }
 
     let cards = document.querySelectorAll('.creator__card');
