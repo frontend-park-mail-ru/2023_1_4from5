@@ -28,7 +28,7 @@ class Settings {
     this.#parent.appendChild(newDiv);
 
     const photo = document.getElementById('user-photo');
-    photo.style.backgroundImage = `url(../../images/user/${this.#user.profilePhoto}.png)`;
+    photo.style.backgroundImage = `url(../../images/user/${this.#user.profilePhoto}.jpg)`;
 
     const settingsBtn = document.getElementById('settings__btn');
     settingsBtn.addEventListener('click', (event) => {
