@@ -2,15 +2,17 @@ import { dispatcher } from '../../dispatcher/dispatcher';
 import { statistics } from './statistics';
 import { request } from '../../modules/request';
 import { ActionTypes } from '../../actionTypes/actionTypes';
+import { isValidGetSum, isValidPhone, isValidSelectedDate } from '../../modules/isValid';
+import { color } from '../../consts/styles';
 
 class StatisticsStore {
   #config = {
     balance: 0,
-    starMonth: 0,
+    startMonth: 0,
     startYear: 0,
     currentMonth: 0,
     currentYear: 0,
-    selectedStarMonth: 0,
+    selectedStartMonth: 0,
     selectedStartYear: 0,
     selectedEndMonth: 0,
     selectedEndYear: 0,
@@ -175,7 +177,7 @@ class StatisticsStore {
     if (firstDateString) {
       const firstDateArr = firstDateString.split('-');
       this.#config.startYear = Number(firstDateArr[0]);
-      this.#config.starMonth = Number(firstDateArr[1]) - 1;
+      this.#config.startMonth = Number(firstDateArr[1]) - 1;
     }
 
     let count = 0;
@@ -196,19 +198,32 @@ class StatisticsStore {
       }
     });
 
+    let startMonthStr = this.#config.startMonth + 1;
+    let endMonthStr = this.#config.currentMonth + 1;
+    if (startMonthStr < 10) {
+      startMonthStr = `0${startMonthStr}`;
+    }
+    if (endMonthStr < 10) {
+      endMonthStr = `0${endMonthStr}`;
+    }
+
     const statisticsTotalReq = await request.post('/api/creator/statistics', {
-      first_month: `${this.#config.startYear}-0${this.#config.starMonth + 1}-01T00:00:00.000Z`,
-      second_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.000Z`
+      first_month: `${this.#config.startYear}-${startMonthStr}-01T00:00:00.000Z`,
+      second_month: `${this.#config.currentYear}-${endMonthStr}-01T00:00:00.000Z`
     });
     if (statisticsTotalReq.ok) {
       statisticsTotal = await statisticsTotalReq.json();
       this.setCardStatistics(statisticsTotal, 'total');
     }
 
-    // TODO сделать проверку на <>10 (если меньше, прикастовать 0
+    let currentMonthStr = this.#config.currentMonth + 1;
+    if (currentMonthStr < 10) {
+      currentMonthStr = `0${currentMonthStr}`;
+    }
+
     const statisticsLastMonthReq = await request.post('/api/creator/statistics', {
-      first_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.000Z`,
-      second_month: `${this.#config.currentYear}-0${this.#config.currentMonth + 1}-01T00:00:00.000Z`
+      first_month: `${this.#config.currentYear}-${currentMonthStr}-01T00:00:00.000Z`,
+      second_month: `${this.#config.currentYear}-${currentMonthStr}-01T00:00:00.000Z`
     });
     if (statisticsLastMonthReq.ok) {
       statisticsLastMonth = await statisticsLastMonthReq.json();
@@ -228,42 +243,86 @@ class StatisticsStore {
   }
 
   async getMoney(input) {
-    const phoneNumber = input.phoneInput.value;
-    const money = Number(input.sumInput.value);
-    const getMoneyReq = await request.put('/api/creator/transferMoney', {
-      money: money,
-      phone_number: phoneNumber
-    });
-    if (getMoneyReq.ok) {
-      input.getMoneyErr.innerHTML = 'Зачисление прошло успешно :)';
-      this.renderStatistics();
+    const phoneNumber = input.phoneInput.value.split(' ').join('').split('-').join('');
+    const money = input.sumInput.value.split(' ').join('');
+
+    input.getMoneyErr.innerHTML = '';
+    input.getPhoneErr.innerHTML = '';
+    input.sumInput.style.backgroundColor = color.field;
+    input.phoneInput.style.backgroundColor = color.field;
+
+    const errMoney = isValidGetSum(money, input.balance);
+    const errPhoneNumber = isValidPhone(phoneNumber);
+    if (errMoney || errPhoneNumber) {
+      if (errMoney) {
+        input.getMoneyErr.innerHTML = errMoney;
+        input.sumInput.style.backgroundColor = color.error;
+      }
+      if (errPhoneNumber) {
+        input.getPhoneErr.innerHTML = errPhoneNumber;
+        input.phoneInput.style.backgroundColor = color.error;
+      }
     } else {
-      input.getMoneyErr.innerHTML = 'Произошла ошибка. Пожалуйста повторите позже :(';
+      const getMoneyReq = await request.put('/api/creator/transferMoney', {
+        money: Number(money),
+        phone_number: phoneNumber.substring(1),
+      });
+      if (getMoneyReq.ok) {
+        input.getMoneyErr.innerHTML = 'Зачисление прошло успешно';
+        this.renderStatistics();
+      } else {
+        input.getMoneyErr.innerHTML = 'Произошла ошибка. Пожалуйста повторите позже';
+      }
     }
   }
 
   async showStatistics(input) {
-    const startMonth = Number(input.startMonth.value);
-    const startYear = Number(input.startYear.value);
-    const endMonth = Number(input.endMonth.value);
-    const endYear = Number(input.endYear.value);
+    const startMonthSelected = Number(input.startMonth.value);
+    const startYearSelected = Number(input.startYear.value);
+    const endMonthSelected = Number(input.endMonth.value);
+    const endYearSelected = Number(input.endYear.value);
     let statisticsInterval;
-    this.#config.selectedStartMonth = startMonth;
-    this.#config.selectedStartYear = startYear;
-    this.#config.selectedEndMonth = endMonth;
-    this.#config.selectedEndYear = endYear;
-
-    const statisticsIntervalReq = await request.post('/api/creator/statistics', {
-      first_month: `${this.#config.startYears[startYear].name}-0${startMonth + 1}-01T00:00:00.000Z`,
-      second_month: `${this.#config.endYears[endYear].name}-0${endMonth + 1}-01T00:00:00.000Z`
+    const selectedErr = isValidSelectedDate({
+      startMonthSelected,
+      startYearSelected,
+      endMonthSelected,
+      endYearSelected,
+      startMonth: this.#config.startMonth,
+      startYear: this.#config.startYear,
+      currentMonth: this.#config.currentMonth,
+      currentYear: this.#config.currentYear,
     });
-    if (statisticsIntervalReq.ok) {
-      statisticsInterval = await statisticsIntervalReq.json();
-      this.setCardStatistics(statisticsInterval, 'interval');
-    }
 
-    statistics.config = this.#config;
-    statistics.render();
+    if (selectedErr) {
+      input.selectDateErr.innerHTML = selectedErr;
+    } else {
+      this.#config.selectedStartMonth = startMonthSelected;
+      this.#config.selectedStartYear = startYearSelected;
+      this.#config.selectedEndMonth = endMonthSelected;
+      this.#config.selectedEndYear = endYearSelected;
+
+      let startMonthSelectedStr = startMonthSelected + 1;
+      let endMonthSelectedStr = endMonthSelected + 1;
+      if (startMonthSelectedStr < 10) {
+        startMonthSelectedStr = `0${startMonthSelectedStr}`;
+      }
+      if (endMonthSelectedStr < 10) {
+        endMonthSelectedStr = `0${endMonthSelectedStr}`;
+      }
+      const statisticsIntervalReq = await request.post('/api/creator/statistics', {
+        first_month: `${this.#config.startYears[startYearSelected].name}-${startMonthSelectedStr}-01T00:00:00.000Z`,
+        second_month: `${this.#config.endYears[endYearSelected].name}-${endMonthSelectedStr}-01T00:00:00.000Z`
+      });
+      if (statisticsIntervalReq.ok) {
+        statisticsInterval = await statisticsIntervalReq.json();
+        this.setCardStatistics(statisticsInterval, 'interval');
+      } else {
+        input.selectDateErr.innerHTML = 'Произошла ошибка. Пожалуйста, повторите операцию позже';
+      }
+
+      statistics.config = this.#config;
+      statistics.render();
+    }
   }
 }
 

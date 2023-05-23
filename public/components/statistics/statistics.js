@@ -41,22 +41,24 @@ class Statistics {
     const sumInput = document.getElementById('get_money__sum');
     const getMoneyBtn = document.getElementById('get_money__button');
     const getMoneyErr = document.getElementById('get_money__err');
+    const getPhoneErr = document.getElementById('get_phone__err');
 
     getMoneyBtn.addEventListener('click', (event) => {
       event.preventDefault();
       Actions.getMoney({
+        balance: this.#config.balance,
         phoneInput,
         sumInput,
         getMoneyErr,
+        getPhoneErr,
       });
     });
 
-    const selectDateErr = document.getElementById('statistics__err');
+    const selectDateErr = document.getElementById('select_date__err');
     const showButton = document.getElementById('select_date__show_button');
 
     showButton.addEventListener('click', (event) => {
       event.preventDefault();
-      console.log('click', this.#config);
       Actions.showStatistics({
         startMonth,
         startYear,
