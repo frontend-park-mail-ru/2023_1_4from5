@@ -110,10 +110,12 @@ $sidebar__user--photo-height: 2em;
   width: $sidebar__user--photo-height;
   height: $sidebar__user--photo-height;
   border-radius: 100%;
-  background-size: 100%;
 
   position: relative;
   top: (($sidebar-height - $sidebar__user--photo-height) / 2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .sidebar__menu {

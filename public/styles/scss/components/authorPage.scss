@@ -35,6 +35,12 @@ $author__photo--left: 5%;
   }
 }
 
+.creator__photo {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
 .photo__img {
   position: relative;
   top: 40%;

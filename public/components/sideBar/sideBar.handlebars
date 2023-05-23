@@ -63,8 +63,9 @@
         {{/if}}
 
         {{#if modalWindow.showDisplay}}
-            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element"
-                 src="../../images/user/{{modalWindow.photo}}.jpg">
+
+            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element" alt="">
+
             <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
                href={{modalWindow.href}}> {{modalWindow.name}} </a>
         {{/if}}

@@ -59,7 +59,7 @@ export class SideBar {
 
     const photo = document.getElementById('sidebar__user--photo');
     if (photo) {
-      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+      photo.style.backgroundImage = `url(../../images/user/${this.#config.modalWindow.photo}.jpg)`;
     }
 
     const logoBtn = document.getElementById('logo');

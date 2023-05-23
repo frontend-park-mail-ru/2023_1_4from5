@@ -154,6 +154,9 @@ class AuthorPage {
       }
     }
 
+    const creatorPhoto = document.getElementById('creator__photo');
+    creatorPhoto.style.backgroundImage = `url(../../images/user/${this.#config.creator_info.profile_photo}.jpg)`;
+
     const backGnd = document.getElementById('author__header');
     backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
 
@@ -310,8 +313,6 @@ class AuthorPage {
       }
       aimBar.style.width = `${width}%`;
     }
-
-
   }
 
   deleteHandler(e) {
