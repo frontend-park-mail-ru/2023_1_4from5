@@ -74,7 +74,6 @@ class PostStore {
   }
 
   async renderPost(postId) {
-    console.log(2)
     const req = await request.get(`/api/post/get/${postId}`);
     const result = await req.json();
     const textArr = result.post.text.split('\\n');

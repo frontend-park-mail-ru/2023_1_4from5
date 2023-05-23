@@ -20,7 +20,6 @@ class SearchStore {
   }
 
   async renderSearch(input) {
-    console.log('input:', input);
     let creatorListRequest;
     if (!input) {
       creatorListRequest = await request.get('/api/creator/list');

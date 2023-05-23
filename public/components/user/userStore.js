@@ -69,16 +69,6 @@ class UserStore {
         await this.logout();
         break;
 
-      case ActionTypes.SUB_TO_NOTIFICATIONS:
-        console.log('sub');
-        await this.subToNotifications(action.creatorId);
-        break;
-
-      case ActionTypes.UNSUB_TO_NOTIFICATIONS:
-        console.log('unsub');
-        await this.unsubToNotifications(action.creatorId);
-        break;
-
       case ActionTypes.FOLLOW_ALL:
         await this.followAll();
         break;
@@ -109,45 +99,11 @@ class UserStore {
     router.go(URLS.root);
   }
 
-  subToNotifications(creatorId) {
-    const app = initializeApp(this.#firebaseConfig);
-    const messaging = getMessaging(app);
-
-    getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
-      .then(async (currentToken) => {
-        if (currentToken) {
-          await request.put(`/api/user/subscribeToNotifications/${creatorId}`, { notification_token: currentToken });
-        } else {
-          console.log('No registration token available. Request permission to generate one.');
-        }
-      })
-      .catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-      });
-  }
-
-  unsubToNotifications(creatorId) {
-    const app = initializeApp(this.#firebaseConfig);
-    const messaging = getMessaging(app);
-
-    getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
-      .then(async (currentToken) => {
-        if (currentToken) {
-          await request.put(`/api/user/unsubscribeFromNotifications/${creatorId}`, { notification_token: currentToken });
-        } else {
-          console.log('No registration token available. Request permission to generate one.');
-        }
-      })
-      .catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-      });
-  }
-
   async followAll() {
     const app = initializeApp(this.#firebaseConfig);
     const messaging = getMessaging(app);
 
-    if (userStore.getUserState().isAuthorizedIn) {
+    if (this.getUserState().isAuthorizedIn) {
       const reqFollows = await request.get('/api/user/follows');
       if (reqFollows) {
         const follows = await reqFollows.json();
@@ -156,7 +112,6 @@ class UserStore {
           for (const i in follows) {
             const follow = follows[i];
             getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
-              // eslint-disable-next-line no-loop-func
               .then(async (currentToken) => {
                 if (currentToken) {
                   await request.put(`/api/user/subscribeToNotifications/${follow.creator}`, { notification_token: currentToken });
@@ -174,6 +129,20 @@ class UserStore {
           });
         }
       }
+    }
+
+    if (this.getUserState().isAuthorIn) {
+      getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
+        .then(async (currentToken) => {
+          if (currentToken) {
+            await request.put('/api/user/subscribeToNotifications', { notification_token: currentToken });
+          } else {
+            console.log('No registration token available. Request permission to generate one.');
+          }
+        })
+        .catch((err) => {
+          console.log('An error occurred while retrieving token. ', err);
+        });
     }
   }
 }

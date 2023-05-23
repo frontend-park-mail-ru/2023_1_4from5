@@ -20,7 +20,7 @@ class NotificationsStore {
     this.#notifications.push(ntf);
     notifications.removeNotifications();
     notifications.render(this.#notifications);
-    sideBar.render()
+    sideBar.render();
   }
 
   async reduce(action) {
