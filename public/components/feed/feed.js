@@ -2,6 +2,7 @@ import template from './feed.handlebars';
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+import { dateParse } from '../../modules/handler';
 
 const contentElement = document.querySelector('main');
 
@@ -57,12 +58,6 @@ class Feed {
       }
     });
 
-    const photos = document.querySelectorAll('#feed__creator--photo');
-    for (let index = 0; index < photos.length; index++) {
-      const photo = photos[index];
-      photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
-    }
-
     const likeIcons = document.querySelectorAll('.feed__like');
     for (let index = 0; index < likeIcons.length; index++) {
       const likeIcon = likeIcons[index];
@@ -79,13 +74,7 @@ class Feed {
     const creationDates = document.querySelectorAll('.feed__date');
     for (let index = 0; index < creationDates.length; index++) {
       const timestamp = creationDates[index];
-      const dateRaw = new Date(Date.parse(timestamp.textContent));
-      const day = dateRaw.getDay();
-      const month = dateRaw.getMonth();
-      const year = dateRaw.getFullYear();
-      const hour = dateRaw.getHours();
-      const min = dateRaw.getMinutes();
-      timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
+      dateParse(timestamp);
     }
 
     const comments = document.querySelectorAll('#post__comment');

@@ -123,7 +123,8 @@ $settings__photo-width: 22em;
   height: $settings__photo-width;
   border-radius: $elem-border-radius;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .photo__load--label {

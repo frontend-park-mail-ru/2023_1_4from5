@@ -3,7 +3,7 @@
         <div class="post__header">
             <div class="post__privacy">
                 <div class="feed__creator--photo">
-                    <img id="feed__creator--photo" class="post__photo" src="../../images/user/{{post.creator_photo}}.jpg" alt="">
+                    <img id="feed__creator--photo" class="post__photo" style="background-image: url(../../images/user/{{post.creator_photo}}.jpg)" alt="">
                 </div>
                 <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
                 {{#if post.subscriptions}}
@@ -44,7 +44,7 @@
 
             <div class="feedback">
                 <div class="post__likes post__likes--lonely">
-                    {{#if ../post.is_my_page}}
+                    {{#if post.is_my_post}}
                         <img id="disable-like-icon" class="icon--like"
                              src="../../images/disable_like_icon.png" alt="like--disable">
                     {{else}}
@@ -78,7 +78,7 @@
             <div id="comment__list" class="comment__list">
                 {{#each comments}}
                     <div id="{{comment_id}}" class="comment__container">
-                        <img id="comment__photo" src="../../images/user/{{user_photo}}.jpg" alt="">
+                        <img id="comment__photo" style="background-image: url(../../images/user/{{user_photo}}.jpg)" alt="">
                         <div id="comment__info" class="comment__info">
                             <p id="comment__text">{{text}}</p>
                             <p id="comment__date">{{creation}}</p>

@@ -1,5 +1,6 @@
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+import { dateParse } from '../../modules/handler';
 
 const template = require('./posts.handlebars');
 
@@ -12,6 +13,12 @@ class Posts {
     newDiv.id = 'postsDiv';
     newDiv.innerHTML = template(config);
     postsSpace.appendChild(newDiv);
+
+    const creationDates = document.querySelectorAll('#creation__date');
+    for (let index = 0; index < creationDates.length; index++) {
+      const timestamp = creationDates[index];
+      dateParse(timestamp);
+    }
 
     const comments = document.querySelectorAll('#post__comment');
     if (comments) {

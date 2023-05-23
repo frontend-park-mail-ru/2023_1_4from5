@@ -64,7 +64,8 @@ $subs__photo-width: 7em;
   border-radius: 100%;
   margin: auto;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .subs__creator {

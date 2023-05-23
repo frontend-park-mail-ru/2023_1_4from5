@@ -5,7 +5,7 @@ const contentElement = document.querySelector('main');
 class Router {
   start() {
     const url = new URL(window.location.href);
-    notifier(url, '', this.parseUrl(url.pathname).additionalUrl);
+    notifier(url, '', decodeURIComponent(this.parseUrl(url.pathname).additionalUrl));
 
     window.onpopstate = (e) => {
       if (e.state) {
@@ -25,7 +25,7 @@ class Router {
     }
 
     // TODO разобраться, что такое url.searchParams.toString() === ''
-    if (window.location.pathname === path && url.searchParams.toString() === '') return;
+    if (window.location.pathname === path && url.searchParams.toString() === '' && !additionalUrl) return;
     contentElement.innerHTML = '';
 
     if (data) {
@@ -34,10 +34,11 @@ class Router {
 
     if (additionalUrl) {
       notifier(url, data, additionalUrl);
+      const encodedText = encodeURIComponent(additionalUrl);
       window.history.pushState({
         data,
-        additionalUrl,
-      }, path, `${path}/${additionalUrl}`);
+        encodedText,
+      }, path, `${path}/${encodedText}`);
     } else {
       notifier(url, data);
       window.history.pushState(data, path, path);
@@ -48,14 +49,6 @@ class Router {
     window.history.back();
     const url = new URL(window.location.href);
     notifier(url, {}, this.parseUrl(url.pathname).additionalUrl);
-  }
-
-  pushHistoryState(_path, _data) {
-    this.#pushHistoryState(_path, { _data });
-  }
-
-  #pushHistoryState(_path, _data) {
-    window.history.pushState(_data, _path, _path);
   }
 
   parseUrl(url) {

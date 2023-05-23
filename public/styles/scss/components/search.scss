@@ -49,8 +49,10 @@ $search__photo-width: 5em;
 .search__photo {
   width: $search__photo-width;
   height: $search__photo-width;
-  background-size: $search__photo-width;
   border-radius: 20em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .search__info {

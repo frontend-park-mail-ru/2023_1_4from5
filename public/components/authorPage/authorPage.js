@@ -154,12 +154,6 @@ class AuthorPage {
       }
     }
 
-    const backGnd = document.getElementById('author__header');
-    backGnd.style.backgroundImage = 'url(../../images/cover-photo.svg)';
-
-    const coverPhoto = document.getElementById('author__header--photo');
-    coverPhoto.style.backgroundImage = `url(../../images/user/${this.#config.creator_info.cover_photo}.jpg)`;
-
     const cover = document.getElementById('cover__upload');
     if (cover) {
       cover.addEventListener('change', (event) => {
@@ -309,18 +303,6 @@ class AuthorPage {
         width = 100;
       }
       aimBar.style.width = `${width}%`;
-    }
-
-    const creationDates = document.querySelectorAll('#creation__date');
-    for (let index = 0; index < creationDates.length; index++) {
-      const timestamp = creationDates[index];
-      const dateRaw = new Date(Date.parse(timestamp.textContent));
-      const day = dateRaw.getDay();
-      const month = dateRaw.getMonth();
-      const year = dateRaw.getFullYear();
-      const hour = dateRaw.getHours();
-      const min = dateRaw.getMinutes();
-      timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
     }
   }
 

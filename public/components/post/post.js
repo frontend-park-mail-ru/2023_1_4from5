@@ -1,4 +1,6 @@
 import { Actions } from '../../actions/actions';
+import { dateParse } from '../../modules/handler';
+import { userStore } from '../user/userStore';
 
 const template = require('./post.handlebars');
 
@@ -13,48 +15,39 @@ class Post {
       config.comments = [];
     }
 
+    config.post.is_my_post = config.post.creator === userStore.getUserState().authorURL;
+
     contentElement.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'postDiv';
     newDiv.innerHTML = template(config);
     contentElement.appendChild(newDiv);
 
-    const photo = document.querySelector('#feed__creator--photo');
-    photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    // const photo = document.querySelector('#feed__creator--photo');
+    // photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
 
     const creationDate = document.querySelector('#creation__date');
-    const dateRaw = new Date(Date.parse(creationDate.textContent));
-    const day = dateRaw.getDay();
-    const month = dateRaw.getMonth();
-    const year = dateRaw.getFullYear();
-    const hour = dateRaw.getHours();
-    const min = dateRaw.getMinutes();
-    creationDate.textContent = `${day}.${month}.${year} ${hour}:${min}`;
+    dateParse(creationDate);
 
     const comments = document.querySelectorAll('.comment__container');
     for (const i in comments) {
       if (!isNaN(i)) {
         const comment = comments[i];
         const commentDate = comment.querySelector('#comment__date');
-        const dateRaw = new Date(Date.parse(commentDate.textContent));
-        const day = dateRaw.getDay();
-        const month = dateRaw.getMonth();
-        const year = dateRaw.getFullYear();
-        const hour = dateRaw.getHours();
-        const min = dateRaw.getMinutes();
-        commentDate.textContent = `${day}.${month}.${year} ${hour}:${min}`;
+        dateParse(commentDate);
 
-        const commentPhoto = comment.querySelector('#comment__photo');
-        commentPhoto.style.backgroundImage = 'url(../../images/author-photo.svg)';
+        // const commentPhoto = comment.querySelector('#comment__photo');
+        // commentPhoto.style.backgroundImage = 'url(../../images/author-photo.svg)';
       }
     }
 
     const likeIcon = document.querySelector('.icon--like');
     likeIcon.addEventListener('click', (event) => {
       const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
-      Actions.clickLike(
+      Actions.clickLikeLonely(
         eventLike,
         event.target.parentElement.parentElement.parentElement.parentElement.id,
+
       );
     });
 

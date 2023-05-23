@@ -35,6 +35,12 @@ $author__photo--left: 5%;
   }
 }
 
+.creator__photo {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .photo__img {
   position: relative;
   top: 40%;
@@ -57,6 +63,9 @@ $author__photo--left: 5%;
 #author__header--photo {
   height: 100%;
   width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .cover__photo {
