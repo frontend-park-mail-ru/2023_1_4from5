@@ -36,7 +36,8 @@ $feed__photo-width: 13%;
   margin-left: 1em;
 
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .feed__creator--name {
