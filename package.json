@@ -30,7 +30,7 @@
   "scripts": {
     "lint": "eslint public",
     "webpack": "sass public/styles/scss/index.scss public/styles/css/index.css | webpack --mode development",
-    "webpackProd": "webpack --mode production",
+    "webpackProd": "sass public/styles/scss/index.scss public/styles/css/index.css | webpack --mode production",
     "serve": "sass --watch public/styles/scss/index.scss public/styles/css/index.css | webpack serve --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
