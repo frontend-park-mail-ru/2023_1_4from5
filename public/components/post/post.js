@@ -23,8 +23,8 @@ class Post {
     newDiv.innerHTML = template(config);
     contentElement.appendChild(newDiv);
 
-    const photo = document.querySelector('#feed__creator--photo');
-    photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
+    // const photo = document.querySelector('#feed__creator--photo');
+    // photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
 
     const creationDate = document.querySelector('#creation__date');
     dateParse(creationDate);
@@ -36,8 +36,8 @@ class Post {
         const commentDate = comment.querySelector('#comment__date');
         dateParse(commentDate);
 
-        const commentPhoto = comment.querySelector('#comment__photo');
-        commentPhoto.style.backgroundImage = 'url(../../images/author-photo.svg)';
+        // const commentPhoto = comment.querySelector('#comment__photo');
+        // commentPhoto.style.backgroundImage = 'url(../../images/author-photo.svg)';
       }
     }
 
