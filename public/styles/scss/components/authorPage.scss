@@ -63,6 +63,9 @@ $author__photo--left: 5%;
 #author__header--photo {
   height: 100%;
   width: 100%;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .cover__photo {
