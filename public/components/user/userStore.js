@@ -144,19 +144,6 @@ class UserStore {
         notificationsStore.addNotification(payload);
       });
     }
-
-    // if (this.getUserState().isAuthorIn) {
-    //   getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
-    //     .then(async (currentToken) => {
-    //       if (currentToken) {
-    //       } else {
-    //         console.log('No registration token available. Request permission to generate one.');
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log('An error occurred while retrieving token. ', err);
-    //     });
-    // }
   }
 }
 
