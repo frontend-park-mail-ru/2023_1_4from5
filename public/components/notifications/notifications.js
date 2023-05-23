@@ -1,5 +1,6 @@
 import { Actions } from '../../actions/actions.js';
 import template from './notifications.handlebars';
+import { notificationsStore } from './notificationsStore';
 
 const contentElement = document.querySelector('main');
 
@@ -16,7 +17,7 @@ export class Notifications {
     const config = {
       ntfs,
     };
-    console.log('notifications config', config);
+
     const newDiv = document.createElement('div');
     newDiv.id = 'notificationsDiv';
     newDiv.innerHTML = template(config);

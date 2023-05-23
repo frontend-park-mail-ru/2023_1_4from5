@@ -2,6 +2,7 @@ import template from './feed.handlebars';
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+import { dateParse } from '../../modules/handler';
 
 const contentElement = document.querySelector('main');
 
@@ -79,13 +80,7 @@ class Feed {
     const creationDates = document.querySelectorAll('.feed__date');
     for (let index = 0; index < creationDates.length; index++) {
       const timestamp = creationDates[index];
-      const dateRaw = new Date(Date.parse(timestamp.textContent));
-      const day = dateRaw.getDay();
-      const month = dateRaw.getMonth();
-      const year = dateRaw.getFullYear();
-      const hour = dateRaw.getHours();
-      const min = dateRaw.getMinutes();
-      timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
+      dateParse(timestamp);
     }
 
     const comments = document.querySelectorAll('#post__comment');

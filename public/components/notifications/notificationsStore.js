@@ -1,6 +1,7 @@
 import { dispatcher } from '../../dispatcher/dispatcher';
 import { ActionTypes } from '../../actionTypes/actionTypes';
 import { notifications } from './notifications';
+import { sideBar } from '../sideBar/sideBar';
 
 class NotificationsStore {
   #notifications;
@@ -11,10 +12,15 @@ class NotificationsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
+  getNotifications() {
+    return this.#notifications;
+  }
+
   addNotification(ntf) {
     this.#notifications.push(ntf);
     notifications.removeNotifications();
     notifications.render(this.#notifications);
+    sideBar.render()
   }
 
   async reduce(action) {

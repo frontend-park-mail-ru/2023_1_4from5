@@ -1,6 +1,7 @@
 import { clickHandler } from '../../modules/handler.js';
 import { Actions } from '../../actions/actions.js';
 import template from './winSettings.handlebars';
+import { notificationsStore } from '../notifications/notificationsStore';
 
 const contentElement = document.querySelector('main');
 
@@ -22,6 +23,8 @@ export class WinSettings {
   }
 
   render() {
+    this.#config.are_notifications = notificationsStore.getNotifications().length > 0;
+
     const newDiv = document.createElement('div');
     newDiv.id = 'winSettingsDiv';
     newDiv.innerHTML = template(this.#config);
