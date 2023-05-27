@@ -5,7 +5,8 @@ const contentElement = document.querySelector('main');
 class Router {
   start() {
     const url = new URL(window.location.href);
-    notifier(url, '', this.parseUrl(url.pathname).additionalUrl);
+    console.log(decodeURIComponent(this.parseUrl(url.pathname).additionalUrl));
+    notifier(url, '', decodeURIComponent(this.parseUrl(url.pathname).additionalUrl));
 
     window.onpopstate = (e) => {
       if (e.state) {
@@ -24,8 +25,7 @@ class Router {
       url = new URL(path, window.location.href);
     }
 
-    // TODO разобраться, что такое url.searchParams.toString() === ''
-    if (window.location.pathname === path && url.searchParams.toString() === '') return;
+    if (window.location.pathname === `${path}/${additionalUrl}` && url.searchParams.toString() === '') return;
     contentElement.innerHTML = '';
 
     if (data) {
@@ -34,7 +34,6 @@ class Router {
 
     if (additionalUrl) {
       notifier(url, data, additionalUrl);
-      // const encodedText = additionalUrl;
       window.history.pushState({
         data,
         additionalUrl,

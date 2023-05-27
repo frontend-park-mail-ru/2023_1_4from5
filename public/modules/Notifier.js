@@ -25,8 +25,6 @@ export const URLS = {
 };
 
 export function notifier(path, data, additionalUrl) {
-  console.log(path.pathname);
-  console.log(additionalUrl);
   switch (path.pathname) {
     case URLS.root:
       Actions.renderStartPage();
@@ -63,14 +61,12 @@ export function notifier(path, data, additionalUrl) {
       break;
 
     case URLS.search:
-      if (!data) {
-        searchStore.renderSearch();
-      }
+      searchStore.renderSearch(data);
       break;
 
-    // case `${URLS.search}/${encodeURIComponent(additionalUrl)}`:
-    //   searchStore.renderSearch(decodeURIComponent(additionalUrl));
-    //   break;
+    case `${URLS.search}/${encodeURIComponent(additionalUrl)}`:
+      searchStore.renderSearch(decodeURIComponent(additionalUrl));
+      break;
 
     case URLS.subscriptions:
       Actions.renderSubscriptions();
