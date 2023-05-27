@@ -26,6 +26,7 @@ export class DonateWin {
     const donateWinBtn = document.getElementById('donateWin-btn');
     const donateWinForm = document.getElementById('donateWin__form');
     const donateWinFormLabel = document.getElementById('donateWin__label');
+    const donateWinFormSum = document.getElementById('donateWin__sum');
     const moneyInput = document.getElementById('donateWin-money');
     const errorOutput = document.getElementById('donateWin-error');
 
@@ -37,6 +38,7 @@ export class DonateWin {
         moneyInput,
         donateWinForm,
         donateWinFormLabel,
+        donateWinFormSum,
         errorOutput,
       });
     });

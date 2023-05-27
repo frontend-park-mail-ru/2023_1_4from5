@@ -297,7 +297,7 @@ export function isValidDonate(inputStr) {
     },
     hasPositive: {
       flag: true,
-      error: 'Сумма доната должна быть больше 0',
+      error: 'Сумма доната должна быть больше 2 рублей',
     }
   };
   if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {

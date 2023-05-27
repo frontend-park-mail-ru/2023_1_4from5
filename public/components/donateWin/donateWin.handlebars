@@ -9,13 +9,14 @@
             <input type="hidden" name="receiver" value="4100118197577777"/>
             <input id="donateWin__label" type="hidden" name="label" value=""/>
             <input type="hidden" name="quickpay-form" value="button"/>
+            <input id="donateWin__sum" type="hidden" name="sum" value="" data-type="number">
             <div class="input__donateWin">
-                <p class="donateWin__label">Сумма доната</p>
-                <input id="donateWin-money" class="donate__input" type="text" name="sum" data-type="number">
+                <p class="donateWin__label">Сумма доната (не менее 2 рублей) </p>
+                <input id="donateWin-money" class="donate__input" type="text">
             </div>
             <div id="donateWin-error"></div>
-            <div class="donateWin-btn-container">
-                <button  id="donateWin-btn" class="auth-btn"> Перейти к оплате</button>
+            <div divclass="donateWin-btn-container">
+                <button  id="donateWin-btn" class="auth-btn">Перейти к оплате</button>
             </div>
         </form>
     </div>
