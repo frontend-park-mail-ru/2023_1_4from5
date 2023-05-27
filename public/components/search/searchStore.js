@@ -8,10 +8,10 @@ class SearchStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  reduce(action) {
+  async reduce(action) {
     switch (action.type) {
       case ActionTypes.SEARCH_AUTHORS:
-        this.renderSearch(action.input);
+        await this.renderSearch(action.input);
         break;
 
       default:
