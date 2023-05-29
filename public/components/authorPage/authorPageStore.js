@@ -61,6 +61,7 @@ class AuthorPageStore {
       case ActionTypes.FOLLOW:
         await request.post(`/api/user/follow/${action.id}`);
         this.#config.follows = true;
+        await userStore.followAll();
         authorPage.config = this.#config;
         authorPage.render();
         break;
@@ -68,6 +69,7 @@ class AuthorPageStore {
       case ActionTypes.UNFOLLOW:
         await request.put(`/api/user/unfollow/${action.id}`);
         this.#config.follows = false;
+        await userStore.unfollow(action.id);
         authorPage.config = this.#config;
         if (action.page === 'authorPage') {
           authorPage.render();

@@ -74,7 +74,7 @@ export class SideBar {
       if (event.key === 'Enter') {
         event.preventDefault();
         const content = input.value;
-        router.go(URLS.search, content, content);
+        router.go(URLS.search, '', content);
       }
     });
   }
