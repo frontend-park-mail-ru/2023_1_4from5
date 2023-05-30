@@ -58,6 +58,16 @@ class Feed {
       }
     });
 
+    const creatorPhotos = document.querySelectorAll('#feed__creator--photo');
+    for (let index = 0; index < creatorPhotos.length; index++) {
+      const photo = creatorPhotos[index];
+      photo.addEventListener('click', (event) => {
+        event.preventDefault();
+        const creatorId = event.target.parentElement.id;
+        router.go(URLS.myPage, '', creatorId);
+      });
+    }
+
     const likeIcons = document.querySelectorAll('.feed__like');
     for (let index = 0; index < likeIcons.length; index++) {
       const likeIcon = likeIcons[index];
