@@ -7,4 +7,10 @@ export const ActionSubscriptions = {
       type: ActionTypes.RENDER_SUBSCRIPTIONS,
     });
   },
+
+  removeSubscriptions() {
+    dispatcher.dispatch({
+      type: ActionTypes.REMOVE_SUBSCRIPTIONS,
+    });
+  },
 };
