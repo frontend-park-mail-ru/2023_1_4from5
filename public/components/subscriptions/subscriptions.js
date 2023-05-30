@@ -1,6 +1,8 @@
 import template from './subscriptions.handlebars';
 import { Actions } from '../../actions/actions';
 import { getSubscription } from '../getSubscription/getSubscription';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const contentElement = document.querySelector('main');
 
@@ -50,6 +52,16 @@ class Subscriptions {
     });
 
     // ----------------------------------------------------------------------------//
+
+    const creatorPhotos = document.querySelectorAll('#subs__photo');
+    for (let index = 0; index < creatorPhotos.length; index++) {
+      const photo = creatorPhotos[index];
+      photo.addEventListener('click', (event) => {
+        event.preventDefault();
+        const creatorId = event.target.parentElement.id;
+        router.go(URLS.myPage, '', creatorId);
+      });
+    }
 
     const extendBtns = document.querySelectorAll('#subs__extend');
     for (let index = 0; index < extendBtns.length; index++) {
