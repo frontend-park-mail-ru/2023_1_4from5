@@ -25,7 +25,7 @@ class Router {
       url = new URL(path, window.location.href);
     }
 
-    if (window.location.pathname === `${path}/${additionalUrl}` && url.searchParams.toString() === '') return;
+    if (window.location.pathname === url.pathname && url.searchParams.toString() === '') return;
     contentElement.innerHTML = '';
 
     if (data) {
