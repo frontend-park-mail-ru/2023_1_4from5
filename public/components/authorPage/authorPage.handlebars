@@ -37,12 +37,12 @@
     <div class="author__empty-space"></div>
 
     <div class="about">
-        <p id="creator__name" class="about__name">
-            {{creator_info.name}}
+        <div id="creator__name" class="about__name--container">
+            <p class="about__name">{{creator_info.name}}</p>
             {{#if is_my_page}}
                 <img id="edit__profile" class="about__edit clickable" src="../../images/edit.svg" alt="edit">
             {{/if}}
-        </p>
+        </div>
         <p id="creator__description" class="about__description">{{creator_info.description}}</p>
 
         <div class="subscribers-1000px">
