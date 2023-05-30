@@ -23,9 +23,6 @@ class Post {
     newDiv.innerHTML = template(config);
     contentElement.appendChild(newDiv);
 
-    // const photo = document.querySelector('#feed__creator--photo');
-    // photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
-
     const creationDate = document.querySelector('#creation__date');
     dateParse(creationDate);
 
@@ -35,9 +32,6 @@ class Post {
         const comment = comments[i];
         const commentDate = comment.querySelector('#comment__date');
         dateParse(commentDate);
-
-        // const commentPhoto = comment.querySelector('#comment__photo');
-        // commentPhoto.style.backgroundImage = 'url(../../images/author-photo.svg)';
       }
     }
 
@@ -57,6 +51,18 @@ class Post {
       const input = document.getElementById('comment__input');
       const text = input.value;
       Actions.createComment({ text, postId: config.post.id });
+    });
+
+    const commentInput = document.getElementById('comment__input');
+    commentInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const text = commentInput.value;
+        Actions.createComment({
+          text,
+          postId: config.post.id,
+        });
+      }
     });
 
     const edits = document.querySelectorAll('#comment__edit');

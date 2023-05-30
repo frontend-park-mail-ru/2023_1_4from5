@@ -11,7 +11,7 @@
   height: fit-content;
   background-color: $card-color;
   display: grid;
-  grid-template-rows: 5em 1fr;
+  grid-template-rows: 6em 1fr;
 
   border-radius: $elem-border-radius;
 }
@@ -24,18 +24,31 @@
   grid-template-columns: 75% 25%;
 }
 
+$privacy__img-width: 1.5em;
 .post__privacy {
-  display: flex;
+  display: grid;
+  grid-template-columns: $privacy__img-width 1fr;
   font-weight: bold;
   color: $text--default-color;
 }
 
 .privacy__img {
-  height: 1.5em;
+  height: $privacy__img-width;
   margin-right: 1em;
 }
 
 .post__subs {
+  display: grid;
+  grid-template-columns: fit-content(100%) 1fr;
+  margin-left: 1em;
+}
+
+.post__sub--list {
+  margin-left: 1em;
+}
+
+.privacy__free {
+  margin-top: 0.7em;
   margin-left: 1em;
 }
 
@@ -43,13 +56,14 @@
   display: flex;
 }
 
-.edit__img, .delete__img {
+.edit__img{
   height: $font-size-4;
+  margin-left: 1em;
 }
 
 .delete__img {
+  height: $font-size-4;
   margin-left: 1em;
-  margin-right: 1em;
 }
 
 .creation__date {
