@@ -110,6 +110,24 @@ $subs__photo-width: 7em;
   }
 }
 
+//-------no-subs---------------
+
+.no-subs__container {
+  margin-bottom: 3em;
+  padding: 5%;
+  border-radius: $block-border-radius;
+  background-color: $card-color;
+  text-align: center;
+}
+
+.subs__no-subs {
+  font-weight: bold;
+  font-size: $font-size-4;
+  color: $text--default-color;
+}
+
+//------------------------------
+
 .subs__disfollow {
   color: black;
   background-color: $sub__btn-color;
