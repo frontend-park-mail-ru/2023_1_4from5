@@ -96,11 +96,18 @@ $post__form-width: 65%;
 .sub__level {
   font-size: $font-size;
   display: flex;
-  background-color: rgba($tag-color, 0.5);
   border-radius: $elem-border-radius;
   padding: 0.7em;
   margin: 0.5em;
   width: fit-content;
+}
+
+.card__inactive {
+  background-color: #dadada;
+}
+
+.card__active {
+  background-color: #3bd548;
 }
 
 .sub__level--text {
