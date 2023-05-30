@@ -21,7 +21,7 @@ $author__photo--left: 5%;
 
 .photo--hover {
   position: absolute;
-  width: $author__photo--width;
+  width: $author__photo--width + 0.25vw;
   height: $author__photo--width;
   top: 0;
   left: 0;
