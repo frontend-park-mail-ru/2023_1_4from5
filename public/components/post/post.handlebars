@@ -2,8 +2,8 @@
     <div id="{{post.id}}" class="post__container">
         <div class="post__header">
             <div class="post__privacy--single">
-                <div class="feed__creator--photo">
-                    <img id="feed__creator--photo" class="post__photo"
+                <div id="{{post.creator}}" class="feed__creator--photo">
+                    <img id="feed__creator--photo" class="post__photo img__border clickable"
                          style="background-image: url(../../images/user/{{post.creator_photo}}.jpg)" alt="">
                 </div>
                 <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
@@ -37,7 +37,7 @@
                     <p>{{text}}</p>
                 {{else}}
                     <div class="no__access--container">
-                        <p>У вас нет доступа к этому посту</p>
+                        <p class="no__access--title">У вас нет доступа к этому посту</p>
                         <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
                     </div>
                 {{/if}}

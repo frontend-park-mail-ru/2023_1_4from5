@@ -1,6 +1,8 @@
 import { Actions } from '../../actions/actions';
 import { dateParse } from '../../modules/handler';
 import { userStore } from '../user/userStore';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const template = require('./post.handlebars');
 
@@ -35,13 +37,19 @@ class Post {
       }
     }
 
+    const photo = document.getElementById('feed__creator--photo');
+    photo.addEventListener('click', (event) => {
+      event.preventDefault();
+      const creatorId = event.target.parentElement.id;
+      router.go(URLS.myPage, '', creatorId);
+    });
+
     const likeIcon = document.querySelector('.icon--like');
     likeIcon.addEventListener('click', (event) => {
       const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
       Actions.clickLikeLonely(
         eventLike,
         event.target.parentElement.parentElement.parentElement.parentElement.id,
-
       );
     });
 
