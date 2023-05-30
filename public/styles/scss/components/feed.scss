@@ -47,11 +47,11 @@ $feed__photo-width: 13%;
 
 .feed__date--container {
   text-align: end;
-  margin-right: 2.5em;
+  //margin-right: 2.5em;
 }
 
 .feed__date {
-  margin-top: 1em;
+  margin-bottom: 1em;
   font-size: $font-size-2;
 }
 
@@ -70,10 +70,10 @@ $content-side-offset: 7%;
 
 //---footer---//
 
-$like__space-width: 90%;
+$like__space-width: 80%;
 
 .feed__footer {
-  padding: 0 $content-side-offset 0.1em $content-side-offset;
+  padding: 0 5% 0.1em $content-side-offset;
   font-size: $font-size-3;
   display: grid;
   grid-template-columns: $like__space-width (100% - $like__space-width);

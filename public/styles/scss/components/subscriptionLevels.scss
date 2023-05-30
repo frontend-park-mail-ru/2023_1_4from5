@@ -92,11 +92,11 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
   height: 2em;
   padding: 0.5em;
   margin: auto;
-  background-color: $sub__btn-color;
+  background-color: $create-btn-color;
   color: black;
 
   &:hover {
-    background-color: $sub__btn-color-hover;
+    background-color: $create-btn-color-hover;
   }
 }
 
