@@ -63,6 +63,16 @@ class Subscriptions {
       });
     }
 
+    const creatorNames = document.querySelectorAll('.subs__creator');
+    for (let index = 0; index < creatorNames.length; index++) {
+      const name = creatorNames[index];
+      name.addEventListener('click', (event) => {
+        event.preventDefault();
+        const creatorId = event.target.id;
+        router.go(URLS.myPage, '', creatorId);
+      });
+    }
+
     const extendBtns = document.querySelectorAll('#subs__extend');
     for (let index = 0; index < extendBtns.length; index++) {
       const card = extendBtns[index];
