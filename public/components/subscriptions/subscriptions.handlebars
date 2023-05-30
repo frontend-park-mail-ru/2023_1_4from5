@@ -11,7 +11,7 @@
                 {{#each subs}}
                     <div id="{{id}}" class="subs__card">
                         <div id="{{creator}}" class="subs__info--container">
-                            <img id="subs__photo" class="subs__photo img__border"
+                            <img id="subs__photo" class="subs__photo img__border clickable"
                                  style="background-image: url(../../images/user/{{creator_photo}}.jpg)" alt="">
                             <h3 id="{{creator}}" class="subs__creator">{{creator_name}}</h3>
 
@@ -40,7 +40,7 @@
                 {{#each follows}}
                     <div id="{{creator}}" class="subs__card">
                         <div id="{{creator}}" class="subs__info--container">
-                            <img id="subs__photo" class="subs__photo img__border"
+                            <img id="subs__photo" class="subs__photo img__border clickable"
                                  style="background-image: url(../../images/user/{{creator_photo}}.jpg)" alt="">
                             <h3 class="subs__creator follow__creator">{{creator_name}}</h3>
                             <div></div>
