@@ -55,6 +55,8 @@ export const validationStructure = {
   isTimePeriod: false,
   isPhoneNumber: false,
   isMoney: false,
+  moreThanTwoRub: false,
+  balance: '',
   length: {
     flag: false, // требуется проверка на длину
     min_length: 0,
@@ -83,6 +85,15 @@ export const validationStructure = {
 };
 
 export function validation(validStructure, inputStr) {
+  // общая проверка на то, что это разрешённый символ
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isAllowedSign(code)) {
+      console.log('is not allowedSign', char);
+      return validStructure.whiteSymbols.error;
+    }
+  }
+
   if (validStructure.isTimePeriod) {
     return isValidSelectedDate(inputStr);
   }
@@ -90,7 +101,7 @@ export function validation(validStructure, inputStr) {
     return isValidPhone(inputStr);
   }
   if (validStructure.isMoney) {
-
+    return isValidDonate(inputStr, validStructure.balance, validStructure.moreThanTwoRub);
   }
   // проверка на длину
   if (validStructure.length.flag
@@ -102,10 +113,6 @@ export function validation(validStructure, inputStr) {
   // общая проверка на то, что это разрешённый символ
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
-    if (!isAllowedSign(code)) {
-      console.log('is not allowedSign', char);
-      return validStructure.whiteSymbols.error;
-    }
     // проверка на hasNumber, если тру
     if (validStructure.hasNumber && !isNaN(char)) {
       validStructure.hasNumber_flag = true;
@@ -398,6 +405,7 @@ export function isValidCreateDescription(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidMoneyString(inputStr) {
   const flags = {
     onlyNumber: {
@@ -420,74 +428,54 @@ export function isValidMoneyString(inputStr) {
   return '';
 }
 
-export function isValidDonate(inputStr) {
+// в будущем удалить
+export function isValidDonate(inputStr, balance, moreThanTwoRub) {
+  inputStr = inputStr.replace(/,/g, '.');
   const flags = {
     onlyNumber: {
       flag: true,
-      error: 'В поле сумма доната можно вводить только число',
+      error: 'В данное поле можно вводить только число',
     },
     hasMaxLen: {
       flag: true,
-      error: 'Превышено максимальное значение суммы доната',
+      error: 'Превышено максимальное значение суммы',
+    },
+    hasMoreThanBalance: {
+      flag: true,
+      error: 'Введённая сумма больше суммы на балансе'
+    },
+    hasMinDenomination: {
+      flag: true,
+      error: 'Сумма должна быть больше 2 рублей',
     },
     hasPositive: {
       flag: true,
-      error: 'Сумма доната должна быть больше 2 рублей',
+      error: 'Сумма должна быть больше 0',
     }
   };
-  if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
+  if (isNaN(inputStr)) {
+    return flags.onlyNumber.error;
+  }
+
+  if (balance === '' && Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
     return flags.hasMaxLen.error;
   }
-  if (Number(inputStr) <= 0) {
+  if (balance !== '' && Number(inputStr) > Number(balance)) {
+    return flags.hasMoreThanBalance.error;
+  }
+
+  if (moreThanTwoRub) {
+    if (Number(inputStr) <= 2) {
+      return flags.hasMinDenomination.error;
+    }
+  } else if (Number(inputStr) <= 0) {
     return flags.hasPositive.error;
   }
-  for (const char of inputStr) {
-    if (isNaN(char)) {
-      return flags.onlyNumber.error;
-    }
-  }
+
   return '';
 }
 
-export function isValidDescriptionAim(inputStr) {
-  const flags = {
-    hasMaxLen: {
-      flag: true,
-      error: `Описание не должно превышать ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
-    },
-  };
-  if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
-    return flags.hasMaxLen.error;
-  }
-  return '';
-}
-
-export function isValidTitlePost(inputStr) {
-  const flags = {
-    hasMaxLen: {
-      flag: true,
-      error: `Название поста не должно превышать ${LENGTH.MAX_TITLE_POST} символов`,
-    },
-  };
-  if (inputStr.length > LENGTH.MAX_TITLE_POST) {
-    return flags.hasMaxLen.error;
-  }
-  return '';
-}
-
-export function isValidTextPost(inputStr) {
-  const flags = {
-    hasMaxLen: {
-      flag: true,
-      error: `Длина текста поста не должна превышать ${LENGTH.MAX_TEXT_POST} символов`,
-    },
-  };
-  if (inputStr.length > LENGTH.MAX_TEXT_POST) {
-    return flags.hasMaxLen.error;
-  }
-  return '';
-}
-
+// в будущем удалить
 export function isValidGetSum(inputStr, balance) {
   const flags = {
     onlyNumber: {
@@ -513,6 +501,48 @@ export function isValidGetSum(inputStr, balance) {
     if (isNaN(char)) {
       return flags.onlyNumber.error;
     }
+  }
+  return '';
+}
+
+// в будущем удалить
+export function isValidDescriptionAim(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Описание не должно превышать ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+// в будущем удалить
+export function isValidTitlePost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Название поста не должно превышать ${LENGTH.MAX_TITLE_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TITLE_POST) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+// в будущем удалить
+export function isValidTextPost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Длина текста поста не должна превышать ${LENGTH.MAX_TEXT_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TEXT_POST) {
+    return flags.hasMaxLen.error;
   }
   return '';
 }
