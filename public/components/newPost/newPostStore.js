@@ -60,9 +60,11 @@ class NewPostStore {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
     this.#config.attachments = [];
-    post.attachments.forEach((item) => {
-      this.#config.attachments.push(item);
-    });
+    if (post.attachments) {
+      post.attachments.forEach((item) => {
+        this.#config.attachments.push(item);
+      });
+    }
     newPost.config.attachments = post.attachments;
 
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
