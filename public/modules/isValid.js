@@ -52,6 +52,9 @@ const UNICODE = {
 
 export const validationStructure = {
   field: '',
+  isTimePeriod: false,
+  isPhoneNumber: false,
+  isMoney: false,
   length: {
     flag: false,
     min_length: 0,
@@ -64,7 +67,7 @@ export const validationStructure = {
     eng_symbols_flag: false,
     rus_symbols_flag: false,
     numbers_flag: false,
-    special_signs: isAllowedSign,
+    special_signs: '',
     error: ''
   },
   hasNumber: false,
@@ -79,39 +82,52 @@ export const validationStructure = {
   },
 };
 
-console.log(validationStructure, validationStructure.length.errorText());
-
-// isTimePeriod(),
-// phoneNumber(),
-// money_flag(),
-
 export function validation(validStructure, inputStr) {
-  let error;
-  // проверка на длину
-  if (inputStr.length >= validStructure.length.max_length
-  || inputStr.length <= validStructure.length.min_length) {
-    error = validStructure.length.errorText();
-    return error;
+  if (validStructure.isTimePeriod) {
+
+  } else if (validStructure.isPhoneNumber) {
+
+  } else if (validStructure.isMoney) {
+
+  } else {
+    // проверка на длину
+    if (validStructure.length.flag
+        && (inputStr.length >= validStructure.length.max_length
+            || inputStr.length <= validStructure.length.min_length)) {
+      return validStructure.length.errorText();
+    }
+
+    // общая проверка на то, что это разрешённый символ
+    for (const char of inputStr) {
+      const code = char.charCodeAt(0);
+      if (!isAllowedSign(code)) {
+        return validStructure.error;
+      }
+      // проверка на hasNumber, если тру
+      if (validStructure.hasNumber && !isNaN(char)) {
+        validStructure.hasNumber_flag = true;
+      }
+      // проверка на hasLetter, если тру
+      if (validStructure.hasLetter && isLetter(code)) {
+        validStructure.hasLetter_flag = true;
+      }
+      // проверка на whiteSymbols
+      if (!((validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code))
+          || (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code))
+          || (validStructure.whiteSymbols.numbers_flag && isNumber(code))
+          || (validStructure.special_signs && validStructure.special_signs(code)))) {
+        return validStructure.error;
+      }
+    }
+
+    if (validStructure.hasNumber && !validStructure.hasNumber_flag) {
+      return validStructure.hasNumber_error();
+    }
+    if (validStructure.hasLetter && !validStructure.hasLetter_flag) {
+      return validStructure.hasLetter_error();
+    }
   }
 
-  // общая проверка на то, что это разрешённый символ
-  for (const char of inputStr) {
-    const code = char.charCodeAt(0);
-    if (!isAllowedSign(code)) {
-      return 'общая проверка на то, что это разрешённый символ';
-    }
-    // проверка на hasNumber, если тру
-    if (validStructure.hasNumber && !isNaN(char)) {
-      validStructure.hasNumber_flag = true;
-    }
-    // проверка на hasLetter, если тру
-    if (validStructure.hasLetter && isLetter(code)) {
-      validStructure.hasLetter_flag = true;
-    }
-  }
-
-  // проверка по флажкам в вайт списке
-  console.log(validStructure);
   return '';
 }
 
@@ -138,14 +154,14 @@ function isEngLetter(code) {
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z));
 }
 
-// function isRusLetter(code) {
-//   return ((code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
-//       || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
-// }
+function isRusLetter(code) {
+  return ((code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
+      || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
+}
 
-// function isNumber(code) {
-//   return (code >= ASCII.ZERO && code <= ASCII.NINE);
-// }
+function isNumber(code) {
+  return (code >= ASCII.ZERO && code <= ASCII.NINE);
+}
 
 /**
  * check for special sign
@@ -170,7 +186,7 @@ export function isWhiteSignWithRus(code) {
       || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
-// в буду
+// в будущем требуется удалить
 export function isWhiteSignWithEng(code) {
   return (code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
@@ -184,10 +200,29 @@ export function isWhiteSignPassword(code) {
 }
 
 export function isWhiteSignLogin(code) {
-  return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
-      || code === ASCII.UNDERSCORE);
+  return (code === ASCII.DASH || code === ASCII.POINT || code === ASCII.UNDERSCORE);
 }
 
+export function isWhiteSignName(code) {
+  return (code === ASCII.SPACE || code === ASCII.DASH
+      || code === ASCII.POINT || code === ASCII.UNDERSCORE);
+}
+
+// isTimePeriod(),
+// phoneNumber(),
+// money_flag(),
+
+export function isTimePeriod() {
+
+}
+
+export function isPhoneNumber() {
+
+}
+
+export function isMoney() {
+
+}
 /**
  * validation of password input
  * @param {String} inputStr - injected password
