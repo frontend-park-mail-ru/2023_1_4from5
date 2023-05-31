@@ -86,13 +86,6 @@ class BecomeAuthorStore {
   }
 
   async validation(input, require, callback) {
-    // let moneyNeeded = input.moneyNeededInput.value.replace(/ /g, '');
-    // const errMoneyNeededOutput = input.errorMoneyNeededOutput;
-    // const validStructMoney = { ...validationStructure };
-    // validStructMoney.field = '"Сумма"';
-    // validStructDescription.isMoney = true;
-    // validStructDescription.whiteSymbols.error = 'В поле "Сумма" можно вводить только число';
-
     const name = input.nameInput.value.trim();
     const errorNameOutput = input.errorNameOutput;
     const validStructName = { ...validationStructure };

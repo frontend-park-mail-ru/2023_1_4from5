@@ -1,7 +1,7 @@
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { donateWin } from './donateWin.js';
-import { isValidDonate } from '../../modules/isValid.js';
+import { isValidDonate, LENGTH, validation, validationStructure } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { authorPage } from '../authorPage/authorPage.js';
 import { authorPageStore } from '../authorPage/authorPageStore.js';
@@ -32,8 +32,16 @@ class DonateWinStore {
   }
 
   donate(input) {
-    let moneyCount = input.moneyInput.value.split(' ').join('');
-    const errMoneyGot = isValidDonate(moneyCount);
+    let moneyCount = input.moneyInput.value.replace(/ /g, '');
+    const errorOutput = input.errorOutput;
+    const validStructMoney = { ...validationStructure };
+    validStructMoney.field = '"Отправить донат"';
+    validStructMoney.isMoney = true;
+    validStructMoney.moreThanTwoRub = true;
+    validStructMoney.hasNumber = true;
+    validStructMoney.whiteSymbols.error = 'Допустимы только числа';
+
+    const errMoneyGot = validation(validStructMoney, moneyCount);
     if (moneyCount.isEmpty) {
       moneyCount = '0';
     }
@@ -46,17 +54,11 @@ class DonateWinStore {
       console.log(input.donateWinForm);
       input.donateWinForm.submit();
 
-      // donateWin.removeDonateWin(); - ломает переход на юмани
     } else {
-      input.errorOutput.innerHTML = '';
-      input.errorOutput.innerHTML = 'Некорректная сумма доната';
+      errorOutput.innerHTML = '';
+      errorOutput.innerHTML = 'Некорректная сумма доната';
       input.moneyInput.style.backgroundColor = color.error;
     }
-    // } else {
-    //   input.errorOutput.innerHTML = '';
-    //   input.errorOutput.innerHTML = errMoneyGot;
-    //   input.moneyInput.style.backgroundColor = color.error;
-    // }
   }
 }
 
