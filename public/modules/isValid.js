@@ -473,7 +473,7 @@ export function isValidDonate(inputStr, balance, moreThanTwoRub) {
   }
 
   if (moreThanTwoRub) {
-    if (Number(inputStr) <= 2) {
+    if (Number(inputStr) < 2) {
       return flags.hasMinDenomination.error;
     }
   } else if (Number(inputStr) <= 0) {
