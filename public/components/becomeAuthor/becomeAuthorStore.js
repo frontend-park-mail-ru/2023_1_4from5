@@ -6,7 +6,12 @@ import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
 import { authorPageStore } from '../authorPage/authorPageStore';
 import { userStore } from '../user/userStore';
-import { isValidCreateDescription, isValidCreatorName } from '../../modules/isValid';
+import {
+  isValidCreateDescription,
+  isValidCreatorName, LENGTH,
+  validationStructure,
+  validation
+} from '../../modules/isValid';
 import { color } from '../../consts/styles';
 
 class BecomeAuthorStore {
@@ -81,13 +86,32 @@ class BecomeAuthorStore {
   }
 
   async validation(input, require, callback) {
-    const name = input.nameInput.value;
-    const description = input.descriptionInput.value;
+    // let moneyNeeded = input.moneyNeededInput.value.replace(/ /g, '');
+    // const errMoneyNeededOutput = input.errorMoneyNeededOutput;
+    // const validStructMoney = { ...validationStructure };
+    // validStructMoney.field = '"Сумма"';
+    // validStructDescription.isMoney = true;
+    // validStructDescription.whiteSymbols.error = 'В поле "Сумма" можно вводить только число';
 
+    const name = input.nameInput.value.trim();
     const errorNameOutput = input.errorNameOutput;
+    const validStructName = { ...validationStructure };
+    validStructName.field = '"Название блога"';
+    validStructName.length.flag = true;
+    validStructName.length.min_length = LENGTH.MIN_CREATOR_NAME;
+    validStructName.length.max_length = LENGTH.MAX_CREATOR_NAME;
+    validStructName.hasLetter = true;
+    validStructName.whiteSymbols.error = 'Допустимы только латинские, русские буквы и спецсимволы';
+    const errName = validation(validStructName, name);
+
+    const description = input.descriptionInput.value.trim();
     const errDescriptionOutput = input.errorDescriptionOutput;
-    const errName = isValidCreatorName(name);
-    const errDescription = isValidCreateDescription(description);
+    const validStructDescription = { ...validationStructure };
+    validStructDescription.field = '"Описание блога"';
+    validStructDescription.length.flag = true;
+    validStructDescription.length.min_length = LENGTH.MIN_CREATOR_DESCRIPTION;
+    validStructDescription.length.max_length = LENGTH.MAX_CREATOR_DESCRIPTION;
+    const errDescription = validation(validStructDescription, description);
 
     input.nameInput.style.backgroundColor = color.field;
     input.descriptionInput.style.backgroundColor = color.field;
@@ -95,7 +119,7 @@ class BecomeAuthorStore {
     errDescriptionOutput.innerHTML = '';
 
     if (errName) {
-      errorNameOutput.innerHTML = errDescription;
+      errorNameOutput.innerHTML = errName;
       input.nameInput.style.backgroundColor = color.error;
     } else if (errDescription) {
       errDescriptionOutput.innerHTML = '';
