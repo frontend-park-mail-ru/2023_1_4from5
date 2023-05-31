@@ -79,6 +79,10 @@ $reg-title-mb: 0.5em;
   margin-bottom: 1em;
 }
 
+#reg-username-error, #reg-login-error, #reg-password-error, #reg-repeat-password-error {
+  margin-bottom: 1em;
+}
+
 @media (max-width: 1500px) {
   .reg__container {
     grid-template-columns: 50% 50%;
