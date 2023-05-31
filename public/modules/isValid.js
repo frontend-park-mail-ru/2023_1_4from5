@@ -64,10 +64,10 @@ export const validationStructure = {
     },
   },
   whiteSymbols: {
-    eng_symbols_flag: false,
-    rus_symbols_flag: false,
-    numbers_flag: false,
-    special_signs: '',
+    eng_symbols_flag: true,
+    rus_symbols_flag: true,
+    numbers_flag: true,
+    special_signs: isSpecialSign,
     error: ''
   },
   hasNumber: false,
@@ -94,8 +94,8 @@ export function validation(validStructure, inputStr) {
   }
   // проверка на длину
   if (validStructure.length.flag
-      && (inputStr.length >= validStructure.length.max_length
-          || inputStr.length <= validStructure.length.min_length)) {
+      && (inputStr.length > validStructure.length.max_length
+          || inputStr.length < validStructure.length.min_length)) {
     return validStructure.length.errorText();
   }
 
@@ -103,6 +103,7 @@ export function validation(validStructure, inputStr) {
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
     if (!isAllowedSign(code)) {
+      console.log('is not allowedSign', char);
       return validStructure.whiteSymbols.error;
     }
     // проверка на hasNumber, если тру
@@ -117,7 +118,18 @@ export function validation(validStructure, inputStr) {
     if (!((validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code))
         || (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code))
         || (validStructure.whiteSymbols.numbers_flag && isNumber(code))
-        || (validStructure.special_signs && validStructure.special_signs(code)))) {
+        || (validStructure.whiteSymbols.special_signs
+            && validStructure.whiteSymbols.special_signs(code)))) {
+      console.log(
+        'is not whiteSymbol',
+        char,
+        code,
+        (validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code)),
+        (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code)),
+        (validStructure.whiteSymbols.numbers_flag && isNumber(code)),
+        validStructure.whiteSymbols.special_signs,
+        validStructure.whiteSymbols.special_signs(code)
+      );
       return validStructure.whiteSymbols.error;
     }
   }
@@ -134,8 +146,10 @@ export function validation(validStructure, inputStr) {
 
 function isAllowedSign(code) {
   return ((code >= ASCII.SPACE && code <= ASCII.TILDE)
-      || (code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
-      || code === UNICODE.RUS_LOWER_YA || code === UNICODE.RUS_LOWER_E);
+      || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
+      || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 /**
  * check for letter
@@ -146,8 +160,8 @@ function isAllowedSign(code) {
 function isLetter(code) {
   return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
-      || (code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
-      || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
+      || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
 function isEngLetter(code) {
@@ -156,8 +170,8 @@ function isEngLetter(code) {
 }
 
 function isRusLetter(code) {
-  return ((code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
-      || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
+  return ((code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
 function isNumber(code) {
@@ -170,12 +184,12 @@ function isNumber(code) {
  *
  * @returns {boolean} - response is sign is special sign
  */
-// function isSpecialSign(code) {
-//   return (((code >= ASCII.EXCLAMATION && code <= ASCII.SLASH)
-//       || (code >= ASCII.COLON && code <= ASCII.AT))
-//       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
-//       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
-// }
+export function isSpecialSign(code) {
+  return (((code >= ASCII.SPACE && code <= ASCII.SLASH)
+      || (code >= ASCII.COLON && code <= ASCII.AT))
+      || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
+      || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
+}
 
 // в будущем требуется удалить
 export function isWhiteSignWithRus(code) {
