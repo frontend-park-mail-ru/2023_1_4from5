@@ -84,48 +84,49 @@ export const validationStructure = {
 
 export function validation(validStructure, inputStr) {
   if (validStructure.isTimePeriod) {
+    return isValidSelectedDate(inputStr);
+  }
+  if (validStructure.isPhoneNumber) {
+    return isValidPhone(inputStr);
+  }
+  if (validStructure.isMoney) {
 
-  } else if (validStructure.isPhoneNumber) {
+  }
+  // проверка на длину
+  if (validStructure.length.flag
+      && (inputStr.length >= validStructure.length.max_length
+          || inputStr.length <= validStructure.length.min_length)) {
+    return validStructure.length.errorText();
+  }
 
-  } else if (validStructure.isMoney) {
-
-  } else {
-    // проверка на длину
-    if (validStructure.length.flag
-        && (inputStr.length >= validStructure.length.max_length
-            || inputStr.length <= validStructure.length.min_length)) {
-      return validStructure.length.errorText();
+  // общая проверка на то, что это разрешённый символ
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isAllowedSign(code)) {
+      return validStructure.error;
     }
+    // проверка на hasNumber, если тру
+    if (validStructure.hasNumber && !isNaN(char)) {
+      validStructure.hasNumber_flag = true;
+    }
+    // проверка на hasLetter, если тру
+    if (validStructure.hasLetter && isLetter(code)) {
+      validStructure.hasLetter_flag = true;
+    }
+    // проверка на whiteSymbols
+    if (!((validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code))
+        || (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code))
+        || (validStructure.whiteSymbols.numbers_flag && isNumber(code))
+        || (validStructure.special_signs && validStructure.special_signs(code)))) {
+      return validStructure.error;
+    }
+  }
 
-    // общая проверка на то, что это разрешённый символ
-    for (const char of inputStr) {
-      const code = char.charCodeAt(0);
-      if (!isAllowedSign(code)) {
-        return validStructure.error;
-      }
-      // проверка на hasNumber, если тру
-      if (validStructure.hasNumber && !isNaN(char)) {
-        validStructure.hasNumber_flag = true;
-      }
-      // проверка на hasLetter, если тру
-      if (validStructure.hasLetter && isLetter(code)) {
-        validStructure.hasLetter_flag = true;
-      }
-      // проверка на whiteSymbols
-      if (!((validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code))
-          || (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code))
-          || (validStructure.whiteSymbols.numbers_flag && isNumber(code))
-          || (validStructure.special_signs && validStructure.special_signs(code)))) {
-        return validStructure.error;
-      }
-    }
-
-    if (validStructure.hasNumber && !validStructure.hasNumber_flag) {
-      return validStructure.hasNumber_error();
-    }
-    if (validStructure.hasLetter && !validStructure.hasLetter_flag) {
-      return validStructure.hasLetter_error();
-    }
+  if (validStructure.hasNumber && !validStructure.hasNumber_flag) {
+    return validStructure.hasNumber_error();
+  }
+  if (validStructure.hasLetter && !validStructure.hasLetter_flag) {
+    return validStructure.hasLetter_error();
   }
 
   return '';
@@ -208,27 +209,13 @@ export function isWhiteSignName(code) {
       || code === ASCII.POINT || code === ASCII.UNDERSCORE);
 }
 
-// isTimePeriod(),
-// phoneNumber(),
-// money_flag(),
-
-export function isTimePeriod() {
-
-}
-
-export function isPhoneNumber() {
-
-}
-
-export function isMoney() {
-
-}
 /**
  * validation of password input
  * @param {String} inputStr - injected password
  *
  * @returns {String} - validation error
  */
+// в будущем удалить
 export function isValidPassword(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -290,6 +277,7 @@ export function isValidPassword(inputStr) {
  *
  * @returns {String} - validation error
  */
+// в будущем удалить
 export function isValidLogin(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -320,6 +308,7 @@ export function isValidLogin(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidUsername(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -350,6 +339,7 @@ export function isValidUsername(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidCreatorName(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -380,6 +370,7 @@ export function isValidCreatorName(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidCreateDescription(inputStr) {
   const flags = {
     hasMaxLen: {
@@ -512,6 +503,7 @@ export function isValidGetSum(inputStr, balance) {
   return '';
 }
 
+// в будущем просто убрать export
 export function isValidPhone(inputStr) {
   const flags = {
     onlyNumber: {
@@ -541,6 +533,7 @@ export function isValidPhone(inputStr) {
   return '';
 }
 
+// в будущем убрать export
 export function isValidSelectedDate(input) {
   const flags = {
     hasCorrectYears: {
@@ -550,11 +543,7 @@ export function isValidSelectedDate(input) {
     hasCorrectMonths: {
       flag: true,
       error: 'Начальный месяц дальше конечного',
-    },
-    hasCorrectCurrentMonth: {
-      flag: true,
-      error: 'В качестве конечного месяца выбран будущий',
-    },
+    }
   };
 
   if (input.startYearSelected > input.endYearSelected) {
@@ -564,9 +553,6 @@ export function isValidSelectedDate(input) {
       && input.startMonthSelected > input.endMonthSelected) {
     return flags.hasCorrectMonths.error;
   }
-  if (input.endYearSelected === input.currentYear
-      && input.endMonthSelected > input.currentMonth) {
-    return flags.hasCorrectCurrentMonth.error;
-  }
+
   return '';
 }
