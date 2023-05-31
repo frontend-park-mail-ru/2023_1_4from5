@@ -90,20 +90,21 @@ class BecomeAuthorStore {
     const errorNameOutput = input.errorNameOutput;
     const validStructName = { ...validationStructure };
     validStructName.field = '"Название блога"';
-    validStructName.length.flag = true;
-    validStructName.length.min_length = LENGTH.MIN_CREATOR_NAME;
-    validStructName.length.max_length = LENGTH.MAX_CREATOR_NAME;
+    validStructName.length_flag = true;
+    validStructName.min_length = LENGTH.MIN_CREATOR_NAME;
+    validStructName.max_length = LENGTH.MAX_CREATOR_NAME;
     validStructName.hasLetter = true;
-    validStructName.whiteSymbols.error = 'Допустимы только латинские, русские буквы и спецсимволы';
+    validStructName.whiteSymbolsError = 'Допустимы только латинские, русские буквы и спецсимволы';
     const errName = validation(validStructName, name);
 
     const description = input.descriptionInput.value.trim();
     const errDescriptionOutput = input.errorDescriptionOutput;
     const validStructDescription = { ...validationStructure };
     validStructDescription.field = '"Описание блога"';
-    validStructDescription.length.flag = true;
-    validStructDescription.length.min_length = LENGTH.MIN_CREATOR_DESCRIPTION;
-    validStructDescription.length.max_length = LENGTH.MAX_CREATOR_DESCRIPTION;
+    validStructDescription.length_flag = true;
+    validStructDescription.min_length = LENGTH.MIN_CREATOR_DESCRIPTION;
+    validStructDescription.max_length = LENGTH.MAX_CREATOR_DESCRIPTION;
+    validStructDescription.whiteSymbolsError = 'Допустимы только латинские, русские буквы и спецсимволы';
     const errDescription = validation(validStructDescription, description);
 
     input.nameInput.style.backgroundColor = color.field;
