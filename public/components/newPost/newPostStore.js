@@ -4,7 +4,7 @@ import { ActionTypes } from '../../actionTypes/actionTypes';
 import { userStore } from '../user/userStore';
 import { request } from '../../modules/request';
 import { router } from '../../modules/Router';
-import { isValidTextPost, isValidTitlePost } from '../../modules/isValid';
+import {isValidTextPost, isValidTitlePost, LENGTH, validation, validationStructure} from '../../modules/isValid';
 import { color } from '../../consts/styles';
 import { URLS } from '../../modules/Notifier';
 
@@ -60,9 +60,11 @@ class NewPostStore {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
     this.#config.attachments = [];
-    post.attachments.forEach((item) => {
-      this.#config.attachments.push(item);
-    });
+    if (post.attachments) {
+      post.attachments.forEach((item) => {
+        this.#config.attachments.push(item);
+      });
+    }
     newPost.config.attachments = post.attachments;
 
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
@@ -75,10 +77,18 @@ class NewPostStore {
   }
 
   async sendPost(actionType, action, callback) {
-    const createTitle = action.input.titleInput.value;
+    const createTitle = action.input.titleInput.value.trim();
     const createText = action.input.textInput.value;
     const subscriptions = action.input.availableSubscriptions;
-    const errTitle = isValidTitlePost(createTitle);
+    const validStructTitle = { ...validationStructure };
+    validStructTitle.field = '"Название поста"';
+    validStructTitle.length_flag = true;
+    validStructTitle.min_length = LENGTH.MIN_TITLE_POST;
+    validStructTitle.max_length = LENGTH.MAX_TITLE_POST;
+    validStructTitle.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
+    validStructTitle.hasLetter = true;
+    const errTitle = validation(validStructTitle, createTitle);
+    // const errTitle = isValidTitlePost(createTitle);
     const errText = isValidTextPost(createText);
     const errorTitleOutput = action.input.errorTitleOutput;
     const errorTextOutput = action.input.errorTextOutput;
