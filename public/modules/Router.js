@@ -5,7 +5,6 @@ const contentElement = document.querySelector('main');
 class Router {
   start() {
     const url = new URL(window.location.href);
-    console.log(decodeURIComponent(this.parseUrl(url.pathname).additionalUrl));
     notifier(url, '', decodeURIComponent(this.parseUrl(url.pathname).additionalUrl));
 
     window.onpopstate = (e) => {
