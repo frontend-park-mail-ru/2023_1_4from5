@@ -72,12 +72,23 @@ export class SideBar {
 
     const input = document.getElementById('find__input');
     input.style.backgroundImage = 'url(../../images/search_icon.svg)';
-    input.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
+
+    let timeout;
+
+    function timeoutWrap(delay) {
+      timeout = setTimeout(() => {
+        console.log('key down');
         const content = input.value;
         router.go(URLS.search, '', content);
+      }, delay);
+    }
+
+    const delay = 300;
+    input.addEventListener('keydown', () => {
+      if (timeout) {
+        clearTimeout(timeout);
       }
+      timeoutWrap(delay);
     });
   }
 }
