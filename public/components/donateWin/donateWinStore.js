@@ -39,7 +39,7 @@ class DonateWinStore {
     validStructMoney.isMoney = true;
     validStructMoney.moreThanTwoRub = true;
     validStructMoney.hasNumber = true;
-    validStructMoney.whiteSymbols.error = 'Допустимы только числа';
+    validStructMoney.whiteSymbolsError = 'Допустимы только числа';
 
     const errMoneyGot = validation(validStructMoney, moneyCount);
     if (moneyCount.isEmpty) {
