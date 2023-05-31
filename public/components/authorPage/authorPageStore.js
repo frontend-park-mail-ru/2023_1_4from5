@@ -62,7 +62,6 @@ class AuthorPageStore {
 
       case ActionTypes.SAVE_AIM:
         await this.saveEditAim(action.input);
-        aim.remove();
         break;
 
       case ActionTypes.FOLLOW:
@@ -178,45 +177,15 @@ class AuthorPageStore {
     const errDescriptionOutput = input.errorDescriptionOutput;
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
 
-    // export const validationStructure = {
-    //   field: '',
-    //   length: {
-    //     flag: false,
-    //     min_length: 0,
-    //     max_length: 0,
-    //     errorText() {
-    //       return `Поле ${this.field} должно содержать от ${this.min_length} до ${this.max_length}`;
-    //     },
-    //   },
-    //   whiteSymbols: {
-    //     eng_symbols_flag: false,
-    //     rus_symbols_flag: false,
-    //     numbers_flag: false,
-    //     special_signs: isWhiteSign,
-    //     error_start() {
-    //       return `Поле ${this.field} может содержать только `;
-    //     },
-    //   },
-    //   hasNumber: false,
-    //   hasNumber_error() {
-    //     return `Поле ${this.field} должно содержать хотя бы 1 цифру`;
-    //   },
-    //   hasLetter: false,
-    //   hasLetter_error() {
-    //     return `Поле ${this.field} должно содержать хотя бы 1 букву`;
-    //   },
-    // };
-
     const validStructDescription = { ...validationStructure };
-    validStructDescription.field = 'описание цели';
+    validStructDescription.field = '"Описание цели"';
     validStructDescription.length.flag = true;
     validStructDescription.length.min_length = LENGTH.MIN_DESCRIPTION_AIM;
     validStructDescription.length.max_length = LENGTH.MAX_DESCRIPTION_AIM;
-    // validStructure.whiteSymbols.special_signs = isWhiteSignWithRus;
-    validStructDescription.whiteSymbols.error = 'Допустимы только латинские символы, цифры и символы-разделители';
+    validStructDescription.whiteSymbols.error = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     validStructDescription.hasLetter = true;
 
-    const errDescription = validation(validStructDescription);
+    const errDescription = validation(validStructDescription, description);
     const errMoneyNeeded = isValidMoneyString(moneyNeeded);
     if (moneyNeeded.isEmpty) {
       moneyNeeded = '0';
@@ -246,6 +215,7 @@ class AuthorPageStore {
         this.#config.aim.money_needed = Number(moneyNeeded);
 
         this.#config.edit_aim = true;
+        aim.remove();
         authorPage.config = this.#config;
         authorPage.render();
       } else {
