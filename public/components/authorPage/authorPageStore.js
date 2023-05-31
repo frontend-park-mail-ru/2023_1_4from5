@@ -3,7 +3,14 @@ import { authorPage } from './authorPage.js';
 import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
-import { isValidDescriptionAim, isValidDonate, isValidMoneyString } from '../../modules/isValid.js';
+import {
+  isValidDescriptionAim,
+  isValidDonate,
+  isValidMoneyString,
+  isWhiteSignWithRus,
+  LENGTH, validation,
+  validationStructure
+} from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { aim } from '../aim/aim';
 import { getSubscription } from '../getSubscription/getSubscription';
@@ -55,7 +62,6 @@ class AuthorPageStore {
 
       case ActionTypes.SAVE_AIM:
         await this.saveEditAim(action.input);
-        aim.remove();
         break;
 
       case ActionTypes.FOLLOW:
@@ -167,13 +173,25 @@ class AuthorPageStore {
   }
 
   async saveEditAim(input) {
-    let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value.split(' ')
-      .join('');
+    let description = input.descriptionInput.value.trim();
     const errDescriptionOutput = input.errorDescriptionOutput;
+    const validStructDescription = { ...validationStructure };
+    validStructDescription.field = '"Описание цели"';
+    validStructDescription.length_flag = true;
+    validStructDescription.min_length = LENGTH.MIN_DESCRIPTION_AIM;
+    validStructDescription.max_length = LENGTH.MAX_DESCRIPTION_AIM;
+    validStructDescription.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
+    validStructDescription.hasLetter = true;
+    const errDescription = validation(validStructDescription, description);
+
+    let moneyNeeded = input.moneyNeededInput.value.replace(/ /g, '');
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
-    const errDescription = isValidDescriptionAim(description);
-    const errMoneyNeeded = isValidMoneyString(moneyNeeded);
+    const validStructMoney = { ...validationStructure };
+    validStructMoney.field = '"Сумма"';
+    validStructMoney.isMoney = true;
+    validStructMoney.whiteSymbolsError = 'В поле "Сумма" можно вводить только число';
+
+    const errMoneyNeeded = validation(validStructMoney, moneyNeeded);
     if (moneyNeeded.isEmpty) {
       moneyNeeded = '0';
     }
@@ -202,6 +220,7 @@ class AuthorPageStore {
         this.#config.aim.money_needed = Number(moneyNeeded);
 
         this.#config.edit_aim = true;
+        aim.remove();
         authorPage.config = this.#config;
         authorPage.render();
       } else {
@@ -226,16 +245,22 @@ class AuthorPageStore {
   }
 
   async getSub(input) {
-    // let moneyCount = input.moneyInput.value.split(' ').join('');
-    // const errMoneyGot = isValidDonate(moneyCount);
-    // if (moneyCount.isEmpty) {
-    //   moneyCount = '0';
-    // }
-    // input.moneyInput.style.backgroundColor = color.field;
+    //     let moneyCount = input.moneyInput.value.replace(/ /g, '');
+    //     const errorOutput = input.errorOutput;
+    //     const validStructMoney = { ...validationStructure };
+    //     validStructMoney.field = '"Отправить донат"';
+    //     validStructMoney.isMoney = true;
+    //     validStructMoney.moreThanTwoRub = true;
+    //     validStructMoney.hasNumber = true;
+    //     validStructMoney.whiteSymbols.error = 'Допустимы только числа';
 
-    // if (!errMoneyGot) {
-    // проверка того, что в monthCount лежит число, а не что-то ещё
-    const monthCount = Number(input.monthCount.value);
+    const monthCount = input.monthCount.value.replace(/ /g, '');
+    const getSubErr = input.getSubErr;
+
+    getSubErr.innerHTML = '';
+    if (isNaN(monthCount)) {
+      getSubErr.innerHTML = 'Поле должно содеражать число';
+    }
 
     const money = monthCount * Number(input.price);
 
@@ -251,7 +276,7 @@ class AuthorPageStore {
       input.getSubFormLabel.value = `subscribe;${subId}`;
       input.getSubForm.submit();
     } else {
-      input.getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
+      getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
     }
 
     getSubscription.remove();
