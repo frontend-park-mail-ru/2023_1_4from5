@@ -55,7 +55,7 @@ $sidebar__element-height: 1em;
 
 .sidebar__authors {
   @include v-align($sidebar-height);
-  text-align: center;
+  margin-left: 1em;
 }
 
 $sidebar-offset: 0.4vw;

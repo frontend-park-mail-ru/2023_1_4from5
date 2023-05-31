@@ -72,12 +72,29 @@ export class SideBar {
 
     const input = document.getElementById('find__input');
     input.style.backgroundImage = 'url(../../images/search_icon.svg)';
+
     input.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
-        event.preventDefault();
         const content = input.value;
         router.go(URLS.search, '', content);
       }
+    });
+
+    const delay = 300;
+
+    let timeout;
+    function timeoutWrap(delay) {
+      timeout = setTimeout(() => {
+        const content = input.value;
+        router.go(URLS.search, '', content);
+      }, delay);
+    }
+
+    input.addEventListener('keydown', () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeoutWrap(delay);
     });
   }
 }
