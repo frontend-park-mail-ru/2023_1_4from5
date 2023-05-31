@@ -1,6 +1,8 @@
 import { Actions } from '../../actions/actions';
 import { dateParse } from '../../modules/handler';
 import { userStore } from '../user/userStore';
+import { router } from '../../modules/Router';
+import { URLS } from '../../modules/Notifier';
 
 const template = require('./post.handlebars');
 
@@ -23,9 +25,6 @@ class Post {
     newDiv.innerHTML = template(config);
     contentElement.appendChild(newDiv);
 
-    // const photo = document.querySelector('#feed__creator--photo');
-    // photo.style.backgroundImage = 'url(../../images/author-photo.svg)';
-
     const creationDate = document.querySelector('#creation__date');
     dateParse(creationDate);
 
@@ -35,11 +34,15 @@ class Post {
         const comment = comments[i];
         const commentDate = comment.querySelector('#comment__date');
         dateParse(commentDate);
-
-        // const commentPhoto = comment.querySelector('#comment__photo');
-        // commentPhoto.style.backgroundImage = 'url(../../images/author-photo.svg)';
       }
     }
+
+    const photo = document.getElementById('feed__creator--photo');
+    photo.addEventListener('click', (event) => {
+      event.preventDefault();
+      const creatorId = event.target.parentElement.id;
+      router.go(URLS.myPage, '', creatorId);
+    });
 
     const likeIcon = document.querySelector('.icon--like');
     likeIcon.addEventListener('click', (event) => {
@@ -47,7 +50,6 @@ class Post {
       Actions.clickLikeLonely(
         eventLike,
         event.target.parentElement.parentElement.parentElement.parentElement.id,
-
       );
     });
 
@@ -57,6 +59,18 @@ class Post {
       const input = document.getElementById('comment__input');
       const text = input.value;
       Actions.createComment({ text, postId: config.post.id });
+    });
+
+    const commentInput = document.getElementById('comment__input');
+    commentInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const text = commentInput.value;
+        Actions.createComment({
+          text,
+          postId: config.post.id,
+        });
+      }
     });
 
     const edits = document.querySelectorAll('#comment__edit');

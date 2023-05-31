@@ -48,13 +48,21 @@ export class SideBar {
     const logo = document.getElementById('logo');
     logo.addEventListener('click', (event) => {
       event.preventDefault();
-      router.go(URLS.root);
+      if (!userStore.getUserState().isAuthorizedIn) {
+        router.go(URLS.root);
+      } else {
+        router.go(URLS.feed);
+      }
     });
 
     const logoSmall = document.getElementById('logo--small');
     logoSmall.addEventListener('click', (event) => {
       event.preventDefault();
-      router.go(URLS.root);
+      if (!userStore.getUserState().isAuthorizedIn) {
+        router.go(URLS.root);
+      } else {
+        router.go(URLS.feed);
+      }
     });
 
     const photo = document.getElementById('sidebar__user--photo');
@@ -62,20 +70,31 @@ export class SideBar {
       photo.style.backgroundImage = `url(../../images/user/${this.#config.modalWindow.photo}.jpg)`;
     }
 
-    const logoBtn = document.getElementById('logo');
-    logoBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.go(URLS.root);
-    });
-
     const input = document.getElementById('find__input');
     input.style.backgroundImage = 'url(../../images/search_icon.svg)';
+
     input.addEventListener('keypress', (event) => {
       if (event.key === 'Enter') {
-        event.preventDefault();
         const content = input.value;
         router.go(URLS.search, '', content);
       }
+    });
+
+    const delay = 300;
+
+    let timeout;
+    function timeoutWrap(delay) {
+      timeout = setTimeout(() => {
+        const content = input.value;
+        router.go(URLS.search, '', content);
+      }, delay);
+    }
+
+    input.addEventListener('keydown', () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeoutWrap(delay);
     });
   }
 }

@@ -1,7 +1,7 @@
 @import "../general/variables";
 
 .post__space {
-  margin: 7em 5em 5em 5em;
+  margin: 7em 10vw 5em 10vw;
 }
 
 .post__photo {
@@ -9,7 +9,21 @@
 }
 
 .privacy__img, .post__subs, .privacy__all {
-  margin-top: 0.7em;
+  margin-top: 0.8em;
+}
+
+$privacy__img-width: 1.5em;
+.post__privacy--single {
+  display: grid;
+  grid-template-columns: 8em $privacy__img-width 1fr;
+}
+
+.privacy__label {
+  margin-left: 1em;
+}
+
+.post__subs--list {
+  margin-left: 1em;
 }
 
 .post__footer {

@@ -59,6 +59,7 @@ class NewPostStore {
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
+
     this.#config.attachments = [];
     if (post.attachments) {
       post.attachments.forEach((item) => {
@@ -73,7 +74,7 @@ class NewPostStore {
       subs: creatorPage.subscriptions,
     };
     newPost.render(levels);
-    newPost.update(postId, post.title, post.text);
+    newPost.update(postId, post.post.title, post.post.text);
   }
 
   async sendPost(actionType, action, callback) {

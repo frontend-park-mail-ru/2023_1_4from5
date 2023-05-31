@@ -95,6 +95,7 @@ export const ActionTypes = {
 
   // subscriptions
   RENDER_SUBSCRIPTIONS: 'RENDER_SUBSCRIPTIONS',
+  REMOVE_SUBSCRIPTIONS: 'REMOVE_SUBSCRIPTIONS',
 
   // feed
   LIKE_FEED: 'LIKE_FEED',

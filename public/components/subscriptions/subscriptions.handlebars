@@ -5,38 +5,55 @@
         <p id="chapter--follow" class="chapter">Отслеживается</p>
     </div>
 
-    <div class="subscriptions__container">
-        {{#if isPaid}}
-            {{#each subs}}
-                <div id="{{id}}" class="subs__card">
-                    <div class="subs__info--container">
-                        <img id="subs__photo" class="subs__photo" style="background-image: url(../../images/user/{{creator_photo}}.jpg)" alt="">
-                        <h3 id="{{creator}}" class="subs__creator">{{creator_name}}</h3>
+    {{#if isPaid}}
+        {{#if subs}}
+            <div class="subscriptions__container">
+                {{#each subs}}
+                    <div id="{{id}}" class="subs__card">
+                        <div id="{{creator}}" class="subs__info--container">
+                            <img id="subs__photo" class="subs__photo img__border clickable"
+                                 style="background-image: url(../../images/user/{{creator_photo}}.jpg)" alt="">
+                            <h3 id="{{creator}}" class="subs__creator clickable">{{creator_name}}</h3>
 
-                        <div class="subs__info">
-                            <p class="subs__info--title">{{title}}</p>
-                            <h2 class="month__cost--container">
-                                <p id="month__cost">{{month_cost}}</p>
-                                <p>р/месяц</p>
-                            </h2>
+                            <div class="subs__info">
+                                <p class="subs__info--title">{{title}}</p>
+                                <h2 class="month__cost--container">
+                                    <p id="month__cost">{{month_cost}}</p>
+                                    <p>р/месяц</p>
+                                </h2>
+                            </div>
                         </div>
-                    </div>
 
-                    <button id="subs__extend" class="subs__extend">Продлить</button>
-                </div>
-            {{/each}}
+                        <button id="subs__extend" class="subs__extend">Продлить</button>
+                    </div>
+                {{/each}}
+            </div>
         {{else}}
-            {{#each follows}}
-                <div id="{{creator}}" class="subs__card">
-                    <div class="subs__info--container">
-                        <img id="subs__photo" class="subs__photo" style="background-image: url(../../images/user/{{creator_photo}}.jpg)" alt="">
-                        <h3 class="subs__creator follow__creator">{{creator_name}}</h3>
-                        <div></div>
-                    </div>
-
-                    <button id="subs__disfollow" class="subs__disfollow">Отписаться</button>
-                </div>
-            {{/each}}
+            <div class="no-subs__container">
+                <p class="subs__no-subs">Вы не оформили ни одной подписки</p>
+            </div>
         {{/if}}
-    </div>
+
+    {{else}}
+        {{#if follows}}
+            <div class="subscriptions__container">
+                {{#each follows}}
+                    <div id="{{creator}}" class="subs__card">
+                        <div id="{{creator}}" class="subs__info--container">
+                            <img id="subs__photo" class="subs__photo img__border clickable"
+                                 style="background-image: url(../../images/user/{{creator_photo}}.jpg)" alt="">
+                            <h3 id="{{creator}}" class="subs__creator follow__creator clickable">{{creator_name}}</h3>
+                            <div style="display: none"></div>
+                        </div>
+
+                        <button id="subs__disfollow" class="subs__disfollow">Отписаться</button>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <div class="no-subs__container">
+                <p class="subs__no-subs">Вы не отслеживаете ни одного автора</p>
+            </div>
+        {{/if}}
+    {{/if}}
 </div>

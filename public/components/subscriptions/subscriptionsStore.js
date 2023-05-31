@@ -24,6 +24,9 @@ class SubscriptionsStore {
         subscriptions.render(subsObj);
         break;
 
+      case ActionTypes.REMOVE_SUBSCRIPTIONS:
+        subscriptions.remove();
+
       default:
         break;
     }

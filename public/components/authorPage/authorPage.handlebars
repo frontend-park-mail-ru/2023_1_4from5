@@ -1,6 +1,6 @@
 <div id="author__photo" class="author__photo--container">
 
-    <img id="creator__photo" class="creator__photo" style="background-image: url(../../images/user/{{creator_info.profile_photo}}.jpg)" alt="">
+    <img id="creator__photo" class="creator__photo img__border" style="background-image: url(../../images/user/{{creator_info.profile_photo}}.jpg)" alt="">
     {{#if is_my_page}}
         <div class="photo--hover">
             <label class="creatorphoto__load--label">
@@ -37,12 +37,12 @@
     <div class="author__empty-space"></div>
 
     <div class="about">
-        <p id="creator__name" class="about__name">
-            {{creator_info.name}}
+        <div id="creator__name" class="about__name--container">
+            <p class="about__name">{{creator_info.name}}</p>
             {{#if is_my_page}}
                 <img id="edit__profile" class="about__edit clickable" src="../../images/edit.svg" alt="edit">
             {{/if}}
-        </p>
+        </div>
         <p id="creator__description" class="about__description">{{creator_info.description}}</p>
 
         <div class="subscribers-1000px">
@@ -94,7 +94,7 @@
             <div class="aim__container">
                 {{#if aim.description}}
                     <div class="aim__money">
-                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} р</p>
+                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} ₽</p>
                         {{#if is_my_page}}
                             <img id="aim__edit" class="clickable" src="../../images/edit.svg" alt="edit">
                         {{/if}}
