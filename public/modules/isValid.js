@@ -56,11 +56,11 @@ export const validationStructure = {
   isPhoneNumber: false,
   isMoney: false,
   length: {
-    flag: false,
+    flag: false, // требуется проверка на длину
     min_length: 0,
     max_length: 0,
     errorText() {
-      return `Поле ${this.field} должно содержать от ${this.min_length} до ${this.max_length}`;
+      return `Поле должно содержать от ${this.min_length} до ${this.max_length} символов`;
     },
   },
   whiteSymbols: {
@@ -103,7 +103,7 @@ export function validation(validStructure, inputStr) {
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
     if (!isAllowedSign(code)) {
-      return validStructure.error;
+      return validStructure.whiteSymbols.error;
     }
     // проверка на hasNumber, если тру
     if (validStructure.hasNumber && !isNaN(char)) {
@@ -118,7 +118,7 @@ export function validation(validStructure, inputStr) {
         || (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code))
         || (validStructure.whiteSymbols.numbers_flag && isNumber(code))
         || (validStructure.special_signs && validStructure.special_signs(code)))) {
-      return validStructure.error;
+      return validStructure.whiteSymbols.error;
     }
   }
 
@@ -133,9 +133,9 @@ export function validation(validStructure, inputStr) {
 }
 
 function isAllowedSign(code) {
-  return ((code >= ASCII.SPACE && code <= ASCII.ENG_LOWER_Z)
+  return ((code >= ASCII.SPACE && code <= ASCII.TILDE)
       || (code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
-      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
+      || code === UNICODE.RUS_LOWER_YA || code === UNICODE.RUS_LOWER_E);
 }
 /**
  * check for letter
@@ -144,14 +144,14 @@ function isAllowedSign(code) {
  * @returns {boolean} - response is sign is letter
  */
 function isLetter(code) {
-  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.TILDE)
+  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
       || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
 }
 
 function isEngLetter(code) {
-  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.TILDE)
+  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z));
 }
 
