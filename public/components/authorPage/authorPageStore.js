@@ -173,21 +173,24 @@ class AuthorPageStore {
 
   async saveEditAim(input) {
     let description = input.descriptionInput.value.trim();
-    let moneyNeeded = input.moneyNeededInput.value.replace(/ /g, '');
     const errDescriptionOutput = input.errorDescriptionOutput;
-    const errMoneyNeededOutput = input.errorMoneyNeededOutput;
-
     const validStructDescription = { ...validationStructure };
     validStructDescription.field = '"Описание цели"';
     validStructDescription.length.flag = true;
     validStructDescription.length.min_length = LENGTH.MIN_DESCRIPTION_AIM;
     validStructDescription.length.max_length = LENGTH.MAX_DESCRIPTION_AIM;
-
     validStructDescription.whiteSymbols.error = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     validStructDescription.hasLetter = true;
-
     const errDescription = validation(validStructDescription, description);
-    const errMoneyNeeded = isValidMoneyString(moneyNeeded);
+
+    let moneyNeeded = input.moneyNeededInput.value.replace(/ /g, '');
+    const errMoneyNeededOutput = input.errorMoneyNeededOutput;
+    const validStructMoney = { ...validationStructure };
+    validStructMoney.field = '"Сумма"';
+    validStructDescription.isMoney = true;
+    validStructDescription.whiteSymbols.error = 'В поле "Сумма" можно вводить только число';
+
+    const errMoneyNeeded = validation(validStructMoney, moneyNeeded);
     if (moneyNeeded.isEmpty) {
       moneyNeeded = '0';
     }
