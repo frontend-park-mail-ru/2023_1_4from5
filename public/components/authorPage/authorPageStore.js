@@ -262,17 +262,17 @@ class AuthorPageStore {
       getSubErr.innerHTML = 'Поле должно содеражать число';
     }
 
-    const money = monthCount * Number(input.price);
+    const money = Number(monthCount) * Number(input.price);
 
     const tokenSub = await request.getHeader(`/api/user/subscribe/${input.subscriptionId}`);
     const result = await request.post(`/api/user/subscribe/${input.subscriptionId}`, {
       creator_id: input.creatorId,
-      month_count: monthCount
+      month_count: Number(monthCount)
     }, tokenSub);
 
     if (result.ok) {
       const subId = await result.json();
-      input.getSubFormSum.value = money;
+      input.getSubFormSum.value = Number(money);
       input.getSubFormLabel.value = `subscribe;${subId}`;
       input.getSubForm.submit();
     } else {
