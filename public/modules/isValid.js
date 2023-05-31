@@ -1,4 +1,4 @@
-const LENGTH = {
+export const LENGTH = {
   MIN_LOGIN: 7,
   MAX_LOGIN: 20,
 
@@ -6,7 +6,7 @@ const LENGTH = {
   MAX_PASSWORD: 20,
 
   MIN_USERNAME: 1,
-  MAX_USERNAME: 20,
+  MAX_USERNAME: 30,
 
   MIN_CREATOR_NAME: 1,
   MAX_CREATOR_NAME: 40,
@@ -15,6 +15,7 @@ const LENGTH = {
   MAX_CREATOR_DESCRIPTION: 250,
 
   MAX_MONEY: 9,
+  MIN_DESCRIPTION_AIM: 1,
   MAX_DESCRIPTION_AIM: 50,
 
   MAX_TITLE_POST: 40,
@@ -34,7 +35,7 @@ const ASCII = {
   ENG_UPPER_A: 65,
   ENG_UPPER_Z: 90,
   RECTANGLE_BRACKET: 91,
-  UNDERLINING: 95,
+  UNDERSCORE: 95,
   BACK_QUOTE: 96,
   ENG_LOWER_A: 97,
   ENG_LOWER_Z: 122,
@@ -49,6 +50,76 @@ const UNICODE = {
   RUS_LOWER_E: 1105,
 };
 
+export const validationStructure = {
+  field: '',
+  length: {
+    flag: false,
+    min_length: 0,
+    max_length: 0,
+    errorText() {
+      return `Поле ${this.field} должно содержать от ${this.min_length} до ${this.max_length}`;
+    },
+  },
+  whiteSymbols: {
+    eng_symbols_flag: false,
+    rus_symbols_flag: false,
+    numbers_flag: false,
+    special_signs: isAllowedSign,
+    error: ''
+  },
+  hasNumber: false,
+  hasNumber_flag: false,
+  hasNumber_error() {
+    return `Поле ${this.field} должно содержать хотя бы 1 цифру`;
+  },
+  hasLetter: false,
+  hasLetter_flag: false,
+  hasLetter_error() {
+    return `Поле ${this.field} должно содержать хотя бы 1 букву`;
+  },
+};
+
+console.log(validationStructure, validationStructure.length.errorText());
+
+// isTimePeriod(),
+// phoneNumber(),
+// money_flag(),
+
+export function validation(validStructure, inputStr) {
+  let error;
+  // проверка на длину
+  if (inputStr.length >= validStructure.length.max_length
+  || inputStr.length <= validStructure.length.min_length) {
+    error = validStructure.length.errorText();
+    return error;
+  }
+
+  // общая проверка на то, что это разрешённый символ
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isAllowedSign(code)) {
+      return 'общая проверка на то, что это разрешённый символ';
+    }
+    // проверка на hasNumber, если тру
+    if (validStructure.hasNumber && !isNaN(char)) {
+      validStructure.hasNumber_flag = true;
+    }
+    // проверка на hasLetter, если тру
+    if (validStructure.hasLetter && isLetter(code)) {
+      validStructure.hasLetter_flag = true;
+    }
+  }
+
+  // проверка по флажкам в вайт списке
+  console.log(validStructure);
+  return '';
+}
+
+function isAllowedSign(code) {
+  return ((code >= ASCII.SPACE && code <= ASCII.ENG_LOWER_Z)
+      || (code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
+}
 /**
  * check for letter
  * @param {int} code - ASCII code of sign
@@ -56,9 +127,25 @@ const UNICODE = {
  * @returns {boolean} - response is sign is letter
  */
 function isLetter(code) {
-  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.TILDE)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
+      || (code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
+      || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
+}
+
+function isEngLetter(code) {
+  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.TILDE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z));
 }
+
+// function isRusLetter(code) {
+//   return ((code >= ASCII.RUS_UPPER_E && code <= ASCII.RUS_UPPER_A)
+//       || (code >= ASCII.RUS_LOWER_YA && code <= ASCII.RUS_LOWER_E));
+// }
+
+// function isNumber(code) {
+//   return (code >= ASCII.ZERO && code <= ASCII.NINE);
+// }
 
 /**
  * check for special sign
@@ -72,25 +159,33 @@ function isLetter(code) {
 //       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
 //       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
 // }
-function isWhiteSignWithRus(code) {
+
+// в будущем требуется удалить
+export function isWhiteSignWithRus(code) {
   return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
-      || code === ASCII.UNDERLINING || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === ASCII.UNDERSCORE || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
       || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
-function isWhiteSign(code) {
-  return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
+// в буду
+export function isWhiteSignWithEng(code) {
+  return (code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
-      || code === ASCII.UNDERLINING);
+      || code === ASCII.UNDERSCORE);
 }
 
-function isWhiteSignPassword(code) {
+export function isWhiteSignPassword(code) {
   return (code >= ASCII.SPACE && code <= ASCII.TILDE);
+}
+
+export function isWhiteSignLogin(code) {
+  return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
+      || code === ASCII.UNDERSCORE);
 }
 
 /**
@@ -140,7 +235,7 @@ export function isValidPassword(inputStr) {
     }
     if (!isNaN(char)) {
       flags.hasNumber.flag = true;
-    } else if (isLetter(code)) {
+    } else if (isEngLetter(code)) {
       flags.hasLetter.flag = true;
     } else if (!isWhiteSignPassword(code)) {
       flags.hasBlackSign = true;
@@ -172,7 +267,7 @@ export function isValidLogin(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина логина',
+      error: `Логин должен содержать не более ${LENGTH.MAX_LOGIN} символов`,
     },
   };
   if (inputStr.length < LENGTH.MIN_LOGIN) {
@@ -183,7 +278,7 @@ export function isValidLogin(inputStr) {
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
-    if (!(isWhiteSign(code))) {
+    if (!(isWhiteSignWithEng(code))) {
       return flags.hasBlackSign.error;
     }
   }

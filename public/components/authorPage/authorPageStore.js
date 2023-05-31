@@ -3,7 +3,14 @@ import { authorPage } from './authorPage.js';
 import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
-import { isValidDescriptionAim, isValidDonate, isValidMoneyString } from '../../modules/isValid.js';
+import {
+  isValidDescriptionAim,
+  isValidDonate,
+  isValidMoneyString,
+  isWhiteSignWithRus,
+  LENGTH, validation,
+  validationStructure
+} from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
 import { aim } from '../aim/aim';
 import { getSubscription } from '../getSubscription/getSubscription';
@@ -166,12 +173,50 @@ class AuthorPageStore {
   }
 
   async saveEditAim(input) {
-    let description = input.descriptionInput.value;
-    let moneyNeeded = input.moneyNeededInput.value.split(' ')
-      .join('');
+    let description = input.descriptionInput.value.trim();
+    let moneyNeeded = input.moneyNeededInput.value.replace(/ /g, '');
     const errDescriptionOutput = input.errorDescriptionOutput;
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
-    const errDescription = isValidDescriptionAim(description);
+
+    // export const validationStructure = {
+    //   field: '',
+    //   length: {
+    //     flag: false,
+    //     min_length: 0,
+    //     max_length: 0,
+    //     errorText() {
+    //       return `Поле ${this.field} должно содержать от ${this.min_length} до ${this.max_length}`;
+    //     },
+    //   },
+    //   whiteSymbols: {
+    //     eng_symbols_flag: false,
+    //     rus_symbols_flag: false,
+    //     numbers_flag: false,
+    //     special_signs: isWhiteSign,
+    //     error_start() {
+    //       return `Поле ${this.field} может содержать только `;
+    //     },
+    //   },
+    //   hasNumber: false,
+    //   hasNumber_error() {
+    //     return `Поле ${this.field} должно содержать хотя бы 1 цифру`;
+    //   },
+    //   hasLetter: false,
+    //   hasLetter_error() {
+    //     return `Поле ${this.field} должно содержать хотя бы 1 букву`;
+    //   },
+    // };
+
+    const validStructDescription = { ...validationStructure };
+    validStructDescription.field = 'описание цели';
+    validStructDescription.length.flag = true;
+    validStructDescription.length.min_length = LENGTH.MIN_DESCRIPTION_AIM;
+    validStructDescription.length.max_length = LENGTH.MAX_DESCRIPTION_AIM;
+    // validStructure.whiteSymbols.special_signs = isWhiteSignWithRus;
+    validStructDescription.whiteSymbols.error = 'Допустимы только латинские символы, цифры и символы-разделители';
+    validStructDescription.hasLetter = true;
+
+    const errDescription = validation(validStructDescription);
     const errMoneyNeeded = isValidMoneyString(moneyNeeded);
     if (moneyNeeded.isEmpty) {
       moneyNeeded = '0';
@@ -234,6 +279,7 @@ class AuthorPageStore {
 
     // if (!errMoneyGot) {
     // проверка того, что в monthCount лежит число, а не что-то ещё
+
     const monthCount = Number(input.monthCount.value);
 
     const money = monthCount * Number(input.price);

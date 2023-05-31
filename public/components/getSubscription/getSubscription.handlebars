@@ -20,7 +20,8 @@
             <input id="getsub__sum" type="hidden" name="sum" value="" data-type="number">
             <div class="getsub__block">
                 <p class="getsub__description--title">Укажите, на сколько месяцев вы хотите оформить подписку</p>
-                <input id="getsub__months" class="aim__input" type="text">
+                <input id="getsub__months" type="number" min="1" value="1" pattern="[0-9]*">
+<!--             <input  class="aim__input" type="text">-->
                 <div id="getsub__cost--err" class="aim--err"></div>
             </div>
             <div class="donateWin-btn-container">
