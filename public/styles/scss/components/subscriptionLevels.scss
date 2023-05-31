@@ -43,6 +43,7 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
 
 .sub__container {
   display: flex;
+  justify-content: center;
   width: 100%;
   margin: $sub__container-offset auto $sub__container-offset auto;
 }
@@ -55,7 +56,8 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
   width: ($subs__container-width / 5);
   border-radius: $elem-border-radius;
 
-  margin: auto;
+  margin-left: 1em;
+  margin-right: 1em;
   padding: 1em;
 
   display: grid;
@@ -92,11 +94,11 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
   height: 2em;
   padding: 0.5em;
   margin: auto;
-  background-color: $sub__btn-color;
+  background-color: $create-btn-color;
   color: black;
 
   &:hover {
-    background-color: $sub__btn-color-hover;
+    background-color: $create-btn-color-hover;
   }
 }
 

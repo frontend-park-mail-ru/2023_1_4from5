@@ -12,14 +12,14 @@
                 </a>
             </div>
         {{/if}}
+
+        {{#if beAuthor.showDisplay}}
+            <a id="{{beAuthor.id}}" class="sidebar__element become-author hover--underline sidebar__media--1000px"
+               href={{beAuthor.href}}> Стать автором </a>
+        {{/if}}
     </div>
 
     <div class="sidebar__authors">
-        {{#if beAuthor.showDisplay}}
-            <a id="{{beAuthor.id}}" class="sidebar__element hover--underline sidebar__media--1000px"
-               href={{beAuthor.href}}> Стать автором </a>
-        {{/if}}
-
         {{#if findAuth.showDisplay}}
             <a id="{{findAuth.id}}" class="sidebar__element hover--underline sidebar__media--1000px"
                href={{findAuth.href}}> Авторы </a>
@@ -64,7 +64,7 @@
 
         {{#if modalWindow.showDisplay}}
 
-            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element" alt="">
+            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element img__border" alt="">
 
             <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
                href={{modalWindow.href}}> {{modalWindow.name}} </a>

@@ -74,13 +74,14 @@ class AuthorPageStore {
 
       case ActionTypes.UNFOLLOW:
         await request.put(`/api/user/unfollow/${action.id}`);
-        this.#config.follows = false;
-        await userStore.unfollow(action.id);
-        authorPage.config = this.#config;
         if (action.page === 'authorPage') {
+          this.#config.follows = false;
+          await userStore.unfollow(action.id);
+          authorPage.config = this.#config;
           authorPage.render();
         }
         if (action.page === 'subscriptions') {
+          await userStore.unfollow(action.id);
           Actions.renderSubscriptions();
         }
         break;

@@ -4,8 +4,8 @@
 $settings__container--space-width: 80%;
 
 .settings {
-  display: grid;
-  grid-template-columns: (100% - $settings__container--space-width) $settings__container--space-width;
+  //display: grid;
+  //grid-template-columns: (100% - $settings__container--space-width) $settings__container--space-width;
 }
 
 .chapter__container {
@@ -50,9 +50,9 @@ $chapter__bar-height: 0.3em;
 $settings__form-width: 50%;
 
 .settings__container {
-  margin: 3em auto auto;
-  width: 70%;
-  padding: 3em 4em 3em 4em;
+  margin: 6em auto auto;
+  width: 65%;
+  padding: 3em 5em 3em 5em;
   background-color: $card-color;
   border-radius: $elem-border-radius;
 
@@ -231,7 +231,7 @@ $settings__photo-width: 18em;
   }
 
   .settings__container {
-    margin: 0.5em auto auto;
+    margin: 6em auto auto;
   }
 
   .settings__title {
@@ -292,18 +292,12 @@ $settings__photo-width: 14em;
   }
 
   .settings__photo--btns {
-    width: $settings__photo-width * 1.13;
-    grid-template-columns: 100%;
+    width: 15em;
+    grid-template-columns: 90%;
     grid-template-rows: repeat(2, auto);
     height: fit-content;
-  }
-
-  .settings__photo--btns {
-    width: 15.82em;
-    grid-template-columns: 100%;
-    grid-template-rows: repeat(2, auto);
-    height: fit-content;
-    margin-bottom: 1em
+    margin-bottom: 1em;
+    margin-left: 1em;
   }
 
   .settings__delete--btn {

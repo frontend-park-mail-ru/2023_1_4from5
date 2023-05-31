@@ -6,23 +6,25 @@
                     <div class="post__privacy">
                         <img class="privacy__img" src="../../images/privacy.svg" alt="privacy">
                         {{#if subscriptions}}
-                            С подпиской:
                             <div class="post__subs">
-                                {{#each subscriptions}}
-                                    <p>{{title}}</p>
-                                {{/each}}
+                                <p>С подпиской:</p>
+                                <div class="post__sub--list">
+                                    {{#each subscriptions}}
+                                        <p>{{title}}</p>
+                                    {{/each}}
+                                </div>
                             </div>
                         {{else}}
-                            Открыт для всех
+                            <p class="privacy__free">Открыт для всех</p>
                         {{/if}}
                     </div>
                     <div class="post__date">
+                        <p id="creation__date" class="creation__date">{{creation_date}}</p>
                         {{#if ../is_my_page}}
                             <img id="edit__post" class="edit__img clickable" src="../../images/edit.svg" alt="edit">
                             <img id="delete__post" class="delete__img clickable" src="../../images/delete.svg"
                                  alt="delete">
                         {{/if}}
-                        <p id="creation__date" class="creation__date">{{creation_date}}</p>
                     </div>
                 </div>
 
@@ -33,7 +35,7 @@
                             <p>{{text}}</p>
                         {{else}}
                             <div class="no__access--container">
-                                <p>У вас нет доступа к этому посту</p>
+                                <p class="no__access--title">У вас нет доступа к этому посту</p>
                                 <img class="no__access" src="../../images/no-access.jpeg" alt="no-access">
                             </div>
                         {{/if}}
@@ -59,7 +61,8 @@
                         </div>
 
                         <div class="post__comments">
-                            <img id="post__comment" class="icon--comments clickable" src="../../images/comment_icon.png" alt="comment">
+                            <img id="post__comment" class="icon--comments clickable" src="../../images/comment_icon.png"
+                                 alt="comment">
                             {{comments_count}}
                         </div>
 

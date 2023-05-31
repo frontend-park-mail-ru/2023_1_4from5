@@ -8,7 +8,7 @@
 $header-height: 20em;
 
 $author__photo--width: 20vw;
-$author__photo--top: 12vh;
+$author__photo--top: 6vw;
 $author__photo--left: 5%;
 
 .author__photo--container {
@@ -21,7 +21,7 @@ $author__photo--left: 5%;
 
 .photo--hover {
   position: absolute;
-  width: $author__photo--width;
+  width: $author__photo--width + 0.25vw;
   height: $author__photo--width;
   top: 0;
   left: 0;
@@ -220,7 +220,11 @@ $author__service--width: 30vw;
 @media (max-width: 600px) {
   $author__photo--width-600px: 35vw;
 
-  .photo--hover, .creator__photo {
+  .photo--hover {
+    width: $author__photo--width-600px;
+    height: $author__photo--width-600px;
+  }
+  .creator__photo {
     width: $author__photo--width-600px;
     height: $author__photo--width-600px;
   }
