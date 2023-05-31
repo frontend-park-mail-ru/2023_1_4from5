@@ -244,17 +244,22 @@ class AuthorPageStore {
   }
 
   async getSub(input) {
-    // let moneyCount = input.moneyInput.value.split(' ').join('');
-    // const errMoneyGot = isValidDonate(moneyCount);
-    // if (moneyCount.isEmpty) {
-    //   moneyCount = '0';
-    // }
-    // input.moneyInput.style.backgroundColor = color.field;
+    //     let moneyCount = input.moneyInput.value.replace(/ /g, '');
+    //     const errorOutput = input.errorOutput;
+    //     const validStructMoney = { ...validationStructure };
+    //     validStructMoney.field = '"Отправить донат"';
+    //     validStructMoney.isMoney = true;
+    //     validStructMoney.moreThanTwoRub = true;
+    //     validStructMoney.hasNumber = true;
+    //     validStructMoney.whiteSymbols.error = 'Допустимы только числа';
 
-    // if (!errMoneyGot) {
-    // проверка того, что в monthCount лежит число, а не что-то ещё
+    const monthCount = input.monthCount.value.replace(/ /g, '');
+    const getSubErr = input.getSubErr;
 
-    const monthCount = Number(input.monthCount.value);
+    getSubErr.innerHTML = '';
+    if (isNaN(monthCount)) {
+      getSubErr.innerHTML = 'Поле должно содеражать число';
+    }
 
     const money = monthCount * Number(input.price);
 
@@ -270,7 +275,7 @@ class AuthorPageStore {
       input.getSubFormLabel.value = `subscribe;${subId}`;
       input.getSubForm.submit();
     } else {
-      input.getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
+      getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
     }
 
     getSubscription.remove();
