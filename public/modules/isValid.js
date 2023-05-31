@@ -1,4 +1,4 @@
-const LENGTH = {
+export const LENGTH = {
   MIN_LOGIN: 7,
   MAX_LOGIN: 20,
 
@@ -6,7 +6,7 @@ const LENGTH = {
   MAX_PASSWORD: 20,
 
   MIN_USERNAME: 1,
-  MAX_USERNAME: 20,
+  MAX_USERNAME: 30,
 
   MIN_CREATOR_NAME: 1,
   MAX_CREATOR_NAME: 40,
@@ -15,6 +15,7 @@ const LENGTH = {
   MAX_CREATOR_DESCRIPTION: 250,
 
   MAX_MONEY: 9,
+  MIN_DESCRIPTION_AIM: 1,
   MAX_DESCRIPTION_AIM: 50,
 
   MAX_TITLE_POST: 40,
@@ -34,7 +35,7 @@ const ASCII = {
   ENG_UPPER_A: 65,
   ENG_UPPER_Z: 90,
   RECTANGLE_BRACKET: 91,
-  UNDERLINING: 95,
+  UNDERSCORE: 95,
   BACK_QUOTE: 96,
   ENG_LOWER_A: 97,
   ENG_LOWER_Z: 122,
@@ -49,6 +50,122 @@ const UNICODE = {
   RUS_LOWER_E: 1105,
 };
 
+export const validationStructure = {
+  field: '',
+
+  isTimePeriod: false,
+  isPhoneNumber: false,
+
+  isMoney: false,
+  moreThanTwoRub: false,
+  balance: '',
+
+  length_flag: false, // требуется проверка на длину
+  min_length: 0,
+  max_length: 0,
+  lengthErrorText() {
+    return `Поле должно содержать от ${this.min_length} до ${this.max_length} символов`;
+  },
+
+  eng_symbols_flag: true,
+  rus_symbols_flag: true,
+  numbers_flag: true,
+  special_signs: isSpecialSign,
+  whiteSymbolsError: '',
+
+  hasNumber: false,
+  hasNumber_flag: false,
+  hasNumber_error() {
+    return `Поле ${this.field} должно содержать хотя бы 1 цифру`;
+  },
+  hasLetter: false,
+  hasLetter_flag: false,
+  hasLetter_error() {
+    return `Поле ${this.field} должно содержать хотя бы 1 букву`;
+  },
+};
+
+export function validation(validStructure, inputStr) {
+  console.log(validStructure);
+  // общая проверка на то, что это разрешённый символ
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    if (!isAllowedSign(code)) {
+      console.log('is not allowedSign', char);
+      return validStructure.whiteSymbolsError;
+    }
+  }
+
+  if (validStructure.isTimePeriod) {
+    console.log('isTimePeriod', inputStr);
+    return isValidSelectedDate(inputStr);
+  }
+  if (validStructure.isPhoneNumber) {
+    console.log('isPhoneNumber', inputStr);
+    return isValidPhone(inputStr);
+  }
+  if (validStructure.isMoney) {
+    console.log('isMoney', inputStr);
+    return isValidDonate(inputStr, validStructure.balance, validStructure.moreThanTwoRub);
+  }
+  // проверка на длину
+  if (validStructure.length_flag
+      && (inputStr.length > validStructure.max_length
+          || inputStr.length < validStructure.min_length)) {
+    console.log('length', inputStr);
+    return validStructure.lengthErrorText();
+  }
+
+  // общая проверка на то, что это разрешённый символ
+  for (const char of inputStr) {
+    const code = char.charCodeAt(0);
+    // проверка на hasNumber, если тру
+    if (validStructure.hasNumber && !isNaN(char)) {
+      validStructure.hasNumber_flag = true;
+    }
+    // проверка на hasLetter, если тру
+    if (validStructure.hasLetter && isLetter(code)) {
+      validStructure.hasLetter_flag = true;
+    }
+    // проверка на whiteSymbols
+    if (!((validStructure.eng_symbols_flag && isEngLetter(code))
+        || (validStructure.rus_symbols_flag && isRusLetter(code))
+        || (validStructure.numbers_flag && isNumber(code))
+        || (validStructure.special_signs
+            && validStructure.special_signs(code)))) {
+      console.log(
+        'is not whiteSymbol',
+        char,
+        code,
+        (validStructure.eng_symbols_flag && isEngLetter(code)),
+        (validStructure.rus_symbols_flag && isRusLetter(code)),
+        (validStructure.numbers_flag && isNumber(code)),
+        validStructure.special_signs,
+        validStructure.special_signs(code)
+      );
+      return validStructure.whiteSymbolsError;
+    }
+  }
+
+  if (validStructure.hasNumber && !validStructure.hasNumber_flag) {
+    console.log('hasNumber', inputStr);
+    return validStructure.hasNumber_error();
+  }
+  if (validStructure.hasLetter && !validStructure.hasLetter_flag) {
+    console.log('hasLetter', inputStr);
+    return validStructure.hasLetter_error();
+  }
+
+  return '';
+}
+
+function isAllowedSign(code) {
+  return ((code >= ASCII.SPACE && code <= ASCII.TILDE)
+      || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
+      || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
+}
 /**
  * check for letter
  * @param {int} code - ASCII code of sign
@@ -57,7 +174,23 @@ const UNICODE = {
  */
 function isLetter(code) {
   return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
+      || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
+      || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
+}
+
+function isEngLetter(code) {
+  return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z));
+}
+
+function isRusLetter(code) {
+  return ((code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
+}
+
+function isNumber(code) {
+  return (code >= ASCII.ZERO && code <= ASCII.NINE);
 }
 
 /**
@@ -66,31 +199,43 @@ function isLetter(code) {
  *
  * @returns {boolean} - response is sign is special sign
  */
-// function isSpecialSign(code) {
-//   return (((code >= ASCII.EXCLAMATION && code <= ASCII.SLASH)
-//       || (code >= ASCII.COLON && code <= ASCII.AT))
-//       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
-//       || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
-// }
-function isWhiteSignWithRus(code) {
+export function isSpecialSign(code) {
+  return (((code >= ASCII.SPACE && code <= ASCII.SLASH)
+      || (code >= ASCII.COLON && code <= ASCII.AT))
+      || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
+      || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
+}
+
+// в будущем требуется удалить
+export function isWhiteSignWithRus(code) {
   return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
-      || code === ASCII.UNDERLINING || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
+      || code === ASCII.UNDERSCORE || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
       || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
-function isWhiteSign(code) {
-  return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
+// в будущем требуется удалить
+export function isWhiteSignWithEng(code) {
+  return (code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
-      || code === ASCII.UNDERLINING);
+      || code === ASCII.UNDERSCORE);
 }
 
-function isWhiteSignPassword(code) {
+export function isWhiteSignPassword(code) {
   return (code >= ASCII.SPACE && code <= ASCII.TILDE);
+}
+
+export function isWhiteSignLogin(code) {
+  return (code === ASCII.DASH || code === ASCII.POINT || code === ASCII.UNDERSCORE);
+}
+
+export function isWhiteSignName(code) {
+  return (code === ASCII.SPACE || code === ASCII.DASH
+      || code === ASCII.POINT || code === ASCII.UNDERSCORE);
 }
 
 /**
@@ -99,6 +244,7 @@ function isWhiteSignPassword(code) {
  *
  * @returns {String} - validation error
  */
+// в будущем удалить
 export function isValidPassword(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -140,7 +286,7 @@ export function isValidPassword(inputStr) {
     }
     if (!isNaN(char)) {
       flags.hasNumber.flag = true;
-    } else if (isLetter(code)) {
+    } else if (isEngLetter(code)) {
       flags.hasLetter.flag = true;
     } else if (!isWhiteSignPassword(code)) {
       flags.hasBlackSign = true;
@@ -160,6 +306,7 @@ export function isValidPassword(inputStr) {
  *
  * @returns {String} - validation error
  */
+// в будущем удалить
 export function isValidLogin(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -172,7 +319,7 @@ export function isValidLogin(inputStr) {
     },
     hasMaxLen: {
       flag: true,
-      error: 'Превышена максимальная длина логина',
+      error: `Логин должен содержать не более ${LENGTH.MAX_LOGIN} символов`,
     },
   };
   if (inputStr.length < LENGTH.MIN_LOGIN) {
@@ -183,13 +330,14 @@ export function isValidLogin(inputStr) {
   }
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
-    if (!(isWhiteSign(code))) {
+    if (!(isWhiteSignWithEng(code))) {
       return flags.hasBlackSign.error;
     }
   }
   return '';
 }
 
+// в будущем удалить
 export function isValidUsername(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -220,6 +368,7 @@ export function isValidUsername(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidCreatorName(inputStr) {
   const flags = {
     hasBlackSign: {
@@ -250,6 +399,7 @@ export function isValidCreatorName(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidCreateDescription(inputStr) {
   const flags = {
     hasMaxLen: {
@@ -263,6 +413,7 @@ export function isValidCreateDescription(inputStr) {
   return '';
 }
 
+// в будущем удалить
 export function isValidMoneyString(inputStr) {
   const flags = {
     onlyNumber: {
@@ -285,74 +436,54 @@ export function isValidMoneyString(inputStr) {
   return '';
 }
 
-export function isValidDonate(inputStr) {
+// в будущем удалить
+export function isValidDonate(inputStr, balance, moreThanTwoRub) {
+  inputStr = inputStr.replace(/,/g, '.');
   const flags = {
     onlyNumber: {
       flag: true,
-      error: 'В поле сумма доната можно вводить только число',
+      error: 'В данное поле можно вводить только число',
     },
     hasMaxLen: {
       flag: true,
-      error: 'Превышено максимальное значение суммы доната',
+      error: 'Превышено максимальное значение суммы',
+    },
+    hasMoreThanBalance: {
+      flag: true,
+      error: 'Введённая сумма больше суммы на балансе'
+    },
+    hasMinDenomination: {
+      flag: true,
+      error: 'Сумма должна быть больше 2 рублей',
     },
     hasPositive: {
       flag: true,
-      error: 'Сумма доната должна быть больше 2 рублей',
+      error: 'Сумма должна быть больше 0',
     }
   };
-  if (Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
+  if (isNaN(inputStr)) {
+    return flags.onlyNumber.error;
+  }
+
+  if (balance === '' && Number(inputStr) > 10 ** LENGTH.MAX_MONEY) {
     return flags.hasMaxLen.error;
   }
-  if (Number(inputStr) <= 0) {
+  if (balance !== '' && Number(inputStr) > Number(balance)) {
+    return flags.hasMoreThanBalance.error;
+  }
+
+  if (moreThanTwoRub) {
+    if (Number(inputStr) < 2) {
+      return flags.hasMinDenomination.error;
+    }
+  } else if (Number(inputStr) <= 0) {
     return flags.hasPositive.error;
   }
-  for (const char of inputStr) {
-    if (isNaN(char)) {
-      return flags.onlyNumber.error;
-    }
-  }
+
   return '';
 }
 
-export function isValidDescriptionAim(inputStr) {
-  const flags = {
-    hasMaxLen: {
-      flag: true,
-      error: `Описание не должно превышать ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
-    },
-  };
-  if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
-    return flags.hasMaxLen.error;
-  }
-  return '';
-}
-
-export function isValidTitlePost(inputStr) {
-  const flags = {
-    hasMaxLen: {
-      flag: true,
-      error: `Название поста не должно превышать ${LENGTH.MAX_TITLE_POST} символов`,
-    },
-  };
-  if (inputStr.length > LENGTH.MAX_TITLE_POST) {
-    return flags.hasMaxLen.error;
-  }
-  return '';
-}
-
-export function isValidTextPost(inputStr) {
-  const flags = {
-    hasMaxLen: {
-      flag: true,
-      error: `Длина текста поста не должна превышать ${LENGTH.MAX_TEXT_POST} символов`,
-    },
-  };
-  if (inputStr.length > LENGTH.MAX_TEXT_POST) {
-    return flags.hasMaxLen.error;
-  }
-  return '';
-}
-
+// в будущем удалить
 export function isValidGetSum(inputStr, balance) {
   const flags = {
     onlyNumber: {
@@ -382,6 +513,49 @@ export function isValidGetSum(inputStr, balance) {
   return '';
 }
 
+// в будущем удалить
+export function isValidDescriptionAim(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Описание не должно превышать ${LENGTH.MAX_DESCRIPTION_AIM} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_DESCRIPTION_AIM) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+// в будущем удалить
+export function isValidTitlePost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Название поста не должно превышать ${LENGTH.MAX_TITLE_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TITLE_POST) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+// в будущем удалить
+export function isValidTextPost(inputStr) {
+  const flags = {
+    hasMaxLen: {
+      flag: true,
+      error: `Длина текста поста не должна превышать ${LENGTH.MAX_TEXT_POST} символов`,
+    },
+  };
+  if (inputStr.length > LENGTH.MAX_TEXT_POST) {
+    return flags.hasMaxLen.error;
+  }
+  return '';
+}
+
+// в будущем просто убрать export
 export function isValidPhone(inputStr) {
   const flags = {
     onlyNumber: {
@@ -411,6 +585,7 @@ export function isValidPhone(inputStr) {
   return '';
 }
 
+// в будущем убрать export
 export function isValidSelectedDate(input) {
   const flags = {
     hasCorrectYears: {
@@ -420,11 +595,7 @@ export function isValidSelectedDate(input) {
     hasCorrectMonths: {
       flag: true,
       error: 'Начальный месяц дальше конечного',
-    },
-    hasCorrectCurrentMonth: {
-      flag: true,
-      error: 'В качестве конечного месяца выбран будущий',
-    },
+    }
   };
 
   if (input.startYearSelected > input.endYearSelected) {
@@ -434,9 +605,6 @@ export function isValidSelectedDate(input) {
       && input.startMonthSelected > input.endMonthSelected) {
     return flags.hasCorrectMonths.error;
   }
-  if (input.endYearSelected === input.currentYear
-      && input.endMonthSelected > input.currentMonth) {
-    return flags.hasCorrectCurrentMonth.error;
-  }
+
   return '';
 }
