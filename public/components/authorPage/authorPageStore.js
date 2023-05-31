@@ -176,10 +176,10 @@ class AuthorPageStore {
     const errDescriptionOutput = input.errorDescriptionOutput;
     const validStructDescription = { ...validationStructure };
     validStructDescription.field = '"Описание цели"';
-    validStructDescription.length.flag = true;
-    validStructDescription.length.min_length = LENGTH.MIN_DESCRIPTION_AIM;
-    validStructDescription.length.max_length = LENGTH.MAX_DESCRIPTION_AIM;
-    validStructDescription.whiteSymbols.error = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
+    validStructDescription.length_flag = true;
+    validStructDescription.min_length = LENGTH.MIN_DESCRIPTION_AIM;
+    validStructDescription.max_length = LENGTH.MAX_DESCRIPTION_AIM;
+    validStructDescription.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     validStructDescription.hasLetter = true;
     const errDescription = validation(validStructDescription, description);
 
@@ -187,8 +187,8 @@ class AuthorPageStore {
     const errMoneyNeededOutput = input.errorMoneyNeededOutput;
     const validStructMoney = { ...validationStructure };
     validStructMoney.field = '"Сумма"';
-    validStructDescription.isMoney = true;
-    validStructDescription.whiteSymbols.error = 'В поле "Сумма" можно вводить только число';
+    validStructMoney.isMoney = true;
+    validStructMoney.whiteSymbolsError = 'В поле "Сумма" можно вводить только число';
 
     const errMoneyNeeded = validation(validStructMoney, moneyNeeded);
     if (moneyNeeded.isEmpty) {

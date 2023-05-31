@@ -52,26 +52,27 @@ const UNICODE = {
 
 export const validationStructure = {
   field: '',
+
   isTimePeriod: false,
   isPhoneNumber: false,
+
   isMoney: false,
   moreThanTwoRub: false,
   balance: '',
-  length: {
-    flag: false, // требуется проверка на длину
-    min_length: 0,
-    max_length: 0,
-    errorText() {
-      return `Поле должно содержать от ${this.min_length} до ${this.max_length} символов`;
-    },
+
+  length_flag: false, // требуется проверка на длину
+  min_length: 0,
+  max_length: 0,
+  lengthErrorText() {
+    return `Поле должно содержать от ${this.min_length} до ${this.max_length} символов`;
   },
-  whiteSymbols: {
-    eng_symbols_flag: true,
-    rus_symbols_flag: true,
-    numbers_flag: true,
-    special_signs: isSpecialSign,
-    error: ''
-  },
+
+  eng_symbols_flag: true,
+  rus_symbols_flag: true,
+  numbers_flag: true,
+  special_signs: isSpecialSign,
+  whiteSymbolsError: '',
+
   hasNumber: false,
   hasNumber_flag: false,
   hasNumber_error() {
@@ -85,29 +86,34 @@ export const validationStructure = {
 };
 
 export function validation(validStructure, inputStr) {
+  console.log(validStructure);
   // общая проверка на то, что это разрешённый символ
   for (const char of inputStr) {
     const code = char.charCodeAt(0);
     if (!isAllowedSign(code)) {
       console.log('is not allowedSign', char);
-      return validStructure.whiteSymbols.error;
+      return validStructure.whiteSymbolsError;
     }
   }
 
   if (validStructure.isTimePeriod) {
+    console.log('isTimePeriod', inputStr);
     return isValidSelectedDate(inputStr);
   }
   if (validStructure.isPhoneNumber) {
+    console.log('isPhoneNumber', inputStr);
     return isValidPhone(inputStr);
   }
   if (validStructure.isMoney) {
+    console.log('isMoney', inputStr);
     return isValidDonate(inputStr, validStructure.balance, validStructure.moreThanTwoRub);
   }
   // проверка на длину
-  if (validStructure.length.flag
-      && (inputStr.length > validStructure.length.max_length
-          || inputStr.length < validStructure.length.min_length)) {
-    return validStructure.length.errorText();
+  if (validStructure.length_flag
+      && (inputStr.length > validStructure.max_length
+          || inputStr.length < validStructure.min_length)) {
+    console.log('length', inputStr);
+    return validStructure.lengthErrorText();
   }
 
   // общая проверка на то, что это разрешённый символ
@@ -122,29 +128,31 @@ export function validation(validStructure, inputStr) {
       validStructure.hasLetter_flag = true;
     }
     // проверка на whiteSymbols
-    if (!((validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code))
-        || (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code))
-        || (validStructure.whiteSymbols.numbers_flag && isNumber(code))
-        || (validStructure.whiteSymbols.special_signs
-            && validStructure.whiteSymbols.special_signs(code)))) {
+    if (!((validStructure.eng_symbols_flag && isEngLetter(code))
+        || (validStructure.rus_symbols_flag && isRusLetter(code))
+        || (validStructure.numbers_flag && isNumber(code))
+        || (validStructure.special_signs
+            && validStructure.special_signs(code)))) {
       console.log(
         'is not whiteSymbol',
         char,
         code,
-        (validStructure.whiteSymbols.eng_symbols_flag && isEngLetter(code)),
-        (validStructure.whiteSymbols.rus_symbols_flag && isRusLetter(code)),
-        (validStructure.whiteSymbols.numbers_flag && isNumber(code)),
-        validStructure.whiteSymbols.special_signs,
-        validStructure.whiteSymbols.special_signs(code)
+        (validStructure.eng_symbols_flag && isEngLetter(code)),
+        (validStructure.rus_symbols_flag && isRusLetter(code)),
+        (validStructure.numbers_flag && isNumber(code)),
+        validStructure.special_signs,
+        validStructure.special_signs(code)
       );
-      return validStructure.whiteSymbols.error;
+      return validStructure.whiteSymbolsError;
     }
   }
 
   if (validStructure.hasNumber && !validStructure.hasNumber_flag) {
+    console.log('hasNumber', inputStr);
     return validStructure.hasNumber_error();
   }
   if (validStructure.hasLetter && !validStructure.hasLetter_flag) {
+    console.log('hasLetter', inputStr);
     return validStructure.hasLetter_error();
   }
 
