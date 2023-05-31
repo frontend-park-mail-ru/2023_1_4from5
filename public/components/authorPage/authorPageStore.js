@@ -182,6 +182,7 @@ class AuthorPageStore {
     validStructDescription.length.flag = true;
     validStructDescription.length.min_length = LENGTH.MIN_DESCRIPTION_AIM;
     validStructDescription.length.max_length = LENGTH.MAX_DESCRIPTION_AIM;
+
     validStructDescription.whiteSymbols.error = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     validStructDescription.hasLetter = true;
 
