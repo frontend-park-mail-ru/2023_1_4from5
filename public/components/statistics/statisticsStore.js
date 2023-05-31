@@ -243,8 +243,8 @@ class StatisticsStore {
   }
 
   async getMoney(input) {
-    const phoneNumber = input.phoneInput.value.split(' ').join('').split('-').join('');
-    const money = input.sumInput.value.split(' ').join('');
+    const phoneNumber = input.phoneInput.value.trim().replace(/ /g, '').replace(/-/g, '');
+    const money = input.sumInput.value.replace(/ /g, '');
 
     input.getMoneyErr.innerHTML = '';
     input.getPhoneErr.innerHTML = '';
