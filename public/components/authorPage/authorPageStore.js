@@ -258,28 +258,27 @@ class AuthorPageStore {
     const getSubErr = input.getSubErr;
 
     getSubErr.innerHTML = '';
-    if (isNaN(monthCount)) {
+    if (isNaN(monthCount) || monthCount.length === 0) {
       getSubErr.innerHTML = 'Поле должно содеражать число';
-    }
-
-    const money = Number(monthCount) * Number(input.price);
-
-    const tokenSub = await request.getHeader(`/api/user/subscribe/${input.subscriptionId}`);
-    const result = await request.post(`/api/user/subscribe/${input.subscriptionId}`, {
-      creator_id: input.creatorId,
-      month_count: Number(monthCount)
-    }, tokenSub);
-
-    if (result.ok) {
-      const subId = await result.json();
-      input.getSubFormSum.value = Number(money);
-      input.getSubFormLabel.value = `subscribe;${subId}`;
-      input.getSubForm.submit();
     } else {
-      getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
-    }
+      const money = Number(monthCount) * Number(input.price);
 
-    getSubscription.remove();
+      const tokenSub = await request.getHeader(`/api/user/subscribe/${input.subscriptionId}`);
+      const result = await request.post(`/api/user/subscribe/${input.subscriptionId}`, {
+        creator_id: input.creatorId,
+        month_count: Number(monthCount)
+      }, tokenSub);
+
+      if (result.ok) {
+        const subId = await result.json();
+        input.getSubFormSum.value = Number(money);
+        input.getSubFormLabel.value = `subscribe;${subId}`;
+        input.getSubForm.submit();
+        getSubscription.remove();
+      } else {
+        getSubErr.innerHTML = 'Произошла ошибка. Пожалуйста, попробуйте позже';
+      }
+    }
   }
 }
 
