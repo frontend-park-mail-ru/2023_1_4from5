@@ -94,4 +94,11 @@ export const ActionsAuthorPage = {
       photoId,
     });
   },
+
+  filterSubscriptions(subscriptions) {
+    dispatcher.dispatch({
+      type: ActionTypes.FILTER_SUBSCRIPTIONS,
+      subscriptions,
+    });
+  },
 };

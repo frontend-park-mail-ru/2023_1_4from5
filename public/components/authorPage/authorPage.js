@@ -95,17 +95,6 @@ class AuthorPage {
       }
     });
 
-    const createSubBtn = document.querySelectorAll('#subs__add');
-    if (createSubBtn) {
-      for (let index = 0; index < createSubBtn.length; index++) {
-        const button = createSubBtn[index];
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          Actions.renderSubscription();
-        });
-      }
-    }
-
     if (this.#subsPos > 0) {
       const prevDivs = document.querySelectorAll('#arrow--prev');
       if (prevDivs) {
@@ -216,20 +205,6 @@ class AuthorPage {
       button.addEventListener('click', this.deleteHandler);
     }
 
-    const getSubBtns = document.querySelectorAll('#get__sub');
-    if (getSubBtns) {
-      for (let index = 0; index < getSubBtns.length; index++) {
-        const button = getSubBtns[index];
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          const subId = event.target.parentElement.id;
-          const price = event.target.parentElement.querySelector('#sub__price').textContent;
-          const creatorId = event.target.parentElement.parentElement.parentElement.id;
-          getSubscription.render(subId, price, creatorId);
-        });
-      }
-    }
-
     const likeIcons = document.querySelectorAll('.icon--like');
     for (let index = 0; index < likeIcons.length; index++) {
       const likeIcon = likeIcons[index];
@@ -266,24 +241,11 @@ class AuthorPage {
       });
     }
 
-    const updateSubBtns = document.querySelectorAll('#sub__edit');
-    for (let index = 0; index < updateSubBtns.length; index++) {
-      const button = updateSubBtns[index];
-      button.addEventListener('click', this.updateSubHandler);
-    }
-
-    const deleteSubBtns = document.querySelectorAll('#sub__delete');
-    for (let index = 0; index < deleteSubBtns.length; index++) {
-      const button = deleteSubBtns[index];
-      button.addEventListener('click', this.deleteSubHandler);
-    }
-
     const followBtn = document.getElementById('follow__btn');
     if (followBtn) {
       followBtn.addEventListener('click', (event) => {
         event.preventDefault();
         Actions.follow(followBtn.parentElement.id);
-        // Actions.subToNotification(followBtn.parentElement.id);
       });
     }
 
@@ -292,7 +254,6 @@ class AuthorPage {
       unfollowBtn.addEventListener('click', (event) => {
         event.preventDefault();
         Actions.unfollow(unfollowBtn.parentElement.id, 'authorPage');
-        // Actions.unsubToNotification(unfollowBtn.parentElement.id);
       });
     }
 
@@ -318,45 +279,6 @@ class AuthorPage {
       postId,
     }, postId);
   }
-
-  deleteSubHandler(e) {
-    e.preventDefault();
-    Actions.deleteSub(e.currentTarget.parentElement.parentElement.id);
-  }
-
-  updateSubHandler(e) {
-    e.preventDefault();
-    const subscription = document.getElementById(e.currentTarget.parentElement.id);
-    const titleContainer = subscription.querySelector('.sub__title--text');
-    const title = titleContainer.textContent;
-
-    const descriptionContainer = subscription.querySelector('.sub__description');
-    const description = descriptionContainer.textContent;
-
-    const costContainer = subscription.querySelector('.cost');
-    const cost = costContainer.textContent;
-
-    Actions.renderUpdatingSubscription(e.currentTarget.parentElement.id, {
-      title,
-      description,
-      cost,
-    });
-  }
 }
 
 export const authorPage = new AuthorPage(contentElement);
-
-// кусок из hbs с аттачами, которые разделены по типам:
-// <!--TOD проверить, норм ли отображается-->
-// {{#if attachments}}
-// {{#each attachments.img}}
-// <!-- TOD попробовать тэг <{{id}}>-->
-// <img id="attach-photo" width="500" src="../../images/logo.png" alt="attach_photo">
-//   {{/each}}
-//   {{#each attachments.video}}
-//     <audio id="audio" src="../../images/music_test.mp3" controls></audio>
-//   {{/each}}
-//   {{#each attachments.audio}}
-//     <video id="video" width="500" src="../../images/video_test.mp4" controls></video>
-//   {{/each}}
-//   {{/if}}
