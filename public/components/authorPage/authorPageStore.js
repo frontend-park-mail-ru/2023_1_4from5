@@ -4,6 +4,7 @@ import { request } from '../../modules/request.js';
 import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import {
+  isSpecialSignWithEnt,
   isValidDescriptionAim,
   isValidDonate,
   isValidMoneyString,
@@ -180,6 +181,7 @@ class AuthorPageStore {
     validStructDescription.length_flag = true;
     validStructDescription.min_length = LENGTH.MIN_DESCRIPTION_AIM;
     validStructDescription.max_length = LENGTH.MAX_DESCRIPTION_AIM;
+    validStructDescription.special_signs = isSpecialSignWithEnt;
     validStructDescription.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     validStructDescription.hasLetter = true;
     const errDescription = validation(validStructDescription, description);

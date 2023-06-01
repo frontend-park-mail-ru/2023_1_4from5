@@ -51,12 +51,10 @@ class DonateWinStore {
       const creatorIdIn = authorPageStore.getState().creator_info.creator_id;
       input.donateWinFormLabel.value = `donate;${creatorIdIn}`;
       input.donateWinFormSum.value = Number(moneyCount);
-      console.log(input.donateWinForm);
       input.donateWinForm.submit();
-
     } else {
       errorOutput.innerHTML = '';
-      errorOutput.innerHTML = 'Некорректная сумма доната';
+      errorOutput.innerHTML = errMoneyGot;
       input.moneyInput.style.backgroundColor = color.error;
     }
   }
