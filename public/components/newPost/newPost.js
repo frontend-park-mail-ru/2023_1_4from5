@@ -16,8 +16,6 @@ class NewPost {
 
   #config;
 
-  #levels;
-
   #switch = {
     all: true,
     subsOnly: false,

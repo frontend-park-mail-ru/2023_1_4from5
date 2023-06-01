@@ -27,14 +27,15 @@ import { subscriptionsStore } from './components/subscriptions/subscriptionsStor
 import { becameAuthorStore } from './components/becomeAuthor/becomeAuthorStore';
 import { postStore } from './components/post/postStore';
 import { notificationsStore } from './components/notifications/notificationsStore';
+import { subscriptionLevelsStore } from './components/subscriptionLevels/subscriptionLevelsStore';
 import { router } from './modules/Router.js';
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('/sw.js', { scope: '/' })
-//     .catch((err) => {
-//       console.log('SW ERR: ', err);
-//     });
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' })
+    .catch((err) => {
+      console.log('SW ERR: ', err);
+    });
+}
 
 async function begin() {
   await startStore.start();
