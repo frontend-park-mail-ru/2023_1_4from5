@@ -122,6 +122,18 @@ class Post {
             });
           });
 
+          input.addEventListener('keypress', (event2) => {
+            if (event2.key === 'Enter' && !event2.shiftKey) {
+              event2.preventDefault();
+              input.value = input.value.replace(/^[\n]+|[\n]+$/g, '');
+              const inputText = buildText(input);
+              Actions.updateComment(comment.id, {
+                text: inputText,
+                postId: post.id,
+              });
+            }
+          });
+
           const close = comment.querySelector('#comment__close');
           close.style.display = 'inline';
           close.addEventListener('click', (event2) => {

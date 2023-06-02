@@ -118,6 +118,10 @@ $comment__photo-size: 3em;
   height: 1em;
 }
 
+.comment__edit-del {
+  padding-top: 2em;
+}
+
 //------------media----------------
 @media (max-width: 1200px) {
   .post__privacy--single {
