@@ -32,7 +32,11 @@
                     <p class="content__header">{{title}}</p>
                     {{#each textWithBreaks}}
                         {{#if ../is_available}}
-                            <p>{{text}}</p>
+                            {{#if text}}
+                                <p>{{text}}</p>
+                            {{else}}
+                                <br>
+                            {{/if}}
                         {{else}}
                             <div class="no__access--container">
                                 <p class="no__access--title">У вас нет доступа к этому посту</p>

@@ -98,7 +98,6 @@ export const validationStructure = {
 };
 
 export function validation(validStructure, inputStr) {
-  console.log(validStructure);
   // общая проверка на то, что это разрешённый символ
   for (const char of inputStr) {
     const code = char.charCodeAt(0);

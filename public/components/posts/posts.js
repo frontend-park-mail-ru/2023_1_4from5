@@ -1,6 +1,6 @@
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
-import { dateParse } from '../../modules/handler';
+import { breakText, dateParse } from '../../modules/handler';
 
 const template = require('./posts.handlebars');
 
