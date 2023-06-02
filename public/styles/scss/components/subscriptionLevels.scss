@@ -75,12 +75,18 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
 }
 
 .sub__title--text {
+  height: 4em;
   font-size: $font-size;
   font-weight: bold;
+  word-break: break-all;
+  overflow: auto;
+  text-overflow: ellipsis;
 }
 
 .sub__description {
-  word-wrap: break-word;
+  word-break: break-all;
+  overflow: auto;
+  text-overflow: ellipsis;
 }
 
 .sub__cost {

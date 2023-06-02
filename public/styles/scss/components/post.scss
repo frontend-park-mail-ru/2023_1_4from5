@@ -4,6 +4,16 @@
   margin: 7em 10vw 5em 10vw;
 }
 
+.back__btn {
+  height: 2em;
+  background-color: $sub__btn-color;
+  color: black;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
+}
+
 .post__photo {
   margin-right: 2em;
 }
