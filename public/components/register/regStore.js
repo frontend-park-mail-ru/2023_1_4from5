@@ -1,6 +1,14 @@
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { dispatcher } from '../../dispatcher/dispatcher.js';
-import { isValidLogin, isValidPassword, isValidUsername } from '../../modules/isValid.js';
+import {
+  isSpecialSignWithEnt,
+  isValidLogin,
+  isValidPassword,
+  isValidUsername,
+  isWhiteSignLogin, isWhiteSignName, isWhiteSignPassword,
+  LENGTH,
+  validation, validationStructure
+} from '../../modules/isValid.js';
 import { register } from './reg.js';
 
 class RegStore {
@@ -30,13 +38,71 @@ class RegStore {
         break;
 
       case ActionTypes.REGISTRATION:
-        const login = action.input.loginInput.value;
-        const username = action.input.usernameInput.value;
-        const password = action.input.passwordInput.value;
+        // const login = action.input.loginInput.value.trim();
+        //         const validStructLogin = { ...validationStructure };
+        //         validStructLogin.field = '"Логин"';
+        //         validStructLogin.length_flag = true;
+        //         validStructLogin.min_length = LENGTH.MIN_LOGIN;
+        //         validStructLogin.max_length = LENGTH.MAX_LOGIN;
+        //         validStructLogin.special_signs = isWhiteSignLogin;
+        //         validStructLogin.rus_symbols_flag = false;
+        //         validStructLogin.whiteSymbolsError = 'Допустимы только латинские символы, цифры и символы-разделители';
+        //         validStructLogin.hasLetter = true;
+        //         const errLogin = validation(validStructLogin, login);
+        //         // const errLogin = isValidLogin(login);
+        //
+        //         const password = action.input.passwordInput.value.trim();
+        //         const validStructPassword = { ...validationStructure };
+        //         validStructPassword.field = '"Пароль"';
+        //         validStructPassword.length_flag = true;
+        //         validStructPassword.min_length = LENGTH.MIN_PASSWORD;
+        //         validStructPassword.max_length = LENGTH.MAX_PASSWORD;
+        //         validStructPassword.special_signs = isWhiteSignPassword;
+        //         validStructPassword.rus_symbols_flag = false;
+        //         validStructPassword.whiteSymbolsError = 'Допустимы только латинские символы, цифры и символы-разделители';
+        //         validStructPassword.hasNumber = true;
+        //         const errPassword = validation(validStructPassword, password);
+        //         // const errPassword = isValidPassword(password);
+        const login = action.input.loginInput.value.trim();
+        const validStructLogin = { ...validationStructure };
+        validStructLogin.field = '"Логин"';
+        validStructLogin.length_flag = true;
+        validStructLogin.min_length = LENGTH.MIN_LOGIN;
+        validStructLogin.max_length = LENGTH.MAX_LOGIN;
+        validStructLogin.special_signs = isWhiteSignLogin;
+        validStructLogin.rus_symbols_flag = false;
+        validStructLogin.whiteSymbolsError = 'Допустимы только латинские символы, цифры и символы-разделители';
+        validStructLogin.hasLetter = true;
+        const errLogin = validation(validStructLogin, login);
+        // const errLogin = isValidLogin(login);
+
+        const username = action.input.usernameInput.value.trim();
+        const validStructUsername = { ...validationStructure };
+        validStructUsername.field = '"Имя пользователя"';
+        validStructUsername.length_flag = true;
+        validStructUsername.min_length = LENGTH.MIN_USERNAME;
+        validStructUsername.max_length = LENGTH.MAX_USERNAME;
+        validStructUsername.special_signs = isWhiteSignName;
+        validStructUsername.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
+        validStructUsername.hasLetter = true;
+        const errUsername = validation(validStructUsername, username);
+        // const errUsername = isValidUsername(username);
+
+        const password = action.input.passwordInput.value.trim();
+        const validStructPassword = { ...validationStructure };
+        validStructPassword.field = '"Пароль"';
+        validStructPassword.length_flag = true;
+        validStructPassword.min_length = LENGTH.MIN_PASSWORD;
+        validStructPassword.max_length = LENGTH.MAX_PASSWORD;
+        validStructPassword.special_signs = isWhiteSignPassword;
+        validStructPassword.rus_symbols_flag = false;
+        validStructPassword.whiteSymbolsError = 'Допустимы только латинские символы, цифры и символы-разделители';
+        validStructPassword.hasNumber = true;
+        const errPassword = validation(validStructPassword, password);
+        // const errPassword = isValidPassword(password);
+
         const repeatPassword = action.input.passwordRepeatInput.value;
-        const errLogin = isValidLogin(login);
-        const errUsername = isValidUsername(username);
-        const errPassword = isValidPassword(password);
+
         register.validation({
           loginInput: action.input.loginInput,
           usernameInput: action.input.usernameInput,

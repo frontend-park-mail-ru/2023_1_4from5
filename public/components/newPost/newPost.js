@@ -3,8 +3,6 @@ import { router } from '../../modules/Router';
 import { subLevels } from './levels';
 import { URLS } from '../../modules/Notifier';
 
-// TODO (сделал минимальную валидацию на каждый файл < 5 Мб)
-//  более лучшая валидация файлов (обработка 413 и общий размер)
 // TODO сделать режим ожидания загрузки файлов
 
 const template = require('./newPost.handlebars');
