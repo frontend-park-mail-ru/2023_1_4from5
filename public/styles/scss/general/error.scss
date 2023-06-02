@@ -11,3 +11,9 @@ $error-color: red;
   height: $error-height;
   color: $error-color;
 }
+
+@media (max-width: 400px) {
+  .error {
+    font-size: 10px;
+  }
+}

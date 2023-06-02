@@ -21,6 +21,14 @@ class Statistics {
   }
 
   render() {
+    this.#config.statisticsIntervalListMoney.forEach((e) => {
+      e.count = Number(e.count.toFixed(2));
+    });
+
+    this.#config.statisticsTotalListMoney.forEach((e) => {
+      e.count = Number(e.count.toFixed(2));
+    });
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'statisticsDiv';

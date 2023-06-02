@@ -128,6 +128,12 @@ class Post {
         });
       }
     }
+
+    const backBtn = document.getElementById('post__back');
+    backBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      router.popstate();
+    });
   }
 
   findUser(comments, comment) {

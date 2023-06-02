@@ -53,3 +53,49 @@ $notification__dot-size: 1em;
 .no-notifications {
   text-align: center;
 }
+
+//-----------media------------
+@media (max-width: 1300px) {
+  .notifications__container {
+    width: 40vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .notifications__container {
+    width: 50vw;
+  }
+
+  .notifications__header {
+    font-size: $font-size-2;
+  }
+
+  .notifications__content {
+    font-size: $font-size-small;
+  }
+}
+
+@media (max-width: 900px) {
+  .notifications__container {
+    width: 60vw;
+  }
+
+  $notification__image-size-900: 4em;
+  .notification__image{
+    width: $notification__image-size-900;
+    height: $notification__image-size-900;
+  }
+}
+
+@media (max-width: 650px) {
+  .notifications__container {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .notifications__container {
+    width: 100%;
+    right: 0;
+  }
+}
