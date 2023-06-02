@@ -9,6 +9,7 @@ import {
 } from '../../modules/isValid';
 import { color } from '../../consts/styles';
 import { URLS } from '../../modules/Notifier';
+import { buildText } from '../../modules/handler';
 
 document.querySelector('main');
 
@@ -93,7 +94,7 @@ class NewPostStore {
     const errTitle = validation(validStructTitle, createTitle);
     // const errTitle = isValidTitlePost(createTitle);
 
-    const createText = action.input.textInput.value.trim();
+    const createText = buildText(action.input.textInput).trim();
     const validStructText = { ...validationStructure };
     validStructText.field = '"Текст поста"';
     validStructText.length_flag = true;
