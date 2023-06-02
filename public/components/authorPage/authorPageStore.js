@@ -197,14 +197,17 @@ class AuthorPageStore {
     errDescriptionOutput.innerHTML = '';
     errMoneyNeededOutput.innerHTML = '';
 
-    if (errDescription) {
-      errDescriptionOutput.innerHTML = '';
-      errDescriptionOutput.innerHTML = errDescription;
-      input.descriptionInput.style.backgroundColor = color.error;
-    } else if (errMoneyNeeded) {
-      errMoneyNeededOutput.innerHTML = '';
-      errMoneyNeededOutput.innerHTML = errMoneyNeeded;
-      input.moneyNeededInput.style.backgroundColor = color.error;
+    if (errDescription || errMoneyNeeded) {
+      if (errDescription) {
+        errDescriptionOutput.innerHTML = '';
+        errDescriptionOutput.innerHTML = errDescription;
+        input.descriptionInput.style.backgroundColor = color.error;
+      }
+      if (errMoneyNeeded) {
+        errMoneyNeededOutput.innerHTML = '';
+        errMoneyNeededOutput.innerHTML = errMoneyNeeded;
+        input.moneyNeededInput.style.backgroundColor = color.error;
+      }
     } else {
       const aimEdit = await request.post('/api/creator/aim/create', {
         creator_id: this.#config.creator_info.creator_id,
@@ -246,8 +249,8 @@ class AuthorPageStore {
     const getSubErr = input.getSubErr;
 
     getSubErr.innerHTML = '';
-    if (isNaN(monthCount) || monthCount.length === 0) {
-      getSubErr.innerHTML = 'Поле должно содержать число';
+    if (isNaN(monthCount) || monthCount.length === 0 || Number(monthCount) <= 0) {
+      getSubErr.innerHTML = 'Поле должно содержать число больше 0';
     } else {
       const money = Number(monthCount) * Number(input.price);
 

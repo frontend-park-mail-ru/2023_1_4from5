@@ -61,15 +61,15 @@ class NewPostStore {
 
   async renderUpdatingPost(postId) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
-    const post = await postRequest.json();
+    const object = await postRequest.json();
 
     this.#config.attachments = [];
-    if (post.attachments) {
-      post.attachments.forEach((item) => {
+    if (object.post.attachments) {
+      object.post.attachments.forEach((item) => {
         this.#config.attachments.push(item);
       });
     }
-    newPost.config.attachments = post.attachments;
+    newPost.config.attachments = object.post.attachments;
 
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     const creatorPage = await req.json();
@@ -77,7 +77,7 @@ class NewPostStore {
       subs: creatorPage.subscriptions,
     };
     newPost.render(levels);
-    newPost.update(postId, post.post.title, post.post.text);
+    newPost.update(postId, object.post.title, object.post.text);
   }
 
   async sendPost(actionType, action, callback) {
@@ -92,7 +92,6 @@ class NewPostStore {
     validStructTitle.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     validStructTitle.hasLetter = true;
     const errTitle = validation(validStructTitle, createTitle);
-    // const errTitle = isValidTitlePost(createTitle);
 
     const createText = buildText(action.input.textInput).trim();
     const validStructText = { ...validationStructure };
@@ -103,7 +102,6 @@ class NewPostStore {
     validStructText.special_signs = isSpecialSignWithEnt;
     validStructText.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
     const errText = validation(validStructText, createText);
-    // const errText = isValidTextPost(createText);
 
     const errorTitleOutput = action.input.errorTitleOutput;
     const errorTextOutput = action.input.errorTextOutput;
@@ -113,14 +111,17 @@ class NewPostStore {
     errorTitleOutput.innerHTML = '';
     errorTextOutput.innerHTML = '';
 
-    if (errTitle) {
-      errorTitleOutput.innerHTML = '';
-      errorTitleOutput.innerHTML = errTitle;
-      action.input.titleInput.style.backgroundColor = color.error;
-    } else if (errText) {
-      errorTextOutput.innerHTML = '';
-      errorTextOutput.innerHTML = errText;
-      action.input.textInput.style.backgroundColor = color.error;
+    if (errTitle || errTitle) {
+      if (errTitle) {
+        errorTitleOutput.innerHTML = '';
+        errorTitleOutput.innerHTML = errTitle;
+        action.input.titleInput.style.backgroundColor = color.error;
+      }
+      if (errText) {
+        errorTextOutput.innerHTML = '';
+        errorTextOutput.innerHTML = errText;
+        action.input.textInput.style.backgroundColor = color.error;
+      }
     } else {
       let status;
       if (actionType === ActionTypes.CREATE_POST) {
@@ -128,6 +129,9 @@ class NewPostStore {
       } else {
         status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
       }
+      action.input.postBtn.classList.remove('newpost-btn--disabled');
+      action.input.postBtn.disabled = false;
+      action.input.loadingOutput.innerHTML = '';
       if (status) {
         newPost.config.attachments = [];
         this.#config.attachments = [];
