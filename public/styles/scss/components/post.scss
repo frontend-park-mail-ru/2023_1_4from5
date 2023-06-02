@@ -80,6 +80,11 @@ $comment__send-height: 40px;
   margin-bottom: 3em;
 }
 
+.comment__username {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
 $comment__photo-size: 3em;
 #comment__photo {
   height: $comment__photo-size;
@@ -98,7 +103,7 @@ $comment__photo-size: 3em;
   resize: none;
   font-size: $font-size;
   margin-bottom: 1em;
-  height: 3em;
+  height: 6em;
 }
 
 #comment__date {
@@ -107,6 +112,10 @@ $comment__photo-size: 3em;
 
 .creation__date {
   margin-top: 1em;
+}
+
+#comment__text {
+  height: 1em;
 }
 
 //------------media----------------

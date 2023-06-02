@@ -1,5 +1,5 @@
 import { Actions } from '../../actions/actions';
-import { dateParse } from '../../modules/handler';
+import { breakText, buildText, dateParse } from '../../modules/handler';
 import { userStore } from '../user/userStore';
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
@@ -11,7 +11,18 @@ const contentElement = document.querySelector('main');
 class Post {
   render(config) {
     if (config.comments) {
+      console.log(config.comments)
       config.commentsNum = config.comments.length;
+
+      config.comments.forEach((comment) => {
+        comment.text = breakText(comment.text);
+        const textWithBreaks = comment.text.split('\n');
+
+        comment.textWithBreaks = [];
+        textWithBreaks.forEach((text) => {
+          comment.textWithBreaks.push({ text });
+        });
+      });
     } else {
       config.commentsNum = 0;
       config.comments = [];
@@ -58,14 +69,17 @@ class Post {
       event.preventDefault();
       const input = document.getElementById('comment__input');
       const text = input.value;
-      Actions.createComment({ text, postId: config.post.id });
+      Actions.createComment({
+        text,
+        postId: config.post.id
+      });
     });
 
     const commentInput = document.getElementById('comment__input');
     commentInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
+      if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
-        const text = commentInput.value;
+        const text = buildText(commentInput);
         Actions.createComment({
           text,
           postId: config.post.id,
@@ -82,22 +96,28 @@ class Post {
           const comment = event.target.parentElement.parentElement;
           const post = comment.parentElement.parentElement.parentElement;
 
-          const text = comment.querySelector('#comment__text');
-          const textBefore = text.innerHTML;
+          let textBefore = '';
+          const textSpace = comment.querySelector('#comment__texts');
+          const texts = comment.querySelectorAll('#comment__text');
+          texts.forEach((elem) => {
+            textBefore += `${elem.innerHTML}\n`;
+          });
           const input = document.createElement('textarea');
           input.classList.add('input--form');
           input.classList.add('comment__input--edit');
-          input.value = textBefore;
-          text.innerHTML = '';
-          text.appendChild(input);
+          input.value = textBefore.replace(/^[\n]+|[\n]+$/g, '');
+          textSpace.innerHTML = '';
+          textSpace.appendChild(input);
 
           const save = comment.querySelector('#comment__save');
           save.style.display = 'inline';
           edit.style.display = 'none';
           save.addEventListener('click', (event2) => {
             event2.preventDefault();
+            input.value = input.value.replace(/^[\n]+|[\n]+$/g, '');
+            const inputText = buildText(input);
             Actions.updateComment(comment.id, {
-              text: input.value,
+              text: inputText,
               postId: post.id,
             });
           });
@@ -106,7 +126,11 @@ class Post {
           close.style.display = 'inline';
           close.addEventListener('click', (event2) => {
             event2.preventDefault();
-            text.innerHTML = textBefore;
+            texts.forEach((elem) => {
+              input.remove();
+              textSpace.appendChild(elem);
+            });
+            // text.innerHTML = textBefore;
             close.style.display = 'none';
             save.style.display = 'none';
             edit.style.display = 'inline';
