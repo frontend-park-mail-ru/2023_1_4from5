@@ -1,9 +1,8 @@
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { donateWin } from './donateWin.js';
-import { isValidDonate, LENGTH, validation, validationStructure } from '../../modules/isValid.js';
+import { validation, validationStructure } from '../../modules/isValid.js';
 import { color } from '../../consts/styles.js';
-import { authorPage } from '../authorPage/authorPage.js';
 import { authorPageStore } from '../authorPage/authorPageStore.js';
 
 class DonateWinStore {
@@ -38,7 +37,6 @@ class DonateWinStore {
     validStructMoney.field = '"Отправить донат"';
     validStructMoney.isMoney = true;
     validStructMoney.moreThanTwoRub = true;
-    validStructMoney.hasNumber = true;
     validStructMoney.whiteSymbolsError = 'Допустимы только числа';
 
     const errMoneyGot = validation(validStructMoney, moneyCount);

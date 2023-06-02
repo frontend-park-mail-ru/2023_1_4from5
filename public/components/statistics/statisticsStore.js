@@ -2,7 +2,7 @@ import { dispatcher } from '../../dispatcher/dispatcher';
 import { statistics } from './statistics';
 import { request } from '../../modules/request';
 import { ActionTypes } from '../../actionTypes/actionTypes';
-import { isValidGetSum, isValidPhone, isValidSelectedDate } from '../../modules/isValid';
+import { isValidSelectedDate, validation, validationStructure } from '../../modules/isValid';
 import { color } from '../../consts/styles';
 
 class StatisticsStore {
@@ -233,17 +233,17 @@ class StatisticsStore {
     const balanceReq = await request.get('/api/creator/balance');
     if (balanceReq.ok) {
       const balance = await balanceReq.json();
+      console.log(balance);
       if (balance) {
         this.#config.balance = balance;
       }
     }
-
     statistics.config = this.#config;
     statistics.render();
   }
 
   async getMoney(input) {
-    const phoneNumber = input.phoneInput.value.trim().replace(/ /g, '').replace(/-/g, '');
+    const phoneNumber = input.phoneInput.value.trim().replace(/[ ()-]/g, '');
     const money = input.sumInput.value.replace(/ /g, '');
 
     input.getMoneyErr.innerHTML = '';
@@ -251,8 +251,21 @@ class StatisticsStore {
     input.sumInput.style.backgroundColor = color.field;
     input.phoneInput.style.backgroundColor = color.field;
 
-    const errMoney = isValidGetSum(money, input.balance);
-    const errPhoneNumber = isValidPhone(phoneNumber);
+    const validStructMoney = { ...validationStructure };
+    validStructMoney.field = '"Сумма вывода"';
+    validStructMoney.isMoney = true;
+    validStructMoney.moreThanTwoRub = true;
+    validStructMoney.balance = input.balance;
+    validStructMoney.whiteSymbolsError = 'Допустимы только числа';
+    const errMoney = validation(validStructMoney, money);
+    // const errMoney = isValidGetSum(money, input.balance);
+
+    const validStructPhone = { ...validationStructure };
+    validStructPhone.field = '"Номер телефона"';
+    validStructPhone.isPhoneNumber = true;
+    validStructPhone.whiteSymbolsError = 'В поле номер телефона допустимы только цифры';
+    const errPhoneNumber = validation(validStructPhone, phoneNumber);
+
     if (errMoney || errPhoneNumber) {
       if (errMoney) {
         input.getMoneyErr.innerHTML = errMoney;
