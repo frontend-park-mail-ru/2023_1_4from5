@@ -15,9 +15,11 @@
     <div class="statistics__total_money">
         {{#each statisticsTotalListMoney}}
             <div class="statistics__card">
-                <div></div>
+                <div class="">
+                    <img class="statistics__finance--img" src="../../images/finance.svg" alt="">
+                </div>
                 <div class="statistics__count">{{count}} ₽</div>
-                <div></div>
+                <div class=""></div>
                 <div>{{description}}</div>
             </div>
         {{/each}}
@@ -27,7 +29,8 @@
 
     <div class="statistics__select_date">
         <div class="statistics__date">
-            <label class="statistics__label">Статистика с
+            <label class="statistics__label">
+                <span class="statistics__label--title">Статистика</span> с
                 <select id="select_date__start_month" name="start_month">
                     {{#each startMonths}}
                         <option class="statistics__option" value={{id}}>{{name}}</option>
@@ -72,7 +75,9 @@
     <div class="statistics__interval_money">
         {{#each statisticsIntervalListMoney}}
             <div class="statistics__card">
-                <div></div>
+                <div>
+                    <img class="statistics__finance--img" src="../../images/finance.svg" alt="">
+                </div>
                 <div class="statistics__count">{{count}} ₽</div>
                 <div></div>
                 <div>{{description}}</div>
