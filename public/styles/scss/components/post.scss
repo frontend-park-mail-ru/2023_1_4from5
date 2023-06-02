@@ -43,7 +43,7 @@ $privacy__img-width: 1.5em;
 
 .comment__hr {
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .comment__header {
@@ -120,6 +120,12 @@ $comment__photo-size: 3em;
 
 .comment__edit-del {
   padding-top: 2em;
+}
+
+.comment__help {
+  font-size: $font-size-small;
+  margin-bottom: 1em;
+  margin-left: 1em;
 }
 
 //------------media----------------

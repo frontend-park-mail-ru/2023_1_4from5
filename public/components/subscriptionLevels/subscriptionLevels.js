@@ -1,14 +1,28 @@
 import { Actions } from '../../actions/actions';
 import { getSubscription } from '../getSubscription/getSubscription';
+import { breakText } from '../../modules/handler';
 
 const template = require('./subscriptionLevels.handlebars');
 
 class SubscriptionLevels {
   render(config) {
+    console.log(config.subscriptions);
+    if (config.subscriptions) {
+      config.subscriptions.forEach((sub) => {
+        const textWithBreaks = sub.description.split('\n');
+        sub.textWithBreaks = [];
+
+        textWithBreaks.forEach((description) => {
+          sub.textWithBreaks.push({ description });
+        });
+        console.log(sub);
+      });
+    }
+
     const levelSpace = document.querySelectorAll('#subscriptionLevels');
     for (let index = 0; index < levelSpace.length; index++) {
       const sub = levelSpace[index];
-      sub.innerHTML = '';
+      sub.textContent = '';
       const newDiv = document.createElement('div');
       newDiv.id = 'subscriptionLevelsDiv';
       newDiv.innerHTML = template(config);
