@@ -1,4 +1,5 @@
 import { Actions } from '../../actions/actions';
+// @ts-expect-error TS(2307): Cannot find module './statistics.handlebars' or it... Remove this comment to see the full error message
 import template from './statistics.handlebars';
 
 const contentElement = document.querySelector('main');
@@ -6,9 +7,10 @@ const contentElement = document.querySelector('main');
 class Statistics {
   #parent;
 
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -21,11 +23,11 @@ class Statistics {
   }
 
   render() {
-    this.#config.statisticsIntervalListMoney.forEach((e) => {
+    this.#config.statisticsIntervalListMoney.forEach((e: any) => {
       e.count = Number(e.count.toFixed(2));
     });
 
-    this.#config.statisticsTotalListMoney.forEach((e) => {
+    this.#config.statisticsTotalListMoney.forEach((e: any) => {
       e.count = Number(e.count.toFixed(2));
     });
 
@@ -40,9 +42,13 @@ class Statistics {
     const endMonth = document.getElementById('select_date__end_month');
     const endYear = document.getElementById('select_date__end_year');
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     startMonth.value = this.#config.selectedStartMonth;
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     startYear.value = this.#config.selectedStartYear;
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     endMonth.value = this.#config.selectedEndMonth;
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     endYear.value = this.#config.selectedStartYear;
 
     const phoneInput = document.getElementById('get_money__phone');
@@ -51,6 +57,7 @@ class Statistics {
     const getMoneyErr = document.getElementById('get_money__err');
     const getPhoneErr = document.getElementById('get_phone__err');
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     getMoneyBtn.addEventListener('click', (event) => {
       event.preventDefault();
       Actions.getMoney({
@@ -65,6 +72,7 @@ class Statistics {
     const selectDateErr = document.getElementById('select_date__err');
     const showButton = document.getElementById('select_date__show_button');
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     showButton.addEventListener('click', (event) => {
       event.preventDefault();
       Actions.showStatistics({

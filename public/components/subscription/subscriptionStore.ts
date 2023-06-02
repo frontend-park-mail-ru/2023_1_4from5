@@ -9,13 +9,14 @@ import { Actions } from '../../actions/actions';
 import { userStore } from '../user/userStore';
 
 class SubscriptionStore {
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
   constructor() {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  setState(config) {
+  setState(config: any) {
     this.#config = config;
   }
 
@@ -23,9 +24,10 @@ class SubscriptionStore {
     return this.#config;
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_SUBSCRIPTION:
+        // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
         subscriptionWin.render();
         subscriptionWin.publish();
         break;

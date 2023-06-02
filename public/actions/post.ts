@@ -2,21 +2,21 @@ import { dispatcher } from '../dispatcher/dispatcher';
 import { ActionTypes } from '../actionTypes/actionTypes';
 
 export const ActionsPost = {
-  createPost(input) {
+  createPost(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATE_POST,
       input,
     });
   },
 
-  deletePost(postId) {
+  deletePost(postId: any) {
     dispatcher.dispatch({
       type: ActionTypes.DELETE_POST,
       postId,
     });
   },
 
-  updatePost(postId, input) {
+  updatePost(postId: any, input: any) {
     dispatcher.dispatch({
       type: ActionTypes.UPDATE_POST,
       postId,
@@ -24,14 +24,14 @@ export const ActionsPost = {
     });
   },
 
-  createComment(input) {
+  createComment(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATE_COMMENT,
       input,
     });
   },
 
-  updateComment(commentId, input) {
+  updateComment(commentId: any, input: any) {
     dispatcher.dispatch({
       type: ActionTypes.UPDATE_COMMENT,
       commentId,
@@ -39,7 +39,7 @@ export const ActionsPost = {
     });
   },
 
-  deleteComment(commentId, postId) {
+  deleteComment(commentId: any, postId: any) {
     dispatcher.dispatch({
       type: ActionTypes.DELETE_COMMENT,
       commentId,
@@ -47,7 +47,7 @@ export const ActionsPost = {
     });
   },
 
-  clickLikeLonely(typeLike, postId) {
+  clickLikeLonely(typeLike: any, postId: any) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE_LONELY,
       typeLike,

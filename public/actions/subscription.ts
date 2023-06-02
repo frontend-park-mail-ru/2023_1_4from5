@@ -8,7 +8,7 @@ export const ActionSubscription = {
     });
   },
 
-  renderUpdatingSubscription(id, content) {
+  renderUpdatingSubscription(id: any, content: any) {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_UPDATING_SUBSCRIPTION,
       id,
@@ -22,14 +22,14 @@ export const ActionSubscription = {
     });
   },
 
-  createSub(input) {
+  createSub(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATE_SUB,
       input,
     });
   },
 
-  updateSub(id, input) {
+  updateSub(id: any, input: any) {
     dispatcher.dispatch({
       type: ActionTypes.UPDATE_SUB,
       id,
@@ -37,7 +37,7 @@ export const ActionSubscription = {
     });
   },
 
-  deleteSub(id) {
+  deleteSub(id: any) {
     dispatcher.dispatch({
       type: ActionTypes.DELETE_SUB,
       id,

@@ -1,5 +1,6 @@
 import { router } from '../../modules/Router';
 import { URLS } from '../../modules/Notifier';
+// @ts-expect-error TS(2307): Cannot find module './search.handlebars' or its co... Remove this comment to see the full error message
 import template from './search.handlebars';
 
 const contentElement = document.querySelector('main');
@@ -7,9 +8,10 @@ const contentElement = document.querySelector('main');
 class Search {
   #parent;
 
+  // @ts-expect-error TS(7008): Member '#authors' implicitly has an 'any' type.
   #authors;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -39,7 +41,7 @@ class Search {
     }
   }
 
-  selectAuthor(e) {
+  selectAuthor(e: any) {
     e.preventDefault();
     router.go(URLS.myPage, {}, e.currentTarget.id);
   }

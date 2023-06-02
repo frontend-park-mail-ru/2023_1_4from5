@@ -11,15 +11,18 @@ const firebaseConfig = {
   measurementId: 'G-RDQS51ZNB6'
 };
 
+// @ts-expect-error TS(2304): Cannot find name 'firebase'.
 firebase.initializeApp(firebaseConfig);
+// @ts-expect-error TS(2304): Cannot find name 'firebase'.
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage((payload) => {
+messaging.onBackgroundMessage((payload: any) => {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
   };
 
+  // @ts-expect-error TS(2339): Property 'registration' does not exist on type 'Wi... Remove this comment to see the full error message
   self.registration.showNotification(
     notificationTitle,
     notificationOptions

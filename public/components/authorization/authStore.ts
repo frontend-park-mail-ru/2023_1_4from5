@@ -4,13 +4,14 @@ import { auth } from './auth.js';
 import { isValidLogin, isValidPassword } from '../../modules/isValid.js';
 
 class AuthStore {
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
   constructor() {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  setState(config) {
+  setState(config: any) {
     this.#config = config;
   }
 
@@ -19,7 +20,7 @@ class AuthStore {
     auth.authentification();
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_AUTH:
         this.renderAuth();

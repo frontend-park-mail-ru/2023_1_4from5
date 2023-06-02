@@ -8,7 +8,7 @@ class SubscriptionsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_SUBSCRIPTIONS:
         const reqSubs = await request.get('/api/user/subscriptions');

@@ -19,7 +19,7 @@ class BecomeAuthorStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_BECOME_AUTHOR:
         this.renderBecomeAuthor(action.creatorId);
@@ -42,7 +42,7 @@ class BecomeAuthorStore {
     }
   }
 
-  async renderBecomeAuthor(creatorId) {
+  async renderBecomeAuthor(creatorId: any) {
     becameAuthor.render();
     if (creatorId) {
       const req = await request.get(`/api/creator/page/${creatorId}`);
@@ -55,37 +55,39 @@ class BecomeAuthorStore {
     }
   }
 
-  async becomeAuthor(input) {
+  async becomeAuthor(input: any) {
     await this.validation(
       input,
-      async (body) => {
+      async (body: any) => {
         const token = await request.getHeader('/api/user/becameCreator');
         return request.post('/api/user/becameCreator', body, token);
       },
       async () => {
         await userStore.getUser();
         becameAuthor.remove();
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
         router.go(URLS.myPage);
       }
     );
   }
 
-  async updateProfile(input) {
+  async updateProfile(input: any) {
     await this.validation(
       input,
-      async (body) => {
+      async (body: any) => {
         const token = await request.getHeader('/api/creator/updateData');
         return request.put('/api/creator/updateData', body, token);
       },
       async () => {
         becameAuthor.remove();
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
         router.go(URLS.myPage);
         await authorPageStore.renderMyPage();
       }
     );
   }
 
-  async validation(input, require, callback) {
+  async validation(input: any, require: any, callback: any) {
     const name = input.nameInput.value.trim();
     const errorNameOutput = input.errorNameOutput;
     const validStructName = { ...validationStructure };

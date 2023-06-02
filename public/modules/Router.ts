@@ -11,12 +11,13 @@ class Router {
       if (e.state) {
         notifier(new URL(window.location.href), e.state.data, e.state.additionalUrl);
       } else {
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
         notifier(new URL(window.location.href));
       }
     };
   }
 
-  go(path, data, additionalUrl) {
+  go(path: any, data: any, additionalUrl: any) {
     let url;
     if (additionalUrl) {
       url = new URL(`${path}/${additionalUrl}`, window.location.href);
@@ -25,6 +26,7 @@ class Router {
     }
 
     if (window.location.pathname === url.pathname && url.searchParams.toString() === '') return;
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     contentElement.innerHTML = '';
 
     if (data) {
@@ -38,6 +40,7 @@ class Router {
         additionalUrl,
       }, path, `${path}/${additionalUrl}`);
     } else {
+      // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
       notifier(url, data);
       window.history.pushState(data, path, path);
     }
@@ -49,7 +52,7 @@ class Router {
     notifier(url, {}, this.parseUrl(url.pathname).additionalUrl);
   }
 
-  parseUrl(url) {
+  parseUrl(url: any) {
     let countSlash = 0;
     let method = '/';
     let additionalUrl = '';

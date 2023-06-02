@@ -59,6 +59,7 @@ class SideBarStore {
       beAuthor: {
         href: '',
         id: 'sidebar__beAuthor',
+        // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
         showDisplay: userStore.getUserState().isAuthorizedIn * !userStore.getUserState().isAuthorIn,
         parent: contentElement,
         render: Actions.renderBecomeAuthor,
@@ -90,12 +91,13 @@ class SideBarStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  setState(userIn) {
+  setState(userIn: any) {
     this.#config.feed.showDisplay = userIn.isAuthorizedIn;
     this.#config.findAuth.showDisplay = true;
     this.#config.subs.showDisplay = userIn.isAuthorizedIn;
     this.#config.reg.showDisplay = !userIn.isAuthorizedIn;
     this.#config.auth.showDisplay = !userIn.isAuthorizedIn;
+    // @ts-expect-error TS(2363): The right-hand side of an arithmetic operation mus... Remove this comment to see the full error message
     this.#config.beAuthor.showDisplay = userIn.isAuthorizedIn * !userIn.isAuthorIn;
     this.#config.notifications.showDisplay = userIn.isAuthorizedIn;
     this.#config.modalWindow.showDisplay = userIn.isAuthorizedIn;
@@ -106,7 +108,7 @@ class SideBarStore {
     return this.#config;
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_SIDEBAR:
         this.renderSideBar(action.user);
@@ -117,7 +119,7 @@ class SideBarStore {
     }
   }
 
-  renderSideBar(user) {
+  renderSideBar(user: any) {
     this.setState(user);
     sideBar.config = this.#config;
     sideBar.render();

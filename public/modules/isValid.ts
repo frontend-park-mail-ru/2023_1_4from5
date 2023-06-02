@@ -86,7 +86,7 @@ export const validationStructure = {
   },
 };
 
-export function validation(validStructure, inputStr) {
+export function validation(validStructure: any, inputStr: any) {
   console.log(validStructure);
   // общая проверка на то, что это разрешённый символ
   for (const char of inputStr) {
@@ -160,7 +160,7 @@ export function validation(validStructure, inputStr) {
   return '';
 }
 
-function isAllowedSign(code) {
+function isAllowedSign(code: any) {
   return ((code >= ASCII.SPACE && code <= ASCII.TILDE)
       || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
@@ -173,24 +173,24 @@ function isAllowedSign(code) {
  *
  * @returns {boolean} - response is sign is letter
  */
-function isLetter(code) {
+function isLetter(code: any) {
   return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
       || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
-function isEngLetter(code) {
+function isEngLetter(code: any) {
   return ((code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z));
 }
 
-function isRusLetter(code) {
+function isRusLetter(code: any) {
   return ((code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
       || code === UNICODE.RUS_UPPER_E || code === UNICODE.RUS_LOWER_E);
 }
 
-function isNumber(code) {
+function isNumber(code: any) {
   return (code >= ASCII.ZERO && code <= ASCII.NINE);
 }
 
@@ -200,7 +200,7 @@ function isNumber(code) {
  *
  * @returns {boolean} - response is sign is special sign
  */
-export function isSpecialSign(code) {
+export function isSpecialSign(code: any) {
   return (((code >= ASCII.SPACE && code <= ASCII.SLASH)
       || (code >= ASCII.COLON && code <= ASCII.AT))
       || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
@@ -208,7 +208,7 @@ export function isSpecialSign(code) {
 }
 
 // в будущем требуется удалить
-export function isWhiteSignWithRus(code) {
+export function isWhiteSignWithRus(code: any) {
   return (code === ASCII.SPACE || code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
@@ -218,7 +218,7 @@ export function isWhiteSignWithRus(code) {
 }
 
 // в будущем требуется удалить
-export function isWhiteSignWithEng(code) {
+export function isWhiteSignWithEng(code: any) {
   return (code === ASCII.DASH || code === ASCII.POINT
       || (code >= ASCII.ZERO && code <= ASCII.NINE)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
@@ -226,15 +226,15 @@ export function isWhiteSignWithEng(code) {
       || code === ASCII.UNDERSCORE);
 }
 
-export function isWhiteSignPassword(code) {
+export function isWhiteSignPassword(code: any) {
   return (code >= ASCII.SPACE && code <= ASCII.TILDE);
 }
 
-export function isWhiteSignLogin(code) {
+export function isWhiteSignLogin(code: any) {
   return (code === ASCII.DASH || code === ASCII.POINT || code === ASCII.UNDERSCORE);
 }
 
-export function isWhiteSignName(code) {
+export function isWhiteSignName(code: any) {
   return (code === ASCII.SPACE || code === ASCII.DASH
       || code === ASCII.POINT || code === ASCII.UNDERSCORE);
 }
@@ -246,7 +246,7 @@ export function isWhiteSignName(code) {
  * @returns {String} - validation error
  */
 // в будущем удалить
-export function isValidPassword(inputStr) {
+export function isValidPassword(inputStr: any) {
   const flags = {
     hasBlackSign: {
       flag: true,
@@ -290,11 +290,14 @@ export function isValidPassword(inputStr) {
     } else if (isEngLetter(code)) {
       flags.hasLetter.flag = true;
     } else if (!isWhiteSignPassword(code)) {
+      // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type '{ flag: ... Remove this comment to see the full error message
       flags.hasBlackSign = true;
     }
   }
   for (const flagsKey in flags) {
+    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (!flags[flagsKey].flag) {
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       return flags[flagsKey].error;
     }
   }
@@ -308,7 +311,7 @@ export function isValidPassword(inputStr) {
  * @returns {String} - validation error
  */
 // в будущем удалить
-export function isValidLogin(inputStr) {
+export function isValidLogin(inputStr: any) {
   const flags = {
     hasBlackSign: {
       flag: false,
@@ -339,7 +342,7 @@ export function isValidLogin(inputStr) {
 }
 
 // в будущем удалить
-export function isValidUsername(inputStr) {
+export function isValidUsername(inputStr: any) {
   const flags = {
     hasBlackSign: {
       flag: false,
@@ -370,7 +373,7 @@ export function isValidUsername(inputStr) {
 }
 
 // в будущем удалить
-export function isValidCreatorName(inputStr) {
+export function isValidCreatorName(inputStr: any) {
   const flags = {
     hasBlackSign: {
       flag: false,
@@ -401,7 +404,7 @@ export function isValidCreatorName(inputStr) {
 }
 
 // в будущем удалить
-export function isValidCreateDescription(inputStr) {
+export function isValidCreateDescription(inputStr: any) {
   const flags = {
     hasMaxLen: {
       flag: true,
@@ -415,7 +418,7 @@ export function isValidCreateDescription(inputStr) {
 }
 
 // в будущем удалить
-export function isValidMoneyString(inputStr) {
+export function isValidMoneyString(inputStr: any) {
   const flags = {
     onlyNumber: {
       flag: true,
@@ -438,7 +441,7 @@ export function isValidMoneyString(inputStr) {
 }
 
 // в будущем удалить
-export function isValidDonate(inputStr, balance, moreThanTwoRub) {
+export function isValidDonate(inputStr: any, balance: any, moreThanTwoRub: any) {
   inputStr = inputStr.replace(/,/g, '.');
   const flags = {
     onlyNumber: {
@@ -485,7 +488,7 @@ export function isValidDonate(inputStr, balance, moreThanTwoRub) {
 }
 
 // в будущем удалить
-export function isValidGetSum(inputStr, balance) {
+export function isValidGetSum(inputStr: any, balance: any) {
   const flags = {
     onlyNumber: {
       flag: true,
@@ -515,7 +518,7 @@ export function isValidGetSum(inputStr, balance) {
 }
 
 // в будущем удалить
-export function isValidDescriptionAim(inputStr) {
+export function isValidDescriptionAim(inputStr: any) {
   const flags = {
     hasMaxLen: {
       flag: true,
@@ -529,7 +532,7 @@ export function isValidDescriptionAim(inputStr) {
 }
 
 // в будущем удалить
-export function isValidTitlePost(inputStr) {
+export function isValidTitlePost(inputStr: any) {
   const flags = {
     hasMaxLen: {
       flag: true,
@@ -543,7 +546,7 @@ export function isValidTitlePost(inputStr) {
 }
 
 // в будущем удалить
-export function isValidTextPost(inputStr) {
+export function isValidTextPost(inputStr: any) {
   const flags = {
     hasMaxLen: {
       flag: true,
@@ -557,7 +560,7 @@ export function isValidTextPost(inputStr) {
 }
 
 // в будущем просто убрать export
-export function isValidPhone(inputStr) {
+export function isValidPhone(inputStr: any) {
   const flags = {
     onlyNumber: {
       flag: true,
@@ -587,7 +590,7 @@ export function isValidPhone(inputStr) {
 }
 
 // в будущем убрать export
-export function isValidSelectedDate(input) {
+export function isValidSelectedDate(input: any) {
   const flags = {
     hasCorrectYears: {
       flag: true,

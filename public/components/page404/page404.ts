@@ -1,3 +1,4 @@
+// @ts-expect-error TS(2307): Cannot find module './page404.handlebars' or its c... Remove this comment to see the full error message
 import template from './page404.handlebars';
 
 const contentElement = document.querySelector('main');
@@ -5,7 +6,7 @@ const contentElement = document.querySelector('main');
 class Page404 {
   #parent;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 

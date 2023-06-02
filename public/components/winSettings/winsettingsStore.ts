@@ -50,14 +50,14 @@ class WinSettingsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  setState(user) {
+  setState(user: any) {
     this.#config.profile.showDisplay = user.isAuthorIn;
     this.#config.finance.showDisplay = user.isAuthorIn;
     this.#config.settings.showDisplay = user.isAuthorizedIn;
     this.#config.logout.showDisplay = user.isAuthorizedIn;
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_WINSETTINGS:
         this.setState(userStore.getUserState());

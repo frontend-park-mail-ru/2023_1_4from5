@@ -1,5 +1,6 @@
 import { clickHandler } from '../../modules/handler.js';
 import { Actions } from '../../actions/actions.js';
+// @ts-expect-error TS(2307): Cannot find module './winSettings.handlebars' or i... Remove this comment to see the full error message
 import template from './winSettings.handlebars';
 import { notificationsStore } from '../notifications/notificationsStore';
 
@@ -8,9 +9,10 @@ const contentElement = document.querySelector('main');
 export class WinSettings {
   #parent;
 
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -35,6 +37,7 @@ export class WinSettings {
     this.#parent.appendChild(newDiv);
 
     const background = document.getElementById('background');
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     background.addEventListener('click', (e) => {
       e.preventDefault();
       Actions.removeWinSettings();

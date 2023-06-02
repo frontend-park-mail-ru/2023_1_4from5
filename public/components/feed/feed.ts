@@ -1,3 +1,4 @@
+// @ts-expect-error TS(2307): Cannot find module './feed.handlebars' or its corr... Remove this comment to see the full error message
 import template from './feed.handlebars';
 import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
@@ -9,7 +10,7 @@ const contentElement = document.querySelector('main');
 class Feed {
   #parent;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -17,22 +18,23 @@ class Feed {
     return this.#parent;
   }
 
-  render(posts) {
+  render(posts: any) {
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'subscriptionsDiv';
     newDiv.innerHTML = template(posts);
     this.#parent.appendChild(newDiv);
 
-    posts.posts.forEach((post) => {
+    posts.posts.forEach((post: any) => {
       if (post.attachments) {
         const divAttaches = document.getElementById(`attachments-${post.id}`);
-        post.attachments.forEach((item) => {
+        post.attachments.forEach((item: any) => {
           if (item.type.startsWith('image')) {
             const attachPreview = document.createElement('img');
             attachPreview.className = 'img-preview';
             attachPreview.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             attachPreview.style.display = 'block';
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('video')) {
             const attachPreview = document.createElement('video');
@@ -45,6 +47,7 @@ class Feed {
             source.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             source.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
             attachPreview.append(source);
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
@@ -52,6 +55,7 @@ class Feed {
             attachPreview.src = `../../images/user/${item.id}.mp3`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             divAttaches.append(attachPreview);
           }
         });
@@ -63,6 +67,7 @@ class Feed {
       const photo = creatorPhotos[index];
       photo.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const creatorId = event.target.parentElement.id;
         router.go(URLS.myPage, '', creatorId);
       });
@@ -73,6 +78,7 @@ class Feed {
       const name = creatorNames[index];
       name.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const creatorId = event.target.id;
         router.go(URLS.myPage, '', creatorId);
       });
@@ -86,6 +92,7 @@ class Feed {
         const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
         Actions.likeFeed(
           eventLike,
+          // @ts-expect-error TS(2531): Object is possibly 'null'.
           event.target.parentElement.parentElement.parentElement.id,
         );
       });
@@ -103,6 +110,7 @@ class Feed {
         const comment = comments[index];
         comment.addEventListener('click', (event) => {
           event.preventDefault();
+          // @ts-expect-error TS(2531): Object is possibly 'null'.
           router.go(URLS.post, '', event.target.parentElement.parentElement.parentElement.id);
         });
       }

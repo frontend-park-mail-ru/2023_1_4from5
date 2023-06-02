@@ -12,7 +12,7 @@ class StartStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_STARTPAGE:
         startPage.render();

@@ -1,4 +1,5 @@
 import { Actions } from '../../actions/actions.js';
+// @ts-expect-error TS(2307): Cannot find module './notifications.handlebars' or... Remove this comment to see the full error message
 import template from './notifications.handlebars';
 import { notificationsStore } from './notificationsStore';
 
@@ -7,11 +8,11 @@ const contentElement = document.querySelector('main');
 export class Notifications {
   #parent;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
-  render(ntfs) {
+  render(ntfs: any) {
     this.removeNotifications();
 
     const config = {
@@ -29,6 +30,7 @@ export class Notifications {
     }
 
     const background = document.getElementById('backNotifications');
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     background.addEventListener('click', (e) => {
       e.preventDefault();
       Actions.removeNotifications();

@@ -1,6 +1,7 @@
 import { router } from '../../modules/Router.js';
 import { URLS } from '../../modules/Notifier.js';
 import { Actions } from '../../actions/actions';
+// @ts-expect-error TS(2307): Cannot find module './authorPage.handlebars' or it... Remove this comment to see the full error message
 import template from './authorPage.handlebars';
 import { getSubscription } from '../getSubscription/getSubscription';
 import { userStore } from '../user/userStore';
@@ -12,11 +13,12 @@ const contentElement = document.querySelector('main');
 class AuthorPage {
   #parent;
 
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
   #subsPos = 0;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -24,7 +26,7 @@ class AuthorPage {
     return this.#subsPos;
   }
 
-  setSubsPos(subsPos) {
+  setSubsPos(subsPos: any) {
     this.#subsPos = subsPos;
   }
 
@@ -43,13 +45,14 @@ class AuthorPage {
   render() {
     const subNum = 4;
 
-    const subs = [];
+    const subs: any = [];
     if (!this.#config.subscriptions) {
       this.#config.subscriptions = [];
     }
     Object.assign(subs, this.#config.subscriptions.slice(this.#subsPos, this.#subsPos + subNum));
     const config = {};
     Object.assign(config, this.#config);
+    // @ts-expect-error TS(2339): Property 'subscriptions' does not exist on type '{... Remove this comment to see the full error message
     config.subscriptions = subs;
 
     this.#parent.innerHTML = '';
@@ -61,15 +64,16 @@ class AuthorPage {
     subscriptionLevels.render(config);
     posts.render(config);
 
-    this.#config.posts.forEach((post) => {
+    this.#config.posts.forEach((post: any) => {
       if (post.attachments) {
         const divAttaches = document.getElementById(`attachments-${post.id}`);
-        post.attachments.forEach((item) => {
+        post.attachments.forEach((item: any) => {
           if (item.type.startsWith('image')) {
             const attachPreview = document.createElement('img');
             attachPreview.className = 'img-preview';
             attachPreview.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             attachPreview.style.display = 'block';
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('video')) {
             const attachPreview = document.createElement('video');
@@ -82,6 +86,7 @@ class AuthorPage {
             source.src = `../../images/user/${item.id}.${item.type.split('/')[1]}`;
             source.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
             attachPreview.append(source);
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             divAttaches.append(attachPreview);
           } else if (item.type.startsWith('audio')) {
             const attachPreview = document.createElement('audio');
@@ -89,6 +94,7 @@ class AuthorPage {
             attachPreview.src = `../../images/user/${item.id}.mp3`;
             attachPreview.controls = true;
             attachPreview.style.display = 'block';
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             divAttaches.append(attachPreview);
           }
         });
@@ -147,6 +153,7 @@ class AuthorPage {
     if (cover) {
       cover.addEventListener('change', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const files = event.target.files;
         Actions.creatorCoverUpdate(files[0], this.#config.creator_info.cover_photo);
       });
@@ -156,6 +163,7 @@ class AuthorPage {
     if (photo) {
       photo.addEventListener('change', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const files = event.target.files;
         Actions.creatorPhotoUpdate(files[0], this.#config.creator_info.profile_photo);
       });
@@ -189,6 +197,7 @@ class AuthorPage {
     if (createPostBtn) {
       createPostBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
         router.go(URLS.newPost);
       });
     }
@@ -210,8 +219,10 @@ class AuthorPage {
       const likeIcon = likeIcons[index];
       likeIcon.addEventListener('click', (event) => {
         const eventLike = likeIcon.id === 'love-like-icon' ? 'removeLike' : 'addLike';
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
         Actions.clickLike(
           eventLike,
+          // @ts-expect-error TS(2531): Object is possibly 'null'.
           event.target.parentElement.parentElement.parentElement.parentElement.id
         );
       });
@@ -245,6 +256,7 @@ class AuthorPage {
     if (followBtn) {
       followBtn.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         Actions.follow(followBtn.parentElement.id);
       });
     }
@@ -253,6 +265,7 @@ class AuthorPage {
     if (unfollowBtn) {
       unfollowBtn.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         Actions.unfollow(unfollowBtn.parentElement.id, 'authorPage');
       });
     }
@@ -260,19 +273,21 @@ class AuthorPage {
     const aimBar = document.getElementById('bar--row');
     if (aimBar) {
       let width = String((this.#config.aim.money_got / this.#config.aim.money_needed) * 100);
+      // @ts-expect-error TS(2365): Operator '>' cannot be applied to types 'string' a... Remove this comment to see the full error message
       if (width > 100) {
+        // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'string'.
         width = 100;
       }
       aimBar.style.width = `${width}%`;
     }
   }
 
-  deleteHandler(e) {
+  deleteHandler(e: any) {
     e.preventDefault();
     Actions.deletePost(e.currentTarget.parentElement.parentElement.parentElement.id);
   }
 
-  updateHandler(e) {
+  updateHandler(e: any) {
     e.preventDefault();
     const postId = e.currentTarget.parentElement.parentElement.parentElement.id;
     router.go(URLS.editPost, {

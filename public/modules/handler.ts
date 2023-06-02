@@ -6,7 +6,7 @@
  *
  * @returns {}
  */
-export function clickHandler(event, config) {
+export function clickHandler(event: any, config: any) {
   if (event.target instanceof HTMLAnchorElement) {
     event.preventDefault();
     const targetId = event.target.id;
@@ -34,7 +34,7 @@ export function clickHandler(event, config) {
   }
 }
 
-export function dateParse(timestamp) {
+export function dateParse(timestamp: any) {
   const dateRaw = new Date(Date.parse(timestamp.textContent));
   let day = dateRaw.getDate().toString();
   let month = (dateRaw.getMonth() + 1).toString();

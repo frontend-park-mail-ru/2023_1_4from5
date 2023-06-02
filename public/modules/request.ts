@@ -14,7 +14,7 @@ export class Request {
    *
    * @returns {Promise} - response
    */
-  async get(path) {
+  async get(path: any) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.GET,
       mode: 'cors',
@@ -24,7 +24,7 @@ export class Request {
     return res;
   }
 
-  async getHeader(path) {
+  async getHeader(path: any) {
     const get = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.GET,
       mode: 'cors',
@@ -50,7 +50,7 @@ export class Request {
    *
    * @returns {Promise} - response
    */
-  async post(path, content, token, contentType = 'application/json') {
+  async post(path: any, content: any, token: any, contentType = 'application/json') {
     let body;
     if (contentType === 'multipart/form-data') {
       const boundary = String(Math.random())
@@ -82,7 +82,7 @@ export class Request {
     return res;
   }
 
-  async putMultipart(path, body, token) {
+  async putMultipart(path: any, body: any, token: any) {
     const response = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',
@@ -96,7 +96,7 @@ export class Request {
     return response;
   }
 
-  async postMultipart(path, body, token) {
+  async postMultipart(path: any, body: any, token: any) {
     const response = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.POST,
       mode: 'cors',
@@ -110,7 +110,7 @@ export class Request {
     return response;
   }
 
-  async delete(path, token) {
+  async delete(path: any, token: any) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.DELETE,
       mode: 'cors',
@@ -124,7 +124,7 @@ export class Request {
     return res;
   }
 
-  async deleteWithBody(path, body, token) {
+  async deleteWithBody(path: any, body: any, token: any) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.DELETE,
       mode: 'cors',
@@ -138,7 +138,7 @@ export class Request {
     return res;
   }
 
-  async put(path, body, token) {
+  async put(path: any, body: any, token: any) {
     const res = await fetch(WEB_URL + path, {
       method: this.#REQUEST_METHODS.PUT,
       mode: 'cors',

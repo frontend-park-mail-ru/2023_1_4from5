@@ -20,17 +20,17 @@ class NewPostStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.CREATE_POST:
-        this.sendPost(action.type, action, async (body) => {
+        this.sendPost(action.type, action, async (body: any) => {
           const tokenCreate = await request.getHeader('/api/post/create');
           return request.postMultipart('/api/post/create', body, tokenCreate);
         });
         break;
 
       case ActionTypes.UPDATE_POST:
-        this.sendPost(action.type, action, async (body, action) => {
+        this.sendPost(action.type, action, async (body: any, action: any) => {
           const postId = action.postId;
           body.available_subscriptions = body.subscriptions;
           const tokenEdit = await request.getHeader(`/api/post/edit/${postId}`);
@@ -44,7 +44,9 @@ class NewPostStore {
   }
 
   async renderNewPost() {
+    // @ts-expect-error TS(2339): Property 'attachments' does not exist on type '{}'... Remove this comment to see the full error message
     if (newPost.config && newPost.config.attachments) {
+      // @ts-expect-error TS(2339): Property 'attachments' does not exist on type '{}'... Remove this comment to see the full error message
       newPost.config.attachments = [];
     }
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
@@ -56,16 +58,18 @@ class NewPostStore {
     newPost.publish();
   }
 
-  async renderUpdatingPost(postId) {
+  async renderUpdatingPost(postId: any) {
     const postRequest = await request.get(`/api/post/get/${postId}`);
     const post = await postRequest.json();
 
     this.#config.attachments = [];
     if (post.attachments) {
-      post.attachments.forEach((item) => {
+      post.attachments.forEach((item: any) => {
+        // @ts-expect-error TS(2345): Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         this.#config.attachments.push(item);
       });
     }
+    // @ts-expect-error TS(2339): Property 'attachments' does not exist on type '{}'... Remove this comment to see the full error message
     newPost.config.attachments = post.attachments;
 
     const req = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
@@ -77,7 +81,7 @@ class NewPostStore {
     newPost.update(postId, post.post.title, post.post.text);
   }
 
-  async sendPost(actionType, action, callback) {
+  async sendPost(actionType: any, action: any, callback: any) {
     const createTitle = action.input.titleInput.value.trim();
     const createText = action.input.textInput.value;
     const subscriptions = action.input.availableSubscriptions;
@@ -115,8 +119,10 @@ class NewPostStore {
         status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       }
       if (status) {
+        // @ts-expect-error TS(2339): Property 'attachments' does not exist on type '{}'... Remove this comment to see the full error message
         newPost.config.attachments = [];
         this.#config.attachments = [];
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
         router.go(URLS.myPage);
       } else {
         errorTextOutput.innerHTML = '';
@@ -127,7 +133,7 @@ class NewPostStore {
     }
   }
 
-  async sendCreatedPost(action, createTitle, createText, subscriptions, callback) {
+  async sendCreatedPost(action: any, createTitle: any, createText: any, subscriptions: any, callback: any) {
     const formData = new FormData();
     formData.append('title', createTitle);
     formData.append('text', createText);
@@ -136,14 +142,14 @@ class NewPostStore {
       formData.append('subscriptions', subscriptions[sub]);
     }
     if (action.input.attachments) {
-      action.input.attachments.forEach((attach) => formData.append('attachments', attach));
+      action.input.attachments.forEach((attach: any) => formData.append('attachments', attach));
     }
 
     const result = await callback(formData, action);
     return result.ok;
   }
 
-  async sendEditedPost(action, createTitle, createText, subscriptions, callback) {
+  async sendEditedPost(action: any, createTitle: any, createText: any, subscriptions: any, callback: any) {
     const body = {
       title: createTitle,
       text: createText,
@@ -171,6 +177,7 @@ class NewPostStore {
 
     if (action.input.attachments) {
       for (const attach of action.input.attachments) {
+        // @ts-expect-error TS(2345): Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         if (!this.#config.attachments.includes(attach)) {
           const formData = new FormData();
           formData.append('attachment', attach);

@@ -8,7 +8,7 @@ export const ActionsAuthorPage = {
     });
   },
 
-  clickLike(typeLike, postId, page) {
+  clickLike(typeLike: any, postId: any, page: any) {
     dispatcher.dispatch({
       type: ActionTypes.CLICK_LIKE,
       typeLike,
@@ -29,28 +29,28 @@ export const ActionsAuthorPage = {
     });
   },
 
-  updateAim(aim) {
+  updateAim(aim: any) {
     dispatcher.dispatch({
       type: ActionTypes.UPDATE_AIM,
       aim,
     });
   },
 
-  saveAim(input) {
+  saveAim(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.SAVE_AIM,
       input,
     });
   },
 
-  follow(id) {
+  follow(id: any) {
     dispatcher.dispatch({
       type: ActionTypes.FOLLOW,
       id,
     });
   },
 
-  unfollow(id, page) {
+  unfollow(id: any, page: any) {
     dispatcher.dispatch({
       type: ActionTypes.UNFOLLOW,
       id,
@@ -58,14 +58,14 @@ export const ActionsAuthorPage = {
     });
   },
 
-  getSubscription(input) {
+  getSubscription(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.GET_SUBSCRIPION,
       input,
     });
   },
 
-  creatorCoverUpdate(file, coverId) {
+  creatorCoverUpdate(file: any, coverId: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_COVER_UPDATE,
       file,
@@ -73,7 +73,7 @@ export const ActionsAuthorPage = {
     });
   },
 
-  creatorPhotoUpdate(file, profilePhoto) {
+  creatorPhotoUpdate(file: any, profilePhoto: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_PHOTO_UPDATE,
       file,
@@ -81,21 +81,21 @@ export const ActionsAuthorPage = {
     });
   },
 
-  creatorCoverDelete(coverId) {
+  creatorCoverDelete(coverId: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_COVER_DELETE,
       coverId,
     });
   },
 
-  creatorPhotoDelete(photoId) {
+  creatorPhotoDelete(photoId: any) {
     dispatcher.dispatch({
       type: ActionTypes.CREATOR_PHOTO_DELETE,
       photoId,
     });
   },
 
-  filterSubscriptions(subscriptions) {
+  filterSubscriptions(subscriptions: any) {
     dispatcher.dispatch({
       type: ActionTypes.FILTER_SUBSCRIPTIONS,
       subscriptions,

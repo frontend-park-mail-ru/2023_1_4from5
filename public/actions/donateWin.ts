@@ -14,7 +14,7 @@ export const ActionsDonateWin = {
     });
   },
 
-  donate(input) {
+  donate(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.DONATE,
       input,

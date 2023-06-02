@@ -2,7 +2,7 @@ import { dispatcher } from '../dispatcher/dispatcher';
 import { ActionTypes } from '../actionTypes/actionTypes';
 
 export const ActionsBecomeAuthor = {
-  renderBecomeAuthor(creatorId) {
+  renderBecomeAuthor(creatorId: any) {
     dispatcher.dispatch({
       type: ActionTypes.RENDER_BECOME_AUTHOR,
       creatorId,
@@ -15,14 +15,14 @@ export const ActionsBecomeAuthor = {
     });
   },
 
-  becomeAuthor(input) {
+  becomeAuthor(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.BECOME_AUTHOR,
       input,
     });
   },
 
-  updateProfile(input) {
+  updateProfile(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.UPDATE_PROFILE,
       input,

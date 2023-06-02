@@ -11,7 +11,7 @@ class Dispatcher {
 
   #lastID;
 
-  pendingPayload;
+  pendingPayload: any;
 
   constructor() {
     this.#callbacks = {};
@@ -21,16 +21,18 @@ class Dispatcher {
     this.#lastID = 1;
   }
 
-  register(callback) {
+  register(callback: any) {
     const id = prefix + this.#lastID++;
+    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     this.#callbacks[id] = callback;
     return id;
   }
 
-  dispatch(payload) {
+  dispatch(payload: any) {
     this.#startDispatching(payload);
     try {
       for (let id in this.#callbacks) {
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         if (this.#isPending[id]) {
           continue;
         }
@@ -41,15 +43,20 @@ class Dispatcher {
     }
   }
 
-  #invokeCallback(id) {
+  #invokeCallback(id: any) {
+    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     this.#isPending[id] = true;
+    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     this.#callbacks[id](this.pendingPayload);
+    // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     this.#isHandled[id] = true;
   }
 
-  #startDispatching(payload) {
+  #startDispatching(payload: any) {
     for (let id in this.#callbacks) {
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       this.#isPending[id] = false;
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       this.#isHandled[id] = false;
     }
     this.pendingPayload = payload;

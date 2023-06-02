@@ -2,14 +2,14 @@ import { dispatcher } from '../dispatcher/dispatcher';
 import { ActionTypes } from '../actionTypes/actionTypes';
 
 export const ActionsSettings = {
-  changePassword(input) {
+  changePassword(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_PASSWORD,
       input,
     });
   },
 
-  changeUsernameLogin(username, login) {
+  changeUsernameLogin(username: any, login: any) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_USERNAME_LOGIN,
       username,
@@ -17,14 +17,14 @@ export const ActionsSettings = {
     });
   },
 
-  changePhoto(file) {
+  changePhoto(file: any) {
     dispatcher.dispatch({
       type: ActionTypes.CHANGE_PHOTO,
       file,
     });
   },
 
-  deletePhoto(photoId) {
+  deletePhoto(photoId: any) {
     dispatcher.dispatch({
       type: ActionTypes.DELETE_PHOTO,
       photoId,

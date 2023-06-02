@@ -4,13 +4,14 @@ import { isValidLogin, isValidPassword, isValidUsername } from '../../modules/is
 import { register } from './reg.js';
 
 class RegStore {
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
   constructor() {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  setState(config) {
+  setState(config: any) {
     this.#config = config;
   }
 
@@ -23,7 +24,7 @@ class RegStore {
     register.registration();
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_REG:
         this.renderReg();

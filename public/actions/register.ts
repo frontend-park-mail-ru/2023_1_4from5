@@ -8,7 +8,7 @@ export const ActionsRegister = {
     });
   },
 
-  registration(input) {
+  registration(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.REGISTRATION,
       input,

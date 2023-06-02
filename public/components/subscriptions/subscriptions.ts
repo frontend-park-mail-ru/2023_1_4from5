@@ -1,3 +1,4 @@
+// @ts-expect-error TS(2307): Cannot find module './subscriptions.handlebars' or... Remove this comment to see the full error message
 import template from './subscriptions.handlebars';
 import { Actions } from '../../actions/actions';
 import { getSubscription } from '../getSubscription/getSubscription';
@@ -11,7 +12,7 @@ class Subscriptions {
 
   #isPaid = true;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -19,7 +20,7 @@ class Subscriptions {
     return this.#parent;
   }
 
-  render(subs) {
+  render(subs: any) {
     subs.isPaid = this.#isPaid;
 
     this.#parent.innerHTML = '';
@@ -32,19 +33,25 @@ class Subscriptions {
     const chapterFollow = document.getElementById('chapter--follow');
 
     if (this.#isPaid) {
+      // @ts-expect-error TS(2531): Object is possibly 'null'.
       chapterPaid.classList.add('chapter--active');
+      // @ts-expect-error TS(2531): Object is possibly 'null'.
       chapterFollow.classList.remove('chapter--active');
     } else {
+      // @ts-expect-error TS(2531): Object is possibly 'null'.
       chapterFollow.classList.add('chapter--active');
+      // @ts-expect-error TS(2531): Object is possibly 'null'.
       chapterPaid.classList.remove('chapter--active');
     }
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     chapterPaid.addEventListener('click', (event) => {
       event.preventDefault();
       this.#isPaid = true;
       this.render(subs);
     });
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     chapterFollow.addEventListener('click', (event) => {
       event.preventDefault();
       this.#isPaid = false;
@@ -58,6 +65,7 @@ class Subscriptions {
       const photo = creatorPhotos[index];
       photo.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const creatorId = event.target.parentElement.id;
         router.go(URLS.myPage, '', creatorId);
       });
@@ -68,6 +76,7 @@ class Subscriptions {
       const name = creatorNames[index];
       name.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const creatorId = event.target.id;
         router.go(URLS.myPage, '', creatorId);
       });
@@ -78,8 +87,11 @@ class Subscriptions {
       const card = extendBtns[index];
       card.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const subId = event.target.parentElement.id;
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const price = event.target.parentElement.querySelector('#month__cost').textContent;
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         const creatorId = event.target.parentElement.querySelector('.subs__creator').id;
         getSubscription.render(subId, price, creatorId);
       });
@@ -90,6 +102,7 @@ class Subscriptions {
       const disfollow = disfollowBtns[index];
       disfollow.addEventListener('click', (event) => {
         event.preventDefault();
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         Actions.unfollow(event.target.parentElement.id, 'subscriptions');
       });
     }

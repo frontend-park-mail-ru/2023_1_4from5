@@ -114,7 +114,7 @@ class StatisticsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.GET_MONEY:
         await this.getMoney(action.input);
@@ -127,7 +127,7 @@ class StatisticsStore {
     }
   }
 
-  setCardStatistics(input, type) {
+  setCardStatistics(input: any, type: any) {
     let propConfig;
     let moneyAll;
     let moneyPart;
@@ -135,28 +135,34 @@ class StatisticsStore {
       for (let prop in input) {
         if (prop === 'money_from_donations' || prop === 'money_from_subscriptions') {
           moneyPart = this.#config.statisticsTotalListMoney.find((item) => item.name === prop);
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           moneyPart.count = input[prop];
         }
         if (prop === 'subscriptions_bought' || prop === 'new_followers') {
           let propConfig = this.#config.statisticsTotalList.find((item) => item.name === prop);
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           propConfig.count = input[prop];
         }
       }
       moneyAll = this.#config.statisticsTotalListMoney.find((item) => item.name === 'money_all');
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       moneyAll.count = Number(input.money_from_donations) + Number(input.money_from_subscriptions);
     } else if (type === 'interval') {
       for (let prop in input) {
         if (prop === 'money_from_donations' || prop === 'money_from_subscriptions') {
           moneyPart = this.#config.statisticsIntervalListMoney.find((item) => item.name === prop);
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           moneyPart.count = input[prop];
         }
         if (prop === 'subscriptions_bought' || prop === 'new_followers' || prop === 'posts_per_month'
             || prop === 'donations_count' || prop === 'likes_count' || prop === 'comments_count') {
           propConfig = this.#config.statisticsIntervalList.find((item) => item.name === prop);
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           propConfig.count = input[prop];
         }
       }
       moneyAll = this.#config.statisticsIntervalListMoney.find((item) => item.name === 'money_all');
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       moneyAll.count = Number(input.money_from_donations) + Number(input.money_from_subscriptions);
     }
   }
@@ -182,8 +188,11 @@ class StatisticsStore {
 
     let count = 0;
     for (let i = this.#config.startYear; i <= this.#config.currentYear; ++i) {
+      // @ts-expect-error TS(2339): Property 'name' does not exist on type 'never'.
       if (!this.#config.endYears.find((item) => item.name === i)) {
+        // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'never'.
         this.#config.endYears.push({ id: count, name: i });
+        // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'never'.
         this.#config.startYears.push({ id: count, name: i });
       }
       count++;
@@ -192,8 +201,11 @@ class StatisticsStore {
     this.#config.selectedEndYear = count - 1;
 
     this.#config.months.forEach((item, index) => {
+      // @ts-expect-error TS(2339): Property 'id' does not exist on type 'never'.
       if (!this.#config.startMonths.find((item) => item.id === index)) {
+        // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'never'.
         this.#config.startMonths.push({ id: index, name: item });
+        // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'never'.
         this.#config.endMonths.push({ id: index, name: item });
       }
     });
@@ -201,12 +213,15 @@ class StatisticsStore {
     let startMonthStr = this.#config.startMonth + 1;
     let endMonthStr = this.#config.currentMonth + 1;
     if (startMonthStr < 10) {
+      // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
       startMonthStr = `0${startMonthStr}`;
     }
     if (endMonthStr < 10) {
+      // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
       endMonthStr = `0${endMonthStr}`;
     }
 
+    // @ts-expect-error TS(2554): Expected 3-4 arguments, but got 2.
     const statisticsTotalReq = await request.post('/api/creator/statistics', {
       first_month: `${this.#config.startYear}-${startMonthStr}-01T00:00:00.000Z`,
       second_month: `${this.#config.currentYear}-${endMonthStr}-01T00:00:00.000Z`
@@ -218,9 +233,11 @@ class StatisticsStore {
 
     let currentMonthStr = this.#config.currentMonth + 1;
     if (currentMonthStr < 10) {
+      // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
       currentMonthStr = `0${currentMonthStr}`;
     }
 
+    // @ts-expect-error TS(2554): Expected 3-4 arguments, but got 2.
     const statisticsLastMonthReq = await request.post('/api/creator/statistics', {
       first_month: `${this.#config.currentYear}-${currentMonthStr}-01T00:00:00.000Z`,
       second_month: `${this.#config.currentYear}-${currentMonthStr}-01T00:00:00.000Z`
@@ -242,7 +259,7 @@ class StatisticsStore {
     statistics.render();
   }
 
-  async getMoney(input) {
+  async getMoney(input: any) {
     const phoneNumber = input.phoneInput.value.trim().replace(/ /g, '').replace(/-/g, '');
     const money = input.sumInput.value.replace(/ /g, '');
 
@@ -263,6 +280,7 @@ class StatisticsStore {
         input.phoneInput.style.backgroundColor = color.error;
       }
     } else {
+      // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
       const getMoneyReq = await request.put('/api/creator/transferMoney', {
         money: Number(money),
         phone_number: phoneNumber.substring(1),
@@ -276,7 +294,7 @@ class StatisticsStore {
     }
   }
 
-  async showStatistics(input) {
+  async showStatistics(input: any) {
     const startMonthSelected = Number(input.startMonth.value);
     const startYearSelected = Number(input.startYear.value);
     const endMonthSelected = Number(input.endMonth.value);
@@ -304,13 +322,18 @@ class StatisticsStore {
       let startMonthSelectedStr = startMonthSelected + 1;
       let endMonthSelectedStr = endMonthSelected + 1;
       if (startMonthSelectedStr < 10) {
+        // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
         startMonthSelectedStr = `0${startMonthSelectedStr}`;
       }
       if (endMonthSelectedStr < 10) {
+        // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
         endMonthSelectedStr = `0${endMonthSelectedStr}`;
       }
+      // @ts-expect-error TS(2554): Expected 3-4 arguments, but got 2.
       const statisticsIntervalReq = await request.post('/api/creator/statistics', {
+        // @ts-expect-error TS(2339): Property 'name' does not exist on type 'never'.
         first_month: `${this.#config.startYears[startYearSelected].name}-${startMonthSelectedStr}-01T00:00:00.000Z`,
+        // @ts-expect-error TS(2339): Property 'name' does not exist on type 'never'.
         second_month: `${this.#config.endYears[endYearSelected].name}-${endMonthSelectedStr}-01T00:00:00.000Z`
       });
       if (statisticsIntervalReq.ok) {

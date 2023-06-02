@@ -8,7 +8,7 @@ class SearchStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.SEARCH_AUTHORS:
         await this.renderSearch(action.input);
@@ -19,7 +19,7 @@ class SearchStore {
     }
   }
 
-  async renderSearch(input) {
+  async renderSearch(input: any) {
     let creatorListRequest;
     if (!input) {
       creatorListRequest = await request.get('/api/creator/list');

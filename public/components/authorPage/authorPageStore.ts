@@ -18,13 +18,14 @@ import { Actions } from '../../actions/actions';
 import { postStore } from '../post/postStore';
 
 class AuthorPageStore {
+  // @ts-expect-error TS(7008): Member '#config' implicitly has an 'any' type.
   #config;
 
   constructor() {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  setState(config) {
+  setState(config: any) {
     this.#config = config;
   }
 
@@ -32,7 +33,7 @@ class AuthorPageStore {
     return this.#config;
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_AUTHOR_PAGE:
         await this.renderMyPage();
@@ -49,6 +50,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.RENDER_AIM:
+        // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
         aim.render();
         break;
 
@@ -65,6 +67,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.FOLLOW:
+        // @ts-expect-error TS(2554): Expected 3-4 arguments, but got 1.
         await request.post(`/api/user/follow/${action.id}`);
         this.#config.follows = true;
         await userStore.followAll();
@@ -73,6 +76,7 @@ class AuthorPageStore {
         break;
 
       case ActionTypes.UNFOLLOW:
+        // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
         await request.put(`/api/user/unfollow/${action.id}`);
         if (action.page === 'authorPage') {
           this.#config.follows = false;
@@ -131,10 +135,10 @@ class AuthorPageStore {
       creatorPage = await request.get(`/api/creator/page/${userStore.getUserState().authorURL}`);
     }
     const result = await creatorPage.json();
-    result.posts.forEach((post) => {
+    result.posts.forEach((post: any) => {
       const textArr = post.text.split('\\n');
       post.textWithBreaks = [];
-      textArr.forEach((text) => {
+      textArr.forEach((text: any) => {
         post.textWithBreaks.push({ text });
       });
     });
@@ -148,22 +152,24 @@ class AuthorPageStore {
     authorPage.render();
   }
 
-  async changeLikeState(action) {
+  async changeLikeState(action: any) {
     if (action.typeLike === 'addLike') {
+      // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
       const result = await request.put('/api/post/addLike', { post_id: action.postId });
       if (result.ok) {
         const res = await result.json();
-        const currentPost = this.#config.posts.find((post) => post.id === action.postId);
+        const currentPost = this.#config.posts.find((post: any) => post.id === action.postId);
         currentPost.is_liked = true;
         currentPost.likes_count = res.likes_count;
         authorPage.config = this.#config;
         authorPage.render();
       }
     } else {
+      // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
       const result = await request.put('/api/post/removeLike', { post_id: action.postId });
       if (result.ok) {
         const res = await result.json();
-        const currentPost = this.#config.posts.find((post) => post.id === action.postId);
+        const currentPost = this.#config.posts.find((post: any) => post.id === action.postId);
         currentPost.is_liked = false;
         currentPost.likes_count = res.likes_count;
         authorPage.config = this.#config;
@@ -172,7 +178,7 @@ class AuthorPageStore {
     }
   }
 
-  async saveEditAim(input) {
+  async saveEditAim(input: any) {
     let description = input.descriptionInput.value.trim();
     const errDescriptionOutput = input.errorDescriptionOutput;
     const validStructDescription = { ...validationStructure };
@@ -209,6 +215,7 @@ class AuthorPageStore {
       errMoneyNeededOutput.innerHTML = errMoneyNeeded;
       input.moneyNeededInput.style.backgroundColor = color.error;
     } else {
+      // @ts-expect-error TS(2554): Expected 3-4 arguments, but got 2.
       const aimEdit = await request.post('/api/creator/aim/create', {
         creator_id: this.#config.creator_info.creator_id,
         description: description,
@@ -232,19 +239,19 @@ class AuthorPageStore {
     }
   }
 
-  async creatorPhotoDelete(photoId) {
+  async creatorPhotoDelete(photoId: any) {
     const token = await request.getHeader(`/api/creator/deleteProfilePhoto/${photoId}`);
     await request.delete(`/api/creator/deleteProfilePhoto/${photoId}`, token);
     await this.renderMyPage();
   }
 
-  async creatorCoverDelete(coverId) {
+  async creatorCoverDelete(coverId: any) {
     const token = await request.getHeader(`/api/creator/deleteCoverPhoto/${coverId}`);
     await request.delete(`/api/creator/deleteCoverPhoto/${coverId}`, token);
     await this.renderMyPage();
   }
 
-  async getSub(input) {
+  async getSub(input: any) {
     //     let moneyCount = input.moneyInput.value.replace(/ /g, '');
     //     const errorOutput = input.errorOutput;
     //     const validStructMoney = { ...validationStructure };

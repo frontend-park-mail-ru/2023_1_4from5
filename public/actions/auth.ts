@@ -8,7 +8,7 @@ export const ActionsAuth = {
     });
   },
 
-  authorization(input) {
+  authorization(input: any) {
     dispatcher.dispatch({
       type: ActionTypes.AUTHORIZATION,
       input,

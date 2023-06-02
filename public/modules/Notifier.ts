@@ -24,7 +24,7 @@ export const URLS = {
   statistics: '/finance',
 };
 
-export function notifier(path, data, additionalUrl) {
+export function notifier(path: any, data: any, additionalUrl: any) {
   switch (path.pathname) {
     case URLS.root:
       Actions.renderStartPage();

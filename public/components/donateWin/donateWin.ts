@@ -1,5 +1,6 @@
 import { color } from '../../consts/styles.js';
 import { Actions } from '../../actions/actions';
+// @ts-expect-error TS(2307): Cannot find module './donateWin.handlebars' or its... Remove this comment to see the full error message
 import template from './donateWin.handlebars';
 
 const rootElement = document.getElementById('root');
@@ -7,7 +8,7 @@ const rootElement = document.getElementById('root');
 export class DonateWin {
   #parent;
 
-  constructor(parent) {
+  constructor(parent: any) {
     this.#parent = parent;
   }
 
@@ -18,6 +19,7 @@ export class DonateWin {
     this.#parent.appendChild(newDiv);
 
     const background = document.getElementById('backDonateWin');
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     background.addEventListener('click', (e) => {
       e.preventDefault();
       Actions.removeDonateWin();
@@ -30,8 +32,10 @@ export class DonateWin {
     const moneyInput = document.getElementById('donateWin-money');
     const errorOutput = document.getElementById('donateWin-error');
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     moneyInput.style.backgroundColor = color.field;
 
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     donateWinBtn.addEventListener('click', (e) => {
       e.preventDefault();
       Actions.donate({

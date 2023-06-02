@@ -15,7 +15,7 @@ class DonateWinStore {
     donateWin.render();
   }
 
-  reduce(action) {
+  reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_DONATE_WIN:
         donateWin.render();
@@ -31,7 +31,7 @@ class DonateWinStore {
     }
   }
 
-  donate(input) {
+  donate(input: any) {
     let moneyCount = input.moneyInput.value.replace(/ /g, '');
     const errorOutput = input.errorOutput;
     const validStructMoney = { ...validationStructure };

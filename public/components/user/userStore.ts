@@ -41,7 +41,7 @@ class UserStore {
     return this.#user;
   }
 
-  setUserState(user) {
+  setUserState(user: any) {
     this.#user.usernameIn = user.usernameIn;
     this.#user.isAuthorIn = user.isAuthorIn;
     this.#user.isAuthorizedIn = user.isAuthorizedIn;
@@ -50,7 +50,7 @@ class UserStore {
     this.#user.profilePhoto = user.profilePhoto;
   }
 
-  setState(profile) {
+  setState(profile: any) {
     this.#user.isAuthorizedIn = true;
     this.#user.login = profile.login;
     this.#user.usernameIn = profile.name;
@@ -59,7 +59,7 @@ class UserStore {
     this.#user.authorURL = profile.creator_id;
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.GET_USER:
         await this.getUser();
@@ -88,7 +88,9 @@ class UserStore {
   }
 
   async logout() {
+    // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
     await request.put('/api/auth/logout');
+    // @ts-expect-error TS(2551): Property 'loginIn' does not exist on type '{ usern... Remove this comment to see the full error message
     this.#user.loginIn = '';
     this.#user.usernameIn = '';
     this.#user.isAuthorIn = false;
@@ -96,6 +98,7 @@ class UserStore {
     this.#user.profilePhoto = '';
     Actions.removeWinSettings();
     Actions.renderSideBar(this.#user);
+    // @ts-expect-error TS(2554): Expected 3 arguments, but got 1.
     router.go(URLS.root);
   }
 
@@ -114,6 +117,7 @@ class UserStore {
             getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
               .then(async (currentToken) => {
                 if (currentToken) {
+                  // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
                   await request.put(`/api/user/subscribeToNotifications/${follow.creator}`, { notification_token: currentToken });
                 } else {
                   console.log('No registration token available. Request permission to generate one.');
@@ -130,6 +134,7 @@ class UserStore {
         getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
           .then(async (currentToken) => {
             if (currentToken) {
+              // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
               await request.put('/api/creator/subscribeToNotifications', { notification_token: currentToken });
             } else {
               console.log('No registration token available. Request permission to generate one.');
@@ -146,13 +151,14 @@ class UserStore {
     }
   }
 
-  async unfollow(creatorId) {
+  async unfollow(creatorId: any) {
     const app = initializeApp(this.#firebaseConfig);
     const messaging = getMessaging(app);
 
     getToken(messaging, { vapidKey: 'BATXyq0BC6pv1xAdt7_F9MvESBLVdDRItBugFcktnkC_4pFo04NMvVNkt91enPfP2gjHQ8vpTAO3Dn1Ss98J0d0' })
       .then(async (currentToken) => {
         if (currentToken) {
+          // @ts-expect-error TS(2554): Expected 3 arguments, but got 2.
           await request.put(`/api/user/unsubscribeFromNotifications/${creatorId}`, { notification_token: currentToken });
         } else {
           console.log('No registration token available. Request permission to generate one.');

@@ -4,6 +4,7 @@ import { notifications } from './notifications';
 import { sideBar } from '../sideBar/sideBar';
 
 class NotificationsStore {
+  // @ts-expect-error TS(7008): Member '#notifications' implicitly has an 'any[]' ... Remove this comment to see the full error message
   #notifications;
 
   constructor() {
@@ -16,14 +17,14 @@ class NotificationsStore {
     return this.#notifications;
   }
 
-  addNotification(ntf) {
+  addNotification(ntf: any) {
     this.#notifications.push(ntf);
     notifications.removeNotifications();
     notifications.render(this.#notifications);
     sideBar.render();
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.RENDER_NOTIFICATIONS:
         this.renderNotifications(this.#notifications);
@@ -38,7 +39,7 @@ class NotificationsStore {
     }
   }
 
-  renderNotifications(config) {
+  renderNotifications(config: any) {
     this.removeNotifications();
     notifications.render(config);
   }

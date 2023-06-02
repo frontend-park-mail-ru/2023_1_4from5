@@ -4,30 +4,33 @@ const CACHE_URLS = [
 ];
 
 self.addEventListener('activate', (event) => {
+  // @ts-expect-error TS(2339): Property 'waitUntil' does not exist on type 'Event... Remove this comment to see the full error message
   event.waitUntil(enableNavigationPreload());
 });
 
 self.addEventListener('install', (event) => {
+  // @ts-expect-error TS(2339): Property 'waitUntil' does not exist on type 'Event... Remove this comment to see the full error message
   event.waitUntil(
     addResourcesToCache(CACHE_URLS)
   );
 });
 
-const addResourcesToCache = async (resources) => {
+const addResourcesToCache = async (resources: any) => {
   const cache = await caches.open(CACHE_NAME);
   await cache.addAll(resources);
 };
 
-const putInCache = async (request, response) => {
+const putInCache = async (request: any, response: any) => {
   const cache = await caches.open(CACHE_NAME);
   await cache.put(request, response);
 };
 
 const netFirst = async ({
   request,
-  preloadResponsePromise, /* fallbackUrl */
-// eslint-disable-next-line consistent-return
-}) => {
+
+  // eslint-disable-next-line consistent-return
+  preloadResponsePromise /* fallbackUrl */
+}: any) => {
   // if (navigator.onLine) {
   // try to get the resource from the network
   const responseFromCache = await caches.match(request);
@@ -61,16 +64,21 @@ const netFirst = async ({
 };
 
 const enableNavigationPreload = async () => {
+  // @ts-expect-error TS(2339): Property 'registration' does not exist on type 'Wi... Remove this comment to see the full error message
   if (self.registration.navigationPreload) {
     // Enable navigation preloads!
+    // @ts-expect-error TS(2339): Property 'registration' does not exist on type 'Wi... Remove this comment to see the full error message
     await self.registration.navigationPreload.enable();
   }
 };
 
 self.addEventListener('fetch', (event) => {
+  // @ts-expect-error TS(2339): Property 'respondWith' does not exist on type 'Eve... Remove this comment to see the full error message
   event.respondWith(
     netFirst({
+      // @ts-expect-error TS(2339): Property 'request' does not exist on type 'Event'.
       request: event.request,
+      // @ts-expect-error TS(2339): Property 'preloadResponse' does not exist on type ... Remove this comment to see the full error message
       preloadResponsePromise: event.preloadResponse,
     })
   );

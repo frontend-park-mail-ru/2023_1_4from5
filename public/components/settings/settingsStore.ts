@@ -14,7 +14,7 @@ class SettingsStore {
     dispatcher.register(this.reduce.bind(this));
   }
 
-  async reduce(action) {
+  async reduce(action: any) {
     switch (action.type) {
       case ActionTypes.CHANGE_PASSWORD:
         await this.changePassword(action.input);
@@ -42,7 +42,7 @@ class SettingsStore {
     settings.render();
   }
 
-  async changePhoto(file) {
+  async changePhoto(file: any) {
     const formData = new FormData();
     formData.append('upload', file);
     formData.append('path', userStore.getUserState().profilePhoto);
@@ -56,7 +56,7 @@ class SettingsStore {
     Actions.renderSideBar(user);
   }
 
-  async changePassword(input) {
+  async changePassword(input: any) {
     const oldPwd = input.oldPwdInput.value;
     const newPwd = input.newPwdInput.value;
     const errPwd = isValidPassword(newPwd);
@@ -77,7 +77,7 @@ class SettingsStore {
     }
   }
 
-  async changeUsernameLogin(usernameInput, loginInput) {
+  async changeUsernameLogin(usernameInput: any, loginInput: any) {
     const name = usernameInput.value;
     const login = loginInput.value;
 
@@ -105,7 +105,7 @@ class SettingsStore {
     }
   }
 
-  async deletePhoto(photoId) {
+  async deletePhoto(photoId: any) {
     //.log(photoId);
     const token = await request.getHeader(`/api/user/deleteProfilePhoto/${photoId}`);
     await request.delete(`/api/user/deleteProfilePhoto/${photoId}`, token);
