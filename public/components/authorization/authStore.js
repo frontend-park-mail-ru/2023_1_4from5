@@ -2,9 +2,7 @@ import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { auth } from './auth.js';
 import {
-  isSpecialSignWithEnt,
-  isValidLogin,
-  isValidPassword, isWhiteSignLogin, isWhiteSignPassword,
+  isWhiteSignLogin, isWhiteSignPassword,
   LENGTH, validation,
   validationStructure
 } from '../../modules/isValid.js';
