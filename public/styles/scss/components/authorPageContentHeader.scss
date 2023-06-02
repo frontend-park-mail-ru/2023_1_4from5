@@ -4,14 +4,19 @@
   padding: 1em 1em 0 0;
 }
 
+.about__name--container {
+  margin-bottom: 0.5em;
+  display: flex;
+}
+
 .about__name {
   font-size: $font-size-4;
   font-weight: bold;
-  margin-bottom: 0.5em;
+  width: fit-content;
+  margin-right: 1em;
 }
 
 .about__edit {
-  margin-left: 1em;
 }
 
 .about__description {
@@ -24,7 +29,7 @@
 
 //--------media--------------
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .about {
     padding: 0;
     width: 90%;

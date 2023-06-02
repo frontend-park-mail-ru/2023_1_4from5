@@ -1,7 +1,17 @@
 @import "../general/variables";
 
 .post__space {
-  margin: 7em 5em 5em 5em;
+  margin: 7em 10vw 5em 10vw;
+}
+
+.back__btn {
+  height: 2em;
+  background-color: $sub__btn-color;
+  color: black;
+
+  &:hover {
+    background-color: $sub__btn-color-hover;
+  }
 }
 
 .post__photo {
@@ -9,7 +19,21 @@
 }
 
 .privacy__img, .post__subs, .privacy__all {
-  margin-top: 0.7em;
+  margin-top: 0.8em;
+}
+
+$privacy__img-width: 1.5em;
+.post__privacy--single {
+  display: grid;
+  grid-template-columns: 8em $privacy__img-width 1fr;
+}
+
+.privacy__label {
+  margin-left: 1em;
+}
+
+.post__subs--list {
+  margin-left: 1em;
 }
 
 .post__footer {
@@ -60,8 +84,10 @@ $comment__photo-size: 3em;
 #comment__photo {
   height: $comment__photo-size;
   width: $comment__photo-size;
-  background-size: 100%;
   border-radius: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .comment__icon {
@@ -73,4 +99,96 @@ $comment__photo-size: 3em;
   font-size: $font-size;
   margin-bottom: 1em;
   height: 3em;
+}
+
+#comment__date {
+  margin-top: 1em;
+}
+
+.creation__date {
+  margin-top: 1em;
+}
+
+//------------media----------------
+@media (max-width: 1200px) {
+  .post__privacy--single {
+    grid-template-columns: 6em $privacy__img-width 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .post__subs {
+    font-size: $font-size-small;
+  }
+
+  .comment__info {
+    font-size: $font-size-small;
+  }
+}
+
+@media (max-width: 800px) {
+  .privacy__label--single {
+    display: none;
+  }
+
+  .comment__icon {
+    height: 1.5em;
+  }
+
+  .comment__send {
+    position: relative;
+    right: -1em;
+  }
+
+  .post__date {
+    display: none;
+  }
+
+  #post__header--single {
+    display: block;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .post__space {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .comment__send {
+    width: 2em;
+  }
+
+  .post__photo {
+    margin: 0;
+  }
+
+  .privacy__img {
+    display: none;
+  }
+
+  .post__subs {
+    margin-left: 0;
+  }
+
+  .post__privacy--single {
+    grid-template-columns: 5em 1fr;
+  }
+
+  .comment__container {
+    grid-template-columns: 5em 1fr 4em;
+  }
+}
+
+@media (max-width: 600px) {
+  $comment__photo-size-600: 2.5em;
+  #comment__photo {
+    width: $comment__photo-size-600;
+    height: $comment__photo-size-600;
+  }
+
+  .comment__container {
+    grid-template-columns: 3em 1fr 4em;
+  }
 }

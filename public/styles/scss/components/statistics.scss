@@ -23,7 +23,7 @@ $num-of-columns: 2;
   display: grid;
   grid-template-columns: 1fr 10em;
   font-size: $font-size-2;
-  margin-top: 2em;
+  margin: 2em auto auto;
 }
 
 .select_date__show_button {
@@ -54,8 +54,8 @@ $num-of-columns: 2;
 }
 
 .statistics__icon {
-  height: 2em;
-  width: 2em;
+  margin-top: 4px;
+  width: 60%;
 }
 
 $num-of-columns: 3;
@@ -77,8 +77,8 @@ $num-of-columns: 3;
 }
 
 .get_money {
-  margin-top: 2em;
-  padding: 2em;
+  margin: 2em auto auto;
+  padding: 2em 4em 2em 4em;
   width: fit-content;
   border-radius: $elem-border-radius;
   background-color: $card-color;
@@ -109,4 +109,112 @@ $num-of-columns: 3;
 
 .statistics__count {
   font-size: $font-size-2;
+}
+
+.statistics__finance--img {
+  width: 60%;
+  margin-top: 3px;
+}
+
+//---------media-----------
+@media (max-width: 1100px) {
+  .statistics__select_date {
+    display: block;
+  }
+
+  .select_date__show_button {
+    margin-top: 1em;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .statistics__card {
+    grid-template-columns: 2em 1fr;
+    font-size: $font-size-small;
+  }
+
+  .statistics__title {
+    font-size: $font-size-3;
+  }
+}
+
+@media (max-width: 1000px) {
+  .statistics__total {
+    display: block;
+  }
+
+  .statistics__total_money {
+    display: block;
+  }
+
+  $num-of-columns-1000: 2;
+  .statistics__interval {
+    grid-template-columns: repeat($num-of-columns-1000, 100% / $num-of-columns-1000);
+    grid-template-rows: 10em 10em 10em;
+  }
+
+  .statistics__interval_money {
+    display: block;
+  }
+
+  .statistics__date {
+    font-size: $font-size;
+  }
+}
+
+@media (max-width: 800px) {
+  .statistics {
+    margin-left: 5em;
+    margin-right: 5em;
+  }
+}
+
+@media (max-width: 650px) {
+  .statistics {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+
+  .statistics__interval {
+    display: block;
+    margin-bottom: 3em;
+  }
+
+  .statistics__label--title {
+    display: none;
+  }
+
+  .statistics__withdraw {
+    font-size: $font-size-2;
+  }
+
+  .statistics__balance {
+    font-size: $font-size;
+  }
+}
+
+@media (max-width: 450px) {
+  .statistics__date {
+    display: grid;
+    grid-template-rows: 2em 2em;
+  }
+
+  .get_money {
+    padding: 1.5em 2em 1.5em 2em;
+  }
+
+  .statistics__input--title {
+    font-size: $font-size-small;
+  }
+
+  .get_money__button {
+    font-size: $font-size-small;
+    height: 3em;
+  }
+}
+
+@media (max-width: 370px) {
+  .statistics__input--form {
+    width: 90%;
+  }
 }

@@ -1,7 +1,6 @@
 <div id="author__photo" class="author__photo--container">
 
-    <img class="creator__photo" src="../../images/author-photo.jpg" alt="">
-    <img class="creator__photo" src="../../images/user/{{creator_info.profile_photo}}.jpg" alt="">
+    <img id="creator__photo" class="creator__photo img__border" style="background-image: url(../../images/user/{{creator_info.profile_photo}}.jpg)" alt="">
     {{#if is_my_page}}
         <div class="photo--hover">
             <label class="creatorphoto__load--label">
@@ -14,8 +13,8 @@
     {{/if}}
 </div>
 
-<div id="author__header">
-    <div id="author__header--photo">
+<div id="author__header" style="background-image: url(../../images/cover-photo.svg)">
+    <div id="author__header--photo" style="background-image: url(../../images/user/{{creator_info.cover_photo}}.jpg)">
         {{#if is_my_page}}
             <label class="cover__load--label">
                 <input id="cover__upload" type="file" class="upload"/>
@@ -38,12 +37,12 @@
     <div class="author__empty-space"></div>
 
     <div class="about">
-        <p id="creator__name" class="about__name">
-            {{creator_info.name}}
+        <div id="creator__name" class="about__name--container">
+            <p class="about__name">{{creator_info.name}}</p>
             {{#if is_my_page}}
                 <img id="edit__profile" class="about__edit clickable" src="../../images/edit.svg" alt="edit">
             {{/if}}
-        </p>
+        </div>
         <p id="creator__description" class="about__description">{{creator_info.description}}</p>
 
         <div class="subscribers-1000px">
@@ -95,7 +94,7 @@
             <div class="aim__container">
                 {{#if aim.description}}
                     <div class="aim__money">
-                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} р</p>
+                        <p class="aim__text">{{aim.money_got}} из {{aim.money_needed}} ₽</p>
                         {{#if is_my_page}}
                             <img id="aim__edit" class="clickable" src="../../images/edit.svg" alt="edit">
                         {{/if}}
@@ -111,7 +110,7 @@
                         </div>
                         <p class="no-aim">У вас пока не выбрана цель</p>
                     {{else}}
-                        <p class="no-aim">У автора нет цели, есть только путь</p>
+                        <p class="no-aim">У автора пока не выбрана цель</p>
                     {{/if}}
                 {{/if}}
             </div>

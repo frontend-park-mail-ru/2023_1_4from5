@@ -70,7 +70,13 @@
         {{#if notifications.showDisplay}}
             <div class="winsettings__chapter">
                 <a id="{{notifications.id}}" class="winsettings__href clickable" href={{notifications.href}}>
-                    <img class="winsettins__img" src="../../images/notification.svg" alt="myPage">
+                    {{#if are_notifications}}
+                        <img class="winsettins__img"
+                             src="../../images/notification.svg" alt="">
+                    {{else}}
+                        <img class="winsettins__img"
+                             src="../../images/no_notifications.svg" alt="">
+                    {{/if}}
                     <p>Уведомления</p>
                 </a>
             </div>

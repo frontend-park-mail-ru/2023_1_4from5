@@ -6,7 +6,7 @@ $sidebar__border-weight: 2px;
   position: fixed;
 
   display: grid;
-  grid-template-columns: 7% 7% 1fr fit-content(100%);
+  grid-template-columns: 7% 20% 1fr fit-content(100%);
 
   width: 100%;
   height: $sidebar-height;
@@ -25,6 +25,9 @@ $sidebar__element-offset: 0.4vw;
   margin-right: $sidebar__element-offset;
 }
 
+.become-author {
+}
+
 .sidebar__about--element {
   margin-left: 0.8vw;
 }
@@ -35,6 +38,8 @@ $sidebar__element-offset: 0.4vw;
 
 .sidebar__info {
   @include v-align($sidebar-height);
+  display: grid;
+  grid-template-columns: 30% 70%;
 }
 
 $sidebar__element-height: 1em;
@@ -44,12 +49,13 @@ $sidebar__element-height: 1em;
   position: relative;
   top: (($sidebar-height - $sidebar__element-height) / 2);
   border-left: $hr-color solid $sidebar__border-weight;
+  width: fit-content;
   @include v-align($sidebar__element-height)
 }
 
 .sidebar__authors {
   @include v-align($sidebar-height);
-  text-align: center;
+  margin-left: 1em;
 }
 
 $sidebar-offset: 0.4vw;
@@ -72,7 +78,7 @@ $sidebar__input-background-color: #ebedf0;
 
 .sidebar__input {
   height: ($sidebar-height * 0.6);
-  width: 30%;
+  width: 35%;
   font-size: $font-size-2;
 
   padding-left: 2em;
@@ -110,10 +116,12 @@ $sidebar__user--photo-height: 2em;
   width: $sidebar__user--photo-height;
   height: $sidebar__user--photo-height;
   border-radius: 100%;
-  background-size: 100%;
 
   position: relative;
   top: (($sidebar-height - $sidebar__user--photo-height) / 2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .sidebar__menu {

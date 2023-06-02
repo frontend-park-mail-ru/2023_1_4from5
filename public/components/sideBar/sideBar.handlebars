@@ -12,14 +12,16 @@
                 </a>
             </div>
         {{/if}}
+
+        {{#if beAuthor.showDisplay}}
+            <div>
+                <a id="{{beAuthor.id}}" class="sidebar__element become-author hover--underline sidebar__media--1000px"
+                   href={{beAuthor.href}}> Стать автором </a>
+            </div>
+        {{/if}}
     </div>
 
     <div class="sidebar__authors">
-        {{#if beAuthor.showDisplay}}
-            <a id="{{beAuthor.id}}" class="sidebar__element hover--underline sidebar__media--1000px"
-               href={{beAuthor.href}}> Стать автором </a>
-        {{/if}}
-
         {{#if findAuth.showDisplay}}
             <a id="{{findAuth.id}}" class="sidebar__element hover--underline sidebar__media--1000px"
                href={{findAuth.href}}> Авторы </a>
@@ -41,7 +43,8 @@
         {{/if}}
 
         {{#if reg.showDisplay}}
-            <a id="{{reg.id}}" class="sidebar__reg sidebar__element hover--underline" href={{reg.href}}> Регистрация </a>
+            <a id="{{reg.id}}" class="sidebar__reg sidebar__element hover--underline" href={{reg.href}}>
+                Регистрация </a>
         {{/if}}
 
         {{#if auth.showDisplay}}
@@ -49,13 +52,22 @@
         {{/if}}
         {{#if notifications.showDisplay}}
             <a id="{{notifications.id}}">
-                <img class="sidebar__notification sidebar__element sidebar__media--1300px clickable" src="../../images/notification.svg" alt="notification">
+                {{#if are_notifications}}
+                    <img id="sidebar__notifications"
+                         class="sidebar__notification sidebar__element sidebar__media--1300px clickable"
+                         src="../../images/notification.svg" alt="">
+                {{else}}
+                    <img id="sidebar__notifications"
+                         class="sidebar__notification sidebar__element sidebar__media--1300px clickable"
+                         src="../../images/no_notifications.svg" alt="">
+                {{/if}}
             </a>
         {{/if}}
 
         {{#if modalWindow.showDisplay}}
-            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element"
-                 src="../../images/user/{{modalWindow.photo}}.jpg">
+
+            <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element img__border" alt="">
+
             <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
                href={{modalWindow.href}}> {{modalWindow.name}} </a>
         {{/if}}
