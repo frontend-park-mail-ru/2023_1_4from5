@@ -38,21 +38,28 @@ export class SubscriptionWin {
     createSubBtn.addEventListener('click', (event) => {
       event.preventDefault();
       const titleInput = document.getElementById('sub-title-input');
-      const title = titleInput.value;
+      // const title = titleInput.value;
 
       const descriptionInput = document.getElementById('sub-description-input');
-      const description = descriptionInput.value;
+      // const description = descriptionInput.value;
 
       const costInput = document.getElementById('sub-cost-input');
-      const cost = costInput.value;
+      // const cost = costInput.value;
 
-      if (this.isCostValid(cost)) {
-        Actions.createSub({
-          title,
-          description,
-          cost,
-        });
-      }
+      const subTitleErrorOutput = document.getElementById('sub-title__err');
+      const subDescErrorOutput = document.getElementById('sub-description__err');
+      const subCostErrorOutput = document.getElementById('sub-cost__err');
+
+      // if (this.isCostValid(cost)) {
+      Actions.createSub({
+        titleInput,
+        descriptionInput,
+        costInput,
+        subTitleErrorOutput,
+        subDescErrorOutput,
+        subCostErrorOutput,
+      });
+      // }
     });
   }
 
@@ -63,20 +70,43 @@ export class SubscriptionWin {
     const createSubBtn = document.getElementById('subscription__btn');
     createSubBtn.addEventListener('click', (event) => {
       event.preventDefault();
+      // const titleInput = document.getElementById('sub-title-input');
+      // const title = titleInput.value;
+      //
+      // const descriptionInput = document.getElementById('sub-description-input');
+      // const description = descriptionInput.value;
+      //
+      // const costInput = document.getElementById('sub-cost-input');
+      // const cost = costInput.value;
+      //
+      // Actions.updateSub(id, {
+      //   title,
+      //   description,
+      //   cost,
+      // });
       const titleInput = document.getElementById('sub-title-input');
-      const title = titleInput.value;
+      // const title = titleInput.value;
 
       const descriptionInput = document.getElementById('sub-description-input');
-      const description = descriptionInput.value;
+      // const description = descriptionInput.value;
 
       const costInput = document.getElementById('sub-cost-input');
-      const cost = costInput.value;
+      // const cost = costInput.value;
 
+      const subTitleErrorOutput = document.getElementById('sub-title__err');
+      const subDescErrorOutput = document.getElementById('sub-description__err');
+      const subCostErrorOutput = document.getElementById('sub-cost__err');
+
+      // if (this.isCostValid(cost)) {
       Actions.updateSub(id, {
-        title,
-        description,
-        cost,
+        titleInput,
+        descriptionInput,
+        costInput,
+        subTitleErrorOutput,
+        subDescErrorOutput,
+        subCostErrorOutput,
       });
+      // }
     });
   }
 
