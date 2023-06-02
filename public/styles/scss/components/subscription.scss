@@ -8,6 +8,7 @@ $popup__sub-width: 45%;
   @include popup__container();
   width: $popup__sub-width;
   margin-left: ((100% - $popup__sub-width) / 2);
+  padding-bottom: 2em;
 }
 
 $popup__content-width: 60%;

@@ -6,7 +6,7 @@ $popup-opacity: 1;
 
 @mixin popup__container() {
   top: ((100% - $popup-height) / 2);
-  height: $popup-height;
+  height: fit-content;
   border-radius: $block-border-radius;
   background-color: $popup-color;
   position: fixed;

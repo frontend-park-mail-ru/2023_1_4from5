@@ -4,12 +4,12 @@
 @import "subscription";
 
 $popup__aim-width: 45%;
-$popup__aim-height: 80%;
+$popup__aim-height: 90%;
 
 .aim--popup__container {
   @include popup__container();
   width: $popup__aim-width;
-  height: $popup__aim-height;
+  padding-bottom: 2em;
   margin-left: ((100% - $popup__aim-width) / 2);
 }
 

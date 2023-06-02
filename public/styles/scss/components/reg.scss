@@ -13,6 +13,7 @@ $reg-title-mb: 0.5em;
 .reg__container{
   @include popup__container();
   width: $popup-reg-width;
+  padding-bottom: 1em;
   margin-left: ((100% - $popup-reg-width) / 2);
   display: grid;
   grid-template-columns: (100% - $form-width) $form-width;
