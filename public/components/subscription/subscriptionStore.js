@@ -111,15 +111,19 @@ class SubscriptionStore {
     errDescOutput.innerHTML = '';
     errCostOutput.innerHTML = '';
 
-    if (errTitle) {
-      errTitleOutput.innerHTML = errTitle;
-      input.titleInput.style.backgroundColor = color.error;
-    } else if (errDesc) {
-      errDescOutput.innerHTML = errDesc;
-      input.descriptionInput.style.backgroundColor = color.error;
-    } else if (errCost) {
-      errCostOutput.innerHTML = errCost;
-      input.costInput.style.backgroundColor = color.error;
+    if (errTitle || errDesc || errCost) {
+      if (errTitle) {
+        errTitleOutput.innerHTML = errTitle;
+        input.titleInput.style.backgroundColor = color.error;
+      }
+      if (errDesc) {
+        errDescOutput.innerHTML = errDesc;
+        input.descriptionInput.style.backgroundColor = color.error;
+      }
+      if (errCost) {
+        errCostOutput.innerHTML = errCost;
+        input.costInput.style.backgroundColor = color.error;
+      }
     } else {
       let status;
       const body = {
