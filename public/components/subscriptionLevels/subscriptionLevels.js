@@ -6,7 +6,6 @@ const template = require('./subscriptionLevels.handlebars');
 
 class SubscriptionLevels {
   render(config) {
-    console.log(config.subscriptions);
     if (config.subscriptions) {
       config.subscriptions.forEach((sub) => {
         const textWithBreaks = sub.description.split('\n');
@@ -15,7 +14,6 @@ class SubscriptionLevels {
         textWithBreaks.forEach((description) => {
           sub.textWithBreaks.push({ description });
         });
-        console.log(sub);
       });
     }
 
@@ -82,8 +80,11 @@ class SubscriptionLevels {
     const titleContainer = subscription.querySelector('.sub__title--text');
     const title = titleContainer.textContent;
 
-    const descriptionContainer = subscription.querySelector('.sub__description');
-    const description = descriptionContainer.textContent;
+    const descriptionContainer = subscription.querySelectorAll('.sub__description');
+    let description = '';
+    descriptionContainer.forEach((elem) => {
+      description += `${elem.textContent}\n`;
+    });
 
     const costContainer = subscription.querySelector('.cost');
     const cost = costContainer.textContent;

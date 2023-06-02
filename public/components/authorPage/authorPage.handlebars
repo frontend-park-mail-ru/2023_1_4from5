@@ -104,7 +104,15 @@
                     <div class="aim__bar">
                         <div id="bar--row" class="bar--row"></div>
                     </div>
-                    <p class="aim__description">{{aim.description}}</p>
+                    <div class="aim__description">
+                        {{#each aim.descWithBreaks}}
+                            {{#if description}}
+                                <p class="aim__description--text">{{description}}</p>
+                            {{else}}
+                                <br>
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 {{else}}
                     {{#if is_my_page}}
                         <div class="aim__add--container">

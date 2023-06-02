@@ -83,7 +83,7 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
   text-overflow: ellipsis;
 }
 
-.sub__description {
+.sub__description--container {
   word-break: break-all;
   overflow: auto;
   text-overflow: ellipsis;
