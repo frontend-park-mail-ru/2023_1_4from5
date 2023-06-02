@@ -15,12 +15,16 @@
                         <div class="sub__title">
                             <p class="sub__title--text">{{title}}</p>
                             {{#if ../is_my_page}}
-                                <img id="sub__delete" class="sub__delete clickable" src="../../images/delete.svg" alt="">
+                                <img id="sub__delete" class="sub__delete clickable" src="../../images/delete.svg"
+                                     alt="">
                             {{else}}
                                 <div></div>
                             {{/if}}
                         </div>
-                        <p class="sub__description">{{description}}</p>
+
+                        <div class="sub__description--container">
+                            <p id="sub__description" class="sub__description">{{description}}</p>
+                        </div>
                         <div class="sub__cost">
                             <p id="sub__price" class="cost">{{month_cost}}</p>
                             <p class="rpm">р/месяц</p>
