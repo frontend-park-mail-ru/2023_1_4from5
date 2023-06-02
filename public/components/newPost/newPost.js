@@ -2,6 +2,7 @@ import { Actions } from '../../actions/actions';
 import { router } from '../../modules/Router';
 import { subLevels } from './levels';
 import { URLS } from '../../modules/Notifier';
+import { breakText } from '../../modules/handler';
 
 // TODO сделать режим ожидания загрузки файлов
 
@@ -162,7 +163,6 @@ class NewPost {
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-
       const subs = document.querySelectorAll('.sub__level');
       if (subs) {
         for (let index = 0; index < subs.length; index++) {
@@ -195,7 +195,7 @@ class NewPost {
     const availableSubscriptions = [];
 
     titleInput.value = title;
-    textInput.textContent = text;
+    textInput.value = breakText(text);
     postBtn.textContent = 'Готово';
 
     postBtn.addEventListener('click', (e) => {

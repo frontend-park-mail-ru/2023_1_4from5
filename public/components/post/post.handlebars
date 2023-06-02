@@ -37,7 +37,11 @@
             <p class="content__header">{{post.title}}</p>
             {{#each post.textWithBreaks}}
                 {{#if ../post.is_available}}
-                    <p>{{text}}</p>
+                    {{#if text}}
+                        <p>{{text}}</p>
+                    {{else}}
+                        <br>
+                    {{/if}}
                 {{else}}
                     <div class="no__access--container">
                         <p class="no__access--title">У вас нет доступа к этому посту</p>
@@ -87,17 +91,26 @@
                         <img id="comment__photo" style="background-image: url(../../images/user/{{user_photo}}.jpg)"
                              alt="">
                         <div id="comment__info" class="comment__info">
-                            <p id="comment__text">{{text}}</p>
+                            <p class="comment__username">{{username}}</p>
+                            <div id="comment__texts">
+                                {{#each textWithBreaks}}
+                                    <p id="comment__text">{{text}}</p>
+                                {{/each}}
+                            </div>
+
                             <p id="comment__date">{{creation}}</p>
                         </div>
                         <div class="comment__edit-del">
-                            <img id="comment__edit" class="comment__icon clickable" src="../../images/edit.svg" alt="">
-                            <img id="comment__close" class="comment__icon clickable" style="display: none"
-                                 src="../../images/close.png" alt="">
-                            <img id="comment__save" class="comment__icon clickable" style="display: none"
-                                 src="../../images/send.svg" alt="">
-                            <img id="comment__delete" class="comment__icon clickable" src="../../images/delete.svg"
-                                 alt="">
+                            {{#if is_owner}}
+                                <img id="comment__edit" class="comment__icon clickable" src="../../images/edit.svg"
+                                     alt="">
+                                <img id="comment__close" class="comment__icon clickable" style="display: none"
+                                     src="../../images/close.png" alt="">
+                                <img id="comment__save" class="comment__icon clickable" style="display: none"
+                                     src="../../images/send.svg" alt="">
+                                <img id="comment__delete" class="comment__icon clickable" src="../../images/delete.svg"
+                                     alt="">
+                            {{/if}}
                         </div>
                     </div>
                 {{/each}}

@@ -55,3 +55,13 @@ export function dateParse(timestamp) {
   }
   timestamp.textContent = `${day}.${month}.${year} ${hour}:${min}`;
 }
+
+export function buildText(textInput) {
+  const text = textInput.value.replace(/\n/g, '\\n');
+  return text;
+}
+
+export function breakText(text) {
+  const newText = text.replace(/\\n/g, '\n');
+  return newText;
+}
