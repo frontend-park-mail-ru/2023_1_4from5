@@ -11,19 +11,28 @@ export const LENGTH = {
   MIN_CREATOR_NAME: 1,
   MAX_CREATOR_NAME: 40,
 
-  MIN_CREATOR_DESCRIPTION: 1,
+  MIN_CREATOR_DESCRIPTION: 0,
   MAX_CREATOR_DESCRIPTION: 250,
 
+  MIN_MONEY: 2,
   MAX_MONEY: 9,
   MIN_DESCRIPTION_AIM: 1,
   MAX_DESCRIPTION_AIM: 50,
 
   MIN_TITLE_POST: 1,
   MAX_TITLE_POST: 40,
+  MIN_TEXT_POST: 0,
   MAX_TEXT_POST: 2000,
+
+  MIN_TITLE_SUB: 1,
+  MAX_TITLE_SUB: 40,
+  MIN_DESCRIPTION_SUB: 0,
+  MAX_DESCRIPTION_SUB: 200,
 };
 
 const ASCII = {
+  LineFeed: 10,
+  CarriageReturn: 13,
   SPACE: 32,
   EXCLAMATION: 33,
   DASH: 45,
@@ -42,6 +51,7 @@ const ASCII = {
   ENG_LOWER_Z: 122,
   FIGURED_BRACKET: 123,
   TILDE: 126,
+  NUMBER_SIGN: 252,
 };
 
 const UNICODE = {
@@ -79,6 +89,7 @@ export const validationStructure = {
   hasNumber_error() {
     return `Поле ${this.field} должно содержать хотя бы 1 цифру`;
   },
+
   hasLetter: false,
   hasLetter_flag: false,
   hasLetter_error() {
@@ -160,8 +171,10 @@ export function validation(validStructure, inputStr) {
   return '';
 }
 
+// TODO от пробела до тильды есть ещё цифры и английские буквы
 function isAllowedSign(code) {
-  return ((code >= ASCII.SPACE && code <= ASCII.TILDE)
+  return (code === ASCII.CarriageReturn || code === ASCII.LineFeed || code === ASCII.NUMBER_SIGN
+      || (code >= ASCII.SPACE && code <= ASCII.TILDE)
       || (code >= ASCII.ENG_LOWER_A && code <= ASCII.ENG_LOWER_Z)
       || (code >= ASCII.ENG_UPPER_A && code <= ASCII.ENG_UPPER_Z)
       || (code >= UNICODE.RUS_UPPER_A && code <= UNICODE.RUS_LOWER_YA)
@@ -201,10 +214,18 @@ function isNumber(code) {
  * @returns {boolean} - response is sign is special sign
  */
 export function isSpecialSign(code) {
-  return (((code >= ASCII.SPACE && code <= ASCII.SLASH)
-      || (code >= ASCII.COLON && code <= ASCII.AT))
-      || ((code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
-      || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE)));
+  return (((code >= ASCII.SPACE && code <= ASCII.SLASH) || code === ASCII.NUMBER_SIGN)
+      || (code >= ASCII.COLON && code <= ASCII.AT)
+      || (code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
+      || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE));
+}
+
+export function isSpecialSignWithEnt(code) {
+  return (code === ASCII.CarriageReturn || code === ASCII.LineFeed || code === ASCII.NUMBER_SIGN
+      || (code >= ASCII.SPACE && code <= ASCII.SLASH)
+      || (code >= ASCII.COLON && code <= ASCII.AT)
+      || (code >= ASCII.RECTANGLE_BRACKET && code <= ASCII.BACK_QUOTE)
+      || (code >= ASCII.FIGURED_BRACKET && code <= ASCII.TILDE));
 }
 
 // в будущем требуется удалить
@@ -437,7 +458,7 @@ export function isValidMoneyString(inputStr) {
   return '';
 }
 
-// в будущем удалить
+// в будущем убрать export
 export function isValidDonate(inputStr, balance, moreThanTwoRub) {
   inputStr = inputStr.replace(/,/g, '.');
   const flags = {
@@ -474,7 +495,7 @@ export function isValidDonate(inputStr, balance, moreThanTwoRub) {
   }
 
   if (moreThanTwoRub) {
-    if (Number(inputStr) < 2) {
+    if (Number(inputStr) < LENGTH.MIN_MONEY) {
       return flags.hasMinDenomination.error;
     }
   } else if (Number(inputStr) <= 0) {

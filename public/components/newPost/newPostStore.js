@@ -4,7 +4,9 @@ import { ActionTypes } from '../../actionTypes/actionTypes';
 import { userStore } from '../user/userStore';
 import { request } from '../../modules/request';
 import { router } from '../../modules/Router';
-import {isValidTextPost, isValidTitlePost, LENGTH, validation, validationStructure} from '../../modules/isValid';
+import {
+  isSpecialSignWithEnt, LENGTH, validation, validationStructure
+} from '../../modules/isValid';
 import { color } from '../../consts/styles';
 import { URLS } from '../../modules/Notifier';
 
@@ -78,9 +80,9 @@ class NewPostStore {
   }
 
   async sendPost(actionType, action, callback) {
-    const createTitle = action.input.titleInput.value.trim();
-    const createText = action.input.textInput.value;
     const subscriptions = action.input.availableSubscriptions;
+
+    const createTitle = action.input.titleInput.value.trim();
     const validStructTitle = { ...validationStructure };
     validStructTitle.field = '"Название поста"';
     validStructTitle.length_flag = true;
@@ -90,7 +92,18 @@ class NewPostStore {
     validStructTitle.hasLetter = true;
     const errTitle = validation(validStructTitle, createTitle);
     // const errTitle = isValidTitlePost(createTitle);
-    const errText = isValidTextPost(createText);
+
+    const createText = action.input.textInput.value.trim();
+    const validStructText = { ...validationStructure };
+    validStructText.field = '"Текст поста"';
+    validStructText.length_flag = true;
+    validStructText.min_length = LENGTH.MIN_TEXT_POST;
+    validStructText.max_length = LENGTH.MAX_TEXT_POST;
+    validStructText.special_signs = isSpecialSignWithEnt;
+    validStructText.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
+    const errText = validation(validStructText, createText);
+    // const errText = isValidTextPost(createText);
+
     const errorTitleOutput = action.input.errorTitleOutput;
     const errorTextOutput = action.input.errorTextOutput;
 
@@ -112,7 +125,7 @@ class NewPostStore {
       if (actionType === ActionTypes.CREATE_POST) {
         status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       } else {
-        status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
+        status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
       }
       if (status) {
         newPost.config.attachments = [];

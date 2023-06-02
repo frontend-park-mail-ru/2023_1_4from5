@@ -7,10 +7,9 @@ import { URLS } from '../../modules/Notifier';
 import { authorPageStore } from '../authorPage/authorPageStore';
 import { userStore } from '../user/userStore';
 import {
-  isValidCreateDescription,
-  isValidCreatorName, LENGTH,
+  LENGTH,
   validationStructure,
-  validation
+  validation, isSpecialSignWithEnt
 } from '../../modules/isValid';
 import { color } from '../../consts/styles';
 
@@ -104,6 +103,7 @@ class BecomeAuthorStore {
     validStructDescription.length_flag = true;
     validStructDescription.min_length = LENGTH.MIN_CREATOR_DESCRIPTION;
     validStructDescription.max_length = LENGTH.MAX_CREATOR_DESCRIPTION;
+    validStructDescription.special_signs = isSpecialSignWithEnt;
     validStructDescription.whiteSymbolsError = 'Допустимы только латинские, русские буквы и спецсимволы';
     const errDescription = validation(validStructDescription, description);
 
