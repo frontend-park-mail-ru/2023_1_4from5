@@ -93,7 +93,7 @@ class BecomeAuthorStore {
     validStructName.min_length = LENGTH.MIN_CREATOR_NAME;
     validStructName.max_length = LENGTH.MAX_CREATOR_NAME;
     validStructName.hasLetter = true;
-    validStructDescription.special_signs = isSpecialSignWithEnt;
+    validStructName.special_signs = isSpecialSignWithEnt;
     validStructName.whiteSymbolsError = 'Допустимы только латинские, русские буквы и спецсимволы';
     const errName = validation(validStructName, name);
 
@@ -113,13 +113,16 @@ class BecomeAuthorStore {
     errorNameOutput.innerHTML = '';
     errDescriptionOutput.innerHTML = '';
 
-    if (errName) {
-      errorNameOutput.innerHTML = errName;
-      input.nameInput.style.backgroundColor = color.error;
-    } else if (errDescription) {
-      errDescriptionOutput.innerHTML = '';
-      errDescriptionOutput.innerHTML = errDescription;
-      input.descriptionInput.style.backgroundColor = color.error;
+    if (errName || errDescription) {
+      if (errName) {
+        errorNameOutput.innerHTML = errName;
+        input.nameInput.style.backgroundColor = color.error;
+      }
+      if (errDescription) {
+        errDescriptionOutput.innerHTML = '';
+        errDescriptionOutput.innerHTML = errDescription;
+        input.descriptionInput.style.backgroundColor = color.error;
+      }
     } else {
       const body = {
         name,
