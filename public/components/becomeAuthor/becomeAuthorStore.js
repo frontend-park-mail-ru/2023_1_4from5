@@ -93,6 +93,7 @@ class BecomeAuthorStore {
     validStructName.min_length = LENGTH.MIN_CREATOR_NAME;
     validStructName.max_length = LENGTH.MAX_CREATOR_NAME;
     validStructName.hasLetter = true;
+    validStructDescription.special_signs = isSpecialSignWithEnt;
     validStructName.whiteSymbolsError = 'Допустимы только латинские, русские буквы и спецсимволы';
     const errName = validation(validStructName, name);
 

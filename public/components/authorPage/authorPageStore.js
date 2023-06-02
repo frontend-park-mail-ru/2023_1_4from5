@@ -5,10 +5,6 @@ import { userStore } from '../user/userStore.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import {
   isSpecialSignWithEnt,
-  isValidDescriptionAim,
-  isValidDonate,
-  isValidMoneyString,
-  isWhiteSignWithRus,
   LENGTH, validation,
   validationStructure
 } from '../../modules/isValid.js';
@@ -16,7 +12,6 @@ import { color } from '../../consts/styles.js';
 import { aim } from '../aim/aim';
 import { getSubscription } from '../getSubscription/getSubscription';
 import { Actions } from '../../actions/actions';
-import { postStore } from '../post/postStore';
 
 class AuthorPageStore {
   #config;
@@ -247,21 +242,12 @@ class AuthorPageStore {
   }
 
   async getSub(input) {
-    //     let moneyCount = input.moneyInput.value.replace(/ /g, '');
-    //     const errorOutput = input.errorOutput;
-    //     const validStructMoney = { ...validationStructure };
-    //     validStructMoney.field = '"Отправить донат"';
-    //     validStructMoney.isMoney = true;
-    //     validStructMoney.moreThanTwoRub = true;
-    //     validStructMoney.hasNumber = true;
-    //     validStructMoney.whiteSymbols.error = 'Допустимы только числа';
-
     const monthCount = input.monthCount.value.replace(/ /g, '');
     const getSubErr = input.getSubErr;
 
     getSubErr.innerHTML = '';
     if (isNaN(monthCount) || monthCount.length === 0) {
-      getSubErr.innerHTML = 'Поле должно содеражать число';
+      getSubErr.innerHTML = 'Поле должно содержать число';
     } else {
       const money = Number(monthCount) * Number(input.price);
 

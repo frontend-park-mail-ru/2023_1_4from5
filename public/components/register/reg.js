@@ -146,18 +146,22 @@ export class Register {
     input.errorRepeatPasswordOutput.innerHTML = '';
     input.errorOutput.innerHTML = '';
 
-    if (input.errLogin) {
-      input.loginForm.style.backgroundColor = color.error;
-      input.errorLoginOutput.innerHTML = '';
-      input.errorLoginOutput.innerHTML = input.errLogin;
-    } else if (input.errUsername) {
-      input.usernameForm.style.backgroundColor = color.error;
-      input.errorUsernameOutput.innerHTML = '';
-      input.errorUsernameOutput.innerHTML = input.errUsername;
-    } else if (input.errPassword) {
-      input.passwordForm.style.backgroundColor = color.error;
-      input.errorPasswordOutput.innerHTML = '';
-      input.errorPasswordOutput.innerHTML = input.errPassword;
+    if (input.errLogin || input.errUsername || input.errPassword) {
+      if (input.errLogin) {
+        input.loginForm.style.backgroundColor = color.error;
+        input.errorLoginOutput.innerHTML = '';
+        input.errorLoginOutput.innerHTML = input.errLogin;
+      }
+      if (input.errUsername) {
+        input.usernameForm.style.backgroundColor = color.error;
+        input.errorUsernameOutput.innerHTML = '';
+        input.errorUsernameOutput.innerHTML = input.errUsername;
+      }
+      if (input.errPassword) {
+        input.passwordForm.style.backgroundColor = color.error;
+        input.errorPasswordOutput.innerHTML = '';
+        input.errorPasswordOutput.innerHTML = input.errPassword;
+      }
     } else if (input.password !== input.repeatPassword) {
       input.passwordForm.style.backgroundColor = color.error;
       input.repeatForm.style.backgroundColor = color.error;

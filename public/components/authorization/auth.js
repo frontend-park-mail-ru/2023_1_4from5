@@ -117,15 +117,8 @@ export class Auth {
         input.errorOutput.innerHTML = 'Неверный логин или пароль';
       }
     } else {
-      // TODO чтобы не подсказывать юзеру, где именно ошибка, подсвечивать лучше оба поля
       input.loginForm.style.backgroundColor = color.error;
       input.passwordForm.style.backgroundColor = color.error;
-      // if (input.errLogin) {
-      //   input.loginInput.style.backgroundColor = color.error;
-      // }
-      // if (input.errPassword) {
-      //   input.passwordInput.style.backgroundColor = color.error;
-      // }
       input.errorOutput.innerHTML = '';
       input.errorOutput.innerHTML = 'Неверный логин или пароль';
     }

@@ -2,12 +2,13 @@ import { dispatcher } from '../../dispatcher/dispatcher.js';
 import { ActionTypes } from '../../actionTypes/actionTypes.js';
 import { settings } from './settings.js';
 import { userStore } from '../user/userStore.js';
-import { isValidLogin, isValidPassword, isValidUsername } from '../../modules/isValid';
+import {
+  isWhiteSignLogin, isWhiteSignName, isWhiteSignPassword,
+  LENGTH, validation,
+  validationStructure
+} from '../../modules/isValid';
 import { request } from '../../modules/request';
 import { Actions } from '../../actions/actions';
-import { router } from '../../modules/Router';
-import { URLS } from '../../modules/Notifier';
-import { sideBar } from '../sideBar/sideBar';
 
 class SettingsStore {
   constructor() {
@@ -58,8 +59,19 @@ class SettingsStore {
 
   async changePassword(input) {
     const oldPwd = input.oldPwdInput.value;
-    const newPwd = input.newPwdInput.value;
-    const errPwd = isValidPassword(newPwd);
+
+    const newPwd = input.newPwdInput.value.trim();
+    const validStructPassword = { ...validationStructure };
+    validStructPassword.field = '"Новый пароль"';
+    validStructPassword.length_flag = true;
+    validStructPassword.min_length = LENGTH.MIN_PASSWORD;
+    validStructPassword.max_length = LENGTH.MAX_PASSWORD;
+    validStructPassword.special_signs = isWhiteSignPassword;
+    validStructPassword.rus_symbols_flag = false;
+    validStructPassword.whiteSymbolsError = 'Допустимы только латинские символы, цифры и символы-разделители';
+    validStructPassword.hasNumber = true;
+    const errPwd = validation(validStructPassword, newPwd);
+    // const errPwd = isValidPassword(newPwd);
 
     settings.invalidPassword(errPwd);
 
@@ -70,7 +82,7 @@ class SettingsStore {
         new_password: newPwd,
       }, token);
       if (!response.ok) {
-        settings.invalidPassword('неверный старый пароль');
+        settings.invalidPassword('Неверный старый пароль');
       } else {
         settings.successPasswordChanged();
       }
@@ -78,24 +90,44 @@ class SettingsStore {
   }
 
   async changeUsernameLogin(usernameInput, loginInput) {
-    const name = usernameInput.value;
-    const login = loginInput.value;
-
-    const errUsername = isValidUsername(name);
-    settings.invalidUsername(errUsername);
-    const errLogin = isValidLogin(login);
+    const login = loginInput.value.trim();
+    const validStructLogin = { ...validationStructure };
+    validStructLogin.field = '"Логин"';
+    validStructLogin.length_flag = true;
+    validStructLogin.min_length = LENGTH.MIN_LOGIN;
+    validStructLogin.max_length = LENGTH.MAX_LOGIN;
+    validStructLogin.special_signs = isWhiteSignLogin;
+    validStructLogin.rus_symbols_flag = false;
+    validStructLogin.whiteSymbolsError = 'Допустимы только латинские символы, цифры и символы-разделители';
+    validStructLogin.hasLetter = true;
+    const errLogin = validation(validStructLogin, login);
+    // const errLogin = isValidLogin(login);
     settings.invalidLogin(errLogin);
+
+    const username = usernameInput.value.trim();
+    // const username = action.input.usernameInput.value.trim();
+    const validStructUsername = { ...validationStructure };
+    validStructUsername.field = '"Имя пользователя"';
+    validStructUsername.length_flag = true;
+    validStructUsername.min_length = LENGTH.MIN_USERNAME;
+    validStructUsername.max_length = LENGTH.MAX_USERNAME;
+    validStructUsername.special_signs = isWhiteSignName;
+    validStructUsername.whiteSymbolsError = 'Допустимы только символы кириллицы и латиницы, цифры и символы-разделители';
+    validStructUsername.hasLetter = true;
+    const errUsername = validation(validStructUsername, username);
+    // const errUsername = isValidUsername(username);
+    settings.invalidUsername(errUsername);
 
     if (!errUsername && !errLogin) {
       const token = await request.getHeader('/api/user/updateData');
       const response = await request.put('/api/user/updateData', {
         login,
-        name,
+        name: username,
       }, token);
 
       if (response.ok) {
         const user = userStore.getUserState();
-        user.usernameIn = name;
+        user.usernameIn = username;
         user.login = login;
         userStore.setUserState(user);
         Actions.renderSideBar(user);
@@ -106,7 +138,6 @@ class SettingsStore {
   }
 
   async deletePhoto(photoId) {
-    //.log(photoId);
     const token = await request.getHeader(`/api/user/deleteProfilePhoto/${photoId}`);
     await request.delete(`/api/user/deleteProfilePhoto/${photoId}`, token);
     await userStore.getUser();
