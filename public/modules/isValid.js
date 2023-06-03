@@ -30,6 +30,57 @@ export const LENGTH = {
   MAX_DESCRIPTION_SUB: 200,
 };
 
+// 'no user with such login'
+//
+// wrong username length
+// wrong username contains black symbols
+// wrong username has no letter
+//
+// wrong login contains black symbols
+// wrong login length
+// user with such login already exists
+//
+// wrong password length
+// wrong password contains black symbols
+// wrong password has no number
+
+// wrong creator name has no letter
+// wrong creator name length
+// wrong creator name contains black symbols
+//
+// wrong creator description length
+
+// wrong username length
+// wrong username contains black symbols
+// wrong username has no letter
+//
+// wrong login contains black symbols
+// wrong login length
+//
+// wrong password length
+// wrong password contains black symbols
+// wrong password has no number
+
+// wrong subscription title length
+// wrong subscription title contains black symbols
+// wrong subscription description length
+// wrong subscription description contains black symbols
+
+// wrong aim description length
+// wrong aim description contains black symbols
+
+// wrong post title length
+// wrong post title contains black symbols
+//
+// wrong post text length
+// wrong post text contains black symbols
+
+// export const BACKEND_ERRORS = {
+//   'no user with such login': 'Пользователя с таким логином нет',
+//   'wrong username contains black symbols': 'Поле "Имя пользователя" ',
+//
+// };
+
 const ASCII = {
   LineFeed: 10,
   CarriageReturn: 13,
