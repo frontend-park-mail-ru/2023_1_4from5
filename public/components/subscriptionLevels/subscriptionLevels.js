@@ -1,12 +1,10 @@
 import { Actions } from '../../actions/actions';
 import { getSubscription } from '../getSubscription/getSubscription';
-import { breakText } from '../../modules/handler';
 
 const template = require('./subscriptionLevels.handlebars');
 
 class SubscriptionLevels {
   render(config) {
-    console.log(config.subscriptions);
     if (config.subscriptions) {
       config.subscriptions.forEach((sub) => {
         const textWithBreaks = sub.description.split('\n');
@@ -15,7 +13,6 @@ class SubscriptionLevels {
         textWithBreaks.forEach((description) => {
           sub.textWithBreaks.push({ description });
         });
-        console.log(sub);
       });
     }
 

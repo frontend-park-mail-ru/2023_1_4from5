@@ -83,12 +83,14 @@
 
                 {{/unless}}
             {{/if}}
-            <button id="donate__btn" class="support__btn donate__btn">
-                <div class="support__btn--container">
-                    <img src="../../images/donate.svg" alt="donate">
-                    <p class="support__btn--text">Отправить донат</p>
-                </div>
-            </button>
+            {{#unless is_my_page}}
+                <button id="donate__btn" class="support__btn donate__btn">
+                    <div class="support__btn--container">
+                        <img src="../../images/donate.svg" alt="donate">
+                        <p class="support__btn--text">Отправить донат</p>
+                    </div>
+                </button>
+            {{/unless}}
         </div>
 
         <div class="aim">

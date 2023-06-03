@@ -124,12 +124,17 @@ class NewPostStore {
       }
     } else {
       let status;
+      action.input.postBtn.classList.add('inactive');
+      action.input.loader.classList.add('loader');
+      action.input.postBtn.disabled = true;
+      action.input.loadingOutput.innerHTML = 'Загрузка ...';
       if (actionType === ActionTypes.CREATE_POST) {
         status = await this.sendCreatedPost(action, createTitle, createText, subscriptions, callback);
       } else {
         status = await this.sendEditedPost(action, createTitle, createText, subscriptions, callback);
       }
       action.input.postBtn.classList.remove('newpost-btn--disabled');
+      action.input.loader.classList.remove('loader');
       action.input.postBtn.disabled = false;
       action.input.loadingOutput.innerHTML = '';
       if (status) {
