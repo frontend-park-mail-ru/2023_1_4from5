@@ -32,23 +32,27 @@
     <div class="sidebar__user">
         {{#if feed.showDisplay}}
             <span class="sidebar__feed sidebar__media--1300px">
-                <a id="{{feed.id}}" class="sidebar__element hover--underline" href={{feed.href}}> Лента </a>
+                <a id="{{feed.id}}" class="sidebar__feed--elem sidebar__element hover--underline" href={{feed.href}}> Лента </a>
             </span>
         {{/if}}
 
         {{#if subs.showDisplay}}
             <span class="sidebar__subs sidebar__media--1300px">
-                <a id="{{subs.id}}" class="sidebar__element hover--underline" href={{subs.href}}> Подписки </a>
+                <a id="{{subs.id}}" class="sidebar__subs--elem sidebar__element hover--underline" href={{subs.href}}> Подписки </a>
             </span>
         {{/if}}
 
         {{#if reg.showDisplay}}
-            <a id="{{reg.id}}" class="sidebar__reg sidebar__element hover--underline" href={{reg.href}}>
-                Регистрация </a>
+            <div>
+                <a id="{{reg.id}}" class="sidebar__reg sidebar__element hover--underline" href={{reg.href}}>
+                    Регистрация </a>
+            </div>
         {{/if}}
 
         {{#if auth.showDisplay}}
-            <a id="{{auth.id}}" class="sidebar__element hover--underline" href={{auth.href}}> Войти </a>
+            <div>
+                <a id="{{auth.id}}" class="sidebar__auth sidebar__element hover--underline" href={{auth.href}}> Войти </a>
+            </div>
         {{/if}}
         {{#if notifications.showDisplay}}
             <a id="{{notifications.id}}">
@@ -68,8 +72,10 @@
 
             <img id="sidebar__user--photo" class="sidebar__user--photo sidebar__element img__border" alt="">
 
-            <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
-               href={{modalWindow.href}}> {{modalWindow.name}} </a>
+            <div class="sidebar__user--container">
+                <a id="{{modalWindow.id}}" class="sidebar__user--name sidebar__element hover--underline"
+                   href={{modalWindow.href}}> {{modalWindow.name}} </a>
+            </div>
         {{/if}}
         <a id="sidebar__menu">
             <img class="sidebar__menu" src="../../images/menu.svg" alt="">

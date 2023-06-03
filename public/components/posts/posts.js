@@ -30,6 +30,15 @@ class Posts {
         });
       }
     }
+
+    const titles = document.querySelectorAll('#content__header');
+    titles.forEach((title) => {
+      title.addEventListener('click', (event) => {
+        event.preventDefault();
+        const postId = event.target.parentElement.parentElement.id;
+        router.go(URLS.post, '', postId);
+      });
+    });
   }
 }
 

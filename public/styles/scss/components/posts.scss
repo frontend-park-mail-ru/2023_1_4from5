@@ -7,6 +7,7 @@
 
 .posts__container {
   width: 90%;
+  margin: auto;
 }
 
 .post__container {
@@ -87,6 +88,9 @@ $privacy__img-width: 1.5em;
   margin-bottom: 1em;
 }
 
+.posts__text {
+  word-break: break-word;
+}
 
 //-------footer--------
 .feedback {
