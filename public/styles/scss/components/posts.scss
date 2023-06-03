@@ -7,7 +7,7 @@
 
 .posts__container {
   width: 90%;
-  margin: auto;
+  margin: 0;
 }
 
 .post__container {
@@ -151,7 +151,7 @@ $privacy__img-width: 1.5em;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .posts__container {
     margin: auto;
   }
