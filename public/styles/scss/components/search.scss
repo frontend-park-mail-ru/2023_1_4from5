@@ -10,7 +10,7 @@ $num-of-columns: 4;
 }
 
 $creator__card-width: 65%;
-$creator__card-height: 20em;
+$creator__card-height: 17em;
 $creator__card-offset-bottom: 2em;
 
 .creator__card {
@@ -31,8 +31,7 @@ $creator__card-offset-bottom: 2em;
 }
 
 .card__header {
-  border-bottom: $card-content-color solid 2px;
-  height: 80%;
+  height: 100%;
 }
 
 .followers {
@@ -67,7 +66,7 @@ $search__photo-width: 5em;
 
 .card__footer {
   margin-top: 1em;
-  display: flex;
+  display: none;
 }
 
 $tag-color: #009F2D;
