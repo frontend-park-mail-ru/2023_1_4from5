@@ -21,6 +21,36 @@ $post__form-width: 65%;
   }
 }
 
+.newpost-loader__container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.newpost-loading {
+  display: inline-block;
+  padding-top: 0.7em;
+  padding-left: 0.3em;
+  font-size: larger;
+}
+
+.loader {
+  margin-top: 0.7em;
+  display: inline-block;
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border: 3px solid #333;
+  border-top-color: #777;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  to {transform: rotate(360deg);}
+}
+
 .post__form {
   padding: 0 10% 0 10%;
 }
@@ -130,6 +160,11 @@ $comment-title-width: 80%;
 
 .newpost-btn--disabled {
   background-color: #777777;
+}
+
+.newpost-btn--disabled:hover {
+  cursor: default;
+  color: inherit;
 }
 
 //-----Alik-----//

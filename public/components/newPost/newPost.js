@@ -157,6 +157,7 @@ class NewPost {
     const textInput = document.getElementById('newpost-text-input');
     const postBtn = document.getElementById('newpost-btn');
     const loadingOutput = document.getElementById('newpost-loading');
+    const loader = document.getElementById('newpost-loader');
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
@@ -164,10 +165,6 @@ class NewPost {
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-
-      postBtn.classList.add('newpost-btn--disabled');
-      postBtn.disabled = true;
-      loadingOutput.innerHTML = 'Загрузка';
 
       const subs = document.querySelectorAll('.sub__level');
       if (subs) {
@@ -189,6 +186,7 @@ class NewPost {
         availableSubscriptions,
         postBtn,
         loadingOutput,
+        loader,
       });
     });
   }
@@ -198,6 +196,7 @@ class NewPost {
     const textInput = document.getElementById('newpost-text-input');
     const postBtn = document.getElementById('newpost-btn');
     const loadingOutput = document.getElementById('newpost-loading');
+    const loader = document.getElementById('newpost-loader');
     const errorTitleOutput = document.getElementById('newpost-title-error');
     const errorTextOutput = document.getElementById('newpost-text-error');
 
@@ -209,11 +208,6 @@ class NewPost {
 
     postBtn.addEventListener('click', (e) => {
       e.preventDefault();
-
-      postBtn.classList.add('newpost-btn--disabled');
-      postBtn.disabled = true;
-      loadingOutput.innerHTML = 'Загрузка';
-
       const subs = document.querySelectorAll('.sub__level');
       if (subs) {
         for (let index = 0; index < subs.length; index++) {
@@ -234,6 +228,7 @@ class NewPost {
         availableSubscriptions,
         postBtn,
         loadingOutput,
+        loader,
       });
     });
   }

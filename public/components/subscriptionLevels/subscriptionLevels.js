@@ -1,6 +1,5 @@
 import { Actions } from '../../actions/actions';
 import { getSubscription } from '../getSubscription/getSubscription';
-import { breakText } from '../../modules/handler';
 
 const template = require('./subscriptionLevels.handlebars');
 

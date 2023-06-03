@@ -233,7 +233,6 @@ class StatisticsStore {
     const balanceReq = await request.get('/api/creator/balance');
     if (balanceReq.ok) {
       const balance = await balanceReq.json();
-      console.log(balance);
       if (balance) {
         this.#config.balance = balance;
       }
@@ -258,7 +257,6 @@ class StatisticsStore {
     validStructMoney.balance = input.balance;
     validStructMoney.whiteSymbolsError = 'Допустимы только числа';
     const errMoney = validation(validStructMoney, money);
-    // const errMoney = isValidGetSum(money, input.balance);
 
     const validStructPhone = { ...validationStructure };
     validStructPhone.field = '"Номер телефона"';
