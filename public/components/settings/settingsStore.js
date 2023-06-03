@@ -118,7 +118,10 @@ class SettingsStore {
     // const errUsername = isValidUsername(username);
     settings.invalidUsername(errUsername);
 
-    if (!errUsername && !errLogin) {
+    if (username === userStore.getUserState().usernameIn && login === userStore.getUserState().login) {
+      const errField = document.getElementById('change-login-error');
+      errField.textContent = 'Новые данные совпадают со старыми';
+    } else if (!errUsername && !errLogin) {
       const token = await request.getHeader('/api/user/updateData');
       const response = await request.put('/api/user/updateData', {
         login,
