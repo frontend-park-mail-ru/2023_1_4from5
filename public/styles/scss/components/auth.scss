@@ -10,6 +10,7 @@ $form-width: 60%;
   @include popup__container();
   width: $popup-auth-width;
   margin-left: ((100vw - $popup-auth-width) / 2);
+  padding-bottom: 5em;
 }
 
 .auth__form {

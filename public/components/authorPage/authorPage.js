@@ -52,6 +52,13 @@ class AuthorPage {
     Object.assign(config, this.#config);
     config.subscriptions = subs;
 
+    const aimWithBreaks = config.aim.description.split('\n');
+    config.aim.descWithBreaks = [];
+    aimWithBreaks.forEach((description) => {
+      config.aim.descWithBreaks.push({ description });
+    });
+    console.log(config.aim);
+
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
     newDiv.id = 'myPageDiv';

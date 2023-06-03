@@ -93,13 +93,16 @@ $num-of-columns: 3;
   margin-bottom: 1em;
 }
 
+$statistics__input--form-width: 50%;
 .statistics__input--form {
   height: 2em;
   width: 10em;
+  margin-left: ((100% - $statistics__input--form-width) / 2);
 }
 
 .statistics__input--title {
   margin-top: 0.5em;
+  text-align: center;
 }
 
 .get_money__button {
@@ -190,6 +193,10 @@ $num-of-columns: 3;
 
   .statistics__balance {
     font-size: $font-size;
+  }
+
+  .statistics__input--form {
+    margin-left: 0;
   }
 }
 

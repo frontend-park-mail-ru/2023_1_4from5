@@ -79,8 +79,11 @@ class SubscriptionLevels {
     const titleContainer = subscription.querySelector('.sub__title--text');
     const title = titleContainer.textContent;
 
-    const descriptionContainer = subscription.querySelector('.sub__description');
-    const description = descriptionContainer.textContent;
+    const descriptionContainer = subscription.querySelectorAll('.sub__description');
+    let description = '';
+    descriptionContainer.forEach((elem) => {
+      description += `${elem.textContent}\n`;
+    });
 
     const costContainer = subscription.querySelector('.cost');
     const cost = costContainer.textContent;

@@ -1,6 +1,7 @@
 @import "../general/variables";
 
 $sidebar__border-weight: 2px;
+$sidebar-offset: 0.4vw;
 
 .sidebar {
   position: fixed;
@@ -25,7 +26,8 @@ $sidebar__element-offset: 0.4vw;
   margin-right: $sidebar__element-offset;
 }
 
-.become-author {
+.sidebar__auth {
+  margin-right: 0.5em;
 }
 
 .sidebar__about--element {
@@ -34,6 +36,21 @@ $sidebar__element-offset: 0.4vw;
 
 .sidebar__user {
   @include v-align($sidebar-height);
+  display: flex;
+}
+
+.sidebar__subs {
+  height: 1em;
+  position: relative;
+  top: 1.4em;
+  border-left: $hr-color solid $sidebar__border-weight;
+  border-right: $hr-color solid $sidebar__border-weight;
+}
+
+.sidebar__subs--elem {
+  position: relative;
+  top: -1.35em;
+  margin-right: 0.3em;
 }
 
 .sidebar__info {
@@ -58,12 +75,11 @@ $sidebar__element-height: 1em;
   margin-left: 1em;
 }
 
-$sidebar-offset: 0.4vw;
-
 .sidebar__logo {
   height: ($sidebar-height * 0.9);
   padding-left: $sidebar-offset;
   cursor: pointer;
+  user-select: none;
 }
 
 .sidebar__logo--fav {
@@ -90,16 +106,6 @@ $sidebar__input-background-color: #ebedf0;
   background-color: $sidebar__input-background-color;
   background-repeat: no-repeat;
   background-position: 2%;
-}
-
-.sidebar__subs {
-  border-left: $hr-color solid $sidebar__border-weight;
-  border-right: $hr-color solid $sidebar__border-weight;
-}
-
-.sidebar__user {
-  text-align: right;
-  padding-right: $sidebar-offset;
 }
 
 $sidebar__notification-height: 1.5em;
@@ -129,15 +135,37 @@ $sidebar__user--photo-height: 2em;
   display: none;
 }
 
+.sidebar__user--name {
+  height: 2.5em;
+  margin-right: 0.5em;
+  display: block;
+  max-width: 12em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 //------1300px------//
 
 @media (max-width: 1300px) {
+  .sidebar__user {
+    grid-template-columns: 20% 1fr;
+  }
+
   .sidebar__logo {
     height: fit-content;
     width: 100%;
   }
 
   .sidebar__media--1300px {
+    display: none;
+  }
+
+  #sidebar__notifications {
+    display: none;
+  }
+
+  #sidebar__menu {
     display: none;
   }
 }
@@ -166,6 +194,10 @@ $sidebar__img-top: 0.45em;
 
   .sidebar__user--name {
     display: none;
+  }
+
+  #sidebar__menu {
+    display: inline;
   }
 
   .sidebar__menu {

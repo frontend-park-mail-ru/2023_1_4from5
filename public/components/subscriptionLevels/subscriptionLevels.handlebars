@@ -23,7 +23,13 @@
                         </div>
 
                         <div class="sub__description--container">
-                            <p id="sub__description" class="sub__description">{{description}}</p>
+                            {{#each textWithBreaks}}
+                                {{#if description}}
+                                    <p id="sub__description" class="sub__description">{{description}}</p>
+                                {{else}}
+                                    <br>
+                                {{/if}}
+                            {{/each}}
                         </div>
                         <div class="sub__cost">
                             <p id="sub__price" class="cost">{{month_cost}}</p>
