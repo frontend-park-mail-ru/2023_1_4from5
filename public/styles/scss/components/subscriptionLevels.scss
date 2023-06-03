@@ -67,7 +67,6 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
 .sub__title {
   display: grid;
   grid-template-columns: 80% 20%;
-  word-wrap: break-word;
 }
 
 .sub__delete {
@@ -78,13 +77,13 @@ $sub__space-height: ($sub__card-height + ($sub__container-offset * 4));
   height: 4em;
   font-size: $font-size;
   font-weight: bold;
-  word-break: break-all;
+  word-break: break-word;
   overflow: auto;
   text-overflow: ellipsis;
 }
 
 .sub__description--container {
-  word-break: break-all;
+  word-break: break-word;
   overflow: auto;
   text-overflow: ellipsis;
 }

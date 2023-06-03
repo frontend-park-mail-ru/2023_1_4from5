@@ -24,6 +24,10 @@
 
 $start__photo-width: 80%;
 
+.start__photo, .start__photo--top, .start__photo--bottom {
+  user-select: none;
+}
+
 .start__photo, .start__photo--top {
   width: $start__photo-width;
 }
