@@ -11,7 +11,6 @@ const contentElement = document.querySelector('main');
 class Post {
   render(config) {
     if (config.comments) {
-      console.log(config.comments)
       config.commentsNum = config.comments.length;
 
       config.comments.forEach((comment) => {
@@ -170,6 +169,13 @@ class Post {
       event.preventDefault();
       router.popstate();
     });
+  }
+
+  remove() {
+    const lastPage = document.getElementById('postDiv');
+    if (lastPage) {
+      lastPage.remove();
+    }
   }
 
   findUser(comments, comment) {

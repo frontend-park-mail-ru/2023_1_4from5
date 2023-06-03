@@ -26,7 +26,8 @@ $sidebar__element-offset: 0.4vw;
   margin-right: $sidebar__element-offset;
 }
 
-.become-author {
+.sidebar__auth {
+  margin-right: 0.5em;
 }
 
 .sidebar__about--element {
@@ -48,7 +49,7 @@ $sidebar__element-offset: 0.4vw;
 
 .sidebar__subs--elem {
   position: relative;
-  top: -1.3em;
+  top: -1.35em;
   margin-right: 0.3em;
 }
 
@@ -136,6 +137,7 @@ $sidebar__user--photo-height: 2em;
 
 .sidebar__user--name {
   height: 2.5em;
+  margin-right: 0.5em;
   display: block;
   max-width: 12em;
   white-space: nowrap;
@@ -192,6 +194,10 @@ $sidebar__img-top: 0.45em;
 
   .sidebar__user--name {
     display: none;
+  }
+
+  #sidebar__menu {
+    display: inline;
   }
 
   .sidebar__menu {

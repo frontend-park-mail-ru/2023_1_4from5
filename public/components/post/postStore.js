@@ -82,6 +82,7 @@ class PostStore {
       result.post.textWithBreaks.push({ text });
     });
 
+    post.remove();
     post.render(result);
   }
 }
