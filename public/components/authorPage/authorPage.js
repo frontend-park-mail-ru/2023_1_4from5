@@ -57,7 +57,6 @@ class AuthorPage {
     aimWithBreaks.forEach((description) => {
       config.aim.descWithBreaks.push({ description });
     });
-    console.log(config.aim);
 
     this.#parent.innerHTML = '';
     const newDiv = document.createElement('div');
