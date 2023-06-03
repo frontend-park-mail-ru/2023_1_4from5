@@ -90,6 +90,7 @@ $comment__photo-size: 3em;
   height: $comment__photo-size;
   width: $comment__photo-size;
   border-radius: 100%;
+  border: white solid 2px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
