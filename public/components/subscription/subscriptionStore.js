@@ -5,7 +5,7 @@ import { request } from '../../modules/request';
 import { authorPageStore } from '../authorPage/authorPageStore';
 import { userStore } from '../user/userStore';
 import {
-  isSpecialSignWithEnt, LENGTH, validation, validationStructure 
+  isSpecialSignWithEnt, LENGTH, validation, validationStructure
 } from '../../modules/isValid';
 import { color } from '../../consts/styles';
 
@@ -70,7 +70,6 @@ class SubscriptionStore {
   }
 
   async sendSub(actionType, input, callback, postID = '') {
-    console.log(actionType, input, postID);
     const subTitle = input.titleInput.value.trim();
     const validStructTitle = { ...validationStructure };
     validStructTitle.field = '"Название подписки"';
