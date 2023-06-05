@@ -30,16 +30,16 @@ const netFirst = async ({
 }) => {
   // if (navigator.onLine) {
   // try to get the resource from the network
-  const responseFromCache = await caches.match(request);
-  if (responseFromCache) {
-    return responseFromCache;
-  }
-
-  const preloadResponse = await preloadResponsePromise;
-  if (preloadResponse) {
-    await putInCache(request, preloadResponse.clone());
-    return preloadResponse;
-  }
+  // const responseFromCache = await caches.match(request);
+  // if (responseFromCache) {
+  //   return responseFromCache;
+  // }
+  //
+  // const preloadResponse = await preloadResponsePromise;
+  // if (preloadResponse) {
+  //   await putInCache(request, preloadResponse.clone());
+  //   return preloadResponse;
+  // }
 
   let responseFromNetwork;
   try {
@@ -54,9 +54,9 @@ const netFirst = async ({
     });
   }
 
-  if (!request.url.includes('/api/') && !request.url.endsWith('.mp4') && !request.url.endsWith('.mp3')) {
-    await putInCache(request, responseFromNetwork.clone());
-  }
+  // if (!request.url.includes('/api/') && !request.url.endsWith('.mp4') && !request.url.endsWith('.mp3')) {
+  //   await putInCache(request, responseFromNetwork.clone());
+  // }
   return responseFromNetwork;
 };
 
