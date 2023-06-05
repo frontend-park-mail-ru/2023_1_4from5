@@ -30,12 +30,12 @@ import { notificationsStore } from './components/notifications/notificationsStor
 import { subscriptionLevelsStore } from './components/subscriptionLevels/subscriptionLevelsStore';
 import { router } from './modules/Router.js';
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('/sw.js', { scope: '/' })
-//     .catch((err) => {
-//       console.log('SW ERR: ', err);
-//     });
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' })
+    .catch((err) => {
+      console.log('SW ERR: ', err);
+    });
+}
 
 async function begin() {
   await startStore.start();
